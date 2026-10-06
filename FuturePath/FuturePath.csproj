@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -48,14 +48,170 @@
   <ItemGroup>
     <Compile Include="ApplicationLayer\User.cs" />
     <Compile Include="DatabaseLayer\AdminDBController.cs" />
-    <Compile Include="PresentationLayer\Form1.cs">
+    <Compile Include="PresentationLayer\Dialogs\ConfirmationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Dialogs\ConfirmationDialog.Designer.cs">
+      <DependentUpon>ConfirmationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ValidationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ValidationDialog.Designer.cs">
+      <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\AdvisorySummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\AdvisorySummaryForm.Designer.cs">
+      <DependentUpon>AdvisorySummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\AlternativeProgrammesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\AlternativeProgrammesForm.Designer.cs">
+      <DependentUpon>AlternativeProgrammesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\EligibilityResultsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\EligibilityResultsForm.Designer.cs">
+      <DependentUpon>EligibilityResultsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\FacultySelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\FacultySelectionForm.Designer.cs">
+      <DependentUpon>FacultySelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\FundingOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\FundingOptionsForm.Designer.cs">
+      <DependentUpon>FundingOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\InterestQuestionnaireForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\InterestQuestionnaireForm.Designer.cs">
+      <DependentUpon>InterestQuestionnaireForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\LearnerProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\LearnerProfileForm.Designer.cs">
+      <DependentUpon>LearnerProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\SubjectsMarksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Learner\SubjectsMarksForm.Designer.cs">
+      <DependentUpon>SubjectsMarksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\AdminDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\AdminDashboardForm.Designer.cs">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\AdvisorDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\AdvisorDashboardForm.Designer.cs">
+      <DependentUpon>AdvisorDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\ReferenceDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\ReferenceDataForm.Designer.cs">
+      <DependentUpon>ReferenceDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\ReportGenerationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\ReportGenerationForm.Designer.cs">
+      <DependentUpon>ReportGenerationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\SessionsDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\SessionsDashboardForm.Designer.cs">
+      <DependentUpon>SessionsDashboardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffLoginForm.Designer.cs">
+      <DependentUpon>StaffLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\AdvisoryReportsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\AdvisoryReportsTab.Designer.cs">
+      <DependentUpon>AdvisoryReportsTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\AdvisorySessionTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\AdvisorySessionTab.Designer.cs">
+      <DependentUpon>AdvisorySessionTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\DegreeRequirementsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\DegreeRequirementsTab.Designer.cs">
+      <DependentUpon>DegreeRequirementsTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\FundingTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\FundingTab.Designer.cs">
+      <DependentUpon>FundingTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\InterestCategoriesTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\InterestCategoriesTab.Designer.cs">
+      <DependentUpon>InterestCategoriesTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\LearnerProfileTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\LearnerProfileTab.Designer.cs">
+      <DependentUpon>LearnerProfileTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\QuestionnaireTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\QuestionnaireTab.Designer.cs">
+      <DependentUpon>QuestionnaireTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\UniversityInfoTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\UniversityInfoTab.Designer.cs">
+      <DependentUpon>UniversityInfoTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\UserAccountsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\Tabs\UserAccountsTab.Designer.cs">
+      <DependentUpon>UserAccountsTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
+      <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Learner\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
