@@ -195,11 +195,11 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            Form dashboard = role == AdministratorRole
-                ? (Form)new AdminDashboardForm(homeForm, userId, fullName, role)
-                : new AdvisorDashboardForm(homeForm, userId, fullName, role);
+            // One console for both roles: it removes the pages this role may not reach (decisions.md D11)
+            // and opens on the role's own dashboard (UI 9 or UI 12).
+            var console = new StaffConsoleForm(homeForm, userId, fullName, role);
             txtPassword.Clear();
-            dashboard.Show();
+            console.Show();
             navigating = true;
             Close();
         }
