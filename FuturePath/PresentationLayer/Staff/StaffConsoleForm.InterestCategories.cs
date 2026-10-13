@@ -10,9 +10,9 @@ namespace FuturePath.PresentationLayer
     /// UI 13.4 — Reference data, Interest categories (Administrators only; page <c>tabCategories</c> in the
     /// Reference data group). Built to the UI 13.2 maintenance pattern: a read-only grid of stored
     /// <c>InterestCategory</c> rows (Category · Questions · Mapped programmes · Status chip) with a count
-    /// line, and a maintenance form below it (Category name*, Active). The console's action band calls
-    /// <see cref="CategoriesAddNew"/>, <see cref="CategoriesUpdateSelected"/>,
-    /// <see cref="CategoriesDeactivateSelected"/> and <see cref="CategoriesCancelEdit"/>. A second panel
+    /// line, and a maintenance form below it (Category name*, Active). The tab's own buttons run
+    /// <see cref="btnCategoriesAdd_Click"/>, <see cref="btnCategoriesUpdate_Click"/>,
+    /// <see cref="btnCategoriesDeactivate_Click"/> and <see cref="btnCategoriesCancel_Click"/>. A second panel
     /// maintains the programme ↔ category relevance weights (<c>DegreeInterestMapping.RelevanceWeight</c>)
     /// for the selected category, which the spec needs for the interest match but gives no screen of its
     /// own. Nothing is ever deleted.
@@ -30,16 +30,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the grids are being rebound, so selection events are ignored.</summary>
         private bool categoriesLoading;
 
-        #region Console contract (action band and page switching)
-
-        /// <summary>Noun used by the action band: "Add category", "Update category".</summary>
-        private string CategoriesItemNoun
-        {
-            get { return "category"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 13.4 appears. The first time, it prepares the grids
+        /// Called by <see cref="PageShown"/> each time UI 13.4 appears. The first time, it prepares the grids
         /// and loads the categories and the programme list; afterwards the page keeps its state.
         /// </summary>
         /// <param name="firstTime">True the first time the page is shown in this console.</param>
@@ -58,8 +52,12 @@ namespace FuturePath.PresentationLayer
             CategoriesClearForm();
         }
 
-        /// <summary>Adds a new category from the form (validated here and again in the BLL).</summary>
-        private void CategoriesAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add category: adds a new category from the form (validated here and again in the BLL).</summary>
+        private void btnCategoriesAdd_Click(object sender, EventArgs e)
         {
             if (!CategoriesValidateForm())
             {
@@ -82,8 +80,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" added. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Saves the form over the category selected in the grid.</summary>
-        private void CategoriesUpdateSelected()
+        /// <summary>Update category: saves the form over the category selected in the grid.</summary>
+        private void btnCategoriesUpdate_Click(object sender, EventArgs e)
         {
             if (!categoriesSelectedId.HasValue)
             {
@@ -112,8 +110,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" updated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Deactivates the selected category after confirmation (never deletes it).</summary>
-        private void CategoriesDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected category after confirmation (never deletes it).</summary>
+        private void btnCategoriesDeactivate_Click(object sender, EventArgs e)
         {
             if (!categoriesSelectedId.HasValue)
             {
@@ -150,8 +148,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" deactivated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
-        private void CategoriesCancelEdit()
+        /// <summary>Cancel: discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
+        private void btnCategoriesCancel_Click(object sender, EventArgs e)
         {
             CategoriesClearForm();
             ReportStatus("Edit cancelled. Nothing was saved.", false);

@@ -17,8 +17,8 @@ namespace FuturePath.PresentationLayer
     /// <c>FUNDING_TYPE_n</c>), eligibility, documents, closing date, contact, merit / need flags, the
     /// linked faculties and programmes (<c>FUNDINGFACULTY</c> / <c>FUNDINGPROGRAMME</c>) and Active.
     /// </para>
-    /// The console's action band calls <see cref="FundingAdminAddNew"/>, <see cref="FundingAdminUpdateSelected"/>,
-    /// <see cref="FundingAdminDeactivateSelected"/> and <see cref="FundingAdminCancelEdit"/>. Nothing is
+    /// The tab's own buttons run <see cref="btnFundingAdminAdd_Click"/>, <see cref="btnFundingAdminUpdate_Click"/>,
+    /// <see cref="btnFundingAdminDeactivate_Click"/> and <see cref="btnFundingAdminCancel_Click"/>. Nothing is
     /// deleted, and the BLL re-validates every save and checks that the user is an Administrator.
     /// </summary>
     public partial class StaffConsoleForm
@@ -26,16 +26,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>FundingID of the funding option being edited, or null when the form holds a new one.</summary>
         private int? fundingAdminSelectedFundingId;
 
-        #region Screen contract (called by the console)
-
-        /// <summary>The noun the console puts on its Add / Update buttons.</summary>
-        private string FundingAdminItemNoun
-        {
-            get { return "funding option"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called each time UI 13.3 is shown. The first time it binds the funding type, faculty and
+        /// Called by <see cref="PageShown"/> each time UI 13.3 is shown. The first time it binds the funding type, faculty and
         /// programme lists and the grid (replaces the old tab's constructor and <c>LoadData</c>).
         /// </summary>
         /// <param name="firstTime">True the first time this page is shown in this console.</param>
@@ -70,8 +64,12 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Select a funding option to edit it, or fill in the form to add one.", false);
         }
 
-        /// <summary>Validates the form and adds a new funding option.</summary>
-        private void FundingAdminAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add funding option: validates the form and adds a new funding option.</summary>
+        private void btnFundingAdminAdd_Click(object sender, EventArgs e)
         {
             if (!FundingAdminValidateForm())
             {
@@ -98,8 +96,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option added: " + name + ".", false);
         }
 
-        /// <summary>Validates the form and saves it over the funding option selected in the grid.</summary>
-        private void FundingAdminUpdateSelected()
+        /// <summary>Update funding option: validates the form and saves it over the funding option selected in the grid.</summary>
+        private void btnFundingAdminUpdate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue)
             {
@@ -130,8 +128,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option updated.", false);
         }
 
-        /// <summary>Deactivates the selected funding option after confirmation. Nothing is deleted.</summary>
-        private void FundingAdminDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected funding option after confirmation. Nothing is deleted.</summary>
+        private void btnFundingAdminDeactivate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue || dgvFunding.SelectedRows.Count == 0)
             {
@@ -168,8 +166,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Discards the form's changes and clears the grid selection.</summary>
-        private void FundingAdminCancelEdit()
+        /// <summary>Cancel: discards the form's changes and clears the grid selection.</summary>
+        private void btnFundingAdminCancel_Click(object sender, EventArgs e)
         {
             dgvFunding.ClearSelection();
             FundingAdminClearForm();

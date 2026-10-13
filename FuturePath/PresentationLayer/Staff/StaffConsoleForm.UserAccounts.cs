@@ -33,16 +33,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
         private bool accountsLoading;
 
-        #region Console contract (action band and page switching)
-
-        /// <summary>Noun used by the action band: "Add user account", "Update user account".</summary>
-        private string AccountsItemNoun
-        {
-            get { return "user account"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 13.6 appears. The first time, it prepares the grid
+        /// Called by <see cref="PageShown"/> each time UI 13.6 appears. The first time, it prepares the grid
         /// and loads the role list and the accounts. Every time, both password boxes start empty, so a
         /// password typed before moving to another page never waits on screen.
         /// </summary>
@@ -61,8 +55,12 @@ namespace FuturePath.PresentationLayer
             AccountsClearForm();
         }
 
-        /// <summary>Adds a new account. A password is required; the boxes are cleared afterwards whatever happens.</summary>
-        private void AccountsAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add user account: a password is required; the boxes are cleared afterwards whatever happens.</summary>
+        private void btnAccountsAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -93,10 +91,10 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Saves the form over the selected account. Leaving both password boxes blank keeps the current
-        /// password; entering one resets it. The boxes are cleared afterwards whatever happens.
+        /// Update user account: saves the form over the selected account. Leaving both password boxes blank
+        /// keeps the current password; entering one resets it. The boxes are cleared afterwards whatever happens.
         /// </summary>
-        private void AccountsUpdateSelected()
+        private void btnAccountsUpdate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -133,8 +131,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Deactivates the selected account after confirmation (never deletes it, never your own).</summary>
-        private void AccountsDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected account after confirmation (never deletes it, never your own).</summary>
+        private void btnAccountsDeactivate_Click(object sender, EventArgs e)
         {
             AccountsClearPasswords();
             if (!accountsSelectedUserId.HasValue)
@@ -178,8 +176,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("User account \"" + username + "\" deactivated.", false);
         }
 
-        /// <summary>Discards the edit, clears the form, both password boxes and the grid selection.</summary>
-        private void AccountsCancelEdit()
+        /// <summary>Cancel: discards the edit, clears the form, both password boxes and the grid selection.</summary>
+        private void btnAccountsCancel_Click(object sender, EventArgs e)
         {
             AccountsClearForm();
             ReportStatus("Edit cancelled. Nothing was saved.", false);

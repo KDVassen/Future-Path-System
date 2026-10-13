@@ -14,14 +14,8 @@ namespace FuturePath.PresentationLayer
     /// </summary>
     public partial class StaffConsoleForm
     {
-        /// <summary>Caption of the primary button while UI 10.3c is on show.</summary>
-        private string ReportShortcutsPrimaryText
-        {
-            get { return "Generate report"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.3c appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.3c appears. The first time, it prepares the
         /// grid, sets the current year to date as the default period, binds the filter lists and lists
         /// the reports.
         /// </summary>
@@ -41,11 +35,13 @@ namespace FuturePath.PresentationLayer
             ReportShortcutsFind();
         }
 
+        #region Button click events
+
         /// <summary>
-        /// Generate report (the tab's primary action): validates the period, then opens UI 11 for the
-        /// selected report with this tab's criteria applied.
+        /// Generate report: validates the period, then opens UI 11 for the selected report with this
+        /// tab's criteria applied.
         /// </summary>
-        private void ReportShortcutsPrimary()
+        private void btnReportShortcutsGenerate_Click(object sender, EventArgs e)
         {
             if (!ReportShortcutsCheckDateRange())
             {
@@ -71,6 +67,8 @@ namespace FuturePath.PresentationLayer
                 ReportShortcutsSelectedId(cboRscFaculty), ReportShortcutsSelectedId(cboRscGrade),
                 cboRscOutcome.SelectedIndex >= 0 ? Convert.ToString(cboRscOutcome.SelectedValue, CultureInfo.InvariantCulture) : null);
         }
+
+        #endregion
 
         #region Business Logic Layer hooks
 
@@ -207,7 +205,7 @@ namespace FuturePath.PresentationLayer
         {
             if (e.RowIndex >= 0)
             {
-                ReportShortcutsPrimary();
+                btnReportShortcutsGenerate_Click(sender, e);
             }
         }
 

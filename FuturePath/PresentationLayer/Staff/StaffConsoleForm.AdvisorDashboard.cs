@@ -14,7 +14,7 @@ namespace FuturePath.PresentationLayer
     public partial class StaffConsoleForm
     {
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 9 appears. The welcome line is written once; the
+        /// Called by <see cref="PageShown"/> each time UI 9 appears. The welcome line is written once; the
         /// "Today" figures are refreshed on every visit, because they change during the day.
         /// </summary>
         /// <param name="firstTime">True the first time UI 9 is shown in this console.</param>
@@ -68,13 +68,13 @@ namespace FuturePath.PresentationLayer
         /// <summary>Search advisory sessions → UI 10 Sessions (opens on the Sessions tab used last).</summary>
         private void btnAdvSearchSessions_Click(object sender, EventArgs e)
         {
-            ShowPage(tabSessions);
+            SelectPage(tabSessions);
         }
 
         /// <summary>Generate reports → UI 11 Reports.</summary>
         private void btnAdvGenerateReports_Click(object sender, EventArgs e)
         {
-            ShowPage(tabReports);
+            SelectPage(tabReports);
         }
 
         #endregion

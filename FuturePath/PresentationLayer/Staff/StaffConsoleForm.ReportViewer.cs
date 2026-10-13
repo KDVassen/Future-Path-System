@@ -85,7 +85,8 @@ namespace FuturePath.PresentationLayer
             viewerReturnPage = returnPage;
             viewerSavedPath = null;
 
-            ShowPage(tabReportViewer);
+            // viewerData is set above, so tcConsole_Selecting lets the Report viewer tab open.
+            SelectPage(tabReportViewer);
             LoadReport(rvReport.LocalReport, viewerReportCode, viewerData);
             UseReportPageSettings(rvReport);
             rvReport.SetDisplayMode(DisplayMode.PrintLayout);
@@ -93,29 +94,31 @@ namespace FuturePath.PresentationLayer
             rvReport.RefreshReport();
         }
 
-        /// <summary>Called by ShowPage each time the viewer appears.</summary>
+        /// <summary>Called by <see cref="PageShown"/> each time the viewer appears; the caption names the report on show.</summary>
         private void ReportViewerShown(bool firstTime)
         {
+            Text = "Future Path — " + ReportNameOf(viewerReportCode) + " (" + ReportScreenOf(viewerReportCode) + ")";
+            string scope = viewerScope.Length > 0 ? " · " + viewerScope : string.Empty;
             ReportStatus(viewerSavedPath == null
-                ? "Preview of the " + ReportNameOf(viewerReportCode) + ": nothing is saved or recorded until you save it."
+                ? "Preview of the " + ReportNameOf(viewerReportCode) + scope + ". Nothing is saved or recorded until you save it."
                 : ReportNameOf(viewerReportCode) + " saved as " + viewerSavedPath + ".", false);
-        }
-
-        /// <summary>Back returns to the screen that opened the viewer.</summary>
-        private void ReportViewerBack()
-        {
-            ShowPage(viewerReturnPage ?? tabReports);
         }
 
         #endregion
 
-        #region Saving
+        #region Button click events
+
+        /// <summary>Back returns to the screen that opened the viewer.</summary>
+        private void btnReportViewerBack_Click(object sender, EventArgs e)
+        {
+            SelectPage(viewerReturnPage ?? tabReports);
+        }
 
         /// <summary>
         /// Save report → asks for the file when UI 11 did not set one, confirms, renders the report on show
         /// to the chosen format and records the export (ExportReport) through the BLL.
         /// </summary>
-        private void ReportViewerSave()
+        private void btnReportViewerSave_Click(object sender, EventArgs e)
         {
             string path = ReportViewerChoosePath();
             if (path == null)
@@ -152,6 +155,10 @@ namespace FuturePath.PresentationLayer
             viewerSavedPath = path;
             SetStatus(ReportNameOf(viewerReportCode) + " saved as " + path + ".", GreenColour, Color.White);
         }
+
+        #endregion
+
+        #region Saving
 
         /// <summary>The file to save to: UI 11's format and folder when set, otherwise a Save dialog.</summary>
         private string ReportViewerChoosePath()
@@ -242,7 +249,7 @@ namespace FuturePath.PresentationLayer
             return "FpDie";
         }
 
-        /// <summary>The report's name, for the title band.</summary>
+        /// <summary>The report's name, for the window caption and the status messages.</summary>
         private static string ReportNameOf(string reportCode)
         {
             if (reportCode == LsrCode) return "Learner Advisory Summary";

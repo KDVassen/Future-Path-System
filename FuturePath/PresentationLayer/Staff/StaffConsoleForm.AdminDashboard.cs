@@ -12,7 +12,7 @@ namespace FuturePath.PresentationLayer
     public partial class StaffConsoleForm
     {
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 12 appears. The first time, writes the welcome line
+        /// Called by <see cref="PageShown"/> each time UI 12 appears. The first time, writes the welcome line
         /// and enables "Maintain reference data" only for an Administrator.
         /// </summary>
         /// <param name="firstTime">True the first time UI 12 is shown in this console.</param>
@@ -27,7 +27,7 @@ namespace FuturePath.PresentationLayer
 
         #region Hub buttons
 
-        /// <summary>Maintain reference data → UI 13 (Administrators only; a Career Advisor never reaches it).</summary>
+        /// <summary>Maintain reference data → UI 13 on the sub-tab used last (Administrators only; a Career Advisor never reaches it).</summary>
         private void btnMaintainReferenceData_Click(object sender, EventArgs e)
         {
             if (!IsAdministrator)
@@ -35,19 +35,19 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            ShowPage(tabReference);
+            SelectPage(tabReference);
         }
 
         /// <summary>Search advisory sessions → UI 10 Sessions (opens on the Sessions tab used last).</summary>
         private void btnAdmSearchSessions_Click(object sender, EventArgs e)
         {
-            ShowPage(tabSessions);
+            SelectPage(tabSessions);
         }
 
         /// <summary>Generate reports → UI 11 Reports.</summary>
         private void btnAdmGenerateReports_Click(object sender, EventArgs e)
         {
-            ShowPage(tabReports);
+            SelectPage(tabReports);
         }
 
         #endregion

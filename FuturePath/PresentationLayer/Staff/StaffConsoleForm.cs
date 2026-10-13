@@ -7,18 +7,21 @@ namespace FuturePath.PresentationLayer
 {
     /// <summary>
     /// The staff console: every screen a Career Advisor or Administrator reaches after UI 8 Staff login —
-    /// UI 9 Advisor dashboard, UI 12 Administrator dashboard, UI 10 Sessions (10.1a / 10.2b / 10.3c under
-    /// visible tabs), UI 11 Reports and UI 13 Reference data (13.1–13.6 under visible tabs). Each screen is
-    /// a TabPage of <c>tabConsole</c>, whose own tab strip is hidden; the rail moves between areas
-    /// (spec 2.2.2). The window is always 1200 × 800 (decisions.md D6).
+    /// UI 9 Advisor dashboard, UI 12 Administrator dashboard, UI 10 Sessions (10.1a / 10.2b / 10.3c),
+    /// UI 13 Reference data (13.1–13.6), UI 11 Reports and the report viewer (UI 11.1a / 11.2b / 11.3c).
+    /// Each screen is a TabPage of <c>tcConsole</c>, whose tab headers are visible; Sessions and Reference
+    /// data hold their screens in the nested <c>tcSessions</c> and <c>tcReference</c> tab controls.
+    /// Each tab has its own row of buttons, with one <c>btnX_Click</c> handler per button in that screen's
+    /// file. The menu bar offers Sign out and Exit, and the status bar shows the latest message with the
+    /// signed-in user on the right. The window is about 990 × 800 (decisions.md D6).
     /// <para>
     /// Role-based security (spec Section 8, decisions.md D11): the constructor removes every page the
     /// signed-in role may not reach, so Administrator-only screens are never rendered for a Career Advisor.
     /// The Business Logic Layer checks the role again inside every method that changes data.
     /// </para>
     /// <para>
-    /// This file holds the shared shell (palette, page switching, rail, action band, status band, sign out,
-    /// closing). Each screen's controls and code live in a partial-class file named after it
+    /// This file holds the shared parts (palette, tab navigation, status bar, menu, sign out, closing).
+    /// Each screen's controls and code live in a partial-class file named after it
     /// (StaffConsoleForm.Reports.cs, StaffConsoleForm.Requirements.cs, …).
     /// </para>
     /// </summary>
@@ -42,10 +45,6 @@ namespace FuturePath.PresentationLayer
         private static readonly Color RedTint = Color.FromArgb(250, 234, 235);
         private static readonly Color GreenColour = Color.FromArgb(31, 107, 58);
         private static readonly Color GreenTint = Color.FromArgb(230, 242, 234);
-        private static readonly Color RailActive = Color.FromArgb(38, 64, 104);
-        private static readonly Color RailText = Color.FromArgb(214, 222, 235);
-        private static readonly Font RailFont = new Font("Segoe UI", 10F);
-        private static readonly Font RailActiveFont = new Font("Segoe UI Semibold", 10F);
         private static readonly Font ChipFont = new Font("Segoe UI Semibold", 9F);
 
         #endregion
@@ -55,10 +54,7 @@ namespace FuturePath.PresentationLayer
 
         private readonly Form mainForm;
         private readonly HashSet<TabPage> shownPages = new HashSet<TabPage>();
-        private bool changingPage;
         private bool navigating;
-        private TabPage lastSessionsPage;
-        private TabPage lastReferencePage;
 
         /// <summary>Opens the console for the staff member returned by the login controller.</summary>
         /// <param name="mainForm">The main window (UI 1), shown again on sign out.</param>
@@ -72,12 +68,14 @@ namespace FuturePath.PresentationLayer
             UserId = userId;
             FullName = fullName;
             Role = role;
-            lastSessionsPage = tabSessionSearch;      // UI 10 opens on 10.2b, as in its wireframe
-            lastReferencePage = tabRequirements;      // UI 13 opens on 13.2, as in its wireframe
+            tcSessions.SelectedTab = tabSessionSearch;      // UI 10 opens on 10.2b, as in its wireframe
+            tcReference.SelectedTab = tabRequirements;      // UI 13 opens on 13.2, as in its wireframe
             numMinimumAverage.KeyPress += DecimalBox_KeyPress;
+            numMinimumMark.KeyPress += DecimalBox_KeyPress;
             numRelevanceWeight.KeyPress += DecimalBox_KeyPress;
             ApplyRole();
             OpenDashboard();
+            PageShown(CurrentPage);   // no selection event fires before the window exists, so show the first page here
         }
 
         #region The signed-in staff member
@@ -85,7 +83,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>UserAccount.UserID — passed to every BLL call so the BLL can check the role itself.</summary>
         private int UserId { get; set; }
 
-        /// <summary>UserAccount.FullName, shown in the rail footer and the status band.</summary>
+        /// <summary>UserAccount.FullName, shown in the status bar.</summary>
         private string FullName { get; set; }
 
         /// <summary>UserAccount.Role.</summary>
@@ -98,57 +96,47 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Removes the pages this role may not reach and lays out the rail (decisions.md D11): Career
-        /// Advisors get UI 9, 10 and 11; Administrators get UI 12, 10, 11 and 13.
+        /// Removes the pages this role may not reach (decisions.md D11) and shows who is signed in:
+        /// Career Advisors get UI 9, 10 and 11; Administrators get UI 12, 10, 13 and 11.
         /// </summary>
         private void ApplyRole()
         {
             if (IsAdministrator)
             {
-                tabConsole.TabPages.Remove(tabAdvisorDashboard);
+                tcConsole.TabPages.Remove(tabAdvisorDashboard);
             }
             else
             {
-                tabConsole.TabPages.Remove(tabAdminDashboard);
-                tabConsole.TabPages.Remove(tabReference);
+                tcConsole.TabPages.Remove(tabAdminDashboard);
+                tcConsole.TabPages.Remove(tabReference);
             }
 
-            btnNavReferenceData.Visible = IsAdministrator;
-            int y = btnNavSessions.Bottom;
-            if (IsAdministrator)
-            {
-                btnNavReferenceData.Top = y;
-                y = btnNavReferenceData.Bottom;
-            }
-
-            btnNavReports.Top = y;
-            btnNavSignOut.Top = btnNavReports.Bottom;
-
-            lblBadge.Text = IsAdministrator ? "ADMINISTRATOR" : "CAREER ADVISOR";
-            lblRailFooter.Text = "Signed in" + Environment.NewLine + FullName + Environment.NewLine + Role;
+            lblSignedIn.Text = "Signed in as " + FullName + " (" + Role + ")";
         }
 
         #endregion
 
-        #region Page switching
+        #region Tab navigation
 
-        /// <summary>The screen on show (a sub-tab when a group is showing).</summary>
+        /// <summary>The screen on show (the selected sub-tab when Sessions or Reference data is selected).</summary>
         private TabPage CurrentPage
         {
             get
             {
-                TabPage top = tabConsole.SelectedTab;
-                if (top == tabSessions) return tabSessionsGroup.SelectedTab;
-                if (top == tabReference) return tabReferenceGroup.SelectedTab;
+                TabPage top = tcConsole.SelectedTab;
+                if (top == tabSessions) return tcSessions.SelectedTab;
+                if (top == tabReference) return tcReference.SelectedTab;
                 return top;
             }
         }
 
+        /// <summary>True for the three Sessions sub-tabs (10.1a, 10.2b, 10.3c).</summary>
         private bool IsSessionsPage(TabPage page)
         {
             return page == tabLearnerSearch || page == tabSessionSearch || page == tabReportShortcuts;
         }
 
+        /// <summary>True for the six Reference data sub-tabs (13.1–13.6).</summary>
         private bool IsReferencePage(TabPage page)
         {
             return page == tabUniversity || page == tabRequirements || page == tabFundingAdmin
@@ -158,107 +146,95 @@ namespace FuturePath.PresentationLayer
         /// <summary>Opens the signed-in role's dashboard: UI 12 for Administrators, UI 9 for Career Advisors.</summary>
         private void OpenDashboard()
         {
-            ShowPage(IsAdministrator ? tabAdminDashboard : tabAdvisorDashboard);
+            tcConsole.SelectedTab = IsAdministrator ? tabAdminDashboard : tabAdvisorDashboard;
         }
 
         /// <summary>
-        /// Shows one screen: selects its page (and group tab), sets the caption, title band, rail highlight,
-        /// action-band buttons and status band, then lets the screen refresh through its <c>…Shown(firstTime)</c>
-        /// method. Pages the role may not reach are refused (they were removed in <see cref="ApplyRole"/>).
+        /// Selects a screen from code. A Sessions or Reference sub-tab is selected first, then its parent tab
+        /// (selecting tabSessions or tabReference itself keeps the sub-tab used last). A page removed for this
+        /// role (<see cref="ApplyRole"/>) is never selected.
         /// </summary>
-        private void ShowPage(TabPage page)
+        private void SelectPage(TabPage page)
         {
-            if (page == tabSessions) page = lastSessionsPage;
-            if (page == tabReference) page = lastReferencePage;
-            if (!IsAdministrator && (page == tabAdminDashboard || IsReferencePage(page))) return;
-            if (IsAdministrator && page == tabAdvisorDashboard) return;
-            if (IsSessionsPage(page)) lastSessionsPage = page;
-            if (IsReferencePage(page)) lastReferencePage = page;
-
-            changingPage = true;
-            if (IsSessionsPage(page))
+            TabPage parent = IsSessionsPage(page) ? tabSessions : IsReferencePage(page) ? tabReference : page;
+            if (!tcConsole.TabPages.Contains(parent))
             {
-                tabConsole.SelectedTab = tabSessions;
-                tabSessionsGroup.SelectedTab = page;
-            }
-            else if (IsReferencePage(page))
-            {
-                tabConsole.SelectedTab = tabReference;
-                tabReferenceGroup.SelectedTab = page;
-            }
-            else
-            {
-                tabConsole.SelectedTab = page;
+                return;
             }
 
-            changingPage = false;
+            if (IsSessionsPage(page)) tcSessions.SelectedTab = page;
+            else if (IsReferencePage(page)) tcReference.SelectedTab = page;
+            tcConsole.SelectedTab = parent;
+        }
 
-            string title, subtitle, hint;
-            Button railButton;
-            if (page == tabAdvisorDashboard || page == tabAdminDashboard)
+        /// <summary>UI 10.3c "Generate report" → UI 11, already filtered (spec 2.1).</summary>
+        private void OpenReports(string reportCode, DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcome)
+        {
+            tcConsole.SelectedTab = tabReports;
+            ReportsApplyFilter(reportCode, from, to, facultyId, gradeLevelId, outcome);
+        }
+
+        /// <summary>The Report viewer tab is refused until a report has been opened from Reports or Sessions.</summary>
+        private void tcConsole_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == tabReportViewer && viewerData == null)
             {
-                title = page == tabAdminDashboard ? "Administrator dashboard" : "Advisor dashboard";
-                subtitle = page == tabAdminDashboard ? "Maintain reference data and generate reports"
-                                                     : "Review advisory sessions and generate reports";
-                hint = "Sign out from the rail when you finish. Learners never log in.";
-                railButton = btnNavDashboard;
-                ShowButtons();
+                e.Cancel = true;
+                ReportStatus("Open a report from Reports or Sessions first.", true);
             }
-            else if (IsSessionsPage(page))
+        }
+
+        /// <summary>A new top-level tab is on show.</summary>
+        private void tcConsole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PageShown(CurrentPage);
+        }
+
+        /// <summary>A new Sessions sub-tab (10.1a / 10.2b / 10.3c) is on show.</summary>
+        private void tcSessions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcConsole.SelectedTab == tabSessions)
             {
-                title = "Sessions dashboard";
-                subtitle = "Find an advisory session and open or export its summary";
-                hint = "Read-only · search on any field, none are required.";
-                railButton = btnNavSessions;
-                btnPrimary.Text = page == tabLearnerSearch ? LearnerSearchPrimaryText
-                                : page == tabSessionSearch ? SessionSearchPrimaryText
-                                : ReportShortcutsPrimaryText;
-                btnCancel.Text = "Close";
-                ShowButtons(btnPrimary, btnCancel);
+                PageShown(CurrentPage);
             }
-            else if (page == tabReportViewer)
+        }
+
+        /// <summary>A new Reference data sub-tab (13.1–13.6) is on show.</summary>
+        private void tcReference_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcConsole.SelectedTab == tabReference)
             {
-                title = ReportNameOf(viewerReportCode);
-                subtitle = ReportScreenOf(viewerReportCode) + " · " + viewerReportCode + " · " + viewerScope;
-                hint = "Preview: nothing is saved or recorded until you save the report.";
-                railButton = viewerReturnPage == tabSessionSearch ? btnNavSessions : btnNavReports;
-                btnPrimary.Text = "Save report";
-                btnCancel.Text = "Back";
-                ShowButtons(btnPrimary, btnCancel);
+                PageShown(CurrentPage);
             }
-            else if (page == tabReports)
+        }
+
+        /// <summary>
+        /// Runs each time a screen comes into view: sets the caption, the status bar and the page's Enter / Esc
+        /// buttons, then lets the screen refresh through its <c>…Shown(firstTime)</c> method.
+        /// </summary>
+        private void PageShown(TabPage page)
+        {
+            if (page == null)
             {
-                title = "Reports";
-                subtitle = "Choose a report, set its parameters, then preview or generate it";
-                hint = "Career Advisors reach these three reports from UI 10.3c";
-                railButton = btnNavReports;
-                btnPrimary.Text = "Generate report";
-                btnCancel.Text = "Cancel";
-                ShowButtons(btnPrimary, btnPreview, btnCancel);
-            }
-            else
-            {
-                title = "Reference data";
-                subtitle = "Maintain the data the recommendation engine reads — Administrators only";
-                hint = ReferenceNote;
-                railButton = btnNavReferenceData;
-                string noun = ItemNounOf(page);
-                btnPrimary.Text = "Add " + noun;
-                btnUpdate.Text = "Update " + noun;
-                btnCancel.Text = "Cancel";
-                ShowButtons(btnPrimary, btnUpdate, btnDeactivate, btnCancel);
+                return;
             }
 
-            btnPrimary.AccessibleName = btnPrimary.Text;
-            btnUpdate.AccessibleName = btnUpdate.Text;
-            btnCancel.AccessibleName = btnCancel.Text;
-            Text = "Future Path — " + title;
-            lblTitle.Text = title;
-            lblSubtitle.Text = subtitle;
-            lblActionHint.Text = hint;
-            UpdateRail(railButton);
-            SetStatus("Signed in as " + FullName + " (" + Role + ")" + (IsReferencePage(page) ? " · " + ReferenceNote : string.Empty),
-                      DeepNavy, Color.White);
+            Text = "Future Path — " + page.Text;
+            SetStatus(IsReferencePage(page) ? ReferenceNote : "Ready", DeepNavy, Color.White);
+
+            // Enter and Esc run this page's own buttons (the dashboards have none).
+            if (page == tabLearnerSearch) SetPageButtons(btnLearnerSearchOpen, null);
+            else if (page == tabSessionSearch) SetPageButtons(btnSessionSearchOpen, null);
+            else if (page == tabReportShortcuts) SetPageButtons(btnReportShortcutsGenerate, null);
+            else if (page == tabReports) SetPageButtons(btnReportsGenerate, null);
+            else if (page == tabReportViewer) SetPageButtons(btnReportViewerSave, btnReportViewerBack);
+            else if (page == tabUniversity) SetPageButtons(btnUniversityAdd, btnUniversityCancel);
+            else if (page == tabRequirements) SetPageButtons(btnRequirementsAdd, btnRequirementsCancel);
+            else if (page == tabFundingAdmin) SetPageButtons(btnFundingAdminAdd, btnFundingAdminCancel);
+            else if (page == tabCategories) SetPageButtons(btnCategoriesAdd, btnCategoriesCancel);
+            else if (page == tabQuestionnaire) SetPageButtons(btnQuestionnaireAdd, btnQuestionnaireCancel);
+            else if (page == tabAccounts) SetPageButtons(btnAccountsAdd, btnAccountsCancel);
+            else SetPageButtons(null, null);
 
             bool firstTime = shownPages.Add(page);
             if (page == tabAdvisorDashboard) AdvisorDashboardShown(firstTime);
@@ -276,93 +252,27 @@ namespace FuturePath.PresentationLayer
             else if (page == tabAccounts) AccountsShown(firstTime);
         }
 
-        /// <summary>The thing a UI 13 tab maintains, for its Add / Update button labels.</summary>
-        private string ItemNounOf(TabPage page)
+        /// <summary>Sets the buttons that Enter (accept) and Esc (cancel) press; null for none.</summary>
+        private void SetPageButtons(Button accept, Button cancel)
         {
-            if (page == tabUniversity) return UniversityItemNoun;
-            if (page == tabRequirements) return RequirementsItemNoun;
-            if (page == tabFundingAdmin) return FundingAdminItemNoun;
-            if (page == tabCategories) return CategoriesItemNoun;
-            if (page == tabQuestionnaire) return QuestionnaireItemNoun;
-            return AccountsItemNoun;
-        }
-
-        /// <summary>UI 10.3c "Generate report" → UI 11, already filtered (spec 2.1).</summary>
-        private void OpenReports(string reportCode, DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcome)
-        {
-            ShowPage(tabReports);
-            ReportsApplyFilter(reportCode, from, to, facultyId, gradeLevelId, outcome);
-        }
-
-        /// <summary>The hidden top-level tab strip never changes by keyboard; only the rail and code move areas.</summary>
-        private void tabConsole_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            if (!changingPage)
-            {
-                e.Cancel = true;
-            }
-        }
-
-        /// <summary>A click on a visible Sessions tab (10.1a / 10.2b / 10.3c) refreshes the shell.</summary>
-        private void tabSessionsGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!changingPage && tabConsole.SelectedTab == tabSessions && tabSessionsGroup.SelectedTab != null)
-            {
-                ShowPage(tabSessionsGroup.SelectedTab);
-            }
-        }
-
-        /// <summary>A click on a visible Reference data tab (13.1–13.6) refreshes the shell.</summary>
-        private void tabReferenceGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!changingPage && tabConsole.SelectedTab == tabReference && tabReferenceGroup.SelectedTab != null)
-            {
-                ShowPage(tabReferenceGroup.SelectedTab);
-            }
+            AcceptButton = accept;
+            CancelButton = cancel;
         }
 
         #endregion
 
-        #region Rail
+        #region Menu
 
-        /// <summary>Highlights the rail item of the area on show.</summary>
-        private void UpdateRail(Button active)
-        {
-            foreach (Button item in new[] { btnNavDashboard, btnNavSessions, btnNavReferenceData, btnNavReports, btnNavSignOut })
-            {
-                bool on = item == active;
-                item.BackColor = on ? RailActive : NavyColour;
-                item.ForeColor = on ? Color.White : RailText;
-                item.Font = on ? RailActiveFont : RailFont;
-            }
-        }
-
-        private void btnNavDashboard_Click(object sender, EventArgs e)
-        {
-            OpenDashboard();
-        }
-
-        private void btnNavSessions_Click(object sender, EventArgs e)
-        {
-            ShowPage(tabSessions);
-        }
-
-        private void btnNavReferenceData_Click(object sender, EventArgs e)
-        {
-            if (IsAdministrator)
-            {
-                ShowPage(tabReference);
-            }
-        }
-
-        private void btnNavReports_Click(object sender, EventArgs e)
-        {
-            ShowPage(tabReports);
-        }
-
-        private void btnNavSignOut_Click(object sender, EventArgs e)
+        /// <summary>Sign out: asks for confirmation, then returns to UI 1.</summary>
+        private void mnuSignOut_Click(object sender, EventArgs e)
         {
             SignOut();
+        }
+
+        /// <summary>Exit: closes Future Path (the closing confirmation still asks first).</summary>
+        private void mnuExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         /// <summary>Asks for confirmation, then closes the console and returns to UI 1.</summary>
@@ -380,102 +290,14 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        #region Action band
+        #region Shared helpers (used by every screen's partial file)
 
-        /// <summary>Shows only the given action-band buttons and gives the hint label the width they leave.</summary>
-        private void ShowButtons(params Button[] visibleButtons)
-        {
-            int used = flpActions.Padding.Horizontal;
-            foreach (Control control in flpActions.Controls)
-            {
-                bool show = Array.IndexOf(visibleButtons, control) >= 0;
-                control.Visible = show;
-                if (show)
-                {
-                    used += control.Width + control.Margin.Horizontal;
-                }
-            }
-
-            lblActionHint.Width = Math.Max(0, pnlActions.ClientSize.Width - used);
-        }
-
-        /// <summary>The primary (navy, AcceptButton) action of the screen on show.</summary>
-        private void btnPrimary_Click(object sender, EventArgs e)
-        {
-            TabPage page = CurrentPage;
-            if (page == tabLearnerSearch) LearnerSearchPrimary();
-            else if (page == tabSessionSearch) SessionSearchPrimary();
-            else if (page == tabReportShortcuts) ReportShortcutsPrimary();
-            else if (page == tabReports) ReportsGenerate();
-            else if (page == tabReportViewer) ReportViewerSave();
-            else if (page == tabUniversity) UniversityAddNew();
-            else if (page == tabRequirements) RequirementsAddNew();
-            else if (page == tabFundingAdmin) FundingAdminAddNew();
-            else if (page == tabCategories) CategoriesAddNew();
-            else if (page == tabQuestionnaire) QuestionnaireAddNew();
-            else if (page == tabAccounts) AccountsAddNew();
-        }
-
-        /// <summary>UI 13 "Update &lt;item&gt;".</summary>
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            TabPage page = CurrentPage;
-            if (page == tabUniversity) UniversityUpdateSelected();
-            else if (page == tabRequirements) RequirementsUpdateSelected();
-            else if (page == tabFundingAdmin) FundingAdminUpdateSelected();
-            else if (page == tabCategories) CategoriesUpdateSelected();
-            else if (page == tabQuestionnaire) QuestionnaireUpdateSelected();
-            else if (page == tabAccounts) AccountsUpdateSelected();
-        }
-
-        /// <summary>UI 13 "Deactivate" (each screen confirms first; nothing is ever deleted).</summary>
-        private void btnDeactivate_Click(object sender, EventArgs e)
-        {
-            TabPage page = CurrentPage;
-            if (page == tabUniversity) UniversityDeactivateSelected();
-            else if (page == tabRequirements) RequirementsDeactivateSelected();
-            else if (page == tabFundingAdmin) FundingAdminDeactivateSelected();
-            else if (page == tabCategories) CategoriesDeactivateSelected();
-            else if (page == tabQuestionnaire) QuestionnaireDeactivateSelected();
-            else if (page == tabAccounts) AccountsDeactivateSelected();
-        }
-
-        /// <summary>UI 11 "Preview".</summary>
-        private void btnPreview_Click(object sender, EventArgs e)
-        {
-            if (CurrentPage == tabReports)
-            {
-                ReportsPreview();
-            }
-        }
-
-        /// <summary>
-        /// Close (UI 10) and Cancel (UI 11) return to the dashboard; Cancel on UI 13 abandons the edit; Back on the
-        /// report viewer returns to the screen that opened it.
-        /// </summary>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            TabPage page = CurrentPage;
-            if (!btnCancel.Visible) return;
-            if (page == tabUniversity) UniversityCancelEdit();
-            else if (page == tabRequirements) RequirementsCancelEdit();
-            else if (page == tabFundingAdmin) FundingAdminCancelEdit();
-            else if (page == tabCategories) CategoriesCancelEdit();
-            else if (page == tabQuestionnaire) QuestionnaireCancelEdit();
-            else if (page == tabAccounts) AccountsCancelEdit();
-            else if (page == tabReportViewer) ReportViewerBack();
-            else OpenDashboard();
-        }
-
-        #endregion
-
-        #region Shared zone helpers (used by every screen's partial file)
-
-        /// <summary>Shows a message in the status band (never a modal; spec 2.2.7).</summary>
+        /// <summary>Shows a message in the status bar (never a modal; spec 2.2.7).</summary>
         private void SetStatus(string message, Color back, Color fore)
         {
             pnlStatus.BackColor = back;
             lblStatus.ForeColor = fore;
+            lblSignedIn.ForeColor = fore;
             lblStatus.Text = message;
         }
 
@@ -547,7 +369,7 @@ namespace FuturePath.PresentationLayer
 
         #region Closing
 
-        /// <summary>The caption-bar X closes Future Path, so it asks first (not when signing out).</summary>
+        /// <summary>The caption-bar X and Exit close Future Path, so they ask first (not when signing out).</summary>
         private void StaffConsoleForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing || navigating || mainForm.Visible)
@@ -561,7 +383,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Ends the application when the console was closed with the caption-bar X.</summary>
+        /// <summary>Ends the application when the console was closed with the caption-bar X or Exit.</summary>
         private void StaffConsoleForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (!navigating && !mainForm.Visible)

@@ -14,9 +14,9 @@ namespace FuturePath.PresentationLayer
     /// and a small "Faculty details" group below it maintains faculties themselves with its own amber
     /// group buttons — <b>Add faculty</b>, <b>Rename</b> and <b>Deactivate faculty</b> — which save at once.
     /// Right: a read-only grid of the selected faculty's programmes (Programme · Min. overall average ·
-    /// Status chip) and the "Add or edit a programme" form, driven by the console's action band
-    /// (<see cref="UniversityAddNew"/>, <see cref="UniversityUpdateSelected"/>,
-    /// <see cref="UniversityDeactivateSelected"/>, <see cref="UniversityCancelEdit"/>).
+    /// Status chip) and the "Add or edit a programme" form, driven by the tab's own buttons
+    /// (<see cref="btnUniversityAdd_Click"/>, <see cref="btnUniversityUpdate_Click"/>,
+    /// <see cref="btnUniversityDeactivate_Click"/>, <see cref="btnUniversityCancel_Click"/>).
     /// </para>
     /// Nothing is deleted; the BLL re-validates every save and checks that the user is an Administrator.
     /// </summary>
@@ -25,16 +25,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>ProgrammeID of the programme being edited, or null when the form holds a new programme.</summary>
         private int? universitySelectedProgrammeId;
 
-        #region Screen contract (called by the console)
-
-        /// <summary>The noun the console puts on its Add / Update buttons.</summary>
-        private string UniversityItemNoun
-        {
-            get { return "programme"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called each time UI 13.1 is shown. The first time it binds the faculty lists and empties the
+        /// Called by <see cref="PageShown"/> each time UI 13.1 is shown. The first time it binds the faculty lists and empties the
         /// programme form (replaces the old tab's constructor and <c>LoadData</c>).
         /// </summary>
         /// <param name="firstTime">True the first time this page is shown in this console.</param>
@@ -53,8 +47,12 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Select a faculty to see its programmes. Faculty changes use the amber buttons under the list.", false);
         }
 
-        /// <summary>Validates the form and adds a new degree programme.</summary>
-        private void UniversityAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add programme: validates the form and adds a new degree programme.</summary>
+        private void btnUniversityAdd_Click(object sender, EventArgs e)
         {
             if (!UniversityValidateForm())
             {
@@ -79,8 +77,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Programme added: " + name + ".", false);
         }
 
-        /// <summary>Validates the form and saves it over the programme selected in the grid.</summary>
-        private void UniversityUpdateSelected()
+        /// <summary>Update programme: validates the form and saves it over the programme selected in the grid.</summary>
+        private void btnUniversityUpdate_Click(object sender, EventArgs e)
         {
             if (!universitySelectedProgrammeId.HasValue)
             {
@@ -109,8 +107,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Programme updated.", false);
         }
 
-        /// <summary>Deactivates the selected programme after confirmation. Nothing is deleted.</summary>
-        private void UniversityDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected programme after confirmation. Nothing is deleted.</summary>
+        private void btnUniversityDeactivate_Click(object sender, EventArgs e)
         {
             if (!universitySelectedProgrammeId.HasValue || dgvProgrammes.SelectedRows.Count == 0)
             {
@@ -147,8 +145,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Discards the form's changes and clears the grid selection.</summary>
-        private void UniversityCancelEdit()
+        /// <summary>Cancel: discards the form's changes and clears the grid selection.</summary>
+        private void btnUniversityCancel_Click(object sender, EventArgs e)
         {
             dgvProgrammes.ClearSelection();
             UniversityClearForm();

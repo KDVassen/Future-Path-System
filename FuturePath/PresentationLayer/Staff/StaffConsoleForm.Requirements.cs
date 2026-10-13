@@ -12,9 +12,9 @@ namespace FuturePath.PresentationLayer
     /// The administrator scopes the view with a Faculty ComboBox and a Degree programme ListBox
     /// (inactive programmes stay listed, marked "(inactive)"), reads the stored requirements in a
     /// read-only grid with green Active / grey Inactive status chips, and maintains one requirement
-    /// at a time in the "Add or edit a requirement" form. The console's action band calls
-    /// <see cref="RequirementsAddNew"/>, <see cref="RequirementsUpdateSelected"/>,
-    /// <see cref="RequirementsDeactivateSelected"/> and <see cref="RequirementsCancelEdit"/>. Nothing is
+    /// at a time in the "Add or edit a requirement" form, driven by the tab's own buttons
+    /// (<see cref="btnRequirementsAdd_Click"/>, <see cref="btnRequirementsUpdate_Click"/>,
+    /// <see cref="btnRequirementsDeactivate_Click"/>, <see cref="btnRequirementsCancel_Click"/>). Nothing is
     /// ever deleted, and every save is re-checked by the BLL, which also confirms that the signed-in user
     /// is an Administrator.
     /// </summary>
@@ -32,16 +32,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the programme's "Minimum average" row (DegreeProgramme.MinimumOverallAverage) is being edited.</summary>
         private bool requirementsEditingMinimumAverage;
 
-        #region Screen contract (called by the console)
-
-        /// <summary>The noun the console puts on its Add / Update buttons.</summary>
-        private string RequirementsItemNoun
-        {
-            get { return "requirement"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called each time UI 13.2 is shown. The first time it binds the faculty scope list and the form's
+        /// Called by <see cref="PageShown"/> each time UI 13.2 is shown. The first time it binds the faculty scope list and the form's
         /// lists and empties the form (replaces the old tab's constructor and <c>LoadData</c>).
         /// </summary>
         /// <param name="firstTime">True the first time this page is shown in this console.</param>
@@ -77,8 +71,12 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Validates the form and adds it as a new requirement of the selected programme.</summary>
-        private void RequirementsAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add requirement: validates the form and adds it as a new requirement of the selected programme.</summary>
+        private void btnRequirementsAdd_Click(object sender, EventArgs e)
         {
             if (lstProgrammes.SelectedIndex < 0)
             {
@@ -117,8 +115,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement added for " + subject + ".", false);
         }
 
-        /// <summary>Validates the form and saves it over the requirement selected in the grid.</summary>
-        private void RequirementsUpdateSelected()
+        /// <summary>Update requirement: validates the form and saves it over the requirement selected in the grid.</summary>
+        private void btnRequirementsUpdate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0)
             {
@@ -157,8 +155,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement updated.", false);
         }
 
-        /// <summary>Deactivates the selected requirement after confirmation. Nothing is deleted.</summary>
-        private void RequirementsDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected requirement after confirmation. Nothing is deleted.</summary>
+        private void btnRequirementsDeactivate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0 || !requirementsSelectedRequirementId.HasValue)
             {
@@ -197,8 +195,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement for " + subject + " deactivated.", false);
         }
 
-        /// <summary>Discards the form's changes and clears the grid selection, ready for a new requirement.</summary>
-        private void RequirementsCancelEdit()
+        /// <summary>Cancel: discards the form's changes and clears the grid selection, ready for a new requirement.</summary>
+        private void btnRequirementsCancel_Click(object sender, EventArgs e)
         {
             dgvRequirements.ClearSelection();
             RequirementsClearForm();

@@ -11,9 +11,9 @@ namespace FuturePath.PresentationLayer
     /// left (with "Show all categories"), a read-only grid of stored <c>InterestQuestion</c> rows
     /// (Order · Statement · Category · Status chip) with a count line, and a maintenance form below it
     /// (Statement* with an "n / 255" counter, Category*, Display order*, Active). Learners answer every
-    /// active question on UI 4 on a 1–5 scale. The console's action band calls
-    /// <see cref="QuestionnaireAddNew"/>, <see cref="QuestionnaireUpdateSelected"/>,
-    /// <see cref="QuestionnaireDeactivateSelected"/> and <see cref="QuestionnaireCancelEdit"/>.
+    /// active question on UI 4 on a 1–5 scale. The tab's own buttons run
+    /// <see cref="btnQuestionnaireAdd_Click"/>, <see cref="btnQuestionnaireUpdate_Click"/>,
+    /// <see cref="btnQuestionnaireDeactivate_Click"/> and <see cref="btnQuestionnaireCancel_Click"/>.
     /// Nothing is ever deleted.
     /// </summary>
     public partial class StaffConsoleForm
@@ -29,16 +29,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
         private bool questionnaireLoading;
 
-        #region Console contract (action band and page switching)
-
-        /// <summary>Noun used by the action band: "Add question", "Update question".</summary>
-        private string QuestionnaireItemNoun
-        {
-            get { return "question"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 13.5 appears. The first time, it prepares the grid
+        /// Called by <see cref="PageShown"/> each time UI 13.5 appears. The first time, it prepares the grid
         /// and loads the category lists and the questions; afterwards the page keeps its state.
         /// </summary>
         /// <param name="firstTime">True the first time the page is shown in this console.</param>
@@ -56,8 +50,12 @@ namespace FuturePath.PresentationLayer
             QuestionnaireClearForm();
         }
 
-        /// <summary>Adds a new question from the form (validated here and again in the BLL).</summary>
-        private void QuestionnaireAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add question: adds a new question from the form (validated here and again in the BLL).</summary>
+        private void btnQuestionnaireAdd_Click(object sender, EventArgs e)
         {
             if (!QuestionnaireValidateForm())
             {
@@ -79,8 +77,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question added. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Saves the form over the question selected in the grid.</summary>
-        private void QuestionnaireUpdateSelected()
+        /// <summary>Update question: saves the form over the question selected in the grid.</summary>
+        private void btnQuestionnaireUpdate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
             {
@@ -108,8 +106,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question updated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Deactivates the selected question after confirmation (never deletes it).</summary>
-        private void QuestionnaireDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected question after confirmation (never deletes it).</summary>
+        private void btnQuestionnaireDeactivate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
             {
@@ -145,8 +143,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question deactivated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
-        private void QuestionnaireCancelEdit()
+        /// <summary>Cancel: discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
+        private void btnQuestionnaireCancel_Click(object sender, EventArgs e)
         {
             QuestionnaireClearForm();
             ReportStatus("Edit cancelled. Nothing was saved.", false);

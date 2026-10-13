@@ -19,14 +19,8 @@ namespace FuturePath.PresentationLayer
     /// </summary>
     public partial class StaffConsoleForm
     {
-        /// <summary>Caption of the primary button while UI 10.1a is on show.</summary>
-        private string LearnerSearchPrimaryText
-        {
-            get { return "Open learner profile"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.1a appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.1a appears. The first time, it prepares the
         /// grid and binds the grade and province lists, then shows the search guidance.
         /// </summary>
         /// <param name="firstTime">True the first time the tab is shown in this console.</param>
@@ -43,11 +37,13 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Search on any field, or leave them all blank to list every learner.", false);
         }
 
+        #region Button click events
+
         /// <summary>
-        /// Open learner profile (the tab's primary action): moves to the Advisory session tab (10.2b)
-        /// and lists the selected learner's sessions there.
+        /// Open learner profile: moves to the Advisory session tab (10.2b) and lists the selected
+        /// learner's sessions there.
         /// </summary>
-        private void LearnerSearchPrimary()
+        private void btnLearnerSearchOpen_Click(object sender, EventArgs e)
         {
             if (grdLearners.CurrentRow == null)
             {
@@ -64,9 +60,11 @@ namespace FuturePath.PresentationLayer
             }
 
             string learnerName = Convert.ToString(row.Cells[colLrnLearner.Index].Value, CultureInfo.CurrentCulture);
-            ShowPage(tabSessionSearch);
+            SelectPage(tabSessionSearch);
             SessionSearchShowLearnerSessions(learnerId, learnerName);
         }
+
+        #endregion
 
         #region Business Logic Layer hooks
 
@@ -103,7 +101,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search
 
-        /// <summary>Runs the search and reports the result in the status band.</summary>
+        /// <summary>Runs the search and reports the result in the status bar.</summary>
         private void LearnerSearchFind()
         {
             int? gradeLevelId = cboLrnGrade.SelectedValue is int ? (int?)(int)cboLrnGrade.SelectedValue : null;
@@ -179,7 +177,7 @@ namespace FuturePath.PresentationLayer
         {
             if (e.RowIndex >= 0)
             {
-                LearnerSearchPrimary();
+                btnLearnerSearchOpen_Click(sender, e);
             }
         }
 

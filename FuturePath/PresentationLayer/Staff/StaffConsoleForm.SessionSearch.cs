@@ -13,7 +13,7 @@ namespace FuturePath.PresentationLayer
     /// advisory outcome; none is required. On <b>Find</b>, a session number not in the form
     /// yyyy-NNNN, or a from-date later than the to-date, turns its label and control red with a
     /// field message. The grid lists matching sessions with the outcome read back from the stored
-    /// RecommendationResult (never recalculated). The status band turns amber when nothing matches
+    /// RecommendationResult (never recalculated). The status bar turns amber when nothing matches
     /// and blue when results show. <b>Open advisory summary</b> and <b>Export advisory summary</b>
     /// regenerate the FP-LSR report for the selected session.
     /// </summary>
@@ -25,14 +25,8 @@ namespace FuturePath.PresentationLayer
         private int? sessionSearchLearnerFilterId;
         private string sessionSearchLearnerFilterSurname;
 
-        /// <summary>Caption of the primary button while UI 10.2b is on show.</summary>
-        private string SessionSearchPrimaryText
-        {
-            get { return "Open advisory summary"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.2b appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.2b appears. The first time, it prepares the
         /// grid and binds the outcome list, then shows the search guidance.
         /// </summary>
         /// <param name="firstTime">True the first time the tab is shown in this console.</param>
@@ -49,11 +43,15 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Search on any field — none is required. Tick a date box to use that date.", false);
         }
 
-        /// <summary>Opens the FP-LSR advisory summary of the selected session (the tab's primary action).</summary>
-        private void SessionSearchPrimary()
+        #region Button click events
+
+        /// <summary>Open advisory summary: opens the FP-LSR of the selected session in the report viewer.</summary>
+        private void btnSessionSearchOpen_Click(object sender, EventArgs e)
         {
             SessionSearchOpenSummary(false);
         }
+
+        #endregion
 
         /// <summary>
         /// Lists the sessions of one learner, used when the advisor opens a learner from UI 10.1a.
@@ -138,7 +136,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search and validation
 
-        /// <summary>Validates the criteria, runs the search and reports the result in the status band.</summary>
+        /// <summary>Validates the criteria, runs the search and reports the result in the status bar.</summary>
         private void SessionSearchFind()
         {
             bool numberValid = SessionSearchCheckSessionNumber();
