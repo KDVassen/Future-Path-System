@@ -35,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -199,9 +198,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
       <DependentUpon>ValidationDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\MainForm.Subjects.resx">
-      <DependentUpon>MainForm.Subjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Reports\FpDie.rdlc" />
     <EmbeddedResource Include="PresentationLayer\Reports\FpLer.rdlc" />

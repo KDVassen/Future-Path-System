@@ -375,7 +375,6 @@
             this.lblRailFooter = new System.Windows.Forms.Label();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.pnlBody.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -5063,6 +5062,5 @@
         private System.Windows.Forms.Label lblRailFooter;
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Label lblStatus;
-        private System.ServiceProcess.ServiceController serviceController1;
     }
 }
