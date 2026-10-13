@@ -46,6 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <!-- RDLC reports (UI 7, UI 11.1a-11.3c) in the WinForms ReportViewer: docs/design/reports.md -->
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms">
+      <Version>150.1652.0</Version>
+    </PackageReference>
+    <!-- ReportViewer asks for SqlServer.Types >= 14.0.0, which nuget.org does not have; pin the version it resolves to. -->
+    <PackageReference Include="Microsoft.SqlServer.Types">
+      <Version>14.0.314.76</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ApplicationLayer\User.cs" />
     <Compile Include="DatabaseLayer\AdminDBController.cs" />
     <Compile Include="PresentationLayer\MainForm.Alternatives.cs">
@@ -133,6 +143,10 @@
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.ReportViewer.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Reports.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
       <SubType>Form</SubType>
@@ -162,14 +176,32 @@
     <Compile Include="PresentationLayer\Staff\StaffLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpDieData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpDieData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpLerData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpLerData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpLsrData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpLsrData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
-      <DependentUpon>ValidationDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
+      <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Reports\FpDie.rdlc" />
+    <EmbeddedResource Include="PresentationLayer\Reports\FpLer.rdlc" />
+    <EmbeddedResource Include="PresentationLayer\Reports\FpLsr.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -179,6 +211,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ApplicationLayer\Reports\FpDieData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpDieData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationLayer\Reports\FpLerData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpLerData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationLayer\Reports\FpLsrData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpLsrData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

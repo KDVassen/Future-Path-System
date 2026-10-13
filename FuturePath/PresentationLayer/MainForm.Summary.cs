@@ -4,35 +4,27 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer.Reports;
+using Microsoft.Reporting.WinForms;
 
 namespace FuturePath.PresentationLayer
 {
     /// <summary>
     /// UI 7 — Advisory Summary and export (step 6 of 6; spec 2.3.9, report FP-LSR).
     /// The learner sets only the export format and the destination folder (both required). The file
-    /// name, generation date and the preview are system-supplied: every preview line is assembled
-    /// from the stored session, alternatives appear only if ticked on UI 6.1a and funding only if
-    /// added on UI 6.2b. <b>Save and export</b> validates, asks for confirmation, writes the file,
+    /// name, generation date and the preview are system-supplied: the preview is the FP-LSR report itself
+    /// (FpLsr.rdlc in the ReportViewer), rendered from the stored session, so the learner sees exactly what is
+    /// exported; alternatives appear only if ticked on UI 6.1a and funding only if added on UI 6.2b. <b>Save and export</b> validates, asks for confirmation, writes the file,
     /// completes the session and logs the export. An unusable folder raises a dialog that names the
     /// folder; success is shown in the status band, never in a modal, and the primary button becomes
     /// <b>Finish</b>. Back (host button) returns to the screen that opened UI 7; Back and Cancel write nothing.
     /// </summary>
     public partial class MainForm
     {
-        // Preview fonts used at runtime (spec 2.2.6). Everything else is set in the Designer.
-        private static readonly Font SummaryPreviewTitleFont = new Font("Segoe UI Semibold", 12F);
-        private static readonly Font SummaryPreviewSectionFont = new Font("Segoe UI Semibold", 10F);
-        private static readonly Font SummaryPreviewBodyFont = new Font("Segoe UI", 9F);
-        private static readonly Font SummaryPreviewCaptionFont = new Font("Segoe UI", 8F);
-
         private const string SummaryReadyStatus = "Step 6 of 6 · Choose an export format and a folder, then save and export.";
         private const string SummaryGuidanceText =
             "Saving the advisory summary completes this session: your profile, subjects, marks, questionnaire " +
             "responses and advisory outcome are kept on record as a completed session.";
-        private const string SummaryDisclaimer =
-            "Preliminary guidance only: Future Path does not make admission decisions, and the requirements used are " +
-            "sample data held in this system. Confirm every requirement with the institution before applying.";
-
         /// <summary>True once the export formats have been bound for this session.</summary>
         private bool summaryFormatsLoaded;
 
@@ -44,18 +36,18 @@ namespace FuturePath.PresentationLayer
 
         private DateTime? summaryGeneratedOn;
 
-        // Values read from the stored session for the file name and the preview (filled by the BLL).
+        /// <summary>The stored session as the FP-LSR typed dataset (filled by the BLL): the preview and the export are rendered from it.</summary>
+        private FpLsrData summaryData;
+
+        // From the report header, for the proposed file name Surname_SessionNumber.
         private string summarySurname;
         private string summarySessionNumber;
-        private string summaryOutcomeCategory;
-        private string summaryOutcomeReason;
-        private string summarySubjectsLine;
-        private string summaryInterestsLine;
-        private string summaryAlternativesLine;
-        private string summaryFundingLine;
-        private bool summaryIncludeAlternatives;
-        private bool summaryIncludeFunding;
+
+        /// <summary>Pages of the rendered summary, shown beside the export format.</summary>
         private int? summaryPageCount;
+
+        /// <summary>True once the preview's RenderingComplete handler is attached.</summary>
+        private bool summaryViewerReady;
 
         #region Shown, primary action and reset (called by the host)
 
@@ -161,9 +153,8 @@ namespace FuturePath.PresentationLayer
             summaryExported = false;
             summaryExportedMessage = null;
             summaryGeneratedOn = null;
-            summarySurname = summarySessionNumber = summaryOutcomeCategory = summaryOutcomeReason = null;
-            summarySubjectsLine = summaryInterestsLine = summaryAlternativesLine = summaryFundingLine = null;
-            summaryIncludeAlternatives = summaryIncludeFunding = false;
+            summaryData = null;
+            summarySurname = summarySessionNumber = null;
             summaryPageCount = null;
 
             cboExportFormat.Enabled = true;
@@ -174,7 +165,7 @@ namespace FuturePath.PresentationLayer
             txtFileName.Text = string.Empty;
             txtGeneratedOn.Text = string.Empty;
             lblPreviewMeta.Text = string.Empty;
-            rtbPreview.Clear();
+            rvSummary.Reset();
             CheckField(true, cboExportFormat, lblExportFormat, lblExportFormatError, string.Empty);
             CheckField(true, txtSaveTo, lblSaveTo, lblSaveToError, string.Empty);
         }
@@ -201,46 +192,56 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Reads the stored session that the preview and the file name are built from. The outcome is
-        /// read back, never recalculated; alternatives and funding flags come from the session row.
+        /// Reads the stored session as the FP-LSR typed dataset that the preview and the file name are built
+        /// from. The outcome is read back, never recalculated; the alternatives and funding flags come from the
+        /// session row (AlternativesInSummary, FundingInfoRequested).
         /// </summary>
         private void SummaryLoad()
         {
             // Cleared first, so a failed read never shows the previous values.
-            summarySurname = summarySessionNumber = summaryOutcomeCategory = summaryOutcomeReason = null;
-            summarySubjectsLine = summaryInterestsLine = summaryAlternativesLine = summaryFundingLine = null;
-            summaryIncludeAlternatives = summaryIncludeFunding = false;
+            summaryData = null;
+            summarySurname = summarySessionNumber = null;
             summaryPageCount = null;
             try
             {
-                // TODO BLL: var summary = ReportController.GetLearnerSummary(SessionId.Value);   // FP-LSR data set
-                //           summarySurname = summary.LastName; summarySessionNumber = summary.SessionNumber;
-                //           summaryOutcomeCategory = summary.OutcomeCode; summaryOutcomeReason = summary.OutcomeReason;
-                //           summarySubjectsLine = summary.SubjectsAndMarks;     // by subject name, ascending
-                //           summaryInterestsLine = summary.InterestResults;     // by score, descending
-                //           summaryIncludeAlternatives = summary.AlternativesInSummary;
-                //           summaryAlternativesLine = summary.Alternatives;     // by OverallScore, descending
-                //           summaryIncludeFunding = summary.FundingInfoRequested;
-                //           summaryFundingLine = summary.Funding;               // by ClosingDate, ascending
-                //           summaryPageCount = summary.PageCount;
+                // TODO BLL: summaryData = ReportController.GetLearnerSummary(SessionId.Value);   // FpLsrData
             }
             catch (Exception)
             {
                 SetStatus("Your stored session could not be read for the preview. Please go back and try again.", AmberColour, InkColour);
             }
 
+            if (summaryData == null)
+            {
+                summaryData = new FpLsrData();   // the empty layout, until the BLL supplies the session
+            }
+
+            FpLsrData.ReportHeaderRow header = summaryData.ReportHeader.Count > 0 ? summaryData.ReportHeader[0] : null;
+            summarySurname = header != null && !header.IsLastNameNull() ? header.LastName : null;
+            summarySessionNumber = header != null ? header.SessionNumber : SessionNumber;
+
             SummaryUpdateFileName();
             SummaryBuildPreview();
         }
 
         /// <summary>
-        /// Writes the FP-LSR file, sets SessionStatus = 'Completed' and DateCompleted, and writes an
-        /// ExportReport row (ReportCode FP-LSR, GeneratedByUserID null — a learner's own export).
+        /// Writes the FP-LSR file, then has the BLL set SessionStatus = 'Completed' and DateCompleted and write
+        /// the ExportReport row (ReportCode FP-LSR, GeneratedByUserID null — a learner's own export). The file is
+        /// rendered from the same report the preview shows, stamped with the export date and time.
         /// </summary>
         private void SummaryExport(string folder, string fileName)
         {
-            // TODO BLL: ReportController.ExportLearnerSummary(SessionId.Value, (string)cboExportFormat.SelectedValue,
-            //               Path.Combine(folder, fileName), summaryGeneratedOn.Value, null /* GeneratedByUserID */);
+            if (summaryData.ReportHeader.Count > 0)
+            {
+                summaryData.ReportHeader[0].DateGenerated = summaryGeneratedOn.Value;   // "stamped at export" (2.3.9)
+            }
+
+            string extension = Path.GetExtension(fileName).ToLowerInvariant();
+            byte[] file = rvSummary.LocalReport.Render(extension == ".docx" ? "WORDOPENXML" : "PDF");
+            File.WriteAllBytes(Path.Combine(folder, fileName), file);
+
+            // TODO BLL: ReportController.CompleteLearnerSession(SessionId.Value, extension.TrimStart('.').ToUpperInvariant(),
+            //               summaryGeneratedOn.Value, null /* GeneratedByUserID */);
         }
 
         #endregion
@@ -262,63 +263,51 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Builds the read-only preview. There are no section tick boxes: alternatives print only if
-        /// ticked on UI 6.1a, funding only if added on UI 6.2b, and everything else always.
+        /// Shows the FP-LSR in the preview pane, in print layout so the learner sees the exported pages. There are
+        /// no section tick boxes: alternatives print only if ticked on UI 6.1a, funding only if added on UI 6.2b,
+        /// and everything else always — the report reads those flags from the stored session.
         /// </summary>
         private void SummaryBuildPreview()
         {
-            rtbPreview.Clear();
-            SummaryAppendPreview("Future Path — Learner Advisory Summary", SummaryPreviewTitleFont, InkColour);
-            string stamp = summaryGeneratedOn.HasValue
-                ? "Generated " + summaryGeneratedOn.Value.ToString("dd MMMM yyyy 'at' HH:mm", CultureInfo.CurrentCulture)
-                : "Generated when you save and export";
-            SummaryAppendPreview("Session " + SummaryDash(summarySessionNumber) + " · " + stamp, SummaryPreviewCaptionFont, MutedColour);
-
-            SummaryAppendSection("Learner profile", SummaryDash(LearnerContext));
-            SummaryAppendSection("Selected qualification", SummaryDash(SelectedProgrammeName));
-            SummaryAppendSection("Subjects and marks", SummaryDash(summarySubjectsLine));
-            SummaryAppendSection("Interest category results", SummaryDash(summaryInterestsLine));
-            string outcome = string.IsNullOrEmpty(summaryOutcomeCategory)
-                ? "Advisory outcome"
-                : "Advisory outcome — " + summaryOutcomeCategory;
-            SummaryAppendSection(outcome, SummaryDash(summaryOutcomeReason));
-            if (summaryIncludeAlternatives)
+            if (!summaryViewerReady)
             {
-                SummaryAppendSection("Suggested alternative programmes", SummaryDash(summaryAlternativesLine));
+                rvSummary.RenderingComplete += SummaryPreview_RenderingComplete;
+                summaryViewerReady = true;
             }
 
-            if (summaryIncludeFunding)
+            LocalReport report = rvSummary.LocalReport;
+            report.ReportEmbeddedResource = "FuturePath.PresentationLayer.Reports.FpLsr.rdlc";
+            report.DataSources.Clear();
+            foreach (System.Data.DataTable table in summaryData.Tables)
             {
-                SummaryAppendSection("Funding options", SummaryDash(summaryFundingLine));
+                report.DataSources.Add(new ReportDataSource(table.TableName, table));
             }
 
-            SummaryAppendPreview(string.Empty, SummaryPreviewCaptionFont, MutedColour);
-            SummaryAppendPreview(SummaryDisclaimer, SummaryPreviewCaptionFont, MutedColour);
-            rtbPreview.SelectionStart = 0;
-            rtbPreview.ScrollToCaret();
+            ReportPageSettings page = report.GetDefaultPageSettings();   // the report's own A4 portrait page, not the printer's
+            rvSummary.SetPageSettings(new System.Drawing.Printing.PageSettings
+            {
+                PaperSize = page.PaperSize,
+                Margins = page.Margins,
+                Landscape = page.IsLandscape
+            });
+            rvSummary.SetDisplayMode(DisplayMode.PrintLayout);
+            rvSummary.ZoomMode = ZoomMode.PageWidth;
+            rvSummary.RefreshReport();
         }
 
-        /// <summary>Appends a blank line, a section heading and its body to the preview.</summary>
-        private void SummaryAppendSection(string heading, string body)
+        /// <summary>Once the preview has rendered, shows its page count beside the export format.</summary>
+        private void SummaryPreview_RenderingComplete(object sender, RenderingCompleteEventArgs e)
         {
-            SummaryAppendPreview(string.Empty, SummaryPreviewCaptionFont, InkColour);
-            SummaryAppendPreview(heading, SummaryPreviewSectionFont, InkColour);
-            SummaryAppendPreview(body, SummaryPreviewBodyFont, InkColour);
-        }
+            try
+            {
+                summaryPageCount = rvSummary.GetTotalPages();
+            }
+            catch (Exception)
+            {
+                summaryPageCount = null;
+            }
 
-        /// <summary>Appends one line to the preview in the given font and colour.</summary>
-        private void SummaryAppendPreview(string text, Font font, Color colour)
-        {
-            rtbPreview.SelectionStart = rtbPreview.TextLength;
-            rtbPreview.SelectionFont = font;
-            rtbPreview.SelectionColor = colour;
-            rtbPreview.AppendText(text + Environment.NewLine);
-        }
-
-        /// <summary>The value, or a dash when there is none.</summary>
-        private static string SummaryDash(string value)
-        {
-            return string.IsNullOrEmpty(value) ? "—" : value;
+            SummaryUpdateFileName();
         }
 
         #endregion

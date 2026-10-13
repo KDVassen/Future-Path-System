@@ -216,6 +216,16 @@ namespace FuturePath.PresentationLayer
                 btnCancel.Text = "Close";
                 ShowButtons(btnPrimary, btnCancel);
             }
+            else if (page == tabReportViewer)
+            {
+                title = ReportNameOf(viewerReportCode);
+                subtitle = ReportScreenOf(viewerReportCode) + " · " + viewerReportCode + " · " + viewerScope;
+                hint = "Preview: nothing is saved or recorded until you save the report.";
+                railButton = viewerReturnPage == tabSessionSearch ? btnNavSessions : btnNavReports;
+                btnPrimary.Text = "Save report";
+                btnCancel.Text = "Back";
+                ShowButtons(btnPrimary, btnCancel);
+            }
             else if (page == tabReports)
             {
                 title = "Reports";
@@ -257,6 +267,7 @@ namespace FuturePath.PresentationLayer
             else if (page == tabSessionSearch) SessionSearchShown(firstTime);
             else if (page == tabReportShortcuts) ReportShortcutsShown(firstTime);
             else if (page == tabReports) ReportsShown(firstTime);
+            else if (page == tabReportViewer) ReportViewerShown(firstTime);
             else if (page == tabUniversity) UniversityShown(firstTime);
             else if (page == tabRequirements) RequirementsShown(firstTime);
             else if (page == tabFundingAdmin) FundingAdminShown(firstTime);
@@ -396,6 +407,7 @@ namespace FuturePath.PresentationLayer
             else if (page == tabSessionSearch) SessionSearchPrimary();
             else if (page == tabReportShortcuts) ReportShortcutsPrimary();
             else if (page == tabReports) ReportsGenerate();
+            else if (page == tabReportViewer) ReportViewerSave();
             else if (page == tabUniversity) UniversityAddNew();
             else if (page == tabRequirements) RequirementsAddNew();
             else if (page == tabFundingAdmin) FundingAdminAddNew();
@@ -437,7 +449,10 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Close (UI 10) and Cancel (UI 11) return to the dashboard; Cancel on UI 13 abandons the edit.</summary>
+        /// <summary>
+        /// Close (UI 10) and Cancel (UI 11) return to the dashboard; Cancel on UI 13 abandons the edit; Back on the
+        /// report viewer returns to the screen that opened it.
+        /// </summary>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             TabPage page = CurrentPage;
@@ -448,6 +463,7 @@ namespace FuturePath.PresentationLayer
             else if (page == tabCategories) CategoriesCancelEdit();
             else if (page == tabQuestionnaire) QuestionnaireCancelEdit();
             else if (page == tabAccounts) AccountsCancelEdit();
+            else if (page == tabReportViewer) ReportViewerBack();
             else OpenDashboard();
         }
 

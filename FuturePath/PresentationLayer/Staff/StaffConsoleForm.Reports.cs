@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -284,26 +285,74 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Generates the report. The BLL checks the signed-in user's role from <c>UserAccount</c>
-        /// (the screen's role is never trusted), builds the typed dataset, writes the file and logs an
-        /// <c>ExportReport</c> row (ReportCode, SessionID or ParametersUsed, GeneratedByUserID,
-        /// DateGenerated, ExportFormat).
+        /// Generates the report. The BLL checks the signed-in user's role from <c>UserAccount</c> (the screen's
+        /// role is never trusted) and builds the typed dataset; this screen renders it to the chosen format and
+        /// folder, records the export (ExportReport) and shows it in the report viewer (UI 11.1a / 11.2b / 11.3c).
         /// </summary>
         private void ReportsBuildAndSave()
         {
-            // TODO BLL: var report = ReportController.Generate(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
-            //               dtpRepFrom.Value.Date, dtpRepTo.Value.Date, ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade),
-            //               ReportsSelectedOutcome(), chkIncludeInactive.Checked, (string)cboOutputFormat.SelectedValue, txtSaveTo.Text.Trim());
-            // TODO Stage 10: open the report viewer (UI 11.1a / 11.2b / 11.3c) for report — the RDLC ReportViewer is deferred.
-        }
-
-        /// <summary>Builds the preview of the chosen report without saving or logging anything.</summary>
-        private void ReportsBuildPreview()
-        {
-            // TODO BLL: var data = ReportController.BuildPreview(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
+            DataSet data = null;
+            int? sessionId = null;
+            // TODO BLL: data = ReportController.Generate(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
             //               dtpRepFrom.Value.Date, dtpRepTo.Value.Date, ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade),
             //               ReportsSelectedOutcome(), chkIncludeInactive.Checked);
-            // TODO Stage 10: show data in the report viewer (UI 11.1a / 11.2b / 11.3c) — nothing is written or logged.
+            //           Returns FpLsrData / FpDieData / FpLerData: completed sessions only, inactive programmes and
+            //           funding excluded unless the box is ticked (FP-DIE only).
+            // TODO BLL: if (ReportsSelectedCode == ReportsLearnerSummaryCode)
+            //               sessionId = SessionSearchController.FindSessionId(ReportsSessionNumberOrNull());
+            string folder = txtSaveTo.Text.Trim();
+            string extension = (string)cboOutputFormat.SelectedValue;
+            string path = Path.Combine(folder, ReportsFileStem() + extension);
+            SaveReport(ReportsSelectedCode, data, path, sessionId, ReportsParametersUsed());
+
+            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, sessionId, ReportsParametersUsed(),
+                             extension, folder, ReportsFileStem(), tabReports);
+            viewerSavedPath = path;
+        }
+
+        /// <summary>Builds the preview of the chosen report in the report viewer without saving or logging anything.</summary>
+        private void ReportsBuildPreview()
+        {
+            DataSet data = null;
+            // TODO BLL: data = ReportController.BuildPreview(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
+            //               dtpRepFrom.Value.Date, dtpRepTo.Value.Date, ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade),
+            //               ReportsSelectedOutcome(), chkIncludeInactive.Checked);
+            string extension = cboOutputFormat.SelectedValue as string;
+            string folder = Directory.Exists(txtSaveTo.Text.Trim()) ? txtSaveTo.Text.Trim() : null;
+            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, null, ReportsParametersUsed(),
+                             extension, folder, ReportsFileStem(), tabReports);
+        }
+
+        /// <summary>The proposed file name: FP-LSR_&lt;session&gt;, or the report code and the period.</summary>
+        private string ReportsFileStem()
+        {
+            if (ReportsSelectedCode == ReportsLearnerSummaryCode)
+            {
+                return ReportsSelectedCode + "_" + (ReportsSessionNumberOrNull() ?? "session");
+            }
+
+            return ReportsSelectedCode + "_" + dtpRepFrom.Value.ToString("yyyyMMdd", CultureInfo.InvariantCulture) +
+                   "-" + dtpRepTo.Value.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// ExportReport.ParametersUsed for FP-DIE and FP-LER (database.md), e.g.
+        /// "Period 2026-01-01..2026-09-15; Faculty=All; Grade=All; Outcome=All; Inactive=Excluded". Null for FP-LSR,
+        /// which records its SessionID instead.
+        /// </summary>
+        private string ReportsParametersUsed()
+        {
+            if (ReportsSelectedCode == ReportsLearnerSummaryCode)
+            {
+                return null;
+            }
+
+            return "Period " + dtpRepFrom.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + ".." +
+                   dtpRepTo.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) +
+                   "; Faculty=" + (ReportsSelectedId(cboRepFaculty).HasValue ? cboRepFaculty.Text : "All") +
+                   "; Grade=" + (ReportsSelectedId(cboRepGrade).HasValue ? cboRepGrade.Text : "All") +
+                   "; Outcome=" + (cboRepOutcome.Enabled ? (ReportsSelectedOutcome() ?? "All") : "Exceptions") +
+                   "; Inactive=" + (chkIncludeInactive.Enabled && chkIncludeInactive.Checked ? "Included" : "Excluded");
         }
 
         /// <summary>The selected ID of an enabled, bound list, or null for "all".</summary>

@@ -116,15 +116,22 @@ namespace FuturePath.PresentationLayer
         /// SessionID set, GeneratedByUserID = UserId).
         /// </summary>
         /// <param name="sessionId">AdvisorySession.SessionID of the selected row.</param>
-        /// <param name="filePath">Where to save the export, or null to open it in the report viewer.</param>
-        private void SessionSearchGenerateLearnerSummary(int sessionId, string filePath)
+        /// <param name="sessionNumber">The session number yyyy-NNNN, for the subtitle and the file name.</param>
+        /// <param name="filePath">Where to save the export, or null to open it in the report viewer (UI 11.1a).</param>
+        private void SessionSearchGenerateLearnerSummary(int sessionId, string sessionNumber, string filePath)
         {
-            // TODO BLL: if (filePath == null)
-            //               ReportController.GenerateLearnerSummary(sessionId, UserId, ReportOutput.Preview, null);
-            //           else
-            //               ReportController.GenerateLearnerSummary(sessionId, UserId,
-            //                   filePath.EndsWith(".docx", StringComparison.OrdinalIgnoreCase) ? ReportOutput.Word : ReportOutput.Pdf, filePath);
-            //           The preview opens in the RDLC ReportViewer (reports.md, "Technology").
+            System.Data.DataSet data = null;
+            // TODO BLL: data = ReportController.GetLearnerSummary(sessionId, UserId);   // FpLsrData
+            //           The BLL checks the role and refuses an incomplete session (reports.md FP-LSR "Who generates it").
+            if (filePath == null)
+            {
+                OpenReportViewer(LsrCode, data, "Session " + sessionNumber, sessionId, null, null, null,
+                                 "FP-LSR_" + sessionNumber, tabSessionSearch);
+            }
+            else
+            {
+                SaveReport(LsrCode, data, filePath, sessionId, null);
+            }
         }
 
         #endregion
@@ -315,7 +322,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                SessionSearchGenerateLearnerSummary(sessionId, filePath);
+                SessionSearchGenerateLearnerSummary(sessionId, sessionNumber, filePath);
             }
             catch (UnauthorizedAccessException)
             {

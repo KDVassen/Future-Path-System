@@ -273,6 +273,9 @@
             this.lblReadyScope = new System.Windows.Forms.Label();
             this.lblReadyChip = new System.Windows.Forms.Label();
             this.pnlReadinessBar = new System.Windows.Forms.Panel();
+            this.tabReportViewer = new System.Windows.Forms.TabPage();
+            this.pnlRvwContent = new System.Windows.Forms.Panel();
+            this.rvReport = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabReference = new System.Windows.Forms.TabPage();
             this.tabReferenceGroup = new System.Windows.Forms.TabControl();
             this.tabUniversity = new System.Windows.Forms.TabPage();
@@ -604,6 +607,8 @@
             this.lblOutputHeadingBar.SuspendLayout();
             this.pnlReadiness.SuspendLayout();
             this.pnlReadinessBar.SuspendLayout();
+            this.tabReportViewer.SuspendLayout();
+            this.pnlRvwContent.SuspendLayout();
             this.tabReference.SuspendLayout();
             this.tabReferenceGroup.SuspendLayout();
             this.tabUniversity.SuspendLayout();
@@ -693,6 +698,7 @@
             this.tabConsole.Controls.Add(this.tabAdminDashboard);
             this.tabConsole.Controls.Add(this.tabSessions);
             this.tabConsole.Controls.Add(this.tabReports);
+            this.tabConsole.Controls.Add(this.tabReportViewer);
             this.tabConsole.Controls.Add(this.tabReference);
             this.tabConsole.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabConsole.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -3066,6 +3072,44 @@
             this.pnlReadinessBar.TabIndex = 3;
             this.pnlReadinessBar.Name = "pnlReadinessBar";
             //
+            // tabReportViewer
+            //
+            this.tabReportViewer.Controls.Add(this.pnlRvwContent);
+            this.tabReportViewer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabReportViewer.Location = new System.Drawing.Point(4, 5);
+            this.tabReportViewer.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.tabReportViewer.Size = new System.Drawing.Size(934, 563);
+            this.tabReportViewer.TabIndex = 4;
+            this.tabReportViewer.Text = "UI 11.1a / 11.2b / 11.3c Report viewer";
+            this.tabReportViewer.UseVisualStyleBackColor = false;
+            this.tabReportViewer.Name = "tabReportViewer";
+            //
+            // pnlRvwContent
+            //
+            this.pnlRvwContent.Controls.Add(this.rvReport);
+            this.pnlRvwContent.BackColor = System.Drawing.Color.White;
+            this.pnlRvwContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRvwContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlRvwContent.TabIndex = 0;
+            this.pnlRvwContent.Name = "pnlRvwContent";
+            //
+            // rvReport
+            //
+            this.rvReport.AccessibleName = "Report viewer";
+            this.rvReport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rvReport.Location = new System.Drawing.Point(0, 0);
+            this.rvReport.ShowBackButton = false;
+            this.rvReport.ShowCredentialPrompts = false;
+            this.rvReport.ShowDocumentMapButton = false;
+            this.rvReport.ShowExportButton = false;
+            this.rvReport.ShowFindControls = false;
+            this.rvReport.ShowParameterPrompts = false;
+            this.rvReport.ShowRefreshButton = false;
+            this.rvReport.ShowStopButton = false;
+            this.rvReport.Size = new System.Drawing.Size(934, 563);
+            this.rvReport.TabIndex = 0;
+            this.rvReport.Name = "rvReport";
+            //
             // tabReference
             //
             this.tabReference.Controls.Add(this.tabReferenceGroup);
@@ -3073,7 +3117,7 @@
             this.tabReference.Location = new System.Drawing.Point(4, 5);
             this.tabReference.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.tabReference.Size = new System.Drawing.Size(934, 563);
-            this.tabReference.TabIndex = 4;
+            this.tabReference.TabIndex = 5;
             this.tabReference.Text = "UI 13 Reference data";
             this.tabReference.UseVisualStyleBackColor = false;
             this.tabReference.Name = "tabReference";
@@ -6723,6 +6767,10 @@
             this.pnlReadiness.PerformLayout();
             this.pnlReadinessBar.ResumeLayout(false);
             this.pnlReadinessBar.PerformLayout();
+            this.tabReportViewer.ResumeLayout(false);
+            this.tabReportViewer.PerformLayout();
+            this.pnlRvwContent.ResumeLayout(false);
+            this.pnlRvwContent.PerformLayout();
             this.tabReference.ResumeLayout(false);
             this.tabReference.PerformLayout();
             this.tabReferenceGroup.ResumeLayout(false);
@@ -7056,6 +7104,9 @@
         private System.Windows.Forms.Label lblReadyScope;
         private System.Windows.Forms.Label lblReadyChip;
         private System.Windows.Forms.Panel pnlReadinessBar;
+        private System.Windows.Forms.TabPage tabReportViewer;
+        private System.Windows.Forms.Panel pnlRvwContent;
+        private Microsoft.Reporting.WinForms.ReportViewer rvReport;
         private System.Windows.Forms.TabPage tabReference;
         private System.Windows.Forms.TabControl tabReferenceGroup;
         private System.Windows.Forms.TabPage tabUniversity;

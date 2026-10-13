@@ -338,7 +338,7 @@
             this.lblPreviewHeading = new System.Windows.Forms.Label();
             this.lblPreviewMeta = new System.Windows.Forms.Label();
             this.pnlPreviewRule = new System.Windows.Forms.Panel();
-            this.rtbPreview = new System.Windows.Forms.RichTextBox();
+            this.rvSummary = new Microsoft.Reporting.WinForms.ReportViewer();
             this.pnlNoticeGap = new System.Windows.Forms.Panel();
             this.pnlNotice = new System.Windows.Forms.Panel();
             this.lblNotice = new System.Windows.Forms.Label();
@@ -4077,7 +4077,7 @@
             this.pnlPreviewCard.Controls.Add(this.lblPreviewHeading);
             this.pnlPreviewCard.Controls.Add(this.lblPreviewMeta);
             this.pnlPreviewCard.Controls.Add(this.pnlPreviewRule);
-            this.pnlPreviewCard.Controls.Add(this.rtbPreview);
+            this.pnlPreviewCard.Controls.Add(this.rvSummary);
             this.pnlPreviewCard.Location = new System.Drawing.Point(395, 0);
             this.pnlPreviewCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPreviewCard.Name = "pnlPreviewCard";
@@ -4125,22 +4125,22 @@
             this.pnlPreviewRule.Size = new System.Drawing.Size(722, 1);
             this.pnlPreviewRule.TabIndex = 3;
             // 
-            // rtbPreview
+            // rvSummary
             // 
-            this.rtbPreview.AccessibleName = "Advisory summary preview (read-only)";
-            this.rtbPreview.BackColor = System.Drawing.Color.White;
-            this.rtbPreview.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbPreview.DetectUrls = false;
-            this.rtbPreview.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.rtbPreview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rtbPreview.Location = new System.Drawing.Point(25, 55);
-            this.rtbPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.rtbPreview.Name = "rtbPreview";
-            this.rtbPreview.ReadOnly = true;
-            this.rtbPreview.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtbPreview.Size = new System.Drawing.Size(722, 500);
-            this.rtbPreview.TabIndex = 4;
-            this.rtbPreview.Text = "";
+            this.rvSummary.AccessibleName = "Advisory summary preview (read-only)";
+            this.rvSummary.Location = new System.Drawing.Point(25, 55);
+            this.rvSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rvSummary.Name = "rvSummary";
+            this.rvSummary.ShowBackButton = false;
+            this.rvSummary.ShowCredentialPrompts = false;
+            this.rvSummary.ShowDocumentMapButton = false;
+            this.rvSummary.ShowExportButton = false;
+            this.rvSummary.ShowFindControls = false;
+            this.rvSummary.ShowParameterPrompts = false;
+            this.rvSummary.ShowRefreshButton = false;
+            this.rvSummary.ShowStopButton = false;
+            this.rvSummary.Size = new System.Drawing.Size(722, 500);
+            this.rvSummary.TabIndex = 4;
             // 
             // pnlNoticeGap
             // 
@@ -5024,7 +5024,7 @@
         private System.Windows.Forms.Label lblPreviewHeading;
         private System.Windows.Forms.Label lblPreviewMeta;
         private System.Windows.Forms.Panel pnlPreviewRule;
-        private System.Windows.Forms.RichTextBox rtbPreview;
+        private Microsoft.Reporting.WinForms.ReportViewer rvSummary;
         private System.Windows.Forms.Panel pnlNoticeGap;
         private System.Windows.Forms.Panel pnlNotice;
         private System.Windows.Forms.Label lblNotice;
