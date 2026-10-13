@@ -375,6 +375,7 @@
             this.lblRailFooter = new System.Windows.Forms.Label();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.pnlBody.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -457,7 +458,7 @@
             this.pnlBody.Controls.Add(this.pnlContext);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBody.Location = new System.Drawing.Point(262, 105);
-            this.pnlBody.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlBody.Margin = new System.Windows.Forms.Padding(4);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Padding = new System.Windows.Forms.Padding(20, 10, 20, 9);
             this.pnlBody.Size = new System.Drawing.Size(1218, 734);
@@ -477,7 +478,7 @@
             this.tabMain.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tabMain.ItemSize = new System.Drawing.Size(0, 1);
             this.tabMain.Location = new System.Drawing.Point(20, 139);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(1178, 586);
@@ -491,7 +492,7 @@
             this.tabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabHome.Controls.Add(this.pnlHomeContent);
             this.tabHome.Location = new System.Drawing.Point(4, 5);
-            this.tabHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(4);
             this.tabHome.Name = "tabHome";
             this.tabHome.Size = new System.Drawing.Size(1170, 577);
             this.tabHome.TabIndex = 0;
@@ -505,7 +506,7 @@
             this.pnlHomeContent.Controls.Add(this.lblHomeDisclaimer);
             this.pnlHomeContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHomeContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlHomeContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlHomeContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlHomeContent.Name = "pnlHomeContent";
             this.pnlHomeContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlHomeContent.TabIndex = 0;
@@ -530,7 +531,7 @@
             this.pnlLearnerCard.Controls.Add(this.lblLearnerText);
             this.pnlLearnerCard.Controls.Add(this.btnStart);
             this.pnlLearnerCard.Location = new System.Drawing.Point(0, 80);
-            this.pnlLearnerCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlLearnerCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlLearnerCard.Name = "pnlLearnerCard";
             this.pnlLearnerCard.Size = new System.Drawing.Size(571, 374);
             this.pnlLearnerCard.TabIndex = 1;
@@ -539,7 +540,7 @@
             // 
             this.lblLearnerHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblLearnerHeadingBar.Location = new System.Drawing.Point(20, 25);
-            this.lblLearnerHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLearnerHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblLearnerHeadingBar.Name = "lblLearnerHeadingBar";
             this.lblLearnerHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblLearnerHeadingBar.TabIndex = 0;
@@ -577,7 +578,7 @@
             this.btnStart.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
             this.btnStart.Location = new System.Drawing.Point(25, 290);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(300, 55);
             this.btnStart.TabIndex = 3;
@@ -594,7 +595,7 @@
             this.pnlStaffCard.Controls.Add(this.lblStaffText);
             this.pnlStaffCard.Controls.Add(this.btnStaffLogin);
             this.pnlStaffCard.Location = new System.Drawing.Point(596, 80);
-            this.pnlStaffCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlStaffCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlStaffCard.Name = "pnlStaffCard";
             this.pnlStaffCard.Size = new System.Drawing.Size(571, 374);
             this.pnlStaffCard.TabIndex = 2;
@@ -603,7 +604,7 @@
             // 
             this.lblStaffHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblStaffHeadingBar.Location = new System.Drawing.Point(20, 25);
-            this.lblStaffHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblStaffHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblStaffHeadingBar.Name = "lblStaffHeadingBar";
             this.lblStaffHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblStaffHeadingBar.TabIndex = 0;
@@ -643,7 +644,7 @@
             this.btnStaffLogin.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnStaffLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.btnStaffLogin.Location = new System.Drawing.Point(25, 290);
-            this.btnStaffLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStaffLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnStaffLogin.Name = "btnStaffLogin";
             this.btnStaffLogin.Size = new System.Drawing.Size(225, 55);
             this.btnStaffLogin.TabIndex = 3;
@@ -669,9 +670,9 @@
             this.tabProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabProfile.Controls.Add(this.pnlProfContent);
             this.tabProfile.Location = new System.Drawing.Point(4, 5);
-            this.tabProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabProfile.Margin = new System.Windows.Forms.Padding(4);
             this.tabProfile.Name = "tabProfile";
-            this.tabProfile.Size = new System.Drawing.Size(1170, 576);
+            this.tabProfile.Size = new System.Drawing.Size(1170, 577);
             this.tabProfile.TabIndex = 1;
             this.tabProfile.Text = "UI 2 Learner profile";
             // 
@@ -684,9 +685,9 @@
             this.pnlProfContent.Controls.Add(this.lblProfRequiredNote);
             this.pnlProfContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProfContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlProfContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlProfContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlProfContent.Name = "pnlProfContent";
-            this.pnlProfContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlProfContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlProfContent.TabIndex = 0;
             // 
             // pnlWhoCard
@@ -700,7 +701,7 @@
             this.pnlWhoCard.Controls.Add(this.lblSurname);
             this.pnlWhoCard.Controls.Add(this.txtSurname);
             this.pnlWhoCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlWhoCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlWhoCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlWhoCard.Name = "pnlWhoCard";
             this.pnlWhoCard.Size = new System.Drawing.Size(1167, 124);
             this.pnlWhoCard.TabIndex = 0;
@@ -709,7 +710,7 @@
             // 
             this.lblWhoHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblWhoHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblWhoHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblWhoHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblWhoHeadingBar.Name = "lblWhoHeadingBar";
             this.lblWhoHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblWhoHeadingBar.TabIndex = 0;
@@ -743,7 +744,7 @@
             this.txtFirstName.AccessibleName = "First name (optional)";
             this.txtFirstName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtFirstName.Location = new System.Drawing.Point(25, 82);
-            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4);
             this.txtFirstName.MaxLength = 50;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(324, 30);
@@ -766,7 +767,7 @@
             this.txtSurname.AccessibleName = "Surname (optional)";
             this.txtSurname.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSurname.Location = new System.Drawing.Point(375, 82);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.MaxLength = 50;
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(324, 30);
@@ -796,7 +797,7 @@
             this.pnlSchoolCard.Controls.Add(this.numAdvisingYear);
             this.pnlSchoolCard.Controls.Add(this.lblAdvisingYearError);
             this.pnlSchoolCard.Location = new System.Drawing.Point(0, 138);
-            this.pnlSchoolCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSchoolCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSchoolCard.Name = "pnlSchoolCard";
             this.pnlSchoolCard.Size = new System.Drawing.Size(1167, 160);
             this.pnlSchoolCard.TabIndex = 1;
@@ -805,7 +806,7 @@
             // 
             this.lblSchoolHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblSchoolHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSchoolHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblSchoolHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblSchoolHeadingBar.Name = "lblSchoolHeadingBar";
             this.lblSchoolHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblSchoolHeadingBar.TabIndex = 0;
@@ -853,7 +854,7 @@
             this.cboGrade.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboGrade.FormattingEnabled = true;
             this.cboGrade.Location = new System.Drawing.Point(25, 82);
-            this.cboGrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboGrade.Margin = new System.Windows.Forms.Padding(4);
             this.cboGrade.Name = "cboGrade";
             this.cboGrade.Size = new System.Drawing.Size(249, 31);
             this.cboGrade.TabIndex = 4;
@@ -910,7 +911,7 @@
             this.txtSchool.AccessibleName = "School name (required)";
             this.txtSchool.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSchool.Location = new System.Drawing.Point(300, 82);
-            this.txtSchool.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSchool.Margin = new System.Windows.Forms.Padding(4);
             this.txtSchool.MaxLength = 100;
             this.txtSchool.Name = "txtSchool";
             this.txtSchool.Size = new System.Drawing.Size(349, 30);
@@ -959,7 +960,7 @@
             this.cboProvince.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboProvince.FormattingEnabled = true;
             this.cboProvince.Location = new System.Drawing.Point(675, 82);
-            this.cboProvince.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboProvince.Margin = new System.Windows.Forms.Padding(4);
             this.cboProvince.Name = "cboProvince";
             this.cboProvince.Size = new System.Drawing.Size(249, 31);
             this.cboProvince.TabIndex = 13;
@@ -1005,7 +1006,7 @@
             this.numAdvisingYear.AccessibleName = "Advising year (required)";
             this.numAdvisingYear.Font = new System.Drawing.Font("Consolas", 10F);
             this.numAdvisingYear.Location = new System.Drawing.Point(950, 82);
-            this.numAdvisingYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numAdvisingYear.Margin = new System.Windows.Forms.Padding(4);
             this.numAdvisingYear.Maximum = new decimal(new int[] {
             2100,
             0,
@@ -1051,7 +1052,7 @@
             this.pnlContactCard.Controls.Add(this.lblMobileError);
             this.pnlContactCard.Controls.Add(this.lblContactNote);
             this.pnlContactCard.Location = new System.Drawing.Point(0, 310);
-            this.pnlContactCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContactCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContactCard.Name = "pnlContactCard";
             this.pnlContactCard.Size = new System.Drawing.Size(1167, 154);
             this.pnlContactCard.TabIndex = 2;
@@ -1060,7 +1061,7 @@
             // 
             this.lblContactHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblContactHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblContactHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblContactHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblContactHeadingBar.Name = "lblContactHeadingBar";
             this.lblContactHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblContactHeadingBar.TabIndex = 0;
@@ -1094,7 +1095,7 @@
             this.txtEmail.AccessibleName = "Email address (optional)";
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtEmail.Location = new System.Drawing.Point(25, 82);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(374, 30);
@@ -1129,7 +1130,7 @@
             this.txtMobile.AccessibleName = "Mobile number (optional), format 0XX XXX XXXX";
             this.txtMobile.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtMobile.Location = new System.Drawing.Point(425, 82);
-            this.txtMobile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMobile.Margin = new System.Windows.Forms.Padding(4);
             this.txtMobile.MaxLength = 20;
             this.txtMobile.Name = "txtMobile";
             this.txtMobile.Size = new System.Drawing.Size(274, 27);
@@ -1174,7 +1175,7 @@
             this.pnlSessionCard.Controls.Add(this.lblSessionStatus);
             this.pnlSessionCard.Controls.Add(this.txtSessionStatus);
             this.pnlSessionCard.Location = new System.Drawing.Point(0, 478);
-            this.pnlSessionCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSessionCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSessionCard.Name = "pnlSessionCard";
             this.pnlSessionCard.Size = new System.Drawing.Size(1167, 123);
             this.pnlSessionCard.TabIndex = 3;
@@ -1183,7 +1184,7 @@
             // 
             this.lblSessionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblSessionHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSessionHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblSessionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblSessionHeadingBar.Name = "lblSessionHeadingBar";
             this.lblSessionHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblSessionHeadingBar.TabIndex = 0;
@@ -1218,7 +1219,7 @@
             this.txtSessionNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSessionNumber.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtSessionNumber.Location = new System.Drawing.Point(25, 82);
-            this.txtSessionNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSessionNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtSessionNumber.Name = "txtSessionNumber";
             this.txtSessionNumber.ReadOnly = true;
             this.txtSessionNumber.Size = new System.Drawing.Size(249, 27);
@@ -1243,7 +1244,7 @@
             this.txtDateStarted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtDateStarted.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtDateStarted.Location = new System.Drawing.Point(300, 82);
-            this.txtDateStarted.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDateStarted.Margin = new System.Windows.Forms.Padding(4);
             this.txtDateStarted.Name = "txtDateStarted";
             this.txtDateStarted.ReadOnly = true;
             this.txtDateStarted.Size = new System.Drawing.Size(249, 27);
@@ -1268,7 +1269,7 @@
             this.txtCapturedBy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtCapturedBy.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCapturedBy.Location = new System.Drawing.Point(575, 82);
-            this.txtCapturedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCapturedBy.Margin = new System.Windows.Forms.Padding(4);
             this.txtCapturedBy.Name = "txtCapturedBy";
             this.txtCapturedBy.ReadOnly = true;
             this.txtCapturedBy.Size = new System.Drawing.Size(249, 30);
@@ -1293,7 +1294,7 @@
             this.txtSessionStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSessionStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSessionStatus.Location = new System.Drawing.Point(850, 82);
-            this.txtSessionStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSessionStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtSessionStatus.Name = "txtSessionStatus";
             this.txtSessionStatus.ReadOnly = true;
             this.txtSessionStatus.Size = new System.Drawing.Size(249, 30);
@@ -1316,9 +1317,9 @@
             this.tabSubjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabSubjects.Controls.Add(this.pnlSubjContent);
             this.tabSubjects.Location = new System.Drawing.Point(4, 5);
-            this.tabSubjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSubjects.Margin = new System.Windows.Forms.Padding(4);
             this.tabSubjects.Name = "tabSubjects";
-            this.tabSubjects.Size = new System.Drawing.Size(1170, 576);
+            this.tabSubjects.Size = new System.Drawing.Size(1170, 577);
             this.tabSubjects.TabIndex = 2;
             this.tabSubjects.Text = "UI 3 Subjects and marks";
             // 
@@ -1329,9 +1330,9 @@
             this.pnlSubjContent.Controls.Add(this.pnlCapturedCard);
             this.pnlSubjContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSubjContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSubjContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSubjContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSubjContent.Name = "pnlSubjContent";
-            this.pnlSubjContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSubjContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlSubjContent.TabIndex = 0;
             // 
             // pnlAddCard
@@ -1352,7 +1353,7 @@
             this.pnlAddCard.Controls.Add(this.lblMarkError);
             this.pnlAddCard.Controls.Add(this.btnAddSubject);
             this.pnlAddCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlAddCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlAddCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlAddCard.Name = "pnlAddCard";
             this.pnlAddCard.Size = new System.Drawing.Size(1167, 144);
             this.pnlAddCard.TabIndex = 0;
@@ -1363,7 +1364,7 @@
             // 
             this.lblAddHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblAddHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblAddHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblAddHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblAddHeadingBar.Name = "lblAddHeadingBar";
             this.lblAddHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblAddHeadingBar.TabIndex = 0;
@@ -1411,7 +1412,7 @@
             this.cboSubject.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboSubject.FormattingEnabled = true;
             this.cboSubject.Location = new System.Drawing.Point(25, 82);
-            this.cboSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboSubject.Margin = new System.Windows.Forms.Padding(4);
             this.cboSubject.Name = "cboSubject";
             this.cboSubject.Size = new System.Drawing.Size(424, 31);
             this.cboSubject.TabIndex = 4;
@@ -1447,7 +1448,7 @@
             this.txtSubjectLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSubjectLevel.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSubjectLevel.Location = new System.Drawing.Point(475, 82);
-            this.txtSubjectLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubjectLevel.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubjectLevel.Name = "txtSubjectLevel";
             this.txtSubjectLevel.ReadOnly = true;
             this.txtSubjectLevel.Size = new System.Drawing.Size(274, 30);
@@ -1484,7 +1485,7 @@
             this.numMark.DecimalPlaces = 1;
             this.numMark.Font = new System.Drawing.Font("Consolas", 10F);
             this.numMark.Location = new System.Drawing.Point(775, 82);
-            this.numMark.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numMark.Margin = new System.Windows.Forms.Padding(4);
             this.numMark.Name = "numMark";
             this.numMark.Size = new System.Drawing.Size(175, 27);
             this.numMark.TabIndex = 10;
@@ -1513,7 +1514,7 @@
             this.btnAddSubject.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnAddSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.btnAddSubject.Location = new System.Drawing.Point(975, 78);
-            this.btnAddSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddSubject.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddSubject.Name = "btnAddSubject";
             this.btnAddSubject.Size = new System.Drawing.Size(168, 40);
             this.btnAddSubject.TabIndex = 12;
@@ -1527,7 +1528,7 @@
             this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSummary.Controls.Add(this.lblSummary);
             this.pnlSummary.Location = new System.Drawing.Point(0, 158);
-            this.pnlSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSummary.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Size = new System.Drawing.Size(1167, 87);
             this.pnlSummary.TabIndex = 1;
@@ -1553,7 +1554,7 @@
             this.pnlCapturedCard.Controls.Add(this.dgvSubjects);
             this.pnlCapturedCard.Controls.Add(this.lblFooter);
             this.pnlCapturedCard.Location = new System.Drawing.Point(0, 158);
-            this.pnlCapturedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCapturedCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCapturedCard.Name = "pnlCapturedCard";
             this.pnlCapturedCard.Size = new System.Drawing.Size(1167, 416);
             this.pnlCapturedCard.TabIndex = 2;
@@ -1562,7 +1563,7 @@
             // 
             this.lblCapturedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblCapturedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblCapturedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblCapturedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblCapturedHeadingBar.Name = "lblCapturedHeadingBar";
             this.lblCapturedHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblCapturedHeadingBar.TabIndex = 0;
@@ -1634,7 +1635,7 @@
             this.dgvSubjects.EnableHeadersVisualStyles = false;
             this.dgvSubjects.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvSubjects.Location = new System.Drawing.Point(20, 50);
-            this.dgvSubjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvSubjects.Margin = new System.Windows.Forms.Padding(4);
             this.dgvSubjects.MultiSelect = false;
             this.dgvSubjects.Name = "dgvSubjects";
             this.dgvSubjects.ReadOnly = true;
@@ -1725,9 +1726,9 @@
             this.tabInterests.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabInterests.Controls.Add(this.pnlIntContent);
             this.tabInterests.Location = new System.Drawing.Point(4, 5);
-            this.tabInterests.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabInterests.Margin = new System.Windows.Forms.Padding(4);
             this.tabInterests.Name = "tabInterests";
-            this.tabInterests.Size = new System.Drawing.Size(1170, 576);
+            this.tabInterests.Size = new System.Drawing.Size(1170, 577);
             this.tabInterests.TabIndex = 3;
             this.tabInterests.Text = "UI 4 Interest questionnaire";
             // 
@@ -1740,9 +1741,9 @@
             this.pnlIntContent.Controls.Add(this.tileCategory3);
             this.pnlIntContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlIntContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlIntContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlIntContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlIntContent.Name = "pnlIntContent";
-            this.pnlIntContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlIntContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlIntContent.TabIndex = 0;
             // 
             // pnlQuestionCard
@@ -1755,7 +1756,7 @@
             this.pnlQuestionCard.Controls.Add(this.pnlStatementHeader);
             this.pnlQuestionCard.Controls.Add(this.pnlStatements);
             this.pnlQuestionCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlQuestionCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlQuestionCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlQuestionCard.Name = "pnlQuestionCard";
             this.pnlQuestionCard.Size = new System.Drawing.Size(1167, 468);
             this.pnlQuestionCard.TabIndex = 0;
@@ -1764,7 +1765,7 @@
             // 
             this.lblQuestionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblQuestionHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblQuestionHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblQuestionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblQuestionHeadingBar.Name = "lblQuestionHeadingBar";
             this.lblQuestionHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblQuestionHeadingBar.TabIndex = 0;
@@ -1802,7 +1803,7 @@
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse4);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse5);
             this.pnlStatementHeader.Location = new System.Drawing.Point(20, 50);
-            this.pnlStatementHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlStatementHeader.Margin = new System.Windows.Forms.Padding(4);
             this.pnlStatementHeader.Name = "pnlStatementHeader";
             this.pnlStatementHeader.Size = new System.Drawing.Size(1125, 50);
             this.pnlStatementHeader.TabIndex = 3;
@@ -1886,7 +1887,7 @@
             this.pnlStatements.BackColor = System.Drawing.Color.White;
             this.pnlStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatements.Location = new System.Drawing.Point(20, 100);
-            this.pnlStatements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlStatements.Margin = new System.Windows.Forms.Padding(4);
             this.pnlStatements.Name = "pnlStatements";
             this.pnlStatements.Size = new System.Drawing.Size(1124, 362);
             this.pnlStatements.TabIndex = 4;
@@ -1899,7 +1900,7 @@
             this.tileAnswered.Controls.Add(this.tileAnsweredValue);
             this.tileAnswered.Controls.Add(this.tileAnsweredNote);
             this.tileAnswered.Location = new System.Drawing.Point(0, 481);
-            this.tileAnswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileAnswered.Margin = new System.Windows.Forms.Padding(4);
             this.tileAnswered.Name = "tileAnswered";
             this.tileAnswered.Size = new System.Drawing.Size(272, 92);
             this.tileAnswered.TabIndex = 1;
@@ -1944,7 +1945,7 @@
             this.tileCategory1.Controls.Add(this.tileCategory1Value);
             this.tileCategory1.Controls.Add(this.tileCategory1Note);
             this.tileCategory1.Location = new System.Drawing.Point(298, 481);
-            this.tileCategory1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory1.Margin = new System.Windows.Forms.Padding(4);
             this.tileCategory1.Name = "tileCategory1";
             this.tileCategory1.Size = new System.Drawing.Size(272, 92);
             this.tileCategory1.TabIndex = 2;
@@ -1991,7 +1992,7 @@
             this.tileCategory2.Controls.Add(this.tileCategory2Value);
             this.tileCategory2.Controls.Add(this.tileCategory2Note);
             this.tileCategory2.Location = new System.Drawing.Point(595, 481);
-            this.tileCategory2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory2.Margin = new System.Windows.Forms.Padding(4);
             this.tileCategory2.Name = "tileCategory2";
             this.tileCategory2.Size = new System.Drawing.Size(272, 92);
             this.tileCategory2.TabIndex = 3;
@@ -2038,7 +2039,7 @@
             this.tileCategory3.Controls.Add(this.tileCategory3Value);
             this.tileCategory3.Controls.Add(this.tileCategory3Note);
             this.tileCategory3.Location = new System.Drawing.Point(892, 481);
-            this.tileCategory3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory3.Margin = new System.Windows.Forms.Padding(4);
             this.tileCategory3.Name = "tileCategory3";
             this.tileCategory3.Size = new System.Drawing.Size(272, 92);
             this.tileCategory3.TabIndex = 4;
@@ -2082,9 +2083,9 @@
             this.tabFaculty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabFaculty.Controls.Add(this.pnlSelContent);
             this.tabFaculty.Location = new System.Drawing.Point(4, 5);
-            this.tabFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabFaculty.Margin = new System.Windows.Forms.Padding(4);
             this.tabFaculty.Name = "tabFaculty";
-            this.tabFaculty.Size = new System.Drawing.Size(1170, 576);
+            this.tabFaculty.Size = new System.Drawing.Size(1170, 577);
             this.tabFaculty.TabIndex = 4;
             this.tabFaculty.Text = "UI 5 Faculty and department";
             // 
@@ -2096,9 +2097,9 @@
             this.pnlSelContent.Controls.Add(this.pnlAlignmentCard);
             this.pnlSelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSelContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSelContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSelContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSelContent.Name = "pnlSelContent";
-            this.pnlSelContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSelContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlSelContent.TabIndex = 0;
             // 
             // pnlSearchCard
@@ -2117,7 +2118,7 @@
             this.pnlSearchCard.Controls.Add(this.txtProgrammeSearch);
             this.pnlSearchCard.Controls.Add(this.lblSearchHint);
             this.pnlSearchCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSearchCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSearchCard.Name = "pnlSearchCard";
             this.pnlSearchCard.Size = new System.Drawing.Size(1167, 147);
             this.pnlSearchCard.TabIndex = 0;
@@ -2126,7 +2127,7 @@
             // 
             this.lblSearchHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblSearchHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSearchHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblSearchHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblSearchHeadingBar.Name = "lblSearchHeadingBar";
             this.lblSearchHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblSearchHeadingBar.TabIndex = 0;
@@ -2150,7 +2151,7 @@
             this.rbBrowse.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rbBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.rbBrowse.Location = new System.Drawing.Point(25, 58);
-            this.rbBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.rbBrowse.Name = "rbBrowse";
             this.rbBrowse.Size = new System.Drawing.Size(275, 30);
             this.rbBrowse.TabIndex = 2;
@@ -2165,7 +2166,7 @@
             this.rbSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rbSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.rbSearch.Location = new System.Drawing.Point(25, 92);
-            this.rbSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbSearch.Margin = new System.Windows.Forms.Padding(4);
             this.rbSearch.Name = "rbSearch";
             this.rbSearch.Size = new System.Drawing.Size(275, 30);
             this.rbSearch.TabIndex = 3;
@@ -2204,7 +2205,7 @@
             this.cboSelFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboSelFaculty.FormattingEnabled = true;
             this.cboSelFaculty.Location = new System.Drawing.Point(338, 85);
-            this.cboSelFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboSelFaculty.Margin = new System.Windows.Forms.Padding(4);
             this.cboSelFaculty.Name = "cboSelFaculty";
             this.cboSelFaculty.Size = new System.Drawing.Size(374, 31);
             this.cboSelFaculty.TabIndex = 6;
@@ -2240,7 +2241,7 @@
             this.txtProgrammeSearch.Enabled = false;
             this.txtProgrammeSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtProgrammeSearch.Location = new System.Drawing.Point(762, 85);
-            this.txtProgrammeSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProgrammeSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtProgrammeSearch.MaxLength = 100;
             this.txtProgrammeSearch.Name = "txtProgrammeSearch";
             this.txtProgrammeSearch.Size = new System.Drawing.Size(382, 30);
@@ -2267,7 +2268,7 @@
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammeCount);
             this.pnlProgrammesCard.Controls.Add(this.dgvProgrammes);
             this.pnlProgrammesCard.Location = new System.Drawing.Point(0, 172);
-            this.pnlProgrammesCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlProgrammesCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlProgrammesCard.Name = "pnlProgrammesCard";
             this.pnlProgrammesCard.Size = new System.Drawing.Size(571, 368);
             this.pnlProgrammesCard.TabIndex = 1;
@@ -2276,7 +2277,7 @@
             // 
             this.lblProgrammesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblProgrammesHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblProgrammesHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblProgrammesHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblProgrammesHeadingBar.Name = "lblProgrammesHeadingBar";
             this.lblProgrammesHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblProgrammesHeadingBar.TabIndex = 0;
@@ -2344,7 +2345,7 @@
             this.dgvProgrammes.EnableHeadersVisualStyles = false;
             this.dgvProgrammes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvProgrammes.Location = new System.Drawing.Point(15, 72);
-            this.dgvProgrammes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvProgrammes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProgrammes.MultiSelect = false;
             this.dgvProgrammes.Name = "dgvProgrammes";
             this.dgvProgrammes.ReadOnly = true;
@@ -2418,7 +2419,7 @@
             this.pnlRequirementsCard.Controls.Add(this.dgvRequirements);
             this.pnlRequirementsCard.Controls.Add(this.lblSelSampleData);
             this.pnlRequirementsCard.Location = new System.Drawing.Point(596, 172);
-            this.pnlRequirementsCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRequirementsCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRequirementsCard.Name = "pnlRequirementsCard";
             this.pnlRequirementsCard.Size = new System.Drawing.Size(571, 368);
             this.pnlRequirementsCard.TabIndex = 2;
@@ -2427,7 +2428,7 @@
             // 
             this.lblRequirementsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblRequirementsHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblRequirementsHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblRequirementsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblRequirementsHeadingBar.Name = "lblRequirementsHeadingBar";
             this.lblRequirementsHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblRequirementsHeadingBar.TabIndex = 0;
@@ -2495,7 +2496,7 @@
             this.dgvRequirements.EnableHeadersVisualStyles = false;
             this.dgvRequirements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvRequirements.Location = new System.Drawing.Point(15, 72);
-            this.dgvRequirements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvRequirements.Margin = new System.Windows.Forms.Padding(4);
             this.dgvRequirements.MultiSelect = false;
             this.dgvRequirements.Name = "dgvRequirements";
             this.dgvRequirements.ReadOnly = true;
@@ -2563,7 +2564,7 @@
             this.pnlAlignmentCard.Controls.Add(this.lblStrongestCategories);
             this.pnlAlignmentCard.Controls.Add(this.lblAlignmentSource);
             this.pnlAlignmentCard.Location = new System.Drawing.Point(0, 566);
-            this.pnlAlignmentCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlAlignmentCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlAlignmentCard.Name = "pnlAlignmentCard";
             this.pnlAlignmentCard.Size = new System.Drawing.Size(1167, 80);
             this.pnlAlignmentCard.TabIndex = 3;
@@ -2623,9 +2624,9 @@
             this.tabResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabResults.Controls.Add(this.tabResultsGroup);
             this.tabResults.Location = new System.Drawing.Point(4, 5);
-            this.tabResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabResults.Margin = new System.Windows.Forms.Padding(4);
             this.tabResults.Name = "tabResults";
-            this.tabResults.Size = new System.Drawing.Size(1170, 576);
+            this.tabResults.Size = new System.Drawing.Size(1170, 577);
             this.tabResults.TabIndex = 5;
             this.tabResults.Text = "UI 6 Results";
             // 
@@ -2637,11 +2638,11 @@
             this.tabResultsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabResultsGroup.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tabResultsGroup.Location = new System.Drawing.Point(0, 0);
-            this.tabResultsGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabResultsGroup.Margin = new System.Windows.Forms.Padding(4);
             this.tabResultsGroup.Name = "tabResultsGroup";
             this.tabResultsGroup.Padding = new System.Drawing.Point(6, 5);
             this.tabResultsGroup.SelectedIndex = 0;
-            this.tabResultsGroup.Size = new System.Drawing.Size(1170, 576);
+            this.tabResultsGroup.Size = new System.Drawing.Size(1170, 577);
             this.tabResultsGroup.TabIndex = 0;
             this.tabResultsGroup.SelectedIndexChanged += new System.EventHandler(this.tabResultsGroup_SelectedIndexChanged);
             // 
@@ -2650,9 +2651,9 @@
             this.tabOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabOutcome.Controls.Add(this.pnlOutContent);
             this.tabOutcome.Location = new System.Drawing.Point(4, 36);
-            this.tabOutcome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabOutcome.Margin = new System.Windows.Forms.Padding(4);
             this.tabOutcome.Name = "tabOutcome";
-            this.tabOutcome.Size = new System.Drawing.Size(1162, 536);
+            this.tabOutcome.Size = new System.Drawing.Size(1162, 537);
             this.tabOutcome.TabIndex = 0;
             this.tabOutcome.Text = "Your outcome";
             // 
@@ -2668,9 +2669,9 @@
             this.pnlOutContent.Controls.Add(this.lblOutSampleData);
             this.pnlOutContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOutContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOutContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOutContent.Name = "pnlOutContent";
-            this.pnlOutContent.Size = new System.Drawing.Size(1162, 536);
+            this.pnlOutContent.Size = new System.Drawing.Size(1162, 537);
             this.pnlOutContent.TabIndex = 0;
             // 
             // pnlOutcome
@@ -2681,7 +2682,7 @@
             this.pnlOutcome.Controls.Add(this.lblOutcomeExplanation);
             this.pnlOutcome.Controls.Add(this.pnlOutcomeBar);
             this.pnlOutcome.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutcome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOutcome.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOutcome.Name = "pnlOutcome";
             this.pnlOutcome.Size = new System.Drawing.Size(1158, 115);
             this.pnlOutcome.TabIndex = 0;
@@ -2729,7 +2730,7 @@
             this.pnlOutcomeBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(107)))), ((int)(((byte)(130)))));
             this.pnlOutcomeBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlOutcomeBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutcomeBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOutcomeBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOutcomeBar.Name = "pnlOutcomeBar";
             this.pnlOutcomeBar.Size = new System.Drawing.Size(6, 115);
             this.pnlOutcomeBar.TabIndex = 3;
@@ -2742,7 +2743,7 @@
             this.pnlCheckedCard.Controls.Add(this.lblCheckedHeading);
             this.pnlCheckedCard.Controls.Add(this.dgvChecked);
             this.pnlCheckedCard.Location = new System.Drawing.Point(0, 138);
-            this.pnlCheckedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCheckedCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCheckedCard.Name = "pnlCheckedCard";
             this.pnlCheckedCard.Size = new System.Drawing.Size(1157, 280);
             this.pnlCheckedCard.TabIndex = 1;
@@ -2751,7 +2752,7 @@
             // 
             this.lblCheckedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblCheckedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblCheckedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblCheckedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblCheckedHeadingBar.Name = "lblCheckedHeadingBar";
             this.lblCheckedHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblCheckedHeadingBar.TabIndex = 0;
@@ -2809,7 +2810,7 @@
             this.dgvChecked.EnableHeadersVisualStyles = false;
             this.dgvChecked.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvChecked.Location = new System.Drawing.Point(15, 52);
-            this.dgvChecked.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvChecked.Margin = new System.Windows.Forms.Padding(4);
             this.dgvChecked.MultiSelect = false;
             this.dgvChecked.Name = "dgvChecked";
             this.dgvChecked.ReadOnly = true;
@@ -2888,7 +2889,7 @@
             this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileValue);
             this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileNote);
             this.pnlSubjectTile.Location = new System.Drawing.Point(0, 438);
-            this.pnlSubjectTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSubjectTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSubjectTile.Name = "pnlSubjectTile";
             this.pnlSubjectTile.Size = new System.Drawing.Size(272, 112);
             this.pnlSubjectTile.TabIndex = 2;
@@ -2934,7 +2935,7 @@
             this.pnlMarkTile.Controls.Add(this.pnlMarkTileValue);
             this.pnlMarkTile.Controls.Add(this.pnlMarkTileNote);
             this.pnlMarkTile.Location = new System.Drawing.Point(295, 438);
-            this.pnlMarkTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMarkTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMarkTile.Name = "pnlMarkTile";
             this.pnlMarkTile.Size = new System.Drawing.Size(272, 112);
             this.pnlMarkTile.TabIndex = 3;
@@ -2980,7 +2981,7 @@
             this.pnlInterestTile.Controls.Add(this.pnlInterestTileValue);
             this.pnlInterestTile.Controls.Add(this.pnlInterestTileNote);
             this.pnlInterestTile.Location = new System.Drawing.Point(590, 438);
-            this.pnlInterestTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlInterestTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInterestTile.Name = "pnlInterestTile";
             this.pnlInterestTile.Size = new System.Drawing.Size(272, 112);
             this.pnlInterestTile.TabIndex = 4;
@@ -3026,7 +3027,7 @@
             this.pnlOverallTile.Controls.Add(this.pnlOverallTileValue);
             this.pnlOverallTile.Controls.Add(this.pnlOverallTileNote);
             this.pnlOverallTile.Location = new System.Drawing.Point(885, 438);
-            this.pnlOverallTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlOverallTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOverallTile.Name = "pnlOverallTile";
             this.pnlOverallTile.Size = new System.Drawing.Size(272, 112);
             this.pnlOverallTile.TabIndex = 5;
@@ -3092,9 +3093,9 @@
             this.tabAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabAlternatives.Controls.Add(this.pnlAltContent);
             this.tabAlternatives.Location = new System.Drawing.Point(4, 36);
-            this.tabAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.tabAlternatives.Name = "tabAlternatives";
-            this.tabAlternatives.Size = new System.Drawing.Size(1160, 664);
+            this.tabAlternatives.Size = new System.Drawing.Size(1162, 536);
             this.tabAlternatives.TabIndex = 1;
             this.tabAlternatives.Text = "Alternative programmes";
             // 
@@ -3105,9 +3106,9 @@
             this.pnlAltContent.Controls.Add(this.chkIncludeAlternatives);
             this.pnlAltContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAltContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlAltContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlAltContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlAltContent.Name = "pnlAltContent";
-            this.pnlAltContent.Size = new System.Drawing.Size(1160, 664);
+            this.pnlAltContent.Size = new System.Drawing.Size(1162, 536);
             this.pnlAltContent.TabIndex = 0;
             // 
             // pnlRankedCard
@@ -3119,7 +3120,7 @@
             this.pnlRankedCard.Controls.Add(this.lblRankedCount);
             this.pnlRankedCard.Controls.Add(this.dgvAlternatives);
             this.pnlRankedCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlRankedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRankedCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRankedCard.Name = "pnlRankedCard";
             this.pnlRankedCard.Size = new System.Drawing.Size(1157, 312);
             this.pnlRankedCard.TabIndex = 0;
@@ -3128,7 +3129,7 @@
             // 
             this.lblRankedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblRankedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblRankedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblRankedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblRankedHeadingBar.Name = "lblRankedHeadingBar";
             this.lblRankedHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblRankedHeadingBar.TabIndex = 0;
@@ -3200,7 +3201,7 @@
             this.dgvAlternatives.EnableHeadersVisualStyles = false;
             this.dgvAlternatives.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvAlternatives.Location = new System.Drawing.Point(20, 52);
-            this.dgvAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAlternatives.MultiSelect = false;
             this.dgvAlternatives.Name = "dgvAlternatives";
             this.dgvAlternatives.ReadOnly = true;
@@ -3303,7 +3304,7 @@
             this.pnlReasonsCard.Controls.Add(this.lblReasonsHeading);
             this.pnlReasonsCard.Controls.Add(this.lblReasons);
             this.pnlReasonsCard.Location = new System.Drawing.Point(0, 335);
-            this.pnlReasonsCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlReasonsCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlReasonsCard.Name = "pnlReasonsCard";
             this.pnlReasonsCard.Size = new System.Drawing.Size(1157, 140);
             this.pnlReasonsCard.TabIndex = 1;
@@ -3312,7 +3313,7 @@
             // 
             this.lblReasonsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblReasonsHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblReasonsHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblReasonsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblReasonsHeadingBar.Name = "lblReasonsHeadingBar";
             this.lblReasonsHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblReasonsHeadingBar.TabIndex = 0;
@@ -3347,7 +3348,7 @@
             this.chkIncludeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkIncludeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.chkIncludeAlternatives.Location = new System.Drawing.Point(2, 492);
-            this.chkIncludeAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.chkIncludeAlternatives.Name = "chkIncludeAlternatives";
             this.chkIncludeAlternatives.Size = new System.Drawing.Size(750, 30);
             this.chkIncludeAlternatives.TabIndex = 2;
@@ -3360,9 +3361,9 @@
             this.tabFunding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabFunding.Controls.Add(this.pnlFundContent);
             this.tabFunding.Location = new System.Drawing.Point(4, 36);
-            this.tabFunding.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabFunding.Margin = new System.Windows.Forms.Padding(4);
             this.tabFunding.Name = "tabFunding";
-            this.tabFunding.Size = new System.Drawing.Size(1160, 664);
+            this.tabFunding.Size = new System.Drawing.Size(1162, 536);
             this.tabFunding.TabIndex = 2;
             this.tabFunding.Text = "Funding options";
             // 
@@ -3373,9 +3374,9 @@
             this.pnlFundContent.Controls.Add(this.pnlDetailCard);
             this.pnlFundContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFundContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlFundContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlFundContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFundContent.Name = "pnlFundContent";
-            this.pnlFundContent.Size = new System.Drawing.Size(1160, 664);
+            this.pnlFundContent.Size = new System.Drawing.Size(1162, 536);
             this.pnlFundContent.TabIndex = 0;
             // 
             // pnlFilterCard
@@ -3388,7 +3389,7 @@
             this.pnlFilterCard.Controls.Add(this.cboFundingType);
             this.pnlFilterCard.Controls.Add(this.chkOpenOnly);
             this.pnlFilterCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlFilterCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlFilterCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFilterCard.Name = "pnlFilterCard";
             this.pnlFilterCard.Size = new System.Drawing.Size(1157, 90);
             this.pnlFilterCard.TabIndex = 0;
@@ -3412,7 +3413,7 @@
             this.cboFundFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboFundFaculty.FormattingEnabled = true;
             this.cboFundFaculty.Location = new System.Drawing.Point(20, 45);
-            this.cboFundFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboFundFaculty.Margin = new System.Windows.Forms.Padding(4);
             this.cboFundFaculty.Name = "cboFundFaculty";
             this.cboFundFaculty.Size = new System.Drawing.Size(349, 31);
             this.cboFundFaculty.TabIndex = 1;
@@ -3437,7 +3438,7 @@
             this.cboFundingType.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboFundingType.FormattingEnabled = true;
             this.cboFundingType.Location = new System.Drawing.Point(395, 45);
-            this.cboFundingType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboFundingType.Margin = new System.Windows.Forms.Padding(4);
             this.cboFundingType.Name = "cboFundingType";
             this.cboFundingType.Size = new System.Drawing.Size(349, 31);
             this.cboFundingType.TabIndex = 3;
@@ -3449,7 +3450,7 @@
             this.chkOpenOnly.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkOpenOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.chkOpenOnly.Location = new System.Drawing.Point(770, 45);
-            this.chkOpenOnly.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkOpenOnly.Margin = new System.Windows.Forms.Padding(4);
             this.chkOpenOnly.Name = "chkOpenOnly";
             this.chkOpenOnly.Size = new System.Drawing.Size(375, 30);
             this.chkOpenOnly.TabIndex = 4;
@@ -3466,7 +3467,7 @@
             this.pnlFundingCard.Controls.Add(this.lblFundingCount);
             this.pnlFundingCard.Controls.Add(this.dgvFunding);
             this.pnlFundingCard.Location = new System.Drawing.Point(0, 112);
-            this.pnlFundingCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlFundingCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFundingCard.Name = "pnlFundingCard";
             this.pnlFundingCard.Size = new System.Drawing.Size(1157, 237);
             this.pnlFundingCard.TabIndex = 1;
@@ -3475,7 +3476,7 @@
             // 
             this.lblFundingHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblFundingHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblFundingHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFundingHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblFundingHeadingBar.Name = "lblFundingHeadingBar";
             this.lblFundingHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblFundingHeadingBar.TabIndex = 0;
@@ -3548,7 +3549,7 @@
             this.dgvFunding.EnableHeadersVisualStyles = false;
             this.dgvFunding.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvFunding.Location = new System.Drawing.Point(20, 52);
-            this.dgvFunding.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvFunding.Margin = new System.Windows.Forms.Padding(4);
             this.dgvFunding.MultiSelect = false;
             this.dgvFunding.Name = "dgvFunding";
             this.dgvFunding.ReadOnly = true;
@@ -3663,7 +3664,7 @@
             this.pnlDetailCard.Controls.Add(this.txtContact);
             this.pnlDetailCard.Controls.Add(this.pnlSampleNote);
             this.pnlDetailCard.Location = new System.Drawing.Point(0, 372);
-            this.pnlDetailCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlDetailCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlDetailCard.Name = "pnlDetailCard";
             this.pnlDetailCard.Size = new System.Drawing.Size(1157, 231);
             this.pnlDetailCard.TabIndex = 2;
@@ -3672,7 +3673,7 @@
             // 
             this.lblDetailHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblDetailHeadingBar.Location = new System.Drawing.Point(20, 12);
-            this.lblDetailHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDetailHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblDetailHeadingBar.Name = "lblDetailHeadingBar";
             this.lblDetailHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblDetailHeadingBar.TabIndex = 0;
@@ -3706,7 +3707,7 @@
             this.txtEligibility.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtEligibility.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtEligibility.Location = new System.Drawing.Point(20, 78);
-            this.txtEligibility.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEligibility.Margin = new System.Windows.Forms.Padding(4);
             this.txtEligibility.Multiline = true;
             this.txtEligibility.Name = "txtEligibility";
             this.txtEligibility.ReadOnly = true;
@@ -3731,7 +3732,7 @@
             this.txtDocuments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtDocuments.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtDocuments.Location = new System.Drawing.Point(400, 78);
-            this.txtDocuments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDocuments.Margin = new System.Windows.Forms.Padding(4);
             this.txtDocuments.Multiline = true;
             this.txtDocuments.Name = "txtDocuments";
             this.txtDocuments.ReadOnly = true;
@@ -3756,7 +3757,7 @@
             this.txtContact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtContact.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtContact.Location = new System.Drawing.Point(780, 78);
-            this.txtContact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtContact.Margin = new System.Windows.Forms.Padding(4);
             this.txtContact.Multiline = true;
             this.txtContact.Name = "txtContact";
             this.txtContact.ReadOnly = true;
@@ -3770,7 +3771,7 @@
             this.pnlSampleNote.Controls.Add(this.lblSampleNote);
             this.pnlSampleNote.Controls.Add(this.pnlSampleNoteBar);
             this.pnlSampleNote.Location = new System.Drawing.Point(20, 165);
-            this.pnlSampleNote.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSampleNote.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSampleNote.Name = "pnlSampleNote";
             this.pnlSampleNote.Size = new System.Drawing.Size(1115, 48);
             this.pnlSampleNote.TabIndex = 8;
@@ -3795,7 +3796,7 @@
             this.pnlSampleNoteBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.pnlSampleNoteBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSampleNoteBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSampleNoteBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSampleNoteBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSampleNoteBar.Name = "pnlSampleNoteBar";
             this.pnlSampleNoteBar.Size = new System.Drawing.Size(6, 48);
             this.pnlSampleNoteBar.TabIndex = 1;
@@ -3805,9 +3806,9 @@
             this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabSummary.Controls.Add(this.pnlSumContent);
             this.tabSummary.Location = new System.Drawing.Point(4, 5);
-            this.tabSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSummary.Margin = new System.Windows.Forms.Padding(4);
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Size = new System.Drawing.Size(1170, 576);
+            this.tabSummary.Size = new System.Drawing.Size(1170, 577);
             this.tabSummary.TabIndex = 6;
             this.tabSummary.Text = "UI 7 Advisory summary";
             // 
@@ -3817,9 +3818,9 @@
             this.pnlSumContent.Controls.Add(this.pnlPreviewCard);
             this.pnlSumContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSumContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSumContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSumContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSumContent.Name = "pnlSumContent";
-            this.pnlSumContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSumContent.Size = new System.Drawing.Size(1170, 577);
             this.pnlSumContent.TabIndex = 0;
             // 
             // pnlIncludeCard
@@ -3845,7 +3846,7 @@
             this.pnlIncludeCard.Controls.Add(this.lblPrintNote);
             this.pnlIncludeCard.Controls.Add(this.lblSumRequiredNote);
             this.pnlIncludeCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlIncludeCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlIncludeCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlIncludeCard.Name = "pnlIncludeCard";
             this.pnlIncludeCard.Size = new System.Drawing.Size(374, 573);
             this.pnlIncludeCard.TabIndex = 0;
@@ -3854,7 +3855,7 @@
             // 
             this.lblIncludeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblIncludeHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblIncludeHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblIncludeHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblIncludeHeadingBar.Name = "lblIncludeHeadingBar";
             this.lblIncludeHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblIncludeHeadingBar.TabIndex = 0;
@@ -3902,7 +3903,7 @@
             this.cboExportFormat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboExportFormat.FormattingEnabled = true;
             this.cboExportFormat.Location = new System.Drawing.Point(20, 88);
-            this.cboExportFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboExportFormat.Margin = new System.Windows.Forms.Padding(4);
             this.cboExportFormat.Name = "cboExportFormat";
             this.cboExportFormat.Size = new System.Drawing.Size(332, 31);
             this.cboExportFormat.TabIndex = 4;
@@ -3949,7 +3950,7 @@
             this.txtSaveTo.AccessibleName = "Save to folder (required)";
             this.txtSaveTo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSaveTo.Location = new System.Drawing.Point(20, 185);
-            this.txtSaveTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSaveTo.Margin = new System.Windows.Forms.Padding(4);
             this.txtSaveTo.MaxLength = 248;
             this.txtSaveTo.Name = "txtSaveTo";
             this.txtSaveTo.Size = new System.Drawing.Size(219, 30);
@@ -3966,7 +3967,7 @@
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.btnBrowse.Location = new System.Drawing.Point(250, 182);
-            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(102, 36);
             this.btnBrowse.TabIndex = 9;
@@ -4003,7 +4004,7 @@
             this.txtFileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtFileName.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtFileName.Location = new System.Drawing.Point(20, 285);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFileName.Margin = new System.Windows.Forms.Padding(4);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
             this.txtFileName.Size = new System.Drawing.Size(332, 27);
@@ -4028,7 +4029,7 @@
             this.txtGeneratedOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtGeneratedOn.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtGeneratedOn.Location = new System.Drawing.Point(20, 368);
-            this.txtGeneratedOn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGeneratedOn.Margin = new System.Windows.Forms.Padding(4);
             this.txtGeneratedOn.Name = "txtGeneratedOn";
             this.txtGeneratedOn.ReadOnly = true;
             this.txtGeneratedOn.Size = new System.Drawing.Size(332, 27);
@@ -4079,7 +4080,7 @@
             this.pnlPreviewCard.Controls.Add(this.pnlPreviewRule);
             this.pnlPreviewCard.Controls.Add(this.rvSummary);
             this.pnlPreviewCard.Location = new System.Drawing.Point(395, 0);
-            this.pnlPreviewCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPreviewCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPreviewCard.Name = "pnlPreviewCard";
             this.pnlPreviewCard.Size = new System.Drawing.Size(772, 573);
             this.pnlPreviewCard.TabIndex = 1;
@@ -4088,7 +4089,7 @@
             // 
             this.lblPreviewHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblPreviewHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblPreviewHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblPreviewHeadingBar.Margin = new System.Windows.Forms.Padding(4);
             this.lblPreviewHeadingBar.Name = "lblPreviewHeadingBar";
             this.lblPreviewHeadingBar.Size = new System.Drawing.Size(5, 25);
             this.lblPreviewHeadingBar.TabIndex = 0;
@@ -4120,7 +4121,7 @@
             // 
             this.pnlPreviewRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.pnlPreviewRule.Location = new System.Drawing.Point(25, 48);
-            this.pnlPreviewRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPreviewRule.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPreviewRule.Name = "pnlPreviewRule";
             this.pnlPreviewRule.Size = new System.Drawing.Size(722, 1);
             this.pnlPreviewRule.TabIndex = 3;
@@ -4129,8 +4130,9 @@
             // 
             this.rvSummary.AccessibleName = "Advisory summary preview (read-only)";
             this.rvSummary.Location = new System.Drawing.Point(25, 55);
-            this.rvSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rvSummary.Margin = new System.Windows.Forms.Padding(4);
             this.rvSummary.Name = "rvSummary";
+            this.rvSummary.ServerReport.BearerToken = null;
             this.rvSummary.ShowBackButton = false;
             this.rvSummary.ShowCredentialPrompts = false;
             this.rvSummary.ShowDocumentMapButton = false;
@@ -4146,7 +4148,7 @@
             // 
             this.pnlNoticeGap.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNoticeGap.Location = new System.Drawing.Point(20, 127);
-            this.pnlNoticeGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNoticeGap.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNoticeGap.Name = "pnlNoticeGap";
             this.pnlNoticeGap.Size = new System.Drawing.Size(1178, 12);
             this.pnlNoticeGap.TabIndex = 1;
@@ -4158,7 +4160,7 @@
             this.pnlNotice.Controls.Add(this.pnlNoticeBar);
             this.pnlNotice.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNotice.Location = new System.Drawing.Point(20, 67);
-            this.pnlNotice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNotice.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNotice.Name = "pnlNotice";
             this.pnlNotice.Size = new System.Drawing.Size(1178, 60);
             this.pnlNotice.TabIndex = 2;
@@ -4181,7 +4183,7 @@
             this.pnlNoticeBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.pnlNoticeBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlNoticeBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNoticeBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNoticeBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNoticeBar.Name = "pnlNoticeBar";
             this.pnlNoticeBar.Size = new System.Drawing.Size(6, 60);
             this.pnlNoticeBar.TabIndex = 1;
@@ -4190,7 +4192,7 @@
             // 
             this.pnlContextGap.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContextGap.Location = new System.Drawing.Point(20, 55);
-            this.pnlContextGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContextGap.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContextGap.Name = "pnlContextGap";
             this.pnlContextGap.Size = new System.Drawing.Size(1178, 12);
             this.pnlContextGap.TabIndex = 3;
@@ -4202,7 +4204,7 @@
             this.pnlContext.Controls.Add(this.pnlContextBar);
             this.pnlContext.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContext.Location = new System.Drawing.Point(20, 10);
-            this.pnlContext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContext.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContext.Name = "pnlContext";
             this.pnlContext.Size = new System.Drawing.Size(1178, 45);
             this.pnlContext.TabIndex = 4;
@@ -4225,7 +4227,7 @@
             this.pnlContextBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.pnlContextBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlContextBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlContextBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContextBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContextBar.Name = "pnlContextBar";
             this.pnlContextBar.Size = new System.Drawing.Size(6, 45);
             this.pnlContextBar.TabIndex = 1;
@@ -4239,7 +4241,7 @@
             this.pnlTitle.Controls.Add(this.pnlTitleRule);
             this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitle.Location = new System.Drawing.Point(262, 0);
-            this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTitle.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.Size = new System.Drawing.Size(1218, 105);
             this.pnlTitle.TabIndex = 1;
@@ -4284,7 +4286,7 @@
             this.pnlTitleRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.pnlTitleRule.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlTitleRule.Location = new System.Drawing.Point(0, 101);
-            this.pnlTitleRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTitleRule.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTitleRule.Name = "pnlTitleRule";
             this.pnlTitleRule.Size = new System.Drawing.Size(1218, 4);
             this.pnlTitleRule.TabIndex = 3;
@@ -4297,7 +4299,7 @@
             this.pnlActions.Controls.Add(this.pnlActionRule);
             this.pnlActions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlActions.Location = new System.Drawing.Point(262, 839);
-            this.pnlActions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlActions.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActions.Name = "pnlActions";
             this.pnlActions.Size = new System.Drawing.Size(1218, 80);
             this.pnlActions.TabIndex = 2;
@@ -4313,7 +4315,7 @@
             this.flpActions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flpActions.Location = new System.Drawing.Point(412, 1);
-            this.flpActions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flpActions.Margin = new System.Windows.Forms.Padding(4);
             this.flpActions.Name = "flpActions";
             this.flpActions.Padding = new System.Windows.Forms.Padding(0, 14, 25, 0);
             this.flpActions.Size = new System.Drawing.Size(806, 79);
@@ -4447,7 +4449,7 @@
             this.pnlActionRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.pnlActionRule.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlActionRule.Location = new System.Drawing.Point(0, 0);
-            this.pnlActionRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlActionRule.Margin = new System.Windows.Forms.Padding(4);
             this.pnlActionRule.Name = "pnlActionRule";
             this.pnlActionRule.Size = new System.Drawing.Size(1218, 1);
             this.pnlActionRule.TabIndex = 2;
@@ -4467,7 +4469,7 @@
             this.pnlRail.Controls.Add(this.lblRailFooter);
             this.pnlRail.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlRail.Location = new System.Drawing.Point(0, 0);
-            this.pnlRail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRail.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRail.Name = "pnlRail";
             this.pnlRail.Size = new System.Drawing.Size(262, 919);
             this.pnlRail.TabIndex = 3;
@@ -4488,7 +4490,7 @@
             // 
             this.pnlBrandRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.pnlBrandRule.Location = new System.Drawing.Point(30, 82);
-            this.pnlBrandRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlBrandRule.Margin = new System.Windows.Forms.Padding(4);
             this.pnlBrandRule.Name = "pnlBrandRule";
             this.pnlBrandRule.Size = new System.Drawing.Size(202, 2);
             this.pnlBrandRule.TabIndex = 1;
@@ -4504,7 +4506,7 @@
             this.btnNavHome.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnNavHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
             this.btnNavHome.Location = new System.Drawing.Point(0, 105);
-            this.btnNavHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNavHome.Margin = new System.Windows.Forms.Padding(4);
             this.btnNavHome.Name = "btnNavHome";
             this.btnNavHome.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnNavHome.Size = new System.Drawing.Size(262, 45);
@@ -4619,7 +4621,7 @@
             this.pnlStatus.Controls.Add(this.lblStatus);
             this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlStatus.Location = new System.Drawing.Point(0, 919);
-            this.pnlStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlStatus.Margin = new System.Windows.Forms.Padding(4);
             this.pnlStatus.Name = "pnlStatus";
             this.pnlStatus.Size = new System.Drawing.Size(1480, 32);
             this.pnlStatus.TabIndex = 4;
@@ -4654,7 +4656,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -5061,5 +5063,6 @@
         private System.Windows.Forms.Label lblRailFooter;
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Label lblStatus;
+        private System.ServiceProcess.ServiceController serviceController1;
     }
 }
