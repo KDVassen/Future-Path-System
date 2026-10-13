@@ -57,6 +57,7 @@ namespace FuturePath.PresentationLayer
         {
             InitializeComponent();
             railSteps = new[] { lblStep1, lblStep2, lblStep3, lblStep4, lblStep5, lblStep6 };
+            numMark.KeyPress += DecimalBox_KeyPress;
             ShowPage(tabHome);
         }
 
@@ -523,6 +524,19 @@ namespace FuturePath.PresentationLayer
             messageLabel.Visible = !valid;
             input.AccessibleDescription = valid ? null : message;
             return valid;
+        }
+
+        /// <summary>
+        /// Lets a decimal box accept either "." or "," as the decimal point. A NumericUpDown only accepts the
+        /// separator of the Windows regional setting (a comma on many South African machines), so "67.5"
+        /// would otherwise be refused; the typed key is swapped for the regional separator before the box sees it.
+        /// </summary>
+        private void DecimalBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                e.KeyChar = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            }
         }
 
         /// <summary>Asks for confirmation (spec Section 7). Returns true when the user confirms.</summary>

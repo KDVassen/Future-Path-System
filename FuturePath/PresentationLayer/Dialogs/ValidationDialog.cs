@@ -35,10 +35,5 @@ namespace FuturePath.PresentationLayer
                 lblMessage.Text = "• " + string.Join(Environment.NewLine + "• ", lines);
             }
         }
-
-        private void btnReattempt_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -28,36 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle SubjDgvSubjectsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SubjDgvSubjectsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SubjDgvSubjectsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvProgrammesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvProgrammesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvProgrammesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvRequirementsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvRequirementsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelDgvRequirementsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutDgvCheckedAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutDgvCheckedHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutDgvCheckedCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AltDgvAlternativesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AltDgvAlternativesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AltDgvAlternativesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FundDgvFundingAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FundDgvFundingHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FundDgvFundingCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SubjColMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SubjColRemoveStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelColMinimumAverageStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelColSelectStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelColRequirementMinimumStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SelColRequirementTypeStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutColMinimumMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutColMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle OutColRequirementOutcomeStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AltColRankStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AltColScoreStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FundColClosingDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -379,35 +380,25 @@
             this.tabHome.SuspendLayout();
             this.pnlHomeContent.SuspendLayout();
             this.pnlLearnerCard.SuspendLayout();
-            this.lblLearnerHeadingBar.SuspendLayout();
             this.pnlStaffCard.SuspendLayout();
-            this.lblStaffHeadingBar.SuspendLayout();
             this.tabProfile.SuspendLayout();
             this.pnlProfContent.SuspendLayout();
             this.pnlWhoCard.SuspendLayout();
-            this.lblWhoHeadingBar.SuspendLayout();
             this.pnlSchoolCard.SuspendLayout();
-            this.lblSchoolHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAdvisingYear)).BeginInit();
             this.pnlContactCard.SuspendLayout();
-            this.lblContactHeadingBar.SuspendLayout();
             this.pnlSessionCard.SuspendLayout();
-            this.lblSessionHeadingBar.SuspendLayout();
             this.tabSubjects.SuspendLayout();
             this.pnlSubjContent.SuspendLayout();
             this.pnlAddCard.SuspendLayout();
-            this.lblAddHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMark)).BeginInit();
             this.pnlSummary.SuspendLayout();
             this.pnlCapturedCard.SuspendLayout();
-            this.lblCapturedHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).BeginInit();
             this.tabInterests.SuspendLayout();
             this.pnlIntContent.SuspendLayout();
             this.pnlQuestionCard.SuspendLayout();
-            this.lblQuestionHeadingBar.SuspendLayout();
             this.pnlStatementHeader.SuspendLayout();
-            this.pnlStatements.SuspendLayout();
             this.tileAnswered.SuspendLayout();
             this.tileCategory1.SuspendLayout();
             this.tileCategory2.SuspendLayout();
@@ -415,12 +406,9 @@
             this.tabFaculty.SuspendLayout();
             this.pnlSelContent.SuspendLayout();
             this.pnlSearchCard.SuspendLayout();
-            this.lblSearchHeadingBar.SuspendLayout();
             this.pnlProgrammesCard.SuspendLayout();
-            this.lblProgrammesHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammes)).BeginInit();
             this.pnlRequirementsCard.SuspendLayout();
-            this.lblRequirementsHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).BeginInit();
             this.pnlAlignmentCard.SuspendLayout();
             this.tabResults.SuspendLayout();
@@ -428,9 +416,7 @@
             this.tabOutcome.SuspendLayout();
             this.pnlOutContent.SuspendLayout();
             this.pnlOutcome.SuspendLayout();
-            this.pnlOutcomeBar.SuspendLayout();
             this.pnlCheckedCard.SuspendLayout();
-            this.lblCheckedHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChecked)).BeginInit();
             this.pnlSubjectTile.SuspendLayout();
             this.pnlMarkTile.SuspendLayout();
@@ -439,60 +425,47 @@
             this.tabAlternatives.SuspendLayout();
             this.pnlAltContent.SuspendLayout();
             this.pnlRankedCard.SuspendLayout();
-            this.lblRankedHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).BeginInit();
             this.pnlReasonsCard.SuspendLayout();
-            this.lblReasonsHeadingBar.SuspendLayout();
             this.tabFunding.SuspendLayout();
             this.pnlFundContent.SuspendLayout();
             this.pnlFilterCard.SuspendLayout();
             this.pnlFundingCard.SuspendLayout();
-            this.lblFundingHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).BeginInit();
             this.pnlDetailCard.SuspendLayout();
-            this.lblDetailHeadingBar.SuspendLayout();
             this.pnlSampleNote.SuspendLayout();
-            this.pnlSampleNoteBar.SuspendLayout();
             this.tabSummary.SuspendLayout();
             this.pnlSumContent.SuspendLayout();
             this.pnlIncludeCard.SuspendLayout();
-            this.lblIncludeHeadingBar.SuspendLayout();
             this.pnlPreviewCard.SuspendLayout();
-            this.lblPreviewHeadingBar.SuspendLayout();
-            this.pnlPreviewRule.SuspendLayout();
-            this.pnlNoticeGap.SuspendLayout();
             this.pnlNotice.SuspendLayout();
-            this.pnlNoticeBar.SuspendLayout();
-            this.pnlContextGap.SuspendLayout();
             this.pnlContext.SuspendLayout();
-            this.pnlContextBar.SuspendLayout();
             this.pnlTitle.SuspendLayout();
-            this.pnlTitleRule.SuspendLayout();
             this.pnlActions.SuspendLayout();
             this.flpActions.SuspendLayout();
-            this.pnlActionRule.SuspendLayout();
             this.pnlRail.SuspendLayout();
-            this.pnlBrandRule.SuspendLayout();
             this.pnlStatus.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // pnlBody
-            //
+            // 
+            this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.pnlBody.Controls.Add(this.tabMain);
             this.pnlBody.Controls.Add(this.pnlNoticeGap);
             this.pnlBody.Controls.Add(this.pnlNotice);
             this.pnlBody.Controls.Add(this.pnlContextGap);
             this.pnlBody.Controls.Add(this.pnlContext);
-            this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(210, 84);
-            this.pnlBody.Padding = new System.Windows.Forms.Padding(16, 8, 16, 7);
-            this.pnlBody.Size = new System.Drawing.Size(974, 587);
-            this.pnlBody.TabIndex = 0;
+            this.pnlBody.Location = new System.Drawing.Point(262, 105);
+            this.pnlBody.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlBody.Name = "pnlBody";
-            //
+            this.pnlBody.Padding = new System.Windows.Forms.Padding(20, 10, 20, 9);
+            this.pnlBody.Size = new System.Drawing.Size(1218, 734);
+            this.pnlBody.TabIndex = 0;
+            // 
             // tabMain
-            //
+            // 
+            this.tabMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabMain.Controls.Add(this.tabHome);
             this.tabMain.Controls.Add(this.tabProfile);
             this.tabMain.Controls.Add(this.tabSubjects);
@@ -500,193 +473,210 @@
             this.tabMain.Controls.Add(this.tabFaculty);
             this.tabMain.Controls.Add(this.tabResults);
             this.tabMain.Controls.Add(this.tabSummary);
-            this.tabMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tabMain.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabMain.Location = new System.Drawing.Point(20, 12);
-            this.tabMain.Size = new System.Drawing.Size(934, 563);
+            this.tabMain.Location = new System.Drawing.Point(20, 139);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabMain.Name = "tabMain";
+            this.tabMain.SelectedIndex = 0;
+            this.tabMain.Size = new System.Drawing.Size(1178, 586);
             this.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabMain.TabIndex = 0;
             this.tabMain.TabStop = false;
-            this.tabMain.Name = "tabMain";
             this.tabMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabMain_Selecting);
-            //
+            // 
             // tabHome
-            //
-            this.tabHome.Controls.Add(this.pnlHomeContent);
+            // 
             this.tabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabHome.Controls.Add(this.pnlHomeContent);
             this.tabHome.Location = new System.Drawing.Point(4, 5);
-            this.tabHome.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabHome.Size = new System.Drawing.Size(934, 563);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabHome.Name = "tabHome";
+            this.tabHome.Size = new System.Drawing.Size(1170, 577);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "UI 1 Homepage";
-            this.tabHome.UseVisualStyleBackColor = false;
-            this.tabHome.Name = "tabHome";
-            //
+            // 
             // pnlHomeContent
-            //
+            // 
             this.pnlHomeContent.Controls.Add(this.lblIntro);
             this.pnlHomeContent.Controls.Add(this.pnlLearnerCard);
             this.pnlHomeContent.Controls.Add(this.pnlStaffCard);
             this.pnlHomeContent.Controls.Add(this.lblHomeDisclaimer);
             this.pnlHomeContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHomeContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlHomeContent.TabIndex = 0;
+            this.pnlHomeContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlHomeContent.Name = "pnlHomeContent";
-            //
+            this.pnlHomeContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlHomeContent.TabIndex = 0;
+            // 
             // lblIntro
-            //
+            // 
             this.lblIntro.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblIntro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.lblIntro.Location = new System.Drawing.Point(0, 0);
-            this.lblIntro.Size = new System.Drawing.Size(934, 44);
-            this.lblIntro.TabIndex = 0;
-            this.lblIntro.Text = "Future Path checks your school subjects, marks and interests against the degree requirements held on this computer. It explains every outcome, suggests alternative programmes and shows funding you could apply for. It works offline, and learners do not need an account.";
+            this.lblIntro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIntro.Name = "lblIntro";
-            //
+            this.lblIntro.Size = new System.Drawing.Size(1168, 55);
+            this.lblIntro.TabIndex = 0;
+            this.lblIntro.Text = resources.GetString("lblIntro.Text");
+            // 
             // pnlLearnerCard
-            //
+            // 
+            this.pnlLearnerCard.BackColor = System.Drawing.Color.White;
+            this.pnlLearnerCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlLearnerCard.Controls.Add(this.lblLearnerHeadingBar);
             this.pnlLearnerCard.Controls.Add(this.lblLearnerHeading);
             this.pnlLearnerCard.Controls.Add(this.lblLearnerText);
             this.pnlLearnerCard.Controls.Add(this.btnStart);
-            this.pnlLearnerCard.BackColor = System.Drawing.Color.White;
-            this.pnlLearnerCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLearnerCard.Location = new System.Drawing.Point(0, 64);
-            this.pnlLearnerCard.Size = new System.Drawing.Size(457, 300);
-            this.pnlLearnerCard.TabIndex = 1;
+            this.pnlLearnerCard.Location = new System.Drawing.Point(0, 80);
+            this.pnlLearnerCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlLearnerCard.Name = "pnlLearnerCard";
-            //
+            this.pnlLearnerCard.Size = new System.Drawing.Size(571, 374);
+            this.pnlLearnerCard.TabIndex = 1;
+            // 
             // lblLearnerHeadingBar
-            //
+            // 
             this.lblLearnerHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblLearnerHeadingBar.Location = new System.Drawing.Point(16, 20);
-            this.lblLearnerHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblLearnerHeadingBar.TabIndex = 0;
+            this.lblLearnerHeadingBar.Location = new System.Drawing.Point(20, 25);
+            this.lblLearnerHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblLearnerHeadingBar.Name = "lblLearnerHeadingBar";
-            //
+            this.lblLearnerHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblLearnerHeadingBar.TabIndex = 0;
+            // 
             // lblLearnerHeading
-            //
+            // 
             this.lblLearnerHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblLearnerHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblLearnerHeading.Location = new System.Drawing.Point(26, 16);
-            this.lblLearnerHeading.Size = new System.Drawing.Size(400, 28);
+            this.lblLearnerHeading.Location = new System.Drawing.Point(32, 20);
+            this.lblLearnerHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLearnerHeading.Name = "lblLearnerHeading";
+            this.lblLearnerHeading.Size = new System.Drawing.Size(500, 35);
             this.lblLearnerHeading.TabIndex = 1;
             this.lblLearnerHeading.Text = "I am a learner";
             this.lblLearnerHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLearnerHeading.Name = "lblLearnerHeading";
-            //
+            // 
             // lblLearnerText
-            //
+            // 
             this.lblLearnerText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblLearnerText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblLearnerText.Location = new System.Drawing.Point(20, 58);
-            this.lblLearnerText.Size = new System.Drawing.Size(417, 150);
-            this.lblLearnerText.TabIndex = 2;
-            this.lblLearnerText.Text = "Six short steps: your profile, your subjects and marks, an interest questionnaire and the qualification you want checked. You then see your advisory outcome, alternative programmes and funding, and can export your advisory summary.";
+            this.lblLearnerText.Location = new System.Drawing.Point(25, 72);
+            this.lblLearnerText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLearnerText.Name = "lblLearnerText";
-            //
+            this.lblLearnerText.Size = new System.Drawing.Size(521, 188);
+            this.lblLearnerText.TabIndex = 2;
+            this.lblLearnerText.Text = resources.GetString("lblLearnerText.Text");
+            // 
             // btnStart
-            //
+            // 
             this.btnStart.AccessibleName = "Start advisory session";
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStart.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(20, 232);
-            this.btnStart.Size = new System.Drawing.Size(240, 44);
+            this.btnStart.Location = new System.Drawing.Point(25, 290);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(300, 55);
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Start advisory session";
             this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Name = "btnStart";
-            this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            //
+            // 
             // pnlStaffCard
-            //
+            // 
+            this.pnlStaffCard.BackColor = System.Drawing.Color.White;
+            this.pnlStaffCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStaffCard.Controls.Add(this.lblStaffHeadingBar);
             this.pnlStaffCard.Controls.Add(this.lblStaffHeading);
             this.pnlStaffCard.Controls.Add(this.lblStaffText);
             this.pnlStaffCard.Controls.Add(this.btnStaffLogin);
-            this.pnlStaffCard.BackColor = System.Drawing.Color.White;
-            this.pnlStaffCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlStaffCard.Location = new System.Drawing.Point(477, 64);
-            this.pnlStaffCard.Size = new System.Drawing.Size(457, 300);
-            this.pnlStaffCard.TabIndex = 2;
+            this.pnlStaffCard.Location = new System.Drawing.Point(596, 80);
+            this.pnlStaffCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlStaffCard.Name = "pnlStaffCard";
-            //
+            this.pnlStaffCard.Size = new System.Drawing.Size(571, 374);
+            this.pnlStaffCard.TabIndex = 2;
+            // 
             // lblStaffHeadingBar
-            //
+            // 
             this.lblStaffHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblStaffHeadingBar.Location = new System.Drawing.Point(16, 20);
-            this.lblStaffHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblStaffHeadingBar.TabIndex = 0;
+            this.lblStaffHeadingBar.Location = new System.Drawing.Point(20, 25);
+            this.lblStaffHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblStaffHeadingBar.Name = "lblStaffHeadingBar";
-            //
+            this.lblStaffHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblStaffHeadingBar.TabIndex = 0;
+            // 
             // lblStaffHeading
-            //
+            // 
             this.lblStaffHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblStaffHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblStaffHeading.Location = new System.Drawing.Point(26, 16);
-            this.lblStaffHeading.Size = new System.Drawing.Size(400, 28);
+            this.lblStaffHeading.Location = new System.Drawing.Point(32, 20);
+            this.lblStaffHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStaffHeading.Name = "lblStaffHeading";
+            this.lblStaffHeading.Size = new System.Drawing.Size(500, 35);
             this.lblStaffHeading.TabIndex = 1;
             this.lblStaffHeading.Text = "I am a staff member";
             this.lblStaffHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStaffHeading.Name = "lblStaffHeading";
-            //
+            // 
             // lblStaffText
-            //
+            // 
             this.lblStaffText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStaffText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblStaffText.Location = new System.Drawing.Point(20, 58);
-            this.lblStaffText.Size = new System.Drawing.Size(417, 150);
-            this.lblStaffText.TabIndex = 2;
-            this.lblStaffText.Text = "Career Advisors log in to review advisory sessions and generate reports. System Administrators also maintain faculties, programmes, requirements, funding, the questionnaire and user accounts.";
+            this.lblStaffText.Location = new System.Drawing.Point(25, 72);
+            this.lblStaffText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStaffText.Name = "lblStaffText";
-            //
+            this.lblStaffText.Size = new System.Drawing.Size(521, 188);
+            this.lblStaffText.TabIndex = 2;
+            this.lblStaffText.Text = "Career Advisors log in to review advisory sessions and generate reports. System A" +
+    "dministrators also maintain faculties, programmes, requirements, funding, the qu" +
+    "estionnaire and user accounts.";
+            // 
             // btnStaffLogin
-            //
+            // 
             this.btnStaffLogin.AccessibleName = "Staff login";
             this.btnStaffLogin.BackColor = System.Drawing.Color.White;
             this.btnStaffLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStaffLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnStaffLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStaffLogin.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnStaffLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnStaffLogin.Location = new System.Drawing.Point(20, 232);
-            this.btnStaffLogin.Size = new System.Drawing.Size(180, 44);
+            this.btnStaffLogin.Location = new System.Drawing.Point(25, 290);
+            this.btnStaffLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStaffLogin.Name = "btnStaffLogin";
+            this.btnStaffLogin.Size = new System.Drawing.Size(225, 55);
             this.btnStaffLogin.TabIndex = 3;
             this.btnStaffLogin.Text = "Staff login";
             this.btnStaffLogin.UseVisualStyleBackColor = false;
-            this.btnStaffLogin.Name = "btnStaffLogin";
-            this.btnStaffLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnStaffLogin.Click += new System.EventHandler(this.btnStaffLogin_Click);
-            //
+            // 
             // lblHomeDisclaimer
-            //
+            // 
             this.lblHomeDisclaimer.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblHomeDisclaimer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblHomeDisclaimer.Location = new System.Drawing.Point(0, 384);
-            this.lblHomeDisclaimer.Size = new System.Drawing.Size(934, 36);
-            this.lblHomeDisclaimer.TabIndex = 3;
-            this.lblHomeDisclaimer.Text = "Preliminary guidance only \u2014 not an admission decision. Requirement and funding data are locally stored sample data; check them against the official source before you apply.";
+            this.lblHomeDisclaimer.Location = new System.Drawing.Point(0, 480);
+            this.lblHomeDisclaimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHomeDisclaimer.Name = "lblHomeDisclaimer";
-            //
+            this.lblHomeDisclaimer.Size = new System.Drawing.Size(1168, 45);
+            this.lblHomeDisclaimer.TabIndex = 3;
+            this.lblHomeDisclaimer.Text = "Preliminary guidance only — not an admission decision. Requirement and funding da" +
+    "ta are locally stored sample data; check them against the official source before" +
+    " you apply.";
+            // 
             // tabProfile
-            //
-            this.tabProfile.Controls.Add(this.pnlProfContent);
+            // 
             this.tabProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabProfile.Controls.Add(this.pnlProfContent);
             this.tabProfile.Location = new System.Drawing.Point(4, 5);
-            this.tabProfile.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabProfile.Size = new System.Drawing.Size(934, 563);
+            this.tabProfile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabProfile.Name = "tabProfile";
+            this.tabProfile.Size = new System.Drawing.Size(1170, 576);
             this.tabProfile.TabIndex = 1;
             this.tabProfile.Text = "UI 2 Learner profile";
-            this.tabProfile.UseVisualStyleBackColor = false;
-            this.tabProfile.Name = "tabProfile";
-            //
+            // 
             // pnlProfContent
-            //
+            // 
             this.pnlProfContent.Controls.Add(this.pnlWhoCard);
             this.pnlProfContent.Controls.Add(this.pnlSchoolCard);
             this.pnlProfContent.Controls.Add(this.pnlContactCard);
@@ -694,85 +684,98 @@
             this.pnlProfContent.Controls.Add(this.lblProfRequiredNote);
             this.pnlProfContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProfContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlProfContent.TabIndex = 0;
+            this.pnlProfContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProfContent.Name = "pnlProfContent";
-            //
+            this.pnlProfContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlProfContent.TabIndex = 0;
+            // 
             // pnlWhoCard
-            //
+            // 
+            this.pnlWhoCard.BackColor = System.Drawing.Color.White;
+            this.pnlWhoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlWhoCard.Controls.Add(this.lblWhoHeadingBar);
             this.pnlWhoCard.Controls.Add(this.lblWhoHeading);
             this.pnlWhoCard.Controls.Add(this.lblFirstName);
             this.pnlWhoCard.Controls.Add(this.txtFirstName);
             this.pnlWhoCard.Controls.Add(this.lblSurname);
             this.pnlWhoCard.Controls.Add(this.txtSurname);
-            this.pnlWhoCard.BackColor = System.Drawing.Color.White;
-            this.pnlWhoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlWhoCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlWhoCard.Size = new System.Drawing.Size(934, 100);
-            this.pnlWhoCard.TabIndex = 0;
+            this.pnlWhoCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlWhoCard.Name = "pnlWhoCard";
-            //
+            this.pnlWhoCard.Size = new System.Drawing.Size(1167, 124);
+            this.pnlWhoCard.TabIndex = 0;
+            // 
             // lblWhoHeadingBar
-            //
+            // 
             this.lblWhoHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblWhoHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblWhoHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblWhoHeadingBar.TabIndex = 0;
+            this.lblWhoHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblWhoHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblWhoHeadingBar.Name = "lblWhoHeadingBar";
-            //
+            this.lblWhoHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblWhoHeadingBar.TabIndex = 0;
+            // 
             // lblWhoHeading
-            //
+            // 
             this.lblWhoHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblWhoHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblWhoHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblWhoHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblWhoHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblWhoHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWhoHeading.Name = "lblWhoHeading";
+            this.lblWhoHeading.Size = new System.Drawing.Size(625, 35);
             this.lblWhoHeading.TabIndex = 1;
             this.lblWhoHeading.Text = "Who is this advisory session for?";
             this.lblWhoHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblWhoHeading.Name = "lblWhoHeading";
-            //
+            // 
             // lblFirstName
-            //
+            // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFirstName.Location = new System.Drawing.Point(20, 40);
+            this.lblFirstName.Location = new System.Drawing.Point(25, 50);
+            this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(107, 28);
             this.lblFirstName.TabIndex = 2;
             this.lblFirstName.Text = "First name";
-            this.lblFirstName.Name = "lblFirstName";
-            //
+            // 
             // txtFirstName
-            //
+            // 
             this.txtFirstName.AccessibleName = "First name (optional)";
             this.txtFirstName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtFirstName.Location = new System.Drawing.Point(20, 66);
+            this.txtFirstName.Location = new System.Drawing.Point(25, 82);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFirstName.MaxLength = 50;
-            this.txtFirstName.Size = new System.Drawing.Size(260, 25);
-            this.txtFirstName.TabIndex = 3;
             this.txtFirstName.Name = "txtFirstName";
-            //
+            this.txtFirstName.Size = new System.Drawing.Size(324, 30);
+            this.txtFirstName.TabIndex = 3;
+            // 
             // lblSurname
-            //
+            // 
             this.lblSurname.AutoSize = true;
             this.lblSurname.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSurname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSurname.Location = new System.Drawing.Point(300, 40);
+            this.lblSurname.Location = new System.Drawing.Point(375, 50);
+            this.lblSurname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSurname.Name = "lblSurname";
+            this.lblSurname.Size = new System.Drawing.Size(93, 28);
             this.lblSurname.TabIndex = 4;
             this.lblSurname.Text = "Surname";
-            this.lblSurname.Name = "lblSurname";
-            //
+            // 
             // txtSurname
-            //
+            // 
             this.txtSurname.AccessibleName = "Surname (optional)";
             this.txtSurname.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSurname.Location = new System.Drawing.Point(300, 66);
+            this.txtSurname.Location = new System.Drawing.Point(375, 82);
+            this.txtSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSurname.MaxLength = 50;
-            this.txtSurname.Size = new System.Drawing.Size(260, 25);
-            this.txtSurname.TabIndex = 5;
             this.txtSurname.Name = "txtSurname";
-            //
+            this.txtSurname.Size = new System.Drawing.Size(324, 30);
+            this.txtSurname.TabIndex = 5;
+            // 
             // pnlSchoolCard
-            //
+            // 
+            this.pnlSchoolCard.BackColor = System.Drawing.Color.White;
+            this.pnlSchoolCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSchoolCard.Controls.Add(this.lblSchoolHeadingBar);
             this.pnlSchoolCard.Controls.Add(this.lblSchoolHeading);
             this.pnlSchoolCard.Controls.Add(this.lblGrade);
@@ -792,221 +795,252 @@
             this.pnlSchoolCard.Controls.Add(this.lblAdvisingYearStar);
             this.pnlSchoolCard.Controls.Add(this.numAdvisingYear);
             this.pnlSchoolCard.Controls.Add(this.lblAdvisingYearError);
-            this.pnlSchoolCard.BackColor = System.Drawing.Color.White;
-            this.pnlSchoolCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSchoolCard.Location = new System.Drawing.Point(0, 110);
-            this.pnlSchoolCard.Size = new System.Drawing.Size(934, 128);
-            this.pnlSchoolCard.TabIndex = 1;
+            this.pnlSchoolCard.Location = new System.Drawing.Point(0, 138);
+            this.pnlSchoolCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSchoolCard.Name = "pnlSchoolCard";
-            //
+            this.pnlSchoolCard.Size = new System.Drawing.Size(1167, 160);
+            this.pnlSchoolCard.TabIndex = 1;
+            // 
             // lblSchoolHeadingBar
-            //
+            // 
             this.lblSchoolHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSchoolHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblSchoolHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblSchoolHeadingBar.TabIndex = 0;
+            this.lblSchoolHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblSchoolHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblSchoolHeadingBar.Name = "lblSchoolHeadingBar";
-            //
+            this.lblSchoolHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblSchoolHeadingBar.TabIndex = 0;
+            // 
             // lblSchoolHeading
-            //
+            // 
             this.lblSchoolHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSchoolHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSchoolHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblSchoolHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblSchoolHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblSchoolHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSchoolHeading.Name = "lblSchoolHeading";
+            this.lblSchoolHeading.Size = new System.Drawing.Size(625, 35);
             this.lblSchoolHeading.TabIndex = 1;
             this.lblSchoolHeading.Text = "Your school";
             this.lblSchoolHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSchoolHeading.Name = "lblSchoolHeading";
-            //
+            // 
             // lblGrade
-            //
+            // 
             this.lblGrade.AutoSize = true;
             this.lblGrade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblGrade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblGrade.Location = new System.Drawing.Point(20, 40);
+            this.lblGrade.Location = new System.Drawing.Point(25, 50);
+            this.lblGrade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGrade.Name = "lblGrade";
+            this.lblGrade.Size = new System.Drawing.Size(138, 28);
             this.lblGrade.TabIndex = 2;
             this.lblGrade.Text = "Current grade";
-            this.lblGrade.Name = "lblGrade";
-            //
+            // 
             // lblGradeStar
-            //
+            // 
             this.lblGradeStar.AutoSize = true;
             this.lblGradeStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblGradeStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblGradeStar.Location = new System.Drawing.Point(127, 40);
-            this.lblGradeStar.Size = new System.Drawing.Size(14, 24);
+            this.lblGradeStar.Location = new System.Drawing.Point(159, 50);
+            this.lblGradeStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGradeStar.Name = "lblGradeStar";
+            this.lblGradeStar.Size = new System.Drawing.Size(21, 28);
             this.lblGradeStar.TabIndex = 3;
             this.lblGradeStar.Text = "*";
-            this.lblGradeStar.Name = "lblGradeStar";
-            //
+            // 
             // cboGrade
-            //
+            // 
             this.cboGrade.AccessibleName = "Current grade (required)";
             this.cboGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboGrade.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboGrade.FormattingEnabled = true;
-            this.cboGrade.Location = new System.Drawing.Point(20, 66);
-            this.cboGrade.Size = new System.Drawing.Size(200, 25);
-            this.cboGrade.TabIndex = 4;
+            this.cboGrade.Location = new System.Drawing.Point(25, 82);
+            this.cboGrade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboGrade.Name = "cboGrade";
+            this.cboGrade.Size = new System.Drawing.Size(249, 31);
+            this.cboGrade.TabIndex = 4;
             this.cboGrade.Leave += new System.EventHandler(this.cboGrade_Leave);
-            //
+            // 
             // lblGradeError
-            //
+            // 
             this.lblGradeError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblGradeError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblGradeError.Location = new System.Drawing.Point(20, 93);
-            this.lblGradeError.Size = new System.Drawing.Size(210, 28);
-            this.lblGradeError.TabIndex = 5;
-            this.lblGradeError.Text = "";
-            this.lblGradeError.Visible = false;
+            this.lblGradeError.Location = new System.Drawing.Point(25, 116);
+            this.lblGradeError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGradeError.Name = "lblGradeError";
-            //
+            this.lblGradeError.Size = new System.Drawing.Size(262, 35);
+            this.lblGradeError.TabIndex = 5;
+            this.lblGradeError.Visible = false;
+            // 
             // lblGradeHint
-            //
+            // 
             this.lblGradeHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblGradeHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblGradeHint.Location = new System.Drawing.Point(20, 93);
-            this.lblGradeHint.Size = new System.Drawing.Size(320, 16);
+            this.lblGradeHint.Location = new System.Drawing.Point(25, 116);
+            this.lblGradeHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGradeHint.Name = "lblGradeHint";
+            this.lblGradeHint.Size = new System.Drawing.Size(400, 20);
             this.lblGradeHint.TabIndex = 6;
             this.lblGradeHint.Text = "Grade 11 marks are treated as projected results.";
-            this.lblGradeHint.Name = "lblGradeHint";
-            //
+            // 
             // lblSchool
-            //
+            // 
             this.lblSchool.AutoSize = true;
             this.lblSchool.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSchool.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSchool.Location = new System.Drawing.Point(240, 40);
+            this.lblSchool.Location = new System.Drawing.Point(300, 50);
+            this.lblSchool.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSchool.Name = "lblSchool";
+            this.lblSchool.Size = new System.Drawing.Size(130, 28);
             this.lblSchool.TabIndex = 7;
             this.lblSchool.Text = "School name";
-            this.lblSchool.Name = "lblSchool";
-            //
+            // 
             // lblSchoolStar
-            //
+            // 
             this.lblSchoolStar.AutoSize = true;
             this.lblSchoolStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSchoolStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSchoolStar.Location = new System.Drawing.Point(346, 40);
-            this.lblSchoolStar.Size = new System.Drawing.Size(14, 24);
+            this.lblSchoolStar.Location = new System.Drawing.Point(432, 50);
+            this.lblSchoolStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSchoolStar.Name = "lblSchoolStar";
+            this.lblSchoolStar.Size = new System.Drawing.Size(21, 28);
             this.lblSchoolStar.TabIndex = 8;
             this.lblSchoolStar.Text = "*";
-            this.lblSchoolStar.Name = "lblSchoolStar";
-            //
+            // 
             // txtSchool
-            //
+            // 
             this.txtSchool.AccessibleName = "School name (required)";
             this.txtSchool.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSchool.Location = new System.Drawing.Point(240, 66);
+            this.txtSchool.Location = new System.Drawing.Point(300, 82);
+            this.txtSchool.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSchool.MaxLength = 100;
-            this.txtSchool.Size = new System.Drawing.Size(280, 25);
-            this.txtSchool.TabIndex = 9;
             this.txtSchool.Name = "txtSchool";
+            this.txtSchool.Size = new System.Drawing.Size(349, 30);
+            this.txtSchool.TabIndex = 9;
             this.txtSchool.Leave += new System.EventHandler(this.txtSchool_Leave);
-            //
+            // 
             // lblSchoolError
-            //
+            // 
             this.lblSchoolError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSchoolError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSchoolError.Location = new System.Drawing.Point(240, 93);
-            this.lblSchoolError.Size = new System.Drawing.Size(290, 28);
-            this.lblSchoolError.TabIndex = 10;
-            this.lblSchoolError.Text = "";
-            this.lblSchoolError.Visible = false;
+            this.lblSchoolError.Location = new System.Drawing.Point(300, 116);
+            this.lblSchoolError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSchoolError.Name = "lblSchoolError";
-            //
+            this.lblSchoolError.Size = new System.Drawing.Size(362, 35);
+            this.lblSchoolError.TabIndex = 10;
+            this.lblSchoolError.Visible = false;
+            // 
             // lblProvince
-            //
+            // 
             this.lblProvince.AutoSize = true;
             this.lblProvince.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblProvince.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblProvince.Location = new System.Drawing.Point(540, 40);
+            this.lblProvince.Location = new System.Drawing.Point(675, 50);
+            this.lblProvince.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProvince.Name = "lblProvince";
+            this.lblProvince.Size = new System.Drawing.Size(90, 28);
             this.lblProvince.TabIndex = 11;
             this.lblProvince.Text = "Province";
-            this.lblProvince.Name = "lblProvince";
-            //
+            // 
             // lblProvinceStar
-            //
+            // 
             this.lblProvinceStar.AutoSize = true;
             this.lblProvinceStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblProvinceStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblProvinceStar.Location = new System.Drawing.Point(612, 40);
-            this.lblProvinceStar.Size = new System.Drawing.Size(14, 24);
+            this.lblProvinceStar.Location = new System.Drawing.Point(765, 50);
+            this.lblProvinceStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProvinceStar.Name = "lblProvinceStar";
+            this.lblProvinceStar.Size = new System.Drawing.Size(21, 28);
             this.lblProvinceStar.TabIndex = 12;
             this.lblProvinceStar.Text = "*";
-            this.lblProvinceStar.Name = "lblProvinceStar";
-            //
+            // 
             // cboProvince
-            //
+            // 
             this.cboProvince.AccessibleName = "Province (required)";
             this.cboProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvince.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(540, 66);
-            this.cboProvince.Size = new System.Drawing.Size(200, 25);
-            this.cboProvince.TabIndex = 13;
+            this.cboProvince.Location = new System.Drawing.Point(675, 82);
+            this.cboProvince.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboProvince.Name = "cboProvince";
+            this.cboProvince.Size = new System.Drawing.Size(249, 31);
+            this.cboProvince.TabIndex = 13;
             this.cboProvince.Leave += new System.EventHandler(this.cboProvince_Leave);
-            //
+            // 
             // lblProvinceError
-            //
+            // 
             this.lblProvinceError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblProvinceError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblProvinceError.Location = new System.Drawing.Point(540, 93);
-            this.lblProvinceError.Size = new System.Drawing.Size(210, 28);
-            this.lblProvinceError.TabIndex = 14;
-            this.lblProvinceError.Text = "";
-            this.lblProvinceError.Visible = false;
+            this.lblProvinceError.Location = new System.Drawing.Point(675, 116);
+            this.lblProvinceError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProvinceError.Name = "lblProvinceError";
-            //
+            this.lblProvinceError.Size = new System.Drawing.Size(262, 35);
+            this.lblProvinceError.TabIndex = 14;
+            this.lblProvinceError.Visible = false;
+            // 
             // lblAdvisingYear
-            //
+            // 
             this.lblAdvisingYear.AutoSize = true;
             this.lblAdvisingYear.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdvisingYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdvisingYear.Location = new System.Drawing.Point(760, 40);
+            this.lblAdvisingYear.Location = new System.Drawing.Point(950, 50);
+            this.lblAdvisingYear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAdvisingYear.Name = "lblAdvisingYear";
+            this.lblAdvisingYear.Size = new System.Drawing.Size(134, 28);
             this.lblAdvisingYear.TabIndex = 15;
             this.lblAdvisingYear.Text = "Advising year";
-            this.lblAdvisingYear.Name = "lblAdvisingYear";
-            //
+            // 
             // lblAdvisingYearStar
-            //
+            // 
             this.lblAdvisingYearStar.AutoSize = true;
             this.lblAdvisingYearStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdvisingYearStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblAdvisingYearStar.Location = new System.Drawing.Point(871, 40);
-            this.lblAdvisingYearStar.Size = new System.Drawing.Size(14, 24);
+            this.lblAdvisingYearStar.Location = new System.Drawing.Point(1089, 50);
+            this.lblAdvisingYearStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAdvisingYearStar.Name = "lblAdvisingYearStar";
+            this.lblAdvisingYearStar.Size = new System.Drawing.Size(21, 28);
             this.lblAdvisingYearStar.TabIndex = 16;
             this.lblAdvisingYearStar.Text = "*";
-            this.lblAdvisingYearStar.Name = "lblAdvisingYearStar";
-            //
+            // 
             // numAdvisingYear
-            //
+            // 
             this.numAdvisingYear.AccessibleName = "Advising year (required)";
             this.numAdvisingYear.Font = new System.Drawing.Font("Consolas", 10F);
-            this.numAdvisingYear.Location = new System.Drawing.Point(760, 66);
-            this.numAdvisingYear.Maximum = new decimal(new int[] { 2100, 0, 0, 0 });
-            this.numAdvisingYear.Minimum = new decimal(new int[] { 2000, 0, 0, 0 });
-            this.numAdvisingYear.Size = new System.Drawing.Size(140, 23);
-            this.numAdvisingYear.TabIndex = 17;
-            this.numAdvisingYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.numAdvisingYear.Value = new decimal(new int[] { 2026, 0, 0, 0 });
+            this.numAdvisingYear.Location = new System.Drawing.Point(950, 82);
+            this.numAdvisingYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numAdvisingYear.Maximum = new decimal(new int[] {
+            2100,
+            0,
+            0,
+            0});
+            this.numAdvisingYear.Minimum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
             this.numAdvisingYear.Name = "numAdvisingYear";
+            this.numAdvisingYear.Size = new System.Drawing.Size(175, 27);
+            this.numAdvisingYear.TabIndex = 17;
+            this.numAdvisingYear.Value = new decimal(new int[] {
+            2026,
+            0,
+            0,
+            0});
             this.numAdvisingYear.Leave += new System.EventHandler(this.numAdvisingYear_Leave);
-            //
+            // 
             // lblAdvisingYearError
-            //
+            // 
             this.lblAdvisingYearError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblAdvisingYearError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblAdvisingYearError.Location = new System.Drawing.Point(760, 93);
-            this.lblAdvisingYearError.Size = new System.Drawing.Size(166, 28);
-            this.lblAdvisingYearError.TabIndex = 18;
-            this.lblAdvisingYearError.Text = "";
-            this.lblAdvisingYearError.Visible = false;
+            this.lblAdvisingYearError.Location = new System.Drawing.Point(950, 116);
+            this.lblAdvisingYearError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAdvisingYearError.Name = "lblAdvisingYearError";
-            //
+            this.lblAdvisingYearError.Size = new System.Drawing.Size(208, 35);
+            this.lblAdvisingYearError.TabIndex = 18;
+            this.lblAdvisingYearError.Visible = false;
+            // 
             // pnlContactCard
-            //
+            // 
+            this.pnlContactCard.BackColor = System.Drawing.Color.White;
+            this.pnlContactCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlContactCard.Controls.Add(this.lblContactHeadingBar);
             this.pnlContactCard.Controls.Add(this.lblContactHeading);
             this.pnlContactCard.Controls.Add(this.lblEmail);
@@ -1016,108 +1050,119 @@
             this.pnlContactCard.Controls.Add(this.txtMobile);
             this.pnlContactCard.Controls.Add(this.lblMobileError);
             this.pnlContactCard.Controls.Add(this.lblContactNote);
-            this.pnlContactCard.BackColor = System.Drawing.Color.White;
-            this.pnlContactCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlContactCard.Location = new System.Drawing.Point(0, 248);
-            this.pnlContactCard.Size = new System.Drawing.Size(934, 124);
-            this.pnlContactCard.TabIndex = 2;
+            this.pnlContactCard.Location = new System.Drawing.Point(0, 310);
+            this.pnlContactCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlContactCard.Name = "pnlContactCard";
-            //
+            this.pnlContactCard.Size = new System.Drawing.Size(1167, 154);
+            this.pnlContactCard.TabIndex = 2;
+            // 
             // lblContactHeadingBar
-            //
+            // 
             this.lblContactHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblContactHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblContactHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblContactHeadingBar.TabIndex = 0;
+            this.lblContactHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblContactHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblContactHeadingBar.Name = "lblContactHeadingBar";
-            //
+            this.lblContactHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblContactHeadingBar.TabIndex = 0;
+            // 
             // lblContactHeading
-            //
+            // 
             this.lblContactHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblContactHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblContactHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblContactHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblContactHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblContactHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContactHeading.Name = "lblContactHeading";
+            this.lblContactHeading.Size = new System.Drawing.Size(625, 35);
             this.lblContactHeading.TabIndex = 1;
             this.lblContactHeading.Text = "Contact details (optional)";
             this.lblContactHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblContactHeading.Name = "lblContactHeading";
-            //
+            // 
             // lblEmail
-            //
+            // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblEmail.Location = new System.Drawing.Point(20, 40);
+            this.lblEmail.Location = new System.Drawing.Point(25, 50);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(136, 28);
             this.lblEmail.TabIndex = 2;
             this.lblEmail.Text = "Email address";
-            this.lblEmail.Name = "lblEmail";
-            //
+            // 
             // txtEmail
-            //
+            // 
             this.txtEmail.AccessibleName = "Email address (optional)";
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtEmail.Location = new System.Drawing.Point(20, 66);
+            this.txtEmail.Location = new System.Drawing.Point(25, 82);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEmail.MaxLength = 100;
-            this.txtEmail.Size = new System.Drawing.Size(300, 25);
-            this.txtEmail.TabIndex = 3;
             this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(374, 30);
+            this.txtEmail.TabIndex = 3;
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
-            //
+            // 
             // lblEmailError
-            //
+            // 
             this.lblEmailError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblEmailError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblEmailError.Location = new System.Drawing.Point(20, 93);
-            this.lblEmailError.Size = new System.Drawing.Size(310, 28);
-            this.lblEmailError.TabIndex = 4;
-            this.lblEmailError.Text = "";
-            this.lblEmailError.Visible = false;
+            this.lblEmailError.Location = new System.Drawing.Point(25, 116);
+            this.lblEmailError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmailError.Name = "lblEmailError";
-            //
+            this.lblEmailError.Size = new System.Drawing.Size(388, 35);
+            this.lblEmailError.TabIndex = 4;
+            this.lblEmailError.Visible = false;
+            // 
             // lblMobile
-            //
+            // 
             this.lblMobile.AutoSize = true;
             this.lblMobile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblMobile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblMobile.Location = new System.Drawing.Point(340, 40);
+            this.lblMobile.Location = new System.Drawing.Point(425, 50);
+            this.lblMobile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMobile.Name = "lblMobile";
+            this.lblMobile.Size = new System.Drawing.Size(304, 28);
             this.lblMobile.TabIndex = 5;
             this.lblMobile.Text = "Mobile number (0XX XXX XXXX)";
-            this.lblMobile.Name = "lblMobile";
-            //
+            // 
             // txtMobile
-            //
+            // 
             this.txtMobile.AccessibleName = "Mobile number (optional), format 0XX XXX XXXX";
             this.txtMobile.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtMobile.Location = new System.Drawing.Point(340, 66);
+            this.txtMobile.Location = new System.Drawing.Point(425, 82);
+            this.txtMobile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMobile.MaxLength = 20;
-            this.txtMobile.Size = new System.Drawing.Size(220, 25);
-            this.txtMobile.TabIndex = 6;
             this.txtMobile.Name = "txtMobile";
+            this.txtMobile.Size = new System.Drawing.Size(274, 27);
+            this.txtMobile.TabIndex = 6;
             this.txtMobile.Leave += new System.EventHandler(this.txtMobile_Leave);
-            //
+            // 
             // lblMobileError
-            //
+            // 
             this.lblMobileError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblMobileError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblMobileError.Location = new System.Drawing.Point(340, 93);
-            this.lblMobileError.Size = new System.Drawing.Size(240, 28);
-            this.lblMobileError.TabIndex = 7;
-            this.lblMobileError.Text = "";
-            this.lblMobileError.Visible = false;
+            this.lblMobileError.Location = new System.Drawing.Point(425, 116);
+            this.lblMobileError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMobileError.Name = "lblMobileError";
-            //
+            this.lblMobileError.Size = new System.Drawing.Size(300, 35);
+            this.lblMobileError.TabIndex = 7;
+            this.lblMobileError.Visible = false;
+            // 
             // lblContactNote
-            //
+            // 
             this.lblContactNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblContactNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblContactNote.Location = new System.Drawing.Point(590, 62);
-            this.lblContactNote.Size = new System.Drawing.Size(320, 36);
-            this.lblContactNote.TabIndex = 8;
-            this.lblContactNote.Text = "Used only if a career advisor follows up on this session. Never required, and never printed on the advisory summary.";
+            this.lblContactNote.Location = new System.Drawing.Point(738, 78);
+            this.lblContactNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContactNote.Name = "lblContactNote";
-            //
+            this.lblContactNote.Size = new System.Drawing.Size(400, 45);
+            this.lblContactNote.TabIndex = 8;
+            this.lblContactNote.Text = "Used only if a career advisor follows up on this session. Never required, and nev" +
+    "er printed on the advisory summary.";
+            // 
             // pnlSessionCard
-            //
+            // 
+            this.pnlSessionCard.BackColor = System.Drawing.Color.White;
+            this.pnlSessionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSessionCard.Controls.Add(this.lblSessionHeadingBar);
             this.pnlSessionCard.Controls.Add(this.lblSessionHeading);
             this.pnlSessionCard.Controls.Add(this.lblSessionNumber);
@@ -1128,154 +1173,171 @@
             this.pnlSessionCard.Controls.Add(this.txtCapturedBy);
             this.pnlSessionCard.Controls.Add(this.lblSessionStatus);
             this.pnlSessionCard.Controls.Add(this.txtSessionStatus);
-            this.pnlSessionCard.BackColor = System.Drawing.Color.White;
-            this.pnlSessionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSessionCard.Location = new System.Drawing.Point(0, 382);
-            this.pnlSessionCard.Size = new System.Drawing.Size(934, 99);
-            this.pnlSessionCard.TabIndex = 3;
+            this.pnlSessionCard.Location = new System.Drawing.Point(0, 478);
+            this.pnlSessionCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSessionCard.Name = "pnlSessionCard";
-            //
+            this.pnlSessionCard.Size = new System.Drawing.Size(1167, 123);
+            this.pnlSessionCard.TabIndex = 3;
+            // 
             // lblSessionHeadingBar
-            //
+            // 
             this.lblSessionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSessionHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblSessionHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblSessionHeadingBar.TabIndex = 0;
+            this.lblSessionHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblSessionHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblSessionHeadingBar.Name = "lblSessionHeadingBar";
-            //
+            this.lblSessionHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblSessionHeadingBar.TabIndex = 0;
+            // 
             // lblSessionHeading
-            //
+            // 
             this.lblSessionHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSessionHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblSessionHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblSessionHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblSessionHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSessionHeading.Name = "lblSessionHeading";
+            this.lblSessionHeading.Size = new System.Drawing.Size(625, 35);
             this.lblSessionHeading.TabIndex = 1;
             this.lblSessionHeading.Text = "Session details";
             this.lblSessionHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSessionHeading.Name = "lblSessionHeading";
-            //
+            // 
             // lblSessionNumber
-            //
+            // 
             this.lblSessionNumber.AutoSize = true;
             this.lblSessionNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSessionNumber.Location = new System.Drawing.Point(20, 40);
+            this.lblSessionNumber.Location = new System.Drawing.Point(25, 50);
+            this.lblSessionNumber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSessionNumber.Name = "lblSessionNumber";
+            this.lblSessionNumber.Size = new System.Drawing.Size(159, 28);
             this.lblSessionNumber.TabIndex = 2;
             this.lblSessionNumber.Text = "Session number";
-            this.lblSessionNumber.Name = "lblSessionNumber";
-            //
+            // 
             // txtSessionNumber
-            //
+            // 
             this.txtSessionNumber.AccessibleName = "Session number (read-only)";
             this.txtSessionNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSessionNumber.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtSessionNumber.Location = new System.Drawing.Point(20, 66);
+            this.txtSessionNumber.Location = new System.Drawing.Point(25, 82);
+            this.txtSessionNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSessionNumber.Name = "txtSessionNumber";
             this.txtSessionNumber.ReadOnly = true;
-            this.txtSessionNumber.Size = new System.Drawing.Size(200, 25);
+            this.txtSessionNumber.Size = new System.Drawing.Size(249, 27);
             this.txtSessionNumber.TabIndex = 3;
             this.txtSessionNumber.TabStop = false;
-            this.txtSessionNumber.Name = "txtSessionNumber";
-            //
+            // 
             // lblDateStarted
-            //
+            // 
             this.lblDateStarted.AutoSize = true;
             this.lblDateStarted.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDateStarted.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblDateStarted.Location = new System.Drawing.Point(240, 40);
+            this.lblDateStarted.Location = new System.Drawing.Point(300, 50);
+            this.lblDateStarted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDateStarted.Name = "lblDateStarted";
+            this.lblDateStarted.Size = new System.Drawing.Size(124, 28);
             this.lblDateStarted.TabIndex = 4;
             this.lblDateStarted.Text = "Date started";
-            this.lblDateStarted.Name = "lblDateStarted";
-            //
+            // 
             // txtDateStarted
-            //
+            // 
             this.txtDateStarted.AccessibleName = "Date started (read-only)";
             this.txtDateStarted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtDateStarted.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtDateStarted.Location = new System.Drawing.Point(240, 66);
+            this.txtDateStarted.Location = new System.Drawing.Point(300, 82);
+            this.txtDateStarted.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDateStarted.Name = "txtDateStarted";
             this.txtDateStarted.ReadOnly = true;
-            this.txtDateStarted.Size = new System.Drawing.Size(200, 25);
+            this.txtDateStarted.Size = new System.Drawing.Size(249, 27);
             this.txtDateStarted.TabIndex = 5;
             this.txtDateStarted.TabStop = false;
-            this.txtDateStarted.Name = "txtDateStarted";
-            //
+            // 
             // lblCapturedBy
-            //
+            // 
             this.lblCapturedBy.AutoSize = true;
             this.lblCapturedBy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCapturedBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCapturedBy.Location = new System.Drawing.Point(460, 40);
+            this.lblCapturedBy.Location = new System.Drawing.Point(575, 50);
+            this.lblCapturedBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCapturedBy.Name = "lblCapturedBy";
+            this.lblCapturedBy.Size = new System.Drawing.Size(123, 28);
             this.lblCapturedBy.TabIndex = 6;
             this.lblCapturedBy.Text = "Captured by";
-            this.lblCapturedBy.Name = "lblCapturedBy";
-            //
+            // 
             // txtCapturedBy
-            //
+            // 
             this.txtCapturedBy.AccessibleName = "Captured by (read-only)";
             this.txtCapturedBy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtCapturedBy.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtCapturedBy.Location = new System.Drawing.Point(460, 66);
+            this.txtCapturedBy.Location = new System.Drawing.Point(575, 82);
+            this.txtCapturedBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCapturedBy.Name = "txtCapturedBy";
             this.txtCapturedBy.ReadOnly = true;
-            this.txtCapturedBy.Size = new System.Drawing.Size(200, 25);
+            this.txtCapturedBy.Size = new System.Drawing.Size(249, 30);
             this.txtCapturedBy.TabIndex = 7;
             this.txtCapturedBy.TabStop = false;
-            this.txtCapturedBy.Name = "txtCapturedBy";
-            //
+            // 
             // lblSessionStatus
-            //
+            // 
             this.lblSessionStatus.AutoSize = true;
             this.lblSessionStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSessionStatus.Location = new System.Drawing.Point(680, 40);
+            this.lblSessionStatus.Location = new System.Drawing.Point(850, 50);
+            this.lblSessionStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSessionStatus.Name = "lblSessionStatus";
+            this.lblSessionStatus.Size = new System.Drawing.Size(141, 28);
             this.lblSessionStatus.TabIndex = 8;
             this.lblSessionStatus.Text = "Session status";
-            this.lblSessionStatus.Name = "lblSessionStatus";
-            //
+            // 
             // txtSessionStatus
-            //
+            // 
             this.txtSessionStatus.AccessibleName = "Session status (read-only)";
             this.txtSessionStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSessionStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSessionStatus.Location = new System.Drawing.Point(680, 66);
+            this.txtSessionStatus.Location = new System.Drawing.Point(850, 82);
+            this.txtSessionStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSessionStatus.Name = "txtSessionStatus";
             this.txtSessionStatus.ReadOnly = true;
-            this.txtSessionStatus.Size = new System.Drawing.Size(200, 25);
+            this.txtSessionStatus.Size = new System.Drawing.Size(249, 30);
             this.txtSessionStatus.TabIndex = 9;
             this.txtSessionStatus.TabStop = false;
-            this.txtSessionStatus.Name = "txtSessionStatus";
-            //
+            // 
             // lblProfRequiredNote
-            //
+            // 
             this.lblProfRequiredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblProfRequiredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblProfRequiredNote.Location = new System.Drawing.Point(0, 487);
-            this.lblProfRequiredNote.Size = new System.Drawing.Size(300, 18);
+            this.lblProfRequiredNote.Location = new System.Drawing.Point(0, 609);
+            this.lblProfRequiredNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProfRequiredNote.Name = "lblProfRequiredNote";
+            this.lblProfRequiredNote.Size = new System.Drawing.Size(375, 22);
             this.lblProfRequiredNote.TabIndex = 4;
             this.lblProfRequiredNote.Text = "* indicates a required field.";
-            this.lblProfRequiredNote.Name = "lblProfRequiredNote";
-            //
+            // 
             // tabSubjects
-            //
-            this.tabSubjects.Controls.Add(this.pnlSubjContent);
+            // 
             this.tabSubjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabSubjects.Controls.Add(this.pnlSubjContent);
             this.tabSubjects.Location = new System.Drawing.Point(4, 5);
-            this.tabSubjects.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabSubjects.Size = new System.Drawing.Size(934, 563);
+            this.tabSubjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSubjects.Name = "tabSubjects";
+            this.tabSubjects.Size = new System.Drawing.Size(1170, 576);
             this.tabSubjects.TabIndex = 2;
             this.tabSubjects.Text = "UI 3 Subjects and marks";
-            this.tabSubjects.UseVisualStyleBackColor = false;
-            this.tabSubjects.Name = "tabSubjects";
-            //
+            // 
             // pnlSubjContent
-            //
+            // 
             this.pnlSubjContent.Controls.Add(this.pnlAddCard);
             this.pnlSubjContent.Controls.Add(this.pnlSummary);
             this.pnlSubjContent.Controls.Add(this.pnlCapturedCard);
             this.pnlSubjContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSubjContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSubjContent.TabIndex = 0;
+            this.pnlSubjContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSubjContent.Name = "pnlSubjContent";
-            //
+            this.pnlSubjContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSubjContent.TabIndex = 0;
+            // 
             // pnlAddCard
-            //
+            // 
+            this.pnlAddCard.BackColor = System.Drawing.Color.White;
+            this.pnlAddCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAddCard.Controls.Add(this.lblAddHeadingBar);
             this.pnlAddCard.Controls.Add(this.lblAddHeading);
             this.pnlAddCard.Controls.Add(this.lblSubject);
@@ -1289,365 +1351,388 @@
             this.pnlAddCard.Controls.Add(this.numMark);
             this.pnlAddCard.Controls.Add(this.lblMarkError);
             this.pnlAddCard.Controls.Add(this.btnAddSubject);
-            this.pnlAddCard.BackColor = System.Drawing.Color.White;
-            this.pnlAddCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAddCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlAddCard.Size = new System.Drawing.Size(934, 116);
-            this.pnlAddCard.TabIndex = 0;
+            this.pnlAddCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAddCard.Name = "pnlAddCard";
+            this.pnlAddCard.Size = new System.Drawing.Size(1167, 144);
+            this.pnlAddCard.TabIndex = 0;
             this.pnlAddCard.Enter += new System.EventHandler(this.pnlAddCard_Enter);
             this.pnlAddCard.Leave += new System.EventHandler(this.pnlAddCard_Leave);
-            //
+            // 
             // lblAddHeadingBar
-            //
+            // 
             this.lblAddHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAddHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblAddHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAddHeadingBar.TabIndex = 0;
+            this.lblAddHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblAddHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblAddHeadingBar.Name = "lblAddHeadingBar";
-            //
+            this.lblAddHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblAddHeadingBar.TabIndex = 0;
+            // 
             // lblAddHeading
-            //
+            // 
             this.lblAddHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAddHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAddHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblAddHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblAddHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblAddHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAddHeading.Name = "lblAddHeading";
+            this.lblAddHeading.Size = new System.Drawing.Size(625, 35);
             this.lblAddHeading.TabIndex = 1;
             this.lblAddHeading.Text = "Add a subject";
             this.lblAddHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblAddHeading.Name = "lblAddHeading";
-            //
+            // 
             // lblSubject
-            //
+            // 
             this.lblSubject.AutoSize = true;
             this.lblSubject.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSubject.Location = new System.Drawing.Point(20, 40);
+            this.lblSubject.Location = new System.Drawing.Point(25, 50);
+            this.lblSubject.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubject.Name = "lblSubject";
+            this.lblSubject.Size = new System.Drawing.Size(79, 28);
             this.lblSubject.TabIndex = 2;
             this.lblSubject.Text = "Subject";
-            this.lblSubject.Name = "lblSubject";
-            //
+            // 
             // lblSubjectStar
-            //
+            // 
             this.lblSubjectStar.AutoSize = true;
             this.lblSubjectStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSubjectStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSubjectStar.Location = new System.Drawing.Point(83, 40);
-            this.lblSubjectStar.Size = new System.Drawing.Size(14, 24);
+            this.lblSubjectStar.Location = new System.Drawing.Point(104, 50);
+            this.lblSubjectStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectStar.Name = "lblSubjectStar";
+            this.lblSubjectStar.Size = new System.Drawing.Size(21, 28);
             this.lblSubjectStar.TabIndex = 3;
             this.lblSubjectStar.Text = "*";
-            this.lblSubjectStar.Name = "lblSubjectStar";
-            //
+            // 
             // cboSubject
-            //
+            // 
             this.cboSubject.AccessibleName = "Subject (required)";
             this.cboSubject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSubject.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboSubject.FormattingEnabled = true;
-            this.cboSubject.Location = new System.Drawing.Point(20, 66);
-            this.cboSubject.Size = new System.Drawing.Size(340, 25);
-            this.cboSubject.TabIndex = 4;
+            this.cboSubject.Location = new System.Drawing.Point(25, 82);
+            this.cboSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboSubject.Name = "cboSubject";
+            this.cboSubject.Size = new System.Drawing.Size(424, 31);
+            this.cboSubject.TabIndex = 4;
             this.cboSubject.SelectedIndexChanged += new System.EventHandler(this.cboSubject_SelectedIndexChanged);
             this.cboSubject.Leave += new System.EventHandler(this.cboSubject_Leave);
-            //
+            // 
             // lblSubjectError
-            //
+            // 
             this.lblSubjectError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSubjectError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSubjectError.Location = new System.Drawing.Point(20, 93);
-            this.lblSubjectError.Size = new System.Drawing.Size(590, 16);
-            this.lblSubjectError.TabIndex = 5;
-            this.lblSubjectError.Text = "";
-            this.lblSubjectError.Visible = false;
+            this.lblSubjectError.Location = new System.Drawing.Point(25, 116);
+            this.lblSubjectError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubjectError.Name = "lblSubjectError";
-            //
+            this.lblSubjectError.Size = new System.Drawing.Size(738, 20);
+            this.lblSubjectError.TabIndex = 5;
+            this.lblSubjectError.Visible = false;
+            // 
             // lblSubjectLevel
-            //
+            // 
             this.lblSubjectLevel.AutoSize = true;
             this.lblSubjectLevel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSubjectLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSubjectLevel.Location = new System.Drawing.Point(380, 40);
+            this.lblSubjectLevel.Location = new System.Drawing.Point(475, 50);
+            this.lblSubjectLevel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectLevel.Name = "lblSubjectLevel";
+            this.lblSubjectLevel.Size = new System.Drawing.Size(127, 28);
             this.lblSubjectLevel.TabIndex = 6;
             this.lblSubjectLevel.Text = "Subject level";
-            this.lblSubjectLevel.Name = "lblSubjectLevel";
-            //
+            // 
             // txtSubjectLevel
-            //
+            // 
             this.txtSubjectLevel.AccessibleName = "Subject level (read-only, follows from the subject)";
             this.txtSubjectLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtSubjectLevel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSubjectLevel.Location = new System.Drawing.Point(380, 66);
+            this.txtSubjectLevel.Location = new System.Drawing.Point(475, 82);
+            this.txtSubjectLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSubjectLevel.Name = "txtSubjectLevel";
             this.txtSubjectLevel.ReadOnly = true;
-            this.txtSubjectLevel.Size = new System.Drawing.Size(220, 25);
+            this.txtSubjectLevel.Size = new System.Drawing.Size(274, 30);
             this.txtSubjectLevel.TabIndex = 7;
             this.txtSubjectLevel.TabStop = false;
-            this.txtSubjectLevel.Name = "txtSubjectLevel";
-            //
+            // 
             // lblMark
-            //
+            // 
             this.lblMark.AutoSize = true;
             this.lblMark.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblMark.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblMark.Location = new System.Drawing.Point(620, 40);
-            this.lblMark.TabIndex = 8;
-            this.lblMark.Text = "Mark % (0\u2013100)";
+            this.lblMark.Location = new System.Drawing.Point(775, 50);
+            this.lblMark.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMark.Name = "lblMark";
-            //
+            this.lblMark.Size = new System.Drawing.Size(152, 28);
+            this.lblMark.TabIndex = 8;
+            this.lblMark.Text = "Mark % (0–100)";
+            // 
             // lblMarkStar
-            //
+            // 
             this.lblMarkStar.AutoSize = true;
             this.lblMarkStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblMarkStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblMarkStar.Location = new System.Drawing.Point(746, 40);
-            this.lblMarkStar.Size = new System.Drawing.Size(14, 24);
+            this.lblMarkStar.Location = new System.Drawing.Point(932, 50);
+            this.lblMarkStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMarkStar.Name = "lblMarkStar";
+            this.lblMarkStar.Size = new System.Drawing.Size(21, 28);
             this.lblMarkStar.TabIndex = 9;
             this.lblMarkStar.Text = "*";
-            this.lblMarkStar.Name = "lblMarkStar";
-            //
+            // 
             // numMark
-            //
+            // 
             this.numMark.AccessibleName = "Mark percent from 0 to 100, one decimal (required)";
             this.numMark.DecimalPlaces = 1;
             this.numMark.Font = new System.Drawing.Font("Consolas", 10F);
-            this.numMark.Location = new System.Drawing.Point(620, 66);
-            this.numMark.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
-            this.numMark.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
-            this.numMark.Size = new System.Drawing.Size(140, 23);
+            this.numMark.Location = new System.Drawing.Point(775, 82);
+            this.numMark.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numMark.Name = "numMark";
+            this.numMark.Size = new System.Drawing.Size(175, 27);
             this.numMark.TabIndex = 10;
             this.numMark.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numMark.Value = new decimal(new int[] { 0, 0, 0, 0 });
-            this.numMark.Name = "numMark";
             this.numMark.TextChanged += new System.EventHandler(this.numMark_TextChanged);
             this.numMark.Leave += new System.EventHandler(this.numMark_Leave);
-            //
+            // 
             // lblMarkError
-            //
+            // 
             this.lblMarkError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblMarkError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblMarkError.Location = new System.Drawing.Point(620, 93);
-            this.lblMarkError.Size = new System.Drawing.Size(300, 16);
-            this.lblMarkError.TabIndex = 11;
-            this.lblMarkError.Text = "";
-            this.lblMarkError.Visible = false;
+            this.lblMarkError.Location = new System.Drawing.Point(775, 116);
+            this.lblMarkError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMarkError.Name = "lblMarkError";
-            //
+            this.lblMarkError.Size = new System.Drawing.Size(375, 20);
+            this.lblMarkError.TabIndex = 11;
+            this.lblMarkError.Visible = false;
+            // 
             // btnAddSubject
-            //
+            // 
             this.btnAddSubject.AccessibleName = "Add subject";
             this.btnAddSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.btnAddSubject.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddSubject.FlatAppearance.BorderSize = 0;
             this.btnAddSubject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddSubject.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnAddSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAddSubject.Location = new System.Drawing.Point(780, 62);
-            this.btnAddSubject.Size = new System.Drawing.Size(134, 32);
+            this.btnAddSubject.Location = new System.Drawing.Point(975, 78);
+            this.btnAddSubject.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddSubject.Name = "btnAddSubject";
+            this.btnAddSubject.Size = new System.Drawing.Size(168, 40);
             this.btnAddSubject.TabIndex = 12;
             this.btnAddSubject.Text = "Add subject";
             this.btnAddSubject.UseVisualStyleBackColor = false;
-            this.btnAddSubject.Name = "btnAddSubject";
-            this.btnAddSubject.FlatAppearance.BorderSize = 0;
             this.btnAddSubject.Click += new System.EventHandler(this.btnAddSubject_Click);
-            //
+            // 
             // pnlSummary
-            //
-            this.pnlSummary.Controls.Add(this.lblSummary);
+            // 
             this.pnlSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSummary.Location = new System.Drawing.Point(0, 126);
-            this.pnlSummary.Size = new System.Drawing.Size(934, 70);
+            this.pnlSummary.Controls.Add(this.lblSummary);
+            this.pnlSummary.Location = new System.Drawing.Point(0, 158);
+            this.pnlSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSummary.Name = "pnlSummary";
+            this.pnlSummary.Size = new System.Drawing.Size(1167, 87);
             this.pnlSummary.TabIndex = 1;
             this.pnlSummary.Visible = false;
-            this.pnlSummary.Name = "pnlSummary";
-            //
+            // 
             // lblSummary
-            //
+            // 
             this.lblSummary.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSummary.Location = new System.Drawing.Point(12, 6);
-            this.lblSummary.Size = new System.Drawing.Size(908, 58);
-            this.lblSummary.TabIndex = 0;
-            this.lblSummary.Text = "";
+            this.lblSummary.Location = new System.Drawing.Point(15, 8);
+            this.lblSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSummary.Name = "lblSummary";
-            //
+            this.lblSummary.Size = new System.Drawing.Size(1135, 72);
+            this.lblSummary.TabIndex = 0;
+            // 
             // pnlCapturedCard
-            //
+            // 
+            this.pnlCapturedCard.BackColor = System.Drawing.Color.White;
+            this.pnlCapturedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCapturedCard.Controls.Add(this.lblCapturedHeadingBar);
             this.pnlCapturedCard.Controls.Add(this.lblCapturedHeading);
             this.pnlCapturedCard.Controls.Add(this.lblCapturedCount);
             this.pnlCapturedCard.Controls.Add(this.dgvSubjects);
             this.pnlCapturedCard.Controls.Add(this.lblFooter);
-            this.pnlCapturedCard.BackColor = System.Drawing.Color.White;
-            this.pnlCapturedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCapturedCard.Location = new System.Drawing.Point(0, 126);
-            this.pnlCapturedCard.Size = new System.Drawing.Size(934, 333);
-            this.pnlCapturedCard.TabIndex = 2;
+            this.pnlCapturedCard.Location = new System.Drawing.Point(0, 158);
+            this.pnlCapturedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlCapturedCard.Name = "pnlCapturedCard";
-            //
+            this.pnlCapturedCard.Size = new System.Drawing.Size(1167, 416);
+            this.pnlCapturedCard.TabIndex = 2;
+            // 
             // lblCapturedHeadingBar
-            //
+            // 
             this.lblCapturedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCapturedHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblCapturedHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblCapturedHeadingBar.TabIndex = 0;
+            this.lblCapturedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblCapturedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblCapturedHeadingBar.Name = "lblCapturedHeadingBar";
-            //
+            this.lblCapturedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblCapturedHeadingBar.TabIndex = 0;
+            // 
             // lblCapturedHeading
-            //
+            // 
             this.lblCapturedHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCapturedHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCapturedHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblCapturedHeading.Size = new System.Drawing.Size(500, 28);
+            this.lblCapturedHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblCapturedHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCapturedHeading.Name = "lblCapturedHeading";
+            this.lblCapturedHeading.Size = new System.Drawing.Size(625, 35);
             this.lblCapturedHeading.TabIndex = 1;
             this.lblCapturedHeading.Text = "Captured subjects";
             this.lblCapturedHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblCapturedHeading.Name = "lblCapturedHeading";
-            //
+            // 
             // lblCapturedCount
-            //
+            // 
             this.lblCapturedCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblCapturedCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblCapturedCount.Location = new System.Drawing.Point(616, 12);
-            this.lblCapturedCount.Size = new System.Drawing.Size(300, 20);
-            this.lblCapturedCount.TabIndex = 2;
-            this.lblCapturedCount.Text = "";
-            this.lblCapturedCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCapturedCount.Location = new System.Drawing.Point(770, 15);
+            this.lblCapturedCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCapturedCount.Name = "lblCapturedCount";
-            //
+            this.lblCapturedCount.Size = new System.Drawing.Size(375, 25);
+            this.lblCapturedCount.TabIndex = 2;
+            this.lblCapturedCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // dgvSubjects
-            //
+            // 
+            this.dgvSubjects.AccessibleName = "Captured subjects";
+            this.dgvSubjects.AllowUserToAddRows = false;
+            this.dgvSubjects.AllowUserToDeleteRows = false;
+            this.dgvSubjects.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvSubjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvSubjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSubjects.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSubjects.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvSubjects.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSubjects.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvSubjects.ColumnHeadersHeight = 34;
+            this.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSubjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSubjSubjectName,
             this.colSubjectLevel,
             this.colSubjMark,
             this.colAchievementLevel,
             this.colRemove});
-            SubjDgvSubjectsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvSubjects.AlternatingRowsDefaultCellStyle = SubjDgvSubjectsAltStyle;
-            SubjDgvSubjectsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SubjDgvSubjectsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SubjDgvSubjectsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            SubjDgvSubjectsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            SubjDgvSubjectsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SubjDgvSubjectsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SubjDgvSubjectsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            SubjDgvSubjectsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSubjects.ColumnHeadersDefaultCellStyle = SubjDgvSubjectsHeaderStyle;
-            SubjDgvSubjectsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SubjDgvSubjectsCellStyle.BackColor = System.Drawing.Color.White;
-            SubjDgvSubjectsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            SubjDgvSubjectsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SubjDgvSubjectsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SubjDgvSubjectsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            SubjDgvSubjectsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            SubjDgvSubjectsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSubjects.DefaultCellStyle = SubjDgvSubjectsCellStyle;
-            this.dgvSubjects.AccessibleName = "Captured subjects";
-            this.dgvSubjects.AllowUserToAddRows = false;
-            this.dgvSubjects.AllowUserToDeleteRows = false;
-            this.dgvSubjects.AllowUserToResizeRows = false;
-            this.dgvSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvSubjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSubjects.BackgroundColor = System.Drawing.Color.White;
-            this.dgvSubjects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dgvSubjects.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvSubjects.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvSubjects.ColumnHeadersHeight = 34;
-            this.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSubjects.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvSubjects.EnableHeadersVisualStyles = false;
             this.dgvSubjects.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvSubjects.Location = new System.Drawing.Point(16, 40);
+            this.dgvSubjects.Location = new System.Drawing.Point(20, 50);
+            this.dgvSubjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvSubjects.MultiSelect = false;
+            this.dgvSubjects.Name = "dgvSubjects";
             this.dgvSubjects.ReadOnly = true;
             this.dgvSubjects.RowHeadersVisible = false;
-            this.dgvSubjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubjects.Size = new System.Drawing.Size(900, 257);
-            this.dgvSubjects.TabIndex = 3;
-            this.dgvSubjects.Name = "dgvSubjects";
+            this.dgvSubjects.RowHeadersWidth = 51;
             this.dgvSubjects.RowTemplate.Height = 30;
-            this.colSubjMark.HeaderCell.Style.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvSubjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSubjects.Size = new System.Drawing.Size(1125, 321);
+            this.dgvSubjects.TabIndex = 3;
             this.dgvSubjects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubjects_CellContentClick);
             this.dgvSubjects.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvSubjects_DataBindingComplete);
-            //
+            // 
             // colSubjSubjectName
-            //
+            // 
             this.colSubjSubjectName.DataPropertyName = "SubjectName";
             this.colSubjSubjectName.FillWeight = 34F;
             this.colSubjSubjectName.HeaderText = "Subject";
-            this.colSubjSubjectName.ReadOnly = true;
+            this.colSubjSubjectName.MinimumWidth = 6;
             this.colSubjSubjectName.Name = "colSubjSubjectName";
-            //
+            this.colSubjSubjectName.ReadOnly = true;
+            // 
             // colSubjectLevel
-            //
+            // 
             this.colSubjectLevel.DataPropertyName = "SubjectLevel";
             this.colSubjectLevel.FillWeight = 22F;
             this.colSubjectLevel.HeaderText = "Level";
-            this.colSubjectLevel.ReadOnly = true;
+            this.colSubjectLevel.MinimumWidth = 6;
             this.colSubjectLevel.Name = "colSubjectLevel";
-            //
+            this.colSubjectLevel.ReadOnly = true;
+            // 
             // colSubjMark
-            //
-            SubjColMarkStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            SubjColMarkStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            SubjColMarkStyle.Format = "0.0";
-            this.colSubjMark.DefaultCellStyle = SubjColMarkStyle;
+            // 
             this.colSubjMark.DataPropertyName = "Mark";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle3.Format = "0.0";
+            this.colSubjMark.DefaultCellStyle = dataGridViewCellStyle3;
             this.colSubjMark.FillWeight = 12F;
             this.colSubjMark.HeaderText = "Mark %";
-            this.colSubjMark.ReadOnly = true;
+            this.colSubjMark.MinimumWidth = 6;
             this.colSubjMark.Name = "colSubjMark";
-            //
+            this.colSubjMark.ReadOnly = true;
+            // 
             // colAchievementLevel
-            //
+            // 
             this.colAchievementLevel.DataPropertyName = "AchievementLevel";
             this.colAchievementLevel.FillWeight = 20F;
             this.colAchievementLevel.HeaderText = "Achievement level";
-            this.colAchievementLevel.ReadOnly = true;
+            this.colAchievementLevel.MinimumWidth = 6;
             this.colAchievementLevel.Name = "colAchievementLevel";
-            //
+            this.colAchievementLevel.ReadOnly = true;
+            // 
             // colRemove
-            //
-            SubjColRemoveStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SubjColRemoveStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            SubjColRemoveStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            SubjColRemoveStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SubjColRemoveStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            SubjColRemoveStyle.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
-            this.colRemove.DefaultCellStyle = SubjColRemoveStyle;
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.colRemove.DefaultCellStyle = dataGridViewCellStyle4;
             this.colRemove.FillWeight = 12F;
             this.colRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colRemove.HeaderText = "Remove";
+            this.colRemove.MinimumWidth = 6;
+            this.colRemove.Name = "colRemove";
+            this.colRemove.ReadOnly = true;
             this.colRemove.Text = "Remove";
             this.colRemove.ToolTipText = "Remove this subject from the captured list";
             this.colRemove.UseColumnTextForButtonValue = true;
-            this.colRemove.Name = "colRemove";
-            //
+            // 
             // lblFooter
-            //
-            this.lblFooter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            this.lblFooter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFooter.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFooter.Location = new System.Drawing.Point(16, 301);
-            this.lblFooter.Size = new System.Drawing.Size(900, 26);
+            this.lblFooter.Location = new System.Drawing.Point(20, 376);
+            this.lblFooter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFooter.Name = "lblFooter";
+            this.lblFooter.Size = new System.Drawing.Size(1125, 32);
             this.lblFooter.TabIndex = 4;
             this.lblFooter.Text = "0 subjects captured";
             this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblFooter.Name = "lblFooter";
-            //
+            // 
             // tabInterests
-            //
-            this.tabInterests.Controls.Add(this.pnlIntContent);
+            // 
             this.tabInterests.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabInterests.Controls.Add(this.pnlIntContent);
             this.tabInterests.Location = new System.Drawing.Point(4, 5);
-            this.tabInterests.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabInterests.Size = new System.Drawing.Size(934, 563);
+            this.tabInterests.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabInterests.Name = "tabInterests";
+            this.tabInterests.Size = new System.Drawing.Size(1170, 576);
             this.tabInterests.TabIndex = 3;
             this.tabInterests.Text = "UI 4 Interest questionnaire";
-            this.tabInterests.UseVisualStyleBackColor = false;
-            this.tabInterests.Name = "tabInterests";
-            //
+            // 
             // pnlIntContent
-            //
+            // 
             this.pnlIntContent.Controls.Add(this.pnlQuestionCard);
             this.pnlIntContent.Controls.Add(this.tileAnswered);
             this.pnlIntContent.Controls.Add(this.tileCategory1);
@@ -1655,340 +1740,371 @@
             this.pnlIntContent.Controls.Add(this.tileCategory3);
             this.pnlIntContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlIntContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlIntContent.TabIndex = 0;
+            this.pnlIntContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlIntContent.Name = "pnlIntContent";
-            //
+            this.pnlIntContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlIntContent.TabIndex = 0;
+            // 
             // pnlQuestionCard
-            //
+            // 
+            this.pnlQuestionCard.BackColor = System.Drawing.Color.White;
+            this.pnlQuestionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlQuestionCard.Controls.Add(this.lblQuestionHeadingBar);
             this.pnlQuestionCard.Controls.Add(this.lblQuestionHeading);
             this.pnlQuestionCard.Controls.Add(this.lblAnsweredCount);
             this.pnlQuestionCard.Controls.Add(this.pnlStatementHeader);
             this.pnlQuestionCard.Controls.Add(this.pnlStatements);
-            this.pnlQuestionCard.BackColor = System.Drawing.Color.White;
-            this.pnlQuestionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlQuestionCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlQuestionCard.Size = new System.Drawing.Size(934, 375);
-            this.pnlQuestionCard.TabIndex = 0;
+            this.pnlQuestionCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlQuestionCard.Name = "pnlQuestionCard";
-            //
+            this.pnlQuestionCard.Size = new System.Drawing.Size(1167, 468);
+            this.pnlQuestionCard.TabIndex = 0;
+            // 
             // lblQuestionHeadingBar
-            //
+            // 
             this.lblQuestionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblQuestionHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblQuestionHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblQuestionHeadingBar.TabIndex = 0;
+            this.lblQuestionHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblQuestionHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblQuestionHeadingBar.Name = "lblQuestionHeadingBar";
-            //
+            this.lblQuestionHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblQuestionHeadingBar.TabIndex = 0;
+            // 
             // lblQuestionHeading
-            //
+            // 
             this.lblQuestionHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblQuestionHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblQuestionHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblQuestionHeading.Size = new System.Drawing.Size(600, 28);
+            this.lblQuestionHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblQuestionHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblQuestionHeading.Name = "lblQuestionHeading";
+            this.lblQuestionHeading.Size = new System.Drawing.Size(750, 35);
             this.lblQuestionHeading.TabIndex = 1;
             this.lblQuestionHeading.Text = "How much do you agree with each statement?";
             this.lblQuestionHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblQuestionHeading.Name = "lblQuestionHeading";
-            //
+            // 
             // lblAnsweredCount
-            //
+            // 
             this.lblAnsweredCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblAnsweredCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblAnsweredCount.Location = new System.Drawing.Point(616, 12);
-            this.lblAnsweredCount.Size = new System.Drawing.Size(300, 20);
-            this.lblAnsweredCount.TabIndex = 2;
-            this.lblAnsweredCount.Text = "";
-            this.lblAnsweredCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblAnsweredCount.Location = new System.Drawing.Point(770, 15);
+            this.lblAnsweredCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAnsweredCount.Name = "lblAnsweredCount";
-            //
+            this.lblAnsweredCount.Size = new System.Drawing.Size(375, 25);
+            this.lblAnsweredCount.TabIndex = 2;
+            this.lblAnsweredCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // pnlStatementHeader
-            //
+            // 
+            this.pnlStatementHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.pnlStatementHeader.Controls.Add(this.lblHeaderStatement);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse1);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse2);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse3);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse4);
             this.pnlStatementHeader.Controls.Add(this.lblHeaderResponse5);
-            this.pnlStatementHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.pnlStatementHeader.Location = new System.Drawing.Point(16, 40);
-            this.pnlStatementHeader.Size = new System.Drawing.Size(900, 40);
-            this.pnlStatementHeader.TabIndex = 3;
+            this.pnlStatementHeader.Location = new System.Drawing.Point(20, 50);
+            this.pnlStatementHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlStatementHeader.Name = "pnlStatementHeader";
-            //
+            this.pnlStatementHeader.Size = new System.Drawing.Size(1125, 50);
+            this.pnlStatementHeader.TabIndex = 3;
+            // 
             // lblHeaderStatement
-            //
+            // 
             this.lblHeaderStatement.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.lblHeaderStatement.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderStatement.Location = new System.Drawing.Point(12, 0);
-            this.lblHeaderStatement.Size = new System.Drawing.Size(300, 40);
+            this.lblHeaderStatement.Location = new System.Drawing.Point(15, 0);
+            this.lblHeaderStatement.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderStatement.Name = "lblHeaderStatement";
+            this.lblHeaderStatement.Size = new System.Drawing.Size(375, 50);
             this.lblHeaderStatement.TabIndex = 0;
             this.lblHeaderStatement.Text = "Statement";
             this.lblHeaderStatement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblHeaderStatement.Name = "lblHeaderStatement";
-            //
+            // 
             // lblHeaderResponse1
-            //
+            // 
             this.lblHeaderResponse1.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblHeaderResponse1.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderResponse1.Location = new System.Drawing.Point(493, 0);
-            this.lblHeaderResponse1.Size = new System.Drawing.Size(78, 40);
+            this.lblHeaderResponse1.Location = new System.Drawing.Point(616, 0);
+            this.lblHeaderResponse1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderResponse1.Name = "lblHeaderResponse1";
+            this.lblHeaderResponse1.Size = new System.Drawing.Size(98, 50);
             this.lblHeaderResponse1.TabIndex = 1;
             this.lblHeaderResponse1.Text = "Strongly disagree";
             this.lblHeaderResponse1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeaderResponse1.Name = "lblHeaderResponse1";
-            //
+            // 
             // lblHeaderResponse2
-            //
+            // 
             this.lblHeaderResponse2.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblHeaderResponse2.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderResponse2.Location = new System.Drawing.Point(571, 0);
-            this.lblHeaderResponse2.Size = new System.Drawing.Size(78, 40);
+            this.lblHeaderResponse2.Location = new System.Drawing.Point(714, 0);
+            this.lblHeaderResponse2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderResponse2.Name = "lblHeaderResponse2";
+            this.lblHeaderResponse2.Size = new System.Drawing.Size(98, 50);
             this.lblHeaderResponse2.TabIndex = 2;
             this.lblHeaderResponse2.Text = "Disagree";
             this.lblHeaderResponse2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeaderResponse2.Name = "lblHeaderResponse2";
-            //
+            // 
             // lblHeaderResponse3
-            //
+            // 
             this.lblHeaderResponse3.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblHeaderResponse3.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderResponse3.Location = new System.Drawing.Point(649, 0);
-            this.lblHeaderResponse3.Size = new System.Drawing.Size(78, 40);
+            this.lblHeaderResponse3.Location = new System.Drawing.Point(811, 0);
+            this.lblHeaderResponse3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderResponse3.Name = "lblHeaderResponse3";
+            this.lblHeaderResponse3.Size = new System.Drawing.Size(98, 50);
             this.lblHeaderResponse3.TabIndex = 3;
             this.lblHeaderResponse3.Text = "Neutral";
             this.lblHeaderResponse3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeaderResponse3.Name = "lblHeaderResponse3";
-            //
+            // 
             // lblHeaderResponse4
-            //
+            // 
             this.lblHeaderResponse4.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblHeaderResponse4.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderResponse4.Location = new System.Drawing.Point(727, 0);
-            this.lblHeaderResponse4.Size = new System.Drawing.Size(78, 40);
+            this.lblHeaderResponse4.Location = new System.Drawing.Point(909, 0);
+            this.lblHeaderResponse4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderResponse4.Name = "lblHeaderResponse4";
+            this.lblHeaderResponse4.Size = new System.Drawing.Size(98, 50);
             this.lblHeaderResponse4.TabIndex = 4;
             this.lblHeaderResponse4.Text = "Agree";
             this.lblHeaderResponse4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeaderResponse4.Name = "lblHeaderResponse4";
-            //
+            // 
             // lblHeaderResponse5
-            //
+            // 
             this.lblHeaderResponse5.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblHeaderResponse5.ForeColor = System.Drawing.Color.White;
-            this.lblHeaderResponse5.Location = new System.Drawing.Point(805, 0);
-            this.lblHeaderResponse5.Size = new System.Drawing.Size(78, 40);
+            this.lblHeaderResponse5.Location = new System.Drawing.Point(1006, 0);
+            this.lblHeaderResponse5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeaderResponse5.Name = "lblHeaderResponse5";
+            this.lblHeaderResponse5.Size = new System.Drawing.Size(98, 50);
             this.lblHeaderResponse5.TabIndex = 5;
             this.lblHeaderResponse5.Text = "Strongly agree";
             this.lblHeaderResponse5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblHeaderResponse5.Name = "lblHeaderResponse5";
-            //
+            // 
             // pnlStatements
-            //
+            // 
             this.pnlStatements.AccessibleName = "Questionnaire statements";
             this.pnlStatements.AutoScroll = true;
             this.pnlStatements.BackColor = System.Drawing.Color.White;
             this.pnlStatements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlStatements.Location = new System.Drawing.Point(16, 80);
-            this.pnlStatements.Size = new System.Drawing.Size(900, 290);
-            this.pnlStatements.TabIndex = 4;
+            this.pnlStatements.Location = new System.Drawing.Point(20, 100);
+            this.pnlStatements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlStatements.Name = "pnlStatements";
-            //
+            this.pnlStatements.Size = new System.Drawing.Size(1124, 362);
+            this.pnlStatements.TabIndex = 4;
+            // 
             // tileAnswered
-            //
+            // 
+            this.tileAnswered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            this.tileAnswered.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tileAnswered.Controls.Add(this.tileAnsweredCaption);
             this.tileAnswered.Controls.Add(this.tileAnsweredValue);
             this.tileAnswered.Controls.Add(this.tileAnsweredNote);
-            this.tileAnswered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            this.tileAnswered.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileAnswered.Location = new System.Drawing.Point(0, 385);
-            this.tileAnswered.Size = new System.Drawing.Size(218, 74);
-            this.tileAnswered.TabIndex = 1;
+            this.tileAnswered.Location = new System.Drawing.Point(0, 481);
+            this.tileAnswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tileAnswered.Name = "tileAnswered";
-            //
+            this.tileAnswered.Size = new System.Drawing.Size(272, 92);
+            this.tileAnswered.TabIndex = 1;
+            // 
             // tileAnsweredCaption
-            //
+            // 
             this.tileAnsweredCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.tileAnsweredCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileAnsweredCaption.Location = new System.Drawing.Point(12, 8);
-            this.tileAnsweredCaption.Size = new System.Drawing.Size(194, 20);
+            this.tileAnsweredCaption.Location = new System.Drawing.Point(15, 10);
+            this.tileAnsweredCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileAnsweredCaption.Name = "tileAnsweredCaption";
+            this.tileAnsweredCaption.Size = new System.Drawing.Size(242, 25);
             this.tileAnsweredCaption.TabIndex = 0;
             this.tileAnsweredCaption.Text = "Answered";
-            this.tileAnsweredCaption.Name = "tileAnsweredCaption";
-            //
+            // 
             // tileAnsweredValue
-            //
+            // 
             this.tileAnsweredValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.tileAnsweredValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
-            this.tileAnsweredValue.Location = new System.Drawing.Point(10, 24);
-            this.tileAnsweredValue.Size = new System.Drawing.Size(194, 30);
-            this.tileAnsweredValue.TabIndex = 1;
-            this.tileAnsweredValue.Text = "\u2014";
+            this.tileAnsweredValue.Location = new System.Drawing.Point(12, 30);
+            this.tileAnsweredValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tileAnsweredValue.Name = "tileAnsweredValue";
-            //
+            this.tileAnsweredValue.Size = new System.Drawing.Size(242, 38);
+            this.tileAnsweredValue.TabIndex = 1;
+            this.tileAnsweredValue.Text = "—";
+            // 
             // tileAnsweredNote
-            //
+            // 
             this.tileAnsweredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tileAnsweredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileAnsweredNote.Location = new System.Drawing.Point(12, 52);
-            this.tileAnsweredNote.Size = new System.Drawing.Size(194, 18);
-            this.tileAnsweredNote.TabIndex = 2;
-            this.tileAnsweredNote.Text = "";
+            this.tileAnsweredNote.Location = new System.Drawing.Point(15, 65);
+            this.tileAnsweredNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tileAnsweredNote.Name = "tileAnsweredNote";
-            //
+            this.tileAnsweredNote.Size = new System.Drawing.Size(242, 22);
+            this.tileAnsweredNote.TabIndex = 2;
+            // 
             // tileCategory1
-            //
+            // 
+            this.tileCategory1.BackColor = System.Drawing.Color.White;
+            this.tileCategory1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tileCategory1.Controls.Add(this.tileCategory1Caption);
             this.tileCategory1.Controls.Add(this.tileCategory1Value);
             this.tileCategory1.Controls.Add(this.tileCategory1Note);
-            this.tileCategory1.BackColor = System.Drawing.Color.White;
-            this.tileCategory1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory1.Location = new System.Drawing.Point(238, 385);
-            this.tileCategory1.Size = new System.Drawing.Size(218, 74);
+            this.tileCategory1.Location = new System.Drawing.Point(298, 481);
+            this.tileCategory1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory1.Name = "tileCategory1";
+            this.tileCategory1.Size = new System.Drawing.Size(272, 92);
             this.tileCategory1.TabIndex = 2;
             this.tileCategory1.Visible = false;
-            this.tileCategory1.Name = "tileCategory1";
-            //
+            // 
             // tileCategory1Caption
-            //
+            // 
             this.tileCategory1Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.tileCategory1Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory1Caption.Location = new System.Drawing.Point(12, 8);
-            this.tileCategory1Caption.Size = new System.Drawing.Size(194, 20);
+            this.tileCategory1Caption.Location = new System.Drawing.Point(15, 10);
+            this.tileCategory1Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory1Caption.Name = "tileCategory1Caption";
+            this.tileCategory1Caption.Size = new System.Drawing.Size(242, 25);
             this.tileCategory1Caption.TabIndex = 0;
             this.tileCategory1Caption.Text = "Category";
-            this.tileCategory1Caption.Name = "tileCategory1Caption";
-            //
+            // 
             // tileCategory1Value
-            //
+            // 
             this.tileCategory1Value.Font = new System.Drawing.Font("Consolas", 18F);
             this.tileCategory1Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory1Value.Location = new System.Drawing.Point(10, 24);
-            this.tileCategory1Value.Size = new System.Drawing.Size(194, 30);
-            this.tileCategory1Value.TabIndex = 1;
-            this.tileCategory1Value.Text = "\u2014";
+            this.tileCategory1Value.Location = new System.Drawing.Point(12, 30);
+            this.tileCategory1Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tileCategory1Value.Name = "tileCategory1Value";
-            //
+            this.tileCategory1Value.Size = new System.Drawing.Size(242, 38);
+            this.tileCategory1Value.TabIndex = 1;
+            this.tileCategory1Value.Text = "—";
+            // 
             // tileCategory1Note
-            //
+            // 
             this.tileCategory1Note.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tileCategory1Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory1Note.Location = new System.Drawing.Point(12, 52);
-            this.tileCategory1Note.Size = new System.Drawing.Size(194, 18);
+            this.tileCategory1Note.Location = new System.Drawing.Point(15, 65);
+            this.tileCategory1Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory1Note.Name = "tileCategory1Note";
+            this.tileCategory1Note.Size = new System.Drawing.Size(242, 22);
             this.tileCategory1Note.TabIndex = 2;
             this.tileCategory1Note.Text = "provisional";
-            this.tileCategory1Note.Name = "tileCategory1Note";
-            //
+            // 
             // tileCategory2
-            //
+            // 
+            this.tileCategory2.BackColor = System.Drawing.Color.White;
+            this.tileCategory2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tileCategory2.Controls.Add(this.tileCategory2Caption);
             this.tileCategory2.Controls.Add(this.tileCategory2Value);
             this.tileCategory2.Controls.Add(this.tileCategory2Note);
-            this.tileCategory2.BackColor = System.Drawing.Color.White;
-            this.tileCategory2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory2.Location = new System.Drawing.Point(476, 385);
-            this.tileCategory2.Size = new System.Drawing.Size(218, 74);
+            this.tileCategory2.Location = new System.Drawing.Point(595, 481);
+            this.tileCategory2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory2.Name = "tileCategory2";
+            this.tileCategory2.Size = new System.Drawing.Size(272, 92);
             this.tileCategory2.TabIndex = 3;
             this.tileCategory2.Visible = false;
-            this.tileCategory2.Name = "tileCategory2";
-            //
+            // 
             // tileCategory2Caption
-            //
+            // 
             this.tileCategory2Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.tileCategory2Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory2Caption.Location = new System.Drawing.Point(12, 8);
-            this.tileCategory2Caption.Size = new System.Drawing.Size(194, 20);
+            this.tileCategory2Caption.Location = new System.Drawing.Point(15, 10);
+            this.tileCategory2Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory2Caption.Name = "tileCategory2Caption";
+            this.tileCategory2Caption.Size = new System.Drawing.Size(242, 25);
             this.tileCategory2Caption.TabIndex = 0;
             this.tileCategory2Caption.Text = "Category";
-            this.tileCategory2Caption.Name = "tileCategory2Caption";
-            //
+            // 
             // tileCategory2Value
-            //
+            // 
             this.tileCategory2Value.Font = new System.Drawing.Font("Consolas", 18F);
             this.tileCategory2Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory2Value.Location = new System.Drawing.Point(10, 24);
-            this.tileCategory2Value.Size = new System.Drawing.Size(194, 30);
-            this.tileCategory2Value.TabIndex = 1;
-            this.tileCategory2Value.Text = "\u2014";
+            this.tileCategory2Value.Location = new System.Drawing.Point(12, 30);
+            this.tileCategory2Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tileCategory2Value.Name = "tileCategory2Value";
-            //
+            this.tileCategory2Value.Size = new System.Drawing.Size(242, 38);
+            this.tileCategory2Value.TabIndex = 1;
+            this.tileCategory2Value.Text = "—";
+            // 
             // tileCategory2Note
-            //
+            // 
             this.tileCategory2Note.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tileCategory2Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory2Note.Location = new System.Drawing.Point(12, 52);
-            this.tileCategory2Note.Size = new System.Drawing.Size(194, 18);
+            this.tileCategory2Note.Location = new System.Drawing.Point(15, 65);
+            this.tileCategory2Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory2Note.Name = "tileCategory2Note";
+            this.tileCategory2Note.Size = new System.Drawing.Size(242, 22);
             this.tileCategory2Note.TabIndex = 2;
             this.tileCategory2Note.Text = "provisional";
-            this.tileCategory2Note.Name = "tileCategory2Note";
-            //
+            // 
             // tileCategory3
-            //
+            // 
+            this.tileCategory3.BackColor = System.Drawing.Color.White;
+            this.tileCategory3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tileCategory3.Controls.Add(this.tileCategory3Caption);
             this.tileCategory3.Controls.Add(this.tileCategory3Value);
             this.tileCategory3.Controls.Add(this.tileCategory3Note);
-            this.tileCategory3.BackColor = System.Drawing.Color.White;
-            this.tileCategory3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory3.Location = new System.Drawing.Point(714, 385);
-            this.tileCategory3.Size = new System.Drawing.Size(218, 74);
+            this.tileCategory3.Location = new System.Drawing.Point(892, 481);
+            this.tileCategory3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tileCategory3.Name = "tileCategory3";
+            this.tileCategory3.Size = new System.Drawing.Size(272, 92);
             this.tileCategory3.TabIndex = 4;
             this.tileCategory3.Visible = false;
-            this.tileCategory3.Name = "tileCategory3";
-            //
+            // 
             // tileCategory3Caption
-            //
+            // 
             this.tileCategory3Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.tileCategory3Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory3Caption.Location = new System.Drawing.Point(12, 8);
-            this.tileCategory3Caption.Size = new System.Drawing.Size(194, 20);
+            this.tileCategory3Caption.Location = new System.Drawing.Point(15, 10);
+            this.tileCategory3Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory3Caption.Name = "tileCategory3Caption";
+            this.tileCategory3Caption.Size = new System.Drawing.Size(242, 25);
             this.tileCategory3Caption.TabIndex = 0;
             this.tileCategory3Caption.Text = "Category";
-            this.tileCategory3Caption.Name = "tileCategory3Caption";
-            //
+            // 
             // tileCategory3Value
-            //
+            // 
             this.tileCategory3Value.Font = new System.Drawing.Font("Consolas", 18F);
             this.tileCategory3Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory3Value.Location = new System.Drawing.Point(10, 24);
-            this.tileCategory3Value.Size = new System.Drawing.Size(194, 30);
-            this.tileCategory3Value.TabIndex = 1;
-            this.tileCategory3Value.Text = "\u2014";
+            this.tileCategory3Value.Location = new System.Drawing.Point(12, 30);
+            this.tileCategory3Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.tileCategory3Value.Name = "tileCategory3Value";
-            //
+            this.tileCategory3Value.Size = new System.Drawing.Size(242, 38);
+            this.tileCategory3Value.TabIndex = 1;
+            this.tileCategory3Value.Text = "—";
+            // 
             // tileCategory3Note
-            //
+            // 
             this.tileCategory3Note.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.tileCategory3Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory3Note.Location = new System.Drawing.Point(12, 52);
-            this.tileCategory3Note.Size = new System.Drawing.Size(194, 18);
+            this.tileCategory3Note.Location = new System.Drawing.Point(15, 65);
+            this.tileCategory3Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tileCategory3Note.Name = "tileCategory3Note";
+            this.tileCategory3Note.Size = new System.Drawing.Size(242, 22);
             this.tileCategory3Note.TabIndex = 2;
             this.tileCategory3Note.Text = "provisional";
-            this.tileCategory3Note.Name = "tileCategory3Note";
-            //
+            // 
             // tabFaculty
-            //
-            this.tabFaculty.Controls.Add(this.pnlSelContent);
+            // 
             this.tabFaculty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabFaculty.Controls.Add(this.pnlSelContent);
             this.tabFaculty.Location = new System.Drawing.Point(4, 5);
-            this.tabFaculty.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabFaculty.Size = new System.Drawing.Size(934, 563);
+            this.tabFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabFaculty.Name = "tabFaculty";
+            this.tabFaculty.Size = new System.Drawing.Size(1170, 576);
             this.tabFaculty.TabIndex = 4;
             this.tabFaculty.Text = "UI 5 Faculty and department";
-            this.tabFaculty.UseVisualStyleBackColor = false;
-            this.tabFaculty.Name = "tabFaculty";
-            //
+            // 
             // pnlSelContent
-            //
+            // 
             this.pnlSelContent.Controls.Add(this.pnlSearchCard);
             this.pnlSelContent.Controls.Add(this.pnlProgrammesCard);
             this.pnlSelContent.Controls.Add(this.pnlRequirementsCard);
             this.pnlSelContent.Controls.Add(this.pnlAlignmentCard);
             this.pnlSelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSelContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSelContent.TabIndex = 0;
+            this.pnlSelContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSelContent.Name = "pnlSelContent";
-            //
+            this.pnlSelContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSelContent.TabIndex = 0;
+            // 
             // pnlSearchCard
-            //
+            // 
+            this.pnlSearchCard.BackColor = System.Drawing.Color.White;
+            this.pnlSearchCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSearchCard.Controls.Add(this.lblSearchHeadingBar);
             this.pnlSearchCard.Controls.Add(this.lblSearchHeading);
             this.pnlSearchCard.Controls.Add(this.rbBrowse);
@@ -2000,514 +2116,548 @@
             this.pnlSearchCard.Controls.Add(this.lblProgrammeSearch);
             this.pnlSearchCard.Controls.Add(this.txtProgrammeSearch);
             this.pnlSearchCard.Controls.Add(this.lblSearchHint);
-            this.pnlSearchCard.BackColor = System.Drawing.Color.White;
-            this.pnlSearchCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSearchCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlSearchCard.Size = new System.Drawing.Size(934, 118);
-            this.pnlSearchCard.TabIndex = 0;
+            this.pnlSearchCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSearchCard.Name = "pnlSearchCard";
-            //
+            this.pnlSearchCard.Size = new System.Drawing.Size(1167, 147);
+            this.pnlSearchCard.TabIndex = 0;
+            // 
             // lblSearchHeadingBar
-            //
+            // 
             this.lblSearchHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSearchHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblSearchHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblSearchHeadingBar.TabIndex = 0;
+            this.lblSearchHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblSearchHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblSearchHeadingBar.Name = "lblSearchHeadingBar";
-            //
+            this.lblSearchHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblSearchHeadingBar.TabIndex = 0;
+            // 
             // lblSearchHeading
-            //
+            // 
             this.lblSearchHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSearchHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSearchHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblSearchHeading.Size = new System.Drawing.Size(600, 28);
+            this.lblSearchHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblSearchHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearchHeading.Name = "lblSearchHeading";
+            this.lblSearchHeading.Size = new System.Drawing.Size(750, 35);
             this.lblSearchHeading.TabIndex = 1;
             this.lblSearchHeading.Text = "How would you like to find a programme?";
             this.lblSearchHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSearchHeading.Name = "lblSearchHeading";
-            //
+            // 
             // rbBrowse
-            //
+            // 
             this.rbBrowse.AccessibleName = "Browse by faculty";
             this.rbBrowse.Checked = true;
             this.rbBrowse.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rbBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rbBrowse.Location = new System.Drawing.Point(20, 46);
-            this.rbBrowse.Size = new System.Drawing.Size(220, 24);
+            this.rbBrowse.Location = new System.Drawing.Point(25, 58);
+            this.rbBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbBrowse.Name = "rbBrowse";
+            this.rbBrowse.Size = new System.Drawing.Size(275, 30);
             this.rbBrowse.TabIndex = 2;
             this.rbBrowse.TabStop = true;
             this.rbBrowse.Text = "Browse by faculty";
             this.rbBrowse.UseVisualStyleBackColor = true;
-            this.rbBrowse.Name = "rbBrowse";
             this.rbBrowse.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
-            //
+            // 
             // rbSearch
-            //
+            // 
             this.rbSearch.AccessibleName = "Search by programme name";
             this.rbSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rbSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rbSearch.Location = new System.Drawing.Point(20, 74);
-            this.rbSearch.Size = new System.Drawing.Size(220, 24);
+            this.rbSearch.Location = new System.Drawing.Point(25, 92);
+            this.rbSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbSearch.Name = "rbSearch";
+            this.rbSearch.Size = new System.Drawing.Size(275, 30);
             this.rbSearch.TabIndex = 3;
             this.rbSearch.Text = "Search by programme name";
             this.rbSearch.UseVisualStyleBackColor = true;
-            this.rbSearch.Name = "rbSearch";
             this.rbSearch.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
-            //
+            // 
             // lblSelFaculty
-            //
+            // 
             this.lblSelFaculty.AutoSize = true;
             this.lblSelFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSelFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSelFaculty.Location = new System.Drawing.Point(270, 42);
+            this.lblSelFaculty.Location = new System.Drawing.Point(338, 52);
+            this.lblSelFaculty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSelFaculty.Name = "lblSelFaculty";
+            this.lblSelFaculty.Size = new System.Drawing.Size(74, 28);
             this.lblSelFaculty.TabIndex = 4;
             this.lblSelFaculty.Text = "Faculty";
-            this.lblSelFaculty.Name = "lblSelFaculty";
-            //
+            // 
             // lblFacultyStar
-            //
+            // 
             this.lblFacultyStar.AutoSize = true;
             this.lblFacultyStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFacultyStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblFacultyStar.Location = new System.Drawing.Point(333, 42);
-            this.lblFacultyStar.Size = new System.Drawing.Size(14, 24);
+            this.lblFacultyStar.Location = new System.Drawing.Point(416, 52);
+            this.lblFacultyStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFacultyStar.Name = "lblFacultyStar";
+            this.lblFacultyStar.Size = new System.Drawing.Size(21, 28);
             this.lblFacultyStar.TabIndex = 5;
             this.lblFacultyStar.Text = "*";
-            this.lblFacultyStar.Name = "lblFacultyStar";
-            //
+            // 
             // cboSelFaculty
-            //
+            // 
             this.cboSelFaculty.AccessibleName = "Faculty (required)";
             this.cboSelFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSelFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboSelFaculty.FormattingEnabled = true;
-            this.cboSelFaculty.Location = new System.Drawing.Point(270, 68);
-            this.cboSelFaculty.Size = new System.Drawing.Size(300, 25);
-            this.cboSelFaculty.TabIndex = 6;
+            this.cboSelFaculty.Location = new System.Drawing.Point(338, 85);
+            this.cboSelFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboSelFaculty.Name = "cboSelFaculty";
+            this.cboSelFaculty.Size = new System.Drawing.Size(374, 31);
+            this.cboSelFaculty.TabIndex = 6;
             this.cboSelFaculty.SelectionChangeCommitted += new System.EventHandler(this.cboSelFaculty_SelectionChangeCommitted);
             this.cboSelFaculty.Leave += new System.EventHandler(this.cboSelFaculty_Leave);
-            //
+            // 
             // lblFacultyError
-            //
+            // 
             this.lblFacultyError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFacultyError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
-            this.lblFacultyError.Location = new System.Drawing.Point(270, 95);
-            this.lblFacultyError.Size = new System.Drawing.Size(300, 16);
-            this.lblFacultyError.TabIndex = 7;
-            this.lblFacultyError.Text = "";
-            this.lblFacultyError.Visible = false;
+            this.lblFacultyError.Location = new System.Drawing.Point(338, 119);
+            this.lblFacultyError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFacultyError.Name = "lblFacultyError";
-            //
+            this.lblFacultyError.Size = new System.Drawing.Size(375, 20);
+            this.lblFacultyError.TabIndex = 7;
+            this.lblFacultyError.Visible = false;
+            // 
             // lblProgrammeSearch
-            //
+            // 
             this.lblProgrammeSearch.AutoSize = true;
             this.lblProgrammeSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblProgrammeSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblProgrammeSearch.Location = new System.Drawing.Point(610, 42);
+            this.lblProgrammeSearch.Location = new System.Drawing.Point(762, 52);
+            this.lblProgrammeSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProgrammeSearch.Name = "lblProgrammeSearch";
+            this.lblProgrammeSearch.Size = new System.Drawing.Size(258, 28);
             this.lblProgrammeSearch.TabIndex = 8;
             this.lblProgrammeSearch.Text = "Programme name contains";
-            this.lblProgrammeSearch.Name = "lblProgrammeSearch";
-            //
+            // 
             // txtProgrammeSearch
-            //
+            // 
             this.txtProgrammeSearch.AccessibleName = "Programme name contains";
             this.txtProgrammeSearch.Enabled = false;
             this.txtProgrammeSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtProgrammeSearch.Location = new System.Drawing.Point(610, 68);
+            this.txtProgrammeSearch.Location = new System.Drawing.Point(762, 85);
+            this.txtProgrammeSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtProgrammeSearch.MaxLength = 100;
-            this.txtProgrammeSearch.Size = new System.Drawing.Size(306, 25);
-            this.txtProgrammeSearch.TabIndex = 9;
             this.txtProgrammeSearch.Name = "txtProgrammeSearch";
+            this.txtProgrammeSearch.Size = new System.Drawing.Size(382, 30);
+            this.txtProgrammeSearch.TabIndex = 9;
             this.txtProgrammeSearch.TextChanged += new System.EventHandler(this.txtProgrammeSearch_TextChanged);
-            //
+            // 
             // lblSearchHint
-            //
+            // 
             this.lblSearchHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSearchHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSearchHint.Location = new System.Drawing.Point(610, 95);
-            this.lblSearchHint.Size = new System.Drawing.Size(306, 16);
+            this.lblSearchHint.Location = new System.Drawing.Point(762, 119);
+            this.lblSearchHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearchHint.Name = "lblSearchHint";
+            this.lblSearchHint.Size = new System.Drawing.Size(382, 20);
             this.lblSearchHint.TabIndex = 10;
             this.lblSearchHint.Text = "Disabled while browsing by faculty";
-            this.lblSearchHint.Name = "lblSearchHint";
-            //
+            // 
             // pnlProgrammesCard
-            //
+            // 
+            this.pnlProgrammesCard.BackColor = System.Drawing.Color.White;
+            this.pnlProgrammesCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammesHeadingBar);
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammesHeading);
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammeCount);
             this.pnlProgrammesCard.Controls.Add(this.dgvProgrammes);
-            this.pnlProgrammesCard.BackColor = System.Drawing.Color.White;
-            this.pnlProgrammesCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlProgrammesCard.Location = new System.Drawing.Point(0, 138);
-            this.pnlProgrammesCard.Size = new System.Drawing.Size(457, 295);
-            this.pnlProgrammesCard.TabIndex = 1;
+            this.pnlProgrammesCard.Location = new System.Drawing.Point(0, 172);
+            this.pnlProgrammesCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProgrammesCard.Name = "pnlProgrammesCard";
-            //
+            this.pnlProgrammesCard.Size = new System.Drawing.Size(571, 368);
+            this.pnlProgrammesCard.TabIndex = 1;
+            // 
             // lblProgrammesHeadingBar
-            //
+            // 
             this.lblProgrammesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblProgrammesHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblProgrammesHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblProgrammesHeadingBar.TabIndex = 0;
+            this.lblProgrammesHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblProgrammesHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblProgrammesHeadingBar.Name = "lblProgrammesHeadingBar";
-            //
+            this.lblProgrammesHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblProgrammesHeadingBar.TabIndex = 0;
+            // 
             // lblProgrammesHeading
-            //
+            // 
             this.lblProgrammesHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblProgrammesHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblProgrammesHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblProgrammesHeading.Size = new System.Drawing.Size(417, 28);
+            this.lblProgrammesHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblProgrammesHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProgrammesHeading.Name = "lblProgrammesHeading";
+            this.lblProgrammesHeading.Size = new System.Drawing.Size(521, 35);
             this.lblProgrammesHeading.TabIndex = 1;
             this.lblProgrammesHeading.Text = "Degree programmes";
             this.lblProgrammesHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblProgrammesHeading.Name = "lblProgrammesHeading";
-            //
+            // 
             // lblProgrammeCount
-            //
+            // 
             this.lblProgrammeCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblProgrammeCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblProgrammeCount.Location = new System.Drawing.Point(26, 36);
-            this.lblProgrammeCount.Size = new System.Drawing.Size(407, 16);
+            this.lblProgrammeCount.Location = new System.Drawing.Point(32, 45);
+            this.lblProgrammeCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProgrammeCount.Name = "lblProgrammeCount";
+            this.lblProgrammeCount.Size = new System.Drawing.Size(509, 20);
             this.lblProgrammeCount.TabIndex = 2;
             this.lblProgrammeCount.Text = "Choose a faculty to list its active programmes.";
-            this.lblProgrammeCount.Name = "lblProgrammeCount";
-            //
+            // 
             // dgvProgrammes
-            //
+            // 
+            this.dgvProgrammes.AccessibleName = "Degree programmes in the chosen faculty";
+            this.dgvProgrammes.AllowUserToAddRows = false;
+            this.dgvProgrammes.AllowUserToDeleteRows = false;
+            this.dgvProgrammes.AllowUserToResizeRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvProgrammes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProgrammes.BackgroundColor = System.Drawing.Color.White;
+            this.dgvProgrammes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvProgrammes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvProgrammes.ColumnHeadersHeight = 34;
+            this.dgvProgrammes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProgrammes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colSelProgrammeId,
             this.colProgrammeName,
             this.colMinimumAverage,
             this.colSelect});
-            SelDgvProgrammesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = SelDgvProgrammesAltStyle;
-            SelDgvProgrammesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SelDgvProgrammesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelDgvProgrammesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            SelDgvProgrammesHeaderStyle.ForeColor = System.Drawing.Color.White;
-            SelDgvProgrammesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SelDgvProgrammesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelDgvProgrammesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            SelDgvProgrammesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = SelDgvProgrammesHeaderStyle;
-            SelDgvProgrammesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SelDgvProgrammesCellStyle.BackColor = System.Drawing.Color.White;
-            SelDgvProgrammesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            SelDgvProgrammesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SelDgvProgrammesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SelDgvProgrammesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            SelDgvProgrammesCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            SelDgvProgrammesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammes.DefaultCellStyle = SelDgvProgrammesCellStyle;
-            this.dgvProgrammes.AccessibleName = "Degree programmes in the chosen faculty";
-            this.dgvProgrammes.AllowUserToAddRows = false;
-            this.dgvProgrammes.AllowUserToDeleteRows = false;
-            this.dgvProgrammes.AllowUserToResizeRows = false;
-            this.dgvProgrammes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProgrammes.BackgroundColor = System.Drawing.Color.White;
-            this.dgvProgrammes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dgvProgrammes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvProgrammes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvProgrammes.ColumnHeadersHeight = 34;
-            this.dgvProgrammes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrammes.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvProgrammes.EnableHeadersVisualStyles = false;
             this.dgvProgrammes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvProgrammes.Location = new System.Drawing.Point(12, 58);
+            this.dgvProgrammes.Location = new System.Drawing.Point(15, 72);
+            this.dgvProgrammes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvProgrammes.MultiSelect = false;
+            this.dgvProgrammes.Name = "dgvProgrammes";
             this.dgvProgrammes.ReadOnly = true;
             this.dgvProgrammes.RowHeadersVisible = false;
-            this.dgvProgrammes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammes.Size = new System.Drawing.Size(431, 223);
-            this.dgvProgrammes.TabIndex = 3;
-            this.dgvProgrammes.Name = "dgvProgrammes";
+            this.dgvProgrammes.RowHeadersWidth = 51;
             this.dgvProgrammes.RowTemplate.Height = 30;
+            this.dgvProgrammes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProgrammes.Size = new System.Drawing.Size(539, 279);
+            this.dgvProgrammes.TabIndex = 3;
             this.dgvProgrammes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProgrammes_CellContentClick);
             this.dgvProgrammes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProgrammes_CellFormatting);
             this.dgvProgrammes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SelGrid_DataBindingComplete);
-            //
+            // 
             // colSelProgrammeId
-            //
+            // 
             this.colSelProgrammeId.DataPropertyName = "ProgrammeID";
             this.colSelProgrammeId.FillWeight = 5F;
             this.colSelProgrammeId.HeaderText = "Programme ID";
+            this.colSelProgrammeId.MinimumWidth = 6;
+            this.colSelProgrammeId.Name = "colSelProgrammeId";
             this.colSelProgrammeId.ReadOnly = true;
             this.colSelProgrammeId.Visible = false;
-            this.colSelProgrammeId.Name = "colSelProgrammeId";
-            //
+            // 
             // colProgrammeName
-            //
+            // 
             this.colProgrammeName.DataPropertyName = "ProgrammeName";
             this.colProgrammeName.FillWeight = 56F;
             this.colProgrammeName.HeaderText = "Degree programme";
-            this.colProgrammeName.ReadOnly = true;
+            this.colProgrammeName.MinimumWidth = 6;
             this.colProgrammeName.Name = "colProgrammeName";
-            //
+            this.colProgrammeName.ReadOnly = true;
+            // 
             // colMinimumAverage
-            //
-            SelColMinimumAverageStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            SelColMinimumAverageStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            SelColMinimumAverageStyle.Format = "0'%'";
-            SelColMinimumAverageStyle.NullValue = "\u2014";
-            this.colMinimumAverage.DefaultCellStyle = SelColMinimumAverageStyle;
+            // 
             this.colMinimumAverage.DataPropertyName = "MinimumOverallAverage";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle8.Format = "0\'%\'";
+            dataGridViewCellStyle8.NullValue = "—";
+            this.colMinimumAverage.DefaultCellStyle = dataGridViewCellStyle8;
             this.colMinimumAverage.FillWeight = 20F;
             this.colMinimumAverage.HeaderText = "Min. avg.";
-            this.colMinimumAverage.ReadOnly = true;
+            this.colMinimumAverage.MinimumWidth = 6;
             this.colMinimumAverage.Name = "colMinimumAverage";
-            //
+            this.colMinimumAverage.ReadOnly = true;
+            // 
             // colSelect
-            //
-            SelColSelectStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            SelColSelectStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelColSelectStyle.ForeColor = System.Drawing.Color.White;
-            SelColSelectStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelColSelectStyle.SelectionForeColor = System.Drawing.Color.White;
-            SelColSelectStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            SelColSelectStyle.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.colSelect.DefaultCellStyle = SelColSelectStyle;
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            this.colSelect.DefaultCellStyle = dataGridViewCellStyle9;
             this.colSelect.FillWeight = 24F;
             this.colSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colSelect.HeaderText = "Choose";
+            this.colSelect.MinimumWidth = 6;
             this.colSelect.Name = "colSelect";
-            //
+            this.colSelect.ReadOnly = true;
+            // 
             // pnlRequirementsCard
-            //
+            // 
+            this.pnlRequirementsCard.BackColor = System.Drawing.Color.White;
+            this.pnlRequirementsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRequirementsCard.Controls.Add(this.lblRequirementsHeadingBar);
             this.pnlRequirementsCard.Controls.Add(this.lblRequirementsHeading);
             this.pnlRequirementsCard.Controls.Add(this.lblRequirementsProgramme);
             this.pnlRequirementsCard.Controls.Add(this.dgvRequirements);
             this.pnlRequirementsCard.Controls.Add(this.lblSelSampleData);
-            this.pnlRequirementsCard.BackColor = System.Drawing.Color.White;
-            this.pnlRequirementsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRequirementsCard.Location = new System.Drawing.Point(477, 138);
-            this.pnlRequirementsCard.Size = new System.Drawing.Size(457, 295);
-            this.pnlRequirementsCard.TabIndex = 2;
+            this.pnlRequirementsCard.Location = new System.Drawing.Point(596, 172);
+            this.pnlRequirementsCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlRequirementsCard.Name = "pnlRequirementsCard";
-            //
+            this.pnlRequirementsCard.Size = new System.Drawing.Size(571, 368);
+            this.pnlRequirementsCard.TabIndex = 2;
+            // 
             // lblRequirementsHeadingBar
-            //
+            // 
             this.lblRequirementsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblRequirementsHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblRequirementsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblRequirementsHeadingBar.TabIndex = 0;
+            this.lblRequirementsHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblRequirementsHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblRequirementsHeadingBar.Name = "lblRequirementsHeadingBar";
-            //
+            this.lblRequirementsHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblRequirementsHeadingBar.TabIndex = 0;
+            // 
             // lblRequirementsHeading
-            //
+            // 
             this.lblRequirementsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRequirementsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRequirementsHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblRequirementsHeading.Size = new System.Drawing.Size(417, 28);
+            this.lblRequirementsHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblRequirementsHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRequirementsHeading.Name = "lblRequirementsHeading";
+            this.lblRequirementsHeading.Size = new System.Drawing.Size(521, 35);
             this.lblRequirementsHeading.TabIndex = 1;
             this.lblRequirementsHeading.Text = "Programme requirements";
             this.lblRequirementsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblRequirementsHeading.Name = "lblRequirementsHeading";
-            //
+            // 
             // lblRequirementsProgramme
-            //
+            // 
             this.lblRequirementsProgramme.AutoEllipsis = true;
             this.lblRequirementsProgramme.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblRequirementsProgramme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.lblRequirementsProgramme.Location = new System.Drawing.Point(26, 34);
-            this.lblRequirementsProgramme.Size = new System.Drawing.Size(407, 20);
+            this.lblRequirementsProgramme.Location = new System.Drawing.Point(32, 42);
+            this.lblRequirementsProgramme.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRequirementsProgramme.Name = "lblRequirementsProgramme";
+            this.lblRequirementsProgramme.Size = new System.Drawing.Size(509, 25);
             this.lblRequirementsProgramme.TabIndex = 2;
             this.lblRequirementsProgramme.Text = "No programme selected yet";
-            this.lblRequirementsProgramme.Name = "lblRequirementsProgramme";
-            //
+            // 
             // dgvRequirements
-            //
-            this.dgvRequirements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRequirementSubject,
-            this.colRequirementMinimum,
-            this.colRequirementType});
-            SelDgvRequirementsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvRequirements.AlternatingRowsDefaultCellStyle = SelDgvRequirementsAltStyle;
-            SelDgvRequirementsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SelDgvRequirementsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelDgvRequirementsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            SelDgvRequirementsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            SelDgvRequirementsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SelDgvRequirementsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SelDgvRequirementsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            SelDgvRequirementsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRequirements.ColumnHeadersDefaultCellStyle = SelDgvRequirementsHeaderStyle;
-            SelDgvRequirementsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SelDgvRequirementsCellStyle.BackColor = System.Drawing.Color.White;
-            SelDgvRequirementsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            SelDgvRequirementsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SelDgvRequirementsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SelDgvRequirementsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            SelDgvRequirementsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            SelDgvRequirementsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRequirements.DefaultCellStyle = SelDgvRequirementsCellStyle;
+            // 
             this.dgvRequirements.AccessibleName = "Requirements for the selected programme";
             this.dgvRequirements.AllowUserToAddRows = false;
             this.dgvRequirements.AllowUserToDeleteRows = false;
             this.dgvRequirements.AllowUserToResizeRows = false;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvRequirements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRequirements.BackgroundColor = System.Drawing.Color.White;
-            this.dgvRequirements.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dgvRequirements.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvRequirements.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvRequirements.ColumnHeadersHeight = 34;
             this.dgvRequirements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvRequirements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colRequirementSubject,
+            this.colRequirementMinimum,
+            this.colRequirementType});
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRequirements.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvRequirements.EnableHeadersVisualStyles = false;
             this.dgvRequirements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvRequirements.Location = new System.Drawing.Point(12, 58);
+            this.dgvRequirements.Location = new System.Drawing.Point(15, 72);
+            this.dgvRequirements.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvRequirements.MultiSelect = false;
+            this.dgvRequirements.Name = "dgvRequirements";
             this.dgvRequirements.ReadOnly = true;
             this.dgvRequirements.RowHeadersVisible = false;
-            this.dgvRequirements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRequirements.Size = new System.Drawing.Size(431, 183);
-            this.dgvRequirements.TabIndex = 3;
-            this.dgvRequirements.Name = "dgvRequirements";
-            this.dgvRequirements.RowTemplate.Height = 30;
+            this.dgvRequirements.RowHeadersWidth = 51;
             this.dgvRequirements.RowTemplate.Height = 24;
+            this.dgvRequirements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRequirements.Size = new System.Drawing.Size(539, 229);
+            this.dgvRequirements.TabIndex = 3;
             this.dgvRequirements.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SelGrid_DataBindingComplete);
-            //
+            // 
             // colRequirementSubject
-            //
+            // 
             this.colRequirementSubject.DataPropertyName = "SubjectName";
             this.colRequirementSubject.FillWeight = 46F;
             this.colRequirementSubject.HeaderText = "Requirement";
-            this.colRequirementSubject.ReadOnly = true;
+            this.colRequirementSubject.MinimumWidth = 6;
             this.colRequirementSubject.Name = "colRequirementSubject";
-            //
+            this.colRequirementSubject.ReadOnly = true;
+            // 
             // colRequirementMinimum
-            //
-            SelColRequirementMinimumStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            SelColRequirementMinimumStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            SelColRequirementMinimumStyle.Format = "0'%'";
-            SelColRequirementMinimumStyle.NullValue = "\u2014";
-            this.colRequirementMinimum.DefaultCellStyle = SelColRequirementMinimumStyle;
+            // 
             this.colRequirementMinimum.DataPropertyName = "MinimumMark";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle13.Format = "0\'%\'";
+            dataGridViewCellStyle13.NullValue = "—";
+            this.colRequirementMinimum.DefaultCellStyle = dataGridViewCellStyle13;
             this.colRequirementMinimum.FillWeight = 22F;
             this.colRequirementMinimum.HeaderText = "Minimum";
-            this.colRequirementMinimum.ReadOnly = true;
+            this.colRequirementMinimum.MinimumWidth = 6;
             this.colRequirementMinimum.Name = "colRequirementMinimum";
-            //
+            this.colRequirementMinimum.ReadOnly = true;
+            // 
             // colRequirementType
-            //
-            SelColRequirementTypeStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            SelColRequirementTypeStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.colRequirementType.DefaultCellStyle = SelColRequirementTypeStyle;
+            // 
             this.colRequirementType.DataPropertyName = "RequirementType";
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.colRequirementType.DefaultCellStyle = dataGridViewCellStyle14;
             this.colRequirementType.FillWeight = 32F;
             this.colRequirementType.HeaderText = "Type";
-            this.colRequirementType.ReadOnly = true;
+            this.colRequirementType.MinimumWidth = 6;
             this.colRequirementType.Name = "colRequirementType";
-            //
+            this.colRequirementType.ReadOnly = true;
+            // 
             // lblSelSampleData
-            //
+            // 
             this.lblSelSampleData.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSelSampleData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSelSampleData.Location = new System.Drawing.Point(12, 247);
-            this.lblSelSampleData.Size = new System.Drawing.Size(431, 34);
-            this.lblSelSampleData.TabIndex = 4;
-            this.lblSelSampleData.Text = "Sample requirements held in the local database. Future Path does not publish official university admission requirements.";
+            this.lblSelSampleData.Location = new System.Drawing.Point(15, 309);
+            this.lblSelSampleData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelSampleData.Name = "lblSelSampleData";
-            //
+            this.lblSelSampleData.Size = new System.Drawing.Size(539, 42);
+            this.lblSelSampleData.TabIndex = 4;
+            this.lblSelSampleData.Text = "Sample requirements held in the local database. Future Path does not publish offi" +
+    "cial university admission requirements.";
+            // 
             // pnlAlignmentCard
-            //
+            // 
+            this.pnlAlignmentCard.BackColor = System.Drawing.Color.White;
+            this.pnlAlignmentCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAlignmentCard.Controls.Add(this.lblAlignmentHeading);
             this.pnlAlignmentCard.Controls.Add(this.lblAlignmentValue);
             this.pnlAlignmentCard.Controls.Add(this.lblStrongestCategories);
             this.pnlAlignmentCard.Controls.Add(this.lblAlignmentSource);
-            this.pnlAlignmentCard.BackColor = System.Drawing.Color.White;
-            this.pnlAlignmentCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAlignmentCard.Location = new System.Drawing.Point(0, 453);
-            this.pnlAlignmentCard.Size = new System.Drawing.Size(934, 64);
-            this.pnlAlignmentCard.TabIndex = 3;
+            this.pnlAlignmentCard.Location = new System.Drawing.Point(0, 566);
+            this.pnlAlignmentCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAlignmentCard.Name = "pnlAlignmentCard";
-            //
+            this.pnlAlignmentCard.Size = new System.Drawing.Size(1167, 80);
+            this.pnlAlignmentCard.TabIndex = 3;
+            // 
             // lblAlignmentHeading
-            //
+            // 
             this.lblAlignmentHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblAlignmentHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAlignmentHeading.Location = new System.Drawing.Point(16, 10);
-            this.lblAlignmentHeading.Size = new System.Drawing.Size(300, 40);
+            this.lblAlignmentHeading.Location = new System.Drawing.Point(20, 12);
+            this.lblAlignmentHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlignmentHeading.Name = "lblAlignmentHeading";
+            this.lblAlignmentHeading.Size = new System.Drawing.Size(375, 50);
             this.lblAlignmentHeading.TabIndex = 0;
             this.lblAlignmentHeading.Text = "Interest alignment with this programme";
             this.lblAlignmentHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblAlignmentHeading.Name = "lblAlignmentHeading";
-            //
+            // 
             // lblAlignmentValue
-            //
+            // 
             this.lblAlignmentValue.AccessibleName = "Interest alignment percentage";
             this.lblAlignmentValue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.lblAlignmentValue.Font = new System.Drawing.Font("Consolas", 12F);
             this.lblAlignmentValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.lblAlignmentValue.Location = new System.Drawing.Point(326, 16);
-            this.lblAlignmentValue.Size = new System.Drawing.Size(70, 28);
-            this.lblAlignmentValue.TabIndex = 1;
-            this.lblAlignmentValue.Text = "\u2014";
-            this.lblAlignmentValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAlignmentValue.Location = new System.Drawing.Point(408, 20);
+            this.lblAlignmentValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlignmentValue.Name = "lblAlignmentValue";
-            //
+            this.lblAlignmentValue.Size = new System.Drawing.Size(88, 35);
+            this.lblAlignmentValue.TabIndex = 1;
+            this.lblAlignmentValue.Text = "—";
+            this.lblAlignmentValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblStrongestCategories
-            //
+            // 
             this.lblStrongestCategories.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStrongestCategories.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblStrongestCategories.Location = new System.Drawing.Point(414, 10);
-            this.lblStrongestCategories.Size = new System.Drawing.Size(330, 40);
+            this.lblStrongestCategories.Location = new System.Drawing.Point(518, 12);
+            this.lblStrongestCategories.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStrongestCategories.Name = "lblStrongestCategories";
+            this.lblStrongestCategories.Size = new System.Drawing.Size(412, 50);
             this.lblStrongestCategories.TabIndex = 2;
             this.lblStrongestCategories.Text = "Select a programme to see how your questionnaire answers align with it.";
             this.lblStrongestCategories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStrongestCategories.Name = "lblStrongestCategories";
-            //
+            // 
             // lblAlignmentSource
-            //
+            // 
             this.lblAlignmentSource.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblAlignmentSource.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblAlignmentSource.Location = new System.Drawing.Point(760, 10);
-            this.lblAlignmentSource.Size = new System.Drawing.Size(160, 40);
+            this.lblAlignmentSource.Location = new System.Drawing.Point(950, 12);
+            this.lblAlignmentSource.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlignmentSource.Name = "lblAlignmentSource";
+            this.lblAlignmentSource.Size = new System.Drawing.Size(200, 50);
             this.lblAlignmentSource.TabIndex = 3;
             this.lblAlignmentSource.Text = "Calculated from your questionnaire";
             this.lblAlignmentSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblAlignmentSource.Name = "lblAlignmentSource";
-            //
+            // 
             // tabResults
-            //
-            this.tabResults.Controls.Add(this.tabResultsGroup);
+            // 
             this.tabResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabResults.Controls.Add(this.tabResultsGroup);
             this.tabResults.Location = new System.Drawing.Point(4, 5);
-            this.tabResults.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabResults.Size = new System.Drawing.Size(934, 563);
+            this.tabResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabResults.Name = "tabResults";
+            this.tabResults.Size = new System.Drawing.Size(1170, 576);
             this.tabResults.TabIndex = 5;
             this.tabResults.Text = "UI 6 Results";
-            this.tabResults.UseVisualStyleBackColor = false;
-            this.tabResults.Name = "tabResults";
-            //
+            // 
             // tabResultsGroup
-            //
+            // 
             this.tabResultsGroup.Controls.Add(this.tabOutcome);
             this.tabResultsGroup.Controls.Add(this.tabAlternatives);
             this.tabResultsGroup.Controls.Add(this.tabFunding);
             this.tabResultsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabResultsGroup.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tabResultsGroup.Location = new System.Drawing.Point(0, 0);
-            this.tabResultsGroup.Padding = new System.Drawing.Point(6, 5);
-            this.tabResultsGroup.Size = new System.Drawing.Size(934, 563);
-            this.tabResultsGroup.TabIndex = 0;
-            this.tabResultsGroup.TabStop = true;
+            this.tabResultsGroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabResultsGroup.Name = "tabResultsGroup";
+            this.tabResultsGroup.Padding = new System.Drawing.Point(6, 5);
+            this.tabResultsGroup.SelectedIndex = 0;
+            this.tabResultsGroup.Size = new System.Drawing.Size(1170, 576);
+            this.tabResultsGroup.TabIndex = 0;
             this.tabResultsGroup.SelectedIndexChanged += new System.EventHandler(this.tabResultsGroup_SelectedIndexChanged);
-            //
+            // 
             // tabOutcome
-            //
-            this.tabOutcome.Controls.Add(this.pnlOutContent);
+            // 
             this.tabOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabOutcome.Location = new System.Drawing.Point(4, 5);
-            this.tabOutcome.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabOutcome.Size = new System.Drawing.Size(926, 527);
+            this.tabOutcome.Controls.Add(this.pnlOutContent);
+            this.tabOutcome.Location = new System.Drawing.Point(4, 36);
+            this.tabOutcome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabOutcome.Name = "tabOutcome";
+            this.tabOutcome.Size = new System.Drawing.Size(1162, 536);
             this.tabOutcome.TabIndex = 0;
             this.tabOutcome.Text = "Your outcome";
-            this.tabOutcome.UseVisualStyleBackColor = false;
-            this.tabOutcome.Name = "tabOutcome";
-            //
+            // 
             // pnlOutContent
-            //
+            // 
             this.pnlOutContent.Controls.Add(this.pnlOutcome);
             this.pnlOutContent.Controls.Add(this.pnlCheckedCard);
             this.pnlOutContent.Controls.Add(this.pnlSubjectTile);
@@ -2518,460 +2668,517 @@
             this.pnlOutContent.Controls.Add(this.lblOutSampleData);
             this.pnlOutContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOutContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutContent.TabIndex = 0;
+            this.pnlOutContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlOutContent.Name = "pnlOutContent";
-            //
+            this.pnlOutContent.Size = new System.Drawing.Size(1162, 536);
+            this.pnlOutContent.TabIndex = 0;
+            // 
             // pnlOutcome
-            //
+            // 
+            this.pnlOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlOutcome.Controls.Add(this.lblOutcomeChip);
             this.pnlOutcome.Controls.Add(this.lblOutcomeHeadline);
             this.pnlOutcome.Controls.Add(this.lblOutcomeExplanation);
             this.pnlOutcome.Controls.Add(this.pnlOutcomeBar);
-            this.pnlOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlOutcome.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutcome.Size = new System.Drawing.Size(926, 92);
-            this.pnlOutcome.TabIndex = 0;
+            this.pnlOutcome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlOutcome.Name = "pnlOutcome";
-            //
+            this.pnlOutcome.Size = new System.Drawing.Size(1158, 115);
+            this.pnlOutcome.TabIndex = 0;
+            // 
             // lblOutcomeChip
-            //
+            // 
             this.lblOutcomeChip.AccessibleName = "Outcome";
             this.lblOutcomeChip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(107)))), ((int)(((byte)(130)))));
             this.lblOutcomeChip.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.lblOutcomeChip.ForeColor = System.Drawing.Color.White;
-            this.lblOutcomeChip.Location = new System.Drawing.Point(20, 12);
-            this.lblOutcomeChip.Size = new System.Drawing.Size(200, 26);
+            this.lblOutcomeChip.Location = new System.Drawing.Point(25, 15);
+            this.lblOutcomeChip.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOutcomeChip.Name = "lblOutcomeChip";
+            this.lblOutcomeChip.Size = new System.Drawing.Size(250, 32);
             this.lblOutcomeChip.TabIndex = 0;
             this.lblOutcomeChip.Text = "? More information needed";
             this.lblOutcomeChip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblOutcomeChip.Name = "lblOutcomeChip";
-            //
+            // 
             // lblOutcomeHeadline
-            //
+            // 
             this.lblOutcomeHeadline.AccessibleName = "Outcome headline";
             this.lblOutcomeHeadline.AutoEllipsis = true;
             this.lblOutcomeHeadline.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblOutcomeHeadline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblOutcomeHeadline.Location = new System.Drawing.Point(232, 10);
-            this.lblOutcomeHeadline.Size = new System.Drawing.Size(676, 30);
-            this.lblOutcomeHeadline.TabIndex = 1;
-            this.lblOutcomeHeadline.Text = "";
-            this.lblOutcomeHeadline.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblOutcomeHeadline.Location = new System.Drawing.Point(290, 12);
+            this.lblOutcomeHeadline.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutcomeHeadline.Name = "lblOutcomeHeadline";
-            //
+            this.lblOutcomeHeadline.Size = new System.Drawing.Size(845, 38);
+            this.lblOutcomeHeadline.TabIndex = 1;
+            this.lblOutcomeHeadline.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // lblOutcomeExplanation
-            //
+            // 
             this.lblOutcomeExplanation.AccessibleName = "Why this outcome was reached";
             this.lblOutcomeExplanation.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblOutcomeExplanation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblOutcomeExplanation.Location = new System.Drawing.Point(20, 44);
-            this.lblOutcomeExplanation.Size = new System.Drawing.Size(888, 44);
-            this.lblOutcomeExplanation.TabIndex = 2;
-            this.lblOutcomeExplanation.Text = "";
+            this.lblOutcomeExplanation.Location = new System.Drawing.Point(25, 55);
+            this.lblOutcomeExplanation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutcomeExplanation.Name = "lblOutcomeExplanation";
-            //
+            this.lblOutcomeExplanation.Size = new System.Drawing.Size(1110, 55);
+            this.lblOutcomeExplanation.TabIndex = 2;
+            // 
             // pnlOutcomeBar
-            //
+            // 
             this.pnlOutcomeBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(107)))), ((int)(((byte)(130)))));
             this.pnlOutcomeBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlOutcomeBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutcomeBar.Size = new System.Drawing.Size(5, 92);
-            this.pnlOutcomeBar.TabIndex = 3;
+            this.pnlOutcomeBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlOutcomeBar.Name = "pnlOutcomeBar";
-            //
+            this.pnlOutcomeBar.Size = new System.Drawing.Size(6, 115);
+            this.pnlOutcomeBar.TabIndex = 3;
+            // 
             // pnlCheckedCard
-            //
+            // 
+            this.pnlCheckedCard.BackColor = System.Drawing.Color.White;
+            this.pnlCheckedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCheckedCard.Controls.Add(this.lblCheckedHeadingBar);
             this.pnlCheckedCard.Controls.Add(this.lblCheckedHeading);
             this.pnlCheckedCard.Controls.Add(this.dgvChecked);
-            this.pnlCheckedCard.BackColor = System.Drawing.Color.White;
-            this.pnlCheckedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCheckedCard.Location = new System.Drawing.Point(0, 110);
-            this.pnlCheckedCard.Size = new System.Drawing.Size(926, 224);
-            this.pnlCheckedCard.TabIndex = 1;
+            this.pnlCheckedCard.Location = new System.Drawing.Point(0, 138);
+            this.pnlCheckedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlCheckedCard.Name = "pnlCheckedCard";
-            //
+            this.pnlCheckedCard.Size = new System.Drawing.Size(1157, 280);
+            this.pnlCheckedCard.TabIndex = 1;
+            // 
             // lblCheckedHeadingBar
-            //
+            // 
             this.lblCheckedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCheckedHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblCheckedHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblCheckedHeadingBar.TabIndex = 0;
+            this.lblCheckedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblCheckedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblCheckedHeadingBar.Name = "lblCheckedHeadingBar";
-            //
+            this.lblCheckedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblCheckedHeadingBar.TabIndex = 0;
+            // 
             // lblCheckedHeading
-            //
+            // 
             this.lblCheckedHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCheckedHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCheckedHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblCheckedHeading.Size = new System.Drawing.Size(600, 28);
+            this.lblCheckedHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblCheckedHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCheckedHeading.Name = "lblCheckedHeading";
+            this.lblCheckedHeading.Size = new System.Drawing.Size(750, 35);
             this.lblCheckedHeading.TabIndex = 1;
             this.lblCheckedHeading.Text = "How your profile was checked";
             this.lblCheckedHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblCheckedHeading.Name = "lblCheckedHeading";
-            //
+            // 
             // dgvChecked
-            //
+            // 
+            this.dgvChecked.AccessibleName = "How your profile was checked";
+            this.dgvChecked.AllowUserToAddRows = false;
+            this.dgvChecked.AllowUserToDeleteRows = false;
+            this.dgvChecked.AllowUserToResizeRows = false;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvChecked.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            this.dgvChecked.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvChecked.BackgroundColor = System.Drawing.Color.White;
+            this.dgvChecked.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvChecked.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvChecked.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvChecked.ColumnHeadersHeight = 34;
+            this.dgvChecked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvChecked.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colOutSubjectName,
             this.colMinimumMark,
             this.colOutMark,
             this.colRequirementOutcome,
             this.colIsMet});
-            OutDgvCheckedAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvChecked.AlternatingRowsDefaultCellStyle = OutDgvCheckedAltStyle;
-            OutDgvCheckedHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            OutDgvCheckedHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            OutDgvCheckedHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            OutDgvCheckedHeaderStyle.ForeColor = System.Drawing.Color.White;
-            OutDgvCheckedHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            OutDgvCheckedHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            OutDgvCheckedHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            OutDgvCheckedHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvChecked.ColumnHeadersDefaultCellStyle = OutDgvCheckedHeaderStyle;
-            OutDgvCheckedCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            OutDgvCheckedCellStyle.BackColor = System.Drawing.Color.White;
-            OutDgvCheckedCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            OutDgvCheckedCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            OutDgvCheckedCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            OutDgvCheckedCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            OutDgvCheckedCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            OutDgvCheckedCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChecked.DefaultCellStyle = OutDgvCheckedCellStyle;
-            this.dgvChecked.AccessibleName = "How your profile was checked";
-            this.dgvChecked.AllowUserToAddRows = false;
-            this.dgvChecked.AllowUserToDeleteRows = false;
-            this.dgvChecked.AllowUserToResizeRows = false;
-            this.dgvChecked.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvChecked.BackgroundColor = System.Drawing.Color.White;
-            this.dgvChecked.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dgvChecked.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvChecked.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvChecked.ColumnHeadersHeight = 34;
-            this.dgvChecked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChecked.DefaultCellStyle = dataGridViewCellStyle21;
             this.dgvChecked.EnableHeadersVisualStyles = false;
             this.dgvChecked.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvChecked.Location = new System.Drawing.Point(12, 42);
+            this.dgvChecked.Location = new System.Drawing.Point(15, 52);
+            this.dgvChecked.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvChecked.MultiSelect = false;
+            this.dgvChecked.Name = "dgvChecked";
             this.dgvChecked.ReadOnly = true;
             this.dgvChecked.RowHeadersVisible = false;
-            this.dgvChecked.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChecked.Size = new System.Drawing.Size(900, 170);
-            this.dgvChecked.TabIndex = 2;
-            this.dgvChecked.Name = "dgvChecked";
-            this.dgvChecked.RowTemplate.Height = 30;
+            this.dgvChecked.RowHeadersWidth = 51;
             this.dgvChecked.RowTemplate.Height = 24;
-            this.dgvChecked.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OutGrid_DataBindingComplete);
+            this.dgvChecked.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChecked.Size = new System.Drawing.Size(1125, 212);
+            this.dgvChecked.TabIndex = 2;
             this.dgvChecked.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvChecked_CellFormatting);
-            //
+            this.dgvChecked.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OutGrid_DataBindingComplete);
+            // 
             // colOutSubjectName
-            //
+            // 
             this.colOutSubjectName.DataPropertyName = "SubjectName";
             this.colOutSubjectName.FillWeight = 40F;
             this.colOutSubjectName.HeaderText = "Requirement";
-            this.colOutSubjectName.ReadOnly = true;
+            this.colOutSubjectName.MinimumWidth = 6;
             this.colOutSubjectName.Name = "colOutSubjectName";
-            //
+            this.colOutSubjectName.ReadOnly = true;
+            // 
             // colMinimumMark
-            //
-            OutColMinimumMarkStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            OutColMinimumMarkStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            OutColMinimumMarkStyle.Format = "0'%'";
-            OutColMinimumMarkStyle.NullValue = "\u2014";
-            this.colMinimumMark.DefaultCellStyle = OutColMinimumMarkStyle;
+            // 
             this.colMinimumMark.DataPropertyName = "MinimumMark";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle18.Format = "0\'%\'";
+            dataGridViewCellStyle18.NullValue = "—";
+            this.colMinimumMark.DefaultCellStyle = dataGridViewCellStyle18;
             this.colMinimumMark.FillWeight = 16F;
             this.colMinimumMark.HeaderText = "Required";
-            this.colMinimumMark.ReadOnly = true;
+            this.colMinimumMark.MinimumWidth = 6;
             this.colMinimumMark.Name = "colMinimumMark";
-            //
+            this.colMinimumMark.ReadOnly = true;
+            // 
             // colOutMark
-            //
-            OutColMarkStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            OutColMarkStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            OutColMarkStyle.Format = "0.#'%'";
-            OutColMarkStyle.NullValue = "\u2014";
-            this.colOutMark.DefaultCellStyle = OutColMarkStyle;
+            // 
             this.colOutMark.DataPropertyName = "Mark";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle19.Format = "0.#\'%\'";
+            dataGridViewCellStyle19.NullValue = "—";
+            this.colOutMark.DefaultCellStyle = dataGridViewCellStyle19;
             this.colOutMark.FillWeight = 16F;
             this.colOutMark.HeaderText = "Your result";
-            this.colOutMark.ReadOnly = true;
+            this.colOutMark.MinimumWidth = 6;
             this.colOutMark.Name = "colOutMark";
-            //
+            this.colOutMark.ReadOnly = true;
+            // 
             // colRequirementOutcome
-            //
-            OutColRequirementOutcomeStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.colRequirementOutcome.DefaultCellStyle = OutColRequirementOutcomeStyle;
+            // 
             this.colRequirementOutcome.DataPropertyName = "RequirementOutcome";
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.colRequirementOutcome.DefaultCellStyle = dataGridViewCellStyle20;
             this.colRequirementOutcome.FillWeight = 28F;
             this.colRequirementOutcome.HeaderText = "Outcome";
-            this.colRequirementOutcome.ReadOnly = true;
+            this.colRequirementOutcome.MinimumWidth = 6;
             this.colRequirementOutcome.Name = "colRequirementOutcome";
-            //
+            this.colRequirementOutcome.ReadOnly = true;
+            // 
             // colIsMet
-            //
+            // 
             this.colIsMet.DataPropertyName = "IsMet";
             this.colIsMet.FillWeight = 5F;
             this.colIsMet.HeaderText = "Met";
+            this.colIsMet.MinimumWidth = 6;
+            this.colIsMet.Name = "colIsMet";
             this.colIsMet.ReadOnly = true;
             this.colIsMet.Visible = false;
-            this.colIsMet.Name = "colIsMet";
-            //
+            // 
             // pnlSubjectTile
-            //
+            // 
+            this.pnlSubjectTile.BackColor = System.Drawing.Color.White;
+            this.pnlSubjectTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileCaption);
             this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileValue);
             this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileNote);
-            this.pnlSubjectTile.BackColor = System.Drawing.Color.White;
-            this.pnlSubjectTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSubjectTile.Location = new System.Drawing.Point(0, 350);
-            this.pnlSubjectTile.Size = new System.Drawing.Size(218, 90);
-            this.pnlSubjectTile.TabIndex = 2;
+            this.pnlSubjectTile.Location = new System.Drawing.Point(0, 438);
+            this.pnlSubjectTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSubjectTile.Name = "pnlSubjectTile";
-            //
+            this.pnlSubjectTile.Size = new System.Drawing.Size(272, 112);
+            this.pnlSubjectTile.TabIndex = 2;
+            // 
             // pnlSubjectTileCaption
-            //
+            // 
             this.pnlSubjectTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.pnlSubjectTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlSubjectTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.pnlSubjectTileCaption.Size = new System.Drawing.Size(194, 20);
+            this.pnlSubjectTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.pnlSubjectTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlSubjectTileCaption.Name = "pnlSubjectTileCaption";
+            this.pnlSubjectTileCaption.Size = new System.Drawing.Size(242, 25);
             this.pnlSubjectTileCaption.TabIndex = 0;
             this.pnlSubjectTileCaption.Text = "Subject match";
-            this.pnlSubjectTileCaption.Name = "pnlSubjectTileCaption";
-            //
+            // 
             // pnlSubjectTileValue
-            //
+            // 
             this.pnlSubjectTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.pnlSubjectTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlSubjectTileValue.Location = new System.Drawing.Point(10, 28);
-            this.pnlSubjectTileValue.Size = new System.Drawing.Size(194, 34);
-            this.pnlSubjectTileValue.TabIndex = 1;
-            this.pnlSubjectTileValue.Text = "\u2014";
+            this.pnlSubjectTileValue.Location = new System.Drawing.Point(12, 35);
+            this.pnlSubjectTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pnlSubjectTileValue.Name = "pnlSubjectTileValue";
-            //
+            this.pnlSubjectTileValue.Size = new System.Drawing.Size(242, 42);
+            this.pnlSubjectTileValue.TabIndex = 1;
+            this.pnlSubjectTileValue.Text = "—";
+            // 
             // pnlSubjectTileNote
-            //
+            // 
             this.pnlSubjectTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.pnlSubjectTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlSubjectTileNote.Location = new System.Drawing.Point(12, 64);
-            this.pnlSubjectTileNote.Size = new System.Drawing.Size(194, 18);
+            this.pnlSubjectTileNote.Location = new System.Drawing.Point(15, 80);
+            this.pnlSubjectTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlSubjectTileNote.Name = "pnlSubjectTileNote";
+            this.pnlSubjectTileNote.Size = new System.Drawing.Size(242, 22);
             this.pnlSubjectTileNote.TabIndex = 2;
             this.pnlSubjectTileNote.Text = "required subjects present";
-            this.pnlSubjectTileNote.Name = "pnlSubjectTileNote";
-            //
+            // 
             // pnlMarkTile
-            //
+            // 
+            this.pnlMarkTile.BackColor = System.Drawing.Color.White;
+            this.pnlMarkTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlMarkTile.Controls.Add(this.pnlMarkTileCaption);
             this.pnlMarkTile.Controls.Add(this.pnlMarkTileValue);
             this.pnlMarkTile.Controls.Add(this.pnlMarkTileNote);
-            this.pnlMarkTile.BackColor = System.Drawing.Color.White;
-            this.pnlMarkTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlMarkTile.Location = new System.Drawing.Point(236, 350);
-            this.pnlMarkTile.Size = new System.Drawing.Size(218, 90);
-            this.pnlMarkTile.TabIndex = 3;
+            this.pnlMarkTile.Location = new System.Drawing.Point(295, 438);
+            this.pnlMarkTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlMarkTile.Name = "pnlMarkTile";
-            //
+            this.pnlMarkTile.Size = new System.Drawing.Size(272, 112);
+            this.pnlMarkTile.TabIndex = 3;
+            // 
             // pnlMarkTileCaption
-            //
+            // 
             this.pnlMarkTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.pnlMarkTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlMarkTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.pnlMarkTileCaption.Size = new System.Drawing.Size(194, 20);
+            this.pnlMarkTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.pnlMarkTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlMarkTileCaption.Name = "pnlMarkTileCaption";
+            this.pnlMarkTileCaption.Size = new System.Drawing.Size(242, 25);
             this.pnlMarkTileCaption.TabIndex = 0;
             this.pnlMarkTileCaption.Text = "Mark match";
-            this.pnlMarkTileCaption.Name = "pnlMarkTileCaption";
-            //
+            // 
             // pnlMarkTileValue
-            //
+            // 
             this.pnlMarkTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.pnlMarkTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlMarkTileValue.Location = new System.Drawing.Point(10, 28);
-            this.pnlMarkTileValue.Size = new System.Drawing.Size(194, 34);
-            this.pnlMarkTileValue.TabIndex = 1;
-            this.pnlMarkTileValue.Text = "\u2014";
+            this.pnlMarkTileValue.Location = new System.Drawing.Point(12, 35);
+            this.pnlMarkTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pnlMarkTileValue.Name = "pnlMarkTileValue";
-            //
+            this.pnlMarkTileValue.Size = new System.Drawing.Size(242, 42);
+            this.pnlMarkTileValue.TabIndex = 1;
+            this.pnlMarkTileValue.Text = "—";
+            // 
             // pnlMarkTileNote
-            //
+            // 
             this.pnlMarkTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.pnlMarkTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlMarkTileNote.Location = new System.Drawing.Point(12, 64);
-            this.pnlMarkTileNote.Size = new System.Drawing.Size(194, 18);
+            this.pnlMarkTileNote.Location = new System.Drawing.Point(15, 80);
+            this.pnlMarkTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlMarkTileNote.Name = "pnlMarkTileNote";
+            this.pnlMarkTileNote.Size = new System.Drawing.Size(242, 22);
             this.pnlMarkTileNote.TabIndex = 2;
             this.pnlMarkTileNote.Text = "marks against minimums";
-            this.pnlMarkTileNote.Name = "pnlMarkTileNote";
-            //
+            // 
             // pnlInterestTile
-            //
+            // 
+            this.pnlInterestTile.BackColor = System.Drawing.Color.White;
+            this.pnlInterestTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlInterestTile.Controls.Add(this.pnlInterestTileCaption);
             this.pnlInterestTile.Controls.Add(this.pnlInterestTileValue);
             this.pnlInterestTile.Controls.Add(this.pnlInterestTileNote);
-            this.pnlInterestTile.BackColor = System.Drawing.Color.White;
-            this.pnlInterestTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlInterestTile.Location = new System.Drawing.Point(472, 350);
-            this.pnlInterestTile.Size = new System.Drawing.Size(218, 90);
-            this.pnlInterestTile.TabIndex = 4;
+            this.pnlInterestTile.Location = new System.Drawing.Point(590, 438);
+            this.pnlInterestTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlInterestTile.Name = "pnlInterestTile";
-            //
+            this.pnlInterestTile.Size = new System.Drawing.Size(272, 112);
+            this.pnlInterestTile.TabIndex = 4;
+            // 
             // pnlInterestTileCaption
-            //
+            // 
             this.pnlInterestTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.pnlInterestTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlInterestTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.pnlInterestTileCaption.Size = new System.Drawing.Size(194, 20);
+            this.pnlInterestTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.pnlInterestTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlInterestTileCaption.Name = "pnlInterestTileCaption";
+            this.pnlInterestTileCaption.Size = new System.Drawing.Size(242, 25);
             this.pnlInterestTileCaption.TabIndex = 0;
             this.pnlInterestTileCaption.Text = "Interest match";
-            this.pnlInterestTileCaption.Name = "pnlInterestTileCaption";
-            //
+            // 
             // pnlInterestTileValue
-            //
+            // 
             this.pnlInterestTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.pnlInterestTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlInterestTileValue.Location = new System.Drawing.Point(10, 28);
-            this.pnlInterestTileValue.Size = new System.Drawing.Size(194, 34);
-            this.pnlInterestTileValue.TabIndex = 1;
-            this.pnlInterestTileValue.Text = "\u2014";
+            this.pnlInterestTileValue.Location = new System.Drawing.Point(12, 35);
+            this.pnlInterestTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pnlInterestTileValue.Name = "pnlInterestTileValue";
-            //
+            this.pnlInterestTileValue.Size = new System.Drawing.Size(242, 42);
+            this.pnlInterestTileValue.TabIndex = 1;
+            this.pnlInterestTileValue.Text = "—";
+            // 
             // pnlInterestTileNote
-            //
+            // 
             this.pnlInterestTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.pnlInterestTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlInterestTileNote.Location = new System.Drawing.Point(12, 64);
-            this.pnlInterestTileNote.Size = new System.Drawing.Size(194, 18);
+            this.pnlInterestTileNote.Location = new System.Drawing.Point(15, 80);
+            this.pnlInterestTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlInterestTileNote.Name = "pnlInterestTileNote";
+            this.pnlInterestTileNote.Size = new System.Drawing.Size(242, 22);
             this.pnlInterestTileNote.TabIndex = 2;
             this.pnlInterestTileNote.Text = "from your questionnaire";
-            this.pnlInterestTileNote.Name = "pnlInterestTileNote";
-            //
+            // 
             // pnlOverallTile
-            //
+            // 
+            this.pnlOverallTile.BackColor = System.Drawing.Color.White;
+            this.pnlOverallTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlOverallTile.Controls.Add(this.pnlOverallTileCaption);
             this.pnlOverallTile.Controls.Add(this.pnlOverallTileValue);
             this.pnlOverallTile.Controls.Add(this.pnlOverallTileNote);
-            this.pnlOverallTile.BackColor = System.Drawing.Color.White;
-            this.pnlOverallTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOverallTile.Location = new System.Drawing.Point(708, 350);
-            this.pnlOverallTile.Size = new System.Drawing.Size(218, 90);
-            this.pnlOverallTile.TabIndex = 5;
+            this.pnlOverallTile.Location = new System.Drawing.Point(885, 438);
+            this.pnlOverallTile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlOverallTile.Name = "pnlOverallTile";
-            //
+            this.pnlOverallTile.Size = new System.Drawing.Size(272, 112);
+            this.pnlOverallTile.TabIndex = 5;
+            // 
             // pnlOverallTileCaption
-            //
+            // 
             this.pnlOverallTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.pnlOverallTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlOverallTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.pnlOverallTileCaption.Size = new System.Drawing.Size(194, 20);
+            this.pnlOverallTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.pnlOverallTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlOverallTileCaption.Name = "pnlOverallTileCaption";
+            this.pnlOverallTileCaption.Size = new System.Drawing.Size(242, 25);
             this.pnlOverallTileCaption.TabIndex = 0;
             this.pnlOverallTileCaption.Text = "Overall score";
-            this.pnlOverallTileCaption.Name = "pnlOverallTileCaption";
-            //
+            // 
             // pnlOverallTileValue
-            //
+            // 
             this.pnlOverallTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.pnlOverallTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlOverallTileValue.Location = new System.Drawing.Point(10, 28);
-            this.pnlOverallTileValue.Size = new System.Drawing.Size(194, 34);
-            this.pnlOverallTileValue.TabIndex = 1;
-            this.pnlOverallTileValue.Text = "\u2014";
+            this.pnlOverallTileValue.Location = new System.Drawing.Point(12, 35);
+            this.pnlOverallTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pnlOverallTileValue.Name = "pnlOverallTileValue";
-            //
+            this.pnlOverallTileValue.Size = new System.Drawing.Size(242, 42);
+            this.pnlOverallTileValue.TabIndex = 1;
+            this.pnlOverallTileValue.Text = "—";
+            // 
             // pnlOverallTileNote
-            //
+            // 
             this.pnlOverallTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.pnlOverallTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlOverallTileNote.Location = new System.Drawing.Point(12, 64);
-            this.pnlOverallTileNote.Size = new System.Drawing.Size(194, 18);
+            this.pnlOverallTileNote.Location = new System.Drawing.Point(15, 80);
+            this.pnlOverallTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pnlOverallTileNote.Name = "pnlOverallTileNote";
+            this.pnlOverallTileNote.Size = new System.Drawing.Size(242, 22);
             this.pnlOverallTileNote.TabIndex = 2;
             this.pnlOverallTileNote.Text = "of a possible 100";
-            this.pnlOverallTileNote.Name = "pnlOverallTileNote";
-            //
+            // 
             // lblOutDisclaimer
-            //
+            // 
             this.lblOutDisclaimer.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblOutDisclaimer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblOutDisclaimer.Location = new System.Drawing.Point(0, 446);
-            this.lblOutDisclaimer.Size = new System.Drawing.Size(926, 18);
-            this.lblOutDisclaimer.TabIndex = 6;
-            this.lblOutDisclaimer.Text = "Preliminary guidance only \u2014 not an admission decision.";
+            this.lblOutDisclaimer.Location = new System.Drawing.Point(0, 558);
+            this.lblOutDisclaimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutDisclaimer.Name = "lblOutDisclaimer";
-            //
+            this.lblOutDisclaimer.Size = new System.Drawing.Size(1158, 22);
+            this.lblOutDisclaimer.TabIndex = 6;
+            this.lblOutDisclaimer.Text = "Preliminary guidance only — not an admission decision.";
+            // 
             // lblOutSampleData
-            //
+            // 
             this.lblOutSampleData.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblOutSampleData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblOutSampleData.Location = new System.Drawing.Point(0, 464);
-            this.lblOutSampleData.Size = new System.Drawing.Size(926, 18);
-            this.lblOutSampleData.TabIndex = 7;
-            this.lblOutSampleData.Text = "Requirement data is locally stored sample data; check it against the official university source before you apply.";
+            this.lblOutSampleData.Location = new System.Drawing.Point(0, 580);
+            this.lblOutSampleData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutSampleData.Name = "lblOutSampleData";
-            //
+            this.lblOutSampleData.Size = new System.Drawing.Size(1158, 22);
+            this.lblOutSampleData.TabIndex = 7;
+            this.lblOutSampleData.Text = "Requirement data is locally stored sample data; check it against the official uni" +
+    "versity source before you apply.";
+            // 
             // tabAlternatives
-            //
-            this.tabAlternatives.Controls.Add(this.pnlAltContent);
+            // 
             this.tabAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabAlternatives.Location = new System.Drawing.Point(4, 5);
-            this.tabAlternatives.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabAlternatives.Size = new System.Drawing.Size(926, 527);
+            this.tabAlternatives.Controls.Add(this.pnlAltContent);
+            this.tabAlternatives.Location = new System.Drawing.Point(4, 36);
+            this.tabAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabAlternatives.Name = "tabAlternatives";
+            this.tabAlternatives.Size = new System.Drawing.Size(1160, 664);
             this.tabAlternatives.TabIndex = 1;
             this.tabAlternatives.Text = "Alternative programmes";
-            this.tabAlternatives.UseVisualStyleBackColor = false;
-            this.tabAlternatives.Name = "tabAlternatives";
-            //
+            // 
             // pnlAltContent
-            //
+            // 
             this.pnlAltContent.Controls.Add(this.pnlRankedCard);
             this.pnlAltContent.Controls.Add(this.pnlReasonsCard);
             this.pnlAltContent.Controls.Add(this.chkIncludeAlternatives);
             this.pnlAltContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAltContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlAltContent.TabIndex = 0;
+            this.pnlAltContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlAltContent.Name = "pnlAltContent";
-            //
+            this.pnlAltContent.Size = new System.Drawing.Size(1160, 664);
+            this.pnlAltContent.TabIndex = 0;
+            // 
             // pnlRankedCard
-            //
+            // 
+            this.pnlRankedCard.BackColor = System.Drawing.Color.White;
+            this.pnlRankedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRankedCard.Controls.Add(this.lblRankedHeadingBar);
             this.pnlRankedCard.Controls.Add(this.lblRankedHeading);
             this.pnlRankedCard.Controls.Add(this.lblRankedCount);
             this.pnlRankedCard.Controls.Add(this.dgvAlternatives);
-            this.pnlRankedCard.BackColor = System.Drawing.Color.White;
-            this.pnlRankedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRankedCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlRankedCard.Size = new System.Drawing.Size(926, 250);
-            this.pnlRankedCard.TabIndex = 0;
+            this.pnlRankedCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlRankedCard.Name = "pnlRankedCard";
-            //
+            this.pnlRankedCard.Size = new System.Drawing.Size(1157, 312);
+            this.pnlRankedCard.TabIndex = 0;
+            // 
             // lblRankedHeadingBar
-            //
+            // 
             this.lblRankedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblRankedHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblRankedHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblRankedHeadingBar.TabIndex = 0;
+            this.lblRankedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblRankedHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblRankedHeadingBar.Name = "lblRankedHeadingBar";
-            //
+            this.lblRankedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblRankedHeadingBar.TabIndex = 0;
+            // 
             // lblRankedHeading
-            //
+            // 
             this.lblRankedHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRankedHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRankedHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblRankedHeading.Size = new System.Drawing.Size(560, 28);
+            this.lblRankedHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblRankedHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRankedHeading.Name = "lblRankedHeading";
+            this.lblRankedHeading.Size = new System.Drawing.Size(700, 35);
             this.lblRankedHeading.TabIndex = 1;
             this.lblRankedHeading.Text = "Programmes ranked for your profile";
             this.lblRankedHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblRankedHeading.Name = "lblRankedHeading";
-            //
+            // 
             // lblRankedCount
-            //
+            // 
             this.lblRankedCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRankedCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblRankedCount.Location = new System.Drawing.Point(600, 14);
-            this.lblRankedCount.Size = new System.Drawing.Size(306, 18);
-            this.lblRankedCount.TabIndex = 2;
-            this.lblRankedCount.Text = "";
-            this.lblRankedCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblRankedCount.Location = new System.Drawing.Point(750, 18);
+            this.lblRankedCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRankedCount.Name = "lblRankedCount";
-            //
+            this.lblRankedCount.Size = new System.Drawing.Size(382, 22);
+            this.lblRankedCount.TabIndex = 2;
+            this.lblRankedCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // dgvAlternatives
-            //
+            // 
+            this.dgvAlternatives.AccessibleName = "Alternative programmes ranked for your profile";
+            this.dgvAlternatives.AllowUserToAddRows = false;
+            this.dgvAlternatives.AllowUserToDeleteRows = false;
+            this.dgvAlternatives.AllowUserToResizeRows = false;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            this.dgvAlternatives.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAlternatives.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAlternatives.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvAlternatives.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            this.dgvAlternatives.ColumnHeadersHeight = 34;
+            this.dgvAlternatives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvAlternatives.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colRank,
             this.colProgramme,
@@ -2981,318 +3188,344 @@
             this.colReason,
             this.colAltProgrammeId,
             this.colIsSelected});
-            AltDgvAlternativesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = AltDgvAlternativesAltStyle;
-            AltDgvAlternativesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            AltDgvAlternativesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            AltDgvAlternativesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            AltDgvAlternativesHeaderStyle.ForeColor = System.Drawing.Color.White;
-            AltDgvAlternativesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            AltDgvAlternativesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            AltDgvAlternativesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            AltDgvAlternativesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = AltDgvAlternativesHeaderStyle;
-            AltDgvAlternativesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            AltDgvAlternativesCellStyle.BackColor = System.Drawing.Color.White;
-            AltDgvAlternativesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            AltDgvAlternativesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            AltDgvAlternativesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            AltDgvAlternativesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            AltDgvAlternativesCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            AltDgvAlternativesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlternatives.DefaultCellStyle = AltDgvAlternativesCellStyle;
-            this.dgvAlternatives.AccessibleName = "Alternative programmes ranked for your profile";
-            this.dgvAlternatives.AllowUserToAddRows = false;
-            this.dgvAlternatives.AllowUserToDeleteRows = false;
-            this.dgvAlternatives.AllowUserToResizeRows = false;
-            this.dgvAlternatives.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAlternatives.BackgroundColor = System.Drawing.Color.White;
-            this.dgvAlternatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dgvAlternatives.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvAlternatives.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvAlternatives.ColumnHeadersHeight = 34;
-            this.dgvAlternatives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle26.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlternatives.DefaultCellStyle = dataGridViewCellStyle26;
             this.dgvAlternatives.EnableHeadersVisualStyles = false;
             this.dgvAlternatives.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvAlternatives.Location = new System.Drawing.Point(16, 42);
+            this.dgvAlternatives.Location = new System.Drawing.Point(20, 52);
+            this.dgvAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvAlternatives.MultiSelect = false;
+            this.dgvAlternatives.Name = "dgvAlternatives";
             this.dgvAlternatives.ReadOnly = true;
             this.dgvAlternatives.RowHeadersVisible = false;
-            this.dgvAlternatives.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAlternatives.Size = new System.Drawing.Size(892, 194);
-            this.dgvAlternatives.TabIndex = 3;
-            this.dgvAlternatives.Name = "dgvAlternatives";
+            this.dgvAlternatives.RowHeadersWidth = 51;
             this.dgvAlternatives.RowTemplate.Height = 30;
-            this.dgvAlternatives.SelectionChanged += new System.EventHandler(this.dgvAlternatives_SelectionChanged);
+            this.dgvAlternatives.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAlternatives.Size = new System.Drawing.Size(1115, 242);
+            this.dgvAlternatives.TabIndex = 3;
             this.dgvAlternatives.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvAlternatives_CellFormatting);
             this.dgvAlternatives.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvAlternatives_DataBindingComplete);
-            //
+            this.dgvAlternatives.SelectionChanged += new System.EventHandler(this.dgvAlternatives_SelectionChanged);
+            // 
             // colRank
-            //
-            AltColRankStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colRank.DefaultCellStyle = AltColRankStyle;
+            // 
             this.colRank.DataPropertyName = "AlternativeRank";
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colRank.DefaultCellStyle = dataGridViewCellStyle24;
             this.colRank.FillWeight = 8F;
             this.colRank.HeaderText = "Rank";
-            this.colRank.ReadOnly = true;
+            this.colRank.MinimumWidth = 6;
             this.colRank.Name = "colRank";
-            //
+            this.colRank.ReadOnly = true;
+            // 
             // colProgramme
-            //
+            // 
             this.colProgramme.DataPropertyName = "ProgrammeName";
             this.colProgramme.FillWeight = 50F;
             this.colProgramme.HeaderText = "Degree programme";
-            this.colProgramme.ReadOnly = true;
+            this.colProgramme.MinimumWidth = 6;
             this.colProgramme.Name = "colProgramme";
-            //
+            this.colProgramme.ReadOnly = true;
+            // 
             // colFaculty
-            //
+            // 
             this.colFaculty.DataPropertyName = "FacultyName";
             this.colFaculty.FillWeight = 18F;
             this.colFaculty.HeaderText = "Faculty";
-            this.colFaculty.ReadOnly = true;
+            this.colFaculty.MinimumWidth = 6;
             this.colFaculty.Name = "colFaculty";
-            //
+            this.colFaculty.ReadOnly = true;
+            // 
             // colScore
-            //
-            AltColScoreStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            AltColScoreStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            AltColScoreStyle.Format = "0";
-            this.colScore.DefaultCellStyle = AltColScoreStyle;
+            // 
             this.colScore.DataPropertyName = "OverallScore";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle25.Format = "0";
+            this.colScore.DefaultCellStyle = dataGridViewCellStyle25;
             this.colScore.FillWeight = 9F;
             this.colScore.HeaderText = "Fit %";
-            this.colScore.ReadOnly = true;
+            this.colScore.MinimumWidth = 6;
             this.colScore.Name = "colScore";
-            //
+            this.colScore.ReadOnly = true;
+            // 
             // colOutcome
-            //
+            // 
             this.colOutcome.DataPropertyName = "OutcomeCode";
             this.colOutcome.FillWeight = 22F;
             this.colOutcome.HeaderText = "Advisory outcome";
-            this.colOutcome.ReadOnly = true;
+            this.colOutcome.MinimumWidth = 6;
             this.colOutcome.Name = "colOutcome";
-            //
+            this.colOutcome.ReadOnly = true;
+            // 
             // colReason
-            //
+            // 
             this.colReason.DataPropertyName = "OutcomeReason";
             this.colReason.FillWeight = 1F;
             this.colReason.HeaderText = "Reason";
+            this.colReason.MinimumWidth = 6;
+            this.colReason.Name = "colReason";
             this.colReason.ReadOnly = true;
             this.colReason.Visible = false;
-            this.colReason.Name = "colReason";
-            //
+            // 
             // colAltProgrammeId
-            //
+            // 
             this.colAltProgrammeId.DataPropertyName = "ProgrammeID";
             this.colAltProgrammeId.FillWeight = 1F;
             this.colAltProgrammeId.HeaderText = "Programme ID";
+            this.colAltProgrammeId.MinimumWidth = 6;
+            this.colAltProgrammeId.Name = "colAltProgrammeId";
             this.colAltProgrammeId.ReadOnly = true;
             this.colAltProgrammeId.Visible = false;
-            this.colAltProgrammeId.Name = "colAltProgrammeId";
-            //
+            // 
             // colIsSelected
-            //
+            // 
             this.colIsSelected.DataPropertyName = "IsSelectedProgramme";
             this.colIsSelected.FillWeight = 1F;
             this.colIsSelected.HeaderText = "Your selection";
+            this.colIsSelected.MinimumWidth = 6;
+            this.colIsSelected.Name = "colIsSelected";
             this.colIsSelected.ReadOnly = true;
             this.colIsSelected.Visible = false;
-            this.colIsSelected.Name = "colIsSelected";
-            //
+            // 
             // pnlReasonsCard
-            //
+            // 
+            this.pnlReasonsCard.BackColor = System.Drawing.Color.White;
+            this.pnlReasonsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlReasonsCard.Controls.Add(this.lblReasonsHeadingBar);
             this.pnlReasonsCard.Controls.Add(this.lblReasonsHeading);
             this.pnlReasonsCard.Controls.Add(this.lblReasons);
-            this.pnlReasonsCard.BackColor = System.Drawing.Color.White;
-            this.pnlReasonsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlReasonsCard.Location = new System.Drawing.Point(0, 268);
-            this.pnlReasonsCard.Size = new System.Drawing.Size(926, 112);
-            this.pnlReasonsCard.TabIndex = 1;
+            this.pnlReasonsCard.Location = new System.Drawing.Point(0, 335);
+            this.pnlReasonsCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlReasonsCard.Name = "pnlReasonsCard";
-            //
+            this.pnlReasonsCard.Size = new System.Drawing.Size(1157, 140);
+            this.pnlReasonsCard.TabIndex = 1;
+            // 
             // lblReasonsHeadingBar
-            //
+            // 
             this.lblReasonsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReasonsHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblReasonsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblReasonsHeadingBar.TabIndex = 0;
+            this.lblReasonsHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblReasonsHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblReasonsHeadingBar.Name = "lblReasonsHeadingBar";
-            //
+            this.lblReasonsHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblReasonsHeadingBar.TabIndex = 0;
+            // 
             // lblReasonsHeading
-            //
+            // 
             this.lblReasonsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReasonsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReasonsHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblReasonsHeading.Size = new System.Drawing.Size(886, 28);
+            this.lblReasonsHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblReasonsHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblReasonsHeading.Name = "lblReasonsHeading";
+            this.lblReasonsHeading.Size = new System.Drawing.Size(1108, 35);
             this.lblReasonsHeading.TabIndex = 1;
             this.lblReasonsHeading.Text = "Why each programme is suggested";
             this.lblReasonsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblReasonsHeading.Name = "lblReasonsHeading";
-            //
+            // 
             // lblReasons
-            //
+            // 
             this.lblReasons.AccessibleName = "Reasons for the selected programme";
             this.lblReasons.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblReasons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReasons.Location = new System.Drawing.Point(20, 40);
-            this.lblReasons.Size = new System.Drawing.Size(884, 64);
+            this.lblReasons.Location = new System.Drawing.Point(25, 50);
+            this.lblReasons.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblReasons.Name = "lblReasons";
+            this.lblReasons.Size = new System.Drawing.Size(1105, 80);
             this.lblReasons.TabIndex = 2;
             this.lblReasons.Text = "Select a programme in the list to see why it is suggested.";
-            this.lblReasons.Name = "lblReasons";
-            //
+            // 
             // chkIncludeAlternatives
-            //
+            // 
             this.chkIncludeAlternatives.AccessibleName = "Include these alternative programmes in my advisory summary";
             this.chkIncludeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkIncludeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkIncludeAlternatives.Location = new System.Drawing.Point(2, 394);
-            this.chkIncludeAlternatives.Size = new System.Drawing.Size(600, 24);
+            this.chkIncludeAlternatives.Location = new System.Drawing.Point(2, 492);
+            this.chkIncludeAlternatives.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkIncludeAlternatives.Name = "chkIncludeAlternatives";
+            this.chkIncludeAlternatives.Size = new System.Drawing.Size(750, 30);
             this.chkIncludeAlternatives.TabIndex = 2;
             this.chkIncludeAlternatives.Text = "Include these alternative programmes in my advisory summary";
             this.chkIncludeAlternatives.UseVisualStyleBackColor = true;
-            this.chkIncludeAlternatives.Name = "chkIncludeAlternatives";
             this.chkIncludeAlternatives.CheckedChanged += new System.EventHandler(this.chkIncludeAlternatives_CheckedChanged);
-            //
+            // 
             // tabFunding
-            //
-            this.tabFunding.Controls.Add(this.pnlFundContent);
+            // 
             this.tabFunding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabFunding.Location = new System.Drawing.Point(4, 5);
-            this.tabFunding.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabFunding.Size = new System.Drawing.Size(926, 527);
+            this.tabFunding.Controls.Add(this.pnlFundContent);
+            this.tabFunding.Location = new System.Drawing.Point(4, 36);
+            this.tabFunding.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabFunding.Name = "tabFunding";
+            this.tabFunding.Size = new System.Drawing.Size(1160, 664);
             this.tabFunding.TabIndex = 2;
             this.tabFunding.Text = "Funding options";
-            this.tabFunding.UseVisualStyleBackColor = false;
-            this.tabFunding.Name = "tabFunding";
-            //
+            // 
             // pnlFundContent
-            //
+            // 
             this.pnlFundContent.Controls.Add(this.pnlFilterCard);
             this.pnlFundContent.Controls.Add(this.pnlFundingCard);
             this.pnlFundContent.Controls.Add(this.pnlDetailCard);
             this.pnlFundContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFundContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlFundContent.TabIndex = 0;
+            this.pnlFundContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlFundContent.Name = "pnlFundContent";
-            //
+            this.pnlFundContent.Size = new System.Drawing.Size(1160, 664);
+            this.pnlFundContent.TabIndex = 0;
+            // 
             // pnlFilterCard
-            //
+            // 
+            this.pnlFilterCard.BackColor = System.Drawing.Color.White;
+            this.pnlFilterCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterCard.Controls.Add(this.lblFundFaculty);
             this.pnlFilterCard.Controls.Add(this.cboFundFaculty);
             this.pnlFilterCard.Controls.Add(this.lblFundingType);
             this.pnlFilterCard.Controls.Add(this.cboFundingType);
             this.pnlFilterCard.Controls.Add(this.chkOpenOnly);
-            this.pnlFilterCard.BackColor = System.Drawing.Color.White;
-            this.pnlFilterCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlFilterCard.Size = new System.Drawing.Size(926, 72);
-            this.pnlFilterCard.TabIndex = 0;
+            this.pnlFilterCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlFilterCard.Name = "pnlFilterCard";
-            //
+            this.pnlFilterCard.Size = new System.Drawing.Size(1157, 90);
+            this.pnlFilterCard.TabIndex = 0;
+            // 
             // lblFundFaculty
-            //
+            // 
             this.lblFundFaculty.AutoSize = true;
             this.lblFundFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFundFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFundFaculty.Location = new System.Drawing.Point(16, 6);
+            this.lblFundFaculty.Location = new System.Drawing.Point(20, 8);
+            this.lblFundFaculty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFundFaculty.Name = "lblFundFaculty";
+            this.lblFundFaculty.Size = new System.Drawing.Size(74, 28);
             this.lblFundFaculty.TabIndex = 0;
             this.lblFundFaculty.Text = "Faculty";
-            this.lblFundFaculty.Name = "lblFundFaculty";
-            //
+            // 
             // cboFundFaculty
-            //
+            // 
             this.cboFundFaculty.AccessibleName = "Faculty";
             this.cboFundFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFundFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboFundFaculty.FormattingEnabled = true;
-            this.cboFundFaculty.Location = new System.Drawing.Point(16, 36);
-            this.cboFundFaculty.Size = new System.Drawing.Size(280, 25);
-            this.cboFundFaculty.TabIndex = 1;
+            this.cboFundFaculty.Location = new System.Drawing.Point(20, 45);
+            this.cboFundFaculty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboFundFaculty.Name = "cboFundFaculty";
+            this.cboFundFaculty.Size = new System.Drawing.Size(349, 31);
+            this.cboFundFaculty.TabIndex = 1;
             this.cboFundFaculty.SelectionChangeCommitted += new System.EventHandler(this.cboFundFaculty_SelectionChangeCommitted);
-            //
+            // 
             // lblFundingType
-            //
+            // 
             this.lblFundingType.AutoSize = true;
             this.lblFundingType.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFundingType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFundingType.Location = new System.Drawing.Point(316, 6);
+            this.lblFundingType.Location = new System.Drawing.Point(395, 8);
+            this.lblFundingType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFundingType.Name = "lblFundingType";
+            this.lblFundingType.Size = new System.Drawing.Size(133, 28);
             this.lblFundingType.TabIndex = 2;
             this.lblFundingType.Text = "Funding type";
-            this.lblFundingType.Name = "lblFundingType";
-            //
+            // 
             // cboFundingType
-            //
+            // 
             this.cboFundingType.AccessibleName = "Funding type";
             this.cboFundingType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFundingType.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboFundingType.FormattingEnabled = true;
-            this.cboFundingType.Location = new System.Drawing.Point(316, 36);
-            this.cboFundingType.Size = new System.Drawing.Size(280, 25);
-            this.cboFundingType.TabIndex = 3;
+            this.cboFundingType.Location = new System.Drawing.Point(395, 45);
+            this.cboFundingType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboFundingType.Name = "cboFundingType";
+            this.cboFundingType.Size = new System.Drawing.Size(349, 31);
+            this.cboFundingType.TabIndex = 3;
             this.cboFundingType.SelectionChangeCommitted += new System.EventHandler(this.cboFundingType_SelectionChangeCommitted);
-            //
+            // 
             // chkOpenOnly
-            //
+            // 
             this.chkOpenOnly.AccessibleName = "Show only options that are still open";
             this.chkOpenOnly.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkOpenOnly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkOpenOnly.Location = new System.Drawing.Point(616, 36);
-            this.chkOpenOnly.Size = new System.Drawing.Size(300, 24);
+            this.chkOpenOnly.Location = new System.Drawing.Point(770, 45);
+            this.chkOpenOnly.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkOpenOnly.Name = "chkOpenOnly";
+            this.chkOpenOnly.Size = new System.Drawing.Size(375, 30);
             this.chkOpenOnly.TabIndex = 4;
             this.chkOpenOnly.Text = "Show only options that are still open";
             this.chkOpenOnly.UseVisualStyleBackColor = true;
-            this.chkOpenOnly.Name = "chkOpenOnly";
             this.chkOpenOnly.CheckedChanged += new System.EventHandler(this.chkOpenOnly_CheckedChanged);
-            //
+            // 
             // pnlFundingCard
-            //
+            // 
+            this.pnlFundingCard.BackColor = System.Drawing.Color.White;
+            this.pnlFundingCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFundingCard.Controls.Add(this.lblFundingHeadingBar);
             this.pnlFundingCard.Controls.Add(this.lblFundingHeading);
             this.pnlFundingCard.Controls.Add(this.lblFundingCount);
             this.pnlFundingCard.Controls.Add(this.dgvFunding);
-            this.pnlFundingCard.BackColor = System.Drawing.Color.White;
-            this.pnlFundingCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFundingCard.Location = new System.Drawing.Point(0, 90);
-            this.pnlFundingCard.Size = new System.Drawing.Size(926, 190);
-            this.pnlFundingCard.TabIndex = 1;
+            this.pnlFundingCard.Location = new System.Drawing.Point(0, 112);
+            this.pnlFundingCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlFundingCard.Name = "pnlFundingCard";
-            //
+            this.pnlFundingCard.Size = new System.Drawing.Size(1157, 237);
+            this.pnlFundingCard.TabIndex = 1;
+            // 
             // lblFundingHeadingBar
-            //
+            // 
             this.lblFundingHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblFundingHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblFundingHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblFundingHeadingBar.TabIndex = 0;
+            this.lblFundingHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblFundingHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblFundingHeadingBar.Name = "lblFundingHeadingBar";
-            //
+            this.lblFundingHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblFundingHeadingBar.TabIndex = 0;
+            // 
             // lblFundingHeading
-            //
+            // 
             this.lblFundingHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFundingHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFundingHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblFundingHeading.Size = new System.Drawing.Size(600, 28);
+            this.lblFundingHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblFundingHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFundingHeading.Name = "lblFundingHeading";
+            this.lblFundingHeading.Size = new System.Drawing.Size(750, 35);
             this.lblFundingHeading.TabIndex = 1;
             this.lblFundingHeading.Text = "Funding linked to your faculty";
             this.lblFundingHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblFundingHeading.Name = "lblFundingHeading";
-            //
+            // 
             // lblFundingCount
-            //
+            // 
             this.lblFundingCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFundingCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblFundingCount.Location = new System.Drawing.Point(640, 14);
-            this.lblFundingCount.Size = new System.Drawing.Size(266, 18);
-            this.lblFundingCount.TabIndex = 2;
-            this.lblFundingCount.Text = "";
-            this.lblFundingCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblFundingCount.Location = new System.Drawing.Point(800, 18);
+            this.lblFundingCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFundingCount.Name = "lblFundingCount";
-            //
+            this.lblFundingCount.Size = new System.Drawing.Size(332, 22);
+            this.lblFundingCount.TabIndex = 2;
+            this.lblFundingCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // dgvFunding
-            //
+            // 
+            this.dgvFunding.AccessibleName = "Funding linked to your faculty and programme";
+            this.dgvFunding.AllowUserToAddRows = false;
+            this.dgvFunding.AllowUserToDeleteRows = false;
+            this.dgvFunding.AllowUserToResizeRows = false;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvFunding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle27;
+            this.dgvFunding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvFunding.BackgroundColor = System.Drawing.Color.White;
+            this.dgvFunding.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvFunding.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFunding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            this.dgvFunding.ColumnHeadersHeight = 34;
+            this.dgvFunding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvFunding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFundingName,
             this.colFundingType,
@@ -3303,132 +3536,123 @@
             this.colEligibility,
             this.colDocuments,
             this.colContact});
-            FundDgvFundingAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvFunding.AlternatingRowsDefaultCellStyle = FundDgvFundingAltStyle;
-            FundDgvFundingHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            FundDgvFundingHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            FundDgvFundingHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            FundDgvFundingHeaderStyle.ForeColor = System.Drawing.Color.White;
-            FundDgvFundingHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            FundDgvFundingHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            FundDgvFundingHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            FundDgvFundingHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFunding.ColumnHeadersDefaultCellStyle = FundDgvFundingHeaderStyle;
-            FundDgvFundingCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            FundDgvFundingCellStyle.BackColor = System.Drawing.Color.White;
-            FundDgvFundingCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            FundDgvFundingCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            FundDgvFundingCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            FundDgvFundingCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            FundDgvFundingCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            FundDgvFundingCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFunding.DefaultCellStyle = FundDgvFundingCellStyle;
-            this.dgvFunding.AccessibleName = "Funding linked to your faculty and programme";
-            this.dgvFunding.AllowUserToAddRows = false;
-            this.dgvFunding.AllowUserToDeleteRows = false;
-            this.dgvFunding.AllowUserToResizeRows = false;
-            this.dgvFunding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvFunding.BackgroundColor = System.Drawing.Color.White;
-            this.dgvFunding.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dgvFunding.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvFunding.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvFunding.ColumnHeadersHeight = 34;
-            this.dgvFunding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFunding.DefaultCellStyle = dataGridViewCellStyle30;
             this.dgvFunding.EnableHeadersVisualStyles = false;
             this.dgvFunding.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvFunding.Location = new System.Drawing.Point(16, 42);
+            this.dgvFunding.Location = new System.Drawing.Point(20, 52);
+            this.dgvFunding.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvFunding.MultiSelect = false;
+            this.dgvFunding.Name = "dgvFunding";
             this.dgvFunding.ReadOnly = true;
             this.dgvFunding.RowHeadersVisible = false;
-            this.dgvFunding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFunding.Size = new System.Drawing.Size(892, 134);
-            this.dgvFunding.TabIndex = 3;
-            this.dgvFunding.Name = "dgvFunding";
+            this.dgvFunding.RowHeadersWidth = 51;
             this.dgvFunding.RowTemplate.Height = 30;
-            this.dgvFunding.SelectionChanged += new System.EventHandler(this.dgvFunding_SelectionChanged);
+            this.dgvFunding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFunding.Size = new System.Drawing.Size(1115, 168);
+            this.dgvFunding.TabIndex = 3;
             this.dgvFunding.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvFunding_CellFormatting);
             this.dgvFunding.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvFunding_DataBindingComplete);
-            //
+            this.dgvFunding.SelectionChanged += new System.EventHandler(this.dgvFunding_SelectionChanged);
+            // 
             // colFundingName
-            //
+            // 
             this.colFundingName.DataPropertyName = "FundingName";
             this.colFundingName.FillWeight = 34F;
             this.colFundingName.HeaderText = "Funding name";
-            this.colFundingName.ReadOnly = true;
+            this.colFundingName.MinimumWidth = 6;
             this.colFundingName.Name = "colFundingName";
-            //
+            this.colFundingName.ReadOnly = true;
+            // 
             // colFundingType
-            //
+            // 
             this.colFundingType.DataPropertyName = "FundingType";
             this.colFundingType.FillWeight = 18F;
             this.colFundingType.HeaderText = "Funding type";
-            this.colFundingType.ReadOnly = true;
+            this.colFundingType.MinimumWidth = 6;
             this.colFundingType.Name = "colFundingType";
-            //
+            this.colFundingType.ReadOnly = true;
+            // 
             // colLinkedTo
-            //
+            // 
             this.colLinkedTo.DataPropertyName = "LinkedTo";
             this.colLinkedTo.FillWeight = 22F;
             this.colLinkedTo.HeaderText = "Linked to";
-            this.colLinkedTo.ReadOnly = true;
+            this.colLinkedTo.MinimumWidth = 6;
             this.colLinkedTo.Name = "colLinkedTo";
-            //
+            this.colLinkedTo.ReadOnly = true;
+            // 
             // colClosingDate
-            //
-            FundColClosingDateStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            FundColClosingDateStyle.Format = "dd/MM/yyyy";
-            this.colClosingDate.DefaultCellStyle = FundColClosingDateStyle;
+            // 
             this.colClosingDate.DataPropertyName = "ClosingDate";
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle29.Format = "dd/MM/yyyy";
+            this.colClosingDate.DefaultCellStyle = dataGridViewCellStyle29;
             this.colClosingDate.FillWeight = 16F;
             this.colClosingDate.HeaderText = "Closing date";
-            this.colClosingDate.ReadOnly = true;
+            this.colClosingDate.MinimumWidth = 6;
             this.colClosingDate.Name = "colClosingDate";
-            //
+            this.colClosingDate.ReadOnly = true;
+            // 
             // colStatus
-            //
+            // 
             this.colStatus.FillWeight = 12F;
             this.colStatus.HeaderText = "Status";
-            this.colStatus.ReadOnly = true;
+            this.colStatus.MinimumWidth = 6;
             this.colStatus.Name = "colStatus";
-            //
+            this.colStatus.ReadOnly = true;
+            // 
             // colFundingId
-            //
+            // 
             this.colFundingId.DataPropertyName = "FundingID";
             this.colFundingId.FillWeight = 1F;
             this.colFundingId.HeaderText = "Funding ID";
+            this.colFundingId.MinimumWidth = 6;
+            this.colFundingId.Name = "colFundingId";
             this.colFundingId.ReadOnly = true;
             this.colFundingId.Visible = false;
-            this.colFundingId.Name = "colFundingId";
-            //
+            // 
             // colEligibility
-            //
+            // 
             this.colEligibility.DataPropertyName = "EligibilityDescription";
             this.colEligibility.FillWeight = 1F;
             this.colEligibility.HeaderText = "Eligibility";
+            this.colEligibility.MinimumWidth = 6;
+            this.colEligibility.Name = "colEligibility";
             this.colEligibility.ReadOnly = true;
             this.colEligibility.Visible = false;
-            this.colEligibility.Name = "colEligibility";
-            //
+            // 
             // colDocuments
-            //
+            // 
             this.colDocuments.DataPropertyName = "RequiredDocuments";
             this.colDocuments.FillWeight = 1F;
             this.colDocuments.HeaderText = "Required documents";
+            this.colDocuments.MinimumWidth = 6;
+            this.colDocuments.Name = "colDocuments";
             this.colDocuments.ReadOnly = true;
             this.colDocuments.Visible = false;
-            this.colDocuments.Name = "colDocuments";
-            //
+            // 
             // colContact
-            //
+            // 
             this.colContact.DataPropertyName = "ContactInformation";
             this.colContact.FillWeight = 1F;
             this.colContact.HeaderText = "Contact";
+            this.colContact.MinimumWidth = 6;
+            this.colContact.Name = "colContact";
             this.colContact.ReadOnly = true;
             this.colContact.Visible = false;
-            this.colContact.Name = "colContact";
-            //
+            // 
             // pnlDetailCard
-            //
+            // 
+            this.pnlDetailCard.BackColor = System.Drawing.Color.White;
+            this.pnlDetailCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDetailCard.Controls.Add(this.lblDetailHeadingBar);
             this.pnlDetailCard.Controls.Add(this.lblDetailHeading);
             this.pnlDetailCard.Controls.Add(this.lblEligibility);
@@ -3438,159 +3662,170 @@
             this.pnlDetailCard.Controls.Add(this.lblContact);
             this.pnlDetailCard.Controls.Add(this.txtContact);
             this.pnlDetailCard.Controls.Add(this.pnlSampleNote);
-            this.pnlDetailCard.BackColor = System.Drawing.Color.White;
-            this.pnlDetailCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDetailCard.Location = new System.Drawing.Point(0, 298);
-            this.pnlDetailCard.Size = new System.Drawing.Size(926, 185);
-            this.pnlDetailCard.TabIndex = 2;
+            this.pnlDetailCard.Location = new System.Drawing.Point(0, 372);
+            this.pnlDetailCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDetailCard.Name = "pnlDetailCard";
-            //
+            this.pnlDetailCard.Size = new System.Drawing.Size(1157, 231);
+            this.pnlDetailCard.TabIndex = 2;
+            // 
             // lblDetailHeadingBar
-            //
+            // 
             this.lblDetailHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblDetailHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblDetailHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblDetailHeadingBar.TabIndex = 0;
+            this.lblDetailHeadingBar.Location = new System.Drawing.Point(20, 12);
+            this.lblDetailHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblDetailHeadingBar.Name = "lblDetailHeadingBar";
-            //
+            this.lblDetailHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblDetailHeadingBar.TabIndex = 0;
+            // 
             // lblDetailHeading
-            //
+            // 
             this.lblDetailHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDetailHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblDetailHeading.Location = new System.Drawing.Point(26, 6);
-            this.lblDetailHeading.Size = new System.Drawing.Size(886, 28);
+            this.lblDetailHeading.Location = new System.Drawing.Point(32, 8);
+            this.lblDetailHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDetailHeading.Name = "lblDetailHeading";
+            this.lblDetailHeading.Size = new System.Drawing.Size(1108, 35);
             this.lblDetailHeading.TabIndex = 1;
             this.lblDetailHeading.Text = "Select a funding option to see its details";
             this.lblDetailHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblDetailHeading.Name = "lblDetailHeading";
-            //
+            // 
             // lblEligibility
-            //
+            // 
             this.lblEligibility.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblEligibility.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblEligibility.Location = new System.Drawing.Point(16, 38);
-            this.lblEligibility.Size = new System.Drawing.Size(284, 22);
+            this.lblEligibility.Location = new System.Drawing.Point(20, 48);
+            this.lblEligibility.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEligibility.Name = "lblEligibility";
+            this.lblEligibility.Size = new System.Drawing.Size(355, 28);
             this.lblEligibility.TabIndex = 2;
             this.lblEligibility.Text = "Eligibility";
-            this.lblEligibility.Name = "lblEligibility";
-            //
+            // 
             // txtEligibility
-            //
+            // 
             this.txtEligibility.AccessibleName = "Eligibility (read-only)";
             this.txtEligibility.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtEligibility.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtEligibility.Location = new System.Drawing.Point(16, 62);
+            this.txtEligibility.Location = new System.Drawing.Point(20, 78);
+            this.txtEligibility.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEligibility.Multiline = true;
+            this.txtEligibility.Name = "txtEligibility";
             this.txtEligibility.ReadOnly = true;
-            this.txtEligibility.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtEligibility.Size = new System.Drawing.Size(284, 60);
+            this.txtEligibility.Size = new System.Drawing.Size(354, 74);
             this.txtEligibility.TabIndex = 3;
             this.txtEligibility.TabStop = false;
-            this.txtEligibility.Name = "txtEligibility";
-            //
+            // 
             // lblDocuments
-            //
+            // 
             this.lblDocuments.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblDocuments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblDocuments.Location = new System.Drawing.Point(320, 38);
-            this.lblDocuments.Size = new System.Drawing.Size(284, 22);
+            this.lblDocuments.Location = new System.Drawing.Point(400, 48);
+            this.lblDocuments.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDocuments.Name = "lblDocuments";
+            this.lblDocuments.Size = new System.Drawing.Size(355, 28);
             this.lblDocuments.TabIndex = 4;
             this.lblDocuments.Text = "Required documents";
-            this.lblDocuments.Name = "lblDocuments";
-            //
+            // 
             // txtDocuments
-            //
+            // 
             this.txtDocuments.AccessibleName = "Required documents (read-only)";
             this.txtDocuments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtDocuments.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtDocuments.Location = new System.Drawing.Point(320, 62);
+            this.txtDocuments.Location = new System.Drawing.Point(400, 78);
+            this.txtDocuments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDocuments.Multiline = true;
+            this.txtDocuments.Name = "txtDocuments";
             this.txtDocuments.ReadOnly = true;
-            this.txtDocuments.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDocuments.Size = new System.Drawing.Size(284, 60);
+            this.txtDocuments.Size = new System.Drawing.Size(354, 74);
             this.txtDocuments.TabIndex = 5;
             this.txtDocuments.TabStop = false;
-            this.txtDocuments.Name = "txtDocuments";
-            //
+            // 
             // lblContact
-            //
+            // 
             this.lblContact.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblContact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblContact.Location = new System.Drawing.Point(624, 38);
-            this.lblContact.Size = new System.Drawing.Size(284, 22);
+            this.lblContact.Location = new System.Drawing.Point(780, 48);
+            this.lblContact.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContact.Name = "lblContact";
+            this.lblContact.Size = new System.Drawing.Size(355, 28);
             this.lblContact.TabIndex = 6;
             this.lblContact.Text = "Contact or application information";
-            this.lblContact.Name = "lblContact";
-            //
+            // 
             // txtContact
-            //
+            // 
             this.txtContact.AccessibleName = "Contact or application information (read-only)";
             this.txtContact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtContact.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtContact.Location = new System.Drawing.Point(624, 62);
+            this.txtContact.Location = new System.Drawing.Point(780, 78);
+            this.txtContact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtContact.Multiline = true;
+            this.txtContact.Name = "txtContact";
             this.txtContact.ReadOnly = true;
-            this.txtContact.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtContact.Size = new System.Drawing.Size(284, 60);
+            this.txtContact.Size = new System.Drawing.Size(354, 74);
             this.txtContact.TabIndex = 7;
             this.txtContact.TabStop = false;
-            this.txtContact.Name = "txtContact";
-            //
+            // 
             // pnlSampleNote
-            //
+            // 
+            this.pnlSampleNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
             this.pnlSampleNote.Controls.Add(this.lblSampleNote);
             this.pnlSampleNote.Controls.Add(this.pnlSampleNoteBar);
-            this.pnlSampleNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            this.pnlSampleNote.Location = new System.Drawing.Point(16, 132);
-            this.pnlSampleNote.Size = new System.Drawing.Size(892, 38);
-            this.pnlSampleNote.TabIndex = 8;
+            this.pnlSampleNote.Location = new System.Drawing.Point(20, 165);
+            this.pnlSampleNote.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSampleNote.Name = "pnlSampleNote";
-            //
+            this.pnlSampleNote.Size = new System.Drawing.Size(1115, 48);
+            this.pnlSampleNote.TabIndex = 8;
+            // 
             // lblSampleNote
-            //
+            // 
             this.lblSampleNote.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSampleNote.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblSampleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
-            this.lblSampleNote.Location = new System.Drawing.Point(5, 0);
-            this.lblSampleNote.Padding = new System.Windows.Forms.Padding(12, 0, 8, 0);
-            this.lblSampleNote.Size = new System.Drawing.Size(887, 38);
-            this.lblSampleNote.TabIndex = 0;
-            this.lblSampleNote.Text = "Sample information. Verify every closing date and requirement with the funder before you apply. Future Path does not submit applications.";
-            this.lblSampleNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSampleNote.Location = new System.Drawing.Point(6, 0);
+            this.lblSampleNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSampleNote.Name = "lblSampleNote";
-            //
+            this.lblSampleNote.Padding = new System.Windows.Forms.Padding(15, 0, 10, 0);
+            this.lblSampleNote.Size = new System.Drawing.Size(1109, 48);
+            this.lblSampleNote.TabIndex = 0;
+            this.lblSampleNote.Text = "Sample information. Verify every closing date and requirement with the funder bef" +
+    "ore you apply. Future Path does not submit applications.";
+            this.lblSampleNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // pnlSampleNoteBar
-            //
+            // 
             this.pnlSampleNoteBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.pnlSampleNoteBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSampleNoteBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSampleNoteBar.Size = new System.Drawing.Size(5, 38);
-            this.pnlSampleNoteBar.TabIndex = 1;
+            this.pnlSampleNoteBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSampleNoteBar.Name = "pnlSampleNoteBar";
-            //
+            this.pnlSampleNoteBar.Size = new System.Drawing.Size(6, 48);
+            this.pnlSampleNoteBar.TabIndex = 1;
+            // 
             // tabSummary
-            //
-            this.tabSummary.Controls.Add(this.pnlSumContent);
+            // 
             this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
+            this.tabSummary.Controls.Add(this.pnlSumContent);
             this.tabSummary.Location = new System.Drawing.Point(4, 5);
-            this.tabSummary.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabSummary.Size = new System.Drawing.Size(934, 563);
+            this.tabSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSummary.Name = "tabSummary";
+            this.tabSummary.Size = new System.Drawing.Size(1170, 576);
             this.tabSummary.TabIndex = 6;
             this.tabSummary.Text = "UI 7 Advisory summary";
-            this.tabSummary.UseVisualStyleBackColor = false;
-            this.tabSummary.Name = "tabSummary";
-            //
+            // 
             // pnlSumContent
-            //
+            // 
             this.pnlSumContent.Controls.Add(this.pnlIncludeCard);
             this.pnlSumContent.Controls.Add(this.pnlPreviewCard);
             this.pnlSumContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSumContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSumContent.TabIndex = 0;
+            this.pnlSumContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSumContent.Name = "pnlSumContent";
-            //
+            this.pnlSumContent.Size = new System.Drawing.Size(1170, 576);
+            this.pnlSumContent.TabIndex = 0;
+            // 
             // pnlIncludeCard
-            //
+            // 
+            this.pnlIncludeCard.BackColor = System.Drawing.Color.White;
+            this.pnlIncludeCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlIncludeCard.Controls.Add(this.lblIncludeHeadingBar);
             this.pnlIncludeCard.Controls.Add(this.lblIncludeHeading);
             this.pnlIncludeCard.Controls.Add(this.lblExportFormat);
@@ -3609,430 +3844,466 @@
             this.pnlIncludeCard.Controls.Add(this.lblGeneratedHint);
             this.pnlIncludeCard.Controls.Add(this.lblPrintNote);
             this.pnlIncludeCard.Controls.Add(this.lblSumRequiredNote);
-            this.pnlIncludeCard.BackColor = System.Drawing.Color.White;
-            this.pnlIncludeCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlIncludeCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlIncludeCard.Size = new System.Drawing.Size(300, 459);
-            this.pnlIncludeCard.TabIndex = 0;
+            this.pnlIncludeCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlIncludeCard.Name = "pnlIncludeCard";
-            //
+            this.pnlIncludeCard.Size = new System.Drawing.Size(374, 573);
+            this.pnlIncludeCard.TabIndex = 0;
+            // 
             // lblIncludeHeadingBar
-            //
+            // 
             this.lblIncludeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblIncludeHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblIncludeHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblIncludeHeadingBar.TabIndex = 0;
+            this.lblIncludeHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblIncludeHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblIncludeHeadingBar.Name = "lblIncludeHeadingBar";
-            //
+            this.lblIncludeHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblIncludeHeadingBar.TabIndex = 0;
+            // 
             // lblIncludeHeading
-            //
+            // 
             this.lblIncludeHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblIncludeHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblIncludeHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblIncludeHeading.Size = new System.Drawing.Size(260, 28);
+            this.lblIncludeHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblIncludeHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIncludeHeading.Name = "lblIncludeHeading";
+            this.lblIncludeHeading.Size = new System.Drawing.Size(325, 35);
             this.lblIncludeHeading.TabIndex = 1;
             this.lblIncludeHeading.Text = "What to include";
             this.lblIncludeHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblIncludeHeading.Name = "lblIncludeHeading";
-            //
+            // 
             // lblExportFormat
-            //
+            // 
             this.lblExportFormat.AutoSize = true;
             this.lblExportFormat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblExportFormat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblExportFormat.Location = new System.Drawing.Point(16, 44);
+            this.lblExportFormat.Location = new System.Drawing.Point(20, 55);
+            this.lblExportFormat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExportFormat.Name = "lblExportFormat";
+            this.lblExportFormat.Size = new System.Drawing.Size(138, 28);
             this.lblExportFormat.TabIndex = 2;
             this.lblExportFormat.Text = "Export format";
-            this.lblExportFormat.Name = "lblExportFormat";
-            //
+            // 
             // lblExportFormatStar
-            //
+            // 
             this.lblExportFormatStar.AutoSize = true;
             this.lblExportFormatStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblExportFormatStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblExportFormatStar.Location = new System.Drawing.Point(124, 44);
-            this.lblExportFormatStar.Size = new System.Drawing.Size(14, 24);
+            this.lblExportFormatStar.Location = new System.Drawing.Point(155, 55);
+            this.lblExportFormatStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExportFormatStar.Name = "lblExportFormatStar";
+            this.lblExportFormatStar.Size = new System.Drawing.Size(21, 28);
             this.lblExportFormatStar.TabIndex = 3;
             this.lblExportFormatStar.Text = "*";
-            this.lblExportFormatStar.Name = "lblExportFormatStar";
-            //
+            // 
             // cboExportFormat
-            //
+            // 
             this.cboExportFormat.AccessibleName = "Export format (required)";
             this.cboExportFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboExportFormat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboExportFormat.FormattingEnabled = true;
-            this.cboExportFormat.Location = new System.Drawing.Point(16, 70);
-            this.cboExportFormat.Size = new System.Drawing.Size(266, 25);
-            this.cboExportFormat.TabIndex = 4;
+            this.cboExportFormat.Location = new System.Drawing.Point(20, 88);
+            this.cboExportFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboExportFormat.Name = "cboExportFormat";
-            this.cboExportFormat.Leave += new System.EventHandler(this.cboExportFormat_Leave);
+            this.cboExportFormat.Size = new System.Drawing.Size(332, 31);
+            this.cboExportFormat.TabIndex = 4;
             this.cboExportFormat.SelectionChangeCommitted += new System.EventHandler(this.cboExportFormat_SelectionChangeCommitted);
-            //
+            this.cboExportFormat.Leave += new System.EventHandler(this.cboExportFormat_Leave);
+            // 
             // lblExportFormatError
-            //
+            // 
             this.lblExportFormatError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblExportFormatError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblExportFormatError.Location = new System.Drawing.Point(16, 97);
-            this.lblExportFormatError.Size = new System.Drawing.Size(270, 16);
-            this.lblExportFormatError.TabIndex = 5;
-            this.lblExportFormatError.Text = "";
-            this.lblExportFormatError.Visible = false;
+            this.lblExportFormatError.Location = new System.Drawing.Point(20, 121);
+            this.lblExportFormatError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportFormatError.Name = "lblExportFormatError";
-            //
+            this.lblExportFormatError.Size = new System.Drawing.Size(338, 20);
+            this.lblExportFormatError.TabIndex = 5;
+            this.lblExportFormatError.Visible = false;
+            // 
             // lblSaveTo
-            //
+            // 
             this.lblSaveTo.AutoSize = true;
             this.lblSaveTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSaveTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSaveTo.Location = new System.Drawing.Point(16, 122);
+            this.lblSaveTo.Location = new System.Drawing.Point(20, 152);
+            this.lblSaveTo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSaveTo.Name = "lblSaveTo";
+            this.lblSaveTo.Size = new System.Drawing.Size(79, 28);
             this.lblSaveTo.TabIndex = 6;
             this.lblSaveTo.Text = "Save to";
-            this.lblSaveTo.Name = "lblSaveTo";
-            //
+            // 
             // lblSaveToStar
-            //
+            // 
             this.lblSaveToStar.AutoSize = true;
             this.lblSaveToStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSaveToStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSaveToStar.Location = new System.Drawing.Point(79, 122);
-            this.lblSaveToStar.Size = new System.Drawing.Size(14, 24);
+            this.lblSaveToStar.Location = new System.Drawing.Point(99, 152);
+            this.lblSaveToStar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSaveToStar.Name = "lblSaveToStar";
+            this.lblSaveToStar.Size = new System.Drawing.Size(21, 28);
             this.lblSaveToStar.TabIndex = 7;
             this.lblSaveToStar.Text = "*";
-            this.lblSaveToStar.Name = "lblSaveToStar";
-            //
+            // 
             // txtSaveTo
-            //
+            // 
             this.txtSaveTo.AccessibleName = "Save to folder (required)";
             this.txtSaveTo.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSaveTo.Location = new System.Drawing.Point(16, 148);
+            this.txtSaveTo.Location = new System.Drawing.Point(20, 185);
+            this.txtSaveTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSaveTo.MaxLength = 248;
-            this.txtSaveTo.Size = new System.Drawing.Size(176, 25);
-            this.txtSaveTo.TabIndex = 8;
             this.txtSaveTo.Name = "txtSaveTo";
+            this.txtSaveTo.Size = new System.Drawing.Size(219, 30);
+            this.txtSaveTo.TabIndex = 8;
             this.txtSaveTo.Leave += new System.EventHandler(this.txtSaveTo_Leave);
-            //
+            // 
             // btnBrowse
-            //
+            // 
             this.btnBrowse.AccessibleName = "Browse";
             this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.btnBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnBrowse.Location = new System.Drawing.Point(200, 146);
-            this.btnBrowse.Size = new System.Drawing.Size(82, 29);
+            this.btnBrowse.Location = new System.Drawing.Point(250, 182);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(102, 36);
             this.btnBrowse.TabIndex = 9;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = false;
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            //
+            // 
             // lblSaveToError
-            //
+            // 
             this.lblSaveToError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSaveToError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSaveToError.Location = new System.Drawing.Point(16, 177);
-            this.lblSaveToError.Size = new System.Drawing.Size(270, 16);
-            this.lblSaveToError.TabIndex = 10;
-            this.lblSaveToError.Text = "";
-            this.lblSaveToError.Visible = false;
+            this.lblSaveToError.Location = new System.Drawing.Point(20, 221);
+            this.lblSaveToError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSaveToError.Name = "lblSaveToError";
-            //
+            this.lblSaveToError.Size = new System.Drawing.Size(338, 20);
+            this.lblSaveToError.TabIndex = 10;
+            this.lblSaveToError.Visible = false;
+            // 
             // lblFileName
-            //
+            // 
             this.lblFileName.AutoSize = true;
             this.lblFileName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFileName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFileName.Location = new System.Drawing.Point(16, 202);
+            this.lblFileName.Location = new System.Drawing.Point(20, 252);
+            this.lblFileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFileName.Name = "lblFileName";
+            this.lblFileName.Size = new System.Drawing.Size(100, 28);
             this.lblFileName.TabIndex = 11;
             this.lblFileName.Text = "File name";
-            this.lblFileName.Name = "lblFileName";
-            //
+            // 
             // txtFileName
-            //
+            // 
             this.txtFileName.AccessibleName = "File name (read-only)";
             this.txtFileName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtFileName.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtFileName.Location = new System.Drawing.Point(16, 228);
+            this.txtFileName.Location = new System.Drawing.Point(20, 285);
+            this.txtFileName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
-            this.txtFileName.Size = new System.Drawing.Size(266, 25);
+            this.txtFileName.Size = new System.Drawing.Size(332, 27);
             this.txtFileName.TabIndex = 12;
             this.txtFileName.TabStop = false;
-            this.txtFileName.Name = "txtFileName";
-            //
+            // 
             // lblGeneratedOn
-            //
+            // 
             this.lblGeneratedOn.AutoSize = true;
             this.lblGeneratedOn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblGeneratedOn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblGeneratedOn.Location = new System.Drawing.Point(16, 268);
+            this.lblGeneratedOn.Location = new System.Drawing.Point(20, 335);
+            this.lblGeneratedOn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGeneratedOn.Name = "lblGeneratedOn";
+            this.lblGeneratedOn.Size = new System.Drawing.Size(137, 28);
             this.lblGeneratedOn.TabIndex = 13;
             this.lblGeneratedOn.Text = "Generated on";
-            this.lblGeneratedOn.Name = "lblGeneratedOn";
-            //
+            // 
             // txtGeneratedOn
-            //
+            // 
             this.txtGeneratedOn.AccessibleName = "Generated on (read-only)";
             this.txtGeneratedOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.txtGeneratedOn.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtGeneratedOn.Location = new System.Drawing.Point(16, 294);
+            this.txtGeneratedOn.Location = new System.Drawing.Point(20, 368);
+            this.txtGeneratedOn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtGeneratedOn.Name = "txtGeneratedOn";
             this.txtGeneratedOn.ReadOnly = true;
-            this.txtGeneratedOn.Size = new System.Drawing.Size(266, 25);
+            this.txtGeneratedOn.Size = new System.Drawing.Size(332, 27);
             this.txtGeneratedOn.TabIndex = 14;
             this.txtGeneratedOn.TabStop = false;
-            this.txtGeneratedOn.Name = "txtGeneratedOn";
-            //
+            // 
             // lblGeneratedHint
-            //
+            // 
             this.lblGeneratedHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblGeneratedHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblGeneratedHint.Location = new System.Drawing.Point(16, 322);
-            this.lblGeneratedHint.Size = new System.Drawing.Size(266, 18);
+            this.lblGeneratedHint.Location = new System.Drawing.Point(20, 402);
+            this.lblGeneratedHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGeneratedHint.Name = "lblGeneratedHint";
+            this.lblGeneratedHint.Size = new System.Drawing.Size(332, 22);
             this.lblGeneratedHint.TabIndex = 15;
             this.lblGeneratedHint.Text = "Stamped with the time when you save and export.";
-            this.lblGeneratedHint.Name = "lblGeneratedHint";
-            //
+            // 
             // lblPrintNote
-            //
+            // 
             this.lblPrintNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblPrintNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblPrintNote.Location = new System.Drawing.Point(16, 356);
-            this.lblPrintNote.Size = new System.Drawing.Size(266, 54);
-            this.lblPrintNote.TabIndex = 16;
-            this.lblPrintNote.Text = "Alternative programmes print only if you ticked them on Alternative programmes. Funding prints only if you chose Add to Summary on Funding options.";
+            this.lblPrintNote.Location = new System.Drawing.Point(20, 445);
+            this.lblPrintNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrintNote.Name = "lblPrintNote";
-            //
+            this.lblPrintNote.Size = new System.Drawing.Size(332, 68);
+            this.lblPrintNote.TabIndex = 16;
+            this.lblPrintNote.Text = "Alternative programmes print only if you ticked them on Alternative programmes. F" +
+    "unding prints only if you chose Add to Summary on Funding options.";
+            // 
             // lblSumRequiredNote
-            //
+            // 
             this.lblSumRequiredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSumRequiredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSumRequiredNote.Location = new System.Drawing.Point(16, 424);
-            this.lblSumRequiredNote.Size = new System.Drawing.Size(266, 18);
+            this.lblSumRequiredNote.Location = new System.Drawing.Point(20, 530);
+            this.lblSumRequiredNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSumRequiredNote.Name = "lblSumRequiredNote";
+            this.lblSumRequiredNote.Size = new System.Drawing.Size(332, 22);
             this.lblSumRequiredNote.TabIndex = 17;
             this.lblSumRequiredNote.Text = "* indicates a required field.";
-            this.lblSumRequiredNote.Name = "lblSumRequiredNote";
-            //
+            // 
             // pnlPreviewCard
-            //
+            // 
+            this.pnlPreviewCard.BackColor = System.Drawing.Color.White;
+            this.pnlPreviewCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPreviewCard.Controls.Add(this.lblPreviewHeadingBar);
             this.pnlPreviewCard.Controls.Add(this.lblPreviewHeading);
             this.pnlPreviewCard.Controls.Add(this.lblPreviewMeta);
             this.pnlPreviewCard.Controls.Add(this.pnlPreviewRule);
             this.pnlPreviewCard.Controls.Add(this.rtbPreview);
-            this.pnlPreviewCard.BackColor = System.Drawing.Color.White;
-            this.pnlPreviewCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPreviewCard.Location = new System.Drawing.Point(316, 0);
-            this.pnlPreviewCard.Size = new System.Drawing.Size(618, 459);
-            this.pnlPreviewCard.TabIndex = 1;
+            this.pnlPreviewCard.Location = new System.Drawing.Point(395, 0);
+            this.pnlPreviewCard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPreviewCard.Name = "pnlPreviewCard";
-            //
+            this.pnlPreviewCard.Size = new System.Drawing.Size(772, 573);
+            this.pnlPreviewCard.TabIndex = 1;
+            // 
             // lblPreviewHeadingBar
-            //
+            // 
             this.lblPreviewHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblPreviewHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblPreviewHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblPreviewHeadingBar.TabIndex = 0;
+            this.lblPreviewHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.lblPreviewHeadingBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblPreviewHeadingBar.Name = "lblPreviewHeadingBar";
-            //
+            this.lblPreviewHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.lblPreviewHeadingBar.TabIndex = 0;
+            // 
             // lblPreviewHeading
-            //
+            // 
             this.lblPreviewHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblPreviewHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblPreviewHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblPreviewHeading.Size = new System.Drawing.Size(300, 28);
+            this.lblPreviewHeading.Location = new System.Drawing.Point(32, 10);
+            this.lblPreviewHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPreviewHeading.Name = "lblPreviewHeading";
+            this.lblPreviewHeading.Size = new System.Drawing.Size(375, 35);
             this.lblPreviewHeading.TabIndex = 1;
             this.lblPreviewHeading.Text = "Preview";
             this.lblPreviewHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPreviewHeading.Name = "lblPreviewHeading";
-            //
+            // 
             // lblPreviewMeta
-            //
+            // 
             this.lblPreviewMeta.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblPreviewMeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblPreviewMeta.Location = new System.Drawing.Point(340, 14);
-            this.lblPreviewMeta.Size = new System.Drawing.Size(258, 18);
-            this.lblPreviewMeta.TabIndex = 2;
-            this.lblPreviewMeta.Text = "";
-            this.lblPreviewMeta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPreviewMeta.Location = new System.Drawing.Point(425, 18);
+            this.lblPreviewMeta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPreviewMeta.Name = "lblPreviewMeta";
-            //
+            this.lblPreviewMeta.Size = new System.Drawing.Size(322, 22);
+            this.lblPreviewMeta.TabIndex = 2;
+            this.lblPreviewMeta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // pnlPreviewRule
-            //
+            // 
             this.pnlPreviewRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.pnlPreviewRule.Location = new System.Drawing.Point(20, 38);
-            this.pnlPreviewRule.Size = new System.Drawing.Size(578, 1);
-            this.pnlPreviewRule.TabIndex = 3;
+            this.pnlPreviewRule.Location = new System.Drawing.Point(25, 48);
+            this.pnlPreviewRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlPreviewRule.Name = "pnlPreviewRule";
-            //
+            this.pnlPreviewRule.Size = new System.Drawing.Size(722, 1);
+            this.pnlPreviewRule.TabIndex = 3;
+            // 
             // rtbPreview
-            //
+            // 
             this.rtbPreview.AccessibleName = "Advisory summary preview (read-only)";
             this.rtbPreview.BackColor = System.Drawing.Color.White;
             this.rtbPreview.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbPreview.DetectUrls = false;
             this.rtbPreview.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rtbPreview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rtbPreview.Location = new System.Drawing.Point(20, 44);
+            this.rtbPreview.Location = new System.Drawing.Point(25, 55);
+            this.rtbPreview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtbPreview.Name = "rtbPreview";
             this.rtbPreview.ReadOnly = true;
             this.rtbPreview.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.rtbPreview.Size = new System.Drawing.Size(578, 400);
+            this.rtbPreview.Size = new System.Drawing.Size(722, 500);
             this.rtbPreview.TabIndex = 4;
             this.rtbPreview.Text = "";
-            this.rtbPreview.Name = "rtbPreview";
-            //
+            // 
             // pnlNoticeGap
-            //
+            // 
             this.pnlNoticeGap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNoticeGap.Location = new System.Drawing.Point(20, 0);
-            this.pnlNoticeGap.Size = new System.Drawing.Size(934, 10);
-            this.pnlNoticeGap.TabIndex = 1;
+            this.pnlNoticeGap.Location = new System.Drawing.Point(20, 127);
+            this.pnlNoticeGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlNoticeGap.Name = "pnlNoticeGap";
-            //
+            this.pnlNoticeGap.Size = new System.Drawing.Size(1178, 12);
+            this.pnlNoticeGap.TabIndex = 1;
+            // 
             // pnlNotice
-            //
+            // 
+            this.pnlNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlNotice.Controls.Add(this.lblNotice);
             this.pnlNotice.Controls.Add(this.pnlNoticeBar);
-            this.pnlNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNotice.Location = new System.Drawing.Point(20, 0);
-            this.pnlNotice.Size = new System.Drawing.Size(934, 48);
-            this.pnlNotice.TabIndex = 2;
+            this.pnlNotice.Location = new System.Drawing.Point(20, 67);
+            this.pnlNotice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlNotice.Name = "pnlNotice";
-            //
+            this.pnlNotice.Size = new System.Drawing.Size(1178, 60);
+            this.pnlNotice.TabIndex = 2;
+            // 
             // lblNotice
-            //
+            // 
             this.lblNotice.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblNotice.Location = new System.Drawing.Point(5, 0);
-            this.lblNotice.Padding = new System.Windows.Forms.Padding(14, 0, 10, 0);
-            this.lblNotice.Size = new System.Drawing.Size(929, 48);
-            this.lblNotice.TabIndex = 0;
-            this.lblNotice.Text = "";
-            this.lblNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNotice.Location = new System.Drawing.Point(6, 0);
+            this.lblNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNotice.Name = "lblNotice";
-            //
+            this.lblNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblNotice.Size = new System.Drawing.Size(1172, 60);
+            this.lblNotice.TabIndex = 0;
+            this.lblNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // pnlNoticeBar
-            //
+            // 
             this.pnlNoticeBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.pnlNoticeBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlNoticeBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNoticeBar.Size = new System.Drawing.Size(5, 48);
-            this.pnlNoticeBar.TabIndex = 1;
+            this.pnlNoticeBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlNoticeBar.Name = "pnlNoticeBar";
-            //
+            this.pnlNoticeBar.Size = new System.Drawing.Size(6, 60);
+            this.pnlNoticeBar.TabIndex = 1;
+            // 
             // pnlContextGap
-            //
+            // 
             this.pnlContextGap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContextGap.Location = new System.Drawing.Point(20, 0);
-            this.pnlContextGap.Size = new System.Drawing.Size(934, 10);
-            this.pnlContextGap.TabIndex = 3;
+            this.pnlContextGap.Location = new System.Drawing.Point(20, 55);
+            this.pnlContextGap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlContextGap.Name = "pnlContextGap";
-            //
+            this.pnlContextGap.Size = new System.Drawing.Size(1178, 12);
+            this.pnlContextGap.TabIndex = 3;
+            // 
             // pnlContext
-            //
+            // 
+            this.pnlContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlContext.Controls.Add(this.lblContext);
             this.pnlContext.Controls.Add(this.pnlContextBar);
-            this.pnlContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
             this.pnlContext.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContext.Location = new System.Drawing.Point(20, 12);
-            this.pnlContext.Size = new System.Drawing.Size(934, 36);
-            this.pnlContext.TabIndex = 4;
+            this.pnlContext.Location = new System.Drawing.Point(20, 10);
+            this.pnlContext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlContext.Name = "pnlContext";
-            //
+            this.pnlContext.Size = new System.Drawing.Size(1178, 45);
+            this.pnlContext.TabIndex = 4;
+            // 
             // lblContext
-            //
+            // 
             this.lblContext.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblContext.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblContext.Location = new System.Drawing.Point(5, 0);
-            this.lblContext.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.lblContext.Size = new System.Drawing.Size(929, 36);
-            this.lblContext.TabIndex = 0;
-            this.lblContext.Text = "";
-            this.lblContext.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblContext.Location = new System.Drawing.Point(6, 0);
+            this.lblContext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContext.Name = "lblContext";
-            //
+            this.lblContext.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.lblContext.Size = new System.Drawing.Size(1172, 45);
+            this.lblContext.TabIndex = 0;
+            this.lblContext.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // pnlContextBar
-            //
+            // 
             this.pnlContextBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.pnlContextBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlContextBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlContextBar.Size = new System.Drawing.Size(5, 36);
-            this.pnlContextBar.TabIndex = 1;
+            this.pnlContextBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlContextBar.Name = "pnlContextBar";
-            //
+            this.pnlContextBar.Size = new System.Drawing.Size(6, 45);
+            this.pnlContextBar.TabIndex = 1;
+            // 
             // pnlTitle
-            //
+            // 
+            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.pnlTitle.Controls.Add(this.lblTitle);
             this.pnlTitle.Controls.Add(this.lblSubtitle);
             this.pnlTitle.Controls.Add(this.lblBadge);
             this.pnlTitle.Controls.Add(this.pnlTitleRule);
-            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTitle.Location = new System.Drawing.Point(210, 0);
-            this.pnlTitle.Size = new System.Drawing.Size(974, 84);
-            this.pnlTitle.TabIndex = 1;
+            this.pnlTitle.Location = new System.Drawing.Point(262, 0);
+            this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTitle.Name = "pnlTitle";
-            //
+            this.pnlTitle.Size = new System.Drawing.Size(1218, 105);
+            this.pnlTitle.TabIndex = 1;
+            // 
             // lblTitle
-            //
+            // 
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 20F);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(20, 10);
-            this.lblTitle.Size = new System.Drawing.Size(560, 40);
+            this.lblTitle.Location = new System.Drawing.Point(25, 12);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(700, 50);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Welcome to Future Path";
-            this.lblTitle.Name = "lblTitle";
-            //
+            // 
             // lblSubtitle
-            //
+            // 
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(24, 54);
-            this.lblSubtitle.Size = new System.Drawing.Size(914, 18);
-            this.lblSubtitle.TabIndex = 1;
-            this.lblSubtitle.Text = "";
+            this.lblSubtitle.Location = new System.Drawing.Point(30, 68);
+            this.lblSubtitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubtitle.Name = "lblSubtitle";
-            //
+            this.lblSubtitle.Size = new System.Drawing.Size(1142, 22);
+            this.lblSubtitle.TabIndex = 1;
+            // 
             // lblBadge
-            //
+            // 
             this.lblBadge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBadge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.lblBadge.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
             this.lblBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblBadge.Location = new System.Drawing.Point(804, 16);
-            this.lblBadge.Size = new System.Drawing.Size(150, 24);
+            this.lblBadge.Location = new System.Drawing.Point(1005, 20);
+            this.lblBadge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBadge.Name = "lblBadge";
+            this.lblBadge.Size = new System.Drawing.Size(188, 30);
             this.lblBadge.TabIndex = 2;
             this.lblBadge.Text = "LEARNER";
             this.lblBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblBadge.Name = "lblBadge";
-            //
+            // 
             // pnlTitleRule
-            //
+            // 
             this.pnlTitleRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
             this.pnlTitleRule.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTitleRule.Location = new System.Drawing.Point(0, 81);
-            this.pnlTitleRule.Size = new System.Drawing.Size(974, 3);
-            this.pnlTitleRule.TabIndex = 3;
+            this.pnlTitleRule.Location = new System.Drawing.Point(0, 101);
+            this.pnlTitleRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTitleRule.Name = "pnlTitleRule";
-            //
+            this.pnlTitleRule.Size = new System.Drawing.Size(1218, 4);
+            this.pnlTitleRule.TabIndex = 3;
+            // 
             // pnlActions
-            //
+            // 
+            this.pnlActions.BackColor = System.Drawing.Color.White;
             this.pnlActions.Controls.Add(this.flpActions);
             this.pnlActions.Controls.Add(this.lblActionHint);
             this.pnlActions.Controls.Add(this.pnlActionRule);
-            this.pnlActions.BackColor = System.Drawing.Color.White;
             this.pnlActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlActions.Location = new System.Drawing.Point(210, 671);
-            this.pnlActions.Size = new System.Drawing.Size(974, 64);
-            this.pnlActions.TabIndex = 2;
+            this.pnlActions.Location = new System.Drawing.Point(262, 839);
+            this.pnlActions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlActions.Name = "pnlActions";
-            //
+            this.pnlActions.Size = new System.Drawing.Size(1218, 80);
+            this.pnlActions.TabIndex = 2;
+            // 
             // flpActions
-            //
+            // 
             this.flpActions.Controls.Add(this.btnPrimary);
             this.flpActions.Controls.Add(this.btnAlternatives);
             this.flpActions.Controls.Add(this.btnCompare);
@@ -4041,139 +4312,149 @@
             this.flpActions.Controls.Add(this.btnCancel);
             this.flpActions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpActions.Location = new System.Drawing.Point(330, 1);
-            this.flpActions.Padding = new System.Windows.Forms.Padding(0, 11, 20, 0);
-            this.flpActions.Size = new System.Drawing.Size(644, 63);
+            this.flpActions.Location = new System.Drawing.Point(412, 1);
+            this.flpActions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flpActions.Name = "flpActions";
+            this.flpActions.Padding = new System.Windows.Forms.Padding(0, 14, 25, 0);
+            this.flpActions.Size = new System.Drawing.Size(806, 79);
             this.flpActions.TabIndex = 0;
             this.flpActions.WrapContents = false;
-            this.flpActions.Name = "flpActions";
-            //
+            // 
             // btnPrimary
-            //
+            // 
             this.btnPrimary.AccessibleName = "Save and continue";
             this.btnPrimary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.btnPrimary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrimary.FlatAppearance.BorderSize = 0;
             this.btnPrimary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrimary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnPrimary.ForeColor = System.Drawing.Color.White;
-            this.btnPrimary.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnPrimary.Size = new System.Drawing.Size(190, 40);
+            this.btnPrimary.Location = new System.Drawing.Point(543, 14);
+            this.btnPrimary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnPrimary.Name = "btnPrimary";
+            this.btnPrimary.Size = new System.Drawing.Size(238, 50);
             this.btnPrimary.TabIndex = 0;
             this.btnPrimary.Text = "Save and continue";
             this.btnPrimary.UseVisualStyleBackColor = false;
-            this.btnPrimary.Name = "btnPrimary";
-            this.btnPrimary.FlatAppearance.BorderSize = 0;
             this.btnPrimary.Click += new System.EventHandler(this.btnPrimary_Click);
-            //
+            // 
             // btnAlternatives
-            //
+            // 
             this.btnAlternatives.AccessibleName = "Alternative programmes";
             this.btnAlternatives.BackColor = System.Drawing.Color.White;
             this.btnAlternatives.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAlternatives.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAlternatives.Size = new System.Drawing.Size(170, 40);
+            this.btnAlternatives.Location = new System.Drawing.Point(319, 14);
+            this.btnAlternatives.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternatives.Name = "btnAlternatives";
+            this.btnAlternatives.Size = new System.Drawing.Size(212, 50);
             this.btnAlternatives.TabIndex = 1;
             this.btnAlternatives.Text = "Alternative programmes";
             this.btnAlternatives.UseVisualStyleBackColor = false;
-            this.btnAlternatives.Name = "btnAlternatives";
-            this.btnAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnAlternatives.Click += new System.EventHandler(this.btnAlternatives_Click);
-            //
+            // 
             // btnCompare
-            //
+            // 
             this.btnCompare.AccessibleName = "Compare with my selection";
             this.btnCompare.BackColor = System.Drawing.Color.White;
             this.btnCompare.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCompare.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCompare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnCompare.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnCompare.Size = new System.Drawing.Size(200, 40);
+            this.btnCompare.Location = new System.Drawing.Point(57, 14);
+            this.btnCompare.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnCompare.Name = "btnCompare";
+            this.btnCompare.Size = new System.Drawing.Size(250, 50);
             this.btnCompare.TabIndex = 2;
             this.btnCompare.Text = "Compare with my selection";
             this.btnCompare.UseVisualStyleBackColor = false;
-            this.btnCompare.Name = "btnCompare";
-            this.btnCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
-            //
+            // 
             // btnFunding
-            //
+            // 
             this.btnFunding.AccessibleName = "Funding options";
             this.btnFunding.BackColor = System.Drawing.Color.White;
             this.btnFunding.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnFunding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFunding.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnFunding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnFunding.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnFunding.Size = new System.Drawing.Size(140, 40);
+            this.btnFunding.Location = new System.Drawing.Point(-130, 14);
+            this.btnFunding.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFunding.Name = "btnFunding";
+            this.btnFunding.Size = new System.Drawing.Size(175, 50);
             this.btnFunding.TabIndex = 3;
             this.btnFunding.Text = "Funding options";
             this.btnFunding.UseVisualStyleBackColor = false;
-            this.btnFunding.Name = "btnFunding";
-            this.btnFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnFunding.Click += new System.EventHandler(this.btnFunding_Click);
-            //
+            // 
             // btnBack
-            //
+            // 
             this.btnBack.AccessibleName = "Back";
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnBack.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnBack.Size = new System.Drawing.Size(130, 40);
+            this.btnBack.Location = new System.Drawing.Point(-304, 14);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(162, 50);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Name = "btnBack";
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            //
+            // 
             // btnCancel
-            //
+            // 
             this.btnCancel.AccessibleName = "Cancel";
             this.btnCancel.BackColor = System.Drawing.Color.White;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnCancel.Size = new System.Drawing.Size(130, 40);
+            this.btnCancel.Location = new System.Drawing.Point(-478, 14);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(162, 50);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            //
+            // 
             // lblActionHint
-            //
+            // 
             this.lblActionHint.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblActionHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblActionHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblActionHint.Location = new System.Drawing.Point(20, 12);
-            this.lblActionHint.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblActionHint.Size = new System.Drawing.Size(330, 63);
-            this.lblActionHint.TabIndex = 1;
-            this.lblActionHint.Text = "";
-            this.lblActionHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblActionHint.Location = new System.Drawing.Point(0, 1);
+            this.lblActionHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblActionHint.Name = "lblActionHint";
-            //
+            this.lblActionHint.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblActionHint.Size = new System.Drawing.Size(412, 79);
+            this.lblActionHint.TabIndex = 1;
+            this.lblActionHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // pnlActionRule
-            //
+            // 
             this.pnlActionRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.pnlActionRule.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlActionRule.Location = new System.Drawing.Point(0, 0);
-            this.pnlActionRule.Size = new System.Drawing.Size(974, 1);
-            this.pnlActionRule.TabIndex = 2;
+            this.pnlActionRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlActionRule.Name = "pnlActionRule";
-            //
+            this.pnlActionRule.Size = new System.Drawing.Size(1218, 1);
+            this.pnlActionRule.TabIndex = 2;
+            // 
             // pnlRail
-            //
+            // 
+            this.pnlRail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.pnlRail.Controls.Add(this.lblBrand);
             this.pnlRail.Controls.Add(this.pnlBrandRule);
             this.pnlRail.Controls.Add(this.btnNavHome);
@@ -4184,381 +4465,280 @@
             this.pnlRail.Controls.Add(this.lblStep5);
             this.pnlRail.Controls.Add(this.lblStep6);
             this.pnlRail.Controls.Add(this.lblRailFooter);
-            this.pnlRail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.pnlRail.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlRail.Location = new System.Drawing.Point(0, 0);
-            this.pnlRail.Size = new System.Drawing.Size(210, 735);
-            this.pnlRail.TabIndex = 3;
+            this.pnlRail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlRail.Name = "pnlRail";
-            //
+            this.pnlRail.Size = new System.Drawing.Size(262, 919);
+            this.pnlRail.TabIndex = 3;
+            // 
             // lblBrand
-            //
+            // 
             this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblBrand.ForeColor = System.Drawing.Color.White;
             this.lblBrand.Location = new System.Drawing.Point(0, 0);
-            this.lblBrand.Size = new System.Drawing.Size(210, 66);
+            this.lblBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(262, 82);
             this.lblBrand.TabIndex = 0;
             this.lblBrand.Text = "Future Path";
             this.lblBrand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblBrand.Name = "lblBrand";
-            //
+            // 
             // pnlBrandRule
-            //
+            // 
             this.pnlBrandRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlBrandRule.Location = new System.Drawing.Point(24, 66);
-            this.pnlBrandRule.Size = new System.Drawing.Size(162, 2);
-            this.pnlBrandRule.TabIndex = 1;
+            this.pnlBrandRule.Location = new System.Drawing.Point(30, 82);
+            this.pnlBrandRule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlBrandRule.Name = "pnlBrandRule";
-            //
+            this.pnlBrandRule.Size = new System.Drawing.Size(202, 2);
+            this.pnlBrandRule.TabIndex = 1;
+            // 
             // btnNavHome
-            //
+            // 
             this.btnNavHome.AccessibleName = "Home";
             this.btnNavHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
             this.btnNavHome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNavHome.FlatAppearance.BorderSize = 0;
+            this.btnNavHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(64)))), ((int)(((byte)(104)))));
             this.btnNavHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNavHome.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnNavHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.btnNavHome.Location = new System.Drawing.Point(0, 84);
-            this.btnNavHome.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.btnNavHome.Size = new System.Drawing.Size(210, 36);
+            this.btnNavHome.Location = new System.Drawing.Point(0, 105);
+            this.btnNavHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNavHome.Name = "btnNavHome";
+            this.btnNavHome.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.btnNavHome.Size = new System.Drawing.Size(262, 45);
             this.btnNavHome.TabIndex = 2;
             this.btnNavHome.Text = "Home";
             this.btnNavHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNavHome.UseVisualStyleBackColor = false;
-            this.btnNavHome.Name = "btnNavHome";
-            this.btnNavHome.FlatAppearance.BorderSize = 0;
-            this.btnNavHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(64)))), ((int)(((byte)(104)))));
             this.btnNavHome.Click += new System.EventHandler(this.btnNavHome_Click);
-            //
+            // 
             // lblStep1
-            //
+            // 
             this.lblStep1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(64)))), ((int)(((byte)(104)))));
             this.lblStep1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.lblStep1.ForeColor = System.Drawing.Color.White;
-            this.lblStep1.Location = new System.Drawing.Point(0, 120);
-            this.lblStep1.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep1.Size = new System.Drawing.Size(210, 36);
+            this.lblStep1.Location = new System.Drawing.Point(0, 150);
+            this.lblStep1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep1.Name = "lblStep1";
+            this.lblStep1.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep1.Size = new System.Drawing.Size(262, 45);
             this.lblStep1.TabIndex = 3;
             this.lblStep1.Text = "Learner profile";
             this.lblStep1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep1.Name = "lblStep1";
             this.lblStep1.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblStep2
-            //
+            // 
             this.lblStep2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStep2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep2.Location = new System.Drawing.Point(0, 156);
-            this.lblStep2.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep2.Size = new System.Drawing.Size(210, 36);
+            this.lblStep2.Location = new System.Drawing.Point(0, 195);
+            this.lblStep2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep2.Name = "lblStep2";
+            this.lblStep2.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep2.Size = new System.Drawing.Size(262, 45);
             this.lblStep2.TabIndex = 4;
             this.lblStep2.Text = "Subjects and marks";
             this.lblStep2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep2.Name = "lblStep2";
             this.lblStep2.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblStep3
-            //
+            // 
             this.lblStep3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStep3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep3.Location = new System.Drawing.Point(0, 192);
-            this.lblStep3.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep3.Size = new System.Drawing.Size(210, 36);
+            this.lblStep3.Location = new System.Drawing.Point(0, 240);
+            this.lblStep3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep3.Name = "lblStep3";
+            this.lblStep3.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep3.Size = new System.Drawing.Size(262, 45);
             this.lblStep3.TabIndex = 5;
             this.lblStep3.Text = "Interest questionnaire";
             this.lblStep3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep3.Name = "lblStep3";
             this.lblStep3.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblStep4
-            //
+            // 
             this.lblStep4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStep4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep4.Location = new System.Drawing.Point(0, 228);
-            this.lblStep4.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep4.Size = new System.Drawing.Size(210, 36);
+            this.lblStep4.Location = new System.Drawing.Point(0, 285);
+            this.lblStep4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep4.Name = "lblStep4";
+            this.lblStep4.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep4.Size = new System.Drawing.Size(262, 45);
             this.lblStep4.TabIndex = 6;
             this.lblStep4.Text = "Faculty and department";
             this.lblStep4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep4.Name = "lblStep4";
             this.lblStep4.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblStep5
-            //
+            // 
             this.lblStep5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStep5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep5.Location = new System.Drawing.Point(0, 264);
-            this.lblStep5.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep5.Size = new System.Drawing.Size(210, 36);
+            this.lblStep5.Location = new System.Drawing.Point(0, 330);
+            this.lblStep5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep5.Name = "lblStep5";
+            this.lblStep5.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep5.Size = new System.Drawing.Size(262, 45);
             this.lblStep5.TabIndex = 7;
             this.lblStep5.Text = "Eligibility results";
             this.lblStep5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep5.Name = "lblStep5";
             this.lblStep5.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblStep6
-            //
+            // 
             this.lblStep6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblStep6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep6.Location = new System.Drawing.Point(0, 300);
-            this.lblStep6.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.lblStep6.Size = new System.Drawing.Size(210, 36);
+            this.lblStep6.Location = new System.Drawing.Point(0, 375);
+            this.lblStep6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStep6.Name = "lblStep6";
+            this.lblStep6.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.lblStep6.Size = new System.Drawing.Size(262, 45);
             this.lblStep6.TabIndex = 8;
             this.lblStep6.Text = "Advisory summary";
             this.lblStep6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep6.Name = "lblStep6";
             this.lblStep6.Click += new System.EventHandler(this.lblStep_Click);
-            //
+            // 
             // lblRailFooter
-            //
+            // 
             this.lblRailFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblRailFooter.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRailFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.lblRailFooter.Location = new System.Drawing.Point(0, 655);
-            this.lblRailFooter.Padding = new System.Windows.Forms.Padding(16, 0, 8, 0);
-            this.lblRailFooter.Size = new System.Drawing.Size(210, 80);
+            this.lblRailFooter.Location = new System.Drawing.Point(0, 819);
+            this.lblRailFooter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRailFooter.Name = "lblRailFooter";
+            this.lblRailFooter.Padding = new System.Windows.Forms.Padding(20, 0, 10, 0);
+            this.lblRailFooter.Size = new System.Drawing.Size(262, 100);
             this.lblRailFooter.TabIndex = 9;
             this.lblRailFooter.Text = "Session\r\nSelf-service";
             this.lblRailFooter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblRailFooter.Name = "lblRailFooter";
-            //
+            // 
             // pnlStatus
-            //
-            this.pnlStatus.Controls.Add(this.lblStatus);
+            // 
             this.pnlStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlStatus.Controls.Add(this.lblStatus);
             this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStatus.Location = new System.Drawing.Point(0, 735);
-            this.pnlStatus.Size = new System.Drawing.Size(1184, 26);
-            this.pnlStatus.TabIndex = 4;
+            this.pnlStatus.Location = new System.Drawing.Point(0, 919);
+            this.pnlStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlStatus.Name = "pnlStatus";
-            //
+            this.pnlStatus.Size = new System.Drawing.Size(1480, 32);
+            this.pnlStatus.TabIndex = 4;
+            // 
             // lblStatus
-            //
+            // 
             this.lblStatus.AccessibleName = "Status";
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblStatus.ForeColor = System.Drawing.Color.White;
             this.lblStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblStatus.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.lblStatus.Size = new System.Drawing.Size(1184, 26);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            //
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.lblStatus.Size = new System.Drawing.Size(1480, 32);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainForm
-            //
+            // 
             this.AcceptButton = this.btnPrimary;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1184, 761);
-            this.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Future Path \u2014 Homepage";
+            this.ClientSize = new System.Drawing.Size(1480, 951);
             this.Controls.Add(this.pnlBody);
             this.Controls.Add(this.pnlTitle);
             this.Controls.Add(this.pnlActions);
             this.Controls.Add(this.pnlRail);
             this.Controls.Add(this.pnlStatus);
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Future Path — Homepage";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.pnlBody.ResumeLayout(false);
-            this.pnlBody.PerformLayout();
             this.tabMain.ResumeLayout(false);
-            this.tabMain.PerformLayout();
             this.tabHome.ResumeLayout(false);
-            this.tabHome.PerformLayout();
             this.pnlHomeContent.ResumeLayout(false);
-            this.pnlHomeContent.PerformLayout();
             this.pnlLearnerCard.ResumeLayout(false);
-            this.pnlLearnerCard.PerformLayout();
-            this.lblLearnerHeadingBar.ResumeLayout(false);
-            this.lblLearnerHeadingBar.PerformLayout();
             this.pnlStaffCard.ResumeLayout(false);
-            this.pnlStaffCard.PerformLayout();
-            this.lblStaffHeadingBar.ResumeLayout(false);
-            this.lblStaffHeadingBar.PerformLayout();
             this.tabProfile.ResumeLayout(false);
-            this.tabProfile.PerformLayout();
             this.pnlProfContent.ResumeLayout(false);
-            this.pnlProfContent.PerformLayout();
             this.pnlWhoCard.ResumeLayout(false);
             this.pnlWhoCard.PerformLayout();
-            this.lblWhoHeadingBar.ResumeLayout(false);
-            this.lblWhoHeadingBar.PerformLayout();
             this.pnlSchoolCard.ResumeLayout(false);
             this.pnlSchoolCard.PerformLayout();
-            this.lblSchoolHeadingBar.ResumeLayout(false);
-            this.lblSchoolHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAdvisingYear)).EndInit();
             this.pnlContactCard.ResumeLayout(false);
             this.pnlContactCard.PerformLayout();
-            this.lblContactHeadingBar.ResumeLayout(false);
-            this.lblContactHeadingBar.PerformLayout();
             this.pnlSessionCard.ResumeLayout(false);
             this.pnlSessionCard.PerformLayout();
-            this.lblSessionHeadingBar.ResumeLayout(false);
-            this.lblSessionHeadingBar.PerformLayout();
             this.tabSubjects.ResumeLayout(false);
-            this.tabSubjects.PerformLayout();
             this.pnlSubjContent.ResumeLayout(false);
-            this.pnlSubjContent.PerformLayout();
             this.pnlAddCard.ResumeLayout(false);
             this.pnlAddCard.PerformLayout();
-            this.lblAddHeadingBar.ResumeLayout(false);
-            this.lblAddHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMark)).EndInit();
             this.pnlSummary.ResumeLayout(false);
-            this.pnlSummary.PerformLayout();
             this.pnlCapturedCard.ResumeLayout(false);
-            this.pnlCapturedCard.PerformLayout();
-            this.lblCapturedHeadingBar.ResumeLayout(false);
-            this.lblCapturedHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).EndInit();
             this.tabInterests.ResumeLayout(false);
-            this.tabInterests.PerformLayout();
             this.pnlIntContent.ResumeLayout(false);
-            this.pnlIntContent.PerformLayout();
             this.pnlQuestionCard.ResumeLayout(false);
-            this.pnlQuestionCard.PerformLayout();
-            this.lblQuestionHeadingBar.ResumeLayout(false);
-            this.lblQuestionHeadingBar.PerformLayout();
             this.pnlStatementHeader.ResumeLayout(false);
-            this.pnlStatementHeader.PerformLayout();
-            this.pnlStatements.ResumeLayout(false);
-            this.pnlStatements.PerformLayout();
             this.tileAnswered.ResumeLayout(false);
-            this.tileAnswered.PerformLayout();
             this.tileCategory1.ResumeLayout(false);
-            this.tileCategory1.PerformLayout();
             this.tileCategory2.ResumeLayout(false);
-            this.tileCategory2.PerformLayout();
             this.tileCategory3.ResumeLayout(false);
-            this.tileCategory3.PerformLayout();
             this.tabFaculty.ResumeLayout(false);
-            this.tabFaculty.PerformLayout();
             this.pnlSelContent.ResumeLayout(false);
-            this.pnlSelContent.PerformLayout();
             this.pnlSearchCard.ResumeLayout(false);
             this.pnlSearchCard.PerformLayout();
-            this.lblSearchHeadingBar.ResumeLayout(false);
-            this.lblSearchHeadingBar.PerformLayout();
             this.pnlProgrammesCard.ResumeLayout(false);
-            this.pnlProgrammesCard.PerformLayout();
-            this.lblProgrammesHeadingBar.ResumeLayout(false);
-            this.lblProgrammesHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammes)).EndInit();
             this.pnlRequirementsCard.ResumeLayout(false);
-            this.pnlRequirementsCard.PerformLayout();
-            this.lblRequirementsHeadingBar.ResumeLayout(false);
-            this.lblRequirementsHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).EndInit();
             this.pnlAlignmentCard.ResumeLayout(false);
-            this.pnlAlignmentCard.PerformLayout();
             this.tabResults.ResumeLayout(false);
-            this.tabResults.PerformLayout();
             this.tabResultsGroup.ResumeLayout(false);
-            this.tabResultsGroup.PerformLayout();
             this.tabOutcome.ResumeLayout(false);
-            this.tabOutcome.PerformLayout();
             this.pnlOutContent.ResumeLayout(false);
-            this.pnlOutContent.PerformLayout();
             this.pnlOutcome.ResumeLayout(false);
-            this.pnlOutcome.PerformLayout();
-            this.pnlOutcomeBar.ResumeLayout(false);
-            this.pnlOutcomeBar.PerformLayout();
             this.pnlCheckedCard.ResumeLayout(false);
-            this.pnlCheckedCard.PerformLayout();
-            this.lblCheckedHeadingBar.ResumeLayout(false);
-            this.lblCheckedHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChecked)).EndInit();
             this.pnlSubjectTile.ResumeLayout(false);
-            this.pnlSubjectTile.PerformLayout();
             this.pnlMarkTile.ResumeLayout(false);
-            this.pnlMarkTile.PerformLayout();
             this.pnlInterestTile.ResumeLayout(false);
-            this.pnlInterestTile.PerformLayout();
             this.pnlOverallTile.ResumeLayout(false);
-            this.pnlOverallTile.PerformLayout();
             this.tabAlternatives.ResumeLayout(false);
-            this.tabAlternatives.PerformLayout();
             this.pnlAltContent.ResumeLayout(false);
-            this.pnlAltContent.PerformLayout();
             this.pnlRankedCard.ResumeLayout(false);
-            this.pnlRankedCard.PerformLayout();
-            this.lblRankedHeadingBar.ResumeLayout(false);
-            this.lblRankedHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).EndInit();
             this.pnlReasonsCard.ResumeLayout(false);
-            this.pnlReasonsCard.PerformLayout();
-            this.lblReasonsHeadingBar.ResumeLayout(false);
-            this.lblReasonsHeadingBar.PerformLayout();
             this.tabFunding.ResumeLayout(false);
-            this.tabFunding.PerformLayout();
             this.pnlFundContent.ResumeLayout(false);
-            this.pnlFundContent.PerformLayout();
             this.pnlFilterCard.ResumeLayout(false);
             this.pnlFilterCard.PerformLayout();
             this.pnlFundingCard.ResumeLayout(false);
-            this.pnlFundingCard.PerformLayout();
-            this.lblFundingHeadingBar.ResumeLayout(false);
-            this.lblFundingHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).EndInit();
             this.pnlDetailCard.ResumeLayout(false);
             this.pnlDetailCard.PerformLayout();
-            this.lblDetailHeadingBar.ResumeLayout(false);
-            this.lblDetailHeadingBar.PerformLayout();
             this.pnlSampleNote.ResumeLayout(false);
-            this.pnlSampleNote.PerformLayout();
-            this.pnlSampleNoteBar.ResumeLayout(false);
-            this.pnlSampleNoteBar.PerformLayout();
             this.tabSummary.ResumeLayout(false);
-            this.tabSummary.PerformLayout();
             this.pnlSumContent.ResumeLayout(false);
-            this.pnlSumContent.PerformLayout();
             this.pnlIncludeCard.ResumeLayout(false);
             this.pnlIncludeCard.PerformLayout();
-            this.lblIncludeHeadingBar.ResumeLayout(false);
-            this.lblIncludeHeadingBar.PerformLayout();
             this.pnlPreviewCard.ResumeLayout(false);
-            this.pnlPreviewCard.PerformLayout();
-            this.lblPreviewHeadingBar.ResumeLayout(false);
-            this.lblPreviewHeadingBar.PerformLayout();
-            this.pnlPreviewRule.ResumeLayout(false);
-            this.pnlPreviewRule.PerformLayout();
-            this.pnlNoticeGap.ResumeLayout(false);
-            this.pnlNoticeGap.PerformLayout();
             this.pnlNotice.ResumeLayout(false);
-            this.pnlNotice.PerformLayout();
-            this.pnlNoticeBar.ResumeLayout(false);
-            this.pnlNoticeBar.PerformLayout();
-            this.pnlContextGap.ResumeLayout(false);
-            this.pnlContextGap.PerformLayout();
             this.pnlContext.ResumeLayout(false);
-            this.pnlContext.PerformLayout();
-            this.pnlContextBar.ResumeLayout(false);
-            this.pnlContextBar.PerformLayout();
             this.pnlTitle.ResumeLayout(false);
-            this.pnlTitle.PerformLayout();
-            this.pnlTitleRule.ResumeLayout(false);
-            this.pnlTitleRule.PerformLayout();
             this.pnlActions.ResumeLayout(false);
-            this.pnlActions.PerformLayout();
             this.flpActions.ResumeLayout(false);
-            this.flpActions.PerformLayout();
-            this.pnlActionRule.ResumeLayout(false);
-            this.pnlActionRule.PerformLayout();
             this.pnlRail.ResumeLayout(false);
-            this.pnlRail.PerformLayout();
-            this.pnlBrandRule.ResumeLayout(false);
-            this.pnlBrandRule.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
-            this.pnlStatus.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -50,33 +50,42 @@
     <Compile Include="DatabaseLayer\AdminDBController.cs" />
     <Compile Include="PresentationLayer\MainForm.Alternatives.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Faculty.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Funding.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Home.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Interests.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Outcome.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Profile.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Subjects.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.Summary.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\MainForm.cs">
       <SubType>Form</SubType>
@@ -95,42 +104,54 @@
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.AdminDashboard.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.AdvisorDashboard.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Designer.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.FundingAdmin.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.InterestCategories.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.LearnerSearch.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Questionnaire.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.ReportShortcuts.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Reports.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Requirements.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.SessionSearch.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.UniversityInfo.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.UserAccounts.cs">
       <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Staff\StaffConsoleForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +166,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
       <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

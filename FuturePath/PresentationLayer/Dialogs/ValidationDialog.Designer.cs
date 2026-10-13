@@ -128,7 +128,6 @@
             this.btnReattempt.TabIndex = 0;
             this.btnReattempt.Text = "Try again";
             this.btnReattempt.UseVisualStyleBackColor = false;
-            this.btnReattempt.Click += new System.EventHandler(this.btnReattempt_Click);
             // 
             // ValidationDialog
             // 
