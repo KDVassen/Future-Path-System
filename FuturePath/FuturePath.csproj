@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,16 +47,165 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <!-- RDLC reports (UI 7, UI 11.1a-11.3c) in the WinForms ReportViewer: docs/design/reports.md -->
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms">
+      <Version>150.1652.0</Version>
+    </PackageReference>
+    <!-- ReportViewer asks for SqlServer.Types >= 14.0.0, which nuget.org does not have; pin the version it resolves to. -->
+    <PackageReference Include="Microsoft.SqlServer.Types">
+      <Version>14.0.314.76</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ApplicationLayer\User.cs" />
     <Compile Include="DatabaseLayer\AdminDBController.cs" />
-    <Compile Include="PresentationLayer\Form1.cs">
+    <Compile Include="PresentationLayer\MainForm.Alternatives.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PresentationLayer\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Faculty.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Funding.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Home.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Interests.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Outcome.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Profile.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Subjects.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.Summary.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ConfirmationDialog.Designer.cs">
+      <DependentUpon>ConfirmationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ConfirmationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ValidationDialog.Designer.cs">
+      <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Dialogs\ValidationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.AdminDashboard.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.AdvisorDashboard.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Designer.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.FundingAdmin.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.InterestCategories.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.LearnerSearch.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Questionnaire.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.ReportShortcuts.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.ReportViewer.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Reports.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.Requirements.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.SessionSearch.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.UniversityInfo.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.UserAccounts.cs">
+      <DependentUpon>StaffConsoleForm.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffConsoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffLoginForm.Designer.cs">
+      <DependentUpon>StaffLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Staff\StaffLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpDieData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpDieData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpLerData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpLerData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\Reports\FpLsrData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FpLsrData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationLayer\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Dialogs\ValidationDialog.resx">
+      <DependentUpon>ValidationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\MainForm.Subjects.resx">
+      <DependentUpon>MainForm.Subjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Reports\FpDie.rdlc" />
+    <EmbeddedResource Include="PresentationLayer\Reports\FpLer.rdlc" />
+    <EmbeddedResource Include="PresentationLayer\Reports\FpLsr.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -65,6 +215,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ApplicationLayer\Reports\FpDieData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpDieData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationLayer\Reports\FpLerData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpLerData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationLayer\Reports\FpLsrData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FpLsrData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

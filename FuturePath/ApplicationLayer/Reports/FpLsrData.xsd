@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FpLsrData: typed DataSet for FP-LSR "Learner Advisory Summary Report" (spec 6.1, docs/design/reports.md).
+  The Business Logic Layer fills it for ONE completed advisory session; PresentationLayer\Reports\FpLsr.rdlc
+  only formats and sorts it. Every outcome, reason, met/gap status, shortfall, count, average and fit %
+  arrives here already decided. One DataTable per data region; each RDLC DataSet has the same name.
+    ReportHeader         1 row   masthead, identity line, outcome and reason, Table 1 overall-average row,
+                                 counts, overall guidance and the two section flags
+    SubjectRequirements  n rows  Table 1: one row per captured subject, plus one per required subject not taken
+    MarkComparison       n rows  Chart 1: one row per subject that has a stored minimum, plus the overall average
+    InterestProfile      n rows  Chart 2: one row per interest category
+    Alternatives         n rows  Table 2: the ranked alternative programmes (printed only if IncludeAlternatives)
+    FundingOptions       n rows  Table 3: the funding added on UI 6.2b (printed only if IncludeFunding)
+  Status codes used by ResultCode / AverageResultCode: Met, Gap, NotAssessed.
+  OutcomeCode is RecommendationResult.OutcomeCode as stored (STRONG / POSSIBLE / NCE / MOREINFO; SM and PM also read).
+  Contact details (Learner.ContactEmail, ContactNumber) and staff identities are deliberately absent.
+-->
+<xs:schema id="FpLsrData" targetNamespace="http://tempuri.org/FpLsrData.xsd" xmlns:mstns="http://tempuri.org/FpLsrData.xsd" xmlns="http://tempuri.org/FpLsrData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FpLsrData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- One row. No staff-only values: the same header serves UI 7 (learner) and UI 10.2b / UI 11 (staff). -->
+        <xs:element name="ReportHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- "FP-LSR" (ExportReport.ReportCode) -->
+              <xs:element name="ReportCode" type="xs:string" />
+              <!-- yyyy-NNNN, built from SessionDate and SessionID (not stored) -->
+              <xs:element name="SessionNumber" type="xs:string" />
+              <!-- AdvisorySession.SessionDate -->
+              <xs:element name="SessionDate" type="xs:dateTime" />
+              <!-- ExportReport.DateGenerated: the generation date and time printed on the report -->
+              <xs:element name="DateGenerated" type="xs:dateTime" />
+              <!-- Learner.FirstName / LastName (both optional on UI 2) -->
+              <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="LastName" type="xs:string" minOccurs="0" />
+              <!-- GradeLevel.GradeDescription, e.g. "Grade 11" -->
+              <xs:element name="GradeDescription" type="xs:string" />
+              <!-- GradeLevel.MarkBasis: "Projected" (Grade 11) or "Final" (Grade 12) -->
+              <xs:element name="MarkBasis" type="xs:string" />
+              <!-- Learner.SchoolName and Province -->
+              <xs:element name="SchoolName" type="xs:string" />
+              <xs:element name="Province" type="xs:string" />
+              <!-- number of LearnerSubject rows captured in this session -->
+              <xs:element name="SubjectCount" type="xs:int" />
+              <!-- average of the captured marks, one decimal (e.g. 70.2) -->
+              <xs:element name="OverallAverage" type="xs:decimal" minOccurs="0" />
+              <!-- the selected programme (RecommendationResult.IsSelectedProgramme = 1) and its faculty -->
+              <xs:element name="ProgrammeName" type="xs:string" />
+              <xs:element name="FacultyName" type="xs:string" />
+              <!-- DegreeProgramme.MinimumOverallAverage (null when the programme stores none) -->
+              <xs:element name="MinimumOverallAverage" type="xs:decimal" minOccurs="0" />
+              <!-- overall average against that minimum: Met / Gap / NotAssessed, and the shortfall in points when Gap -->
+              <xs:element name="AverageResultCode" type="xs:string" />
+              <xs:element name="AverageShortfall" type="xs:decimal" minOccurs="0" />
+              <!-- requirements checked and met, the overall-average requirement included (e.g. 5 and 4) -->
+              <xs:element name="RequirementsChecked" type="xs:int" />
+              <xs:element name="RequirementsMet" type="xs:int" />
+              <!-- RecommendationResult.OutcomeCode and OutcomeReason of the selected programme -->
+              <xs:element name="OutcomeCode" type="xs:string" />
+              <xs:element name="OutcomeReason" type="xs:string" />
+              <!-- LearnerInterestResponse rows answered in this session -->
+              <xs:element name="QuestionsAnswered" type="xs:int" />
+              <!-- the "Overall guidance" paragraph, composed by the BLL -->
+              <xs:element name="OverallGuidance" type="xs:string" />
+              <!-- AdvisorySession.AlternativesInSummary (ticked on UI 6.1a): prints Table 2 -->
+              <xs:element name="IncludeAlternatives" type="xs:boolean" />
+              <!-- AdvisorySession.FundingInfoRequested (Add to Summary on UI 6.2b): prints Table 3 -->
+              <xs:element name="IncludeFunding" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Table 1. The report sorts by SubjectName ascending. -->
+        <xs:element name="SubjectRequirements">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- Subject.SubjectName -->
+              <xs:element name="SubjectName" type="xs:string" />
+              <!-- LearnerSubject.Mark; null for a required subject that was not taken -->
+              <xs:element name="Mark" type="xs:decimal" minOccurs="0" />
+              <!-- ProgrammeRequirement.RequirementType (Required / Recommended); null when the subject is not a requirement -->
+              <xs:element name="RequirementType" type="xs:string" minOccurs="0" />
+              <!-- ProgrammeRequirement.AdvisoryNote, e.g. "Mathematical Literacy not accepted" -->
+              <xs:element name="AdvisoryNote" type="xs:string" minOccurs="0" />
+              <!-- ProgrammeRequirement.MinimumMark (or AlternativeMinimumMark when the alternative subject was used) -->
+              <xs:element name="MinimumMark" type="xs:decimal" minOccurs="0" />
+              <!-- Met / Gap / NotAssessed -->
+              <xs:element name="ResultCode" type="xs:string" />
+              <!-- percentage points below MinimumMark, Gap rows with a mark only (e.g. 2) -->
+              <xs:element name="Shortfall" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Chart 1. The report sorts the subjects by Label ascending and puts the overall average last. -->
+        <xs:element name="MarkComparison">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- Subject.SubjectName, or "Overall average" -->
+              <xs:element name="Label" type="xs:string" />
+              <!-- the learner's mark or overall average; null for a required subject not taken -->
+              <xs:element name="Mark" type="xs:decimal" minOccurs="0" />
+              <!-- the stored minimum, or DegreeProgramme.MinimumOverallAverage on the overall-average row -->
+              <xs:element name="MinimumMark" type="xs:decimal" minOccurs="0" />
+              <!-- Met / Gap / NotAssessed (colours the learner's bar) -->
+              <xs:element name="ResultCode" type="xs:string" />
+              <!-- true on the single overall-average row -->
+              <xs:element name="IsOverallAverage" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Chart 2. The report sorts by InterestPercent descending. -->
+        <xs:element name="InterestProfile">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- InterestCategory.CategoryName -->
+              <xs:element name="CategoryName" type="xs:string" />
+              <!-- the learner's interest score for the category as a percentage, 0-100 -->
+              <xs:element name="InterestPercent" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Table 2 (RecommendationResult rows with an AlternativeRank). The report sorts by OverallScore descending. -->
+        <xs:element name="Alternatives">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AlternativeRank" type="xs:int" minOccurs="0" />
+              <xs:element name="ProgrammeName" type="xs:string" />
+              <xs:element name="FacultyName" type="xs:string" />
+              <!-- RecommendationResult.OverallScore as stored: printed as the fit %, never recalculated -->
+              <xs:element name="OverallScore" type="xs:decimal" />
+              <xs:element name="OutcomeCode" type="xs:string" />
+              <xs:element name="OutcomeReason" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Table 3 (active FundingOption rows only). The report sorts by ClosingDate ascending, open-ended last. -->
+        <xs:element name="FundingOptions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FundingName" type="xs:string" />
+              <xs:element name="FundingType" type="xs:string" />
+              <!-- from FundingFaculty / FundingProgramme, e.g. "Faculty of Science" or "All faculties" -->
+              <xs:element name="LinkedTo" type="xs:string" />
+              <xs:element name="EligibilityDescription" type="xs:string" />
+              <xs:element name="RequiredDocuments" type="xs:string" minOccurs="0" />
+              <xs:element name="ClosingDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
