@@ -49,7 +49,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdAccounts.AutoGenerateColumns = false;
+            dgvAccounts.AutoGenerateColumns = false;
             AccountsLoadRoles();
             AccountsLoadAccounts();
             AccountsClearForm();
@@ -207,10 +207,10 @@ namespace FuturePath.PresentationLayer
             accountsLoading = true;
             try
             {
-                // TODO BLL: grdAccounts.DataSource = UserAccountController.GetAccounts(UserId);
+                // TODO BLL: dgvAccounts.DataSource = UserAccountController.GetAccounts(UserId);
                 //           Columns: UserID, Username, FullName, Role, IsActive — the BLL never returns PasswordHash.
                 //           The BLL checks that UserId's Role = Administrator before returning the list.
-                grdAccounts.ClearSelection();
+                dgvAccounts.ClearSelection();
             }
             catch (Exception)
             {
@@ -255,11 +255,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "N accounts · M active" from the bound rows.</summary>
         private void AccountsUpdateCountLine()
         {
-            int total = grdAccounts.Rows.Count;
+            int total = dgvAccounts.Rows.Count;
             int active = 0;
-            foreach (DataGridViewRow row in grdAccounts.Rows)
+            foreach (DataGridViewRow row in dgvAccounts.Rows)
             {
-                if (AccountsIsTrue(row.Cells[colAccountStatus.Index].Value))
+                if (AccountsIsTrue(row.Cells[colAccountsStatus.Index].Value))
                 {
                     active++;
                 }
@@ -269,9 +269,9 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
-        private void grdAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colAccountStatus.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colAccountsStatus.Index)
             {
                 return;
             }
@@ -288,12 +288,12 @@ namespace FuturePath.PresentationLayer
         /// After (re)binding, starts with no row selected, so the form stays ready for a new
         /// account until the administrator picks one, and refreshes the count line.
         /// </summary>
-        private void grdAccounts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvAccounts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = accountsLoading;
             accountsLoading = true;
-            grdAccounts.ClearSelection();
-            grdAccounts.CurrentCell = null;
+            dgvAccounts.ClearSelection();
+            dgvAccounts.CurrentCell = null;
             accountsLoading = wasLoading;
             AccountsUpdateCountLine();
         }
@@ -302,15 +302,15 @@ namespace FuturePath.PresentationLayer
         /// Copies the account the administrator selects into the form; password boxes always start empty.
         /// Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
         /// </summary>
-        private void grdAccounts_SelectionChanged(object sender, EventArgs e)
+        private void dgvAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            if (accountsLoading || !grdAccounts.Focused || grdAccounts.SelectedRows.Count == 0)
+            if (accountsLoading || !dgvAccounts.Focused || dgvAccounts.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdAccounts.SelectedRows[0];
-            object id = row.Cells[colUserId.Index].Value;
+            DataGridViewRow row = dgvAccounts.SelectedRows[0];
+            object id = row.Cells[colAccountsUserId.Index].Value;
             if (id == null || id == DBNull.Value)
             {
                 return;
@@ -319,10 +319,10 @@ namespace FuturePath.PresentationLayer
             AccountsClearValidation();
             AccountsClearPasswords();
             accountsSelectedUserId = Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            accountsSelectedIsActive = AccountsIsTrue(row.Cells[colAccountStatus.Index].Value);
-            txtUsername.Text = Convert.ToString(row.Cells[colUsername.Index].Value, CultureInfo.CurrentCulture);
-            txtFullName.Text = Convert.ToString(row.Cells[colFullName.Index].Value, CultureInfo.CurrentCulture);
-            cboRole.SelectedIndex = cboRole.FindStringExact(Convert.ToString(row.Cells[colRole.Index].Value, CultureInfo.CurrentCulture));
+            accountsSelectedIsActive = AccountsIsTrue(row.Cells[colAccountsStatus.Index].Value);
+            txtUsername.Text = Convert.ToString(row.Cells[colAccountsUsername.Index].Value, CultureInfo.CurrentCulture);
+            txtFullName.Text = Convert.ToString(row.Cells[colAccountsFullName.Index].Value, CultureInfo.CurrentCulture);
+            cboRole.SelectedIndex = cboRole.FindStringExact(Convert.ToString(row.Cells[colAccountsRole.Index].Value, CultureInfo.CurrentCulture));
             chkAccountActive.Checked = accountsSelectedIsActive;
 
             if (accountsSelectedUserId.Value == UserId)
@@ -473,7 +473,7 @@ namespace FuturePath.PresentationLayer
         private void AccountsClearForm()
         {
             accountsLoading = true;
-            grdAccounts.ClearSelection();
+            dgvAccounts.ClearSelection();
             accountsLoading = false;
 
             accountsSelectedUserId = null;

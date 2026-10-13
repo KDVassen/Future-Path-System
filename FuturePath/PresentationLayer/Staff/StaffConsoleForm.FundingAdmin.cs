@@ -286,7 +286,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>Display formatting only: green Active / grey Inactive status chips.</summary>
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colFndStatus.Index && e.Value is bool)
+            if (e.ColumnIndex == colFundingStatus.Index && e.Value is bool)
             {
                 bool active = (bool)e.Value;
                 e.Value = active ? "Active" : "Inactive";
@@ -402,7 +402,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the grid row's IsActive cell is true.</summary>
         private bool FundingAdminRowIsActive(DataGridViewRow row)
         {
-            object value = row.Cells[colFndStatus.Index].Value;
+            object value = row.Cells[colFundingStatus.Index].Value;
             return value is bool && (bool)value;
         }
 

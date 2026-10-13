@@ -28,53 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle LrnGrdLearnersAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle LrnGrdLearnersHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle LrnGrdLearnersCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesGrdSessionsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesGrdSessionsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesGrdSessionsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle RscGrdReportsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle RscGrdReportsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle RscGrdReportsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle UniDgvProgrammesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle UniDgvProgrammesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle UniDgvProgrammesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle ReqDgvRequirementsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle ReqDgvRequirementsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle ReqDgvRequirementsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FndDgvFundingAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FndDgvFundingHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FndDgvFundingCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdCategoriesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdCategoriesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdCategoriesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdWeightsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdWeightsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatGrdWeightsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle QueGrdQuestionsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle QueGrdQuestionsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle QueGrdQuestionsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AccGrdAccountsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AccGrdAccountsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle AccGrdAccountsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle LrnColSessionsStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle LrnColLastSessionStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesColSessionStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesColDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle SesColGrStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle RscColRowsInScopeStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle RscColLastGeneratedStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle UniColMinimumAverageStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle UniColStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle ReqColMinimumMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle ReqColStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FndColClosingDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle FndColStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatColQuestionCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatColProgrammeCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle CatColWeightValueStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle QueColDisplayOrderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvLearnersAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvLearnersHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvLearnersCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvSessionsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvSessionsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvSessionsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvReportsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvReportsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvReportsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvProgrammesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvProgrammesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvProgrammesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvRequirementsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvRequirementsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvRequirementsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvFundingAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvFundingHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvFundingCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvCategoriesAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvCategoriesHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvCategoriesCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvWeightsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvWeightsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvWeightsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvQuestionsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvQuestionsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvQuestionsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvAccountsAltStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvAccountsHeaderStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dgvAccountsCellStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colLearnersSessionsStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colLearnersLastSessionStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colSessionsNumberStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colSessionsDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colSessionsGradeStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colReportsRowsInScopeStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colReportsLastGeneratedStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colProgrammesMinimumAverageStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colProgrammesStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colRequirementsMinimumMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colRequirementsStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colFundingClosingDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colFundingStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colCategoriesQuestionCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colCategoriesProgrammeCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colWeightsValueStyle = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle colQuestionsDisplayOrderStyle = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.tcConsole = new System.Windows.Forms.TabControl();
             this.tabAdvisorDashboard = new System.Windows.Forms.TabPage();
@@ -82,46 +82,46 @@
             this.lblAdvWelcome = new System.Windows.Forms.Label();
             this.lblAdvIntro = new System.Windows.Forms.Label();
             this.pnlAdvSessionsCard = new System.Windows.Forms.Panel();
-            this.lblAdvSessionsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAdvSessionsHeadingBar = new System.Windows.Forms.Panel();
             this.lblAdvSessionsHeading = new System.Windows.Forms.Label();
             this.lblAdvSessionsText = new System.Windows.Forms.Label();
             this.btnAdvSearchSessions = new System.Windows.Forms.Button();
             this.pnlAdvReportsCard = new System.Windows.Forms.Panel();
-            this.lblAdvReportsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAdvReportsHeadingBar = new System.Windows.Forms.Panel();
             this.lblAdvReportsHeading = new System.Windows.Forms.Label();
             this.lblAdvReportsText = new System.Windows.Forms.Label();
             this.btnAdvGenerateReports = new System.Windows.Forms.Button();
             this.pnlTodayCard = new System.Windows.Forms.Panel();
-            this.lblTodayHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlTodayHeadingBar = new System.Windows.Forms.Panel();
             this.lblTodayHeading = new System.Windows.Forms.Label();
-            this.tilCompleted = new System.Windows.Forms.Panel();
-            this.tilCompletedCaption = new System.Windows.Forms.Label();
-            this.tilCompletedValue = new System.Windows.Forms.Label();
-            this.tilCompletedNote = new System.Windows.Forms.Label();
-            this.tilInProgress = new System.Windows.Forms.Panel();
-            this.tilInProgressCaption = new System.Windows.Forms.Label();
-            this.tilInProgressValue = new System.Windows.Forms.Label();
-            this.tilInProgressNote = new System.Windows.Forms.Label();
-            this.tilFollowUp = new System.Windows.Forms.Panel();
-            this.tilFollowUpCaption = new System.Windows.Forms.Label();
-            this.tilFollowUpValue = new System.Windows.Forms.Label();
-            this.tilFollowUpNote = new System.Windows.Forms.Label();
+            this.pnlCompletedTile = new System.Windows.Forms.Panel();
+            this.lblCompletedTileCaption = new System.Windows.Forms.Label();
+            this.lblCompletedTileValue = new System.Windows.Forms.Label();
+            this.lblCompletedTileNote = new System.Windows.Forms.Label();
+            this.pnlInProgressTile = new System.Windows.Forms.Panel();
+            this.lblInProgressTileCaption = new System.Windows.Forms.Label();
+            this.lblInProgressTileValue = new System.Windows.Forms.Label();
+            this.lblInProgressTileNote = new System.Windows.Forms.Label();
+            this.pnlFollowUpTile = new System.Windows.Forms.Panel();
+            this.lblFollowUpTileCaption = new System.Windows.Forms.Label();
+            this.lblFollowUpTileValue = new System.Windows.Forms.Label();
+            this.lblFollowUpTileNote = new System.Windows.Forms.Label();
             this.tabAdminDashboard = new System.Windows.Forms.TabPage();
             this.pnlAdmContent = new System.Windows.Forms.Panel();
             this.lblAdmWelcome = new System.Windows.Forms.Label();
             this.lblAdmIntro = new System.Windows.Forms.Label();
             this.pnlReferenceDataCard = new System.Windows.Forms.Panel();
-            this.lblReferenceDataHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlReferenceDataHeadingBar = new System.Windows.Forms.Panel();
             this.lblReferenceDataHeading = new System.Windows.Forms.Label();
             this.lblReferenceDataText = new System.Windows.Forms.Label();
             this.btnMaintainReferenceData = new System.Windows.Forms.Button();
             this.pnlAdmSessionsCard = new System.Windows.Forms.Panel();
-            this.lblAdmSessionsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAdmSessionsHeadingBar = new System.Windows.Forms.Panel();
             this.lblAdmSessionsHeading = new System.Windows.Forms.Label();
             this.lblAdmSessionsText = new System.Windows.Forms.Label();
             this.btnAdmSearchSessions = new System.Windows.Forms.Button();
             this.pnlAdmReportsCard = new System.Windows.Forms.Panel();
-            this.lblAdmReportsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAdmReportsHeadingBar = new System.Windows.Forms.Panel();
             this.lblAdmReportsHeading = new System.Windows.Forms.Label();
             this.lblAdmReportsText = new System.Windows.Forms.Label();
             this.btnAdmGenerateReports = new System.Windows.Forms.Button();
@@ -145,17 +145,17 @@
             this.btnLrnClear = new System.Windows.Forms.Button();
             this.lblLrnSearchHint = new System.Windows.Forms.Label();
             this.pnlLrnResultsCard = new System.Windows.Forms.Panel();
-            this.lblLrnResultsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlLrnResultsHeadingBar = new System.Windows.Forms.Panel();
             this.lblLrnResultsHeading = new System.Windows.Forms.Label();
             this.lblLrnResultsCount = new System.Windows.Forms.Label();
-            this.grdLearners = new System.Windows.Forms.DataGridView();
-            this.colLearnerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLrnLearner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSchool = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSessions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastSession = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvLearners = new System.Windows.Forms.DataGridView();
+            this.colLearnersId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersSchool = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersProvince = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersSessions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLearnersLastSession = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpLearnerSearchActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLearnerSearchOpen = new System.Windows.Forms.Button();
             this.tabSessionSearch = new System.Windows.Forms.TabPage();
@@ -177,20 +177,20 @@
             this.btnSesClear = new System.Windows.Forms.Button();
             this.lblSesSearchHint = new System.Windows.Forms.Label();
             this.pnlSesResultsCard = new System.Windows.Forms.Panel();
-            this.lblSesResultsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlSesResultsHeadingBar = new System.Windows.Forms.Panel();
             this.lblSesResultsHeading = new System.Windows.Forms.Label();
             this.lblSesResultsCount = new System.Windows.Forms.Label();
             this.btnExportSummary = new System.Windows.Forms.Button();
-            this.grdSessions = new System.Windows.Forms.DataGridView();
-            this.colSessionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSessionStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSession = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSesLearner = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExported = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSessions = new System.Windows.Forms.DataGridView();
+            this.colSessionsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsLearner = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsGrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionsExported = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpSessionSearchActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSessionSearchOpen = new System.Windows.Forms.Button();
             this.tabReportShortcuts = new System.Windows.Forms.TabPage();
@@ -212,22 +212,22 @@
             this.btnRscFind = new System.Windows.Forms.Button();
             this.lblRscSearchHint = new System.Windows.Forms.Label();
             this.pnlRscResultsCard = new System.Windows.Forms.Panel();
-            this.lblRscResultsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlRscResultsHeadingBar = new System.Windows.Forms.Panel();
             this.lblRscResultsHeading = new System.Windows.Forms.Label();
             this.lblRscResultsCount = new System.Windows.Forms.Label();
             this.lblReportsNote = new System.Windows.Forms.Label();
-            this.grdReports = new System.Windows.Forms.DataGridView();
-            this.colReportCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRowsInScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastGenerated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvReports = new System.Windows.Forms.DataGridView();
+            this.colReportsCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReportsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReportsScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReportsRowsInScope = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReportsLastGenerated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flpReportShortcutsActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnReportShortcutsGenerate = new System.Windows.Forms.Button();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.pnlRepContent = new System.Windows.Forms.Panel();
             this.pnlReportCard = new System.Windows.Forms.Panel();
-            this.lblReportHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlReportHeadingBar = new System.Windows.Forms.Panel();
             this.lblReportHeading = new System.Windows.Forms.Label();
             this.rdoLearnerSummary = new System.Windows.Forms.RadioButton();
             this.lblLearnerSummaryNote = new System.Windows.Forms.Label();
@@ -236,7 +236,7 @@
             this.rdoNotEligible = new System.Windows.Forms.RadioButton();
             this.lblNotEligibleNote = new System.Windows.Forms.Label();
             this.pnlParameterCard = new System.Windows.Forms.Panel();
-            this.lblParameterHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlParameterHeadingBar = new System.Windows.Forms.Panel();
             this.lblParameterHeading = new System.Windows.Forms.Label();
             this.lblRepFrom = new System.Windows.Forms.Label();
             this.lblRepFromStar = new System.Windows.Forms.Label();
@@ -263,7 +263,7 @@
             this.chkIncludeInactive = new System.Windows.Forms.CheckBox();
             this.lblIncludeInactiveNote = new System.Windows.Forms.Label();
             this.pnlOutputCard = new System.Windows.Forms.Panel();
-            this.lblOutputHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlOutputHeadingBar = new System.Windows.Forms.Panel();
             this.lblOutputHeading = new System.Windows.Forms.Label();
             this.lblOutputFormat = new System.Windows.Forms.Label();
             this.lblOutputFormatStar = new System.Windows.Forms.Label();
@@ -296,7 +296,7 @@
             this.lstFaculties = new System.Windows.Forms.ListBox();
             this.lblFacultyCount = new System.Windows.Forms.Label();
             this.pnlFacultyCard = new System.Windows.Forms.Panel();
-            this.lblFacultyHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlFacultyHeadingBar = new System.Windows.Forms.Panel();
             this.lblFacultyHeading = new System.Windows.Forms.Label();
             this.lblFacultyName = new System.Windows.Forms.Label();
             this.lblFacultyNameStar = new System.Windows.Forms.Label();
@@ -307,17 +307,17 @@
             this.btnDeactivateFaculty = new System.Windows.Forms.Button();
             this.lblFacultyHint = new System.Windows.Forms.Label();
             this.pnlUniGridCard = new System.Windows.Forms.Panel();
-            this.lblUniGridHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlUniGridHeadingBar = new System.Windows.Forms.Panel();
             this.lblUniGridHeading = new System.Windows.Forms.Label();
             this.lblUniProgrammeCount = new System.Windows.Forms.Label();
             this.dgvProgrammes = new System.Windows.Forms.DataGridView();
-            this.colProgrammeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinimumAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUniStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFacultyId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesMinimumAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesFacultyId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlUniFormCard = new System.Windows.Forms.Panel();
-            this.lblUniFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlUniFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblUniFormHeading = new System.Windows.Forms.Label();
             this.lblProgrammeFaculty = new System.Windows.Forms.Label();
             this.lblProgrammeFacultyStar = new System.Windows.Forms.Label();
@@ -347,21 +347,21 @@
             this.lstProgrammes = new System.Windows.Forms.ListBox();
             this.lblReqProgrammeCount = new System.Windows.Forms.Label();
             this.pnlReqGridCard = new System.Windows.Forms.Panel();
-            this.lblReqGridHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlReqGridHeadingBar = new System.Windows.Forms.Panel();
             this.lblReqGridHeading = new System.Windows.Forms.Label();
             this.lblRequirementCount = new System.Windows.Forms.Label();
             this.dgvRequirements = new System.Windows.Forms.DataGridView();
-            this.colRequirementType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinimumMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAlternative = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReqStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRequirementId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAlternativeSubjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAdvisoryNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsMinimumMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsAlternative = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsSubjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsAlternativeSubjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsAdvisoryNote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlReqFormCard = new System.Windows.Forms.Panel();
-            this.lblReqFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlReqFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblReqFormHeading = new System.Windows.Forms.Label();
             this.lblRequirementType = new System.Windows.Forms.Label();
             this.lblRequirementTypeStar = new System.Windows.Forms.Label();
@@ -393,17 +393,17 @@
             this.tabFundingAdmin = new System.Windows.Forms.TabPage();
             this.pnlFndContent = new System.Windows.Forms.Panel();
             this.pnlFndGridCard = new System.Windows.Forms.Panel();
-            this.lblFndGridHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlFndGridHeadingBar = new System.Windows.Forms.Panel();
             this.lblFndGridHeading = new System.Windows.Forms.Label();
             this.lblFundingCount = new System.Windows.Forms.Label();
             this.dgvFunding = new System.Windows.Forms.DataGridView();
             this.colFundingName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFundingType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClosingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFndStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingClosingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFundingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFndFormCard = new System.Windows.Forms.Panel();
-            this.lblFndFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlFndFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblFndFormHeading = new System.Windows.Forms.Label();
             this.lblFundingName = new System.Windows.Forms.Label();
             this.lblFundingNameStar = new System.Windows.Forms.Label();
@@ -441,17 +441,17 @@
             this.tabCategories = new System.Windows.Forms.TabPage();
             this.pnlCatContent = new System.Windows.Forms.Panel();
             this.pnlCategoriesCard = new System.Windows.Forms.Panel();
-            this.lblCategoriesHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlCategoriesHeadingBar = new System.Windows.Forms.Panel();
             this.lblCategoriesHeading = new System.Windows.Forms.Label();
             this.lblCategoryCount = new System.Windows.Forms.Label();
-            this.grdCategories = new System.Windows.Forms.DataGridView();
-            this.colCategoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuestionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProgrammeCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCategories = new System.Windows.Forms.DataGridView();
+            this.colCategoriesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoriesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoriesQuestionCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoriesProgrammeCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoriesStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlCategoryFormCard = new System.Windows.Forms.Panel();
-            this.lblCategoryFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlCategoryFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblCategoryFormHeading = new System.Windows.Forms.Label();
             this.lblCategoryName = new System.Windows.Forms.Label();
             this.lblCategoryNameStar = new System.Windows.Forms.Label();
@@ -462,13 +462,13 @@
             this.pnlCategorySummary = new System.Windows.Forms.Panel();
             this.lblCategorySummary = new System.Windows.Forms.Label();
             this.pnlWeightsCard = new System.Windows.Forms.Panel();
-            this.lblWeightsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlWeightsHeadingBar = new System.Windows.Forms.Panel();
             this.lblWeightsHeading = new System.Windows.Forms.Label();
             this.lblWeightsScope = new System.Windows.Forms.Label();
-            this.grdWeights = new System.Windows.Forms.DataGridView();
-            this.colWeightProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeightProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeightValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvWeights = new System.Windows.Forms.DataGridView();
+            this.colWeightsProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeightsProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeightsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblWeightProgramme = new System.Windows.Forms.Label();
             this.lblWeightProgrammeStar = new System.Windows.Forms.Label();
             this.cboWeightProgramme = new System.Windows.Forms.ComboBox();
@@ -486,7 +486,7 @@
             this.tabQuestionnaire = new System.Windows.Forms.TabPage();
             this.pnlQueContent = new System.Windows.Forms.Panel();
             this.pnlScopeCard = new System.Windows.Forms.Panel();
-            this.lblScopeHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlScopeHeadingBar = new System.Windows.Forms.Panel();
             this.lblScopeHeading = new System.Windows.Forms.Label();
             this.lblScopeCategory = new System.Windows.Forms.Label();
             this.cboScopeCategory = new System.Windows.Forms.ComboBox();
@@ -494,18 +494,18 @@
             this.lblScaleNote = new System.Windows.Forms.Label();
             this.lblScopeNote = new System.Windows.Forms.Label();
             this.pnlQuestionsCard = new System.Windows.Forms.Panel();
-            this.lblQuestionsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlQuestionsHeadingBar = new System.Windows.Forms.Panel();
             this.lblQuestionsHeading = new System.Windows.Forms.Label();
             this.lblQuestionCount = new System.Windows.Forms.Label();
-            this.grdQuestions = new System.Windows.Forms.DataGridView();
-            this.colQuestionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuestionCategoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDisplayOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuestionText = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuestionCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuestionStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvQuestions = new System.Windows.Forms.DataGridView();
+            this.colQuestionsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuestionsCategoryId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuestionsDisplayOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuestionsText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuestionsCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQuestionsStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlQuestionFormCard = new System.Windows.Forms.Panel();
-            this.lblQuestionFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlQuestionFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblQuestionFormHeading = new System.Windows.Forms.Label();
             this.lblStatementLength = new System.Windows.Forms.Label();
             this.lblStatement = new System.Windows.Forms.Label();
@@ -531,17 +531,17 @@
             this.tabAccounts = new System.Windows.Forms.TabPage();
             this.pnlAccContent = new System.Windows.Forms.Panel();
             this.pnlAccountsCard = new System.Windows.Forms.Panel();
-            this.lblAccountsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAccountsHeadingBar = new System.Windows.Forms.Panel();
             this.lblAccountsHeading = new System.Windows.Forms.Label();
             this.lblAccountCount = new System.Windows.Forms.Label();
-            this.grdAccounts = new System.Windows.Forms.DataGridView();
-            this.colUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAccountStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvAccounts = new System.Windows.Forms.DataGridView();
+            this.colAccountsUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccountsUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccountsFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccountsRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccountsStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlAccountFormCard = new System.Windows.Forms.Panel();
-            this.lblAccountFormHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAccountFormHeadingBar = new System.Windows.Forms.Panel();
             this.lblAccountFormHeading = new System.Windows.Forms.Label();
             this.lblAccountRequiredNote = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -584,53 +584,53 @@
             this.tabAdvisorDashboard.SuspendLayout();
             this.pnlAdvContent.SuspendLayout();
             this.pnlAdvSessionsCard.SuspendLayout();
-            this.lblAdvSessionsHeadingBar.SuspendLayout();
+            this.pnlAdvSessionsHeadingBar.SuspendLayout();
             this.pnlAdvReportsCard.SuspendLayout();
-            this.lblAdvReportsHeadingBar.SuspendLayout();
+            this.pnlAdvReportsHeadingBar.SuspendLayout();
             this.pnlTodayCard.SuspendLayout();
-            this.lblTodayHeadingBar.SuspendLayout();
-            this.tilCompleted.SuspendLayout();
-            this.tilInProgress.SuspendLayout();
-            this.tilFollowUp.SuspendLayout();
+            this.pnlTodayHeadingBar.SuspendLayout();
+            this.pnlCompletedTile.SuspendLayout();
+            this.pnlInProgressTile.SuspendLayout();
+            this.pnlFollowUpTile.SuspendLayout();
             this.tabAdminDashboard.SuspendLayout();
             this.pnlAdmContent.SuspendLayout();
             this.pnlReferenceDataCard.SuspendLayout();
-            this.lblReferenceDataHeadingBar.SuspendLayout();
+            this.pnlReferenceDataHeadingBar.SuspendLayout();
             this.pnlAdmSessionsCard.SuspendLayout();
-            this.lblAdmSessionsHeadingBar.SuspendLayout();
+            this.pnlAdmSessionsHeadingBar.SuspendLayout();
             this.pnlAdmReportsCard.SuspendLayout();
-            this.lblAdmReportsHeadingBar.SuspendLayout();
+            this.pnlAdmReportsHeadingBar.SuspendLayout();
             this.tabSessions.SuspendLayout();
             this.tcSessions.SuspendLayout();
             this.tabLearnerSearch.SuspendLayout();
             this.pnlLrnContent.SuspendLayout();
             this.pnlLrnSearchCard.SuspendLayout();
             this.pnlLrnResultsCard.SuspendLayout();
-            this.lblLrnResultsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdLearners)).BeginInit();
+            this.pnlLrnResultsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLearners)).BeginInit();
             this.flpLearnerSearchActions.SuspendLayout();
             this.tabSessionSearch.SuspendLayout();
             this.pnlSesContent.SuspendLayout();
             this.pnlSesSearchCard.SuspendLayout();
             this.pnlSesResultsCard.SuspendLayout();
-            this.lblSesResultsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdSessions)).BeginInit();
+            this.pnlSesResultsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).BeginInit();
             this.flpSessionSearchActions.SuspendLayout();
             this.tabReportShortcuts.SuspendLayout();
             this.pnlRscContent.SuspendLayout();
             this.pnlRscSearchCard.SuspendLayout();
             this.pnlRscResultsCard.SuspendLayout();
-            this.lblRscResultsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdReports)).BeginInit();
+            this.pnlRscResultsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReports)).BeginInit();
             this.flpReportShortcutsActions.SuspendLayout();
             this.tabReports.SuspendLayout();
             this.pnlRepContent.SuspendLayout();
             this.pnlReportCard.SuspendLayout();
-            this.lblReportHeadingBar.SuspendLayout();
+            this.pnlReportHeadingBar.SuspendLayout();
             this.pnlParameterCard.SuspendLayout();
-            this.lblParameterHeadingBar.SuspendLayout();
+            this.pnlParameterHeadingBar.SuspendLayout();
             this.pnlOutputCard.SuspendLayout();
-            this.lblOutputHeadingBar.SuspendLayout();
+            this.pnlOutputHeadingBar.SuspendLayout();
             this.pnlReadiness.SuspendLayout();
             this.pnlReadinessBar.SuspendLayout();
             this.flpReportsActions.SuspendLayout();
@@ -642,66 +642,66 @@
             this.tabUniversity.SuspendLayout();
             this.pnlUniContent.SuspendLayout();
             this.pnlFacultyCard.SuspendLayout();
-            this.lblFacultyHeadingBar.SuspendLayout();
+            this.pnlFacultyHeadingBar.SuspendLayout();
             this.pnlUniGridCard.SuspendLayout();
-            this.lblUniGridHeadingBar.SuspendLayout();
+            this.pnlUniGridHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammes)).BeginInit();
             this.pnlUniFormCard.SuspendLayout();
-            this.lblUniFormHeadingBar.SuspendLayout();
+            this.pnlUniFormHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMinimumAverage)).BeginInit();
             this.pnlUniSummary.SuspendLayout();
             this.flpUniversityActions.SuspendLayout();
             this.tabRequirements.SuspendLayout();
             this.pnlReqContent.SuspendLayout();
             this.pnlReqGridCard.SuspendLayout();
-            this.lblReqGridHeadingBar.SuspendLayout();
+            this.pnlReqGridHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).BeginInit();
             this.pnlReqFormCard.SuspendLayout();
-            this.lblReqFormHeadingBar.SuspendLayout();
+            this.pnlReqFormHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMinimumMark)).BeginInit();
             this.pnlReqSummary.SuspendLayout();
             this.flpRequirementsActions.SuspendLayout();
             this.tabFundingAdmin.SuspendLayout();
             this.pnlFndContent.SuspendLayout();
             this.pnlFndGridCard.SuspendLayout();
-            this.lblFndGridHeadingBar.SuspendLayout();
+            this.pnlFndGridHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).BeginInit();
             this.pnlFndFormCard.SuspendLayout();
-            this.lblFndFormHeadingBar.SuspendLayout();
+            this.pnlFndFormHeadingBar.SuspendLayout();
             this.pnlFndSummary.SuspendLayout();
             this.flpFundingAdminActions.SuspendLayout();
             this.tabCategories.SuspendLayout();
             this.pnlCatContent.SuspendLayout();
             this.pnlCategoriesCard.SuspendLayout();
-            this.lblCategoriesHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdCategories)).BeginInit();
+            this.pnlCategoriesHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
             this.pnlCategoryFormCard.SuspendLayout();
-            this.lblCategoryFormHeadingBar.SuspendLayout();
+            this.pnlCategoryFormHeadingBar.SuspendLayout();
             this.pnlCategorySummary.SuspendLayout();
             this.pnlWeightsCard.SuspendLayout();
-            this.lblWeightsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdWeights)).BeginInit();
+            this.pnlWeightsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWeights)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRelevanceWeight)).BeginInit();
             this.flpCategoriesActions.SuspendLayout();
             this.tabQuestionnaire.SuspendLayout();
             this.pnlQueContent.SuspendLayout();
             this.pnlScopeCard.SuspendLayout();
-            this.lblScopeHeadingBar.SuspendLayout();
+            this.pnlScopeHeadingBar.SuspendLayout();
             this.pnlQuestionsCard.SuspendLayout();
-            this.lblQuestionsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdQuestions)).BeginInit();
+            this.pnlQuestionsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).BeginInit();
             this.pnlQuestionFormCard.SuspendLayout();
-            this.lblQuestionFormHeadingBar.SuspendLayout();
+            this.pnlQuestionFormHeadingBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDisplayOrder)).BeginInit();
             this.pnlQuestionSummary.SuspendLayout();
             this.flpQuestionnaireActions.SuspendLayout();
             this.tabAccounts.SuspendLayout();
             this.pnlAccContent.SuspendLayout();
             this.pnlAccountsCard.SuspendLayout();
-            this.lblAccountsHeadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdAccounts)).BeginInit();
+            this.pnlAccountsHeadingBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             this.pnlAccountFormCard.SuspendLayout();
-            this.lblAccountFormHeadingBar.SuspendLayout();
+            this.pnlAccountFormHeadingBar.SuspendLayout();
             this.pnlPassword.SuspendLayout();
             this.pnlAccountSummary.SuspendLayout();
             this.flpAccountsActions.SuspendLayout();
@@ -785,7 +785,7 @@
             //
             // pnlAdvSessionsCard
             //
-            this.pnlAdvSessionsCard.Controls.Add(this.lblAdvSessionsHeadingBar);
+            this.pnlAdvSessionsCard.Controls.Add(this.pnlAdvSessionsHeadingBar);
             this.pnlAdvSessionsCard.Controls.Add(this.lblAdvSessionsHeading);
             this.pnlAdvSessionsCard.Controls.Add(this.lblAdvSessionsText);
             this.pnlAdvSessionsCard.Controls.Add(this.btnAdvSearchSessions);
@@ -796,13 +796,13 @@
             this.pnlAdvSessionsCard.TabIndex = 2;
             this.pnlAdvSessionsCard.Name = "pnlAdvSessionsCard";
             //
-            // lblAdvSessionsHeadingBar
+            // pnlAdvSessionsHeadingBar
             //
-            this.lblAdvSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAdvSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
-            this.lblAdvSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAdvSessionsHeadingBar.TabIndex = 0;
-            this.lblAdvSessionsHeadingBar.Name = "lblAdvSessionsHeadingBar";
+            this.pnlAdvSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAdvSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdvSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAdvSessionsHeadingBar.TabIndex = 0;
+            this.pnlAdvSessionsHeadingBar.Name = "pnlAdvSessionsHeadingBar";
             //
             // lblAdvSessionsHeading
             //
@@ -844,7 +844,7 @@
             //
             // pnlAdvReportsCard
             //
-            this.pnlAdvReportsCard.Controls.Add(this.lblAdvReportsHeadingBar);
+            this.pnlAdvReportsCard.Controls.Add(this.pnlAdvReportsHeadingBar);
             this.pnlAdvReportsCard.Controls.Add(this.lblAdvReportsHeading);
             this.pnlAdvReportsCard.Controls.Add(this.lblAdvReportsText);
             this.pnlAdvReportsCard.Controls.Add(this.btnAdvGenerateReports);
@@ -855,13 +855,13 @@
             this.pnlAdvReportsCard.TabIndex = 3;
             this.pnlAdvReportsCard.Name = "pnlAdvReportsCard";
             //
-            // lblAdvReportsHeadingBar
+            // pnlAdvReportsHeadingBar
             //
-            this.lblAdvReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAdvReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
-            this.lblAdvReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAdvReportsHeadingBar.TabIndex = 0;
-            this.lblAdvReportsHeadingBar.Name = "lblAdvReportsHeadingBar";
+            this.pnlAdvReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAdvReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdvReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAdvReportsHeadingBar.TabIndex = 0;
+            this.pnlAdvReportsHeadingBar.Name = "pnlAdvReportsHeadingBar";
             //
             // lblAdvReportsHeading
             //
@@ -903,11 +903,11 @@
             //
             // pnlTodayCard
             //
-            this.pnlTodayCard.Controls.Add(this.lblTodayHeadingBar);
+            this.pnlTodayCard.Controls.Add(this.pnlTodayHeadingBar);
             this.pnlTodayCard.Controls.Add(this.lblTodayHeading);
-            this.pnlTodayCard.Controls.Add(this.tilCompleted);
-            this.pnlTodayCard.Controls.Add(this.tilInProgress);
-            this.pnlTodayCard.Controls.Add(this.tilFollowUp);
+            this.pnlTodayCard.Controls.Add(this.pnlCompletedTile);
+            this.pnlTodayCard.Controls.Add(this.pnlInProgressTile);
+            this.pnlTodayCard.Controls.Add(this.pnlFollowUpTile);
             this.pnlTodayCard.BackColor = System.Drawing.Color.White;
             this.pnlTodayCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTodayCard.Location = new System.Drawing.Point(0, 334);
@@ -916,13 +916,13 @@
             this.pnlTodayCard.Visible = false;
             this.pnlTodayCard.Name = "pnlTodayCard";
             //
-            // lblTodayHeadingBar
+            // pnlTodayHeadingBar
             //
-            this.lblTodayHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblTodayHeadingBar.Location = new System.Drawing.Point(16, 14);
-            this.lblTodayHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblTodayHeadingBar.TabIndex = 0;
-            this.lblTodayHeadingBar.Name = "lblTodayHeadingBar";
+            this.pnlTodayHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlTodayHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlTodayHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlTodayHeadingBar.TabIndex = 0;
+            this.pnlTodayHeadingBar.Name = "pnlTodayHeadingBar";
             //
             // lblTodayHeading
             //
@@ -935,131 +935,131 @@
             this.lblTodayHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTodayHeading.Name = "lblTodayHeading";
             //
-            // tilCompleted
+            // pnlCompletedTile
             //
-            this.tilCompleted.Controls.Add(this.tilCompletedCaption);
-            this.tilCompleted.Controls.Add(this.tilCompletedValue);
-            this.tilCompleted.Controls.Add(this.tilCompletedNote);
-            this.tilCompleted.BackColor = System.Drawing.Color.White;
-            this.tilCompleted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tilCompleted.Location = new System.Drawing.Point(16, 44);
-            this.tilCompleted.Size = new System.Drawing.Size(289, 90);
-            this.tilCompleted.TabIndex = 2;
-            this.tilCompleted.Name = "tilCompleted";
+            this.pnlCompletedTile.Controls.Add(this.lblCompletedTileCaption);
+            this.pnlCompletedTile.Controls.Add(this.lblCompletedTileValue);
+            this.pnlCompletedTile.Controls.Add(this.lblCompletedTileNote);
+            this.pnlCompletedTile.BackColor = System.Drawing.Color.White;
+            this.pnlCompletedTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCompletedTile.Location = new System.Drawing.Point(16, 44);
+            this.pnlCompletedTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlCompletedTile.TabIndex = 2;
+            this.pnlCompletedTile.Name = "pnlCompletedTile";
             //
-            // tilCompletedCaption
+            // lblCompletedTileCaption
             //
-            this.tilCompletedCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tilCompletedCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilCompletedCaption.Location = new System.Drawing.Point(12, 8);
-            this.tilCompletedCaption.Size = new System.Drawing.Size(265, 20);
-            this.tilCompletedCaption.TabIndex = 0;
-            this.tilCompletedCaption.Text = "Sessions completed";
-            this.tilCompletedCaption.Name = "tilCompletedCaption";
+            this.lblCompletedTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblCompletedTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblCompletedTileCaption.Location = new System.Drawing.Point(12, 8);
+            this.lblCompletedTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblCompletedTileCaption.TabIndex = 0;
+            this.lblCompletedTileCaption.Text = "Sessions completed";
+            this.lblCompletedTileCaption.Name = "lblCompletedTileCaption";
             //
-            // tilCompletedValue
+            // lblCompletedTileValue
             //
-            this.tilCompletedValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tilCompletedValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilCompletedValue.Location = new System.Drawing.Point(10, 28);
-            this.tilCompletedValue.Size = new System.Drawing.Size(265, 34);
-            this.tilCompletedValue.TabIndex = 1;
-            this.tilCompletedValue.Text = "\u2014";
-            this.tilCompletedValue.Name = "tilCompletedValue";
+            this.lblCompletedTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblCompletedTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblCompletedTileValue.Location = new System.Drawing.Point(10, 28);
+            this.lblCompletedTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblCompletedTileValue.TabIndex = 1;
+            this.lblCompletedTileValue.Text = "\u2014";
+            this.lblCompletedTileValue.Name = "lblCompletedTileValue";
             //
-            // tilCompletedNote
+            // lblCompletedTileNote
             //
-            this.tilCompletedNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tilCompletedNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tilCompletedNote.Location = new System.Drawing.Point(12, 64);
-            this.tilCompletedNote.Size = new System.Drawing.Size(265, 18);
-            this.tilCompletedNote.TabIndex = 2;
-            this.tilCompletedNote.Text = "Exported summaries dated today";
-            this.tilCompletedNote.Name = "tilCompletedNote";
+            this.lblCompletedTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblCompletedTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblCompletedTileNote.Location = new System.Drawing.Point(12, 64);
+            this.lblCompletedTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblCompletedTileNote.TabIndex = 2;
+            this.lblCompletedTileNote.Text = "Exported summaries dated today";
+            this.lblCompletedTileNote.Name = "lblCompletedTileNote";
             //
-            // tilInProgress
+            // pnlInProgressTile
             //
-            this.tilInProgress.Controls.Add(this.tilInProgressCaption);
-            this.tilInProgress.Controls.Add(this.tilInProgressValue);
-            this.tilInProgress.Controls.Add(this.tilInProgressNote);
-            this.tilInProgress.BackColor = System.Drawing.Color.White;
-            this.tilInProgress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tilInProgress.Location = new System.Drawing.Point(321, 44);
-            this.tilInProgress.Size = new System.Drawing.Size(289, 90);
-            this.tilInProgress.TabIndex = 3;
-            this.tilInProgress.Name = "tilInProgress";
+            this.pnlInProgressTile.Controls.Add(this.lblInProgressTileCaption);
+            this.pnlInProgressTile.Controls.Add(this.lblInProgressTileValue);
+            this.pnlInProgressTile.Controls.Add(this.lblInProgressTileNote);
+            this.pnlInProgressTile.BackColor = System.Drawing.Color.White;
+            this.pnlInProgressTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlInProgressTile.Location = new System.Drawing.Point(321, 44);
+            this.pnlInProgressTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlInProgressTile.TabIndex = 3;
+            this.pnlInProgressTile.Name = "pnlInProgressTile";
             //
-            // tilInProgressCaption
+            // lblInProgressTileCaption
             //
-            this.tilInProgressCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tilInProgressCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilInProgressCaption.Location = new System.Drawing.Point(12, 8);
-            this.tilInProgressCaption.Size = new System.Drawing.Size(265, 20);
-            this.tilInProgressCaption.TabIndex = 0;
-            this.tilInProgressCaption.Text = "Sessions in progress";
-            this.tilInProgressCaption.Name = "tilInProgressCaption";
+            this.lblInProgressTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblInProgressTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInProgressTileCaption.Location = new System.Drawing.Point(12, 8);
+            this.lblInProgressTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblInProgressTileCaption.TabIndex = 0;
+            this.lblInProgressTileCaption.Text = "Sessions in progress";
+            this.lblInProgressTileCaption.Name = "lblInProgressTileCaption";
             //
-            // tilInProgressValue
+            // lblInProgressTileValue
             //
-            this.tilInProgressValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tilInProgressValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilInProgressValue.Location = new System.Drawing.Point(10, 28);
-            this.tilInProgressValue.Size = new System.Drawing.Size(265, 34);
-            this.tilInProgressValue.TabIndex = 1;
-            this.tilInProgressValue.Text = "\u2014";
-            this.tilInProgressValue.Name = "tilInProgressValue";
+            this.lblInProgressTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblInProgressTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInProgressTileValue.Location = new System.Drawing.Point(10, 28);
+            this.lblInProgressTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblInProgressTileValue.TabIndex = 1;
+            this.lblInProgressTileValue.Text = "\u2014";
+            this.lblInProgressTileValue.Name = "lblInProgressTileValue";
             //
-            // tilInProgressNote
+            // lblInProgressTileNote
             //
-            this.tilInProgressNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tilInProgressNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tilInProgressNote.Location = new System.Drawing.Point(12, 64);
-            this.tilInProgressNote.Size = new System.Drawing.Size(265, 18);
-            this.tilInProgressNote.TabIndex = 2;
-            this.tilInProgressNote.Text = "Started today, not yet exported";
-            this.tilInProgressNote.Name = "tilInProgressNote";
+            this.lblInProgressTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblInProgressTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblInProgressTileNote.Location = new System.Drawing.Point(12, 64);
+            this.lblInProgressTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblInProgressTileNote.TabIndex = 2;
+            this.lblInProgressTileNote.Text = "Started today, not yet exported";
+            this.lblInProgressTileNote.Name = "lblInProgressTileNote";
             //
-            // tilFollowUp
+            // pnlFollowUpTile
             //
-            this.tilFollowUp.Controls.Add(this.tilFollowUpCaption);
-            this.tilFollowUp.Controls.Add(this.tilFollowUpValue);
-            this.tilFollowUp.Controls.Add(this.tilFollowUpNote);
-            this.tilFollowUp.BackColor = System.Drawing.Color.White;
-            this.tilFollowUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tilFollowUp.Location = new System.Drawing.Point(626, 44);
-            this.tilFollowUp.Size = new System.Drawing.Size(289, 90);
-            this.tilFollowUp.TabIndex = 4;
-            this.tilFollowUp.Name = "tilFollowUp";
+            this.pnlFollowUpTile.Controls.Add(this.lblFollowUpTileCaption);
+            this.pnlFollowUpTile.Controls.Add(this.lblFollowUpTileValue);
+            this.pnlFollowUpTile.Controls.Add(this.lblFollowUpTileNote);
+            this.pnlFollowUpTile.BackColor = System.Drawing.Color.White;
+            this.pnlFollowUpTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFollowUpTile.Location = new System.Drawing.Point(626, 44);
+            this.pnlFollowUpTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlFollowUpTile.TabIndex = 4;
+            this.pnlFollowUpTile.Name = "pnlFollowUpTile";
             //
-            // tilFollowUpCaption
+            // lblFollowUpTileCaption
             //
-            this.tilFollowUpCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tilFollowUpCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilFollowUpCaption.Location = new System.Drawing.Point(12, 8);
-            this.tilFollowUpCaption.Size = new System.Drawing.Size(265, 20);
-            this.tilFollowUpCaption.TabIndex = 0;
-            this.tilFollowUpCaption.Text = "Exceptions to follow up";
-            this.tilFollowUpCaption.Name = "tilFollowUpCaption";
+            this.lblFollowUpTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblFollowUpTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblFollowUpTileCaption.Location = new System.Drawing.Point(12, 8);
+            this.lblFollowUpTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblFollowUpTileCaption.TabIndex = 0;
+            this.lblFollowUpTileCaption.Text = "Exceptions to follow up";
+            this.lblFollowUpTileCaption.Name = "lblFollowUpTileCaption";
             //
-            // tilFollowUpValue
+            // lblFollowUpTileValue
             //
-            this.tilFollowUpValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tilFollowUpValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tilFollowUpValue.Location = new System.Drawing.Point(10, 28);
-            this.tilFollowUpValue.Size = new System.Drawing.Size(265, 34);
-            this.tilFollowUpValue.TabIndex = 1;
-            this.tilFollowUpValue.Text = "\u2014";
-            this.tilFollowUpValue.Name = "tilFollowUpValue";
+            this.lblFollowUpTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblFollowUpTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblFollowUpTileValue.Location = new System.Drawing.Point(10, 28);
+            this.lblFollowUpTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblFollowUpTileValue.TabIndex = 1;
+            this.lblFollowUpTileValue.Text = "\u2014";
+            this.lblFollowUpTileValue.Name = "lblFollowUpTileValue";
             //
-            // tilFollowUpNote
+            // lblFollowUpTileNote
             //
-            this.tilFollowUpNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tilFollowUpNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tilFollowUpNote.Location = new System.Drawing.Point(12, 64);
-            this.tilFollowUpNote.Size = new System.Drawing.Size(265, 18);
-            this.tilFollowUpNote.TabIndex = 2;
-            this.tilFollowUpNote.Text = "Exception outcomes, as on FP-LER";
-            this.tilFollowUpNote.Name = "tilFollowUpNote";
+            this.lblFollowUpTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblFollowUpTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblFollowUpTileNote.Location = new System.Drawing.Point(12, 64);
+            this.lblFollowUpTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblFollowUpTileNote.TabIndex = 2;
+            this.lblFollowUpTileNote.Text = "Exception outcomes, as on FP-LER";
+            this.lblFollowUpTileNote.Name = "lblFollowUpTileNote";
             //
             // tabAdminDashboard
             //
@@ -1109,7 +1109,7 @@
             //
             // pnlReferenceDataCard
             //
-            this.pnlReferenceDataCard.Controls.Add(this.lblReferenceDataHeadingBar);
+            this.pnlReferenceDataCard.Controls.Add(this.pnlReferenceDataHeadingBar);
             this.pnlReferenceDataCard.Controls.Add(this.lblReferenceDataHeading);
             this.pnlReferenceDataCard.Controls.Add(this.lblReferenceDataText);
             this.pnlReferenceDataCard.Controls.Add(this.btnMaintainReferenceData);
@@ -1120,13 +1120,13 @@
             this.pnlReferenceDataCard.TabIndex = 2;
             this.pnlReferenceDataCard.Name = "pnlReferenceDataCard";
             //
-            // lblReferenceDataHeadingBar
+            // pnlReferenceDataHeadingBar
             //
-            this.lblReferenceDataHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReferenceDataHeadingBar.Location = new System.Drawing.Point(16, 18);
-            this.lblReferenceDataHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblReferenceDataHeadingBar.TabIndex = 0;
-            this.lblReferenceDataHeadingBar.Name = "lblReferenceDataHeadingBar";
+            this.pnlReferenceDataHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlReferenceDataHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlReferenceDataHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlReferenceDataHeadingBar.TabIndex = 0;
+            this.pnlReferenceDataHeadingBar.Name = "pnlReferenceDataHeadingBar";
             //
             // lblReferenceDataHeading
             //
@@ -1168,7 +1168,7 @@
             //
             // pnlAdmSessionsCard
             //
-            this.pnlAdmSessionsCard.Controls.Add(this.lblAdmSessionsHeadingBar);
+            this.pnlAdmSessionsCard.Controls.Add(this.pnlAdmSessionsHeadingBar);
             this.pnlAdmSessionsCard.Controls.Add(this.lblAdmSessionsHeading);
             this.pnlAdmSessionsCard.Controls.Add(this.lblAdmSessionsText);
             this.pnlAdmSessionsCard.Controls.Add(this.btnAdmSearchSessions);
@@ -1179,13 +1179,13 @@
             this.pnlAdmSessionsCard.TabIndex = 3;
             this.pnlAdmSessionsCard.Name = "pnlAdmSessionsCard";
             //
-            // lblAdmSessionsHeadingBar
+            // pnlAdmSessionsHeadingBar
             //
-            this.lblAdmSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAdmSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
-            this.lblAdmSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAdmSessionsHeadingBar.TabIndex = 0;
-            this.lblAdmSessionsHeadingBar.Name = "lblAdmSessionsHeadingBar";
+            this.pnlAdmSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAdmSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdmSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAdmSessionsHeadingBar.TabIndex = 0;
+            this.pnlAdmSessionsHeadingBar.Name = "pnlAdmSessionsHeadingBar";
             //
             // lblAdmSessionsHeading
             //
@@ -1227,7 +1227,7 @@
             //
             // pnlAdmReportsCard
             //
-            this.pnlAdmReportsCard.Controls.Add(this.lblAdmReportsHeadingBar);
+            this.pnlAdmReportsCard.Controls.Add(this.pnlAdmReportsHeadingBar);
             this.pnlAdmReportsCard.Controls.Add(this.lblAdmReportsHeading);
             this.pnlAdmReportsCard.Controls.Add(this.lblAdmReportsText);
             this.pnlAdmReportsCard.Controls.Add(this.btnAdmGenerateReports);
@@ -1238,13 +1238,13 @@
             this.pnlAdmReportsCard.TabIndex = 4;
             this.pnlAdmReportsCard.Name = "pnlAdmReportsCard";
             //
-            // lblAdmReportsHeadingBar
+            // pnlAdmReportsHeadingBar
             //
-            this.lblAdmReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAdmReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
-            this.lblAdmReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAdmReportsHeadingBar.TabIndex = 0;
-            this.lblAdmReportsHeadingBar.Name = "lblAdmReportsHeadingBar";
+            this.pnlAdmReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAdmReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdmReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAdmReportsHeadingBar.TabIndex = 0;
+            this.pnlAdmReportsHeadingBar.Name = "pnlAdmReportsHeadingBar";
             //
             // lblAdmReportsHeading
             //
@@ -1513,10 +1513,10 @@
             //
             // pnlLrnResultsCard
             //
-            this.pnlLrnResultsCard.Controls.Add(this.lblLrnResultsHeadingBar);
+            this.pnlLrnResultsCard.Controls.Add(this.pnlLrnResultsHeadingBar);
             this.pnlLrnResultsCard.Controls.Add(this.lblLrnResultsHeading);
             this.pnlLrnResultsCard.Controls.Add(this.lblLrnResultsCount);
-            this.pnlLrnResultsCard.Controls.Add(this.grdLearners);
+            this.pnlLrnResultsCard.Controls.Add(this.dgvLearners);
             this.pnlLrnResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlLrnResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlLrnResultsCard.Location = new System.Drawing.Point(0, 98);
@@ -1524,13 +1524,13 @@
             this.pnlLrnResultsCard.TabIndex = 1;
             this.pnlLrnResultsCard.Name = "pnlLrnResultsCard";
             //
-            // lblLrnResultsHeadingBar
+            // pnlLrnResultsHeadingBar
             //
-            this.lblLrnResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblLrnResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
-            this.lblLrnResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblLrnResultsHeadingBar.TabIndex = 0;
-            this.lblLrnResultsHeadingBar.Name = "lblLrnResultsHeadingBar";
+            this.pnlLrnResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlLrnResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlLrnResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlLrnResultsHeadingBar.TabIndex = 0;
+            this.pnlLrnResultsHeadingBar.Name = "pnlLrnResultsHeadingBar";
             //
             // lblLrnResultsHeading
             //
@@ -1553,122 +1553,122 @@
             this.lblLrnResultsCount.Text = "";
             this.lblLrnResultsCount.Name = "lblLrnResultsCount";
             //
-            // grdLearners
+            // dgvLearners
             //
-            this.grdLearners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colLearnerId,
-            this.colLrnLearner,
-            this.colGrade,
-            this.colSchool,
-            this.colProvince,
-            this.colSessions,
-            this.colLastSession});
-            LrnGrdLearnersAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdLearners.AlternatingRowsDefaultCellStyle = LrnGrdLearnersAltStyle;
-            LrnGrdLearnersHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            LrnGrdLearnersHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            LrnGrdLearnersHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            LrnGrdLearnersHeaderStyle.ForeColor = System.Drawing.Color.White;
-            LrnGrdLearnersHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            LrnGrdLearnersHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            LrnGrdLearnersHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            LrnGrdLearnersHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdLearners.ColumnHeadersDefaultCellStyle = LrnGrdLearnersHeaderStyle;
-            LrnGrdLearnersCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            LrnGrdLearnersCellStyle.BackColor = System.Drawing.Color.White;
-            LrnGrdLearnersCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            LrnGrdLearnersCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            LrnGrdLearnersCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            LrnGrdLearnersCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            LrnGrdLearnersCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            LrnGrdLearnersCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdLearners.DefaultCellStyle = LrnGrdLearnersCellStyle;
-            this.grdLearners.AccessibleName = "Learners found";
-            this.grdLearners.AllowUserToAddRows = false;
-            this.grdLearners.AllowUserToDeleteRows = false;
-            this.grdLearners.AllowUserToResizeRows = false;
-            this.grdLearners.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdLearners.BackgroundColor = System.Drawing.Color.White;
-            this.grdLearners.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdLearners.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdLearners.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdLearners.ColumnHeadersHeight = 34;
-            this.grdLearners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdLearners.EnableHeadersVisualStyles = false;
-            this.grdLearners.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdLearners.Location = new System.Drawing.Point(16, 46);
-            this.grdLearners.MultiSelect = false;
-            this.grdLearners.ReadOnly = true;
-            this.grdLearners.RowHeadersVisible = false;
-            this.grdLearners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdLearners.Size = new System.Drawing.Size(892, 360);
-            this.grdLearners.TabIndex = 3;
-            this.grdLearners.Name = "grdLearners";
-            this.grdLearners.RowTemplate.Height = 30;
-            this.grdLearners.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdLearners_CellFormatting);
-            this.grdLearners.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdLearners_CellDoubleClick);
+            this.dgvLearners.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colLearnersId,
+            this.colLearnersName,
+            this.colLearnersGrade,
+            this.colLearnersSchool,
+            this.colLearnersProvince,
+            this.colLearnersSessions,
+            this.colLearnersLastSession});
+            dgvLearnersAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvLearners.AlternatingRowsDefaultCellStyle = dgvLearnersAltStyle;
+            dgvLearnersHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvLearnersHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvLearnersHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvLearnersHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvLearnersHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvLearnersHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvLearnersHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvLearnersHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLearners.ColumnHeadersDefaultCellStyle = dgvLearnersHeaderStyle;
+            dgvLearnersCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvLearnersCellStyle.BackColor = System.Drawing.Color.White;
+            dgvLearnersCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvLearnersCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvLearnersCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvLearnersCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvLearnersCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvLearnersCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLearners.DefaultCellStyle = dgvLearnersCellStyle;
+            this.dgvLearners.AccessibleName = "Learners found";
+            this.dgvLearners.AllowUserToAddRows = false;
+            this.dgvLearners.AllowUserToDeleteRows = false;
+            this.dgvLearners.AllowUserToResizeRows = false;
+            this.dgvLearners.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvLearners.BackgroundColor = System.Drawing.Color.White;
+            this.dgvLearners.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvLearners.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvLearners.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvLearners.ColumnHeadersHeight = 34;
+            this.dgvLearners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvLearners.EnableHeadersVisualStyles = false;
+            this.dgvLearners.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvLearners.Location = new System.Drawing.Point(16, 46);
+            this.dgvLearners.MultiSelect = false;
+            this.dgvLearners.ReadOnly = true;
+            this.dgvLearners.RowHeadersVisible = false;
+            this.dgvLearners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLearners.Size = new System.Drawing.Size(892, 360);
+            this.dgvLearners.TabIndex = 3;
+            this.dgvLearners.Name = "dgvLearners";
+            this.dgvLearners.RowTemplate.Height = 30;
+            this.dgvLearners.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLearners_CellFormatting);
+            this.dgvLearners.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLearners_CellDoubleClick);
             //
-            // colLearnerId
+            // colLearnersId
             //
-            this.colLearnerId.DataPropertyName = "LearnerID";
-            this.colLearnerId.FillWeight = 5F;
-            this.colLearnerId.HeaderText = "Learner ID";
-            this.colLearnerId.ReadOnly = true;
-            this.colLearnerId.Visible = false;
-            this.colLearnerId.Name = "colLearnerId";
+            this.colLearnersId.DataPropertyName = "LearnerID";
+            this.colLearnersId.FillWeight = 5F;
+            this.colLearnersId.HeaderText = "Learner ID";
+            this.colLearnersId.ReadOnly = true;
+            this.colLearnersId.Visible = false;
+            this.colLearnersId.Name = "colLearnersId";
             //
-            // colLrnLearner
+            // colLearnersName
             //
-            this.colLrnLearner.DataPropertyName = "LearnerName";
-            this.colLrnLearner.FillWeight = 26F;
-            this.colLrnLearner.HeaderText = "Learner";
-            this.colLrnLearner.ReadOnly = true;
-            this.colLrnLearner.Name = "colLrnLearner";
+            this.colLearnersName.DataPropertyName = "LearnerName";
+            this.colLearnersName.FillWeight = 26F;
+            this.colLearnersName.HeaderText = "Learner";
+            this.colLearnersName.ReadOnly = true;
+            this.colLearnersName.Name = "colLearnersName";
             //
-            // colGrade
+            // colLearnersGrade
             //
-            this.colGrade.DataPropertyName = "GradeDescription";
-            this.colGrade.FillWeight = 12F;
-            this.colGrade.HeaderText = "Grade";
-            this.colGrade.ReadOnly = true;
-            this.colGrade.Name = "colGrade";
+            this.colLearnersGrade.DataPropertyName = "GradeDescription";
+            this.colLearnersGrade.FillWeight = 12F;
+            this.colLearnersGrade.HeaderText = "Grade";
+            this.colLearnersGrade.ReadOnly = true;
+            this.colLearnersGrade.Name = "colLearnersGrade";
             //
-            // colSchool
+            // colLearnersSchool
             //
-            this.colSchool.DataPropertyName = "SchoolName";
-            this.colSchool.FillWeight = 28F;
-            this.colSchool.HeaderText = "School";
-            this.colSchool.ReadOnly = true;
-            this.colSchool.Name = "colSchool";
+            this.colLearnersSchool.DataPropertyName = "SchoolName";
+            this.colLearnersSchool.FillWeight = 28F;
+            this.colLearnersSchool.HeaderText = "School";
+            this.colLearnersSchool.ReadOnly = true;
+            this.colLearnersSchool.Name = "colLearnersSchool";
             //
-            // colProvince
+            // colLearnersProvince
             //
-            this.colProvince.DataPropertyName = "Province";
-            this.colProvince.FillWeight = 16F;
-            this.colProvince.HeaderText = "Province";
-            this.colProvince.ReadOnly = true;
-            this.colProvince.Name = "colProvince";
+            this.colLearnersProvince.DataPropertyName = "Province";
+            this.colLearnersProvince.FillWeight = 16F;
+            this.colLearnersProvince.HeaderText = "Province";
+            this.colLearnersProvince.ReadOnly = true;
+            this.colLearnersProvince.Name = "colLearnersProvince";
             //
-            // colSessions
+            // colLearnersSessions
             //
-            LrnColSessionsStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            LrnColSessionsStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colSessions.DefaultCellStyle = LrnColSessionsStyle;
-            this.colSessions.DataPropertyName = "SessionCount";
-            this.colSessions.FillWeight = 10F;
-            this.colSessions.HeaderText = "Sessions";
-            this.colSessions.ReadOnly = true;
-            this.colSessions.Name = "colSessions";
+            colLearnersSessionsStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colLearnersSessionsStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colLearnersSessions.DefaultCellStyle = colLearnersSessionsStyle;
+            this.colLearnersSessions.DataPropertyName = "SessionCount";
+            this.colLearnersSessions.FillWeight = 10F;
+            this.colLearnersSessions.HeaderText = "Sessions";
+            this.colLearnersSessions.ReadOnly = true;
+            this.colLearnersSessions.Name = "colLearnersSessions";
             //
-            // colLastSession
+            // colLearnersLastSession
             //
-            LrnColLastSessionStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colLastSession.DefaultCellStyle = LrnColLastSessionStyle;
-            this.colLastSession.DataPropertyName = "LastSessionDate";
-            this.colLastSession.FillWeight = 14F;
-            this.colLastSession.HeaderText = "Last session";
-            this.colLastSession.ReadOnly = true;
-            this.colLastSession.Name = "colLastSession";
+            colLearnersLastSessionStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colLearnersLastSession.DefaultCellStyle = colLearnersLastSessionStyle;
+            this.colLearnersLastSession.DataPropertyName = "LastSessionDate";
+            this.colLearnersLastSession.FillWeight = 14F;
+            this.colLearnersLastSession.HeaderText = "Last session";
+            this.colLearnersLastSession.ReadOnly = true;
+            this.colLearnersLastSession.Name = "colLearnersLastSession";
             //
             // flpLearnerSearchActions
             //
@@ -1922,11 +1922,11 @@
             //
             // pnlSesResultsCard
             //
-            this.pnlSesResultsCard.Controls.Add(this.lblSesResultsHeadingBar);
+            this.pnlSesResultsCard.Controls.Add(this.pnlSesResultsHeadingBar);
             this.pnlSesResultsCard.Controls.Add(this.lblSesResultsHeading);
             this.pnlSesResultsCard.Controls.Add(this.lblSesResultsCount);
             this.pnlSesResultsCard.Controls.Add(this.btnExportSummary);
-            this.pnlSesResultsCard.Controls.Add(this.grdSessions);
+            this.pnlSesResultsCard.Controls.Add(this.dgvSessions);
             this.pnlSesResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlSesResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSesResultsCard.Location = new System.Drawing.Point(0, 98);
@@ -1934,13 +1934,13 @@
             this.pnlSesResultsCard.TabIndex = 1;
             this.pnlSesResultsCard.Name = "pnlSesResultsCard";
             //
-            // lblSesResultsHeadingBar
+            // pnlSesResultsHeadingBar
             //
-            this.lblSesResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSesResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
-            this.lblSesResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblSesResultsHeadingBar.TabIndex = 0;
-            this.lblSesResultsHeadingBar.Name = "lblSesResultsHeadingBar";
+            this.pnlSesResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlSesResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlSesResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlSesResultsHeadingBar.TabIndex = 0;
+            this.pnlSesResultsHeadingBar.Name = "pnlSesResultsHeadingBar";
             //
             // lblSesResultsHeading
             //
@@ -1980,143 +1980,143 @@
             this.btnExportSummary.FlatAppearance.BorderSize = 0;
             this.btnExportSummary.Click += new System.EventHandler(this.btnExportSummary_Click);
             //
-            // grdSessions
+            // dgvSessions
             //
-            this.grdSessions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSessionId,
-            this.colSessionStatus,
-            this.colSession,
-            this.colDate,
-            this.colSesLearner,
-            this.colGr,
-            this.colProgramme,
-            this.colOutcome,
-            this.colExported});
-            SesGrdSessionsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdSessions.AlternatingRowsDefaultCellStyle = SesGrdSessionsAltStyle;
-            SesGrdSessionsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SesGrdSessionsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SesGrdSessionsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            SesGrdSessionsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            SesGrdSessionsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SesGrdSessionsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            SesGrdSessionsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            SesGrdSessionsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdSessions.ColumnHeadersDefaultCellStyle = SesGrdSessionsHeaderStyle;
-            SesGrdSessionsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            SesGrdSessionsCellStyle.BackColor = System.Drawing.Color.White;
-            SesGrdSessionsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            SesGrdSessionsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            SesGrdSessionsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            SesGrdSessionsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            SesGrdSessionsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            SesGrdSessionsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdSessions.DefaultCellStyle = SesGrdSessionsCellStyle;
-            this.grdSessions.AccessibleName = "Advisory sessions found";
-            this.grdSessions.AllowUserToAddRows = false;
-            this.grdSessions.AllowUserToDeleteRows = false;
-            this.grdSessions.AllowUserToResizeRows = false;
-            this.grdSessions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdSessions.BackgroundColor = System.Drawing.Color.White;
-            this.grdSessions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdSessions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdSessions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdSessions.ColumnHeadersHeight = 34;
-            this.grdSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdSessions.EnableHeadersVisualStyles = false;
-            this.grdSessions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdSessions.Location = new System.Drawing.Point(16, 46);
-            this.grdSessions.MultiSelect = false;
-            this.grdSessions.ReadOnly = true;
-            this.grdSessions.RowHeadersVisible = false;
-            this.grdSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSessions.Size = new System.Drawing.Size(892, 360);
-            this.grdSessions.TabIndex = 4;
-            this.grdSessions.Name = "grdSessions";
-            this.grdSessions.RowTemplate.Height = 30;
-            this.grdSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdSessions_CellFormatting);
-            this.grdSessions.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.grdSessions_CellPainting);
-            this.grdSessions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSessions_CellDoubleClick);
+            this.dgvSessions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSessionsId,
+            this.colSessionsStatus,
+            this.colSessionsNumber,
+            this.colSessionsDate,
+            this.colSessionsLearner,
+            this.colSessionsGrade,
+            this.colSessionsProgramme,
+            this.colSessionsOutcome,
+            this.colSessionsExported});
+            dgvSessionsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvSessions.AlternatingRowsDefaultCellStyle = dgvSessionsAltStyle;
+            dgvSessionsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvSessionsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvSessionsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvSessionsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvSessionsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvSessionsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvSessionsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvSessionsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSessions.ColumnHeadersDefaultCellStyle = dgvSessionsHeaderStyle;
+            dgvSessionsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvSessionsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvSessionsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvSessionsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvSessionsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvSessionsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvSessionsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvSessionsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSessions.DefaultCellStyle = dgvSessionsCellStyle;
+            this.dgvSessions.AccessibleName = "Advisory sessions found";
+            this.dgvSessions.AllowUserToAddRows = false;
+            this.dgvSessions.AllowUserToDeleteRows = false;
+            this.dgvSessions.AllowUserToResizeRows = false;
+            this.dgvSessions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSessions.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSessions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvSessions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvSessions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvSessions.ColumnHeadersHeight = 34;
+            this.dgvSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvSessions.EnableHeadersVisualStyles = false;
+            this.dgvSessions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvSessions.Location = new System.Drawing.Point(16, 46);
+            this.dgvSessions.MultiSelect = false;
+            this.dgvSessions.ReadOnly = true;
+            this.dgvSessions.RowHeadersVisible = false;
+            this.dgvSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSessions.Size = new System.Drawing.Size(892, 360);
+            this.dgvSessions.TabIndex = 4;
+            this.dgvSessions.Name = "dgvSessions";
+            this.dgvSessions.RowTemplate.Height = 30;
+            this.dgvSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSessions_CellFormatting);
+            this.dgvSessions.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvSessions_CellPainting);
+            this.dgvSessions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSessions_CellDoubleClick);
             //
-            // colSessionId
+            // colSessionsId
             //
-            this.colSessionId.DataPropertyName = "SessionID";
-            this.colSessionId.FillWeight = 5F;
-            this.colSessionId.HeaderText = "Session ID";
-            this.colSessionId.ReadOnly = true;
-            this.colSessionId.Visible = false;
-            this.colSessionId.Name = "colSessionId";
+            this.colSessionsId.DataPropertyName = "SessionID";
+            this.colSessionsId.FillWeight = 5F;
+            this.colSessionsId.HeaderText = "Session ID";
+            this.colSessionsId.ReadOnly = true;
+            this.colSessionsId.Visible = false;
+            this.colSessionsId.Name = "colSessionsId";
             //
-            // colSessionStatus
+            // colSessionsStatus
             //
-            this.colSessionStatus.DataPropertyName = "SessionStatus";
-            this.colSessionStatus.FillWeight = 5F;
-            this.colSessionStatus.HeaderText = "Status";
-            this.colSessionStatus.ReadOnly = true;
-            this.colSessionStatus.Visible = false;
-            this.colSessionStatus.Name = "colSessionStatus";
+            this.colSessionsStatus.DataPropertyName = "SessionStatus";
+            this.colSessionsStatus.FillWeight = 5F;
+            this.colSessionsStatus.HeaderText = "Status";
+            this.colSessionsStatus.ReadOnly = true;
+            this.colSessionsStatus.Visible = false;
+            this.colSessionsStatus.Name = "colSessionsStatus";
             //
-            // colSession
+            // colSessionsNumber
             //
-            SesColSessionStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colSession.DefaultCellStyle = SesColSessionStyle;
-            this.colSession.DataPropertyName = "SessionNumber";
-            this.colSession.FillWeight = 11F;
-            this.colSession.HeaderText = "Session";
-            this.colSession.ReadOnly = true;
-            this.colSession.Name = "colSession";
+            colSessionsNumberStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colSessionsNumber.DefaultCellStyle = colSessionsNumberStyle;
+            this.colSessionsNumber.DataPropertyName = "SessionNumber";
+            this.colSessionsNumber.FillWeight = 11F;
+            this.colSessionsNumber.HeaderText = "Session";
+            this.colSessionsNumber.ReadOnly = true;
+            this.colSessionsNumber.Name = "colSessionsNumber";
             //
-            // colDate
+            // colSessionsDate
             //
-            SesColDateStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colDate.DefaultCellStyle = SesColDateStyle;
-            this.colDate.DataPropertyName = "SessionDate";
-            this.colDate.FillWeight = 11F;
-            this.colDate.HeaderText = "Date";
-            this.colDate.ReadOnly = true;
-            this.colDate.Name = "colDate";
+            colSessionsDateStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colSessionsDate.DefaultCellStyle = colSessionsDateStyle;
+            this.colSessionsDate.DataPropertyName = "SessionDate";
+            this.colSessionsDate.FillWeight = 11F;
+            this.colSessionsDate.HeaderText = "Date";
+            this.colSessionsDate.ReadOnly = true;
+            this.colSessionsDate.Name = "colSessionsDate";
             //
-            // colSesLearner
+            // colSessionsLearner
             //
-            this.colSesLearner.DataPropertyName = "LearnerName";
-            this.colSesLearner.FillWeight = 17F;
-            this.colSesLearner.HeaderText = "Learner";
-            this.colSesLearner.ReadOnly = true;
-            this.colSesLearner.Name = "colSesLearner";
+            this.colSessionsLearner.DataPropertyName = "LearnerName";
+            this.colSessionsLearner.FillWeight = 17F;
+            this.colSessionsLearner.HeaderText = "Learner";
+            this.colSessionsLearner.ReadOnly = true;
+            this.colSessionsLearner.Name = "colSessionsLearner";
             //
-            // colGr
+            // colSessionsGrade
             //
-            SesColGrStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colGr.DefaultCellStyle = SesColGrStyle;
-            this.colGr.DataPropertyName = "Grade";
-            this.colGr.FillWeight = 5F;
-            this.colGr.HeaderText = "Gr";
-            this.colGr.ReadOnly = true;
-            this.colGr.Name = "colGr";
+            colSessionsGradeStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colSessionsGrade.DefaultCellStyle = colSessionsGradeStyle;
+            this.colSessionsGrade.DataPropertyName = "Grade";
+            this.colSessionsGrade.FillWeight = 5F;
+            this.colSessionsGrade.HeaderText = "Gr";
+            this.colSessionsGrade.ReadOnly = true;
+            this.colSessionsGrade.Name = "colSessionsGrade";
             //
-            // colProgramme
+            // colSessionsProgramme
             //
-            this.colProgramme.DataPropertyName = "ProgrammeName";
-            this.colProgramme.FillWeight = 25F;
-            this.colProgramme.HeaderText = "Selected programme";
-            this.colProgramme.ReadOnly = true;
-            this.colProgramme.Name = "colProgramme";
+            this.colSessionsProgramme.DataPropertyName = "ProgrammeName";
+            this.colSessionsProgramme.FillWeight = 25F;
+            this.colSessionsProgramme.HeaderText = "Selected programme";
+            this.colSessionsProgramme.ReadOnly = true;
+            this.colSessionsProgramme.Name = "colSessionsProgramme";
             //
-            // colOutcome
+            // colSessionsOutcome
             //
-            this.colOutcome.DataPropertyName = "OutcomeCode";
-            this.colOutcome.FillWeight = 21F;
-            this.colOutcome.HeaderText = "Advisory outcome";
-            this.colOutcome.ReadOnly = true;
-            this.colOutcome.Name = "colOutcome";
+            this.colSessionsOutcome.DataPropertyName = "OutcomeCode";
+            this.colSessionsOutcome.FillWeight = 21F;
+            this.colSessionsOutcome.HeaderText = "Advisory outcome";
+            this.colSessionsOutcome.ReadOnly = true;
+            this.colSessionsOutcome.Name = "colSessionsOutcome";
             //
-            // colExported
+            // colSessionsExported
             //
-            this.colExported.DataPropertyName = "IsExported";
-            this.colExported.FillWeight = 9F;
-            this.colExported.HeaderText = "Exported";
-            this.colExported.ReadOnly = true;
-            this.colExported.Name = "colExported";
+            this.colSessionsExported.DataPropertyName = "IsExported";
+            this.colSessionsExported.FillWeight = 9F;
+            this.colSessionsExported.HeaderText = "Exported";
+            this.colSessionsExported.ReadOnly = true;
+            this.colSessionsExported.Name = "colSessionsExported";
             //
             // flpSessionSearchActions
             //
@@ -2363,11 +2363,11 @@
             //
             // pnlRscResultsCard
             //
-            this.pnlRscResultsCard.Controls.Add(this.lblRscResultsHeadingBar);
+            this.pnlRscResultsCard.Controls.Add(this.pnlRscResultsHeadingBar);
             this.pnlRscResultsCard.Controls.Add(this.lblRscResultsHeading);
             this.pnlRscResultsCard.Controls.Add(this.lblRscResultsCount);
             this.pnlRscResultsCard.Controls.Add(this.lblReportsNote);
-            this.pnlRscResultsCard.Controls.Add(this.grdReports);
+            this.pnlRscResultsCard.Controls.Add(this.dgvReports);
             this.pnlRscResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlRscResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRscResultsCard.Location = new System.Drawing.Point(0, 98);
@@ -2375,13 +2375,13 @@
             this.pnlRscResultsCard.TabIndex = 1;
             this.pnlRscResultsCard.Name = "pnlRscResultsCard";
             //
-            // lblRscResultsHeadingBar
+            // pnlRscResultsHeadingBar
             //
-            this.lblRscResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblRscResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
-            this.lblRscResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblRscResultsHeadingBar.TabIndex = 0;
-            this.lblRscResultsHeadingBar.Name = "lblRscResultsHeadingBar";
+            this.pnlRscResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlRscResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlRscResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlRscResultsHeadingBar.TabIndex = 0;
+            this.pnlRscResultsHeadingBar.Name = "pnlRscResultsHeadingBar";
             //
             // lblRscResultsHeading
             //
@@ -2414,104 +2414,104 @@
             this.lblReportsNote.Text = "Generate report opens Report generation (UI 11) with these criteria already applied. FP-LSR covers one session at a time; open it from the Advisory session tab.";
             this.lblReportsNote.Name = "lblReportsNote";
             //
-            // grdReports
+            // dgvReports
             //
-            this.grdReports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colReportCode,
-            this.colReport,
-            this.colScope,
-            this.colRowsInScope,
-            this.colLastGenerated});
-            RscGrdReportsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdReports.AlternatingRowsDefaultCellStyle = RscGrdReportsAltStyle;
-            RscGrdReportsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            RscGrdReportsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            RscGrdReportsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            RscGrdReportsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            RscGrdReportsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            RscGrdReportsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            RscGrdReportsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            RscGrdReportsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdReports.ColumnHeadersDefaultCellStyle = RscGrdReportsHeaderStyle;
-            RscGrdReportsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            RscGrdReportsCellStyle.BackColor = System.Drawing.Color.White;
-            RscGrdReportsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            RscGrdReportsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            RscGrdReportsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            RscGrdReportsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            RscGrdReportsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            RscGrdReportsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdReports.DefaultCellStyle = RscGrdReportsCellStyle;
-            this.grdReports.AccessibleName = "Reports available";
-            this.grdReports.AllowUserToAddRows = false;
-            this.grdReports.AllowUserToDeleteRows = false;
-            this.grdReports.AllowUserToResizeRows = false;
-            this.grdReports.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdReports.BackgroundColor = System.Drawing.Color.White;
-            this.grdReports.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdReports.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdReports.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdReports.ColumnHeadersHeight = 34;
-            this.grdReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdReports.EnableHeadersVisualStyles = false;
-            this.grdReports.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdReports.Location = new System.Drawing.Point(16, 46);
-            this.grdReports.MultiSelect = false;
-            this.grdReports.ReadOnly = true;
-            this.grdReports.RowHeadersVisible = false;
-            this.grdReports.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdReports.Size = new System.Drawing.Size(892, 160);
-            this.grdReports.TabIndex = 4;
-            this.grdReports.Name = "grdReports";
-            this.grdReports.RowTemplate.Height = 30;
-            this.grdReports.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdReports_CellFormatting);
-            this.grdReports.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdReports_CellDoubleClick);
+            this.dgvReports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colReportsCode,
+            this.colReportsName,
+            this.colReportsScope,
+            this.colReportsRowsInScope,
+            this.colReportsLastGenerated});
+            dgvReportsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvReports.AlternatingRowsDefaultCellStyle = dgvReportsAltStyle;
+            dgvReportsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvReportsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvReportsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvReportsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvReportsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvReportsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvReportsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvReportsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReports.ColumnHeadersDefaultCellStyle = dgvReportsHeaderStyle;
+            dgvReportsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvReportsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvReportsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvReportsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvReportsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvReportsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvReportsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvReportsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReports.DefaultCellStyle = dgvReportsCellStyle;
+            this.dgvReports.AccessibleName = "Reports available";
+            this.dgvReports.AllowUserToAddRows = false;
+            this.dgvReports.AllowUserToDeleteRows = false;
+            this.dgvReports.AllowUserToResizeRows = false;
+            this.dgvReports.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReports.BackgroundColor = System.Drawing.Color.White;
+            this.dgvReports.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvReports.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvReports.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvReports.ColumnHeadersHeight = 34;
+            this.dgvReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvReports.EnableHeadersVisualStyles = false;
+            this.dgvReports.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvReports.Location = new System.Drawing.Point(16, 46);
+            this.dgvReports.MultiSelect = false;
+            this.dgvReports.ReadOnly = true;
+            this.dgvReports.RowHeadersVisible = false;
+            this.dgvReports.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReports.Size = new System.Drawing.Size(892, 160);
+            this.dgvReports.TabIndex = 4;
+            this.dgvReports.Name = "dgvReports";
+            this.dgvReports.RowTemplate.Height = 30;
+            this.dgvReports.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvReports_CellFormatting);
+            this.dgvReports.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReports_CellDoubleClick);
             //
-            // colReportCode
+            // colReportsCode
             //
-            this.colReportCode.DataPropertyName = "ReportCode";
-            this.colReportCode.FillWeight = 5F;
-            this.colReportCode.HeaderText = "Code";
-            this.colReportCode.ReadOnly = true;
-            this.colReportCode.Visible = false;
-            this.colReportCode.Name = "colReportCode";
+            this.colReportsCode.DataPropertyName = "ReportCode";
+            this.colReportsCode.FillWeight = 5F;
+            this.colReportsCode.HeaderText = "Code";
+            this.colReportsCode.ReadOnly = true;
+            this.colReportsCode.Visible = false;
+            this.colReportsCode.Name = "colReportsCode";
             //
-            // colReport
+            // colReportsName
             //
-            this.colReport.DataPropertyName = "ReportName";
-            this.colReport.FillWeight = 34F;
-            this.colReport.HeaderText = "Report";
-            this.colReport.ReadOnly = true;
-            this.colReport.Name = "colReport";
+            this.colReportsName.DataPropertyName = "ReportName";
+            this.colReportsName.FillWeight = 34F;
+            this.colReportsName.HeaderText = "Report";
+            this.colReportsName.ReadOnly = true;
+            this.colReportsName.Name = "colReportsName";
             //
-            // colScope
+            // colReportsScope
             //
-            this.colScope.DataPropertyName = "Scope";
-            this.colScope.FillWeight = 34F;
-            this.colScope.HeaderText = "Scope";
-            this.colScope.ReadOnly = true;
-            this.colScope.Name = "colScope";
+            this.colReportsScope.DataPropertyName = "Scope";
+            this.colReportsScope.FillWeight = 34F;
+            this.colReportsScope.HeaderText = "Scope";
+            this.colReportsScope.ReadOnly = true;
+            this.colReportsScope.Name = "colReportsScope";
             //
-            // colRowsInScope
+            // colReportsRowsInScope
             //
-            RscColRowsInScopeStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            RscColRowsInScopeStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colRowsInScope.DefaultCellStyle = RscColRowsInScopeStyle;
-            this.colRowsInScope.DataPropertyName = "RowsInScope";
-            this.colRowsInScope.FillWeight = 13F;
-            this.colRowsInScope.HeaderText = "Rows in scope";
-            this.colRowsInScope.ReadOnly = true;
-            this.colRowsInScope.Name = "colRowsInScope";
+            colReportsRowsInScopeStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colReportsRowsInScopeStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colReportsRowsInScope.DefaultCellStyle = colReportsRowsInScopeStyle;
+            this.colReportsRowsInScope.DataPropertyName = "RowsInScope";
+            this.colReportsRowsInScope.FillWeight = 13F;
+            this.colReportsRowsInScope.HeaderText = "Rows in scope";
+            this.colReportsRowsInScope.ReadOnly = true;
+            this.colReportsRowsInScope.Name = "colReportsRowsInScope";
             //
-            // colLastGenerated
+            // colReportsLastGenerated
             //
-            RscColLastGeneratedStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colLastGenerated.DefaultCellStyle = RscColLastGeneratedStyle;
-            this.colLastGenerated.DataPropertyName = "LastGenerated";
-            this.colLastGenerated.FillWeight = 19F;
-            this.colLastGenerated.HeaderText = "Last generated";
-            this.colLastGenerated.ReadOnly = true;
-            this.colLastGenerated.Name = "colLastGenerated";
+            colReportsLastGeneratedStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colReportsLastGenerated.DefaultCellStyle = colReportsLastGeneratedStyle;
+            this.colReportsLastGenerated.DataPropertyName = "LastGenerated";
+            this.colReportsLastGenerated.FillWeight = 19F;
+            this.colReportsLastGenerated.HeaderText = "Last generated";
+            this.colReportsLastGenerated.ReadOnly = true;
+            this.colReportsLastGenerated.Name = "colReportsLastGenerated";
             //
             // flpReportShortcutsActions
             //
@@ -2569,7 +2569,7 @@
             //
             // pnlReportCard
             //
-            this.pnlReportCard.Controls.Add(this.lblReportHeadingBar);
+            this.pnlReportCard.Controls.Add(this.pnlReportHeadingBar);
             this.pnlReportCard.Controls.Add(this.lblReportHeading);
             this.pnlReportCard.Controls.Add(this.rdoLearnerSummary);
             this.pnlReportCard.Controls.Add(this.lblLearnerSummaryNote);
@@ -2584,13 +2584,13 @@
             this.pnlReportCard.TabIndex = 0;
             this.pnlReportCard.Name = "pnlReportCard";
             //
-            // lblReportHeadingBar
+            // pnlReportHeadingBar
             //
-            this.lblReportHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReportHeadingBar.Location = new System.Drawing.Point(16, 8);
-            this.lblReportHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblReportHeadingBar.TabIndex = 0;
-            this.lblReportHeadingBar.Name = "lblReportHeadingBar";
+            this.pnlReportHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlReportHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlReportHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlReportHeadingBar.TabIndex = 0;
+            this.pnlReportHeadingBar.Name = "pnlReportHeadingBar";
             //
             // lblReportHeading
             //
@@ -2676,7 +2676,7 @@
             //
             // pnlParameterCard
             //
-            this.pnlParameterCard.Controls.Add(this.lblParameterHeadingBar);
+            this.pnlParameterCard.Controls.Add(this.pnlParameterHeadingBar);
             this.pnlParameterCard.Controls.Add(this.lblParameterHeading);
             this.pnlParameterCard.Controls.Add(this.lblRepFrom);
             this.pnlParameterCard.Controls.Add(this.lblRepFromStar);
@@ -2709,13 +2709,13 @@
             this.pnlParameterCard.TabIndex = 1;
             this.pnlParameterCard.Name = "pnlParameterCard";
             //
-            // lblParameterHeadingBar
+            // pnlParameterHeadingBar
             //
-            this.lblParameterHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblParameterHeadingBar.Location = new System.Drawing.Point(16, 8);
-            this.lblParameterHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblParameterHeadingBar.TabIndex = 0;
-            this.lblParameterHeadingBar.Name = "lblParameterHeadingBar";
+            this.pnlParameterHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlParameterHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlParameterHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlParameterHeadingBar.TabIndex = 0;
+            this.pnlParameterHeadingBar.Name = "pnlParameterHeadingBar";
             //
             // lblParameterHeading
             //
@@ -2989,7 +2989,7 @@
             //
             // pnlOutputCard
             //
-            this.pnlOutputCard.Controls.Add(this.lblOutputHeadingBar);
+            this.pnlOutputCard.Controls.Add(this.pnlOutputHeadingBar);
             this.pnlOutputCard.Controls.Add(this.lblOutputHeading);
             this.pnlOutputCard.Controls.Add(this.lblOutputFormat);
             this.pnlOutputCard.Controls.Add(this.lblOutputFormatStar);
@@ -3007,13 +3007,13 @@
             this.pnlOutputCard.TabIndex = 2;
             this.pnlOutputCard.Name = "pnlOutputCard";
             //
-            // lblOutputHeadingBar
+            // pnlOutputHeadingBar
             //
-            this.lblOutputHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblOutputHeadingBar.Location = new System.Drawing.Point(16, 8);
-            this.lblOutputHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblOutputHeadingBar.TabIndex = 0;
-            this.lblOutputHeadingBar.Name = "lblOutputHeadingBar";
+            this.pnlOutputHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlOutputHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlOutputHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlOutputHeadingBar.TabIndex = 0;
+            this.pnlOutputHeadingBar.Name = "pnlOutputHeadingBar";
             //
             // lblOutputHeading
             //
@@ -3421,7 +3421,7 @@
             //
             // pnlFacultyCard
             //
-            this.pnlFacultyCard.Controls.Add(this.lblFacultyHeadingBar);
+            this.pnlFacultyCard.Controls.Add(this.pnlFacultyHeadingBar);
             this.pnlFacultyCard.Controls.Add(this.lblFacultyHeading);
             this.pnlFacultyCard.Controls.Add(this.lblFacultyName);
             this.pnlFacultyCard.Controls.Add(this.lblFacultyNameStar);
@@ -3438,13 +3438,13 @@
             this.pnlFacultyCard.TabIndex = 3;
             this.pnlFacultyCard.Name = "pnlFacultyCard";
             //
-            // lblFacultyHeadingBar
+            // pnlFacultyHeadingBar
             //
-            this.lblFacultyHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblFacultyHeadingBar.Location = new System.Drawing.Point(12, 10);
-            this.lblFacultyHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblFacultyHeadingBar.TabIndex = 0;
-            this.lblFacultyHeadingBar.Name = "lblFacultyHeadingBar";
+            this.pnlFacultyHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlFacultyHeadingBar.Location = new System.Drawing.Point(12, 10);
+            this.pnlFacultyHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlFacultyHeadingBar.TabIndex = 0;
+            this.pnlFacultyHeadingBar.Name = "pnlFacultyHeadingBar";
             //
             // lblFacultyHeading
             //
@@ -3563,7 +3563,7 @@
             //
             // pnlUniGridCard
             //
-            this.pnlUniGridCard.Controls.Add(this.lblUniGridHeadingBar);
+            this.pnlUniGridCard.Controls.Add(this.pnlUniGridHeadingBar);
             this.pnlUniGridCard.Controls.Add(this.lblUniGridHeading);
             this.pnlUniGridCard.Controls.Add(this.lblUniProgrammeCount);
             this.pnlUniGridCard.Controls.Add(this.dgvProgrammes);
@@ -3574,13 +3574,13 @@
             this.pnlUniGridCard.TabIndex = 4;
             this.pnlUniGridCard.Name = "pnlUniGridCard";
             //
-            // lblUniGridHeadingBar
+            // pnlUniGridHeadingBar
             //
-            this.lblUniGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblUniGridHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblUniGridHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblUniGridHeadingBar.TabIndex = 0;
-            this.lblUniGridHeadingBar.Name = "lblUniGridHeadingBar";
+            this.pnlUniGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlUniGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlUniGridHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlUniGridHeadingBar.TabIndex = 0;
+            this.pnlUniGridHeadingBar.Name = "pnlUniGridHeadingBar";
             //
             // lblUniGridHeading
             //
@@ -3607,31 +3607,31 @@
             // dgvProgrammes
             //
             this.dgvProgrammes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colProgrammeName,
-            this.colMinimumAverage,
-            this.colUniStatus,
-            this.colProgrammeId,
-            this.colFacultyId});
-            UniDgvProgrammesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = UniDgvProgrammesAltStyle;
-            UniDgvProgrammesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            UniDgvProgrammesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            UniDgvProgrammesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            UniDgvProgrammesHeaderStyle.ForeColor = System.Drawing.Color.White;
-            UniDgvProgrammesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            UniDgvProgrammesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            UniDgvProgrammesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            UniDgvProgrammesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = UniDgvProgrammesHeaderStyle;
-            UniDgvProgrammesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            UniDgvProgrammesCellStyle.BackColor = System.Drawing.Color.White;
-            UniDgvProgrammesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            UniDgvProgrammesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            UniDgvProgrammesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            UniDgvProgrammesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            UniDgvProgrammesCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            UniDgvProgrammesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammes.DefaultCellStyle = UniDgvProgrammesCellStyle;
+            this.colProgrammesName,
+            this.colProgrammesMinimumAverage,
+            this.colProgrammesStatus,
+            this.colProgrammesId,
+            this.colProgrammesFacultyId});
+            dgvProgrammesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dgvProgrammesAltStyle;
+            dgvProgrammesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvProgrammesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvProgrammesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvProgrammesHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvProgrammesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvProgrammesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvProgrammesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvProgrammesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dgvProgrammesHeaderStyle;
+            dgvProgrammesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvProgrammesCellStyle.BackColor = System.Drawing.Color.White;
+            dgvProgrammesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvProgrammesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvProgrammesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvProgrammesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvProgrammesCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvProgrammesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrammes.DefaultCellStyle = dgvProgrammesCellStyle;
             this.dgvProgrammes.AccessibleName = "Programmes in the selected faculty";
             this.dgvProgrammes.AllowUserToAddRows = false;
             this.dgvProgrammes.AllowUserToDeleteRows = false;
@@ -3657,57 +3657,57 @@
             this.dgvProgrammes.SelectionChanged += new System.EventHandler(this.dgvProgrammes_SelectionChanged);
             this.dgvProgrammes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProgrammes_CellFormatting);
             //
-            // colProgrammeName
+            // colProgrammesName
             //
-            this.colProgrammeName.DataPropertyName = "ProgrammeName";
-            this.colProgrammeName.FillWeight = 56F;
-            this.colProgrammeName.HeaderText = "Programme";
-            this.colProgrammeName.ReadOnly = true;
-            this.colProgrammeName.Name = "colProgrammeName";
+            this.colProgrammesName.DataPropertyName = "ProgrammeName";
+            this.colProgrammesName.FillWeight = 56F;
+            this.colProgrammesName.HeaderText = "Programme";
+            this.colProgrammesName.ReadOnly = true;
+            this.colProgrammesName.Name = "colProgrammesName";
             //
-            // colMinimumAverage
+            // colProgrammesMinimumAverage
             //
-            UniColMinimumAverageStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            UniColMinimumAverageStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colMinimumAverage.DefaultCellStyle = UniColMinimumAverageStyle;
-            this.colMinimumAverage.DataPropertyName = "MinimumOverallAverage";
-            this.colMinimumAverage.FillWeight = 22F;
-            this.colMinimumAverage.HeaderText = "Min. overall average";
-            this.colMinimumAverage.ReadOnly = true;
-            this.colMinimumAverage.Name = "colMinimumAverage";
+            colProgrammesMinimumAverageStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colProgrammesMinimumAverageStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colProgrammesMinimumAverage.DefaultCellStyle = colProgrammesMinimumAverageStyle;
+            this.colProgrammesMinimumAverage.DataPropertyName = "MinimumOverallAverage";
+            this.colProgrammesMinimumAverage.FillWeight = 22F;
+            this.colProgrammesMinimumAverage.HeaderText = "Min. overall average";
+            this.colProgrammesMinimumAverage.ReadOnly = true;
+            this.colProgrammesMinimumAverage.Name = "colProgrammesMinimumAverage";
             //
-            // colUniStatus
+            // colProgrammesStatus
             //
-            UniColStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            UniColStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colUniStatus.DefaultCellStyle = UniColStatusStyle;
-            this.colUniStatus.DataPropertyName = "IsActive";
-            this.colUniStatus.FillWeight = 14F;
-            this.colUniStatus.HeaderText = "Status";
-            this.colUniStatus.ReadOnly = true;
-            this.colUniStatus.Name = "colUniStatus";
+            colProgrammesStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            colProgrammesStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
+            this.colProgrammesStatus.DefaultCellStyle = colProgrammesStatusStyle;
+            this.colProgrammesStatus.DataPropertyName = "IsActive";
+            this.colProgrammesStatus.FillWeight = 14F;
+            this.colProgrammesStatus.HeaderText = "Status";
+            this.colProgrammesStatus.ReadOnly = true;
+            this.colProgrammesStatus.Name = "colProgrammesStatus";
             //
-            // colProgrammeId
+            // colProgrammesId
             //
-            this.colProgrammeId.DataPropertyName = "ProgrammeID";
-            this.colProgrammeId.FillWeight = 1F;
-            this.colProgrammeId.HeaderText = "ProgrammeID";
-            this.colProgrammeId.ReadOnly = true;
-            this.colProgrammeId.Visible = false;
-            this.colProgrammeId.Name = "colProgrammeId";
+            this.colProgrammesId.DataPropertyName = "ProgrammeID";
+            this.colProgrammesId.FillWeight = 1F;
+            this.colProgrammesId.HeaderText = "ProgrammeID";
+            this.colProgrammesId.ReadOnly = true;
+            this.colProgrammesId.Visible = false;
+            this.colProgrammesId.Name = "colProgrammesId";
             //
-            // colFacultyId
+            // colProgrammesFacultyId
             //
-            this.colFacultyId.DataPropertyName = "FacultyID";
-            this.colFacultyId.FillWeight = 1F;
-            this.colFacultyId.HeaderText = "FacultyID";
-            this.colFacultyId.ReadOnly = true;
-            this.colFacultyId.Visible = false;
-            this.colFacultyId.Name = "colFacultyId";
+            this.colProgrammesFacultyId.DataPropertyName = "FacultyID";
+            this.colProgrammesFacultyId.FillWeight = 1F;
+            this.colProgrammesFacultyId.HeaderText = "FacultyID";
+            this.colProgrammesFacultyId.ReadOnly = true;
+            this.colProgrammesFacultyId.Visible = false;
+            this.colProgrammesFacultyId.Name = "colProgrammesFacultyId";
             //
             // pnlUniFormCard
             //
-            this.pnlUniFormCard.Controls.Add(this.lblUniFormHeadingBar);
+            this.pnlUniFormCard.Controls.Add(this.pnlUniFormHeadingBar);
             this.pnlUniFormCard.Controls.Add(this.lblUniFormHeading);
             this.pnlUniFormCard.Controls.Add(this.lblProgrammeFaculty);
             this.pnlUniFormCard.Controls.Add(this.lblProgrammeFacultyStar);
@@ -3730,13 +3730,13 @@
             this.pnlUniFormCard.TabIndex = 5;
             this.pnlUniFormCard.Name = "pnlUniFormCard";
             //
-            // lblUniFormHeadingBar
+            // pnlUniFormHeadingBar
             //
-            this.lblUniFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblUniFormHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblUniFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblUniFormHeadingBar.TabIndex = 0;
-            this.lblUniFormHeadingBar.Name = "lblUniFormHeadingBar";
+            this.pnlUniFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlUniFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlUniFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlUniFormHeadingBar.TabIndex = 0;
+            this.pnlUniFormHeadingBar.Name = "pnlUniFormHeadingBar";
             //
             // lblUniFormHeading
             //
@@ -4087,7 +4087,7 @@
             //
             // pnlReqGridCard
             //
-            this.pnlReqGridCard.Controls.Add(this.lblReqGridHeadingBar);
+            this.pnlReqGridCard.Controls.Add(this.pnlReqGridHeadingBar);
             this.pnlReqGridCard.Controls.Add(this.lblReqGridHeading);
             this.pnlReqGridCard.Controls.Add(this.lblRequirementCount);
             this.pnlReqGridCard.Controls.Add(this.dgvRequirements);
@@ -4098,13 +4098,13 @@
             this.pnlReqGridCard.TabIndex = 5;
             this.pnlReqGridCard.Name = "pnlReqGridCard";
             //
-            // lblReqGridHeadingBar
+            // pnlReqGridHeadingBar
             //
-            this.lblReqGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReqGridHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblReqGridHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblReqGridHeadingBar.TabIndex = 0;
-            this.lblReqGridHeadingBar.Name = "lblReqGridHeadingBar";
+            this.pnlReqGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlReqGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlReqGridHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlReqGridHeadingBar.TabIndex = 0;
+            this.pnlReqGridHeadingBar.Name = "pnlReqGridHeadingBar";
             //
             // lblReqGridHeading
             //
@@ -4131,35 +4131,35 @@
             // dgvRequirements
             //
             this.dgvRequirements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRequirementType,
-            this.colSubject,
-            this.colMinimumMark,
-            this.colAlternative,
-            this.colReqStatus,
-            this.colRequirementId,
-            this.colSubjectId,
-            this.colAlternativeSubjectId,
-            this.colAdvisoryNote});
-            ReqDgvRequirementsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvRequirements.AlternatingRowsDefaultCellStyle = ReqDgvRequirementsAltStyle;
-            ReqDgvRequirementsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            ReqDgvRequirementsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            ReqDgvRequirementsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            ReqDgvRequirementsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            ReqDgvRequirementsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            ReqDgvRequirementsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            ReqDgvRequirementsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            ReqDgvRequirementsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRequirements.ColumnHeadersDefaultCellStyle = ReqDgvRequirementsHeaderStyle;
-            ReqDgvRequirementsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            ReqDgvRequirementsCellStyle.BackColor = System.Drawing.Color.White;
-            ReqDgvRequirementsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            ReqDgvRequirementsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            ReqDgvRequirementsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            ReqDgvRequirementsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            ReqDgvRequirementsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            ReqDgvRequirementsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRequirements.DefaultCellStyle = ReqDgvRequirementsCellStyle;
+            this.colRequirementsType,
+            this.colRequirementsSubject,
+            this.colRequirementsMinimumMark,
+            this.colRequirementsAlternative,
+            this.colRequirementsStatus,
+            this.colRequirementsId,
+            this.colRequirementsSubjectId,
+            this.colRequirementsAlternativeSubjectId,
+            this.colRequirementsAdvisoryNote});
+            dgvRequirementsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dgvRequirementsAltStyle;
+            dgvRequirementsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvRequirementsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvRequirementsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvRequirementsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvRequirementsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvRequirementsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvRequirementsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvRequirementsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dgvRequirementsHeaderStyle;
+            dgvRequirementsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvRequirementsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvRequirementsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvRequirementsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvRequirementsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvRequirementsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvRequirementsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvRequirementsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRequirements.DefaultCellStyle = dgvRequirementsCellStyle;
             this.dgvRequirements.AccessibleName = "Stored requirements for the selected programme";
             this.dgvRequirements.AllowUserToAddRows = false;
             this.dgvRequirements.AllowUserToDeleteRows = false;
@@ -4185,91 +4185,91 @@
             this.dgvRequirements.SelectionChanged += new System.EventHandler(this.dgvRequirements_SelectionChanged);
             this.dgvRequirements.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRequirements_CellFormatting);
             //
-            // colRequirementType
+            // colRequirementsType
             //
-            this.colRequirementType.DataPropertyName = "RequirementType";
-            this.colRequirementType.FillWeight = 21F;
-            this.colRequirementType.HeaderText = "Requirement type";
-            this.colRequirementType.ReadOnly = true;
-            this.colRequirementType.Name = "colRequirementType";
+            this.colRequirementsType.DataPropertyName = "RequirementType";
+            this.colRequirementsType.FillWeight = 21F;
+            this.colRequirementsType.HeaderText = "Requirement type";
+            this.colRequirementsType.ReadOnly = true;
+            this.colRequirementsType.Name = "colRequirementsType";
             //
-            // colSubject
+            // colRequirementsSubject
             //
-            this.colSubject.DataPropertyName = "SubjectName";
-            this.colSubject.FillWeight = 24F;
-            this.colSubject.HeaderText = "Subject";
-            this.colSubject.ReadOnly = true;
-            this.colSubject.Name = "colSubject";
+            this.colRequirementsSubject.DataPropertyName = "SubjectName";
+            this.colRequirementsSubject.FillWeight = 24F;
+            this.colRequirementsSubject.HeaderText = "Subject";
+            this.colRequirementsSubject.ReadOnly = true;
+            this.colRequirementsSubject.Name = "colRequirementsSubject";
             //
-            // colMinimumMark
+            // colRequirementsMinimumMark
             //
-            ReqColMinimumMarkStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            ReqColMinimumMarkStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colMinimumMark.DefaultCellStyle = ReqColMinimumMarkStyle;
-            this.colMinimumMark.DataPropertyName = "MinimumMark";
-            this.colMinimumMark.FillWeight = 15F;
-            this.colMinimumMark.HeaderText = "Min. mark";
-            this.colMinimumMark.ReadOnly = true;
-            this.colMinimumMark.Name = "colMinimumMark";
+            colRequirementsMinimumMarkStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colRequirementsMinimumMarkStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colRequirementsMinimumMark.DefaultCellStyle = colRequirementsMinimumMarkStyle;
+            this.colRequirementsMinimumMark.DataPropertyName = "MinimumMark";
+            this.colRequirementsMinimumMark.FillWeight = 15F;
+            this.colRequirementsMinimumMark.HeaderText = "Min. mark";
+            this.colRequirementsMinimumMark.ReadOnly = true;
+            this.colRequirementsMinimumMark.Name = "colRequirementsMinimumMark";
             //
-            // colAlternative
+            // colRequirementsAlternative
             //
-            this.colAlternative.DataPropertyName = "AlternativeSubjectName";
-            this.colAlternative.FillWeight = 26F;
-            this.colAlternative.HeaderText = "Accepted alternative";
-            this.colAlternative.ReadOnly = true;
-            this.colAlternative.Name = "colAlternative";
+            this.colRequirementsAlternative.DataPropertyName = "AlternativeSubjectName";
+            this.colRequirementsAlternative.FillWeight = 26F;
+            this.colRequirementsAlternative.HeaderText = "Accepted alternative";
+            this.colRequirementsAlternative.ReadOnly = true;
+            this.colRequirementsAlternative.Name = "colRequirementsAlternative";
             //
-            // colReqStatus
+            // colRequirementsStatus
             //
-            ReqColStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            ReqColStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colReqStatus.DefaultCellStyle = ReqColStatusStyle;
-            this.colReqStatus.DataPropertyName = "IsActive";
-            this.colReqStatus.FillWeight = 14F;
-            this.colReqStatus.HeaderText = "Status";
-            this.colReqStatus.ReadOnly = true;
-            this.colReqStatus.Name = "colReqStatus";
+            colRequirementsStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            colRequirementsStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
+            this.colRequirementsStatus.DefaultCellStyle = colRequirementsStatusStyle;
+            this.colRequirementsStatus.DataPropertyName = "IsActive";
+            this.colRequirementsStatus.FillWeight = 14F;
+            this.colRequirementsStatus.HeaderText = "Status";
+            this.colRequirementsStatus.ReadOnly = true;
+            this.colRequirementsStatus.Name = "colRequirementsStatus";
             //
-            // colRequirementId
+            // colRequirementsId
             //
-            this.colRequirementId.DataPropertyName = "RequirementID";
-            this.colRequirementId.FillWeight = 1F;
-            this.colRequirementId.HeaderText = "RequirementID";
-            this.colRequirementId.ReadOnly = true;
-            this.colRequirementId.Visible = false;
-            this.colRequirementId.Name = "colRequirementId";
+            this.colRequirementsId.DataPropertyName = "RequirementID";
+            this.colRequirementsId.FillWeight = 1F;
+            this.colRequirementsId.HeaderText = "RequirementID";
+            this.colRequirementsId.ReadOnly = true;
+            this.colRequirementsId.Visible = false;
+            this.colRequirementsId.Name = "colRequirementsId";
             //
-            // colSubjectId
+            // colRequirementsSubjectId
             //
-            this.colSubjectId.DataPropertyName = "SubjectID";
-            this.colSubjectId.FillWeight = 1F;
-            this.colSubjectId.HeaderText = "SubjectID";
-            this.colSubjectId.ReadOnly = true;
-            this.colSubjectId.Visible = false;
-            this.colSubjectId.Name = "colSubjectId";
+            this.colRequirementsSubjectId.DataPropertyName = "SubjectID";
+            this.colRequirementsSubjectId.FillWeight = 1F;
+            this.colRequirementsSubjectId.HeaderText = "SubjectID";
+            this.colRequirementsSubjectId.ReadOnly = true;
+            this.colRequirementsSubjectId.Visible = false;
+            this.colRequirementsSubjectId.Name = "colRequirementsSubjectId";
             //
-            // colAlternativeSubjectId
+            // colRequirementsAlternativeSubjectId
             //
-            this.colAlternativeSubjectId.DataPropertyName = "AlternativeSubjectID";
-            this.colAlternativeSubjectId.FillWeight = 1F;
-            this.colAlternativeSubjectId.HeaderText = "AlternativeSubjectID";
-            this.colAlternativeSubjectId.ReadOnly = true;
-            this.colAlternativeSubjectId.Visible = false;
-            this.colAlternativeSubjectId.Name = "colAlternativeSubjectId";
+            this.colRequirementsAlternativeSubjectId.DataPropertyName = "AlternativeSubjectID";
+            this.colRequirementsAlternativeSubjectId.FillWeight = 1F;
+            this.colRequirementsAlternativeSubjectId.HeaderText = "AlternativeSubjectID";
+            this.colRequirementsAlternativeSubjectId.ReadOnly = true;
+            this.colRequirementsAlternativeSubjectId.Visible = false;
+            this.colRequirementsAlternativeSubjectId.Name = "colRequirementsAlternativeSubjectId";
             //
-            // colAdvisoryNote
+            // colRequirementsAdvisoryNote
             //
-            this.colAdvisoryNote.DataPropertyName = "AdvisoryNote";
-            this.colAdvisoryNote.FillWeight = 1F;
-            this.colAdvisoryNote.HeaderText = "AdvisoryNote";
-            this.colAdvisoryNote.ReadOnly = true;
-            this.colAdvisoryNote.Visible = false;
-            this.colAdvisoryNote.Name = "colAdvisoryNote";
+            this.colRequirementsAdvisoryNote.DataPropertyName = "AdvisoryNote";
+            this.colRequirementsAdvisoryNote.FillWeight = 1F;
+            this.colRequirementsAdvisoryNote.HeaderText = "AdvisoryNote";
+            this.colRequirementsAdvisoryNote.ReadOnly = true;
+            this.colRequirementsAdvisoryNote.Visible = false;
+            this.colRequirementsAdvisoryNote.Name = "colRequirementsAdvisoryNote";
             //
             // pnlReqFormCard
             //
-            this.pnlReqFormCard.Controls.Add(this.lblReqFormHeadingBar);
+            this.pnlReqFormCard.Controls.Add(this.pnlReqFormHeadingBar);
             this.pnlReqFormCard.Controls.Add(this.lblReqFormHeading);
             this.pnlReqFormCard.Controls.Add(this.lblRequirementType);
             this.pnlReqFormCard.Controls.Add(this.lblRequirementTypeStar);
@@ -4299,13 +4299,13 @@
             this.pnlReqFormCard.TabIndex = 6;
             this.pnlReqFormCard.Name = "pnlReqFormCard";
             //
-            // lblReqFormHeadingBar
+            // pnlReqFormHeadingBar
             //
-            this.lblReqFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReqFormHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblReqFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblReqFormHeadingBar.TabIndex = 0;
-            this.lblReqFormHeadingBar.Name = "lblReqFormHeadingBar";
+            this.pnlReqFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlReqFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlReqFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlReqFormHeadingBar.TabIndex = 0;
+            this.pnlReqFormHeadingBar.Name = "pnlReqFormHeadingBar";
             //
             // lblReqFormHeading
             //
@@ -4673,7 +4673,7 @@
             //
             // pnlFndGridCard
             //
-            this.pnlFndGridCard.Controls.Add(this.lblFndGridHeadingBar);
+            this.pnlFndGridCard.Controls.Add(this.pnlFndGridHeadingBar);
             this.pnlFndGridCard.Controls.Add(this.lblFndGridHeading);
             this.pnlFndGridCard.Controls.Add(this.lblFundingCount);
             this.pnlFndGridCard.Controls.Add(this.dgvFunding);
@@ -4684,13 +4684,13 @@
             this.pnlFndGridCard.TabIndex = 0;
             this.pnlFndGridCard.Name = "pnlFndGridCard";
             //
-            // lblFndGridHeadingBar
+            // pnlFndGridHeadingBar
             //
-            this.lblFndGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblFndGridHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblFndGridHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblFndGridHeadingBar.TabIndex = 0;
-            this.lblFndGridHeadingBar.Name = "lblFndGridHeadingBar";
+            this.pnlFndGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlFndGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlFndGridHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlFndGridHeadingBar.TabIndex = 0;
+            this.pnlFndGridHeadingBar.Name = "pnlFndGridHeadingBar";
             //
             // lblFndGridHeading
             //
@@ -4718,29 +4718,29 @@
             this.dgvFunding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFundingName,
             this.colFundingType,
-            this.colClosingDate,
-            this.colFndStatus,
+            this.colFundingClosingDate,
+            this.colFundingStatus,
             this.colFundingId});
-            FndDgvFundingAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvFunding.AlternatingRowsDefaultCellStyle = FndDgvFundingAltStyle;
-            FndDgvFundingHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            FndDgvFundingHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            FndDgvFundingHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            FndDgvFundingHeaderStyle.ForeColor = System.Drawing.Color.White;
-            FndDgvFundingHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            FndDgvFundingHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            FndDgvFundingHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            FndDgvFundingHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFunding.ColumnHeadersDefaultCellStyle = FndDgvFundingHeaderStyle;
-            FndDgvFundingCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            FndDgvFundingCellStyle.BackColor = System.Drawing.Color.White;
-            FndDgvFundingCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            FndDgvFundingCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            FndDgvFundingCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            FndDgvFundingCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            FndDgvFundingCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            FndDgvFundingCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFunding.DefaultCellStyle = FndDgvFundingCellStyle;
+            dgvFundingAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvFunding.AlternatingRowsDefaultCellStyle = dgvFundingAltStyle;
+            dgvFundingHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvFundingHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvFundingHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvFundingHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvFundingHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvFundingHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvFundingHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvFundingHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFunding.ColumnHeadersDefaultCellStyle = dgvFundingHeaderStyle;
+            dgvFundingCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvFundingCellStyle.BackColor = System.Drawing.Color.White;
+            dgvFundingCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvFundingCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvFundingCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvFundingCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvFundingCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvFundingCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFunding.DefaultCellStyle = dgvFundingCellStyle;
             this.dgvFunding.AccessibleName = "Stored funding options";
             this.dgvFunding.AllowUserToAddRows = false;
             this.dgvFunding.AllowUserToDeleteRows = false;
@@ -4782,28 +4782,28 @@
             this.colFundingType.ReadOnly = true;
             this.colFundingType.Name = "colFundingType";
             //
-            // colClosingDate
+            // colFundingClosingDate
             //
-            FndColClosingDateStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            FndColClosingDateStyle.Format = "dd MMM yyyy";
-            FndColClosingDateStyle.NullValue = "\u2014";
-            this.colClosingDate.DefaultCellStyle = FndColClosingDateStyle;
-            this.colClosingDate.DataPropertyName = "ClosingDate";
-            this.colClosingDate.FillWeight = 26F;
-            this.colClosingDate.HeaderText = "Closing date";
-            this.colClosingDate.ReadOnly = true;
-            this.colClosingDate.Name = "colClosingDate";
+            colFundingClosingDateStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            colFundingClosingDateStyle.Format = "dd MMM yyyy";
+            colFundingClosingDateStyle.NullValue = "\u2014";
+            this.colFundingClosingDate.DefaultCellStyle = colFundingClosingDateStyle;
+            this.colFundingClosingDate.DataPropertyName = "ClosingDate";
+            this.colFundingClosingDate.FillWeight = 26F;
+            this.colFundingClosingDate.HeaderText = "Closing date";
+            this.colFundingClosingDate.ReadOnly = true;
+            this.colFundingClosingDate.Name = "colFundingClosingDate";
             //
-            // colFndStatus
+            // colFundingStatus
             //
-            FndColStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            FndColStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colFndStatus.DefaultCellStyle = FndColStatusStyle;
-            this.colFndStatus.DataPropertyName = "IsActive";
-            this.colFndStatus.FillWeight = 14F;
-            this.colFndStatus.HeaderText = "Status";
-            this.colFndStatus.ReadOnly = true;
-            this.colFndStatus.Name = "colFndStatus";
+            colFundingStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            colFundingStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
+            this.colFundingStatus.DefaultCellStyle = colFundingStatusStyle;
+            this.colFundingStatus.DataPropertyName = "IsActive";
+            this.colFundingStatus.FillWeight = 14F;
+            this.colFundingStatus.HeaderText = "Status";
+            this.colFundingStatus.ReadOnly = true;
+            this.colFundingStatus.Name = "colFundingStatus";
             //
             // colFundingId
             //
@@ -4816,7 +4816,7 @@
             //
             // pnlFndFormCard
             //
-            this.pnlFndFormCard.Controls.Add(this.lblFndFormHeadingBar);
+            this.pnlFndFormCard.Controls.Add(this.pnlFndFormHeadingBar);
             this.pnlFndFormCard.Controls.Add(this.lblFndFormHeading);
             this.pnlFndFormCard.Controls.Add(this.lblFundingName);
             this.pnlFndFormCard.Controls.Add(this.lblFundingNameStar);
@@ -4852,13 +4852,13 @@
             this.pnlFndFormCard.TabIndex = 1;
             this.pnlFndFormCard.Name = "pnlFndFormCard";
             //
-            // lblFndFormHeadingBar
+            // pnlFndFormHeadingBar
             //
-            this.lblFndFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblFndFormHeadingBar.Location = new System.Drawing.Point(16, 10);
-            this.lblFndFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblFndFormHeadingBar.TabIndex = 0;
-            this.lblFndFormHeadingBar.Name = "lblFndFormHeadingBar";
+            this.pnlFndFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlFndFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlFndFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlFndFormHeadingBar.TabIndex = 0;
+            this.pnlFndFormHeadingBar.Name = "pnlFndFormHeadingBar";
             //
             // lblFndFormHeading
             //
@@ -5290,10 +5290,10 @@
             //
             // pnlCategoriesCard
             //
-            this.pnlCategoriesCard.Controls.Add(this.lblCategoriesHeadingBar);
+            this.pnlCategoriesCard.Controls.Add(this.pnlCategoriesHeadingBar);
             this.pnlCategoriesCard.Controls.Add(this.lblCategoriesHeading);
             this.pnlCategoriesCard.Controls.Add(this.lblCategoryCount);
-            this.pnlCategoriesCard.Controls.Add(this.grdCategories);
+            this.pnlCategoriesCard.Controls.Add(this.dgvCategories);
             this.pnlCategoriesCard.BackColor = System.Drawing.Color.White;
             this.pnlCategoriesCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCategoriesCard.Location = new System.Drawing.Point(0, 0);
@@ -5301,13 +5301,13 @@
             this.pnlCategoriesCard.TabIndex = 0;
             this.pnlCategoriesCard.Name = "pnlCategoriesCard";
             //
-            // lblCategoriesHeadingBar
+            // pnlCategoriesHeadingBar
             //
-            this.lblCategoriesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCategoriesHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblCategoriesHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblCategoriesHeadingBar.TabIndex = 0;
-            this.lblCategoriesHeadingBar.Name = "lblCategoriesHeadingBar";
+            this.pnlCategoriesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlCategoriesHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlCategoriesHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlCategoriesHeadingBar.TabIndex = 0;
+            this.pnlCategoriesHeadingBar.Name = "pnlCategoriesHeadingBar";
             //
             // lblCategoriesHeading
             //
@@ -5331,110 +5331,110 @@
             this.lblCategoryCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblCategoryCount.Name = "lblCategoryCount";
             //
-            // grdCategories
+            // dgvCategories
             //
-            this.grdCategories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCategoryId,
-            this.colCategoryName,
-            this.colQuestionCount,
-            this.colProgrammeCount,
-            this.colCategoryStatus});
-            CatGrdCategoriesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdCategories.AlternatingRowsDefaultCellStyle = CatGrdCategoriesAltStyle;
-            CatGrdCategoriesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            CatGrdCategoriesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            CatGrdCategoriesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            CatGrdCategoriesHeaderStyle.ForeColor = System.Drawing.Color.White;
-            CatGrdCategoriesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            CatGrdCategoriesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            CatGrdCategoriesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            CatGrdCategoriesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdCategories.ColumnHeadersDefaultCellStyle = CatGrdCategoriesHeaderStyle;
-            CatGrdCategoriesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            CatGrdCategoriesCellStyle.BackColor = System.Drawing.Color.White;
-            CatGrdCategoriesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            CatGrdCategoriesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            CatGrdCategoriesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            CatGrdCategoriesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            CatGrdCategoriesCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            CatGrdCategoriesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdCategories.DefaultCellStyle = CatGrdCategoriesCellStyle;
-            this.grdCategories.AccessibleName = "Stored interest categories";
-            this.grdCategories.AllowUserToAddRows = false;
-            this.grdCategories.AllowUserToDeleteRows = false;
-            this.grdCategories.AllowUserToResizeRows = false;
-            this.grdCategories.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdCategories.BackgroundColor = System.Drawing.Color.White;
-            this.grdCategories.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdCategories.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdCategories.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdCategories.ColumnHeadersHeight = 34;
-            this.grdCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdCategories.EnableHeadersVisualStyles = false;
-            this.grdCategories.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdCategories.Location = new System.Drawing.Point(16, 44);
-            this.grdCategories.MultiSelect = false;
-            this.grdCategories.ReadOnly = true;
-            this.grdCategories.RowHeadersVisible = false;
-            this.grdCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCategories.Size = new System.Drawing.Size(892, 190);
-            this.grdCategories.TabIndex = 3;
-            this.grdCategories.Name = "grdCategories";
-            this.grdCategories.RowTemplate.Height = 30;
-            this.grdCategories.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdCategories_CellFormatting);
-            this.grdCategories.SelectionChanged += new System.EventHandler(this.grdCategories_SelectionChanged);
-            this.grdCategories.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdCategories_DataBindingComplete);
+            this.dgvCategories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCategoriesId,
+            this.colCategoriesName,
+            this.colCategoriesQuestionCount,
+            this.colCategoriesProgrammeCount,
+            this.colCategoriesStatus});
+            dgvCategoriesAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvCategories.AlternatingRowsDefaultCellStyle = dgvCategoriesAltStyle;
+            dgvCategoriesHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvCategoriesHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvCategoriesHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvCategoriesHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvCategoriesHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvCategoriesHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvCategoriesHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvCategoriesHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCategories.ColumnHeadersDefaultCellStyle = dgvCategoriesHeaderStyle;
+            dgvCategoriesCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvCategoriesCellStyle.BackColor = System.Drawing.Color.White;
+            dgvCategoriesCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvCategoriesCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvCategoriesCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvCategoriesCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvCategoriesCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvCategoriesCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCategories.DefaultCellStyle = dgvCategoriesCellStyle;
+            this.dgvCategories.AccessibleName = "Stored interest categories";
+            this.dgvCategories.AllowUserToAddRows = false;
+            this.dgvCategories.AllowUserToDeleteRows = false;
+            this.dgvCategories.AllowUserToResizeRows = false;
+            this.dgvCategories.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCategories.BackgroundColor = System.Drawing.Color.White;
+            this.dgvCategories.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvCategories.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvCategories.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvCategories.ColumnHeadersHeight = 34;
+            this.dgvCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvCategories.EnableHeadersVisualStyles = false;
+            this.dgvCategories.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvCategories.Location = new System.Drawing.Point(16, 44);
+            this.dgvCategories.MultiSelect = false;
+            this.dgvCategories.ReadOnly = true;
+            this.dgvCategories.RowHeadersVisible = false;
+            this.dgvCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCategories.Size = new System.Drawing.Size(892, 190);
+            this.dgvCategories.TabIndex = 3;
+            this.dgvCategories.Name = "dgvCategories";
+            this.dgvCategories.RowTemplate.Height = 30;
+            this.dgvCategories.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCategories_CellFormatting);
+            this.dgvCategories.SelectionChanged += new System.EventHandler(this.dgvCategories_SelectionChanged);
+            this.dgvCategories.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCategories_DataBindingComplete);
             //
-            // colCategoryId
+            // colCategoriesId
             //
-            this.colCategoryId.DataPropertyName = "CategoryID";
-            this.colCategoryId.FillWeight = 5F;
-            this.colCategoryId.HeaderText = "Category ID";
-            this.colCategoryId.ReadOnly = true;
-            this.colCategoryId.Visible = false;
-            this.colCategoryId.Name = "colCategoryId";
+            this.colCategoriesId.DataPropertyName = "CategoryID";
+            this.colCategoriesId.FillWeight = 5F;
+            this.colCategoriesId.HeaderText = "Category ID";
+            this.colCategoriesId.ReadOnly = true;
+            this.colCategoriesId.Visible = false;
+            this.colCategoriesId.Name = "colCategoriesId";
             //
-            // colCategoryName
+            // colCategoriesName
             //
-            this.colCategoryName.DataPropertyName = "CategoryName";
-            this.colCategoryName.FillWeight = 44F;
-            this.colCategoryName.HeaderText = "Category";
-            this.colCategoryName.ReadOnly = true;
-            this.colCategoryName.Name = "colCategoryName";
+            this.colCategoriesName.DataPropertyName = "CategoryName";
+            this.colCategoriesName.FillWeight = 44F;
+            this.colCategoriesName.HeaderText = "Category";
+            this.colCategoriesName.ReadOnly = true;
+            this.colCategoriesName.Name = "colCategoriesName";
             //
-            // colQuestionCount
+            // colCategoriesQuestionCount
             //
-            CatColQuestionCountStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            CatColQuestionCountStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colQuestionCount.DefaultCellStyle = CatColQuestionCountStyle;
-            this.colQuestionCount.DataPropertyName = "QuestionCount";
-            this.colQuestionCount.FillWeight = 14F;
-            this.colQuestionCount.HeaderText = "Questions";
-            this.colQuestionCount.ReadOnly = true;
-            this.colQuestionCount.Name = "colQuestionCount";
+            colCategoriesQuestionCountStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colCategoriesQuestionCountStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colCategoriesQuestionCount.DefaultCellStyle = colCategoriesQuestionCountStyle;
+            this.colCategoriesQuestionCount.DataPropertyName = "QuestionCount";
+            this.colCategoriesQuestionCount.FillWeight = 14F;
+            this.colCategoriesQuestionCount.HeaderText = "Questions";
+            this.colCategoriesQuestionCount.ReadOnly = true;
+            this.colCategoriesQuestionCount.Name = "colCategoriesQuestionCount";
             //
-            // colProgrammeCount
+            // colCategoriesProgrammeCount
             //
-            CatColProgrammeCountStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            CatColProgrammeCountStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colProgrammeCount.DefaultCellStyle = CatColProgrammeCountStyle;
-            this.colProgrammeCount.DataPropertyName = "MappedProgrammeCount";
-            this.colProgrammeCount.FillWeight = 20F;
-            this.colProgrammeCount.HeaderText = "Mapped programmes";
-            this.colProgrammeCount.ReadOnly = true;
-            this.colProgrammeCount.Name = "colProgrammeCount";
+            colCategoriesProgrammeCountStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colCategoriesProgrammeCountStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colCategoriesProgrammeCount.DefaultCellStyle = colCategoriesProgrammeCountStyle;
+            this.colCategoriesProgrammeCount.DataPropertyName = "MappedProgrammeCount";
+            this.colCategoriesProgrammeCount.FillWeight = 20F;
+            this.colCategoriesProgrammeCount.HeaderText = "Mapped programmes";
+            this.colCategoriesProgrammeCount.ReadOnly = true;
+            this.colCategoriesProgrammeCount.Name = "colCategoriesProgrammeCount";
             //
-            // colCategoryStatus
+            // colCategoriesStatus
             //
-            this.colCategoryStatus.DataPropertyName = "IsActive";
-            this.colCategoryStatus.FillWeight = 14F;
-            this.colCategoryStatus.HeaderText = "Status";
-            this.colCategoryStatus.ReadOnly = true;
-            this.colCategoryStatus.Name = "colCategoryStatus";
+            this.colCategoriesStatus.DataPropertyName = "IsActive";
+            this.colCategoriesStatus.FillWeight = 14F;
+            this.colCategoriesStatus.HeaderText = "Status";
+            this.colCategoriesStatus.ReadOnly = true;
+            this.colCategoriesStatus.Name = "colCategoriesStatus";
             //
             // pnlCategoryFormCard
             //
-            this.pnlCategoryFormCard.Controls.Add(this.lblCategoryFormHeadingBar);
+            this.pnlCategoryFormCard.Controls.Add(this.pnlCategoryFormHeadingBar);
             this.pnlCategoryFormCard.Controls.Add(this.lblCategoryFormHeading);
             this.pnlCategoryFormCard.Controls.Add(this.lblCategoryName);
             this.pnlCategoryFormCard.Controls.Add(this.lblCategoryNameStar);
@@ -5450,13 +5450,13 @@
             this.pnlCategoryFormCard.TabIndex = 1;
             this.pnlCategoryFormCard.Name = "pnlCategoryFormCard";
             //
-            // lblCategoryFormHeadingBar
+            // pnlCategoryFormHeadingBar
             //
-            this.lblCategoryFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCategoryFormHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblCategoryFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblCategoryFormHeadingBar.TabIndex = 0;
-            this.lblCategoryFormHeadingBar.Name = "lblCategoryFormHeadingBar";
+            this.pnlCategoryFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlCategoryFormHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlCategoryFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlCategoryFormHeadingBar.TabIndex = 0;
+            this.pnlCategoryFormHeadingBar.Name = "pnlCategoryFormHeadingBar";
             //
             // lblCategoryFormHeading
             //
@@ -5559,10 +5559,10 @@
             //
             // pnlWeightsCard
             //
-            this.pnlWeightsCard.Controls.Add(this.lblWeightsHeadingBar);
+            this.pnlWeightsCard.Controls.Add(this.pnlWeightsHeadingBar);
             this.pnlWeightsCard.Controls.Add(this.lblWeightsHeading);
             this.pnlWeightsCard.Controls.Add(this.lblWeightsScope);
-            this.pnlWeightsCard.Controls.Add(this.grdWeights);
+            this.pnlWeightsCard.Controls.Add(this.dgvWeights);
             this.pnlWeightsCard.Controls.Add(this.lblWeightProgramme);
             this.pnlWeightsCard.Controls.Add(this.lblWeightProgrammeStar);
             this.pnlWeightsCard.Controls.Add(this.cboWeightProgramme);
@@ -5579,13 +5579,13 @@
             this.pnlWeightsCard.TabIndex = 2;
             this.pnlWeightsCard.Name = "pnlWeightsCard";
             //
-            // lblWeightsHeadingBar
+            // pnlWeightsHeadingBar
             //
-            this.lblWeightsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblWeightsHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblWeightsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblWeightsHeadingBar.TabIndex = 0;
-            this.lblWeightsHeadingBar.Name = "lblWeightsHeadingBar";
+            this.pnlWeightsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlWeightsHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlWeightsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlWeightsHeadingBar.TabIndex = 0;
+            this.pnlWeightsHeadingBar.Name = "pnlWeightsHeadingBar";
             //
             // lblWeightsHeading
             //
@@ -5608,84 +5608,84 @@
             this.lblWeightsScope.Text = "Select a category in the grid to see and edit its programme weights.";
             this.lblWeightsScope.Name = "lblWeightsScope";
             //
-            // grdWeights
+            // dgvWeights
             //
-            this.grdWeights.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colWeightProgrammeId,
-            this.colWeightProgramme,
-            this.colWeightValue});
-            CatGrdWeightsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdWeights.AlternatingRowsDefaultCellStyle = CatGrdWeightsAltStyle;
-            CatGrdWeightsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            CatGrdWeightsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            CatGrdWeightsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            CatGrdWeightsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            CatGrdWeightsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            CatGrdWeightsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            CatGrdWeightsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            CatGrdWeightsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdWeights.ColumnHeadersDefaultCellStyle = CatGrdWeightsHeaderStyle;
-            CatGrdWeightsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            CatGrdWeightsCellStyle.BackColor = System.Drawing.Color.White;
-            CatGrdWeightsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            CatGrdWeightsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            CatGrdWeightsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            CatGrdWeightsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            CatGrdWeightsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            CatGrdWeightsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdWeights.DefaultCellStyle = CatGrdWeightsCellStyle;
-            this.grdWeights.AccessibleName = "Programmes mapped to the selected category";
-            this.grdWeights.AllowUserToAddRows = false;
-            this.grdWeights.AllowUserToDeleteRows = false;
-            this.grdWeights.AllowUserToResizeRows = false;
-            this.grdWeights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdWeights.BackgroundColor = System.Drawing.Color.White;
-            this.grdWeights.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdWeights.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdWeights.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdWeights.ColumnHeadersHeight = 28;
-            this.grdWeights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdWeights.EnableHeadersVisualStyles = false;
-            this.grdWeights.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdWeights.Location = new System.Drawing.Point(16, 58);
-            this.grdWeights.MultiSelect = false;
-            this.grdWeights.ReadOnly = true;
-            this.grdWeights.RowHeadersVisible = false;
-            this.grdWeights.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdWeights.Size = new System.Drawing.Size(424, 92);
-            this.grdWeights.TabIndex = 3;
-            this.grdWeights.Name = "grdWeights";
-            this.grdWeights.RowTemplate.Height = 26;
-            this.grdWeights.SelectionChanged += new System.EventHandler(this.grdWeights_SelectionChanged);
-            this.grdWeights.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdWeights_DataBindingComplete);
+            this.dgvWeights.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colWeightsProgrammeId,
+            this.colWeightsProgramme,
+            this.colWeightsValue});
+            dgvWeightsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvWeights.AlternatingRowsDefaultCellStyle = dgvWeightsAltStyle;
+            dgvWeightsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvWeightsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvWeightsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvWeightsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvWeightsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvWeightsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvWeightsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvWeightsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvWeights.ColumnHeadersDefaultCellStyle = dgvWeightsHeaderStyle;
+            dgvWeightsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvWeightsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvWeightsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvWeightsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvWeightsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvWeightsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvWeightsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvWeightsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvWeights.DefaultCellStyle = dgvWeightsCellStyle;
+            this.dgvWeights.AccessibleName = "Programmes mapped to the selected category";
+            this.dgvWeights.AllowUserToAddRows = false;
+            this.dgvWeights.AllowUserToDeleteRows = false;
+            this.dgvWeights.AllowUserToResizeRows = false;
+            this.dgvWeights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvWeights.BackgroundColor = System.Drawing.Color.White;
+            this.dgvWeights.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvWeights.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvWeights.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvWeights.ColumnHeadersHeight = 28;
+            this.dgvWeights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvWeights.EnableHeadersVisualStyles = false;
+            this.dgvWeights.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvWeights.Location = new System.Drawing.Point(16, 58);
+            this.dgvWeights.MultiSelect = false;
+            this.dgvWeights.ReadOnly = true;
+            this.dgvWeights.RowHeadersVisible = false;
+            this.dgvWeights.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvWeights.Size = new System.Drawing.Size(424, 92);
+            this.dgvWeights.TabIndex = 3;
+            this.dgvWeights.Name = "dgvWeights";
+            this.dgvWeights.RowTemplate.Height = 26;
+            this.dgvWeights.SelectionChanged += new System.EventHandler(this.dgvWeights_SelectionChanged);
+            this.dgvWeights.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvWeights_DataBindingComplete);
             //
-            // colWeightProgrammeId
+            // colWeightsProgrammeId
             //
-            this.colWeightProgrammeId.DataPropertyName = "ProgrammeID";
-            this.colWeightProgrammeId.FillWeight = 5F;
-            this.colWeightProgrammeId.HeaderText = "Programme ID";
-            this.colWeightProgrammeId.ReadOnly = true;
-            this.colWeightProgrammeId.Visible = false;
-            this.colWeightProgrammeId.Name = "colWeightProgrammeId";
+            this.colWeightsProgrammeId.DataPropertyName = "ProgrammeID";
+            this.colWeightsProgrammeId.FillWeight = 5F;
+            this.colWeightsProgrammeId.HeaderText = "Programme ID";
+            this.colWeightsProgrammeId.ReadOnly = true;
+            this.colWeightsProgrammeId.Visible = false;
+            this.colWeightsProgrammeId.Name = "colWeightsProgrammeId";
             //
-            // colWeightProgramme
+            // colWeightsProgramme
             //
-            this.colWeightProgramme.DataPropertyName = "ProgrammeName";
-            this.colWeightProgramme.FillWeight = 70F;
-            this.colWeightProgramme.HeaderText = "Degree programme";
-            this.colWeightProgramme.ReadOnly = true;
-            this.colWeightProgramme.Name = "colWeightProgramme";
+            this.colWeightsProgramme.DataPropertyName = "ProgrammeName";
+            this.colWeightsProgramme.FillWeight = 70F;
+            this.colWeightsProgramme.HeaderText = "Degree programme";
+            this.colWeightsProgramme.ReadOnly = true;
+            this.colWeightsProgramme.Name = "colWeightsProgramme";
             //
-            // colWeightValue
+            // colWeightsValue
             //
-            CatColWeightValueStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            CatColWeightValueStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colWeightValue.DefaultCellStyle = CatColWeightValueStyle;
-            this.colWeightValue.DataPropertyName = "RelevanceWeight";
-            this.colWeightValue.FillWeight = 22F;
-            this.colWeightValue.HeaderText = "Weight";
-            this.colWeightValue.ReadOnly = true;
-            this.colWeightValue.Name = "colWeightValue";
+            colWeightsValueStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colWeightsValueStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colWeightsValue.DefaultCellStyle = colWeightsValueStyle;
+            this.colWeightsValue.DataPropertyName = "RelevanceWeight";
+            this.colWeightsValue.FillWeight = 22F;
+            this.colWeightsValue.HeaderText = "Weight";
+            this.colWeightsValue.ReadOnly = true;
+            this.colWeightsValue.Name = "colWeightsValue";
             //
             // lblWeightProgramme
             //
@@ -5907,7 +5907,7 @@
             //
             // pnlScopeCard
             //
-            this.pnlScopeCard.Controls.Add(this.lblScopeHeadingBar);
+            this.pnlScopeCard.Controls.Add(this.pnlScopeHeadingBar);
             this.pnlScopeCard.Controls.Add(this.lblScopeHeading);
             this.pnlScopeCard.Controls.Add(this.lblScopeCategory);
             this.pnlScopeCard.Controls.Add(this.cboScopeCategory);
@@ -5921,13 +5921,13 @@
             this.pnlScopeCard.TabIndex = 0;
             this.pnlScopeCard.Name = "pnlScopeCard";
             //
-            // lblScopeHeadingBar
+            // pnlScopeHeadingBar
             //
-            this.lblScopeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblScopeHeadingBar.Location = new System.Drawing.Point(12, 12);
-            this.lblScopeHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblScopeHeadingBar.TabIndex = 0;
-            this.lblScopeHeadingBar.Name = "lblScopeHeadingBar";
+            this.pnlScopeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlScopeHeadingBar.Location = new System.Drawing.Point(12, 12);
+            this.pnlScopeHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlScopeHeadingBar.TabIndex = 0;
+            this.pnlScopeHeadingBar.Name = "pnlScopeHeadingBar";
             //
             // lblScopeHeading
             //
@@ -5998,10 +5998,10 @@
             //
             // pnlQuestionsCard
             //
-            this.pnlQuestionsCard.Controls.Add(this.lblQuestionsHeadingBar);
+            this.pnlQuestionsCard.Controls.Add(this.pnlQuestionsHeadingBar);
             this.pnlQuestionsCard.Controls.Add(this.lblQuestionsHeading);
             this.pnlQuestionsCard.Controls.Add(this.lblQuestionCount);
-            this.pnlQuestionsCard.Controls.Add(this.grdQuestions);
+            this.pnlQuestionsCard.Controls.Add(this.dgvQuestions);
             this.pnlQuestionsCard.BackColor = System.Drawing.Color.White;
             this.pnlQuestionsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlQuestionsCard.Location = new System.Drawing.Point(212, 0);
@@ -6009,13 +6009,13 @@
             this.pnlQuestionsCard.TabIndex = 1;
             this.pnlQuestionsCard.Name = "pnlQuestionsCard";
             //
-            // lblQuestionsHeadingBar
+            // pnlQuestionsHeadingBar
             //
-            this.lblQuestionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblQuestionsHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblQuestionsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblQuestionsHeadingBar.TabIndex = 0;
-            this.lblQuestionsHeadingBar.Name = "lblQuestionsHeadingBar";
+            this.pnlQuestionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlQuestionsHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlQuestionsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlQuestionsHeadingBar.TabIndex = 0;
+            this.pnlQuestionsHeadingBar.Name = "pnlQuestionsHeadingBar";
             //
             // lblQuestionsHeading
             //
@@ -6039,117 +6039,117 @@
             this.lblQuestionCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblQuestionCount.Name = "lblQuestionCount";
             //
-            // grdQuestions
+            // dgvQuestions
             //
-            this.grdQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colQuestionId,
-            this.colQuestionCategoryId,
-            this.colDisplayOrder,
-            this.colQuestionText,
-            this.colQuestionCategory,
-            this.colQuestionStatus});
-            QueGrdQuestionsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdQuestions.AlternatingRowsDefaultCellStyle = QueGrdQuestionsAltStyle;
-            QueGrdQuestionsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            QueGrdQuestionsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            QueGrdQuestionsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            QueGrdQuestionsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            QueGrdQuestionsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            QueGrdQuestionsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            QueGrdQuestionsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            QueGrdQuestionsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdQuestions.ColumnHeadersDefaultCellStyle = QueGrdQuestionsHeaderStyle;
-            QueGrdQuestionsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            QueGrdQuestionsCellStyle.BackColor = System.Drawing.Color.White;
-            QueGrdQuestionsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            QueGrdQuestionsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            QueGrdQuestionsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            QueGrdQuestionsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            QueGrdQuestionsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            QueGrdQuestionsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdQuestions.DefaultCellStyle = QueGrdQuestionsCellStyle;
-            this.grdQuestions.AccessibleName = "Stored questionnaire questions";
-            this.grdQuestions.AllowUserToAddRows = false;
-            this.grdQuestions.AllowUserToDeleteRows = false;
-            this.grdQuestions.AllowUserToResizeRows = false;
-            this.grdQuestions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdQuestions.BackgroundColor = System.Drawing.Color.White;
-            this.grdQuestions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdQuestions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdQuestions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdQuestions.ColumnHeadersHeight = 34;
-            this.grdQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdQuestions.EnableHeadersVisualStyles = false;
-            this.grdQuestions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdQuestions.Location = new System.Drawing.Point(16, 44);
-            this.grdQuestions.MultiSelect = false;
-            this.grdQuestions.ReadOnly = true;
-            this.grdQuestions.RowHeadersVisible = false;
-            this.grdQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdQuestions.Size = new System.Drawing.Size(680, 172);
-            this.grdQuestions.TabIndex = 3;
-            this.grdQuestions.Name = "grdQuestions";
-            this.grdQuestions.RowTemplate.Height = 30;
-            this.grdQuestions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdQuestions_CellFormatting);
-            this.grdQuestions.SelectionChanged += new System.EventHandler(this.grdQuestions_SelectionChanged);
-            this.grdQuestions.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdQuestions_DataBindingComplete);
+            this.dgvQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colQuestionsId,
+            this.colQuestionsCategoryId,
+            this.colQuestionsDisplayOrder,
+            this.colQuestionsText,
+            this.colQuestionsCategory,
+            this.colQuestionsStatus});
+            dgvQuestionsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvQuestions.AlternatingRowsDefaultCellStyle = dgvQuestionsAltStyle;
+            dgvQuestionsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvQuestionsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvQuestionsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvQuestionsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvQuestionsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvQuestionsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvQuestionsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvQuestionsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQuestions.ColumnHeadersDefaultCellStyle = dgvQuestionsHeaderStyle;
+            dgvQuestionsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvQuestionsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvQuestionsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvQuestionsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvQuestionsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvQuestionsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvQuestionsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvQuestionsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQuestions.DefaultCellStyle = dgvQuestionsCellStyle;
+            this.dgvQuestions.AccessibleName = "Stored questionnaire questions";
+            this.dgvQuestions.AllowUserToAddRows = false;
+            this.dgvQuestions.AllowUserToDeleteRows = false;
+            this.dgvQuestions.AllowUserToResizeRows = false;
+            this.dgvQuestions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvQuestions.BackgroundColor = System.Drawing.Color.White;
+            this.dgvQuestions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvQuestions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvQuestions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvQuestions.ColumnHeadersHeight = 34;
+            this.dgvQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvQuestions.EnableHeadersVisualStyles = false;
+            this.dgvQuestions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvQuestions.Location = new System.Drawing.Point(16, 44);
+            this.dgvQuestions.MultiSelect = false;
+            this.dgvQuestions.ReadOnly = true;
+            this.dgvQuestions.RowHeadersVisible = false;
+            this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvQuestions.Size = new System.Drawing.Size(680, 172);
+            this.dgvQuestions.TabIndex = 3;
+            this.dgvQuestions.Name = "dgvQuestions";
+            this.dgvQuestions.RowTemplate.Height = 30;
+            this.dgvQuestions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvQuestions_CellFormatting);
+            this.dgvQuestions.SelectionChanged += new System.EventHandler(this.dgvQuestions_SelectionChanged);
+            this.dgvQuestions.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvQuestions_DataBindingComplete);
             //
-            // colQuestionId
+            // colQuestionsId
             //
-            this.colQuestionId.DataPropertyName = "QuestionID";
-            this.colQuestionId.FillWeight = 5F;
-            this.colQuestionId.HeaderText = "Question ID";
-            this.colQuestionId.ReadOnly = true;
-            this.colQuestionId.Visible = false;
-            this.colQuestionId.Name = "colQuestionId";
+            this.colQuestionsId.DataPropertyName = "QuestionID";
+            this.colQuestionsId.FillWeight = 5F;
+            this.colQuestionsId.HeaderText = "Question ID";
+            this.colQuestionsId.ReadOnly = true;
+            this.colQuestionsId.Visible = false;
+            this.colQuestionsId.Name = "colQuestionsId";
             //
-            // colQuestionCategoryId
+            // colQuestionsCategoryId
             //
-            this.colQuestionCategoryId.DataPropertyName = "CategoryID";
-            this.colQuestionCategoryId.FillWeight = 5F;
-            this.colQuestionCategoryId.HeaderText = "Category ID";
-            this.colQuestionCategoryId.ReadOnly = true;
-            this.colQuestionCategoryId.Visible = false;
-            this.colQuestionCategoryId.Name = "colQuestionCategoryId";
+            this.colQuestionsCategoryId.DataPropertyName = "CategoryID";
+            this.colQuestionsCategoryId.FillWeight = 5F;
+            this.colQuestionsCategoryId.HeaderText = "Category ID";
+            this.colQuestionsCategoryId.ReadOnly = true;
+            this.colQuestionsCategoryId.Visible = false;
+            this.colQuestionsCategoryId.Name = "colQuestionsCategoryId";
             //
-            // colDisplayOrder
+            // colQuestionsDisplayOrder
             //
-            QueColDisplayOrderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            QueColDisplayOrderStyle.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colDisplayOrder.DefaultCellStyle = QueColDisplayOrderStyle;
-            this.colDisplayOrder.DataPropertyName = "DisplayOrder";
-            this.colDisplayOrder.FillWeight = 10F;
-            this.colDisplayOrder.HeaderText = "Order";
-            this.colDisplayOrder.ReadOnly = true;
-            this.colDisplayOrder.Name = "colDisplayOrder";
+            colQuestionsDisplayOrderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colQuestionsDisplayOrderStyle.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colQuestionsDisplayOrder.DefaultCellStyle = colQuestionsDisplayOrderStyle;
+            this.colQuestionsDisplayOrder.DataPropertyName = "DisplayOrder";
+            this.colQuestionsDisplayOrder.FillWeight = 10F;
+            this.colQuestionsDisplayOrder.HeaderText = "Order";
+            this.colQuestionsDisplayOrder.ReadOnly = true;
+            this.colQuestionsDisplayOrder.Name = "colQuestionsDisplayOrder";
             //
-            // colQuestionText
+            // colQuestionsText
             //
-            this.colQuestionText.DataPropertyName = "QuestionText";
-            this.colQuestionText.FillWeight = 60F;
-            this.colQuestionText.HeaderText = "Statement";
-            this.colQuestionText.ReadOnly = true;
-            this.colQuestionText.Name = "colQuestionText";
+            this.colQuestionsText.DataPropertyName = "QuestionText";
+            this.colQuestionsText.FillWeight = 60F;
+            this.colQuestionsText.HeaderText = "Statement";
+            this.colQuestionsText.ReadOnly = true;
+            this.colQuestionsText.Name = "colQuestionsText";
             //
-            // colQuestionCategory
+            // colQuestionsCategory
             //
-            this.colQuestionCategory.DataPropertyName = "CategoryName";
-            this.colQuestionCategory.FillWeight = 22F;
-            this.colQuestionCategory.HeaderText = "Category";
-            this.colQuestionCategory.ReadOnly = true;
-            this.colQuestionCategory.Name = "colQuestionCategory";
+            this.colQuestionsCategory.DataPropertyName = "CategoryName";
+            this.colQuestionsCategory.FillWeight = 22F;
+            this.colQuestionsCategory.HeaderText = "Category";
+            this.colQuestionsCategory.ReadOnly = true;
+            this.colQuestionsCategory.Name = "colQuestionsCategory";
             //
-            // colQuestionStatus
+            // colQuestionsStatus
             //
-            this.colQuestionStatus.DataPropertyName = "IsActive";
-            this.colQuestionStatus.FillWeight = 14F;
-            this.colQuestionStatus.HeaderText = "Status";
-            this.colQuestionStatus.ReadOnly = true;
-            this.colQuestionStatus.Name = "colQuestionStatus";
+            this.colQuestionsStatus.DataPropertyName = "IsActive";
+            this.colQuestionsStatus.FillWeight = 14F;
+            this.colQuestionsStatus.HeaderText = "Status";
+            this.colQuestionsStatus.ReadOnly = true;
+            this.colQuestionsStatus.Name = "colQuestionsStatus";
             //
             // pnlQuestionFormCard
             //
-            this.pnlQuestionFormCard.Controls.Add(this.lblQuestionFormHeadingBar);
+            this.pnlQuestionFormCard.Controls.Add(this.pnlQuestionFormHeadingBar);
             this.pnlQuestionFormCard.Controls.Add(this.lblQuestionFormHeading);
             this.pnlQuestionFormCard.Controls.Add(this.lblStatementLength);
             this.pnlQuestionFormCard.Controls.Add(this.lblStatement);
@@ -6173,13 +6173,13 @@
             this.pnlQuestionFormCard.TabIndex = 2;
             this.pnlQuestionFormCard.Name = "pnlQuestionFormCard";
             //
-            // lblQuestionFormHeadingBar
+            // pnlQuestionFormHeadingBar
             //
-            this.lblQuestionFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblQuestionFormHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblQuestionFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblQuestionFormHeadingBar.TabIndex = 0;
-            this.lblQuestionFormHeadingBar.Name = "lblQuestionFormHeadingBar";
+            this.pnlQuestionFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlQuestionFormHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlQuestionFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlQuestionFormHeadingBar.TabIndex = 0;
+            this.pnlQuestionFormHeadingBar.Name = "pnlQuestionFormHeadingBar";
             //
             // lblQuestionFormHeading
             //
@@ -6485,10 +6485,10 @@
             //
             // pnlAccountsCard
             //
-            this.pnlAccountsCard.Controls.Add(this.lblAccountsHeadingBar);
+            this.pnlAccountsCard.Controls.Add(this.pnlAccountsHeadingBar);
             this.pnlAccountsCard.Controls.Add(this.lblAccountsHeading);
             this.pnlAccountsCard.Controls.Add(this.lblAccountCount);
-            this.pnlAccountsCard.Controls.Add(this.grdAccounts);
+            this.pnlAccountsCard.Controls.Add(this.dgvAccounts);
             this.pnlAccountsCard.BackColor = System.Drawing.Color.White;
             this.pnlAccountsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAccountsCard.Location = new System.Drawing.Point(0, 0);
@@ -6496,13 +6496,13 @@
             this.pnlAccountsCard.TabIndex = 0;
             this.pnlAccountsCard.Name = "pnlAccountsCard";
             //
-            // lblAccountsHeadingBar
+            // pnlAccountsHeadingBar
             //
-            this.lblAccountsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAccountsHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblAccountsHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAccountsHeadingBar.TabIndex = 0;
-            this.lblAccountsHeadingBar.Name = "lblAccountsHeadingBar";
+            this.pnlAccountsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAccountsHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlAccountsHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAccountsHeadingBar.TabIndex = 0;
+            this.pnlAccountsHeadingBar.Name = "pnlAccountsHeadingBar";
             //
             // lblAccountsHeading
             //
@@ -6526,104 +6526,104 @@
             this.lblAccountCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblAccountCount.Name = "lblAccountCount";
             //
-            // grdAccounts
+            // dgvAccounts
             //
-            this.grdAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colUserId,
-            this.colUsername,
-            this.colFullName,
-            this.colRole,
-            this.colAccountStatus});
-            AccGrdAccountsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.grdAccounts.AlternatingRowsDefaultCellStyle = AccGrdAccountsAltStyle;
-            AccGrdAccountsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            AccGrdAccountsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            AccGrdAccountsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            AccGrdAccountsHeaderStyle.ForeColor = System.Drawing.Color.White;
-            AccGrdAccountsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            AccGrdAccountsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            AccGrdAccountsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            AccGrdAccountsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdAccounts.ColumnHeadersDefaultCellStyle = AccGrdAccountsHeaderStyle;
-            AccGrdAccountsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            AccGrdAccountsCellStyle.BackColor = System.Drawing.Color.White;
-            AccGrdAccountsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            AccGrdAccountsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            AccGrdAccountsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            AccGrdAccountsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            AccGrdAccountsCellStyle.SelectionForeColor = System.Drawing.Color.White;
-            AccGrdAccountsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdAccounts.DefaultCellStyle = AccGrdAccountsCellStyle;
-            this.grdAccounts.AccessibleName = "Stored user accounts";
-            this.grdAccounts.AllowUserToAddRows = false;
-            this.grdAccounts.AllowUserToDeleteRows = false;
-            this.grdAccounts.AllowUserToResizeRows = false;
-            this.grdAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdAccounts.BackgroundColor = System.Drawing.Color.White;
-            this.grdAccounts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.grdAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grdAccounts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grdAccounts.ColumnHeadersHeight = 34;
-            this.grdAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.grdAccounts.EnableHeadersVisualStyles = false;
-            this.grdAccounts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.grdAccounts.Location = new System.Drawing.Point(16, 44);
-            this.grdAccounts.MultiSelect = false;
-            this.grdAccounts.ReadOnly = true;
-            this.grdAccounts.RowHeadersVisible = false;
-            this.grdAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdAccounts.Size = new System.Drawing.Size(892, 176);
-            this.grdAccounts.TabIndex = 3;
-            this.grdAccounts.Name = "grdAccounts";
-            this.grdAccounts.RowTemplate.Height = 30;
-            this.grdAccounts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdAccounts_CellFormatting);
-            this.grdAccounts.SelectionChanged += new System.EventHandler(this.grdAccounts_SelectionChanged);
-            this.grdAccounts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdAccounts_DataBindingComplete);
+            this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colAccountsUserId,
+            this.colAccountsUsername,
+            this.colAccountsFullName,
+            this.colAccountsRole,
+            this.colAccountsStatus});
+            dgvAccountsAltStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvAccounts.AlternatingRowsDefaultCellStyle = dgvAccountsAltStyle;
+            dgvAccountsHeaderStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvAccountsHeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvAccountsHeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dgvAccountsHeaderStyle.ForeColor = System.Drawing.Color.White;
+            dgvAccountsHeaderStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvAccountsHeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dgvAccountsHeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvAccountsHeaderStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAccounts.ColumnHeadersDefaultCellStyle = dgvAccountsHeaderStyle;
+            dgvAccountsCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dgvAccountsCellStyle.BackColor = System.Drawing.Color.White;
+            dgvAccountsCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dgvAccountsCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dgvAccountsCellStyle.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dgvAccountsCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dgvAccountsCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgvAccountsCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAccounts.DefaultCellStyle = dgvAccountsCellStyle;
+            this.dgvAccounts.AccessibleName = "Stored user accounts";
+            this.dgvAccounts.AllowUserToAddRows = false;
+            this.dgvAccounts.AllowUserToDeleteRows = false;
+            this.dgvAccounts.AllowUserToResizeRows = false;
+            this.dgvAccounts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccounts.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAccounts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dgvAccounts.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dgvAccounts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvAccounts.ColumnHeadersHeight = 34;
+            this.dgvAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvAccounts.EnableHeadersVisualStyles = false;
+            this.dgvAccounts.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
+            this.dgvAccounts.Location = new System.Drawing.Point(16, 44);
+            this.dgvAccounts.MultiSelect = false;
+            this.dgvAccounts.ReadOnly = true;
+            this.dgvAccounts.RowHeadersVisible = false;
+            this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAccounts.Size = new System.Drawing.Size(892, 176);
+            this.dgvAccounts.TabIndex = 3;
+            this.dgvAccounts.Name = "dgvAccounts";
+            this.dgvAccounts.RowTemplate.Height = 30;
+            this.dgvAccounts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvAccounts_CellFormatting);
+            this.dgvAccounts.SelectionChanged += new System.EventHandler(this.dgvAccounts_SelectionChanged);
+            this.dgvAccounts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvAccounts_DataBindingComplete);
             //
-            // colUserId
+            // colAccountsUserId
             //
-            this.colUserId.DataPropertyName = "UserID";
-            this.colUserId.FillWeight = 5F;
-            this.colUserId.HeaderText = "User ID";
-            this.colUserId.ReadOnly = true;
-            this.colUserId.Visible = false;
-            this.colUserId.Name = "colUserId";
+            this.colAccountsUserId.DataPropertyName = "UserID";
+            this.colAccountsUserId.FillWeight = 5F;
+            this.colAccountsUserId.HeaderText = "User ID";
+            this.colAccountsUserId.ReadOnly = true;
+            this.colAccountsUserId.Visible = false;
+            this.colAccountsUserId.Name = "colAccountsUserId";
             //
-            // colUsername
+            // colAccountsUsername
             //
-            this.colUsername.DataPropertyName = "Username";
-            this.colUsername.FillWeight = 24F;
-            this.colUsername.HeaderText = "Username";
-            this.colUsername.ReadOnly = true;
-            this.colUsername.Name = "colUsername";
+            this.colAccountsUsername.DataPropertyName = "Username";
+            this.colAccountsUsername.FillWeight = 24F;
+            this.colAccountsUsername.HeaderText = "Username";
+            this.colAccountsUsername.ReadOnly = true;
+            this.colAccountsUsername.Name = "colAccountsUsername";
             //
-            // colFullName
+            // colAccountsFullName
             //
-            this.colFullName.DataPropertyName = "FullName";
-            this.colFullName.FillWeight = 40F;
-            this.colFullName.HeaderText = "Full name";
-            this.colFullName.ReadOnly = true;
-            this.colFullName.Name = "colFullName";
+            this.colAccountsFullName.DataPropertyName = "FullName";
+            this.colAccountsFullName.FillWeight = 40F;
+            this.colAccountsFullName.HeaderText = "Full name";
+            this.colAccountsFullName.ReadOnly = true;
+            this.colAccountsFullName.Name = "colAccountsFullName";
             //
-            // colRole
+            // colAccountsRole
             //
-            this.colRole.DataPropertyName = "Role";
-            this.colRole.FillWeight = 20F;
-            this.colRole.HeaderText = "Role";
-            this.colRole.ReadOnly = true;
-            this.colRole.Name = "colRole";
+            this.colAccountsRole.DataPropertyName = "Role";
+            this.colAccountsRole.FillWeight = 20F;
+            this.colAccountsRole.HeaderText = "Role";
+            this.colAccountsRole.ReadOnly = true;
+            this.colAccountsRole.Name = "colAccountsRole";
             //
-            // colAccountStatus
+            // colAccountsStatus
             //
-            this.colAccountStatus.DataPropertyName = "IsActive";
-            this.colAccountStatus.FillWeight = 14F;
-            this.colAccountStatus.HeaderText = "Status";
-            this.colAccountStatus.ReadOnly = true;
-            this.colAccountStatus.Name = "colAccountStatus";
+            this.colAccountsStatus.DataPropertyName = "IsActive";
+            this.colAccountsStatus.FillWeight = 14F;
+            this.colAccountsStatus.HeaderText = "Status";
+            this.colAccountsStatus.ReadOnly = true;
+            this.colAccountsStatus.Name = "colAccountsStatus";
             //
             // pnlAccountFormCard
             //
-            this.pnlAccountFormCard.Controls.Add(this.lblAccountFormHeadingBar);
+            this.pnlAccountFormCard.Controls.Add(this.pnlAccountFormHeadingBar);
             this.pnlAccountFormCard.Controls.Add(this.lblAccountFormHeading);
             this.pnlAccountFormCard.Controls.Add(this.lblAccountRequiredNote);
             this.pnlAccountFormCard.Controls.Add(this.lblUsername);
@@ -6648,13 +6648,13 @@
             this.pnlAccountFormCard.TabIndex = 1;
             this.pnlAccountFormCard.Name = "pnlAccountFormCard";
             //
-            // lblAccountFormHeadingBar
+            // pnlAccountFormHeadingBar
             //
-            this.lblAccountFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAccountFormHeadingBar.Location = new System.Drawing.Point(16, 12);
-            this.lblAccountFormHeadingBar.Size = new System.Drawing.Size(4, 20);
-            this.lblAccountFormHeadingBar.TabIndex = 0;
-            this.lblAccountFormHeadingBar.Name = "lblAccountFormHeadingBar";
+            this.pnlAccountFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAccountFormHeadingBar.Location = new System.Drawing.Point(16, 12);
+            this.pnlAccountFormHeadingBar.Size = new System.Drawing.Size(4, 20);
+            this.pnlAccountFormHeadingBar.TabIndex = 0;
+            this.pnlAccountFormHeadingBar.Name = "pnlAccountFormHeadingBar";
             //
             // lblAccountFormHeading
             //
@@ -7125,38 +7125,38 @@
             this.pnlAdvContent.PerformLayout();
             this.pnlAdvSessionsCard.ResumeLayout(false);
             this.pnlAdvSessionsCard.PerformLayout();
-            this.lblAdvSessionsHeadingBar.ResumeLayout(false);
-            this.lblAdvSessionsHeadingBar.PerformLayout();
+            this.pnlAdvSessionsHeadingBar.ResumeLayout(false);
+            this.pnlAdvSessionsHeadingBar.PerformLayout();
             this.pnlAdvReportsCard.ResumeLayout(false);
             this.pnlAdvReportsCard.PerformLayout();
-            this.lblAdvReportsHeadingBar.ResumeLayout(false);
-            this.lblAdvReportsHeadingBar.PerformLayout();
+            this.pnlAdvReportsHeadingBar.ResumeLayout(false);
+            this.pnlAdvReportsHeadingBar.PerformLayout();
             this.pnlTodayCard.ResumeLayout(false);
             this.pnlTodayCard.PerformLayout();
-            this.lblTodayHeadingBar.ResumeLayout(false);
-            this.lblTodayHeadingBar.PerformLayout();
-            this.tilCompleted.ResumeLayout(false);
-            this.tilCompleted.PerformLayout();
-            this.tilInProgress.ResumeLayout(false);
-            this.tilInProgress.PerformLayout();
-            this.tilFollowUp.ResumeLayout(false);
-            this.tilFollowUp.PerformLayout();
+            this.pnlTodayHeadingBar.ResumeLayout(false);
+            this.pnlTodayHeadingBar.PerformLayout();
+            this.pnlCompletedTile.ResumeLayout(false);
+            this.pnlCompletedTile.PerformLayout();
+            this.pnlInProgressTile.ResumeLayout(false);
+            this.pnlInProgressTile.PerformLayout();
+            this.pnlFollowUpTile.ResumeLayout(false);
+            this.pnlFollowUpTile.PerformLayout();
             this.tabAdminDashboard.ResumeLayout(false);
             this.tabAdminDashboard.PerformLayout();
             this.pnlAdmContent.ResumeLayout(false);
             this.pnlAdmContent.PerformLayout();
             this.pnlReferenceDataCard.ResumeLayout(false);
             this.pnlReferenceDataCard.PerformLayout();
-            this.lblReferenceDataHeadingBar.ResumeLayout(false);
-            this.lblReferenceDataHeadingBar.PerformLayout();
+            this.pnlReferenceDataHeadingBar.ResumeLayout(false);
+            this.pnlReferenceDataHeadingBar.PerformLayout();
             this.pnlAdmSessionsCard.ResumeLayout(false);
             this.pnlAdmSessionsCard.PerformLayout();
-            this.lblAdmSessionsHeadingBar.ResumeLayout(false);
-            this.lblAdmSessionsHeadingBar.PerformLayout();
+            this.pnlAdmSessionsHeadingBar.ResumeLayout(false);
+            this.pnlAdmSessionsHeadingBar.PerformLayout();
             this.pnlAdmReportsCard.ResumeLayout(false);
             this.pnlAdmReportsCard.PerformLayout();
-            this.lblAdmReportsHeadingBar.ResumeLayout(false);
-            this.lblAdmReportsHeadingBar.PerformLayout();
+            this.pnlAdmReportsHeadingBar.ResumeLayout(false);
+            this.pnlAdmReportsHeadingBar.PerformLayout();
             this.tabSessions.ResumeLayout(false);
             this.tabSessions.PerformLayout();
             this.tcSessions.ResumeLayout(false);
@@ -7169,9 +7169,9 @@
             this.pnlLrnSearchCard.PerformLayout();
             this.pnlLrnResultsCard.ResumeLayout(false);
             this.pnlLrnResultsCard.PerformLayout();
-            this.lblLrnResultsHeadingBar.ResumeLayout(false);
-            this.lblLrnResultsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdLearners)).EndInit();
+            this.pnlLrnResultsHeadingBar.ResumeLayout(false);
+            this.pnlLrnResultsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLearners)).EndInit();
             this.flpLearnerSearchActions.ResumeLayout(false);
             this.flpLearnerSearchActions.PerformLayout();
             this.tabSessionSearch.ResumeLayout(false);
@@ -7182,9 +7182,9 @@
             this.pnlSesSearchCard.PerformLayout();
             this.pnlSesResultsCard.ResumeLayout(false);
             this.pnlSesResultsCard.PerformLayout();
-            this.lblSesResultsHeadingBar.ResumeLayout(false);
-            this.lblSesResultsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdSessions)).EndInit();
+            this.pnlSesResultsHeadingBar.ResumeLayout(false);
+            this.pnlSesResultsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).EndInit();
             this.flpSessionSearchActions.ResumeLayout(false);
             this.flpSessionSearchActions.PerformLayout();
             this.tabReportShortcuts.ResumeLayout(false);
@@ -7195,9 +7195,9 @@
             this.pnlRscSearchCard.PerformLayout();
             this.pnlRscResultsCard.ResumeLayout(false);
             this.pnlRscResultsCard.PerformLayout();
-            this.lblRscResultsHeadingBar.ResumeLayout(false);
-            this.lblRscResultsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdReports)).EndInit();
+            this.pnlRscResultsHeadingBar.ResumeLayout(false);
+            this.pnlRscResultsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReports)).EndInit();
             this.flpReportShortcutsActions.ResumeLayout(false);
             this.flpReportShortcutsActions.PerformLayout();
             this.tabReports.ResumeLayout(false);
@@ -7206,16 +7206,16 @@
             this.pnlRepContent.PerformLayout();
             this.pnlReportCard.ResumeLayout(false);
             this.pnlReportCard.PerformLayout();
-            this.lblReportHeadingBar.ResumeLayout(false);
-            this.lblReportHeadingBar.PerformLayout();
+            this.pnlReportHeadingBar.ResumeLayout(false);
+            this.pnlReportHeadingBar.PerformLayout();
             this.pnlParameterCard.ResumeLayout(false);
             this.pnlParameterCard.PerformLayout();
-            this.lblParameterHeadingBar.ResumeLayout(false);
-            this.lblParameterHeadingBar.PerformLayout();
+            this.pnlParameterHeadingBar.ResumeLayout(false);
+            this.pnlParameterHeadingBar.PerformLayout();
             this.pnlOutputCard.ResumeLayout(false);
             this.pnlOutputCard.PerformLayout();
-            this.lblOutputHeadingBar.ResumeLayout(false);
-            this.lblOutputHeadingBar.PerformLayout();
+            this.pnlOutputHeadingBar.ResumeLayout(false);
+            this.pnlOutputHeadingBar.PerformLayout();
             this.pnlReadiness.ResumeLayout(false);
             this.pnlReadiness.PerformLayout();
             this.pnlReadinessBar.ResumeLayout(false);
@@ -7238,17 +7238,17 @@
             this.pnlUniContent.PerformLayout();
             this.pnlFacultyCard.ResumeLayout(false);
             this.pnlFacultyCard.PerformLayout();
-            this.lblFacultyHeadingBar.ResumeLayout(false);
-            this.lblFacultyHeadingBar.PerformLayout();
+            this.pnlFacultyHeadingBar.ResumeLayout(false);
+            this.pnlFacultyHeadingBar.PerformLayout();
             this.pnlUniGridCard.ResumeLayout(false);
             this.pnlUniGridCard.PerformLayout();
-            this.lblUniGridHeadingBar.ResumeLayout(false);
-            this.lblUniGridHeadingBar.PerformLayout();
+            this.pnlUniGridHeadingBar.ResumeLayout(false);
+            this.pnlUniGridHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammes)).EndInit();
             this.pnlUniFormCard.ResumeLayout(false);
             this.pnlUniFormCard.PerformLayout();
-            this.lblUniFormHeadingBar.ResumeLayout(false);
-            this.lblUniFormHeadingBar.PerformLayout();
+            this.pnlUniFormHeadingBar.ResumeLayout(false);
+            this.pnlUniFormHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMinimumAverage)).EndInit();
             this.pnlUniSummary.ResumeLayout(false);
             this.pnlUniSummary.PerformLayout();
@@ -7260,13 +7260,13 @@
             this.pnlReqContent.PerformLayout();
             this.pnlReqGridCard.ResumeLayout(false);
             this.pnlReqGridCard.PerformLayout();
-            this.lblReqGridHeadingBar.ResumeLayout(false);
-            this.lblReqGridHeadingBar.PerformLayout();
+            this.pnlReqGridHeadingBar.ResumeLayout(false);
+            this.pnlReqGridHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).EndInit();
             this.pnlReqFormCard.ResumeLayout(false);
             this.pnlReqFormCard.PerformLayout();
-            this.lblReqFormHeadingBar.ResumeLayout(false);
-            this.lblReqFormHeadingBar.PerformLayout();
+            this.pnlReqFormHeadingBar.ResumeLayout(false);
+            this.pnlReqFormHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMinimumMark)).EndInit();
             this.pnlReqSummary.ResumeLayout(false);
             this.pnlReqSummary.PerformLayout();
@@ -7278,13 +7278,13 @@
             this.pnlFndContent.PerformLayout();
             this.pnlFndGridCard.ResumeLayout(false);
             this.pnlFndGridCard.PerformLayout();
-            this.lblFndGridHeadingBar.ResumeLayout(false);
-            this.lblFndGridHeadingBar.PerformLayout();
+            this.pnlFndGridHeadingBar.ResumeLayout(false);
+            this.pnlFndGridHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).EndInit();
             this.pnlFndFormCard.ResumeLayout(false);
             this.pnlFndFormCard.PerformLayout();
-            this.lblFndFormHeadingBar.ResumeLayout(false);
-            this.lblFndFormHeadingBar.PerformLayout();
+            this.pnlFndFormHeadingBar.ResumeLayout(false);
+            this.pnlFndFormHeadingBar.PerformLayout();
             this.pnlFndSummary.ResumeLayout(false);
             this.pnlFndSummary.PerformLayout();
             this.flpFundingAdminActions.ResumeLayout(false);
@@ -7295,20 +7295,20 @@
             this.pnlCatContent.PerformLayout();
             this.pnlCategoriesCard.ResumeLayout(false);
             this.pnlCategoriesCard.PerformLayout();
-            this.lblCategoriesHeadingBar.ResumeLayout(false);
-            this.lblCategoriesHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdCategories)).EndInit();
+            this.pnlCategoriesHeadingBar.ResumeLayout(false);
+            this.pnlCategoriesHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
             this.pnlCategoryFormCard.ResumeLayout(false);
             this.pnlCategoryFormCard.PerformLayout();
-            this.lblCategoryFormHeadingBar.ResumeLayout(false);
-            this.lblCategoryFormHeadingBar.PerformLayout();
+            this.pnlCategoryFormHeadingBar.ResumeLayout(false);
+            this.pnlCategoryFormHeadingBar.PerformLayout();
             this.pnlCategorySummary.ResumeLayout(false);
             this.pnlCategorySummary.PerformLayout();
             this.pnlWeightsCard.ResumeLayout(false);
             this.pnlWeightsCard.PerformLayout();
-            this.lblWeightsHeadingBar.ResumeLayout(false);
-            this.lblWeightsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdWeights)).EndInit();
+            this.pnlWeightsHeadingBar.ResumeLayout(false);
+            this.pnlWeightsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvWeights)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRelevanceWeight)).EndInit();
             this.flpCategoriesActions.ResumeLayout(false);
             this.flpCategoriesActions.PerformLayout();
@@ -7318,17 +7318,17 @@
             this.pnlQueContent.PerformLayout();
             this.pnlScopeCard.ResumeLayout(false);
             this.pnlScopeCard.PerformLayout();
-            this.lblScopeHeadingBar.ResumeLayout(false);
-            this.lblScopeHeadingBar.PerformLayout();
+            this.pnlScopeHeadingBar.ResumeLayout(false);
+            this.pnlScopeHeadingBar.PerformLayout();
             this.pnlQuestionsCard.ResumeLayout(false);
             this.pnlQuestionsCard.PerformLayout();
-            this.lblQuestionsHeadingBar.ResumeLayout(false);
-            this.lblQuestionsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdQuestions)).EndInit();
+            this.pnlQuestionsHeadingBar.ResumeLayout(false);
+            this.pnlQuestionsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuestions)).EndInit();
             this.pnlQuestionFormCard.ResumeLayout(false);
             this.pnlQuestionFormCard.PerformLayout();
-            this.lblQuestionFormHeadingBar.ResumeLayout(false);
-            this.lblQuestionFormHeadingBar.PerformLayout();
+            this.pnlQuestionFormHeadingBar.ResumeLayout(false);
+            this.pnlQuestionFormHeadingBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDisplayOrder)).EndInit();
             this.pnlQuestionSummary.ResumeLayout(false);
             this.pnlQuestionSummary.PerformLayout();
@@ -7340,13 +7340,13 @@
             this.pnlAccContent.PerformLayout();
             this.pnlAccountsCard.ResumeLayout(false);
             this.pnlAccountsCard.PerformLayout();
-            this.lblAccountsHeadingBar.ResumeLayout(false);
-            this.lblAccountsHeadingBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdAccounts)).EndInit();
+            this.pnlAccountsHeadingBar.ResumeLayout(false);
+            this.pnlAccountsHeadingBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).EndInit();
             this.pnlAccountFormCard.ResumeLayout(false);
             this.pnlAccountFormCard.PerformLayout();
-            this.lblAccountFormHeadingBar.ResumeLayout(false);
-            this.lblAccountFormHeadingBar.PerformLayout();
+            this.pnlAccountFormHeadingBar.ResumeLayout(false);
+            this.pnlAccountFormHeadingBar.PerformLayout();
             this.pnlPassword.ResumeLayout(false);
             this.pnlPassword.PerformLayout();
             this.pnlAccountSummary.ResumeLayout(false);
@@ -7371,46 +7371,46 @@
         private System.Windows.Forms.Label lblAdvWelcome;
         private System.Windows.Forms.Label lblAdvIntro;
         private System.Windows.Forms.Panel pnlAdvSessionsCard;
-        private System.Windows.Forms.Panel lblAdvSessionsHeadingBar;
+        private System.Windows.Forms.Panel pnlAdvSessionsHeadingBar;
         private System.Windows.Forms.Label lblAdvSessionsHeading;
         private System.Windows.Forms.Label lblAdvSessionsText;
         private System.Windows.Forms.Button btnAdvSearchSessions;
         private System.Windows.Forms.Panel pnlAdvReportsCard;
-        private System.Windows.Forms.Panel lblAdvReportsHeadingBar;
+        private System.Windows.Forms.Panel pnlAdvReportsHeadingBar;
         private System.Windows.Forms.Label lblAdvReportsHeading;
         private System.Windows.Forms.Label lblAdvReportsText;
         private System.Windows.Forms.Button btnAdvGenerateReports;
         private System.Windows.Forms.Panel pnlTodayCard;
-        private System.Windows.Forms.Panel lblTodayHeadingBar;
+        private System.Windows.Forms.Panel pnlTodayHeadingBar;
         private System.Windows.Forms.Label lblTodayHeading;
-        private System.Windows.Forms.Panel tilCompleted;
-        private System.Windows.Forms.Label tilCompletedCaption;
-        private System.Windows.Forms.Label tilCompletedValue;
-        private System.Windows.Forms.Label tilCompletedNote;
-        private System.Windows.Forms.Panel tilInProgress;
-        private System.Windows.Forms.Label tilInProgressCaption;
-        private System.Windows.Forms.Label tilInProgressValue;
-        private System.Windows.Forms.Label tilInProgressNote;
-        private System.Windows.Forms.Panel tilFollowUp;
-        private System.Windows.Forms.Label tilFollowUpCaption;
-        private System.Windows.Forms.Label tilFollowUpValue;
-        private System.Windows.Forms.Label tilFollowUpNote;
+        private System.Windows.Forms.Panel pnlCompletedTile;
+        private System.Windows.Forms.Label lblCompletedTileCaption;
+        private System.Windows.Forms.Label lblCompletedTileValue;
+        private System.Windows.Forms.Label lblCompletedTileNote;
+        private System.Windows.Forms.Panel pnlInProgressTile;
+        private System.Windows.Forms.Label lblInProgressTileCaption;
+        private System.Windows.Forms.Label lblInProgressTileValue;
+        private System.Windows.Forms.Label lblInProgressTileNote;
+        private System.Windows.Forms.Panel pnlFollowUpTile;
+        private System.Windows.Forms.Label lblFollowUpTileCaption;
+        private System.Windows.Forms.Label lblFollowUpTileValue;
+        private System.Windows.Forms.Label lblFollowUpTileNote;
         private System.Windows.Forms.TabPage tabAdminDashboard;
         private System.Windows.Forms.Panel pnlAdmContent;
         private System.Windows.Forms.Label lblAdmWelcome;
         private System.Windows.Forms.Label lblAdmIntro;
         private System.Windows.Forms.Panel pnlReferenceDataCard;
-        private System.Windows.Forms.Panel lblReferenceDataHeadingBar;
+        private System.Windows.Forms.Panel pnlReferenceDataHeadingBar;
         private System.Windows.Forms.Label lblReferenceDataHeading;
         private System.Windows.Forms.Label lblReferenceDataText;
         private System.Windows.Forms.Button btnMaintainReferenceData;
         private System.Windows.Forms.Panel pnlAdmSessionsCard;
-        private System.Windows.Forms.Panel lblAdmSessionsHeadingBar;
+        private System.Windows.Forms.Panel pnlAdmSessionsHeadingBar;
         private System.Windows.Forms.Label lblAdmSessionsHeading;
         private System.Windows.Forms.Label lblAdmSessionsText;
         private System.Windows.Forms.Button btnAdmSearchSessions;
         private System.Windows.Forms.Panel pnlAdmReportsCard;
-        private System.Windows.Forms.Panel lblAdmReportsHeadingBar;
+        private System.Windows.Forms.Panel pnlAdmReportsHeadingBar;
         private System.Windows.Forms.Label lblAdmReportsHeading;
         private System.Windows.Forms.Label lblAdmReportsText;
         private System.Windows.Forms.Button btnAdmGenerateReports;
@@ -7434,17 +7434,17 @@
         private System.Windows.Forms.Button btnLrnClear;
         private System.Windows.Forms.Label lblLrnSearchHint;
         private System.Windows.Forms.Panel pnlLrnResultsCard;
-        private System.Windows.Forms.Panel lblLrnResultsHeadingBar;
+        private System.Windows.Forms.Panel pnlLrnResultsHeadingBar;
         private System.Windows.Forms.Label lblLrnResultsHeading;
         private System.Windows.Forms.Label lblLrnResultsCount;
-        private System.Windows.Forms.DataGridView grdLearners;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnerId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLrnLearner;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGrade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSchool;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProvince;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSessions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLastSession;
+        private System.Windows.Forms.DataGridView dgvLearners;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersGrade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersSchool;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersProvince;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersSessions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLearnersLastSession;
         private System.Windows.Forms.FlowLayoutPanel flpLearnerSearchActions;
         private System.Windows.Forms.Button btnLearnerSearchOpen;
         private System.Windows.Forms.TabPage tabSessionSearch;
@@ -7466,20 +7466,20 @@
         private System.Windows.Forms.Button btnSesClear;
         private System.Windows.Forms.Label lblSesSearchHint;
         private System.Windows.Forms.Panel pnlSesResultsCard;
-        private System.Windows.Forms.Panel lblSesResultsHeadingBar;
+        private System.Windows.Forms.Panel pnlSesResultsHeadingBar;
         private System.Windows.Forms.Label lblSesResultsHeading;
         private System.Windows.Forms.Label lblSesResultsCount;
         private System.Windows.Forms.Button btnExportSummary;
-        private System.Windows.Forms.DataGridView grdSessions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSession;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSesLearner;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOutcome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExported;
+        private System.Windows.Forms.DataGridView dgvSessions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsLearner;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsGrade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsProgramme;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsOutcome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionsExported;
         private System.Windows.Forms.FlowLayoutPanel flpSessionSearchActions;
         private System.Windows.Forms.Button btnSessionSearchOpen;
         private System.Windows.Forms.TabPage tabReportShortcuts;
@@ -7501,22 +7501,22 @@
         private System.Windows.Forms.Button btnRscFind;
         private System.Windows.Forms.Label lblRscSearchHint;
         private System.Windows.Forms.Panel pnlRscResultsCard;
-        private System.Windows.Forms.Panel lblRscResultsHeadingBar;
+        private System.Windows.Forms.Panel pnlRscResultsHeadingBar;
         private System.Windows.Forms.Label lblRscResultsHeading;
         private System.Windows.Forms.Label lblRscResultsCount;
         private System.Windows.Forms.Label lblReportsNote;
-        private System.Windows.Forms.DataGridView grdReports;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReportCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colScope;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRowsInScope;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLastGenerated;
+        private System.Windows.Forms.DataGridView dgvReports;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReportsCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReportsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReportsScope;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReportsRowsInScope;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReportsLastGenerated;
         private System.Windows.Forms.FlowLayoutPanel flpReportShortcutsActions;
         private System.Windows.Forms.Button btnReportShortcutsGenerate;
         private System.Windows.Forms.TabPage tabReports;
         private System.Windows.Forms.Panel pnlRepContent;
         private System.Windows.Forms.Panel pnlReportCard;
-        private System.Windows.Forms.Panel lblReportHeadingBar;
+        private System.Windows.Forms.Panel pnlReportHeadingBar;
         private System.Windows.Forms.Label lblReportHeading;
         private System.Windows.Forms.RadioButton rdoLearnerSummary;
         private System.Windows.Forms.Label lblLearnerSummaryNote;
@@ -7525,7 +7525,7 @@
         private System.Windows.Forms.RadioButton rdoNotEligible;
         private System.Windows.Forms.Label lblNotEligibleNote;
         private System.Windows.Forms.Panel pnlParameterCard;
-        private System.Windows.Forms.Panel lblParameterHeadingBar;
+        private System.Windows.Forms.Panel pnlParameterHeadingBar;
         private System.Windows.Forms.Label lblParameterHeading;
         private System.Windows.Forms.Label lblRepFrom;
         private System.Windows.Forms.Label lblRepFromStar;
@@ -7552,7 +7552,7 @@
         private System.Windows.Forms.CheckBox chkIncludeInactive;
         private System.Windows.Forms.Label lblIncludeInactiveNote;
         private System.Windows.Forms.Panel pnlOutputCard;
-        private System.Windows.Forms.Panel lblOutputHeadingBar;
+        private System.Windows.Forms.Panel pnlOutputHeadingBar;
         private System.Windows.Forms.Label lblOutputHeading;
         private System.Windows.Forms.Label lblOutputFormat;
         private System.Windows.Forms.Label lblOutputFormatStar;
@@ -7585,7 +7585,7 @@
         private System.Windows.Forms.ListBox lstFaculties;
         private System.Windows.Forms.Label lblFacultyCount;
         private System.Windows.Forms.Panel pnlFacultyCard;
-        private System.Windows.Forms.Panel lblFacultyHeadingBar;
+        private System.Windows.Forms.Panel pnlFacultyHeadingBar;
         private System.Windows.Forms.Label lblFacultyHeading;
         private System.Windows.Forms.Label lblFacultyName;
         private System.Windows.Forms.Label lblFacultyNameStar;
@@ -7596,17 +7596,17 @@
         private System.Windows.Forms.Button btnDeactivateFaculty;
         private System.Windows.Forms.Label lblFacultyHint;
         private System.Windows.Forms.Panel pnlUniGridCard;
-        private System.Windows.Forms.Panel lblUniGridHeadingBar;
+        private System.Windows.Forms.Panel pnlUniGridHeadingBar;
         private System.Windows.Forms.Label lblUniGridHeading;
         private System.Windows.Forms.Label lblUniProgrammeCount;
         private System.Windows.Forms.DataGridView dgvProgrammes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMinimumAverage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUniStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFacultyId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesMinimumAverage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesFacultyId;
         private System.Windows.Forms.Panel pnlUniFormCard;
-        private System.Windows.Forms.Panel lblUniFormHeadingBar;
+        private System.Windows.Forms.Panel pnlUniFormHeadingBar;
         private System.Windows.Forms.Label lblUniFormHeading;
         private System.Windows.Forms.Label lblProgrammeFaculty;
         private System.Windows.Forms.Label lblProgrammeFacultyStar;
@@ -7636,21 +7636,21 @@
         private System.Windows.Forms.ListBox lstProgrammes;
         private System.Windows.Forms.Label lblReqProgrammeCount;
         private System.Windows.Forms.Panel pnlReqGridCard;
-        private System.Windows.Forms.Panel lblReqGridHeadingBar;
+        private System.Windows.Forms.Panel pnlReqGridHeadingBar;
         private System.Windows.Forms.Label lblReqGridHeading;
         private System.Windows.Forms.Label lblRequirementCount;
         private System.Windows.Forms.DataGridView dgvRequirements;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMinimumMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternative;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReqStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativeSubjectId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAdvisoryNote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsSubject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsMinimumMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsAlternative;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsSubjectId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsAlternativeSubjectId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsAdvisoryNote;
         private System.Windows.Forms.Panel pnlReqFormCard;
-        private System.Windows.Forms.Panel lblReqFormHeadingBar;
+        private System.Windows.Forms.Panel pnlReqFormHeadingBar;
         private System.Windows.Forms.Label lblReqFormHeading;
         private System.Windows.Forms.Label lblRequirementType;
         private System.Windows.Forms.Label lblRequirementTypeStar;
@@ -7682,17 +7682,17 @@
         private System.Windows.Forms.TabPage tabFundingAdmin;
         private System.Windows.Forms.Panel pnlFndContent;
         private System.Windows.Forms.Panel pnlFndGridCard;
-        private System.Windows.Forms.Panel lblFndGridHeadingBar;
+        private System.Windows.Forms.Panel pnlFndGridHeadingBar;
         private System.Windows.Forms.Label lblFndGridHeading;
         private System.Windows.Forms.Label lblFundingCount;
         private System.Windows.Forms.DataGridView dgvFunding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClosingDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFndStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingClosingDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingId;
         private System.Windows.Forms.Panel pnlFndFormCard;
-        private System.Windows.Forms.Panel lblFndFormHeadingBar;
+        private System.Windows.Forms.Panel pnlFndFormHeadingBar;
         private System.Windows.Forms.Label lblFndFormHeading;
         private System.Windows.Forms.Label lblFundingName;
         private System.Windows.Forms.Label lblFundingNameStar;
@@ -7730,17 +7730,17 @@
         private System.Windows.Forms.TabPage tabCategories;
         private System.Windows.Forms.Panel pnlCatContent;
         private System.Windows.Forms.Panel pnlCategoriesCard;
-        private System.Windows.Forms.Panel lblCategoriesHeadingBar;
+        private System.Windows.Forms.Panel pnlCategoriesHeadingBar;
         private System.Windows.Forms.Label lblCategoriesHeading;
         private System.Windows.Forms.Label lblCategoryCount;
-        private System.Windows.Forms.DataGridView grdCategories;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammeCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoryStatus;
+        private System.Windows.Forms.DataGridView dgvCategories;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoriesId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoriesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoriesQuestionCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoriesProgrammeCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCategoriesStatus;
         private System.Windows.Forms.Panel pnlCategoryFormCard;
-        private System.Windows.Forms.Panel lblCategoryFormHeadingBar;
+        private System.Windows.Forms.Panel pnlCategoryFormHeadingBar;
         private System.Windows.Forms.Label lblCategoryFormHeading;
         private System.Windows.Forms.Label lblCategoryName;
         private System.Windows.Forms.Label lblCategoryNameStar;
@@ -7751,13 +7751,13 @@
         private System.Windows.Forms.Panel pnlCategorySummary;
         private System.Windows.Forms.Label lblCategorySummary;
         private System.Windows.Forms.Panel pnlWeightsCard;
-        private System.Windows.Forms.Panel lblWeightsHeadingBar;
+        private System.Windows.Forms.Panel pnlWeightsHeadingBar;
         private System.Windows.Forms.Label lblWeightsHeading;
         private System.Windows.Forms.Label lblWeightsScope;
-        private System.Windows.Forms.DataGridView grdWeights;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightProgrammeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightProgramme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightValue;
+        private System.Windows.Forms.DataGridView dgvWeights;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightsProgrammeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightsProgramme;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeightsValue;
         private System.Windows.Forms.Label lblWeightProgramme;
         private System.Windows.Forms.Label lblWeightProgrammeStar;
         private System.Windows.Forms.ComboBox cboWeightProgramme;
@@ -7775,7 +7775,7 @@
         private System.Windows.Forms.TabPage tabQuestionnaire;
         private System.Windows.Forms.Panel pnlQueContent;
         private System.Windows.Forms.Panel pnlScopeCard;
-        private System.Windows.Forms.Panel lblScopeHeadingBar;
+        private System.Windows.Forms.Panel pnlScopeHeadingBar;
         private System.Windows.Forms.Label lblScopeHeading;
         private System.Windows.Forms.Label lblScopeCategory;
         private System.Windows.Forms.ComboBox cboScopeCategory;
@@ -7783,18 +7783,18 @@
         private System.Windows.Forms.Label lblScaleNote;
         private System.Windows.Forms.Label lblScopeNote;
         private System.Windows.Forms.Panel pnlQuestionsCard;
-        private System.Windows.Forms.Panel lblQuestionsHeadingBar;
+        private System.Windows.Forms.Panel pnlQuestionsHeadingBar;
         private System.Windows.Forms.Label lblQuestionsHeading;
         private System.Windows.Forms.Label lblQuestionCount;
-        private System.Windows.Forms.DataGridView grdQuestions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionCategoryId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDisplayOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionText;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionStatus;
+        private System.Windows.Forms.DataGridView dgvQuestions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsCategoryId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsDisplayOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsCategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQuestionsStatus;
         private System.Windows.Forms.Panel pnlQuestionFormCard;
-        private System.Windows.Forms.Panel lblQuestionFormHeadingBar;
+        private System.Windows.Forms.Panel pnlQuestionFormHeadingBar;
         private System.Windows.Forms.Label lblQuestionFormHeading;
         private System.Windows.Forms.Label lblStatementLength;
         private System.Windows.Forms.Label lblStatement;
@@ -7820,17 +7820,17 @@
         private System.Windows.Forms.TabPage tabAccounts;
         private System.Windows.Forms.Panel pnlAccContent;
         private System.Windows.Forms.Panel pnlAccountsCard;
-        private System.Windows.Forms.Panel lblAccountsHeadingBar;
+        private System.Windows.Forms.Panel pnlAccountsHeadingBar;
         private System.Windows.Forms.Label lblAccountsHeading;
         private System.Windows.Forms.Label lblAccountCount;
-        private System.Windows.Forms.DataGridView grdAccounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUserId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountStatus;
+        private System.Windows.Forms.DataGridView dgvAccounts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountsUserId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountsUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountsFullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountsRole;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountsStatus;
         private System.Windows.Forms.Panel pnlAccountFormCard;
-        private System.Windows.Forms.Panel lblAccountFormHeadingBar;
+        private System.Windows.Forms.Panel pnlAccountFormHeadingBar;
         private System.Windows.Forms.Label lblAccountFormHeading;
         private System.Windows.Forms.Label lblAccountRequiredNote;
         private System.Windows.Forms.Label lblUsername;

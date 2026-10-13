@@ -339,20 +339,20 @@ namespace FuturePath.PresentationLayer
 
             DataGridViewRow row = dgvRequirements.SelectedRows[0];
             RequirementsClearValidation();
-            requirementsSelectedRequirementId = RequirementsToNullableInt(row.Cells[colRequirementId.Index].Value);
+            requirementsSelectedRequirementId = RequirementsToNullableInt(row.Cells[colRequirementsId.Index].Value);
             requirementsEditingMinimumAverage = !requirementsSelectedRequirementId.HasValue;
             RequirementsSetSubjectFieldsEnabled(!requirementsEditingMinimumAverage);
 
-            RequirementsSelectValue(cboRequirementType, row.Cells[colRequirementType.Index].Value);
-            RequirementsSelectValue(cboSubject, row.Cells[colSubjectId.Index].Value);
-            object alternative = row.Cells[colAlternativeSubjectId.Index].Value;
+            RequirementsSelectValue(cboRequirementType, row.Cells[colRequirementsType.Index].Value);
+            RequirementsSelectValue(cboSubject, row.Cells[colRequirementsSubjectId.Index].Value);
+            object alternative = row.Cells[colRequirementsAlternativeSubjectId.Index].Value;
             RequirementsSelectValue(cboAlternative, RequirementsIsEmpty(alternative) ? (object)RequirementsNoAlternativeValue : alternative);
 
-            object mark = row.Cells[colMinimumMark.Index].Value;
+            object mark = row.Cells[colRequirementsMinimumMark.Index].Value;
             decimal value = RequirementsIsEmpty(mark) ? 0m : Convert.ToDecimal(mark, CultureInfo.InvariantCulture);
             numMinimumMark.Value = Math.Max(numMinimumMark.Minimum, Math.Min(numMinimumMark.Maximum, value));
             chkReqActive.Checked = RequirementsRowIsActive(row);
-            txtAdvisoryNote.Text = Convert.ToString(row.Cells[colAdvisoryNote.Index].Value, CultureInfo.CurrentCulture);
+            txtAdvisoryNote.Text = Convert.ToString(row.Cells[colRequirementsAdvisoryNote.Index].Value, CultureInfo.CurrentCulture);
 
             ReportStatus(requirementsEditingMinimumAverage
                 ? "Editing the programme's minimum average. Set the mark, then choose Update requirement."
@@ -362,7 +362,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>Display formatting only: status chips and dashes for empty cells.</summary>
         private void dgvRequirements_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colReqStatus.Index && e.Value is bool)
+            if (e.ColumnIndex == colRequirementsStatus.Index && e.Value is bool)
             {
                 bool active = (bool)e.Value;
                 e.Value = active ? "Active" : "Inactive";
@@ -372,13 +372,13 @@ namespace FuturePath.PresentationLayer
                 e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
                 e.FormattingApplied = true;
             }
-            else if ((e.ColumnIndex == colSubject.Index || e.ColumnIndex == colAlternative.Index
-                      || e.ColumnIndex == colMinimumMark.Index) && RequirementsIsEmpty(e.Value))
+            else if ((e.ColumnIndex == colRequirementsSubject.Index || e.ColumnIndex == colRequirementsAlternative.Index
+                      || e.ColumnIndex == colRequirementsMinimumMark.Index) && RequirementsIsEmpty(e.Value))
             {
                 e.Value = "—";
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colMinimumMark.Index && e.Value is decimal)
+            else if (e.ColumnIndex == colRequirementsMinimumMark.Index && e.Value is decimal)
             {
                 e.Value = ((decimal)e.Value).ToString("0.##", CultureInfo.CurrentCulture);
                 e.FormattingApplied = true;
@@ -506,7 +506,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the grid row's IsActive cell is true.</summary>
         private bool RequirementsRowIsActive(DataGridViewRow row)
         {
-            object value = row.Cells[colReqStatus.Index].Value;
+            object value = row.Cells[colRequirementsStatus.Index].Value;
             return value is bool && (bool)value;
         }
 

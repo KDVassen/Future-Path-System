@@ -43,7 +43,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdQuestions.AutoGenerateColumns = false;
+            dgvQuestions.AutoGenerateColumns = false;
             txtStatement.MaxLength = QuestionnaireStatementMaxLength;
             QuestionnaireLoadCategoryLists();
             QuestionnaireLoadQuestions();
@@ -182,10 +182,10 @@ namespace FuturePath.PresentationLayer
                 int? scopeCategoryId = cboScopeCategory.SelectedIndex >= 0 && cboScopeCategory.SelectedValue != null
                     ? (int?)Convert.ToInt32(cboScopeCategory.SelectedValue, CultureInfo.InvariantCulture)
                     : null;
-                // TODO BLL: grdQuestions.DataSource = InterestController.GetQuestions(scopeCategoryId, includeInactive: true);
+                // TODO BLL: dgvQuestions.DataSource = InterestController.GetQuestions(scopeCategoryId, includeInactive: true);
                 //           Columns: QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive;
                 //           ordered by DisplayOrder. A null scope returns every category.
-                grdQuestions.ClearSelection();
+                dgvQuestions.ClearSelection();
             }
             catch (Exception)
             {
@@ -239,11 +239,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "N questions · M active" (and the scope) from the bound rows.</summary>
         private void QuestionnaireUpdateCountLine()
         {
-            int total = grdQuestions.Rows.Count;
+            int total = dgvQuestions.Rows.Count;
             int active = 0;
-            foreach (DataGridViewRow row in grdQuestions.Rows)
+            foreach (DataGridViewRow row in dgvQuestions.Rows)
             {
-                if (QuestionnaireIsTrue(row.Cells[colQuestionStatus.Index].Value))
+                if (QuestionnaireIsTrue(row.Cells[colQuestionsStatus.Index].Value))
                 {
                     active++;
                 }
@@ -254,9 +254,9 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
-        private void grdQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colQuestionStatus.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colQuestionsStatus.Index)
             {
                 return;
             }
@@ -273,12 +273,12 @@ namespace FuturePath.PresentationLayer
         /// After (re)binding, starts with no row selected, so the form stays ready for a new
         /// question until the administrator picks one, and refreshes the count line.
         /// </summary>
-        private void grdQuestions_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvQuestions_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = questionnaireLoading;
             questionnaireLoading = true;
-            grdQuestions.ClearSelection();
-            grdQuestions.CurrentCell = null;
+            dgvQuestions.ClearSelection();
+            dgvQuestions.CurrentCell = null;
             questionnaireLoading = wasLoading;
             QuestionnaireUpdateCountLine();
         }
@@ -287,15 +287,15 @@ namespace FuturePath.PresentationLayer
         /// Copies the question the administrator selects into the form. Only a selection made in the
         /// focused grid counts, not the automatic first-row selection on binding.
         /// </summary>
-        private void grdQuestions_SelectionChanged(object sender, EventArgs e)
+        private void dgvQuestions_SelectionChanged(object sender, EventArgs e)
         {
-            if (questionnaireLoading || !grdQuestions.Focused || grdQuestions.SelectedRows.Count == 0)
+            if (questionnaireLoading || !dgvQuestions.Focused || dgvQuestions.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdQuestions.SelectedRows[0];
-            object id = row.Cells[colQuestionId.Index].Value;
+            DataGridViewRow row = dgvQuestions.SelectedRows[0];
+            object id = row.Cells[colQuestionsId.Index].Value;
             if (id == null || id == DBNull.Value)
             {
                 return;
@@ -303,18 +303,18 @@ namespace FuturePath.PresentationLayer
 
             QuestionnaireClearValidation();
             questionnaireSelectedId = Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            questionnaireSelectedIsActive = QuestionnaireIsTrue(row.Cells[colQuestionStatus.Index].Value);
-            txtStatement.Text = Convert.ToString(row.Cells[colQuestionText.Index].Value, CultureInfo.CurrentCulture);
+            questionnaireSelectedIsActive = QuestionnaireIsTrue(row.Cells[colQuestionsStatus.Index].Value);
+            txtStatement.Text = Convert.ToString(row.Cells[colQuestionsText.Index].Value, CultureInfo.CurrentCulture);
             chkQuestionActive.Checked = questionnaireSelectedIsActive;
 
-            object order = row.Cells[colDisplayOrder.Index].Value;
+            object order = row.Cells[colQuestionsDisplayOrder.Index].Value;
             if (order != null && order != DBNull.Value)
             {
                 decimal value = Convert.ToDecimal(order, CultureInfo.InvariantCulture);
                 numDisplayOrder.Value = Math.Max(numDisplayOrder.Minimum, Math.Min(numDisplayOrder.Maximum, value));
             }
 
-            object categoryId = row.Cells[colQuestionCategoryId.Index].Value;
+            object categoryId = row.Cells[colQuestionsCategoryId.Index].Value;
             if (cboQuestionCategory.DataSource != null && categoryId != null && categoryId != DBNull.Value)
             {
                 cboQuestionCategory.SelectedValue = categoryId;
@@ -322,7 +322,7 @@ namespace FuturePath.PresentationLayer
             else
             {
                 cboQuestionCategory.SelectedIndex = cboQuestionCategory.FindStringExact(
-                    Convert.ToString(row.Cells[colQuestionCategory.Index].Value, CultureInfo.CurrentCulture));
+                    Convert.ToString(row.Cells[colQuestionsCategory.Index].Value, CultureInfo.CurrentCulture));
             }
         }
 
@@ -415,7 +415,7 @@ namespace FuturePath.PresentationLayer
         private void QuestionnaireClearForm()
         {
             questionnaireLoading = true;
-            grdQuestions.ClearSelection();
+            dgvQuestions.ClearSelection();
             questionnaireLoading = false;
 
             questionnaireSelectedId = null;

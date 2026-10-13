@@ -27,7 +27,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdReports.AutoGenerateColumns = false;
+            dgvReports.AutoGenerateColumns = false;
             dtpRscFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
             dtpRscTo.Value = DateTime.Today;
             lblRscResultsCount.Text = "Rows in scope follow the criteria above";
@@ -50,13 +50,13 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            if (grdReports.CurrentRow == null)
+            if (dgvReports.CurrentRow == null)
             {
                 ReportStatus("Select a report in the list first, then choose Generate report.", true);
                 return;
             }
 
-            string reportCode = Convert.ToString(grdReports.CurrentRow.Cells[colReportCode.Index].Value, CultureInfo.InvariantCulture);
+            string reportCode = Convert.ToString(dgvReports.CurrentRow.Cells[colReportsCode.Index].Value, CultureInfo.InvariantCulture);
             if (string.IsNullOrEmpty(reportCode))
             {
                 ReportStatus("This report could not be opened. Please select Find and try again.", true);
@@ -132,7 +132,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdReports.DataSource = reports;
+            dgvReports.DataSource = reports;
             int count = reports == null ? 0 : reports.Rows.Count;
             if (count == 0)
             {
@@ -180,9 +180,9 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Shows Last generated as dd/MM/yyyy HH:mm, or "Never" (display formatting only).</summary>
-        private void grdReports_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvReports_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex != colLastGenerated.Index)
+            if (e.ColumnIndex != colReportsLastGenerated.Index)
             {
                 return;
             }
@@ -201,7 +201,7 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Double-clicking a report is the same as Generate report.</summary>
-        private void grdReports_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvReports_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {

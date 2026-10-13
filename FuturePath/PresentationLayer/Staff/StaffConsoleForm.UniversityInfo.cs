@@ -386,11 +386,11 @@ namespace FuturePath.PresentationLayer
 
             DataGridViewRow row = dgvProgrammes.SelectedRows[0];
             UniversityClearValidation();
-            object id = row.Cells[colProgrammeId.Index].Value;
+            object id = row.Cells[colProgrammesId.Index].Value;
             universitySelectedProgrammeId = UniversityIsEmpty(id) ? (int?)null : Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            UniversitySelectValue(cboProgrammeFaculty, row.Cells[colFacultyId.Index].Value);
-            txtProgrammeName.Text = Convert.ToString(row.Cells[colProgrammeName.Index].Value, CultureInfo.CurrentCulture);
-            object average = row.Cells[colMinimumAverage.Index].Value;
+            UniversitySelectValue(cboProgrammeFaculty, row.Cells[colProgrammesFacultyId.Index].Value);
+            txtProgrammeName.Text = Convert.ToString(row.Cells[colProgrammesName.Index].Value, CultureInfo.CurrentCulture);
+            object average = row.Cells[colProgrammesMinimumAverage.Index].Value;
             decimal value = UniversityIsEmpty(average) ? 0m : Convert.ToDecimal(average, CultureInfo.InvariantCulture);
             numMinimumAverage.Value = Math.Max(numMinimumAverage.Minimum, Math.Min(numMinimumAverage.Maximum, value));
             chkUniActive.Checked = UniversityRowIsActive(row);
@@ -400,7 +400,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>Display formatting only: status chips and a dash when no minimum average is set.</summary>
         private void dgvProgrammes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colUniStatus.Index && e.Value is bool)
+            if (e.ColumnIndex == colProgrammesStatus.Index && e.Value is bool)
             {
                 bool active = (bool)e.Value;
                 e.Value = active ? "Active" : "Inactive";
@@ -410,7 +410,7 @@ namespace FuturePath.PresentationLayer
                 e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colMinimumAverage.Index)
+            else if (e.ColumnIndex == colProgrammesMinimumAverage.Index)
             {
                 if (UniversityIsEmpty(e.Value))
                 {
@@ -512,7 +512,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the grid row's IsActive cell is true.</summary>
         private bool UniversityRowIsActive(DataGridViewRow row)
         {
-            object value = row.Cells[colUniStatus.Index].Value;
+            object value = row.Cells[colProgrammesStatus.Index].Value;
             return value is bool && (bool)value;
         }
 

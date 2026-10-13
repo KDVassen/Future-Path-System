@@ -44,9 +44,9 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdCategories.AutoGenerateColumns = false;
-            grdWeights.AutoGenerateColumns = false;
-            colWeightValue.DefaultCellStyle.Format = "0.00";
+            dgvCategories.AutoGenerateColumns = false;
+            dgvWeights.AutoGenerateColumns = false;
+            colWeightsValue.DefaultCellStyle.Format = "0.00";
             CategoriesLoadProgrammeList();
             CategoriesLoadCategories();
             CategoriesClearForm();
@@ -165,9 +165,9 @@ namespace FuturePath.PresentationLayer
             categoriesLoading = true;
             try
             {
-                // TODO BLL: grdCategories.DataSource = InterestController.GetInterestCategories(includeInactive: true);
+                // TODO BLL: dgvCategories.DataSource = InterestController.GetInterestCategories(includeInactive: true);
                 //           Columns: CategoryID, CategoryName, QuestionCount (active questions), MappedProgrammeCount, IsActive.
-                grdCategories.ClearSelection();
+                dgvCategories.ClearSelection();
             }
             catch (Exception)
             {
@@ -203,9 +203,9 @@ namespace FuturePath.PresentationLayer
             categoriesLoading = true;
             try
             {
-                // TODO BLL: grdWeights.DataSource = InterestController.GetRelevanceWeights(categoryId);
+                // TODO BLL: dgvWeights.DataSource = InterestController.GetRelevanceWeights(categoryId);
                 //           Columns: ProgrammeID, ProgrammeName, RelevanceWeight (DegreeInterestMapping, DECIMAL(4,2)).
-                grdWeights.ClearSelection();
+                dgvWeights.ClearSelection();
             }
             catch (Exception)
             {
@@ -252,11 +252,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "N categories · M active" from the bound rows.</summary>
         private void CategoriesUpdateCountLine()
         {
-            int total = grdCategories.Rows.Count;
+            int total = dgvCategories.Rows.Count;
             int active = 0;
-            foreach (DataGridViewRow row in grdCategories.Rows)
+            foreach (DataGridViewRow row in dgvCategories.Rows)
             {
-                if (CategoriesIsTrue(row.Cells[colCategoryStatus.Index].Value))
+                if (CategoriesIsTrue(row.Cells[colCategoriesStatus.Index].Value))
                 {
                     active++;
                 }
@@ -266,9 +266,9 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
-        private void grdCategories_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvCategories_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colCategoryStatus.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colCategoriesStatus.Index)
             {
                 return;
             }
@@ -285,23 +285,23 @@ namespace FuturePath.PresentationLayer
         /// After (re)binding, starts with no row selected, so the form stays ready for a new
         /// category until the administrator picks one, and refreshes the count line.
         /// </summary>
-        private void grdCategories_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvCategories_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = categoriesLoading;
             categoriesLoading = true;
-            grdCategories.ClearSelection();
-            grdCategories.CurrentCell = null;
+            dgvCategories.ClearSelection();
+            dgvCategories.CurrentCell = null;
             categoriesLoading = wasLoading;
             CategoriesUpdateCountLine();
         }
 
         /// <summary>After (re)binding the weights, no mapped programme is pre-selected.</summary>
-        private void grdWeights_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvWeights_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = categoriesLoading;
             categoriesLoading = true;
-            grdWeights.ClearSelection();
-            grdWeights.CurrentCell = null;
+            dgvWeights.ClearSelection();
+            dgvWeights.CurrentCell = null;
             categoriesLoading = wasLoading;
         }
 
@@ -309,15 +309,15 @@ namespace FuturePath.PresentationLayer
         /// Copies the category the administrator selects into the form and shows its programme weights.
         /// Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
         /// </summary>
-        private void grdCategories_SelectionChanged(object sender, EventArgs e)
+        private void dgvCategories_SelectionChanged(object sender, EventArgs e)
         {
-            if (categoriesLoading || !grdCategories.Focused || grdCategories.SelectedRows.Count == 0)
+            if (categoriesLoading || !dgvCategories.Focused || dgvCategories.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdCategories.SelectedRows[0];
-            object id = row.Cells[colCategoryId.Index].Value;
+            DataGridViewRow row = dgvCategories.SelectedRows[0];
+            object id = row.Cells[colCategoriesId.Index].Value;
             if (id == null || id == DBNull.Value)
             {
                 return;
@@ -325,8 +325,8 @@ namespace FuturePath.PresentationLayer
 
             CategoriesClearValidation();
             categoriesSelectedId = Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            categoriesSelectedIsActive = CategoriesIsTrue(row.Cells[colCategoryStatus.Index].Value);
-            txtCategoryName.Text = Convert.ToString(row.Cells[colCategoryName.Index].Value, CultureInfo.CurrentCulture);
+            categoriesSelectedIsActive = CategoriesIsTrue(row.Cells[colCategoriesStatus.Index].Value);
+            txtCategoryName.Text = Convert.ToString(row.Cells[colCategoriesName.Index].Value, CultureInfo.CurrentCulture);
             chkCategoryActive.Checked = categoriesSelectedIsActive;
 
             lblWeightsScope.Text = "Programme weights for \"" + txtCategoryName.Text + "\".";
@@ -335,16 +335,16 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Choosing a mapped programme puts it and its current weight into the weight fields.</summary>
-        private void grdWeights_SelectionChanged(object sender, EventArgs e)
+        private void dgvWeights_SelectionChanged(object sender, EventArgs e)
         {
-            if (categoriesLoading || !grdWeights.Focused || grdWeights.SelectedRows.Count == 0)
+            if (categoriesLoading || !dgvWeights.Focused || dgvWeights.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdWeights.SelectedRows[0];
-            object programmeId = row.Cells[colWeightProgrammeId.Index].Value;
-            object weight = row.Cells[colWeightValue.Index].Value;
+            DataGridViewRow row = dgvWeights.SelectedRows[0];
+            object programmeId = row.Cells[colWeightsProgrammeId.Index].Value;
+            object weight = row.Cells[colWeightsValue.Index].Value;
             if (cboWeightProgramme.DataSource != null && programmeId != null && programmeId != DBNull.Value)
             {
                 cboWeightProgramme.SelectedValue = programmeId;
@@ -506,8 +506,8 @@ namespace FuturePath.PresentationLayer
         private void CategoriesClearForm()
         {
             categoriesLoading = true;
-            grdCategories.ClearSelection();
-            grdWeights.DataSource = null;
+            dgvCategories.ClearSelection();
+            dgvWeights.DataSource = null;
             categoriesLoading = false;
 
             categoriesSelectedId = null;
