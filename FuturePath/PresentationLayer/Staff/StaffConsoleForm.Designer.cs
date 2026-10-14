@@ -66,11 +66,8 @@
             System.Windows.Forms.DataGridViewCellStyle colReportsRowsInScopeStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colReportsLastGeneratedStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colProgrammesMinimumAverageStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle colProgrammesStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colRequirementsMinimumMarkStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle colRequirementsStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colFundingClosingDateStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle colFundingStatusStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colCategoriesQuestionCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colCategoriesProgrammeCountStyle = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle colWeightsValueStyle = new System.Windows.Forms.DataGridViewCellStyle();
@@ -210,6 +207,7 @@
             this.lblRscOutcome = new System.Windows.Forms.Label();
             this.cboRscOutcome = new System.Windows.Forms.ComboBox();
             this.btnRscFind = new System.Windows.Forms.Button();
+            this.btnRscClear = new System.Windows.Forms.Button();
             this.lblRscSearchHint = new System.Windows.Forms.Label();
             this.pnlRscResultsCard = new System.Windows.Forms.Panel();
             this.pnlRscResultsHeadingBar = new System.Windows.Forms.Panel();
@@ -792,14 +790,14 @@
             this.pnlAdvSessionsCard.BackColor = System.Drawing.Color.White;
             this.pnlAdvSessionsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAdvSessionsCard.Location = new System.Drawing.Point(0, 84);
-            this.pnlAdvSessionsCard.Size = new System.Drawing.Size(457, 230);
+            this.pnlAdvSessionsCard.Size = new System.Drawing.Size(461, 230);
             this.pnlAdvSessionsCard.TabIndex = 2;
             this.pnlAdvSessionsCard.Name = "pnlAdvSessionsCard";
             //
             // pnlAdvSessionsHeadingBar
             //
             this.pnlAdvSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlAdvSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdvSessionsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlAdvSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlAdvSessionsHeadingBar.TabIndex = 0;
             this.pnlAdvSessionsHeadingBar.Name = "pnlAdvSessionsHeadingBar";
@@ -808,8 +806,8 @@
             //
             this.lblAdvSessionsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdvSessionsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdvSessionsHeading.Location = new System.Drawing.Point(26, 14);
-            this.lblAdvSessionsHeading.Size = new System.Drawing.Size(397, 28);
+            this.lblAdvSessionsHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblAdvSessionsHeading.Size = new System.Drawing.Size(401, 28);
             this.lblAdvSessionsHeading.TabIndex = 1;
             this.lblAdvSessionsHeading.Text = "Advisory sessions";
             this.lblAdvSessionsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -819,8 +817,8 @@
             //
             this.lblAdvSessionsText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblAdvSessionsText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdvSessionsText.Location = new System.Drawing.Point(20, 52);
-            this.lblAdvSessionsText.Size = new System.Drawing.Size(417, 110);
+            this.lblAdvSessionsText.Location = new System.Drawing.Point(16, 52);
+            this.lblAdvSessionsText.Size = new System.Drawing.Size(427, 110);
             this.lblAdvSessionsText.TabIndex = 2;
             this.lblAdvSessionsText.Text = "Search sessions by session number, surname, date or outcome. Review learner profiles and regenerate a learner's advisory summary (FP-LSR).";
             this.lblAdvSessionsText.Name = "lblAdvSessionsText";
@@ -833,7 +831,7 @@
             this.btnAdvSearchSessions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdvSearchSessions.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnAdvSearchSessions.ForeColor = System.Drawing.Color.White;
-            this.btnAdvSearchSessions.Location = new System.Drawing.Point(20, 172);
+            this.btnAdvSearchSessions.Location = new System.Drawing.Point(16, 172);
             this.btnAdvSearchSessions.Size = new System.Drawing.Size(240, 40);
             this.btnAdvSearchSessions.TabIndex = 3;
             this.btnAdvSearchSessions.Text = "Search advisory sessions";
@@ -850,15 +848,15 @@
             this.pnlAdvReportsCard.Controls.Add(this.btnAdvGenerateReports);
             this.pnlAdvReportsCard.BackColor = System.Drawing.Color.White;
             this.pnlAdvReportsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAdvReportsCard.Location = new System.Drawing.Point(477, 84);
-            this.pnlAdvReportsCard.Size = new System.Drawing.Size(457, 230);
+            this.pnlAdvReportsCard.Location = new System.Drawing.Point(473, 84);
+            this.pnlAdvReportsCard.Size = new System.Drawing.Size(461, 230);
             this.pnlAdvReportsCard.TabIndex = 3;
             this.pnlAdvReportsCard.Name = "pnlAdvReportsCard";
             //
             // pnlAdvReportsHeadingBar
             //
             this.pnlAdvReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlAdvReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdvReportsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlAdvReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlAdvReportsHeadingBar.TabIndex = 0;
             this.pnlAdvReportsHeadingBar.Name = "pnlAdvReportsHeadingBar";
@@ -867,8 +865,8 @@
             //
             this.lblAdvReportsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdvReportsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdvReportsHeading.Location = new System.Drawing.Point(26, 14);
-            this.lblAdvReportsHeading.Size = new System.Drawing.Size(397, 28);
+            this.lblAdvReportsHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblAdvReportsHeading.Size = new System.Drawing.Size(401, 28);
             this.lblAdvReportsHeading.TabIndex = 1;
             this.lblAdvReportsHeading.Text = "Reports";
             this.lblAdvReportsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -878,8 +876,8 @@
             //
             this.lblAdvReportsText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblAdvReportsText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdvReportsText.Location = new System.Drawing.Point(20, 52);
-            this.lblAdvReportsText.Size = new System.Drawing.Size(417, 110);
+            this.lblAdvReportsText.Location = new System.Drawing.Point(16, 52);
+            this.lblAdvReportsText.Size = new System.Drawing.Size(427, 110);
             this.lblAdvReportsText.TabIndex = 2;
             this.lblAdvReportsText.Text = "Generate the Degree Interest and Eligibility Report (FP-DIE) and the Learners Not Currently Eligible exception report (FP-LER) for a period.";
             this.lblAdvReportsText.Name = "lblAdvReportsText";
@@ -892,7 +890,7 @@
             this.btnAdvGenerateReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdvGenerateReports.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAdvGenerateReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAdvGenerateReports.Location = new System.Drawing.Point(20, 172);
+            this.btnAdvGenerateReports.Location = new System.Drawing.Point(16, 172);
             this.btnAdvGenerateReports.Size = new System.Drawing.Size(200, 40);
             this.btnAdvGenerateReports.TabIndex = 3;
             this.btnAdvGenerateReports.Text = "Generate reports";
@@ -910,7 +908,7 @@
             this.pnlTodayCard.Controls.Add(this.pnlFollowUpTile);
             this.pnlTodayCard.BackColor = System.Drawing.Color.White;
             this.pnlTodayCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlTodayCard.Location = new System.Drawing.Point(0, 334);
+            this.pnlTodayCard.Location = new System.Drawing.Point(0, 326);
             this.pnlTodayCard.Size = new System.Drawing.Size(934, 146);
             this.pnlTodayCard.TabIndex = 4;
             this.pnlTodayCard.Visible = false;
@@ -919,7 +917,7 @@
             // pnlTodayHeadingBar
             //
             this.pnlTodayHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlTodayHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlTodayHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlTodayHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlTodayHeadingBar.TabIndex = 0;
             this.pnlTodayHeadingBar.Name = "pnlTodayHeadingBar";
@@ -928,7 +926,7 @@
             //
             this.lblTodayHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblTodayHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblTodayHeading.Location = new System.Drawing.Point(26, 10);
+            this.lblTodayHeading.Location = new System.Drawing.Point(26, 8);
             this.lblTodayHeading.Size = new System.Drawing.Size(300, 28);
             this.lblTodayHeading.TabIndex = 1;
             this.lblTodayHeading.Text = "Today";
@@ -943,16 +941,16 @@
             this.pnlCompletedTile.BackColor = System.Drawing.Color.White;
             this.pnlCompletedTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCompletedTile.Location = new System.Drawing.Point(16, 44);
-            this.pnlCompletedTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlCompletedTile.Size = new System.Drawing.Size(292, 90);
             this.pnlCompletedTile.TabIndex = 2;
             this.pnlCompletedTile.Name = "pnlCompletedTile";
             //
             // lblCompletedTileCaption
             //
-            this.lblCompletedTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblCompletedTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCompletedTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCompletedTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.lblCompletedTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblCompletedTileCaption.Location = new System.Drawing.Point(12, 6);
+            this.lblCompletedTileCaption.Size = new System.Drawing.Size(268, 24);
             this.lblCompletedTileCaption.TabIndex = 0;
             this.lblCompletedTileCaption.Text = "Sessions completed";
             this.lblCompletedTileCaption.Name = "lblCompletedTileCaption";
@@ -961,8 +959,8 @@
             //
             this.lblCompletedTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.lblCompletedTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCompletedTileValue.Location = new System.Drawing.Point(10, 28);
-            this.lblCompletedTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblCompletedTileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblCompletedTileValue.Size = new System.Drawing.Size(268, 34);
             this.lblCompletedTileValue.TabIndex = 1;
             this.lblCompletedTileValue.Text = "\u2014";
             this.lblCompletedTileValue.Name = "lblCompletedTileValue";
@@ -971,8 +969,8 @@
             //
             this.lblCompletedTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblCompletedTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblCompletedTileNote.Location = new System.Drawing.Point(12, 64);
-            this.lblCompletedTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblCompletedTileNote.Location = new System.Drawing.Point(12, 66);
+            this.lblCompletedTileNote.Size = new System.Drawing.Size(268, 18);
             this.lblCompletedTileNote.TabIndex = 2;
             this.lblCompletedTileNote.Text = "Exported summaries dated today";
             this.lblCompletedTileNote.Name = "lblCompletedTileNote";
@@ -984,17 +982,17 @@
             this.pnlInProgressTile.Controls.Add(this.lblInProgressTileNote);
             this.pnlInProgressTile.BackColor = System.Drawing.Color.White;
             this.pnlInProgressTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlInProgressTile.Location = new System.Drawing.Point(321, 44);
-            this.pnlInProgressTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlInProgressTile.Location = new System.Drawing.Point(320, 44);
+            this.pnlInProgressTile.Size = new System.Drawing.Size(292, 90);
             this.pnlInProgressTile.TabIndex = 3;
             this.pnlInProgressTile.Name = "pnlInProgressTile";
             //
             // lblInProgressTileCaption
             //
-            this.lblInProgressTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblInProgressTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblInProgressTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblInProgressTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.lblInProgressTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblInProgressTileCaption.Location = new System.Drawing.Point(12, 6);
+            this.lblInProgressTileCaption.Size = new System.Drawing.Size(268, 24);
             this.lblInProgressTileCaption.TabIndex = 0;
             this.lblInProgressTileCaption.Text = "Sessions in progress";
             this.lblInProgressTileCaption.Name = "lblInProgressTileCaption";
@@ -1003,8 +1001,8 @@
             //
             this.lblInProgressTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.lblInProgressTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblInProgressTileValue.Location = new System.Drawing.Point(10, 28);
-            this.lblInProgressTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblInProgressTileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblInProgressTileValue.Size = new System.Drawing.Size(268, 34);
             this.lblInProgressTileValue.TabIndex = 1;
             this.lblInProgressTileValue.Text = "\u2014";
             this.lblInProgressTileValue.Name = "lblInProgressTileValue";
@@ -1013,8 +1011,8 @@
             //
             this.lblInProgressTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblInProgressTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblInProgressTileNote.Location = new System.Drawing.Point(12, 64);
-            this.lblInProgressTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblInProgressTileNote.Location = new System.Drawing.Point(12, 66);
+            this.lblInProgressTileNote.Size = new System.Drawing.Size(268, 18);
             this.lblInProgressTileNote.TabIndex = 2;
             this.lblInProgressTileNote.Text = "Started today, not yet exported";
             this.lblInProgressTileNote.Name = "lblInProgressTileNote";
@@ -1026,17 +1024,17 @@
             this.pnlFollowUpTile.Controls.Add(this.lblFollowUpTileNote);
             this.pnlFollowUpTile.BackColor = System.Drawing.Color.White;
             this.pnlFollowUpTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFollowUpTile.Location = new System.Drawing.Point(626, 44);
-            this.pnlFollowUpTile.Size = new System.Drawing.Size(289, 90);
+            this.pnlFollowUpTile.Location = new System.Drawing.Point(624, 44);
+            this.pnlFollowUpTile.Size = new System.Drawing.Size(292, 90);
             this.pnlFollowUpTile.TabIndex = 4;
             this.pnlFollowUpTile.Name = "pnlFollowUpTile";
             //
             // lblFollowUpTileCaption
             //
-            this.lblFollowUpTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblFollowUpTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFollowUpTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFollowUpTileCaption.Location = new System.Drawing.Point(12, 8);
-            this.lblFollowUpTileCaption.Size = new System.Drawing.Size(265, 20);
+            this.lblFollowUpTileCaption.Location = new System.Drawing.Point(12, 6);
+            this.lblFollowUpTileCaption.Size = new System.Drawing.Size(268, 24);
             this.lblFollowUpTileCaption.TabIndex = 0;
             this.lblFollowUpTileCaption.Text = "Exceptions to follow up";
             this.lblFollowUpTileCaption.Name = "lblFollowUpTileCaption";
@@ -1045,8 +1043,8 @@
             //
             this.lblFollowUpTileValue.Font = new System.Drawing.Font("Consolas", 18F);
             this.lblFollowUpTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFollowUpTileValue.Location = new System.Drawing.Point(10, 28);
-            this.lblFollowUpTileValue.Size = new System.Drawing.Size(265, 34);
+            this.lblFollowUpTileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblFollowUpTileValue.Size = new System.Drawing.Size(268, 34);
             this.lblFollowUpTileValue.TabIndex = 1;
             this.lblFollowUpTileValue.Text = "\u2014";
             this.lblFollowUpTileValue.Name = "lblFollowUpTileValue";
@@ -1055,8 +1053,8 @@
             //
             this.lblFollowUpTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFollowUpTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblFollowUpTileNote.Location = new System.Drawing.Point(12, 64);
-            this.lblFollowUpTileNote.Size = new System.Drawing.Size(265, 18);
+            this.lblFollowUpTileNote.Location = new System.Drawing.Point(12, 66);
+            this.lblFollowUpTileNote.Size = new System.Drawing.Size(268, 18);
             this.lblFollowUpTileNote.TabIndex = 2;
             this.lblFollowUpTileNote.Text = "Exception outcomes, as on FP-LER";
             this.lblFollowUpTileNote.Name = "lblFollowUpTileNote";
@@ -1116,14 +1114,14 @@
             this.pnlReferenceDataCard.BackColor = System.Drawing.Color.White;
             this.pnlReferenceDataCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlReferenceDataCard.Location = new System.Drawing.Point(0, 84);
-            this.pnlReferenceDataCard.Size = new System.Drawing.Size(298, 230);
+            this.pnlReferenceDataCard.Size = new System.Drawing.Size(303, 230);
             this.pnlReferenceDataCard.TabIndex = 2;
             this.pnlReferenceDataCard.Name = "pnlReferenceDataCard";
             //
             // pnlReferenceDataHeadingBar
             //
             this.pnlReferenceDataHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlReferenceDataHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlReferenceDataHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlReferenceDataHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlReferenceDataHeadingBar.TabIndex = 0;
             this.pnlReferenceDataHeadingBar.Name = "pnlReferenceDataHeadingBar";
@@ -1132,8 +1130,8 @@
             //
             this.lblReferenceDataHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReferenceDataHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReferenceDataHeading.Location = new System.Drawing.Point(26, 14);
-            this.lblReferenceDataHeading.Size = new System.Drawing.Size(238, 28);
+            this.lblReferenceDataHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblReferenceDataHeading.Size = new System.Drawing.Size(243, 28);
             this.lblReferenceDataHeading.TabIndex = 1;
             this.lblReferenceDataHeading.Text = "Reference data";
             this.lblReferenceDataHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1143,8 +1141,8 @@
             //
             this.lblReferenceDataText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblReferenceDataText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReferenceDataText.Location = new System.Drawing.Point(20, 52);
-            this.lblReferenceDataText.Size = new System.Drawing.Size(258, 110);
+            this.lblReferenceDataText.Location = new System.Drawing.Point(16, 52);
+            this.lblReferenceDataText.Size = new System.Drawing.Size(269, 110);
             this.lblReferenceDataText.TabIndex = 2;
             this.lblReferenceDataText.Text = "Maintain faculties and programmes, degree requirements, funding options, interest categories, the questionnaire and staff user accounts.";
             this.lblReferenceDataText.Name = "lblReferenceDataText";
@@ -1157,7 +1155,7 @@
             this.btnMaintainReferenceData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaintainReferenceData.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnMaintainReferenceData.ForeColor = System.Drawing.Color.White;
-            this.btnMaintainReferenceData.Location = new System.Drawing.Point(20, 172);
+            this.btnMaintainReferenceData.Location = new System.Drawing.Point(16, 172);
             this.btnMaintainReferenceData.Size = new System.Drawing.Size(240, 40);
             this.btnMaintainReferenceData.TabIndex = 3;
             this.btnMaintainReferenceData.Text = "Maintain reference data";
@@ -1174,15 +1172,15 @@
             this.pnlAdmSessionsCard.Controls.Add(this.btnAdmSearchSessions);
             this.pnlAdmSessionsCard.BackColor = System.Drawing.Color.White;
             this.pnlAdmSessionsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAdmSessionsCard.Location = new System.Drawing.Point(318, 84);
-            this.pnlAdmSessionsCard.Size = new System.Drawing.Size(298, 230);
+            this.pnlAdmSessionsCard.Location = new System.Drawing.Point(315, 84);
+            this.pnlAdmSessionsCard.Size = new System.Drawing.Size(304, 230);
             this.pnlAdmSessionsCard.TabIndex = 3;
             this.pnlAdmSessionsCard.Name = "pnlAdmSessionsCard";
             //
             // pnlAdmSessionsHeadingBar
             //
             this.pnlAdmSessionsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlAdmSessionsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdmSessionsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlAdmSessionsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlAdmSessionsHeadingBar.TabIndex = 0;
             this.pnlAdmSessionsHeadingBar.Name = "pnlAdmSessionsHeadingBar";
@@ -1191,8 +1189,8 @@
             //
             this.lblAdmSessionsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdmSessionsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdmSessionsHeading.Location = new System.Drawing.Point(26, 14);
-            this.lblAdmSessionsHeading.Size = new System.Drawing.Size(238, 28);
+            this.lblAdmSessionsHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblAdmSessionsHeading.Size = new System.Drawing.Size(244, 28);
             this.lblAdmSessionsHeading.TabIndex = 1;
             this.lblAdmSessionsHeading.Text = "Advisory sessions";
             this.lblAdmSessionsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1202,8 +1200,8 @@
             //
             this.lblAdmSessionsText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblAdmSessionsText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdmSessionsText.Location = new System.Drawing.Point(20, 52);
-            this.lblAdmSessionsText.Size = new System.Drawing.Size(258, 110);
+            this.lblAdmSessionsText.Location = new System.Drawing.Point(16, 52);
+            this.lblAdmSessionsText.Size = new System.Drawing.Size(270, 110);
             this.lblAdmSessionsText.TabIndex = 2;
             this.lblAdmSessionsText.Text = "Search sessions by session number, surname, date or outcome. Review learner profiles and regenerate a learner's advisory summary (FP-LSR).";
             this.lblAdmSessionsText.Name = "lblAdmSessionsText";
@@ -1216,7 +1214,7 @@
             this.btnAdmSearchSessions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmSearchSessions.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAdmSearchSessions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAdmSearchSessions.Location = new System.Drawing.Point(20, 172);
+            this.btnAdmSearchSessions.Location = new System.Drawing.Point(16, 172);
             this.btnAdmSearchSessions.Size = new System.Drawing.Size(240, 40);
             this.btnAdmSearchSessions.TabIndex = 3;
             this.btnAdmSearchSessions.Text = "Search advisory sessions";
@@ -1233,15 +1231,15 @@
             this.pnlAdmReportsCard.Controls.Add(this.btnAdmGenerateReports);
             this.pnlAdmReportsCard.BackColor = System.Drawing.Color.White;
             this.pnlAdmReportsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAdmReportsCard.Location = new System.Drawing.Point(636, 84);
-            this.pnlAdmReportsCard.Size = new System.Drawing.Size(298, 230);
+            this.pnlAdmReportsCard.Location = new System.Drawing.Point(631, 84);
+            this.pnlAdmReportsCard.Size = new System.Drawing.Size(303, 230);
             this.pnlAdmReportsCard.TabIndex = 4;
             this.pnlAdmReportsCard.Name = "pnlAdmReportsCard";
             //
             // pnlAdmReportsHeadingBar
             //
             this.pnlAdmReportsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlAdmReportsHeadingBar.Location = new System.Drawing.Point(16, 18);
+            this.pnlAdmReportsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlAdmReportsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlAdmReportsHeadingBar.TabIndex = 0;
             this.pnlAdmReportsHeadingBar.Name = "pnlAdmReportsHeadingBar";
@@ -1250,8 +1248,8 @@
             //
             this.lblAdmReportsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAdmReportsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdmReportsHeading.Location = new System.Drawing.Point(26, 14);
-            this.lblAdmReportsHeading.Size = new System.Drawing.Size(238, 28);
+            this.lblAdmReportsHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblAdmReportsHeading.Size = new System.Drawing.Size(243, 28);
             this.lblAdmReportsHeading.TabIndex = 1;
             this.lblAdmReportsHeading.Text = "Reports";
             this.lblAdmReportsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1261,8 +1259,8 @@
             //
             this.lblAdmReportsText.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblAdmReportsText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAdmReportsText.Location = new System.Drawing.Point(20, 52);
-            this.lblAdmReportsText.Size = new System.Drawing.Size(258, 110);
+            this.lblAdmReportsText.Location = new System.Drawing.Point(16, 52);
+            this.lblAdmReportsText.Size = new System.Drawing.Size(269, 110);
             this.lblAdmReportsText.TabIndex = 2;
             this.lblAdmReportsText.Text = "Generate the Degree Interest and Eligibility Report (FP-DIE) and the Learners Not Currently Eligible exception report (FP-LER), or regenerate a learner's FP-LSR.";
             this.lblAdmReportsText.Name = "lblAdmReportsText";
@@ -1275,7 +1273,7 @@
             this.btnAdmGenerateReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmGenerateReports.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnAdmGenerateReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAdmGenerateReports.Location = new System.Drawing.Point(20, 172);
+            this.btnAdmGenerateReports.Location = new System.Drawing.Point(16, 172);
             this.btnAdmGenerateReports.Size = new System.Drawing.Size(200, 40);
             this.btnAdmGenerateReports.TabIndex = 3;
             this.btnAdmGenerateReports.Text = "Generate reports";
@@ -1288,7 +1286,7 @@
             //
             this.lblNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblNote.Location = new System.Drawing.Point(0, 334);
+            this.lblNote.Location = new System.Drawing.Point(0, 326);
             this.lblNote.Size = new System.Drawing.Size(934, 36);
             this.lblNote.TabIndex = 5;
             this.lblNote.Text = "Records are deactivated, never deleted, so past advisory sessions and reports stay reproducible. Staff passwords are reset on UI 13.6 User accounts and stored only as salted hashes.";
@@ -1381,7 +1379,7 @@
             this.txtLrnSurname.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtLrnSurname.Location = new System.Drawing.Point(16, 36);
             this.txtLrnSurname.MaxLength = 50;
-            this.txtLrnSurname.Size = new System.Drawing.Size(140, 25);
+            this.txtLrnSurname.Size = new System.Drawing.Size(130, 25);
             this.txtLrnSurname.TabIndex = 1;
             this.txtLrnSurname.Name = "txtLrnSurname";
             //
@@ -1390,7 +1388,7 @@
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFirstName.Location = new System.Drawing.Point(172, 8);
+            this.lblFirstName.Location = new System.Drawing.Point(162, 8);
             this.lblFirstName.TabIndex = 2;
             this.lblFirstName.Text = "First name";
             this.lblFirstName.Name = "lblFirstName";
@@ -1399,9 +1397,9 @@
             //
             this.txtFirstName.AccessibleName = "First name (optional)";
             this.txtFirstName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtFirstName.Location = new System.Drawing.Point(172, 36);
+            this.txtFirstName.Location = new System.Drawing.Point(162, 36);
             this.txtFirstName.MaxLength = 50;
-            this.txtFirstName.Size = new System.Drawing.Size(130, 25);
+            this.txtFirstName.Size = new System.Drawing.Size(124, 25);
             this.txtFirstName.TabIndex = 3;
             this.txtFirstName.Name = "txtFirstName";
             //
@@ -1410,7 +1408,7 @@
             this.lblLrnGrade.AutoSize = true;
             this.lblLrnGrade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblLrnGrade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblLrnGrade.Location = new System.Drawing.Point(318, 8);
+            this.lblLrnGrade.Location = new System.Drawing.Point(302, 8);
             this.lblLrnGrade.TabIndex = 4;
             this.lblLrnGrade.Text = "Grade";
             this.lblLrnGrade.Name = "lblLrnGrade";
@@ -1421,8 +1419,8 @@
             this.cboLrnGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLrnGrade.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboLrnGrade.FormattingEnabled = true;
-            this.cboLrnGrade.Location = new System.Drawing.Point(318, 36);
-            this.cboLrnGrade.Size = new System.Drawing.Size(110, 25);
+            this.cboLrnGrade.Location = new System.Drawing.Point(302, 36);
+            this.cboLrnGrade.Size = new System.Drawing.Size(100, 25);
             this.cboLrnGrade.TabIndex = 5;
             this.cboLrnGrade.Name = "cboLrnGrade";
             //
@@ -1431,7 +1429,7 @@
             this.lblSchool.AutoSize = true;
             this.lblSchool.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSchool.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSchool.Location = new System.Drawing.Point(444, 8);
+            this.lblSchool.Location = new System.Drawing.Point(418, 8);
             this.lblSchool.TabIndex = 6;
             this.lblSchool.Text = "School";
             this.lblSchool.Name = "lblSchool";
@@ -1440,9 +1438,9 @@
             //
             this.txtSchool.AccessibleName = "School (optional)";
             this.txtSchool.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSchool.Location = new System.Drawing.Point(444, 36);
+            this.txtSchool.Location = new System.Drawing.Point(418, 36);
             this.txtSchool.MaxLength = 100;
-            this.txtSchool.Size = new System.Drawing.Size(180, 25);
+            this.txtSchool.Size = new System.Drawing.Size(168, 25);
             this.txtSchool.TabIndex = 7;
             this.txtSchool.Name = "txtSchool";
             //
@@ -1451,7 +1449,7 @@
             this.lblProvince.AutoSize = true;
             this.lblProvince.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblProvince.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblProvince.Location = new System.Drawing.Point(640, 8);
+            this.lblProvince.Location = new System.Drawing.Point(602, 8);
             this.lblProvince.TabIndex = 8;
             this.lblProvince.Text = "Province";
             this.lblProvince.Name = "lblProvince";
@@ -1462,8 +1460,8 @@
             this.cboProvince.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboProvince.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboProvince.FormattingEnabled = true;
-            this.cboProvince.Location = new System.Drawing.Point(640, 36);
-            this.cboProvince.Size = new System.Drawing.Size(140, 25);
+            this.cboProvince.Location = new System.Drawing.Point(602, 36);
+            this.cboProvince.Size = new System.Drawing.Size(122, 25);
             this.cboProvince.TabIndex = 9;
             this.cboProvince.Name = "cboProvince";
             //
@@ -1475,8 +1473,8 @@
             this.btnLrnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLrnFind.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnLrnFind.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnLrnFind.Location = new System.Drawing.Point(796, 34);
-            this.btnLrnFind.Size = new System.Drawing.Size(58, 30);
+            this.btnLrnFind.Location = new System.Drawing.Point(740, 34);
+            this.btnLrnFind.Size = new System.Drawing.Size(80, 30);
             this.btnLrnFind.TabIndex = 10;
             this.btnLrnFind.Text = "Find";
             this.btnLrnFind.UseVisualStyleBackColor = false;
@@ -1492,8 +1490,8 @@
             this.btnLrnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLrnClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnLrnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnLrnClear.Location = new System.Drawing.Point(860, 34);
-            this.btnLrnClear.Size = new System.Drawing.Size(58, 30);
+            this.btnLrnClear.Location = new System.Drawing.Point(828, 34);
+            this.btnLrnClear.Size = new System.Drawing.Size(80, 30);
             this.btnLrnClear.TabIndex = 11;
             this.btnLrnClear.Text = "Clear";
             this.btnLrnClear.UseVisualStyleBackColor = false;
@@ -1519,15 +1517,15 @@
             this.pnlLrnResultsCard.Controls.Add(this.dgvLearners);
             this.pnlLrnResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlLrnResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLrnResultsCard.Location = new System.Drawing.Point(0, 98);
-            this.pnlLrnResultsCard.Size = new System.Drawing.Size(926, 425);
+            this.pnlLrnResultsCard.Location = new System.Drawing.Point(0, 96);
+            this.pnlLrnResultsCard.Size = new System.Drawing.Size(926, 464);
             this.pnlLrnResultsCard.TabIndex = 1;
             this.pnlLrnResultsCard.Name = "pnlLrnResultsCard";
             //
             // pnlLrnResultsHeadingBar
             //
             this.pnlLrnResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlLrnResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlLrnResultsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlLrnResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlLrnResultsHeadingBar.TabIndex = 0;
             this.pnlLrnResultsHeadingBar.Name = "pnlLrnResultsHeadingBar";
@@ -1536,7 +1534,7 @@
             //
             this.lblLrnResultsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblLrnResultsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblLrnResultsHeading.Location = new System.Drawing.Point(26, 10);
+            this.lblLrnResultsHeading.Location = new System.Drawing.Point(26, 8);
             this.lblLrnResultsHeading.Size = new System.Drawing.Size(110, 28);
             this.lblLrnResultsHeading.TabIndex = 1;
             this.lblLrnResultsHeading.Text = "Learners";
@@ -1547,10 +1545,11 @@
             //
             this.lblLrnResultsCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblLrnResultsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblLrnResultsCount.Location = new System.Drawing.Point(136, 16);
-            this.lblLrnResultsCount.Size = new System.Drawing.Size(330, 18);
+            this.lblLrnResultsCount.Location = new System.Drawing.Point(560, 12);
+            this.lblLrnResultsCount.Size = new System.Drawing.Size(348, 20);
             this.lblLrnResultsCount.TabIndex = 2;
             this.lblLrnResultsCount.Text = "";
+            this.lblLrnResultsCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblLrnResultsCount.Name = "lblLrnResultsCount";
             //
             // dgvLearners
@@ -1596,12 +1595,12 @@
             this.dgvLearners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvLearners.EnableHeadersVisualStyles = false;
             this.dgvLearners.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvLearners.Location = new System.Drawing.Point(16, 46);
+            this.dgvLearners.Location = new System.Drawing.Point(16, 44);
             this.dgvLearners.MultiSelect = false;
             this.dgvLearners.ReadOnly = true;
             this.dgvLearners.RowHeadersVisible = false;
             this.dgvLearners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLearners.Size = new System.Drawing.Size(892, 360);
+            this.dgvLearners.Size = new System.Drawing.Size(892, 404);
             this.dgvLearners.TabIndex = 3;
             this.dgvLearners.Name = "dgvLearners";
             this.dgvLearners.RowTemplate.Height = 30;
@@ -1762,7 +1761,7 @@
             this.txtSesSessionNumber.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtSesSessionNumber.Location = new System.Drawing.Point(16, 36);
             this.txtSesSessionNumber.MaxLength = 9;
-            this.txtSesSessionNumber.Size = new System.Drawing.Size(120, 25);
+            this.txtSesSessionNumber.Size = new System.Drawing.Size(116, 25);
             this.txtSesSessionNumber.TabIndex = 1;
             this.txtSesSessionNumber.Name = "txtSesSessionNumber";
             this.txtSesSessionNumber.Leave += new System.EventHandler(this.txtSesSessionNumber_Leave);
@@ -1772,7 +1771,7 @@
             this.lblSesSessionNumberError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSesSessionNumberError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblSesSessionNumberError.Location = new System.Drawing.Point(16, 63);
-            this.lblSesSessionNumberError.Size = new System.Drawing.Size(290, 16);
+            this.lblSesSessionNumberError.Size = new System.Drawing.Size(270, 16);
             this.lblSesSessionNumberError.TabIndex = 2;
             this.lblSesSessionNumberError.Text = "";
             this.lblSesSessionNumberError.Visible = false;
@@ -1783,7 +1782,7 @@
             this.lblSesSurname.AutoSize = true;
             this.lblSesSurname.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSesSurname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSesSurname.Location = new System.Drawing.Point(152, 8);
+            this.lblSesSurname.Location = new System.Drawing.Point(154, 8);
             this.lblSesSurname.TabIndex = 3;
             this.lblSesSurname.Text = "Learner surname";
             this.lblSesSurname.Name = "lblSesSurname";
@@ -1792,9 +1791,9 @@
             //
             this.txtSesSurname.AccessibleName = "Learner surname (optional)";
             this.txtSesSurname.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtSesSurname.Location = new System.Drawing.Point(152, 36);
+            this.txtSesSurname.Location = new System.Drawing.Point(154, 36);
             this.txtSesSurname.MaxLength = 50;
-            this.txtSesSurname.Size = new System.Drawing.Size(150, 25);
+            this.txtSesSurname.Size = new System.Drawing.Size(124, 25);
             this.txtSesSurname.TabIndex = 4;
             this.txtSesSurname.Name = "txtSesSurname";
             //
@@ -1803,7 +1802,7 @@
             this.lblSessionFrom.AutoSize = true;
             this.lblSessionFrom.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSessionFrom.Location = new System.Drawing.Point(318, 8);
+            this.lblSessionFrom.Location = new System.Drawing.Point(298, 8);
             this.lblSessionFrom.TabIndex = 5;
             this.lblSessionFrom.Text = "Session from";
             this.lblSessionFrom.Name = "lblSessionFrom";
@@ -1815,9 +1814,9 @@
             this.dtpSessionFrom.CustomFormat = "dd/MM/yyyy";
             this.dtpSessionFrom.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpSessionFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSessionFrom.Location = new System.Drawing.Point(318, 36);
+            this.dtpSessionFrom.Location = new System.Drawing.Point(298, 36);
             this.dtpSessionFrom.ShowCheckBox = true;
-            this.dtpSessionFrom.Size = new System.Drawing.Size(136, 23);
+            this.dtpSessionFrom.Size = new System.Drawing.Size(124, 23);
             this.dtpSessionFrom.TabIndex = 6;
             this.dtpSessionFrom.Name = "dtpSessionFrom";
             //
@@ -1825,8 +1824,8 @@
             //
             this.lblSesDateRangeError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSesDateRangeError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSesDateRangeError.Location = new System.Drawing.Point(318, 63);
-            this.lblSesDateRangeError.Size = new System.Drawing.Size(300, 16);
+            this.lblSesDateRangeError.Location = new System.Drawing.Point(298, 63);
+            this.lblSesDateRangeError.Size = new System.Drawing.Size(270, 16);
             this.lblSesDateRangeError.TabIndex = 7;
             this.lblSesDateRangeError.Text = "";
             this.lblSesDateRangeError.Visible = false;
@@ -1837,7 +1836,7 @@
             this.lblSessionTo.AutoSize = true;
             this.lblSessionTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSessionTo.Location = new System.Drawing.Point(470, 8);
+            this.lblSessionTo.Location = new System.Drawing.Point(438, 8);
             this.lblSessionTo.TabIndex = 8;
             this.lblSessionTo.Text = "Session to";
             this.lblSessionTo.Name = "lblSessionTo";
@@ -1849,9 +1848,9 @@
             this.dtpSessionTo.CustomFormat = "dd/MM/yyyy";
             this.dtpSessionTo.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpSessionTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSessionTo.Location = new System.Drawing.Point(470, 36);
+            this.dtpSessionTo.Location = new System.Drawing.Point(438, 36);
             this.dtpSessionTo.ShowCheckBox = true;
-            this.dtpSessionTo.Size = new System.Drawing.Size(136, 23);
+            this.dtpSessionTo.Size = new System.Drawing.Size(124, 23);
             this.dtpSessionTo.TabIndex = 9;
             this.dtpSessionTo.Name = "dtpSessionTo";
             //
@@ -1860,7 +1859,7 @@
             this.lblSesOutcome.AutoSize = true;
             this.lblSesOutcome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSesOutcome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSesOutcome.Location = new System.Drawing.Point(622, 8);
+            this.lblSesOutcome.Location = new System.Drawing.Point(578, 8);
             this.lblSesOutcome.TabIndex = 10;
             this.lblSesOutcome.Text = "Advisory outcome";
             this.lblSesOutcome.Name = "lblSesOutcome";
@@ -1871,8 +1870,8 @@
             this.cboSesOutcome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSesOutcome.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboSesOutcome.FormattingEnabled = true;
-            this.cboSesOutcome.Location = new System.Drawing.Point(622, 36);
-            this.cboSesOutcome.Size = new System.Drawing.Size(162, 25);
+            this.cboSesOutcome.Location = new System.Drawing.Point(578, 36);
+            this.cboSesOutcome.Size = new System.Drawing.Size(146, 25);
             this.cboSesOutcome.TabIndex = 11;
             this.cboSesOutcome.Name = "cboSesOutcome";
             //
@@ -1884,8 +1883,8 @@
             this.btnSesFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSesFind.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnSesFind.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnSesFind.Location = new System.Drawing.Point(796, 34);
-            this.btnSesFind.Size = new System.Drawing.Size(58, 30);
+            this.btnSesFind.Location = new System.Drawing.Point(740, 34);
+            this.btnSesFind.Size = new System.Drawing.Size(80, 30);
             this.btnSesFind.TabIndex = 12;
             this.btnSesFind.Text = "Find";
             this.btnSesFind.UseVisualStyleBackColor = false;
@@ -1901,8 +1900,8 @@
             this.btnSesClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSesClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnSesClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnSesClear.Location = new System.Drawing.Point(860, 34);
-            this.btnSesClear.Size = new System.Drawing.Size(58, 30);
+            this.btnSesClear.Location = new System.Drawing.Point(828, 34);
+            this.btnSesClear.Size = new System.Drawing.Size(80, 30);
             this.btnSesClear.TabIndex = 13;
             this.btnSesClear.Text = "Clear";
             this.btnSesClear.UseVisualStyleBackColor = false;
@@ -1914,8 +1913,8 @@
             //
             this.lblSesSearchHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSesSearchHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSesSearchHint.Location = new System.Drawing.Point(622, 63);
-            this.lblSesSearchHint.Size = new System.Drawing.Size(290, 16);
+            this.lblSesSearchHint.Location = new System.Drawing.Point(578, 63);
+            this.lblSesSearchHint.Size = new System.Drawing.Size(330, 16);
             this.lblSesSearchHint.TabIndex = 14;
             this.lblSesSearchHint.Text = "None required \u00B7 tick a date to use it";
             this.lblSesSearchHint.Name = "lblSesSearchHint";
@@ -1929,15 +1928,15 @@
             this.pnlSesResultsCard.Controls.Add(this.dgvSessions);
             this.pnlSesResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlSesResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSesResultsCard.Location = new System.Drawing.Point(0, 98);
-            this.pnlSesResultsCard.Size = new System.Drawing.Size(926, 425);
+            this.pnlSesResultsCard.Location = new System.Drawing.Point(0, 96);
+            this.pnlSesResultsCard.Size = new System.Drawing.Size(926, 464);
             this.pnlSesResultsCard.TabIndex = 1;
             this.pnlSesResultsCard.Name = "pnlSesResultsCard";
             //
             // pnlSesResultsHeadingBar
             //
             this.pnlSesResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlSesResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlSesResultsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlSesResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlSesResultsHeadingBar.TabIndex = 0;
             this.pnlSesResultsHeadingBar.Name = "pnlSesResultsHeadingBar";
@@ -1946,7 +1945,7 @@
             //
             this.lblSesResultsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSesResultsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSesResultsHeading.Location = new System.Drawing.Point(26, 10);
+            this.lblSesResultsHeading.Location = new System.Drawing.Point(26, 8);
             this.lblSesResultsHeading.Size = new System.Drawing.Size(170, 28);
             this.lblSesResultsHeading.TabIndex = 1;
             this.lblSesResultsHeading.Text = "Advisory sessions";
@@ -1957,10 +1956,11 @@
             //
             this.lblSesResultsCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSesResultsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSesResultsCount.Location = new System.Drawing.Point(196, 16);
-            this.lblSesResultsCount.Size = new System.Drawing.Size(330, 18);
+            this.lblSesResultsCount.Location = new System.Drawing.Point(360, 12);
+            this.lblSesResultsCount.Size = new System.Drawing.Size(336, 20);
             this.lblSesResultsCount.TabIndex = 2;
             this.lblSesResultsCount.Text = "";
+            this.lblSesResultsCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblSesResultsCount.Name = "lblSesResultsCount";
             //
             // btnExportSummary
@@ -2025,12 +2025,12 @@
             this.dgvSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSessions.EnableHeadersVisualStyles = false;
             this.dgvSessions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvSessions.Location = new System.Drawing.Point(16, 46);
+            this.dgvSessions.Location = new System.Drawing.Point(16, 44);
             this.dgvSessions.MultiSelect = false;
             this.dgvSessions.ReadOnly = true;
             this.dgvSessions.RowHeadersVisible = false;
             this.dgvSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSessions.Size = new System.Drawing.Size(892, 360);
+            this.dgvSessions.Size = new System.Drawing.Size(892, 404);
             this.dgvSessions.TabIndex = 4;
             this.dgvSessions.Name = "dgvSessions";
             this.dgvSessions.RowTemplate.Height = 30;
@@ -2186,6 +2186,7 @@
             this.pnlRscSearchCard.Controls.Add(this.lblRscOutcome);
             this.pnlRscSearchCard.Controls.Add(this.cboRscOutcome);
             this.pnlRscSearchCard.Controls.Add(this.btnRscFind);
+            this.pnlRscSearchCard.Controls.Add(this.btnRscClear);
             this.pnlRscSearchCard.Controls.Add(this.lblRscSearchHint);
             this.pnlRscSearchCard.BackColor = System.Drawing.Color.White;
             this.pnlRscSearchCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -2222,7 +2223,7 @@
             this.dtpRscFrom.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpRscFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpRscFrom.Location = new System.Drawing.Point(16, 36);
-            this.dtpRscFrom.Size = new System.Drawing.Size(130, 23);
+            this.dtpRscFrom.Size = new System.Drawing.Size(124, 23);
             this.dtpRscFrom.TabIndex = 2;
             this.dtpRscFrom.Name = "dtpRscFrom";
             this.dtpRscFrom.Leave += new System.EventHandler(this.DateRange_Leave);
@@ -2232,7 +2233,7 @@
             this.lblRscDateRangeError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRscDateRangeError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblRscDateRangeError.Location = new System.Drawing.Point(16, 63);
-            this.lblRscDateRangeError.Size = new System.Drawing.Size(290, 16);
+            this.lblRscDateRangeError.Size = new System.Drawing.Size(270, 16);
             this.lblRscDateRangeError.TabIndex = 3;
             this.lblRscDateRangeError.Text = "";
             this.lblRscDateRangeError.Visible = false;
@@ -2243,7 +2244,7 @@
             this.lblRscTo.AutoSize = true;
             this.lblRscTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRscTo.Location = new System.Drawing.Point(162, 8);
+            this.lblRscTo.Location = new System.Drawing.Point(156, 8);
             this.lblRscTo.TabIndex = 4;
             this.lblRscTo.Text = "Sessions to";
             this.lblRscTo.Name = "lblRscTo";
@@ -2253,7 +2254,7 @@
             this.lblRscToStar.AutoSize = true;
             this.lblRscToStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscToStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRscToStar.Location = new System.Drawing.Point(258, 8);
+            this.lblRscToStar.Location = new System.Drawing.Point(252, 8);
             this.lblRscToStar.Size = new System.Drawing.Size(14, 24);
             this.lblRscToStar.TabIndex = 5;
             this.lblRscToStar.Text = "*";
@@ -2265,8 +2266,8 @@
             this.dtpRscTo.CustomFormat = "dd/MM/yyyy";
             this.dtpRscTo.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpRscTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRscTo.Location = new System.Drawing.Point(162, 36);
-            this.dtpRscTo.Size = new System.Drawing.Size(130, 23);
+            this.dtpRscTo.Location = new System.Drawing.Point(156, 36);
+            this.dtpRscTo.Size = new System.Drawing.Size(124, 23);
             this.dtpRscTo.TabIndex = 6;
             this.dtpRscTo.Name = "dtpRscTo";
             this.dtpRscTo.Leave += new System.EventHandler(this.DateRange_Leave);
@@ -2276,7 +2277,7 @@
             this.lblRscFaculty.AutoSize = true;
             this.lblRscFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRscFaculty.Location = new System.Drawing.Point(308, 8);
+            this.lblRscFaculty.Location = new System.Drawing.Point(296, 8);
             this.lblRscFaculty.TabIndex = 7;
             this.lblRscFaculty.Text = "Faculty";
             this.lblRscFaculty.Name = "lblRscFaculty";
@@ -2287,8 +2288,8 @@
             this.cboRscFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRscFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRscFaculty.FormattingEnabled = true;
-            this.cboRscFaculty.Location = new System.Drawing.Point(308, 36);
-            this.cboRscFaculty.Size = new System.Drawing.Size(220, 25);
+            this.cboRscFaculty.Location = new System.Drawing.Point(296, 36);
+            this.cboRscFaculty.Size = new System.Drawing.Size(160, 25);
             this.cboRscFaculty.TabIndex = 8;
             this.cboRscFaculty.Name = "cboRscFaculty";
             //
@@ -2297,7 +2298,7 @@
             this.lblRscGrade.AutoSize = true;
             this.lblRscGrade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscGrade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRscGrade.Location = new System.Drawing.Point(544, 8);
+            this.lblRscGrade.Location = new System.Drawing.Point(472, 8);
             this.lblRscGrade.TabIndex = 9;
             this.lblRscGrade.Text = "Grade";
             this.lblRscGrade.Name = "lblRscGrade";
@@ -2308,8 +2309,8 @@
             this.cboRscGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRscGrade.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRscGrade.FormattingEnabled = true;
-            this.cboRscGrade.Location = new System.Drawing.Point(544, 36);
-            this.cboRscGrade.Size = new System.Drawing.Size(120, 25);
+            this.cboRscGrade.Location = new System.Drawing.Point(472, 36);
+            this.cboRscGrade.Size = new System.Drawing.Size(96, 25);
             this.cboRscGrade.TabIndex = 10;
             this.cboRscGrade.Name = "cboRscGrade";
             //
@@ -2318,7 +2319,7 @@
             this.lblRscOutcome.AutoSize = true;
             this.lblRscOutcome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscOutcome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRscOutcome.Location = new System.Drawing.Point(680, 8);
+            this.lblRscOutcome.Location = new System.Drawing.Point(584, 8);
             this.lblRscOutcome.TabIndex = 11;
             this.lblRscOutcome.Text = "Advisory outcome";
             this.lblRscOutcome.Name = "lblRscOutcome";
@@ -2329,8 +2330,8 @@
             this.cboRscOutcome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRscOutcome.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRscOutcome.FormattingEnabled = true;
-            this.cboRscOutcome.Location = new System.Drawing.Point(680, 36);
-            this.cboRscOutcome.Size = new System.Drawing.Size(164, 25);
+            this.cboRscOutcome.Location = new System.Drawing.Point(584, 36);
+            this.cboRscOutcome.Size = new System.Drawing.Size(140, 25);
             this.cboRscOutcome.TabIndex = 12;
             this.cboRscOutcome.Name = "cboRscOutcome";
             //
@@ -2342,8 +2343,8 @@
             this.btnRscFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRscFind.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnRscFind.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnRscFind.Location = new System.Drawing.Point(860, 34);
-            this.btnRscFind.Size = new System.Drawing.Size(58, 30);
+            this.btnRscFind.Location = new System.Drawing.Point(740, 34);
+            this.btnRscFind.Size = new System.Drawing.Size(80, 30);
             this.btnRscFind.TabIndex = 13;
             this.btnRscFind.Text = "Find";
             this.btnRscFind.UseVisualStyleBackColor = false;
@@ -2351,13 +2352,30 @@
             this.btnRscFind.FlatAppearance.BorderSize = 0;
             this.btnRscFind.Click += new System.EventHandler(this.btnRscFind_Click);
             //
+            // btnRscClear
+            //
+            this.btnRscClear.AccessibleName = "Clear";
+            this.btnRscClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.btnRscClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRscClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRscClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnRscClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnRscClear.Location = new System.Drawing.Point(828, 34);
+            this.btnRscClear.Size = new System.Drawing.Size(80, 30);
+            this.btnRscClear.TabIndex = 14;
+            this.btnRscClear.Text = "Clear";
+            this.btnRscClear.UseVisualStyleBackColor = false;
+            this.btnRscClear.Name = "btnRscClear";
+            this.btnRscClear.FlatAppearance.BorderSize = 0;
+            this.btnRscClear.Click += new System.EventHandler(this.btnRscClear_Click);
+            //
             // lblRscSearchHint
             //
             this.lblRscSearchHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRscSearchHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblRscSearchHint.Location = new System.Drawing.Point(544, 63);
-            this.lblRscSearchHint.Size = new System.Drawing.Size(370, 16);
-            this.lblRscSearchHint.TabIndex = 14;
+            this.lblRscSearchHint.Location = new System.Drawing.Point(472, 63);
+            this.lblRscSearchHint.Size = new System.Drawing.Size(436, 16);
+            this.lblRscSearchHint.TabIndex = 15;
             this.lblRscSearchHint.Text = "Blank faculty, grade or outcome means all.";
             this.lblRscSearchHint.Name = "lblRscSearchHint";
             //
@@ -2370,15 +2388,15 @@
             this.pnlRscResultsCard.Controls.Add(this.dgvReports);
             this.pnlRscResultsCard.BackColor = System.Drawing.Color.White;
             this.pnlRscResultsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRscResultsCard.Location = new System.Drawing.Point(0, 98);
-            this.pnlRscResultsCard.Size = new System.Drawing.Size(926, 425);
+            this.pnlRscResultsCard.Location = new System.Drawing.Point(0, 96);
+            this.pnlRscResultsCard.Size = new System.Drawing.Size(926, 464);
             this.pnlRscResultsCard.TabIndex = 1;
             this.pnlRscResultsCard.Name = "pnlRscResultsCard";
             //
             // pnlRscResultsHeadingBar
             //
             this.pnlRscResultsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlRscResultsHeadingBar.Location = new System.Drawing.Point(16, 14);
+            this.pnlRscResultsHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlRscResultsHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlRscResultsHeadingBar.TabIndex = 0;
             this.pnlRscResultsHeadingBar.Name = "pnlRscResultsHeadingBar";
@@ -2387,7 +2405,7 @@
             //
             this.lblRscResultsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRscResultsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRscResultsHeading.Location = new System.Drawing.Point(26, 10);
+            this.lblRscResultsHeading.Location = new System.Drawing.Point(26, 8);
             this.lblRscResultsHeading.Size = new System.Drawing.Size(160, 28);
             this.lblRscResultsHeading.TabIndex = 1;
             this.lblRscResultsHeading.Text = "Advisory reports";
@@ -2398,17 +2416,18 @@
             //
             this.lblRscResultsCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRscResultsCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblRscResultsCount.Location = new System.Drawing.Point(186, 16);
-            this.lblRscResultsCount.Size = new System.Drawing.Size(330, 18);
+            this.lblRscResultsCount.Location = new System.Drawing.Point(560, 12);
+            this.lblRscResultsCount.Size = new System.Drawing.Size(348, 20);
             this.lblRscResultsCount.TabIndex = 2;
             this.lblRscResultsCount.Text = "";
+            this.lblRscResultsCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblRscResultsCount.Name = "lblRscResultsCount";
             //
             // lblReportsNote
             //
             this.lblReportsNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblReportsNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblReportsNote.Location = new System.Drawing.Point(16, 214);
+            this.lblReportsNote.Location = new System.Drawing.Point(16, 212);
             this.lblReportsNote.Size = new System.Drawing.Size(892, 36);
             this.lblReportsNote.TabIndex = 3;
             this.lblReportsNote.Text = "Generate report opens Report generation (UI 11) with these criteria already applied. FP-LSR covers one session at a time; open it from the Advisory session tab.";
@@ -2455,7 +2474,7 @@
             this.dgvReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvReports.EnableHeadersVisualStyles = false;
             this.dgvReports.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvReports.Location = new System.Drawing.Point(16, 46);
+            this.dgvReports.Location = new System.Drawing.Point(16, 44);
             this.dgvReports.MultiSelect = false;
             this.dgvReports.ReadOnly = true;
             this.dgvReports.RowHeadersVisible = false;
@@ -2580,14 +2599,14 @@
             this.pnlReportCard.BackColor = System.Drawing.Color.White;
             this.pnlReportCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlReportCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlReportCard.Size = new System.Drawing.Size(934, 170);
+            this.pnlReportCard.Size = new System.Drawing.Size(934, 178);
             this.pnlReportCard.TabIndex = 0;
             this.pnlReportCard.Name = "pnlReportCard";
             //
             // pnlReportHeadingBar
             //
             this.pnlReportHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlReportHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlReportHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlReportHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlReportHeadingBar.TabIndex = 0;
             this.pnlReportHeadingBar.Name = "pnlReportHeadingBar";
@@ -2596,7 +2615,7 @@
             //
             this.lblReportHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReportHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReportHeading.Location = new System.Drawing.Point(26, 4);
+            this.lblReportHeading.Location = new System.Drawing.Point(26, 8);
             this.lblReportHeading.Size = new System.Drawing.Size(500, 28);
             this.lblReportHeading.TabIndex = 1;
             this.lblReportHeading.Text = "Which report do you want?";
@@ -2608,7 +2627,7 @@
             this.rdoLearnerSummary.AccessibleName = "Learner Advisory Summary \u2014 FP-LSR (UI 11.1a)";
             this.rdoLearnerSummary.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rdoLearnerSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rdoLearnerSummary.Location = new System.Drawing.Point(20, 34);
+            this.rdoLearnerSummary.Location = new System.Drawing.Point(16, 38);
             this.rdoLearnerSummary.Size = new System.Drawing.Size(620, 24);
             this.rdoLearnerSummary.TabIndex = 2;
             this.rdoLearnerSummary.Text = "Learner Advisory Summary \u2014 FP-LSR (UI 11.1a)";
@@ -2620,7 +2639,7 @@
             //
             this.lblLearnerSummaryNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblLearnerSummaryNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblLearnerSummaryNote.Location = new System.Drawing.Point(38, 58);
+            this.lblLearnerSummaryNote.Location = new System.Drawing.Point(34, 62);
             this.lblLearnerSummaryNote.Size = new System.Drawing.Size(600, 16);
             this.lblLearnerSummaryNote.TabIndex = 3;
             this.lblLearnerSummaryNote.Text = "Detailed: one completed advisory session, as exported on UI 7.";
@@ -2632,7 +2651,7 @@
             this.rdoDegreeInterest.Checked = true;
             this.rdoDegreeInterest.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rdoDegreeInterest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rdoDegreeInterest.Location = new System.Drawing.Point(20, 78);
+            this.rdoDegreeInterest.Location = new System.Drawing.Point(16, 82);
             this.rdoDegreeInterest.Size = new System.Drawing.Size(620, 24);
             this.rdoDegreeInterest.TabIndex = 4;
             this.rdoDegreeInterest.TabStop = true;
@@ -2645,7 +2664,7 @@
             //
             this.lblDegreeInterestNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblDegreeInterestNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblDegreeInterestNote.Location = new System.Drawing.Point(38, 102);
+            this.lblDegreeInterestNote.Location = new System.Drawing.Point(34, 106);
             this.lblDegreeInterestNote.Size = new System.Drawing.Size(600, 16);
             this.lblDegreeInterestNote.TabIndex = 5;
             this.lblDegreeInterestNote.Text = "Summary for a period: demand, outcome counts, subject gaps.";
@@ -2656,7 +2675,7 @@
             this.rdoNotEligible.AccessibleName = "Learners Not Currently Eligible \u2014 FP-LER (UI 11.3c)";
             this.rdoNotEligible.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.rdoNotEligible.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rdoNotEligible.Location = new System.Drawing.Point(20, 122);
+            this.rdoNotEligible.Location = new System.Drawing.Point(16, 126);
             this.rdoNotEligible.Size = new System.Drawing.Size(620, 24);
             this.rdoNotEligible.TabIndex = 6;
             this.rdoNotEligible.Text = "Learners Not Currently Eligible \u2014 FP-LER (UI 11.3c)";
@@ -2668,7 +2687,7 @@
             //
             this.lblNotEligibleNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblNotEligibleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblNotEligibleNote.Location = new System.Drawing.Point(38, 146);
+            this.lblNotEligibleNote.Location = new System.Drawing.Point(34, 150);
             this.lblNotEligibleNote.Size = new System.Drawing.Size(600, 16);
             this.lblNotEligibleNote.TabIndex = 7;
             this.lblNotEligibleNote.Text = "Exceptions: Not Currently Eligible, More Information Needed.";
@@ -2704,15 +2723,15 @@
             this.pnlParameterCard.Controls.Add(this.lblIncludeInactiveNote);
             this.pnlParameterCard.BackColor = System.Drawing.Color.White;
             this.pnlParameterCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlParameterCard.Location = new System.Drawing.Point(0, 186);
-            this.pnlParameterCard.Size = new System.Drawing.Size(934, 180);
+            this.pnlParameterCard.Location = new System.Drawing.Point(0, 190);
+            this.pnlParameterCard.Size = new System.Drawing.Size(934, 190);
             this.pnlParameterCard.TabIndex = 1;
             this.pnlParameterCard.Name = "pnlParameterCard";
             //
             // pnlParameterHeadingBar
             //
             this.pnlParameterHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlParameterHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlParameterHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlParameterHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlParameterHeadingBar.TabIndex = 0;
             this.pnlParameterHeadingBar.Name = "pnlParameterHeadingBar";
@@ -2721,7 +2740,7 @@
             //
             this.lblParameterHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblParameterHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblParameterHeading.Location = new System.Drawing.Point(26, 4);
+            this.lblParameterHeading.Location = new System.Drawing.Point(26, 8);
             this.lblParameterHeading.Size = new System.Drawing.Size(500, 28);
             this.lblParameterHeading.TabIndex = 1;
             this.lblParameterHeading.Text = "Report parameters";
@@ -2733,7 +2752,7 @@
             this.lblRepFrom.AutoSize = true;
             this.lblRepFrom.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepFrom.Location = new System.Drawing.Point(20, 34);
+            this.lblRepFrom.Location = new System.Drawing.Point(16, 38);
             this.lblRepFrom.TabIndex = 2;
             this.lblRepFrom.Text = "Sessions from";
             this.lblRepFrom.Name = "lblRepFrom";
@@ -2743,7 +2762,7 @@
             this.lblRepFromStar.AutoSize = true;
             this.lblRepFromStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepFromStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRepFromStar.Location = new System.Drawing.Point(136, 34);
+            this.lblRepFromStar.Location = new System.Drawing.Point(132, 38);
             this.lblRepFromStar.Size = new System.Drawing.Size(14, 24);
             this.lblRepFromStar.TabIndex = 3;
             this.lblRepFromStar.Text = "*";
@@ -2755,7 +2774,7 @@
             this.dtpRepFrom.CustomFormat = "dd/MM/yyyy";
             this.dtpRepFrom.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpRepFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRepFrom.Location = new System.Drawing.Point(20, 60);
+            this.dtpRepFrom.Location = new System.Drawing.Point(16, 64);
             this.dtpRepFrom.Size = new System.Drawing.Size(170, 23);
             this.dtpRepFrom.TabIndex = 4;
             this.dtpRepFrom.Name = "dtpRepFrom";
@@ -2765,7 +2784,7 @@
             //
             this.lblFromError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFromError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblFromError.Location = new System.Drawing.Point(20, 86);
+            this.lblFromError.Location = new System.Drawing.Point(16, 90);
             this.lblFromError.Size = new System.Drawing.Size(360, 16);
             this.lblFromError.TabIndex = 5;
             this.lblFromError.Text = "";
@@ -2777,7 +2796,7 @@
             this.lblRepTo.AutoSize = true;
             this.lblRepTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepTo.Location = new System.Drawing.Point(210, 34);
+            this.lblRepTo.Location = new System.Drawing.Point(206, 38);
             this.lblRepTo.TabIndex = 6;
             this.lblRepTo.Text = "Sessions to";
             this.lblRepTo.Name = "lblRepTo";
@@ -2787,7 +2806,7 @@
             this.lblRepToStar.AutoSize = true;
             this.lblRepToStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepToStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRepToStar.Location = new System.Drawing.Point(306, 34);
+            this.lblRepToStar.Location = new System.Drawing.Point(302, 38);
             this.lblRepToStar.Size = new System.Drawing.Size(14, 24);
             this.lblRepToStar.TabIndex = 7;
             this.lblRepToStar.Text = "*";
@@ -2799,7 +2818,7 @@
             this.dtpRepTo.CustomFormat = "dd/MM/yyyy";
             this.dtpRepTo.Font = new System.Drawing.Font("Consolas", 10F);
             this.dtpRepTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRepTo.Location = new System.Drawing.Point(210, 60);
+            this.dtpRepTo.Location = new System.Drawing.Point(206, 64);
             this.dtpRepTo.Size = new System.Drawing.Size(170, 23);
             this.dtpRepTo.TabIndex = 8;
             this.dtpRepTo.Name = "dtpRepTo";
@@ -2809,7 +2828,7 @@
             //
             this.lblPeriodNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblPeriodNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblPeriodNote.Location = new System.Drawing.Point(20, 86);
+            this.lblPeriodNote.Location = new System.Drawing.Point(16, 90);
             this.lblPeriodNote.Size = new System.Drawing.Size(360, 16);
             this.lblPeriodNote.TabIndex = 9;
             this.lblPeriodNote.Text = "";
@@ -2820,7 +2839,7 @@
             this.lblRepFaculty.AutoSize = true;
             this.lblRepFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepFaculty.Location = new System.Drawing.Point(400, 34);
+            this.lblRepFaculty.Location = new System.Drawing.Point(396, 38);
             this.lblRepFaculty.TabIndex = 10;
             this.lblRepFaculty.Text = "Faculty";
             this.lblRepFaculty.Name = "lblRepFaculty";
@@ -2831,7 +2850,7 @@
             this.cboRepFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRepFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRepFaculty.FormattingEnabled = true;
-            this.cboRepFaculty.Location = new System.Drawing.Point(400, 60);
+            this.cboRepFaculty.Location = new System.Drawing.Point(396, 64);
             this.cboRepFaculty.Size = new System.Drawing.Size(250, 25);
             this.cboRepFaculty.TabIndex = 11;
             this.cboRepFaculty.Name = "cboRepFaculty";
@@ -2841,7 +2860,7 @@
             //
             this.lblFacultyNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFacultyNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblFacultyNote.Location = new System.Drawing.Point(400, 86);
+            this.lblFacultyNote.Location = new System.Drawing.Point(396, 90);
             this.lblFacultyNote.Size = new System.Drawing.Size(250, 16);
             this.lblFacultyNote.TabIndex = 12;
             this.lblFacultyNote.Text = "";
@@ -2852,7 +2871,7 @@
             this.lblRepGrade.AutoSize = true;
             this.lblRepGrade.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepGrade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepGrade.Location = new System.Drawing.Point(670, 34);
+            this.lblRepGrade.Location = new System.Drawing.Point(666, 38);
             this.lblRepGrade.TabIndex = 13;
             this.lblRepGrade.Text = "Grade";
             this.lblRepGrade.Name = "lblRepGrade";
@@ -2863,7 +2882,7 @@
             this.cboRepGrade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRepGrade.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRepGrade.FormattingEnabled = true;
-            this.cboRepGrade.Location = new System.Drawing.Point(670, 60);
+            this.cboRepGrade.Location = new System.Drawing.Point(666, 64);
             this.cboRepGrade.Size = new System.Drawing.Size(240, 25);
             this.cboRepGrade.TabIndex = 14;
             this.cboRepGrade.Name = "cboRepGrade";
@@ -2873,7 +2892,7 @@
             //
             this.lblGradeNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblGradeNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblGradeNote.Location = new System.Drawing.Point(670, 86);
+            this.lblGradeNote.Location = new System.Drawing.Point(666, 90);
             this.lblGradeNote.Size = new System.Drawing.Size(240, 16);
             this.lblGradeNote.TabIndex = 15;
             this.lblGradeNote.Text = "";
@@ -2884,7 +2903,7 @@
             this.lblRepOutcome.AutoSize = true;
             this.lblRepOutcome.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepOutcome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepOutcome.Location = new System.Drawing.Point(20, 108);
+            this.lblRepOutcome.Location = new System.Drawing.Point(16, 112);
             this.lblRepOutcome.TabIndex = 16;
             this.lblRepOutcome.Text = "Advisory outcome";
             this.lblRepOutcome.Name = "lblRepOutcome";
@@ -2895,7 +2914,7 @@
             this.cboRepOutcome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRepOutcome.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRepOutcome.FormattingEnabled = true;
-            this.cboRepOutcome.Location = new System.Drawing.Point(20, 134);
+            this.cboRepOutcome.Location = new System.Drawing.Point(16, 138);
             this.cboRepOutcome.Size = new System.Drawing.Size(360, 25);
             this.cboRepOutcome.TabIndex = 17;
             this.cboRepOutcome.Name = "cboRepOutcome";
@@ -2905,7 +2924,7 @@
             //
             this.lblOutcomeNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblOutcomeNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblOutcomeNote.Location = new System.Drawing.Point(20, 160);
+            this.lblOutcomeNote.Location = new System.Drawing.Point(16, 164);
             this.lblOutcomeNote.Size = new System.Drawing.Size(360, 16);
             this.lblOutcomeNote.TabIndex = 18;
             this.lblOutcomeNote.Text = "";
@@ -2916,7 +2935,7 @@
             this.lblRepSessionNumber.AutoSize = true;
             this.lblRepSessionNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRepSessionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRepSessionNumber.Location = new System.Drawing.Point(400, 108);
+            this.lblRepSessionNumber.Location = new System.Drawing.Point(396, 112);
             this.lblRepSessionNumber.TabIndex = 19;
             this.lblRepSessionNumber.Text = "Session number";
             this.lblRepSessionNumber.Name = "lblRepSessionNumber";
@@ -2926,7 +2945,7 @@
             this.lblSessionNumberStar.AutoSize = true;
             this.lblSessionNumberStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSessionNumberStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSessionNumberStar.Location = new System.Drawing.Point(530, 108);
+            this.lblSessionNumberStar.Location = new System.Drawing.Point(526, 112);
             this.lblSessionNumberStar.Size = new System.Drawing.Size(14, 24);
             this.lblSessionNumberStar.TabIndex = 20;
             this.lblSessionNumberStar.Text = "*";
@@ -2936,7 +2955,7 @@
             //
             this.txtRepSessionNumber.AccessibleName = "Session number, yyyy-NNNN (required for FP-LSR)";
             this.txtRepSessionNumber.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtRepSessionNumber.Location = new System.Drawing.Point(400, 134);
+            this.txtRepSessionNumber.Location = new System.Drawing.Point(396, 138);
             this.txtRepSessionNumber.MaxLength = 9;
             this.txtRepSessionNumber.Size = new System.Drawing.Size(160, 25);
             this.txtRepSessionNumber.TabIndex = 21;
@@ -2948,7 +2967,7 @@
             //
             this.lblSessionNumberNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSessionNumberNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSessionNumberNote.Location = new System.Drawing.Point(400, 160);
+            this.lblSessionNumberNote.Location = new System.Drawing.Point(396, 164);
             this.lblSessionNumberNote.Size = new System.Drawing.Size(250, 16);
             this.lblSessionNumberNote.TabIndex = 22;
             this.lblSessionNumberNote.Text = "";
@@ -2958,7 +2977,7 @@
             //
             this.lblRepSessionNumberError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRepSessionNumberError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRepSessionNumberError.Location = new System.Drawing.Point(400, 160);
+            this.lblRepSessionNumberError.Location = new System.Drawing.Point(396, 164);
             this.lblRepSessionNumberError.Size = new System.Drawing.Size(250, 16);
             this.lblRepSessionNumberError.TabIndex = 23;
             this.lblRepSessionNumberError.Text = "";
@@ -2970,7 +2989,7 @@
             this.chkIncludeInactive.AccessibleName = "Include inactive programmes";
             this.chkIncludeInactive.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkIncludeInactive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkIncludeInactive.Location = new System.Drawing.Point(670, 134);
+            this.chkIncludeInactive.Location = new System.Drawing.Point(666, 138);
             this.chkIncludeInactive.Size = new System.Drawing.Size(240, 24);
             this.chkIncludeInactive.TabIndex = 24;
             this.chkIncludeInactive.Text = "Include inactive programmes";
@@ -2981,7 +3000,7 @@
             //
             this.lblIncludeInactiveNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblIncludeInactiveNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblIncludeInactiveNote.Location = new System.Drawing.Point(670, 160);
+            this.lblIncludeInactiveNote.Location = new System.Drawing.Point(666, 164);
             this.lblIncludeInactiveNote.Size = new System.Drawing.Size(240, 16);
             this.lblIncludeInactiveNote.TabIndex = 25;
             this.lblIncludeInactiveNote.Text = "";
@@ -3002,15 +3021,15 @@
             this.pnlOutputCard.Controls.Add(this.btnBrowse);
             this.pnlOutputCard.BackColor = System.Drawing.Color.White;
             this.pnlOutputCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOutputCard.Location = new System.Drawing.Point(0, 382);
-            this.pnlOutputCard.Size = new System.Drawing.Size(934, 104);
+            this.pnlOutputCard.Location = new System.Drawing.Point(0, 392);
+            this.pnlOutputCard.Size = new System.Drawing.Size(934, 114);
             this.pnlOutputCard.TabIndex = 2;
             this.pnlOutputCard.Name = "pnlOutputCard";
             //
             // pnlOutputHeadingBar
             //
             this.pnlOutputHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlOutputHeadingBar.Location = new System.Drawing.Point(16, 8);
+            this.pnlOutputHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlOutputHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlOutputHeadingBar.TabIndex = 0;
             this.pnlOutputHeadingBar.Name = "pnlOutputHeadingBar";
@@ -3019,7 +3038,7 @@
             //
             this.lblOutputHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblOutputHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblOutputHeading.Location = new System.Drawing.Point(26, 4);
+            this.lblOutputHeading.Location = new System.Drawing.Point(26, 8);
             this.lblOutputHeading.Size = new System.Drawing.Size(500, 28);
             this.lblOutputHeading.TabIndex = 1;
             this.lblOutputHeading.Text = "Output";
@@ -3031,7 +3050,7 @@
             this.lblOutputFormat.AutoSize = true;
             this.lblOutputFormat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblOutputFormat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblOutputFormat.Location = new System.Drawing.Point(20, 34);
+            this.lblOutputFormat.Location = new System.Drawing.Point(16, 38);
             this.lblOutputFormat.TabIndex = 2;
             this.lblOutputFormat.Text = "Output format";
             this.lblOutputFormat.Name = "lblOutputFormat";
@@ -3041,7 +3060,7 @@
             this.lblOutputFormatStar.AutoSize = true;
             this.lblOutputFormatStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblOutputFormatStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblOutputFormatStar.Location = new System.Drawing.Point(128, 34);
+            this.lblOutputFormatStar.Location = new System.Drawing.Point(124, 38);
             this.lblOutputFormatStar.Size = new System.Drawing.Size(14, 24);
             this.lblOutputFormatStar.TabIndex = 3;
             this.lblOutputFormatStar.Text = "*";
@@ -3053,7 +3072,7 @@
             this.cboOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboOutputFormat.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboOutputFormat.FormattingEnabled = true;
-            this.cboOutputFormat.Location = new System.Drawing.Point(20, 60);
+            this.cboOutputFormat.Location = new System.Drawing.Point(16, 64);
             this.cboOutputFormat.Size = new System.Drawing.Size(360, 25);
             this.cboOutputFormat.TabIndex = 4;
             this.cboOutputFormat.Name = "cboOutputFormat";
@@ -3064,7 +3083,7 @@
             //
             this.lblOutputFormatError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblOutputFormatError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblOutputFormatError.Location = new System.Drawing.Point(20, 86);
+            this.lblOutputFormatError.Location = new System.Drawing.Point(16, 90);
             this.lblOutputFormatError.Size = new System.Drawing.Size(360, 16);
             this.lblOutputFormatError.TabIndex = 5;
             this.lblOutputFormatError.Text = "";
@@ -3076,7 +3095,7 @@
             this.lblSaveTo.AutoSize = true;
             this.lblSaveTo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSaveTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSaveTo.Location = new System.Drawing.Point(400, 34);
+            this.lblSaveTo.Location = new System.Drawing.Point(396, 38);
             this.lblSaveTo.TabIndex = 6;
             this.lblSaveTo.Text = "Save to";
             this.lblSaveTo.Name = "lblSaveTo";
@@ -3086,7 +3105,7 @@
             this.lblSaveToStar.AutoSize = true;
             this.lblSaveToStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblSaveToStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSaveToStar.Location = new System.Drawing.Point(463, 34);
+            this.lblSaveToStar.Location = new System.Drawing.Point(459, 38);
             this.lblSaveToStar.Size = new System.Drawing.Size(14, 24);
             this.lblSaveToStar.TabIndex = 7;
             this.lblSaveToStar.Text = "*";
@@ -3096,7 +3115,7 @@
             //
             this.txtSaveTo.AccessibleName = "Save to folder (required)";
             this.txtSaveTo.Font = new System.Drawing.Font("Consolas", 10F);
-            this.txtSaveTo.Location = new System.Drawing.Point(400, 60);
+            this.txtSaveTo.Location = new System.Drawing.Point(396, 64);
             this.txtSaveTo.MaxLength = 248;
             this.txtSaveTo.Size = new System.Drawing.Size(370, 25);
             this.txtSaveTo.TabIndex = 8;
@@ -3108,7 +3127,7 @@
             //
             this.lblSaveToError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSaveToError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblSaveToError.Location = new System.Drawing.Point(400, 86);
+            this.lblSaveToError.Location = new System.Drawing.Point(396, 90);
             this.lblSaveToError.Size = new System.Drawing.Size(510, 16);
             this.lblSaveToError.TabIndex = 9;
             this.lblSaveToError.Text = "";
@@ -3123,7 +3142,7 @@
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnBrowse.Location = new System.Drawing.Point(790, 58);
+            this.btnBrowse.Location = new System.Drawing.Point(786, 62);
             this.btnBrowse.Size = new System.Drawing.Size(120, 30);
             this.btnBrowse.TabIndex = 10;
             this.btnBrowse.Text = "Browse";
@@ -3140,7 +3159,7 @@
             this.pnlReadiness.Controls.Add(this.pnlReadinessBar);
             this.pnlReadiness.BackColor = System.Drawing.Color.White;
             this.pnlReadiness.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlReadiness.Location = new System.Drawing.Point(0, 502);
+            this.pnlReadiness.Location = new System.Drawing.Point(0, 518);
             this.pnlReadiness.Size = new System.Drawing.Size(934, 55);
             this.pnlReadiness.TabIndex = 3;
             this.pnlReadiness.Name = "pnlReadiness";
@@ -3148,10 +3167,10 @@
             // lblReadyReport
             //
             this.lblReadyReport.AccessibleName = "Report";
-            this.lblReadyReport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblReadyReport.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReadyReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReadyReport.Location = new System.Drawing.Point(18, 5);
-            this.lblReadyReport.Size = new System.Drawing.Size(714, 22);
+            this.lblReadyReport.Location = new System.Drawing.Point(16, 4);
+            this.lblReadyReport.Size = new System.Drawing.Size(716, 24);
             this.lblReadyReport.TabIndex = 0;
             this.lblReadyReport.Text = "";
             this.lblReadyReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3162,8 +3181,8 @@
             this.lblReadyScope.AccessibleName = "Report scope";
             this.lblReadyScope.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblReadyScope.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblReadyScope.Location = new System.Drawing.Point(18, 28);
-            this.lblReadyScope.Size = new System.Drawing.Size(714, 18);
+            this.lblReadyScope.Location = new System.Drawing.Point(16, 29);
+            this.lblReadyScope.Size = new System.Drawing.Size(716, 18);
             this.lblReadyScope.TabIndex = 1;
             this.lblReadyScope.Text = "";
             this.lblReadyScope.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3403,7 +3422,7 @@
             this.lstFaculties.IntegralHeight = false;
             this.lstFaculties.ItemHeight = 17;
             this.lstFaculties.Location = new System.Drawing.Point(0, 26);
-            this.lstFaculties.Size = new System.Drawing.Size(230, 226);
+            this.lstFaculties.Size = new System.Drawing.Size(238, 242);
             this.lstFaculties.TabIndex = 1;
             this.lstFaculties.Name = "lstFaculties";
             this.lstFaculties.SelectedIndexChanged += new System.EventHandler(this.lstFaculties_SelectedIndexChanged);
@@ -3413,8 +3432,8 @@
             //
             this.lblFacultyCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFacultyCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblFacultyCount.Location = new System.Drawing.Point(0, 256);
-            this.lblFacultyCount.Size = new System.Drawing.Size(230, 36);
+            this.lblFacultyCount.Location = new System.Drawing.Point(0, 272);
+            this.lblFacultyCount.Size = new System.Drawing.Size(238, 36);
             this.lblFacultyCount.TabIndex = 2;
             this.lblFacultyCount.Text = "Select a faculty to list its programmes.";
             this.lblFacultyCount.Name = "lblFacultyCount";
@@ -3433,15 +3452,15 @@
             this.pnlFacultyCard.Controls.Add(this.lblFacultyHint);
             this.pnlFacultyCard.BackColor = System.Drawing.Color.White;
             this.pnlFacultyCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFacultyCard.Location = new System.Drawing.Point(0, 297);
-            this.pnlFacultyCard.Size = new System.Drawing.Size(230, 230);
+            this.pnlFacultyCard.Location = new System.Drawing.Point(0, 320);
+            this.pnlFacultyCard.Size = new System.Drawing.Size(238, 240);
             this.pnlFacultyCard.TabIndex = 3;
             this.pnlFacultyCard.Name = "pnlFacultyCard";
             //
             // pnlFacultyHeadingBar
             //
             this.pnlFacultyHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlFacultyHeadingBar.Location = new System.Drawing.Point(12, 10);
+            this.pnlFacultyHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlFacultyHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlFacultyHeadingBar.TabIndex = 0;
             this.pnlFacultyHeadingBar.Name = "pnlFacultyHeadingBar";
@@ -3450,8 +3469,8 @@
             //
             this.lblFacultyHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFacultyHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFacultyHeading.Location = new System.Drawing.Point(22, 6);
-            this.lblFacultyHeading.Size = new System.Drawing.Size(200, 28);
+            this.lblFacultyHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblFacultyHeading.Size = new System.Drawing.Size(196, 28);
             this.lblFacultyHeading.TabIndex = 1;
             this.lblFacultyHeading.Text = "Faculty details";
             this.lblFacultyHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3484,7 +3503,7 @@
             this.txtFacultyName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtFacultyName.Location = new System.Drawing.Point(16, 66);
             this.txtFacultyName.MaxLength = 60;
-            this.txtFacultyName.Size = new System.Drawing.Size(196, 25);
+            this.txtFacultyName.Size = new System.Drawing.Size(206, 25);
             this.txtFacultyName.TabIndex = 4;
             this.txtFacultyName.Name = "txtFacultyName";
             this.txtFacultyName.Leave += new System.EventHandler(this.txtFacultyName_Leave);
@@ -3494,7 +3513,7 @@
             this.lblFacultyNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFacultyNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblFacultyNameError.Location = new System.Drawing.Point(16, 93);
-            this.lblFacultyNameError.Size = new System.Drawing.Size(200, 16);
+            this.lblFacultyNameError.Size = new System.Drawing.Size(206, 16);
             this.lblFacultyNameError.TabIndex = 5;
             this.lblFacultyNameError.Text = "";
             this.lblFacultyNameError.Visible = false;
@@ -3509,7 +3528,7 @@
             this.btnAddFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnAddFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.btnAddFaculty.Location = new System.Drawing.Point(16, 116);
-            this.btnAddFaculty.Size = new System.Drawing.Size(96, 30);
+            this.btnAddFaculty.Size = new System.Drawing.Size(99, 30);
             this.btnAddFaculty.TabIndex = 6;
             this.btnAddFaculty.Text = "Add faculty";
             this.btnAddFaculty.UseVisualStyleBackColor = false;
@@ -3525,8 +3544,8 @@
             this.btnRenameFaculty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRenameFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnRenameFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnRenameFaculty.Location = new System.Drawing.Point(116, 116);
-            this.btnRenameFaculty.Size = new System.Drawing.Size(96, 30);
+            this.btnRenameFaculty.Location = new System.Drawing.Point(123, 116);
+            this.btnRenameFaculty.Size = new System.Drawing.Size(99, 30);
             this.btnRenameFaculty.TabIndex = 7;
             this.btnRenameFaculty.Text = "Rename";
             this.btnRenameFaculty.UseVisualStyleBackColor = false;
@@ -3543,7 +3562,7 @@
             this.btnDeactivateFaculty.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnDeactivateFaculty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.btnDeactivateFaculty.Location = new System.Drawing.Point(16, 154);
-            this.btnDeactivateFaculty.Size = new System.Drawing.Size(196, 30);
+            this.btnDeactivateFaculty.Size = new System.Drawing.Size(206, 30);
             this.btnDeactivateFaculty.TabIndex = 8;
             this.btnDeactivateFaculty.Text = "Deactivate faculty";
             this.btnDeactivateFaculty.UseVisualStyleBackColor = false;
@@ -3556,7 +3575,7 @@
             this.lblFacultyHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFacultyHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblFacultyHint.Location = new System.Drawing.Point(16, 190);
-            this.lblFacultyHint.Size = new System.Drawing.Size(200, 32);
+            this.lblFacultyHint.Size = new System.Drawing.Size(206, 32);
             this.lblFacultyHint.TabIndex = 9;
             this.lblFacultyHint.Text = "Faculty buttons save at once. Faculties are deactivated, never deleted.";
             this.lblFacultyHint.Name = "lblFacultyHint";
@@ -3570,14 +3589,14 @@
             this.pnlUniGridCard.BackColor = System.Drawing.Color.White;
             this.pnlUniGridCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlUniGridCard.Location = new System.Drawing.Point(250, 0);
-            this.pnlUniGridCard.Size = new System.Drawing.Size(676, 277);
+            this.pnlUniGridCard.Size = new System.Drawing.Size(676, 308);
             this.pnlUniGridCard.TabIndex = 4;
             this.pnlUniGridCard.Name = "pnlUniGridCard";
             //
             // pnlUniGridHeadingBar
             //
             this.pnlUniGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlUniGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlUniGridHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlUniGridHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlUniGridHeadingBar.TabIndex = 0;
             this.pnlUniGridHeadingBar.Name = "pnlUniGridHeadingBar";
@@ -3586,8 +3605,8 @@
             //
             this.lblUniGridHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblUniGridHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblUniGridHeading.Location = new System.Drawing.Point(26, 6);
-            this.lblUniGridHeading.Size = new System.Drawing.Size(440, 28);
+            this.lblUniGridHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblUniGridHeading.Size = new System.Drawing.Size(430, 28);
             this.lblUniGridHeading.TabIndex = 1;
             this.lblUniGridHeading.Text = "Programmes \u2014 no faculty selected";
             this.lblUniGridHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3597,7 +3616,7 @@
             //
             this.lblUniProgrammeCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblUniProgrammeCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblUniProgrammeCount.Location = new System.Drawing.Point(460, 10);
+            this.lblUniProgrammeCount.Location = new System.Drawing.Point(460, 12);
             this.lblUniProgrammeCount.Size = new System.Drawing.Size(198, 20);
             this.lblUniProgrammeCount.TabIndex = 2;
             this.lblUniProgrammeCount.Text = "";
@@ -3645,12 +3664,12 @@
             this.dgvProgrammes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProgrammes.EnableHeadersVisualStyles = false;
             this.dgvProgrammes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvProgrammes.Location = new System.Drawing.Point(16, 40);
+            this.dgvProgrammes.Location = new System.Drawing.Point(16, 44);
             this.dgvProgrammes.MultiSelect = false;
             this.dgvProgrammes.ReadOnly = true;
             this.dgvProgrammes.RowHeadersVisible = false;
             this.dgvProgrammes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammes.Size = new System.Drawing.Size(642, 223);
+            this.dgvProgrammes.Size = new System.Drawing.Size(642, 248);
             this.dgvProgrammes.TabIndex = 3;
             this.dgvProgrammes.Name = "dgvProgrammes";
             this.dgvProgrammes.RowTemplate.Height = 30;
@@ -3678,9 +3697,6 @@
             //
             // colProgrammesStatus
             //
-            colProgrammesStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            colProgrammesStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colProgrammesStatus.DefaultCellStyle = colProgrammesStatusStyle;
             this.colProgrammesStatus.DataPropertyName = "IsActive";
             this.colProgrammesStatus.FillWeight = 14F;
             this.colProgrammesStatus.HeaderText = "Status";
@@ -3725,7 +3741,7 @@
             this.pnlUniFormCard.Controls.Add(this.pnlUniSummary);
             this.pnlUniFormCard.BackColor = System.Drawing.Color.White;
             this.pnlUniFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlUniFormCard.Location = new System.Drawing.Point(250, 287);
+            this.pnlUniFormCard.Location = new System.Drawing.Point(250, 320);
             this.pnlUniFormCard.Size = new System.Drawing.Size(676, 240);
             this.pnlUniFormCard.TabIndex = 5;
             this.pnlUniFormCard.Name = "pnlUniFormCard";
@@ -3733,7 +3749,7 @@
             // pnlUniFormHeadingBar
             //
             this.pnlUniFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlUniFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlUniFormHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlUniFormHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlUniFormHeadingBar.TabIndex = 0;
             this.pnlUniFormHeadingBar.Name = "pnlUniFormHeadingBar";
@@ -3742,7 +3758,7 @@
             //
             this.lblUniFormHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblUniFormHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblUniFormHeading.Location = new System.Drawing.Point(26, 6);
+            this.lblUniFormHeading.Location = new System.Drawing.Point(26, 8);
             this.lblUniFormHeading.Size = new System.Drawing.Size(400, 28);
             this.lblUniFormHeading.TabIndex = 1;
             this.lblUniFormHeading.Text = "Add or edit a programme";
@@ -4046,7 +4062,7 @@
             this.cboReqFaculty.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboReqFaculty.FormattingEnabled = true;
             this.cboReqFaculty.Location = new System.Drawing.Point(0, 26);
-            this.cboReqFaculty.Size = new System.Drawing.Size(230, 25);
+            this.cboReqFaculty.Size = new System.Drawing.Size(238, 25);
             this.cboReqFaculty.TabIndex = 1;
             this.cboReqFaculty.Name = "cboReqFaculty";
             this.cboReqFaculty.SelectedIndexChanged += new System.EventHandler(this.cboReqFaculty_SelectedIndexChanged);
@@ -4069,7 +4085,7 @@
             this.lstProgrammes.IntegralHeight = false;
             this.lstProgrammes.ItemHeight = 17;
             this.lstProgrammes.Location = new System.Drawing.Point(0, 88);
-            this.lstProgrammes.Size = new System.Drawing.Size(230, 350);
+            this.lstProgrammes.Size = new System.Drawing.Size(238, 404);
             this.lstProgrammes.TabIndex = 3;
             this.lstProgrammes.Name = "lstProgrammes";
             this.lstProgrammes.SelectedIndexChanged += new System.EventHandler(this.lstProgrammes_SelectedIndexChanged);
@@ -4079,8 +4095,8 @@
             //
             this.lblReqProgrammeCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblReqProgrammeCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblReqProgrammeCount.Location = new System.Drawing.Point(0, 444);
-            this.lblReqProgrammeCount.Size = new System.Drawing.Size(230, 64);
+            this.lblReqProgrammeCount.Location = new System.Drawing.Point(0, 496);
+            this.lblReqProgrammeCount.Size = new System.Drawing.Size(238, 64);
             this.lblReqProgrammeCount.TabIndex = 4;
             this.lblReqProgrammeCount.Text = "Choose a faculty to list its programmes.";
             this.lblReqProgrammeCount.Name = "lblReqProgrammeCount";
@@ -4094,14 +4110,14 @@
             this.pnlReqGridCard.BackColor = System.Drawing.Color.White;
             this.pnlReqGridCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlReqGridCard.Location = new System.Drawing.Point(250, 0);
-            this.pnlReqGridCard.Size = new System.Drawing.Size(676, 262);
+            this.pnlReqGridCard.Size = new System.Drawing.Size(676, 293);
             this.pnlReqGridCard.TabIndex = 5;
             this.pnlReqGridCard.Name = "pnlReqGridCard";
             //
             // pnlReqGridHeadingBar
             //
             this.pnlReqGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlReqGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlReqGridHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlReqGridHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlReqGridHeadingBar.TabIndex = 0;
             this.pnlReqGridHeadingBar.Name = "pnlReqGridHeadingBar";
@@ -4110,8 +4126,8 @@
             //
             this.lblReqGridHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReqGridHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReqGridHeading.Location = new System.Drawing.Point(26, 6);
-            this.lblReqGridHeading.Size = new System.Drawing.Size(440, 28);
+            this.lblReqGridHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblReqGridHeading.Size = new System.Drawing.Size(430, 28);
             this.lblReqGridHeading.TabIndex = 1;
             this.lblReqGridHeading.Text = "Stored requirements \u2014 no programme selected";
             this.lblReqGridHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4121,7 +4137,7 @@
             //
             this.lblRequirementCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRequirementCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblRequirementCount.Location = new System.Drawing.Point(460, 10);
+            this.lblRequirementCount.Location = new System.Drawing.Point(460, 12);
             this.lblRequirementCount.Size = new System.Drawing.Size(198, 20);
             this.lblRequirementCount.TabIndex = 2;
             this.lblRequirementCount.Text = "";
@@ -4173,12 +4189,12 @@
             this.dgvRequirements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRequirements.EnableHeadersVisualStyles = false;
             this.dgvRequirements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvRequirements.Location = new System.Drawing.Point(16, 40);
+            this.dgvRequirements.Location = new System.Drawing.Point(16, 44);
             this.dgvRequirements.MultiSelect = false;
             this.dgvRequirements.ReadOnly = true;
             this.dgvRequirements.RowHeadersVisible = false;
             this.dgvRequirements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRequirements.Size = new System.Drawing.Size(642, 208);
+            this.dgvRequirements.Size = new System.Drawing.Size(642, 233);
             this.dgvRequirements.TabIndex = 3;
             this.dgvRequirements.Name = "dgvRequirements";
             this.dgvRequirements.RowTemplate.Height = 30;
@@ -4222,9 +4238,6 @@
             //
             // colRequirementsStatus
             //
-            colRequirementsStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            colRequirementsStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colRequirementsStatus.DefaultCellStyle = colRequirementsStatusStyle;
             this.colRequirementsStatus.DataPropertyName = "IsActive";
             this.colRequirementsStatus.FillWeight = 14F;
             this.colRequirementsStatus.HeaderText = "Status";
@@ -4294,7 +4307,7 @@
             this.pnlReqFormCard.Controls.Add(this.pnlReqSummary);
             this.pnlReqFormCard.BackColor = System.Drawing.Color.White;
             this.pnlReqFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlReqFormCard.Location = new System.Drawing.Point(250, 272);
+            this.pnlReqFormCard.Location = new System.Drawing.Point(250, 305);
             this.pnlReqFormCard.Size = new System.Drawing.Size(676, 255);
             this.pnlReqFormCard.TabIndex = 6;
             this.pnlReqFormCard.Name = "pnlReqFormCard";
@@ -4302,7 +4315,7 @@
             // pnlReqFormHeadingBar
             //
             this.pnlReqFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlReqFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlReqFormHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlReqFormHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlReqFormHeadingBar.TabIndex = 0;
             this.pnlReqFormHeadingBar.Name = "pnlReqFormHeadingBar";
@@ -4311,7 +4324,7 @@
             //
             this.lblReqFormHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblReqFormHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblReqFormHeading.Location = new System.Drawing.Point(26, 6);
+            this.lblReqFormHeading.Location = new System.Drawing.Point(26, 8);
             this.lblReqFormHeading.Size = new System.Drawing.Size(400, 28);
             this.lblReqFormHeading.TabIndex = 1;
             this.lblReqFormHeading.Text = "Add or edit a requirement";
@@ -4474,6 +4487,7 @@
             // numMinimumMark
             //
             this.numMinimumMark.AccessibleName = "Minimum mark percent (required)";
+            this.numMinimumMark.DecimalPlaces = 2;
             this.numMinimumMark.Font = new System.Drawing.Font("Consolas", 10F);
             this.numMinimumMark.Location = new System.Drawing.Point(16, 140);
             this.numMinimumMark.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
@@ -4680,14 +4694,14 @@
             this.pnlFndGridCard.BackColor = System.Drawing.Color.White;
             this.pnlFndGridCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFndGridCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlFndGridCard.Size = new System.Drawing.Size(430, 527);
+            this.pnlFndGridCard.Size = new System.Drawing.Size(428, 560);
             this.pnlFndGridCard.TabIndex = 0;
             this.pnlFndGridCard.Name = "pnlFndGridCard";
             //
             // pnlFndGridHeadingBar
             //
             this.pnlFndGridHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlFndGridHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlFndGridHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlFndGridHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlFndGridHeadingBar.TabIndex = 0;
             this.pnlFndGridHeadingBar.Name = "pnlFndGridHeadingBar";
@@ -4696,8 +4710,8 @@
             //
             this.lblFndGridHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFndGridHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFndGridHeading.Location = new System.Drawing.Point(26, 6);
-            this.lblFndGridHeading.Size = new System.Drawing.Size(360, 28);
+            this.lblFndGridHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblFndGridHeading.Size = new System.Drawing.Size(184, 28);
             this.lblFndGridHeading.TabIndex = 1;
             this.lblFndGridHeading.Text = "Stored funding options";
             this.lblFndGridHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4707,10 +4721,11 @@
             //
             this.lblFundingCount.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFundingCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblFundingCount.Location = new System.Drawing.Point(16, 36);
-            this.lblFundingCount.Size = new System.Drawing.Size(396, 18);
+            this.lblFundingCount.Location = new System.Drawing.Point(214, 12);
+            this.lblFundingCount.Size = new System.Drawing.Size(196, 20);
             this.lblFundingCount.TabIndex = 2;
             this.lblFundingCount.Text = "";
+            this.lblFundingCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblFundingCount.Name = "lblFundingCount";
             //
             // dgvFunding
@@ -4754,12 +4769,12 @@
             this.dgvFunding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvFunding.EnableHeadersVisualStyles = false;
             this.dgvFunding.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvFunding.Location = new System.Drawing.Point(16, 58);
+            this.dgvFunding.Location = new System.Drawing.Point(16, 44);
             this.dgvFunding.MultiSelect = false;
             this.dgvFunding.ReadOnly = true;
             this.dgvFunding.RowHeadersVisible = false;
             this.dgvFunding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFunding.Size = new System.Drawing.Size(396, 453);
+            this.dgvFunding.Size = new System.Drawing.Size(394, 500);
             this.dgvFunding.TabIndex = 3;
             this.dgvFunding.Name = "dgvFunding";
             this.dgvFunding.RowTemplate.Height = 30;
@@ -4796,9 +4811,6 @@
             //
             // colFundingStatus
             //
-            colFundingStatusStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            colFundingStatusStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.colFundingStatus.DefaultCellStyle = colFundingStatusStyle;
             this.colFundingStatus.DataPropertyName = "IsActive";
             this.colFundingStatus.FillWeight = 14F;
             this.colFundingStatus.HeaderText = "Status";
@@ -4848,14 +4860,14 @@
             this.pnlFndFormCard.BackColor = System.Drawing.Color.White;
             this.pnlFndFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFndFormCard.Location = new System.Drawing.Point(440, 0);
-            this.pnlFndFormCard.Size = new System.Drawing.Size(486, 527);
+            this.pnlFndFormCard.Size = new System.Drawing.Size(486, 560);
             this.pnlFndFormCard.TabIndex = 1;
             this.pnlFndFormCard.Name = "pnlFndFormCard";
             //
             // pnlFndFormHeadingBar
             //
             this.pnlFndFormHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlFndFormHeadingBar.Location = new System.Drawing.Point(16, 10);
+            this.pnlFndFormHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlFndFormHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlFndFormHeadingBar.TabIndex = 0;
             this.pnlFndFormHeadingBar.Name = "pnlFndFormHeadingBar";
@@ -4864,7 +4876,7 @@
             //
             this.lblFndFormHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFndFormHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFndFormHeading.Location = new System.Drawing.Point(26, 6);
+            this.lblFndFormHeading.Location = new System.Drawing.Point(26, 8);
             this.lblFndFormHeading.Size = new System.Drawing.Size(440, 28);
             this.lblFndFormHeading.TabIndex = 1;
             this.lblFndFormHeading.Text = "Add or edit a funding option";
@@ -5131,7 +5143,7 @@
             this.clbFaculties.FormattingEnabled = true;
             this.clbFaculties.IntegralHeight = false;
             this.clbFaculties.Location = new System.Drawing.Point(16, 404);
-            this.clbFaculties.Size = new System.Drawing.Size(219, 64);
+            this.clbFaculties.Size = new System.Drawing.Size(219, 97);
             this.clbFaculties.TabIndex = 25;
             this.clbFaculties.Name = "clbFaculties";
             //
@@ -5153,7 +5165,7 @@
             this.clbProgrammes.FormattingEnabled = true;
             this.clbProgrammes.IntegralHeight = false;
             this.clbProgrammes.Location = new System.Drawing.Point(251, 404);
-            this.clbProgrammes.Size = new System.Drawing.Size(219, 64);
+            this.clbProgrammes.Size = new System.Drawing.Size(219, 97);
             this.clbProgrammes.TabIndex = 27;
             this.clbProgrammes.Name = "clbProgrammes";
             //
@@ -5162,7 +5174,7 @@
             this.pnlFndSummary.Controls.Add(this.lblFndSummary);
             this.pnlFndSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlFndSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFndSummary.Location = new System.Drawing.Point(16, 474);
+            this.pnlFndSummary.Location = new System.Drawing.Point(16, 507);
             this.pnlFndSummary.Size = new System.Drawing.Size(454, 46);
             this.pnlFndSummary.TabIndex = 28;
             this.pnlFndSummary.Visible = false;
@@ -5446,7 +5458,7 @@
             this.pnlCategoryFormCard.BackColor = System.Drawing.Color.White;
             this.pnlCategoryFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCategoryFormCard.Location = new System.Drawing.Point(0, 262);
-            this.pnlCategoryFormCard.Size = new System.Drawing.Size(456, 265);
+            this.pnlCategoryFormCard.Size = new System.Drawing.Size(456, 298);
             this.pnlCategoryFormCard.TabIndex = 1;
             this.pnlCategoryFormCard.Name = "pnlCategoryFormCard";
             //
@@ -5474,7 +5486,7 @@
             this.lblCategoryName.AutoSize = true;
             this.lblCategoryName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCategoryName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblCategoryName.Location = new System.Drawing.Point(20, 44);
+            this.lblCategoryName.Location = new System.Drawing.Point(16, 44);
             this.lblCategoryName.TabIndex = 2;
             this.lblCategoryName.Text = "Category name";
             this.lblCategoryName.Name = "lblCategoryName";
@@ -5484,7 +5496,7 @@
             this.lblCategoryNameStar.AutoSize = true;
             this.lblCategoryNameStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblCategoryNameStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblCategoryNameStar.Location = new System.Drawing.Point(140, 44);
+            this.lblCategoryNameStar.Location = new System.Drawing.Point(136, 44);
             this.lblCategoryNameStar.Size = new System.Drawing.Size(14, 24);
             this.lblCategoryNameStar.TabIndex = 3;
             this.lblCategoryNameStar.Text = "*";
@@ -5494,9 +5506,9 @@
             //
             this.txtCategoryName.AccessibleName = "Category name (required, up to 60 characters)";
             this.txtCategoryName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtCategoryName.Location = new System.Drawing.Point(20, 70);
+            this.txtCategoryName.Location = new System.Drawing.Point(16, 70);
             this.txtCategoryName.MaxLength = 60;
-            this.txtCategoryName.Size = new System.Drawing.Size(416, 25);
+            this.txtCategoryName.Size = new System.Drawing.Size(420, 25);
             this.txtCategoryName.TabIndex = 4;
             this.txtCategoryName.Name = "txtCategoryName";
             this.txtCategoryName.Leave += new System.EventHandler(this.txtCategoryName_Leave);
@@ -5505,8 +5517,8 @@
             //
             this.lblCategoryNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblCategoryNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblCategoryNameError.Location = new System.Drawing.Point(20, 97);
-            this.lblCategoryNameError.Size = new System.Drawing.Size(416, 16);
+            this.lblCategoryNameError.Location = new System.Drawing.Point(16, 97);
+            this.lblCategoryNameError.Size = new System.Drawing.Size(420, 16);
             this.lblCategoryNameError.TabIndex = 5;
             this.lblCategoryNameError.Text = "";
             this.lblCategoryNameError.Visible = false;
@@ -5519,7 +5531,7 @@
             this.chkCategoryActive.Checked = true;
             this.chkCategoryActive.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkCategoryActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkCategoryActive.Location = new System.Drawing.Point(20, 116);
+            this.chkCategoryActive.Location = new System.Drawing.Point(16, 116);
             this.chkCategoryActive.Size = new System.Drawing.Size(120, 24);
             this.chkCategoryActive.TabIndex = 6;
             this.chkCategoryActive.Text = "Active";
@@ -5530,8 +5542,8 @@
             //
             this.lblCategoryActiveHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblCategoryActiveHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblCategoryActiveHint.Location = new System.Drawing.Point(20, 142);
-            this.lblCategoryActiveHint.Size = new System.Drawing.Size(416, 34);
+            this.lblCategoryActiveHint.Location = new System.Drawing.Point(16, 142);
+            this.lblCategoryActiveHint.Size = new System.Drawing.Size(420, 34);
             this.lblCategoryActiveHint.TabIndex = 7;
             this.lblCategoryActiveHint.Text = "An inactive category is left out of new questionnaires and scores. Stored answers and past results are kept; nothing is deleted.";
             this.lblCategoryActiveHint.Name = "lblCategoryActiveHint";
@@ -5541,8 +5553,8 @@
             this.pnlCategorySummary.Controls.Add(this.lblCategorySummary);
             this.pnlCategorySummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlCategorySummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCategorySummary.Location = new System.Drawing.Point(20, 184);
-            this.pnlCategorySummary.Size = new System.Drawing.Size(416, 66);
+            this.pnlCategorySummary.Location = new System.Drawing.Point(16, 184);
+            this.pnlCategorySummary.Size = new System.Drawing.Size(420, 38);
             this.pnlCategorySummary.TabIndex = 8;
             this.pnlCategorySummary.Visible = false;
             this.pnlCategorySummary.Name = "pnlCategorySummary";
@@ -5552,7 +5564,7 @@
             this.lblCategorySummary.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblCategorySummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblCategorySummary.Location = new System.Drawing.Point(12, 6);
-            this.lblCategorySummary.Size = new System.Drawing.Size(390, 54);
+            this.lblCategorySummary.Size = new System.Drawing.Size(394, 26);
             this.lblCategorySummary.TabIndex = 0;
             this.lblCategorySummary.Text = "";
             this.lblCategorySummary.Name = "lblCategorySummary";
@@ -5575,7 +5587,7 @@
             this.pnlWeightsCard.BackColor = System.Drawing.Color.White;
             this.pnlWeightsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlWeightsCard.Location = new System.Drawing.Point(468, 262);
-            this.pnlWeightsCard.Size = new System.Drawing.Size(458, 265);
+            this.pnlWeightsCard.Size = new System.Drawing.Size(458, 298);
             this.pnlWeightsCard.TabIndex = 2;
             this.pnlWeightsCard.Name = "pnlWeightsCard";
             //
@@ -5601,7 +5613,7 @@
             // lblWeightsScope
             //
             this.lblWeightsScope.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblWeightsScope.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.lblWeightsScope.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblWeightsScope.Location = new System.Drawing.Point(16, 36);
             this.lblWeightsScope.Size = new System.Drawing.Size(424, 18);
             this.lblWeightsScope.TabIndex = 2;
@@ -5643,7 +5655,7 @@
             this.dgvWeights.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dgvWeights.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvWeights.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvWeights.ColumnHeadersHeight = 28;
+            this.dgvWeights.ColumnHeadersHeight = 34;
             this.dgvWeights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvWeights.EnableHeadersVisualStyles = false;
             this.dgvWeights.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
@@ -5652,10 +5664,10 @@
             this.dgvWeights.ReadOnly = true;
             this.dgvWeights.RowHeadersVisible = false;
             this.dgvWeights.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvWeights.Size = new System.Drawing.Size(424, 92);
+            this.dgvWeights.Size = new System.Drawing.Size(424, 126);
             this.dgvWeights.TabIndex = 3;
             this.dgvWeights.Name = "dgvWeights";
-            this.dgvWeights.RowTemplate.Height = 26;
+            this.dgvWeights.RowTemplate.Height = 30;
             this.dgvWeights.SelectionChanged += new System.EventHandler(this.dgvWeights_SelectionChanged);
             this.dgvWeights.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvWeights_DataBindingComplete);
             //
@@ -5692,7 +5704,7 @@
             this.lblWeightProgramme.AutoSize = true;
             this.lblWeightProgramme.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblWeightProgramme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblWeightProgramme.Location = new System.Drawing.Point(16, 154);
+            this.lblWeightProgramme.Location = new System.Drawing.Point(16, 188);
             this.lblWeightProgramme.TabIndex = 4;
             this.lblWeightProgramme.Text = "Degree programme";
             this.lblWeightProgramme.Name = "lblWeightProgramme";
@@ -5702,7 +5714,7 @@
             this.lblWeightProgrammeStar.AutoSize = true;
             this.lblWeightProgrammeStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblWeightProgrammeStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblWeightProgrammeStar.Location = new System.Drawing.Point(165, 154);
+            this.lblWeightProgrammeStar.Location = new System.Drawing.Point(165, 188);
             this.lblWeightProgrammeStar.Size = new System.Drawing.Size(14, 24);
             this.lblWeightProgrammeStar.TabIndex = 5;
             this.lblWeightProgrammeStar.Text = "*";
@@ -5714,7 +5726,7 @@
             this.cboWeightProgramme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboWeightProgramme.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboWeightProgramme.FormattingEnabled = true;
-            this.cboWeightProgramme.Location = new System.Drawing.Point(16, 180);
+            this.cboWeightProgramme.Location = new System.Drawing.Point(16, 214);
             this.cboWeightProgramme.Size = new System.Drawing.Size(226, 25);
             this.cboWeightProgramme.TabIndex = 6;
             this.cboWeightProgramme.Name = "cboWeightProgramme";
@@ -5725,7 +5737,7 @@
             this.lblRelevanceWeight.AutoSize = true;
             this.lblRelevanceWeight.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRelevanceWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRelevanceWeight.Location = new System.Drawing.Point(254, 154);
+            this.lblRelevanceWeight.Location = new System.Drawing.Point(254, 188);
             this.lblRelevanceWeight.TabIndex = 7;
             this.lblRelevanceWeight.Text = "Weight";
             this.lblRelevanceWeight.Name = "lblRelevanceWeight";
@@ -5735,7 +5747,7 @@
             this.lblRelevanceWeightStar.AutoSize = true;
             this.lblRelevanceWeightStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRelevanceWeightStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRelevanceWeightStar.Location = new System.Drawing.Point(312, 154);
+            this.lblRelevanceWeightStar.Location = new System.Drawing.Point(312, 188);
             this.lblRelevanceWeightStar.Size = new System.Drawing.Size(14, 24);
             this.lblRelevanceWeightStar.TabIndex = 8;
             this.lblRelevanceWeightStar.Text = "*";
@@ -5747,7 +5759,7 @@
             this.numRelevanceWeight.DecimalPlaces = 2;
             this.numRelevanceWeight.Font = new System.Drawing.Font("Consolas", 10F);
             this.numRelevanceWeight.Increment = new decimal(new int[] { 5, 0, 0, 131072 });
-            this.numRelevanceWeight.Location = new System.Drawing.Point(254, 180);
+            this.numRelevanceWeight.Location = new System.Drawing.Point(254, 214);
             this.numRelevanceWeight.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
             this.numRelevanceWeight.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             this.numRelevanceWeight.Size = new System.Drawing.Size(84, 23);
@@ -5765,7 +5777,7 @@
             this.btnSaveWeight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveWeight.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnSaveWeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnSaveWeight.Location = new System.Drawing.Point(348, 177);
+            this.btnSaveWeight.Location = new System.Drawing.Point(348, 211);
             this.btnSaveWeight.Size = new System.Drawing.Size(94, 30);
             this.btnSaveWeight.TabIndex = 10;
             this.btnSaveWeight.Text = "Save weight";
@@ -5778,7 +5790,7 @@
             //
             this.lblWeightError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblWeightError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblWeightError.Location = new System.Drawing.Point(16, 207);
+            this.lblWeightError.Location = new System.Drawing.Point(16, 241);
             this.lblWeightError.Size = new System.Drawing.Size(424, 16);
             this.lblWeightError.TabIndex = 11;
             this.lblWeightError.Text = "";
@@ -5789,7 +5801,7 @@
             //
             this.lblWeightHint.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblWeightHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblWeightHint.Location = new System.Drawing.Point(16, 224);
+            this.lblWeightHint.Location = new System.Drawing.Point(16, 258);
             this.lblWeightHint.Size = new System.Drawing.Size(424, 34);
             this.lblWeightHint.TabIndex = 12;
             this.lblWeightHint.Text = "0.00 to 1.00: how strongly this category counts toward the programme's interest match. 0.00 means it does not count.";
@@ -5917,14 +5929,14 @@
             this.pnlScopeCard.BackColor = System.Drawing.Color.White;
             this.pnlScopeCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlScopeCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlScopeCard.Size = new System.Drawing.Size(200, 527);
+            this.pnlScopeCard.Size = new System.Drawing.Size(200, 560);
             this.pnlScopeCard.TabIndex = 0;
             this.pnlScopeCard.Name = "pnlScopeCard";
             //
             // pnlScopeHeadingBar
             //
             this.pnlScopeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlScopeHeadingBar.Location = new System.Drawing.Point(12, 12);
+            this.pnlScopeHeadingBar.Location = new System.Drawing.Point(16, 12);
             this.pnlScopeHeadingBar.Size = new System.Drawing.Size(4, 20);
             this.pnlScopeHeadingBar.TabIndex = 0;
             this.pnlScopeHeadingBar.Name = "pnlScopeHeadingBar";
@@ -5933,8 +5945,8 @@
             //
             this.lblScopeHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblScopeHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblScopeHeading.Location = new System.Drawing.Point(22, 8);
-            this.lblScopeHeading.Size = new System.Drawing.Size(170, 28);
+            this.lblScopeHeading.Location = new System.Drawing.Point(26, 8);
+            this.lblScopeHeading.Size = new System.Drawing.Size(160, 28);
             this.lblScopeHeading.TabIndex = 1;
             this.lblScopeHeading.Text = "Scope";
             this.lblScopeHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -5979,9 +5991,9 @@
             // lblScaleNote
             //
             this.lblScaleNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblScaleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.lblScaleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblScaleNote.Location = new System.Drawing.Point(16, 140);
-            this.lblScaleNote.Size = new System.Drawing.Size(170, 150);
+            this.lblScaleNote.Size = new System.Drawing.Size(166, 150);
             this.lblScaleNote.TabIndex = 5;
             this.lblScaleNote.Text = "Learners answer every active question on UI 4 on a 1\u20135 scale, from Strongly disagree (1) to Strongly agree (5). Questions appear in display order, with their category beneath.";
             this.lblScaleNote.Name = "lblScaleNote";
@@ -5991,7 +6003,7 @@
             this.lblScopeNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblScopeNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblScopeNote.Location = new System.Drawing.Point(16, 300);
-            this.lblScopeNote.Size = new System.Drawing.Size(170, 70);
+            this.lblScopeNote.Size = new System.Drawing.Size(166, 70);
             this.lblScopeNote.TabIndex = 6;
             this.lblScopeNote.Text = "Inactive questions stay listed here for administrators and are never shown to learners.";
             this.lblScopeNote.Name = "lblScopeNote";
@@ -6005,7 +6017,7 @@
             this.pnlQuestionsCard.BackColor = System.Drawing.Color.White;
             this.pnlQuestionsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlQuestionsCard.Location = new System.Drawing.Point(212, 0);
-            this.pnlQuestionsCard.Size = new System.Drawing.Size(714, 232);
+            this.pnlQuestionsCard.Size = new System.Drawing.Size(714, 265);
             this.pnlQuestionsCard.TabIndex = 1;
             this.pnlQuestionsCard.Name = "pnlQuestionsCard";
             //
@@ -6022,7 +6034,7 @@
             this.lblQuestionsHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblQuestionsHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.lblQuestionsHeading.Location = new System.Drawing.Point(26, 8);
-            this.lblQuestionsHeading.Size = new System.Drawing.Size(400, 28);
+            this.lblQuestionsHeading.Size = new System.Drawing.Size(340, 28);
             this.lblQuestionsHeading.TabIndex = 1;
             this.lblQuestionsHeading.Text = "Stored questions";
             this.lblQuestionsHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -6086,7 +6098,7 @@
             this.dgvQuestions.ReadOnly = true;
             this.dgvQuestions.RowHeadersVisible = false;
             this.dgvQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvQuestions.Size = new System.Drawing.Size(680, 172);
+            this.dgvQuestions.Size = new System.Drawing.Size(680, 205);
             this.dgvQuestions.TabIndex = 3;
             this.dgvQuestions.Name = "dgvQuestions";
             this.dgvQuestions.RowTemplate.Height = 30;
@@ -6168,7 +6180,7 @@
             this.pnlQuestionFormCard.Controls.Add(this.pnlQuestionSummary);
             this.pnlQuestionFormCard.BackColor = System.Drawing.Color.White;
             this.pnlQuestionFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlQuestionFormCard.Location = new System.Drawing.Point(212, 244);
+            this.pnlQuestionFormCard.Location = new System.Drawing.Point(212, 277);
             this.pnlQuestionFormCard.Size = new System.Drawing.Size(714, 283);
             this.pnlQuestionFormCard.TabIndex = 2;
             this.pnlQuestionFormCard.Name = "pnlQuestionFormCard";
@@ -6208,7 +6220,7 @@
             this.lblStatement.AutoSize = true;
             this.lblStatement.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblStatement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblStatement.Location = new System.Drawing.Point(20, 44);
+            this.lblStatement.Location = new System.Drawing.Point(16, 44);
             this.lblStatement.TabIndex = 3;
             this.lblStatement.Text = "Statement";
             this.lblStatement.Name = "lblStatement";
@@ -6218,7 +6230,7 @@
             this.lblStatementStar.AutoSize = true;
             this.lblStatementStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblStatementStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblStatementStar.Location = new System.Drawing.Point(103, 44);
+            this.lblStatementStar.Location = new System.Drawing.Point(99, 44);
             this.lblStatementStar.Size = new System.Drawing.Size(14, 24);
             this.lblStatementStar.TabIndex = 4;
             this.lblStatementStar.Text = "*";
@@ -6228,11 +6240,11 @@
             //
             this.txtStatement.AccessibleName = "Statement (required, up to 255 characters)";
             this.txtStatement.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtStatement.Location = new System.Drawing.Point(20, 70);
+            this.txtStatement.Location = new System.Drawing.Point(16, 70);
             this.txtStatement.MaxLength = 255;
             this.txtStatement.Multiline = true;
             this.txtStatement.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtStatement.Size = new System.Drawing.Size(674, 50);
+            this.txtStatement.Size = new System.Drawing.Size(678, 50);
             this.txtStatement.TabIndex = 5;
             this.txtStatement.Name = "txtStatement";
             this.txtStatement.Leave += new System.EventHandler(this.txtStatement_Leave);
@@ -6242,8 +6254,8 @@
             //
             this.lblStatementError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblStatementError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblStatementError.Location = new System.Drawing.Point(20, 122);
-            this.lblStatementError.Size = new System.Drawing.Size(674, 16);
+            this.lblStatementError.Location = new System.Drawing.Point(16, 122);
+            this.lblStatementError.Size = new System.Drawing.Size(678, 16);
             this.lblStatementError.TabIndex = 6;
             this.lblStatementError.Text = "";
             this.lblStatementError.Visible = false;
@@ -6254,7 +6266,7 @@
             this.lblQuestionCategory.AutoSize = true;
             this.lblQuestionCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblQuestionCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblQuestionCategory.Location = new System.Drawing.Point(20, 142);
+            this.lblQuestionCategory.Location = new System.Drawing.Point(16, 142);
             this.lblQuestionCategory.TabIndex = 7;
             this.lblQuestionCategory.Text = "Category";
             this.lblQuestionCategory.Name = "lblQuestionCategory";
@@ -6264,7 +6276,7 @@
             this.lblQuestionCategoryStar.AutoSize = true;
             this.lblQuestionCategoryStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblQuestionCategoryStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblQuestionCategoryStar.Location = new System.Drawing.Point(92, 142);
+            this.lblQuestionCategoryStar.Location = new System.Drawing.Point(88, 142);
             this.lblQuestionCategoryStar.Size = new System.Drawing.Size(14, 24);
             this.lblQuestionCategoryStar.TabIndex = 8;
             this.lblQuestionCategoryStar.Text = "*";
@@ -6276,7 +6288,7 @@
             this.cboQuestionCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboQuestionCategory.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboQuestionCategory.FormattingEnabled = true;
-            this.cboQuestionCategory.Location = new System.Drawing.Point(20, 168);
+            this.cboQuestionCategory.Location = new System.Drawing.Point(16, 168);
             this.cboQuestionCategory.Size = new System.Drawing.Size(260, 25);
             this.cboQuestionCategory.TabIndex = 9;
             this.cboQuestionCategory.Name = "cboQuestionCategory";
@@ -6286,7 +6298,7 @@
             //
             this.lblQuestionCategoryError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblQuestionCategoryError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblQuestionCategoryError.Location = new System.Drawing.Point(20, 195);
+            this.lblQuestionCategoryError.Location = new System.Drawing.Point(16, 195);
             this.lblQuestionCategoryError.Size = new System.Drawing.Size(260, 16);
             this.lblQuestionCategoryError.TabIndex = 10;
             this.lblQuestionCategoryError.Text = "";
@@ -6298,7 +6310,7 @@
             this.lblDisplayOrder.AutoSize = true;
             this.lblDisplayOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDisplayOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblDisplayOrder.Location = new System.Drawing.Point(300, 142);
+            this.lblDisplayOrder.Location = new System.Drawing.Point(296, 142);
             this.lblDisplayOrder.TabIndex = 11;
             this.lblDisplayOrder.Text = "Display order";
             this.lblDisplayOrder.Name = "lblDisplayOrder";
@@ -6308,7 +6320,7 @@
             this.lblDisplayOrderStar.AutoSize = true;
             this.lblDisplayOrderStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDisplayOrderStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblDisplayOrderStar.Location = new System.Drawing.Point(407, 142);
+            this.lblDisplayOrderStar.Location = new System.Drawing.Point(403, 142);
             this.lblDisplayOrderStar.Size = new System.Drawing.Size(14, 24);
             this.lblDisplayOrderStar.TabIndex = 12;
             this.lblDisplayOrderStar.Text = "*";
@@ -6318,7 +6330,7 @@
             //
             this.numDisplayOrder.AccessibleName = "Display order, 1 to 99 (required)";
             this.numDisplayOrder.Font = new System.Drawing.Font("Consolas", 10F);
-            this.numDisplayOrder.Location = new System.Drawing.Point(300, 168);
+            this.numDisplayOrder.Location = new System.Drawing.Point(296, 168);
             this.numDisplayOrder.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
             this.numDisplayOrder.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             this.numDisplayOrder.Size = new System.Drawing.Size(110, 23);
@@ -6332,7 +6344,7 @@
             //
             this.lblDisplayOrderError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblDisplayOrderError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblDisplayOrderError.Location = new System.Drawing.Point(300, 195);
+            this.lblDisplayOrderError.Location = new System.Drawing.Point(296, 195);
             this.lblDisplayOrderError.Size = new System.Drawing.Size(240, 16);
             this.lblDisplayOrderError.TabIndex = 14;
             this.lblDisplayOrderError.Text = "";
@@ -6346,7 +6358,7 @@
             this.chkQuestionActive.Checked = true;
             this.chkQuestionActive.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkQuestionActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkQuestionActive.Location = new System.Drawing.Point(430, 168);
+            this.chkQuestionActive.Location = new System.Drawing.Point(426, 168);
             this.chkQuestionActive.Size = new System.Drawing.Size(120, 24);
             this.chkQuestionActive.TabIndex = 15;
             this.chkQuestionActive.Text = "Active";
@@ -6358,8 +6370,8 @@
             this.pnlQuestionSummary.Controls.Add(this.lblQuestionSummary);
             this.pnlQuestionSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlQuestionSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlQuestionSummary.Location = new System.Drawing.Point(20, 212);
-            this.pnlQuestionSummary.Size = new System.Drawing.Size(674, 64);
+            this.pnlQuestionSummary.Location = new System.Drawing.Point(16, 212);
+            this.pnlQuestionSummary.Size = new System.Drawing.Size(678, 38);
             this.pnlQuestionSummary.TabIndex = 16;
             this.pnlQuestionSummary.Visible = false;
             this.pnlQuestionSummary.Name = "pnlQuestionSummary";
@@ -6369,7 +6381,7 @@
             this.lblQuestionSummary.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblQuestionSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblQuestionSummary.Location = new System.Drawing.Point(12, 6);
-            this.lblQuestionSummary.Size = new System.Drawing.Size(648, 52);
+            this.lblQuestionSummary.Size = new System.Drawing.Size(652, 26);
             this.lblQuestionSummary.TabIndex = 0;
             this.lblQuestionSummary.Text = "";
             this.lblQuestionSummary.Name = "lblQuestionSummary";
@@ -6492,7 +6504,7 @@
             this.pnlAccountsCard.BackColor = System.Drawing.Color.White;
             this.pnlAccountsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAccountsCard.Location = new System.Drawing.Point(0, 0);
-            this.pnlAccountsCard.Size = new System.Drawing.Size(926, 236);
+            this.pnlAccountsCard.Size = new System.Drawing.Size(926, 269);
             this.pnlAccountsCard.TabIndex = 0;
             this.pnlAccountsCard.Name = "pnlAccountsCard";
             //
@@ -6572,7 +6584,7 @@
             this.dgvAccounts.ReadOnly = true;
             this.dgvAccounts.RowHeadersVisible = false;
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(892, 176);
+            this.dgvAccounts.Size = new System.Drawing.Size(892, 209);
             this.dgvAccounts.TabIndex = 3;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.RowTemplate.Height = 30;
@@ -6643,7 +6655,7 @@
             this.pnlAccountFormCard.Controls.Add(this.pnlAccountSummary);
             this.pnlAccountFormCard.BackColor = System.Drawing.Color.White;
             this.pnlAccountFormCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAccountFormCard.Location = new System.Drawing.Point(0, 248);
+            this.pnlAccountFormCard.Location = new System.Drawing.Point(0, 281);
             this.pnlAccountFormCard.Size = new System.Drawing.Size(926, 279);
             this.pnlAccountFormCard.TabIndex = 1;
             this.pnlAccountFormCard.Name = "pnlAccountFormCard";
@@ -6670,7 +6682,7 @@
             // lblAccountRequiredNote
             //
             this.lblAccountRequiredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblAccountRequiredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
+            this.lblAccountRequiredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblAccountRequiredNote.Location = new System.Drawing.Point(700, 12);
             this.lblAccountRequiredNote.Size = new System.Drawing.Size(206, 18);
             this.lblAccountRequiredNote.TabIndex = 2;
@@ -6683,7 +6695,7 @@
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblUsername.Location = new System.Drawing.Point(20, 44);
+            this.lblUsername.Location = new System.Drawing.Point(16, 44);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username";
             this.lblUsername.Name = "lblUsername";
@@ -6693,7 +6705,7 @@
             this.lblUsernameStar.AutoSize = true;
             this.lblUsernameStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblUsernameStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblUsernameStar.Location = new System.Drawing.Point(102, 44);
+            this.lblUsernameStar.Location = new System.Drawing.Point(98, 44);
             this.lblUsernameStar.Size = new System.Drawing.Size(14, 24);
             this.lblUsernameStar.TabIndex = 4;
             this.lblUsernameStar.Text = "*";
@@ -6703,7 +6715,7 @@
             //
             this.txtUsername.AccessibleName = "Username (required, up to 50 characters, unique)";
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtUsername.Location = new System.Drawing.Point(20, 70);
+            this.txtUsername.Location = new System.Drawing.Point(16, 70);
             this.txtUsername.MaxLength = 50;
             this.txtUsername.Size = new System.Drawing.Size(200, 25);
             this.txtUsername.TabIndex = 5;
@@ -6714,7 +6726,7 @@
             //
             this.lblUsernameError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblUsernameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblUsernameError.Location = new System.Drawing.Point(20, 97);
+            this.lblUsernameError.Location = new System.Drawing.Point(16, 97);
             this.lblUsernameError.Size = new System.Drawing.Size(210, 16);
             this.lblUsernameError.TabIndex = 6;
             this.lblUsernameError.Text = "";
@@ -6726,7 +6738,7 @@
             this.lblFullName.AutoSize = true;
             this.lblFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblFullName.Location = new System.Drawing.Point(240, 44);
+            this.lblFullName.Location = new System.Drawing.Point(236, 44);
             this.lblFullName.TabIndex = 7;
             this.lblFullName.Text = "Full name";
             this.lblFullName.Name = "lblFullName";
@@ -6736,7 +6748,7 @@
             this.lblFullNameStar.AutoSize = true;
             this.lblFullNameStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblFullNameStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblFullNameStar.Location = new System.Drawing.Point(323, 44);
+            this.lblFullNameStar.Location = new System.Drawing.Point(319, 44);
             this.lblFullNameStar.Size = new System.Drawing.Size(14, 24);
             this.lblFullNameStar.TabIndex = 8;
             this.lblFullNameStar.Text = "*";
@@ -6746,7 +6758,7 @@
             //
             this.txtFullName.AccessibleName = "Full name (required, up to 100 characters)";
             this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtFullName.Location = new System.Drawing.Point(240, 70);
+            this.txtFullName.Location = new System.Drawing.Point(236, 70);
             this.txtFullName.MaxLength = 100;
             this.txtFullName.Size = new System.Drawing.Size(280, 25);
             this.txtFullName.TabIndex = 9;
@@ -6757,7 +6769,7 @@
             //
             this.lblFullNameError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblFullNameError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblFullNameError.Location = new System.Drawing.Point(240, 97);
+            this.lblFullNameError.Location = new System.Drawing.Point(236, 97);
             this.lblFullNameError.Size = new System.Drawing.Size(290, 16);
             this.lblFullNameError.TabIndex = 10;
             this.lblFullNameError.Text = "";
@@ -6769,7 +6781,7 @@
             this.lblRole.AutoSize = true;
             this.lblRole.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblRole.Location = new System.Drawing.Point(540, 44);
+            this.lblRole.Location = new System.Drawing.Point(536, 44);
             this.lblRole.TabIndex = 11;
             this.lblRole.Text = "Role";
             this.lblRole.Name = "lblRole";
@@ -6779,7 +6791,7 @@
             this.lblRoleStar.AutoSize = true;
             this.lblRoleStar.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblRoleStar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRoleStar.Location = new System.Drawing.Point(579, 44);
+            this.lblRoleStar.Location = new System.Drawing.Point(575, 44);
             this.lblRoleStar.Size = new System.Drawing.Size(14, 24);
             this.lblRoleStar.TabIndex = 12;
             this.lblRoleStar.Text = "*";
@@ -6791,7 +6803,7 @@
             this.cboRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRole.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboRole.FormattingEnabled = true;
-            this.cboRole.Location = new System.Drawing.Point(540, 70);
+            this.cboRole.Location = new System.Drawing.Point(536, 70);
             this.cboRole.Size = new System.Drawing.Size(200, 25);
             this.cboRole.TabIndex = 13;
             this.cboRole.Name = "cboRole";
@@ -6801,7 +6813,7 @@
             //
             this.lblRoleError.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRoleError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblRoleError.Location = new System.Drawing.Point(540, 97);
+            this.lblRoleError.Location = new System.Drawing.Point(536, 97);
             this.lblRoleError.Size = new System.Drawing.Size(200, 16);
             this.lblRoleError.TabIndex = 14;
             this.lblRoleError.Text = "";
@@ -6815,7 +6827,7 @@
             this.chkAccountActive.Checked = true;
             this.chkAccountActive.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkAccountActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkAccountActive.Location = new System.Drawing.Point(760, 70);
+            this.chkAccountActive.Location = new System.Drawing.Point(756, 70);
             this.chkAccountActive.Size = new System.Drawing.Size(140, 24);
             this.chkAccountActive.TabIndex = 15;
             this.chkAccountActive.Text = "Active";
@@ -6833,19 +6845,19 @@
             this.pnlPassword.Controls.Add(this.lblConfirmPasswordError);
             this.pnlPassword.Controls.Add(this.lblPasswordHint);
             this.pnlPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.pnlPassword.Location = new System.Drawing.Point(20, 118);
+            this.pnlPassword.Location = new System.Drawing.Point(16, 118);
             this.pnlPassword.Size = new System.Drawing.Size(560, 150);
             this.pnlPassword.TabIndex = 16;
             this.pnlPassword.Name = "pnlPassword";
             //
             // lblPasswordHeading
             //
-            this.lblPasswordHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblPasswordHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblPasswordHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblPasswordHeading.Location = new System.Drawing.Point(12, 6);
-            this.lblPasswordHeading.Size = new System.Drawing.Size(536, 20);
+            this.lblPasswordHeading.Location = new System.Drawing.Point(12, 4);
+            this.lblPasswordHeading.Size = new System.Drawing.Size(536, 24);
             this.lblPasswordHeading.TabIndex = 0;
-            this.lblPasswordHeading.Text = "Password \u2014 required for a new account; optional on update (resets it)";
+            this.lblPasswordHeading.Text = "Password \u2014 required for a new account; optional on update";
             this.lblPasswordHeading.Name = "lblPasswordHeading";
             //
             // lblNewPassword
@@ -6927,8 +6939,8 @@
             this.pnlAccountSummary.Controls.Add(this.lblAccountSummary);
             this.pnlAccountSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlAccountSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAccountSummary.Location = new System.Drawing.Point(600, 118);
-            this.pnlAccountSummary.Size = new System.Drawing.Size(306, 150);
+            this.pnlAccountSummary.Location = new System.Drawing.Point(596, 118);
+            this.pnlAccountSummary.Size = new System.Drawing.Size(310, 150);
             this.pnlAccountSummary.TabIndex = 17;
             this.pnlAccountSummary.Visible = false;
             this.pnlAccountSummary.Name = "pnlAccountSummary";
@@ -6938,7 +6950,7 @@
             this.lblAccountSummary.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblAccountSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblAccountSummary.Location = new System.Drawing.Point(12, 6);
-            this.lblAccountSummary.Size = new System.Drawing.Size(280, 138);
+            this.lblAccountSummary.Size = new System.Drawing.Size(284, 138);
             this.lblAccountSummary.TabIndex = 0;
             this.lblAccountSummary.Text = "";
             this.lblAccountSummary.Name = "lblAccountSummary";
@@ -7499,6 +7511,7 @@
         private System.Windows.Forms.Label lblRscOutcome;
         private System.Windows.Forms.ComboBox cboRscOutcome;
         private System.Windows.Forms.Button btnRscFind;
+        private System.Windows.Forms.Button btnRscClear;
         private System.Windows.Forms.Label lblRscSearchHint;
         private System.Windows.Forms.Panel pnlRscResultsCard;
         private System.Windows.Forms.Panel pnlRscResultsHeadingBar;

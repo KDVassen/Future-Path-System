@@ -253,20 +253,13 @@ namespace FuturePath.PresentationLayer
             lblQuestionCount.Text = total + (total == 1 ? " question" : " questions") + scope + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
         private void dgvQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colQuestionsStatus.Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == colQuestionsStatus.Index)
             {
-                return;
+                FormatStatusChip(e, QuestionnaireIsTrue(e.Value));
             }
-
-            bool active = QuestionnaireIsTrue(e.Value);
-            e.Value = active ? "✓ Active" : "Inactive";
-            e.CellStyle.ForeColor = active ? GreenColour : MutedColour;
-            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-            e.CellStyle.Font = ChipFont;
-            e.FormattingApplied = true;
         }
 
         /// <summary>
@@ -339,10 +332,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Validates the whole form; shows field messages and the validation summary.</summary>
         private bool QuestionnaireValidateForm()
         {
-            var problems = new List<KeyValuePair<Control, string>>();
-            if (!QuestionnaireCheckStatement()) problems.Add(new KeyValuePair<Control, string>(txtStatement, lblStatementError.Text.TrimStart('⚠', ' ')));
-            if (!QuestionnaireCheckCategory()) problems.Add(new KeyValuePair<Control, string>(cboQuestionCategory, lblQuestionCategoryError.Text.TrimStart('⚠', ' ')));
-            if (!QuestionnaireCheckDisplayOrder()) problems.Add(new KeyValuePair<Control, string>(numDisplayOrder, lblDisplayOrderError.Text.TrimStart('⚠', ' ')));
+            var problems = new List<string>();
+            var invalid = new List<Control>();
+            if (!QuestionnaireCheckStatement()) { problems.Add("Statement"); invalid.Add(txtStatement); }
+            if (!QuestionnaireCheckCategory()) { problems.Add("Category"); invalid.Add(cboQuestionCategory); }
+            if (!QuestionnaireCheckDisplayOrder()) { problems.Add("Display order"); invalid.Add(numDisplayOrder); }
 
             if (problems.Count == 0)
             {
@@ -350,16 +344,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            var lines = new List<string>();
-            foreach (KeyValuePair<Control, string> problem in problems)
-            {
-                lines.Add("• " + problem.Value);
-            }
-
-            lblQuestionSummary.Text = string.Join(Environment.NewLine, lines);
-            pnlQuestionSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct before the question can be saved.", true);
-            problems[0].Key.Focus();
+            ShowFormSummary(pnlQuestionSummary, lblQuestionSummary, problems, invalid[0], "the question");
             return false;
         }
 

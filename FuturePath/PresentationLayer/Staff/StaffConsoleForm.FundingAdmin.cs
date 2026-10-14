@@ -283,22 +283,16 @@ namespace FuturePath.PresentationLayer
             FundingAdminLoadFundingDetail(fundingAdminSelectedFundingId.Value);
         }
 
-        /// <summary>Display formatting only: green Active / grey Inactive status chips.</summary>
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == colFundingStatus.Index && e.Value is bool)
             {
-                bool active = (bool)e.Value;
-                e.Value = active ? "Active" : "Inactive";
-                e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-                e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
-                e.FormattingApplied = true;
+                FormatStatusChip(e, (bool)e.Value);
             }
         }
 
-        /// <summary>Shows "n funding options · m active" above the grid.</summary>
+        /// <summary>Shows "n funding options · m active" in the grid card's heading row.</summary>
         private void FundingAdminUpdateFundingCount()
         {
             int active = 0;
@@ -308,8 +302,7 @@ namespace FuturePath.PresentationLayer
             }
 
             int total = dgvFunding.Rows.Count;
-            lblFundingCount.Text = total + (total == 1 ? " funding option" : " funding options") + " · " + active +
-                " active. Learners see active options only.";
+            lblFundingCount.Text = total + (total == 1 ? " funding option" : " funding options") + " · " + active + " active";
         }
 
         #endregion
@@ -320,9 +313,10 @@ namespace FuturePath.PresentationLayer
         private bool FundingAdminValidateForm()
         {
             var problems = new List<string>();
-            if (!FundingAdminCheckFundingName()) problems.Add("Funding name");
-            if (!FundingAdminCheckFundingType()) problems.Add("Funding type");
-            if (!FundingAdminCheckEligibility()) problems.Add("Eligibility description");
+            var invalid = new List<Control>();
+            if (!FundingAdminCheckFundingName()) { problems.Add("Funding name"); invalid.Add(txtFundingName); }
+            if (!FundingAdminCheckFundingType()) { problems.Add("Funding type"); invalid.Add(cboFundingType); }
+            if (!FundingAdminCheckEligibility()) { problems.Add("Eligibility description"); invalid.Add(txtEligibility); }
 
             if (problems.Count == 0)
             {
@@ -330,11 +324,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblFndSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct: " +
-                string.Join(", ", problems) + ".";
-            pnlFndSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the funding option can be saved.", true);
+            ShowFormSummary(pnlFndSummary, lblFndSummary, problems, invalid[0], "the funding option");
             return false;
         }
 

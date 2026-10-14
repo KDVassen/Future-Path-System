@@ -22,8 +22,6 @@ namespace FuturePath.PresentationLayer
         /// <summary>Minimum password length checked in the form (the BLL checks it again).</summary>
         private const int AccountsMinimumPasswordLength = 8;
 
-        private const string AccountsOwnAccountMessage = "Active: you cannot deactivate your own account. Ask another administrator.";
-
         /// <summary>UserID of the account being edited; null while adding a new account.</summary>
         private int? accountsSelectedUserId;
 
@@ -268,20 +266,13 @@ namespace FuturePath.PresentationLayer
             lblAccountCount.Text = total + (total == 1 ? " account" : " accounts") + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
         private void dgvAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colAccountsStatus.Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == colAccountsStatus.Index)
             {
-                return;
+                FormatStatusChip(e, AccountsIsTrue(e.Value));
             }
-
-            bool active = AccountsIsTrue(e.Value);
-            e.Value = active ? "✓ Active" : "Inactive";
-            e.CellStyle.ForeColor = active ? GreenColour : MutedColour;
-            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-            e.CellStyle.Font = ChipFont;
-            e.FormattingApplied = true;
         }
 
         /// <summary>
@@ -341,19 +332,18 @@ namespace FuturePath.PresentationLayer
         /// <param name="isNew">True on Add: the password is then required.</param>
         private bool AccountsValidateForm(bool isNew)
         {
-            var problems = new List<KeyValuePair<Control, string>>();
-            if (!AccountsCheckUsername()) problems.Add(AccountsProblem(txtUsername, lblUsernameError));
-            if (!AccountsCheckFullName()) problems.Add(AccountsProblem(txtFullName, lblFullNameError));
-            if (!AccountsCheckRole()) problems.Add(AccountsProblem(cboRole, lblRoleError));
-            if (!AccountsCheckNewPassword(isNew)) problems.Add(AccountsProblem(txtNewPassword, lblNewPasswordError));
-            if (!AccountsCheckConfirmPassword(isNew)) problems.Add(AccountsProblem(txtConfirmPassword, lblConfirmPasswordError));
+            var problems = new List<string>();
+            var invalid = new List<Control>();
+            if (!AccountsCheckUsername()) { problems.Add("Username"); invalid.Add(txtUsername); }
+            if (!AccountsCheckFullName()) { problems.Add("Full name"); invalid.Add(txtFullName); }
+            if (!AccountsCheckRole()) { problems.Add("Role"); invalid.Add(cboRole); }
+            if (!AccountsCheckNewPassword(isNew)) { problems.Add("New password"); invalid.Add(txtNewPassword); }
+            if (!AccountsCheckConfirmPassword(isNew)) { problems.Add("Confirm password"); invalid.Add(txtConfirmPassword); }
 
+            // An Administrator may not switch off their own account: Active turns red and is listed in the summary.
             bool ownAccountOff = !isNew && accountsSelectedUserId.HasValue && accountsSelectedUserId.Value == UserId && !chkAccountActive.Checked;
             chkAccountActive.ForeColor = ownAccountOff ? RedColour : InkColour;
-            if (ownAccountOff)
-            {
-                problems.Add(new KeyValuePair<Control, string>(chkAccountActive, AccountsOwnAccountMessage));
-            }
+            if (ownAccountOff) { problems.Add("Active"); invalid.Add(chkAccountActive); }
 
             if (problems.Count == 0)
             {
@@ -361,27 +351,8 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            // The summary names each field; the full correction is in the field message under it.
-            var lines = new List<string>();
-            foreach (KeyValuePair<Control, string> problem in problems)
-            {
-                int colon = problem.Value.IndexOf(':');
-                lines.Add("• " + (colon > 0 ? problem.Value.Substring(0, colon) : problem.Value));
-            }
-
-            lblAccountSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct (see the message under each):" +
-                Environment.NewLine + string.Join(Environment.NewLine, lines);
-            pnlAccountSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the account can be saved. Re-enter any password.", true);
-            problems[0].Key.Focus();
+            ShowFormSummary(pnlAccountSummary, lblAccountSummary, problems, invalid[0], "the account");
             return false;
-        }
-
-        /// <summary>One summary entry: the control to focus and its field message without the warning glyph.</summary>
-        private static KeyValuePair<Control, string> AccountsProblem(Control input, Label messageLabel)
-        {
-            return new KeyValuePair<Control, string>(input, messageLabel.Text.TrimStart('⚠', ' '));
         }
 
         /// <summary>Username: required, at most 50 characters of letters, digits, . _ and -.</summary>

@@ -29,13 +29,10 @@ namespace FuturePath.PresentationLayer
     {
         #region Palette (spec 2.2.6) — runtime colours and fonts; everything else is set in the Designer
 
-        private static readonly Color NavyColour = Color.FromArgb(19, 41, 75);
         private static readonly Color DeepNavy = Color.FromArgb(11, 31, 58);
         private static readonly Color InkColour = Color.FromArgb(27, 31, 36);
         private static readonly Color MutedColour = Color.FromArgb(88, 96, 108);
-        private static readonly Color GreyColour = Color.FromArgb(88, 96, 108);
         private static readonly Color GreyTint = Color.FromArgb(236, 238, 241);
-        private static readonly Color RuleColour = Color.FromArgb(215, 220, 227);
         private static readonly Color BlueColour = Color.FromArgb(31, 95, 168);
         private static readonly Color BlueTint = Color.FromArgb(232, 238, 246);
         private static readonly Color AmberColour = Color.FromArgb(200, 137, 43);
@@ -327,6 +324,39 @@ namespace FuturePath.PresentationLayer
             messageLabel.Visible = !valid;
             input.AccessibleDescription = valid ? null : message;
             return valid;
+        }
+
+        /// <summary>
+        /// Shows a UI 13 form's validation summary — "⚠ n entries to correct: A, B." — with the matching
+        /// status message, then moves focus to the first invalid control.
+        /// </summary>
+        /// <param name="summaryPanel">The form's red summary panel.</param>
+        /// <param name="summaryLabel">The label inside it.</param>
+        /// <param name="fields">The names of the fields to correct, in screen order.</param>
+        /// <param name="firstInvalid">The first control to correct (receives the focus).</param>
+        /// <param name="savedItem">What cannot be saved yet, e.g. "the programme".</param>
+        private void ShowFormSummary(Panel summaryPanel, Label summaryLabel, List<string> fields, Control firstInvalid, string savedItem)
+        {
+            string count = fields.Count + (fields.Count == 1 ? " entry" : " entries");
+            summaryLabel.Text = "⚠ " + count + " to correct: " + string.Join(", ", fields) + ".";
+            summaryPanel.Visible = true;
+            ReportStatus(count + " to correct before " + savedItem + " can be saved.", true);
+            if (firstInvalid != null && firstInvalid.CanFocus)
+            {
+                firstInvalid.Focus();
+            }
+        }
+
+        /// <summary>Shows an IsActive cell as a status chip (13.1–13.6): "✓ Active" in green or "Inactive" in grey.</summary>
+        private static void FormatStatusChip(DataGridViewCellFormattingEventArgs e, bool active)
+        {
+            e.Value = active ? "✓ Active" : "Inactive";
+            e.CellStyle.ForeColor = active ? GreenColour : MutedColour;
+            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
+            e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+            e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+            e.CellStyle.Font = ChipFont;
+            e.FormattingApplied = true;
         }
 
         /// <summary>

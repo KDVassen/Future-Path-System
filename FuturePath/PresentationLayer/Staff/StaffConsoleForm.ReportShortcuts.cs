@@ -9,7 +9,8 @@ namespace FuturePath.PresentationLayer
     /// UI 10.3c — Advisory reports tab of the Sessions dashboard (read-only).
     /// The advisor sets a session date range and optional faculty, grade and outcome filters, and
     /// sees the three reports (FP-LSR, FP-DIE, FP-LER) with their scope, the number of rows those
-    /// criteria put in scope and when each was last generated. <b>Generate report</b> checks the
+    /// criteria put in scope and when each was last generated. Find lists the reports for the criteria
+    /// and Clear resets them, as on 10.1a and 10.2b. <b>Generate report</b> checks the
     /// date range and opens Report generation (UI 11) already filtered.
     /// </summary>
     public partial class StaffConsoleForm
@@ -177,6 +178,21 @@ namespace FuturePath.PresentationLayer
         private void btnRscFind_Click(object sender, EventArgs e)
         {
             ReportShortcutsFind();
+        }
+
+        /// <summary>Clears the criteria (back to the current year to date), any field message and the report list.</summary>
+        private void btnRscClear_Click(object sender, EventArgs e)
+        {
+            dtpRscFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
+            dtpRscTo.Value = DateTime.Today;
+            cboRscFaculty.SelectedIndex = -1;
+            cboRscGrade.SelectedIndex = -1;
+            cboRscOutcome.SelectedIndex = -1;
+            ReportShortcutsCheckDateRange();
+            dgvReports.DataSource = null;
+            lblRscResultsCount.Text = "Rows in scope follow the criteria above";
+            ReportStatus("Search criteria cleared.", false);
+            dtpRscFrom.Focus();
         }
 
         /// <summary>Shows Last generated as dd/MM/yyyy HH:mm, or "Never" (display formatting only).</summary>

@@ -402,13 +402,7 @@ namespace FuturePath.PresentationLayer
         {
             if (e.ColumnIndex == colProgrammesStatus.Index && e.Value is bool)
             {
-                bool active = (bool)e.Value;
-                e.Value = active ? "Active" : "Inactive";
-                e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-                e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
-                e.FormattingApplied = true;
+                FormatStatusChip(e, (bool)e.Value);
             }
             else if (e.ColumnIndex == colProgrammesMinimumAverage.Index)
             {
@@ -419,7 +413,7 @@ namespace FuturePath.PresentationLayer
                 }
                 else if (e.Value is decimal)
                 {
-                    e.Value = ((decimal)e.Value).ToString("0.00", CultureInfo.CurrentCulture) + " %";
+                    e.Value = ((decimal)e.Value).ToString("0.#'%'", CultureInfo.CurrentCulture);
                     e.FormattingApplied = true;
                 }
             }
@@ -433,9 +427,10 @@ namespace FuturePath.PresentationLayer
         private bool UniversityValidateForm()
         {
             var problems = new List<string>();
-            if (!UniversityCheckProgrammeFaculty()) problems.Add("Faculty");
-            if (!UniversityCheckProgrammeName()) problems.Add("Programme name");
-            if (!UniversityCheckMinimumAverage()) problems.Add("Minimum overall average %");
+            var invalid = new List<Control>();
+            if (!UniversityCheckProgrammeFaculty()) { problems.Add("Faculty"); invalid.Add(cboProgrammeFaculty); }
+            if (!UniversityCheckProgrammeName()) { problems.Add("Programme name"); invalid.Add(txtProgrammeName); }
+            if (!UniversityCheckMinimumAverage()) { problems.Add("Minimum overall average %"); invalid.Add(numMinimumAverage); }
 
             if (problems.Count == 0)
             {
@@ -443,11 +438,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblUniSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct: " +
-                string.Join(", ", problems) + ".";
-            pnlUniSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the programme can be saved.", true);
+            ShowFormSummary(pnlUniSummary, lblUniSummary, problems, invalid[0], "the programme");
             return false;
         }
 

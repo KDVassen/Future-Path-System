@@ -265,20 +265,13 @@ namespace FuturePath.PresentationLayer
             lblCategoryCount.Text = total + (total == 1 ? " category" : " categories") + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
         private void dgvCategories_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colCategoriesStatus.Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == colCategoriesStatus.Index)
             {
-                return;
+                FormatStatusChip(e, CategoriesIsTrue(e.Value));
             }
-
-            bool active = CategoriesIsTrue(e.Value);
-            e.Value = active ? "✓ Active" : "Inactive";
-            e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-            e.CellStyle.Font = ChipFont;
-            e.FormattingApplied = true;
         }
 
         /// <summary>
@@ -453,10 +446,8 @@ namespace FuturePath.PresentationLayer
         private bool CategoriesValidateForm()
         {
             var problems = new List<string>();
-            if (!CategoriesCheckName())
-            {
-                problems.Add(lblCategoryNameError.Text.TrimStart('⚠', ' '));
-            }
+            var invalid = new List<Control>();
+            if (!CategoriesCheckName()) { problems.Add("Category name"); invalid.Add(txtCategoryName); }
 
             if (problems.Count == 0)
             {
@@ -464,11 +455,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblCategorySummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct:" +
-                Environment.NewLine + "• " + string.Join(Environment.NewLine + "• ", problems);
-            pnlCategorySummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct before the category can be saved.", true);
-            txtCategoryName.Focus();
+            ShowFormSummary(pnlCategorySummary, lblCategorySummary, problems, invalid[0], "the category");
             return false;
         }
 

@@ -364,13 +364,7 @@ namespace FuturePath.PresentationLayer
         {
             if (e.ColumnIndex == colRequirementsStatus.Index && e.Value is bool)
             {
-                bool active = (bool)e.Value;
-                e.Value = active ? "Active" : "Inactive";
-                e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-                e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
-                e.FormattingApplied = true;
+                FormatStatusChip(e, (bool)e.Value);
             }
             else if ((e.ColumnIndex == colRequirementsSubject.Index || e.ColumnIndex == colRequirementsAlternative.Index
                       || e.ColumnIndex == colRequirementsMinimumMark.Index) && RequirementsIsEmpty(e.Value))
@@ -380,7 +374,7 @@ namespace FuturePath.PresentationLayer
             }
             else if (e.ColumnIndex == colRequirementsMinimumMark.Index && e.Value is decimal)
             {
-                e.Value = ((decimal)e.Value).ToString("0.##", CultureInfo.CurrentCulture);
+                e.Value = ((decimal)e.Value).ToString("0.#'%'", CultureInfo.CurrentCulture);
                 e.FormattingApplied = true;
             }
         }
@@ -393,14 +387,15 @@ namespace FuturePath.PresentationLayer
         private bool RequirementsValidateForm()
         {
             var problems = new List<string>();
+            var invalid = new List<Control>();
             if (!requirementsEditingMinimumAverage)
             {
-                if (!RequirementsCheckRequirementType()) problems.Add("Requirement type");
-                if (!RequirementsCheckSubject()) problems.Add("Subject");
-                if (!RequirementsCheckAlternative()) problems.Add("Accepted alternative");
+                if (!RequirementsCheckRequirementType()) { problems.Add("Requirement type"); invalid.Add(cboRequirementType); }
+                if (!RequirementsCheckSubject()) { problems.Add("Subject"); invalid.Add(cboSubject); }
+                if (!RequirementsCheckAlternative()) { problems.Add("Accepted alternative"); invalid.Add(cboAlternative); }
             }
 
-            if (!RequirementsCheckMinimumMark()) problems.Add("Min. mark %");
+            if (!RequirementsCheckMinimumMark()) { problems.Add("Min. mark %"); invalid.Add(numMinimumMark); }
 
             if (problems.Count == 0)
             {
@@ -408,11 +403,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblReqSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct: " +
-                string.Join(", ", problems) + ".";
-            pnlReqSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the requirement can be saved.", true);
+            ShowFormSummary(pnlReqSummary, lblReqSummary, problems, invalid[0], "the requirement");
             return false;
         }
 
