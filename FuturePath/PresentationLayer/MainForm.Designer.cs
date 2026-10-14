@@ -29,63 +29,63 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.tabMain = new System.Windows.Forms.TabControl();
+            this.tcMain = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.pnlHomeContent = new System.Windows.Forms.Panel();
             this.lblIntro = new System.Windows.Forms.Label();
             this.pnlLearnerCard = new System.Windows.Forms.Panel();
-            this.lblLearnerHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlLearnerHeadingBar = new System.Windows.Forms.Panel();
             this.lblLearnerHeading = new System.Windows.Forms.Label();
             this.lblLearnerText = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.pnlStaffCard = new System.Windows.Forms.Panel();
-            this.lblStaffHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlStaffHeadingBar = new System.Windows.Forms.Panel();
             this.lblStaffHeading = new System.Windows.Forms.Label();
             this.lblStaffText = new System.Windows.Forms.Label();
             this.btnStaffLogin = new System.Windows.Forms.Button();
             this.lblHomeDisclaimer = new System.Windows.Forms.Label();
             this.tabProfile = new System.Windows.Forms.TabPage();
-            this.pnlProfContent = new System.Windows.Forms.Panel();
+            this.pnlProfileContent = new System.Windows.Forms.Panel();
             this.pnlWhoCard = new System.Windows.Forms.Panel();
-            this.lblWhoHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlWhoHeadingBar = new System.Windows.Forms.Panel();
             this.lblWhoHeading = new System.Windows.Forms.Label();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblSurname = new System.Windows.Forms.Label();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.pnlSchoolCard = new System.Windows.Forms.Panel();
-            this.lblSchoolHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlSchoolHeadingBar = new System.Windows.Forms.Panel();
             this.lblSchoolHeading = new System.Windows.Forms.Label();
             this.lblGrade = new System.Windows.Forms.Label();
             this.lblGradeStar = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
             this.numAdvisingYear = new System.Windows.Forms.NumericUpDown();
             this.lblAdvisingYearError = new System.Windows.Forms.Label();
             this.pnlContactCard = new System.Windows.Forms.Panel();
-            this.lblContactHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlContactHeadingBar = new System.Windows.Forms.Panel();
             this.lblContactHeading = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -115,7 +115,7 @@
             this.lblMobileError = new System.Windows.Forms.Label();
             this.lblContactNote = new System.Windows.Forms.Label();
             this.pnlSessionCard = new System.Windows.Forms.Panel();
-            this.lblSessionHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlSessionHeadingBar = new System.Windows.Forms.Panel();
             this.lblSessionHeading = new System.Windows.Forms.Label();
             this.lblSessionNumber = new System.Windows.Forms.Label();
             this.txtSessionNumber = new System.Windows.Forms.TextBox();
@@ -126,10 +126,15 @@
             this.lblSessionStatus = new System.Windows.Forms.Label();
             this.txtSessionStatus = new System.Windows.Forms.TextBox();
             this.lblProfRequiredNote = new System.Windows.Forms.Label();
+            this.lblProfileNotice = new System.Windows.Forms.Label();
+            this.flpProfileActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnProfileSave = new System.Windows.Forms.Button();
+            this.btnProfileBack = new System.Windows.Forms.Button();
+            this.btnProfileCancel = new System.Windows.Forms.Button();
             this.tabSubjects = new System.Windows.Forms.TabPage();
-            this.pnlSubjContent = new System.Windows.Forms.Panel();
+            this.pnlSubjectsContent = new System.Windows.Forms.Panel();
             this.pnlAddCard = new System.Windows.Forms.Panel();
-            this.lblAddHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlAddHeadingBar = new System.Windows.Forms.Panel();
             this.lblAddHeading = new System.Windows.Forms.Label();
             this.lblSubject = new System.Windows.Forms.Label();
             this.lblSubjectStar = new System.Windows.Forms.Label();
@@ -145,20 +150,25 @@
             this.pnlSummary = new System.Windows.Forms.Panel();
             this.lblSummary = new System.Windows.Forms.Label();
             this.pnlCapturedCard = new System.Windows.Forms.Panel();
-            this.lblCapturedHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlCapturedHeadingBar = new System.Windows.Forms.Panel();
             this.lblCapturedHeading = new System.Windows.Forms.Label();
             this.lblCapturedCount = new System.Windows.Forms.Label();
             this.dgvSubjects = new System.Windows.Forms.DataGridView();
-            this.colSubjSubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubjectLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSubjMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAchievementLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRemove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colSubjectsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubjectsLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubjectsMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubjectsAchievement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSubjectsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lblFooter = new System.Windows.Forms.Label();
+            this.lblSubjectsNotice = new System.Windows.Forms.Label();
+            this.flpSubjectsActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSubjectsSave = new System.Windows.Forms.Button();
+            this.btnSubjectsBack = new System.Windows.Forms.Button();
+            this.btnSubjectsCancel = new System.Windows.Forms.Button();
             this.tabInterests = new System.Windows.Forms.TabPage();
-            this.pnlIntContent = new System.Windows.Forms.Panel();
+            this.pnlInterestsContent = new System.Windows.Forms.Panel();
             this.pnlQuestionCard = new System.Windows.Forms.Panel();
-            this.lblQuestionHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlQuestionHeadingBar = new System.Windows.Forms.Panel();
             this.lblQuestionHeading = new System.Windows.Forms.Label();
             this.lblAnsweredCount = new System.Windows.Forms.Label();
             this.pnlStatementHeader = new System.Windows.Forms.Panel();
@@ -169,29 +179,34 @@
             this.lblHeaderResponse4 = new System.Windows.Forms.Label();
             this.lblHeaderResponse5 = new System.Windows.Forms.Label();
             this.pnlStatements = new System.Windows.Forms.Panel();
-            this.tileAnswered = new System.Windows.Forms.Panel();
-            this.tileAnsweredCaption = new System.Windows.Forms.Label();
-            this.tileAnsweredValue = new System.Windows.Forms.Label();
-            this.tileAnsweredNote = new System.Windows.Forms.Label();
-            this.tileCategory1 = new System.Windows.Forms.Panel();
-            this.tileCategory1Caption = new System.Windows.Forms.Label();
-            this.tileCategory1Value = new System.Windows.Forms.Label();
-            this.tileCategory1Note = new System.Windows.Forms.Label();
-            this.tileCategory2 = new System.Windows.Forms.Panel();
-            this.tileCategory2Caption = new System.Windows.Forms.Label();
-            this.tileCategory2Value = new System.Windows.Forms.Label();
-            this.tileCategory2Note = new System.Windows.Forms.Label();
-            this.tileCategory3 = new System.Windows.Forms.Panel();
-            this.tileCategory3Caption = new System.Windows.Forms.Label();
-            this.tileCategory3Value = new System.Windows.Forms.Label();
-            this.tileCategory3Note = new System.Windows.Forms.Label();
+            this.pnlAnsweredTile = new System.Windows.Forms.Panel();
+            this.lblAnsweredTileCaption = new System.Windows.Forms.Label();
+            this.lblAnsweredTileValue = new System.Windows.Forms.Label();
+            this.lblAnsweredTileNote = new System.Windows.Forms.Label();
+            this.pnlCategory1Tile = new System.Windows.Forms.Panel();
+            this.lblCategory1TileCaption = new System.Windows.Forms.Label();
+            this.lblCategory1TileValue = new System.Windows.Forms.Label();
+            this.lblCategory1TileNote = new System.Windows.Forms.Label();
+            this.pnlCategory2Tile = new System.Windows.Forms.Panel();
+            this.lblCategory2TileCaption = new System.Windows.Forms.Label();
+            this.lblCategory2TileValue = new System.Windows.Forms.Label();
+            this.lblCategory2TileNote = new System.Windows.Forms.Label();
+            this.pnlCategory3Tile = new System.Windows.Forms.Panel();
+            this.lblCategory3TileCaption = new System.Windows.Forms.Label();
+            this.lblCategory3TileValue = new System.Windows.Forms.Label();
+            this.lblCategory3TileNote = new System.Windows.Forms.Label();
+            this.lblInterestsNotice = new System.Windows.Forms.Label();
+            this.flpInterestsActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnInterestsSave = new System.Windows.Forms.Button();
+            this.btnInterestsBack = new System.Windows.Forms.Button();
+            this.btnInterestsCancel = new System.Windows.Forms.Button();
             this.tabFaculty = new System.Windows.Forms.TabPage();
-            this.pnlSelContent = new System.Windows.Forms.Panel();
+            this.pnlFacultyContent = new System.Windows.Forms.Panel();
             this.pnlSearchCard = new System.Windows.Forms.Panel();
-            this.lblSearchHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlSearchHeadingBar = new System.Windows.Forms.Panel();
             this.lblSearchHeading = new System.Windows.Forms.Label();
-            this.rbBrowse = new System.Windows.Forms.RadioButton();
-            this.rbSearch = new System.Windows.Forms.RadioButton();
+            this.rdoBrowse = new System.Windows.Forms.RadioButton();
+            this.rdoSearch = new System.Windows.Forms.RadioButton();
             this.lblSelFaculty = new System.Windows.Forms.Label();
             this.lblFacultyStar = new System.Windows.Forms.Label();
             this.cboSelFaculty = new System.Windows.Forms.ComboBox();
@@ -200,86 +215,100 @@
             this.txtProgrammeSearch = new System.Windows.Forms.TextBox();
             this.lblSearchHint = new System.Windows.Forms.Label();
             this.pnlProgrammesCard = new System.Windows.Forms.Panel();
-            this.lblProgrammesHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlProgrammesHeadingBar = new System.Windows.Forms.Panel();
             this.lblProgrammesHeading = new System.Windows.Forms.Label();
             this.lblProgrammeCount = new System.Windows.Forms.Label();
             this.dgvProgrammes = new System.Windows.Forms.DataGridView();
-            this.colSelProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProgrammeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinimumAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSelect = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colProgrammesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesMinimumAverage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colProgrammesSelect = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlRequirementsCard = new System.Windows.Forms.Panel();
-            this.lblRequirementsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlRequirementsHeadingBar = new System.Windows.Forms.Panel();
             this.lblRequirementsHeading = new System.Windows.Forms.Label();
             this.lblRequirementsProgramme = new System.Windows.Forms.Label();
             this.dgvRequirements = new System.Windows.Forms.DataGridView();
-            this.colRequirementSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRequirementMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRequirementType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequirementsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSelSampleData = new System.Windows.Forms.Label();
             this.pnlAlignmentCard = new System.Windows.Forms.Panel();
             this.lblAlignmentHeading = new System.Windows.Forms.Label();
             this.lblAlignmentValue = new System.Windows.Forms.Label();
             this.lblStrongestCategories = new System.Windows.Forms.Label();
             this.lblAlignmentSource = new System.Windows.Forms.Label();
+            this.flpFacultyActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnFacultyCheck = new System.Windows.Forms.Button();
+            this.btnFacultyBack = new System.Windows.Forms.Button();
+            this.btnFacultyCancel = new System.Windows.Forms.Button();
             this.tabResults = new System.Windows.Forms.TabPage();
-            this.tabResultsGroup = new System.Windows.Forms.TabControl();
+            this.tcResults = new System.Windows.Forms.TabControl();
             this.tabOutcome = new System.Windows.Forms.TabPage();
-            this.pnlOutContent = new System.Windows.Forms.Panel();
+            this.pnlOutcomeContent = new System.Windows.Forms.Panel();
             this.pnlOutcome = new System.Windows.Forms.Panel();
             this.lblOutcomeChip = new System.Windows.Forms.Label();
             this.lblOutcomeHeadline = new System.Windows.Forms.Label();
             this.lblOutcomeExplanation = new System.Windows.Forms.Label();
             this.pnlOutcomeBar = new System.Windows.Forms.Panel();
             this.pnlCheckedCard = new System.Windows.Forms.Panel();
-            this.lblCheckedHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlCheckedHeadingBar = new System.Windows.Forms.Panel();
             this.lblCheckedHeading = new System.Windows.Forms.Label();
             this.dgvChecked = new System.Windows.Forms.DataGridView();
-            this.colOutSubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMinimumMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOutMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRequirementOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsMet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckedSubject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckedMinimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckedMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckedOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckedIsMet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlSubjectTile = new System.Windows.Forms.Panel();
-            this.pnlSubjectTileCaption = new System.Windows.Forms.Label();
-            this.pnlSubjectTileValue = new System.Windows.Forms.Label();
-            this.pnlSubjectTileNote = new System.Windows.Forms.Label();
+            this.lblSubjectTileCaption = new System.Windows.Forms.Label();
+            this.lblSubjectTileValue = new System.Windows.Forms.Label();
+            this.lblSubjectTileNote = new System.Windows.Forms.Label();
             this.pnlMarkTile = new System.Windows.Forms.Panel();
-            this.pnlMarkTileCaption = new System.Windows.Forms.Label();
-            this.pnlMarkTileValue = new System.Windows.Forms.Label();
-            this.pnlMarkTileNote = new System.Windows.Forms.Label();
+            this.lblMarkTileCaption = new System.Windows.Forms.Label();
+            this.lblMarkTileValue = new System.Windows.Forms.Label();
+            this.lblMarkTileNote = new System.Windows.Forms.Label();
             this.pnlInterestTile = new System.Windows.Forms.Panel();
-            this.pnlInterestTileCaption = new System.Windows.Forms.Label();
-            this.pnlInterestTileValue = new System.Windows.Forms.Label();
-            this.pnlInterestTileNote = new System.Windows.Forms.Label();
+            this.lblInterestTileCaption = new System.Windows.Forms.Label();
+            this.lblInterestTileValue = new System.Windows.Forms.Label();
+            this.lblInterestTileNote = new System.Windows.Forms.Label();
             this.pnlOverallTile = new System.Windows.Forms.Panel();
-            this.pnlOverallTileCaption = new System.Windows.Forms.Label();
-            this.pnlOverallTileValue = new System.Windows.Forms.Label();
-            this.pnlOverallTileNote = new System.Windows.Forms.Label();
+            this.lblOverallTileCaption = new System.Windows.Forms.Label();
+            this.lblOverallTileValue = new System.Windows.Forms.Label();
+            this.lblOverallTileNote = new System.Windows.Forms.Label();
             this.lblOutDisclaimer = new System.Windows.Forms.Label();
             this.lblOutSampleData = new System.Windows.Forms.Label();
+            this.flpOutcomeActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnOutcomeSummary = new System.Windows.Forms.Button();
+            this.btnOutcomeAlternatives = new System.Windows.Forms.Button();
+            this.btnOutcomeFunding = new System.Windows.Forms.Button();
+            this.btnOutcomeBack = new System.Windows.Forms.Button();
             this.tabAlternatives = new System.Windows.Forms.TabPage();
-            this.pnlAltContent = new System.Windows.Forms.Panel();
+            this.pnlAlternativesContent = new System.Windows.Forms.Panel();
             this.pnlRankedCard = new System.Windows.Forms.Panel();
-            this.lblRankedHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlRankedHeadingBar = new System.Windows.Forms.Panel();
             this.lblRankedHeading = new System.Windows.Forms.Label();
             this.lblRankedCount = new System.Windows.Forms.Label();
             this.dgvAlternatives = new System.Windows.Forms.DataGridView();
-            this.colRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFaculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAltProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIsSelected = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesProgramme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesFaculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesOutcome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesProgrammeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAlternativesIsSelected = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlReasonsCard = new System.Windows.Forms.Panel();
-            this.lblReasonsHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlReasonsHeadingBar = new System.Windows.Forms.Panel();
             this.lblReasonsHeading = new System.Windows.Forms.Label();
             this.lblReasons = new System.Windows.Forms.Label();
             this.chkIncludeAlternatives = new System.Windows.Forms.CheckBox();
+            this.lblAlternativesNotice = new System.Windows.Forms.Label();
+            this.flpAlternativesActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAlternativesSummary = new System.Windows.Forms.Button();
+            this.btnAlternativesCompare = new System.Windows.Forms.Button();
+            this.btnAlternativesBack = new System.Windows.Forms.Button();
             this.tabFunding = new System.Windows.Forms.TabPage();
-            this.pnlFundContent = new System.Windows.Forms.Panel();
+            this.pnlFundingContent = new System.Windows.Forms.Panel();
             this.pnlFilterCard = new System.Windows.Forms.Panel();
             this.lblFundFaculty = new System.Windows.Forms.Label();
             this.cboFundFaculty = new System.Windows.Forms.ComboBox();
@@ -287,21 +316,21 @@
             this.cboFundingType = new System.Windows.Forms.ComboBox();
             this.chkOpenOnly = new System.Windows.Forms.CheckBox();
             this.pnlFundingCard = new System.Windows.Forms.Panel();
-            this.lblFundingHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlFundingHeadingBar = new System.Windows.Forms.Panel();
             this.lblFundingHeading = new System.Windows.Forms.Label();
             this.lblFundingCount = new System.Windows.Forms.Label();
             this.dgvFunding = new System.Windows.Forms.DataGridView();
             this.colFundingName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFundingType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLinkedTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClosingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingLinkedTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingClosingDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFundingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEligibility = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDocuments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingEligibility = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingDocuments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFundingContact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlDetailCard = new System.Windows.Forms.Panel();
-            this.lblDetailHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlDetailHeadingBar = new System.Windows.Forms.Panel();
             this.lblDetailHeading = new System.Windows.Forms.Label();
             this.lblEligibility = new System.Windows.Forms.Label();
             this.txtEligibility = new System.Windows.Forms.TextBox();
@@ -311,11 +340,13 @@
             this.txtContact = new System.Windows.Forms.TextBox();
             this.pnlSampleNote = new System.Windows.Forms.Panel();
             this.lblSampleNote = new System.Windows.Forms.Label();
-            this.pnlSampleNoteBar = new System.Windows.Forms.Panel();
+            this.flpFundingActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnFundingAdd = new System.Windows.Forms.Button();
+            this.btnFundingBack = new System.Windows.Forms.Button();
             this.tabSummary = new System.Windows.Forms.TabPage();
-            this.pnlSumContent = new System.Windows.Forms.Panel();
+            this.pnlSummaryContent = new System.Windows.Forms.Panel();
             this.pnlIncludeCard = new System.Windows.Forms.Panel();
-            this.lblIncludeHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlIncludeHeadingBar = new System.Windows.Forms.Panel();
             this.lblIncludeHeading = new System.Windows.Forms.Label();
             this.lblExportFormat = new System.Windows.Forms.Label();
             this.lblExportFormatStar = new System.Windows.Forms.Label();
@@ -334,88 +365,66 @@
             this.lblPrintNote = new System.Windows.Forms.Label();
             this.lblSumRequiredNote = new System.Windows.Forms.Label();
             this.pnlPreviewCard = new System.Windows.Forms.Panel();
-            this.lblPreviewHeadingBar = new System.Windows.Forms.Panel();
+            this.pnlPreviewHeadingBar = new System.Windows.Forms.Panel();
             this.lblPreviewHeading = new System.Windows.Forms.Label();
             this.lblPreviewMeta = new System.Windows.Forms.Label();
             this.pnlPreviewRule = new System.Windows.Forms.Panel();
             this.rvSummary = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.pnlNoticeGap = new System.Windows.Forms.Panel();
-            this.pnlNotice = new System.Windows.Forms.Panel();
-            this.lblNotice = new System.Windows.Forms.Label();
-            this.pnlNoticeBar = new System.Windows.Forms.Panel();
-            this.pnlContextGap = new System.Windows.Forms.Panel();
-            this.pnlContext = new System.Windows.Forms.Panel();
-            this.lblContext = new System.Windows.Forms.Label();
-            this.pnlContextBar = new System.Windows.Forms.Panel();
-            this.pnlTitle = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSubtitle = new System.Windows.Forms.Label();
-            this.lblBadge = new System.Windows.Forms.Label();
-            this.pnlTitleRule = new System.Windows.Forms.Panel();
-            this.pnlActions = new System.Windows.Forms.Panel();
-            this.flpActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnPrimary = new System.Windows.Forms.Button();
-            this.btnAlternatives = new System.Windows.Forms.Button();
-            this.btnCompare = new System.Windows.Forms.Button();
-            this.btnFunding = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.lblActionHint = new System.Windows.Forms.Label();
-            this.pnlActionRule = new System.Windows.Forms.Panel();
-            this.pnlRail = new System.Windows.Forms.Panel();
-            this.lblBrand = new System.Windows.Forms.Label();
-            this.pnlBrandRule = new System.Windows.Forms.Panel();
-            this.btnNavHome = new System.Windows.Forms.Button();
-            this.lblStep1 = new System.Windows.Forms.Label();
-            this.lblStep2 = new System.Windows.Forms.Label();
-            this.lblStep3 = new System.Windows.Forms.Label();
-            this.lblStep4 = new System.Windows.Forms.Label();
-            this.lblStep5 = new System.Windows.Forms.Label();
-            this.lblStep6 = new System.Windows.Forms.Label();
-            this.lblRailFooter = new System.Windows.Forms.Label();
+            this.lblSummaryNotice = new System.Windows.Forms.Label();
+            this.flpSummaryActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSummaryExport = new System.Windows.Forms.Button();
+            this.btnSummaryBack = new System.Windows.Forms.Button();
+            this.btnSummaryCancel = new System.Windows.Forms.Button();
             this.pnlStatus = new System.Windows.Forms.Panel();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.lblLearnerContext = new System.Windows.Forms.Label();
+            this.mnuMain = new System.Windows.Forms.MenuStrip();
+            this.mnuHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBody.SuspendLayout();
-            this.tabMain.SuspendLayout();
+            this.tcMain.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.pnlHomeContent.SuspendLayout();
             this.pnlLearnerCard.SuspendLayout();
             this.pnlStaffCard.SuspendLayout();
             this.tabProfile.SuspendLayout();
-            this.pnlProfContent.SuspendLayout();
+            this.pnlProfileContent.SuspendLayout();
             this.pnlWhoCard.SuspendLayout();
             this.pnlSchoolCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAdvisingYear)).BeginInit();
             this.pnlContactCard.SuspendLayout();
             this.pnlSessionCard.SuspendLayout();
+            this.flpProfileActions.SuspendLayout();
             this.tabSubjects.SuspendLayout();
-            this.pnlSubjContent.SuspendLayout();
+            this.pnlSubjectsContent.SuspendLayout();
             this.pnlAddCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMark)).BeginInit();
             this.pnlSummary.SuspendLayout();
             this.pnlCapturedCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).BeginInit();
+            this.flpSubjectsActions.SuspendLayout();
             this.tabInterests.SuspendLayout();
-            this.pnlIntContent.SuspendLayout();
+            this.pnlInterestsContent.SuspendLayout();
             this.pnlQuestionCard.SuspendLayout();
             this.pnlStatementHeader.SuspendLayout();
-            this.tileAnswered.SuspendLayout();
-            this.tileCategory1.SuspendLayout();
-            this.tileCategory2.SuspendLayout();
-            this.tileCategory3.SuspendLayout();
+            this.pnlAnsweredTile.SuspendLayout();
+            this.pnlCategory1Tile.SuspendLayout();
+            this.pnlCategory2Tile.SuspendLayout();
+            this.pnlCategory3Tile.SuspendLayout();
+            this.flpInterestsActions.SuspendLayout();
             this.tabFaculty.SuspendLayout();
-            this.pnlSelContent.SuspendLayout();
+            this.pnlFacultyContent.SuspendLayout();
             this.pnlSearchCard.SuspendLayout();
             this.pnlProgrammesCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgrammes)).BeginInit();
             this.pnlRequirementsCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).BeginInit();
             this.pnlAlignmentCard.SuspendLayout();
+            this.flpFacultyActions.SuspendLayout();
             this.tabResults.SuspendLayout();
-            this.tabResultsGroup.SuspendLayout();
+            this.tcResults.SuspendLayout();
             this.tabOutcome.SuspendLayout();
-            this.pnlOutContent.SuspendLayout();
+            this.pnlOutcomeContent.SuspendLayout();
             this.pnlOutcome.SuspendLayout();
             this.pnlCheckedCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChecked)).BeginInit();
@@ -423,80 +432,73 @@
             this.pnlMarkTile.SuspendLayout();
             this.pnlInterestTile.SuspendLayout();
             this.pnlOverallTile.SuspendLayout();
+            this.flpOutcomeActions.SuspendLayout();
             this.tabAlternatives.SuspendLayout();
-            this.pnlAltContent.SuspendLayout();
+            this.pnlAlternativesContent.SuspendLayout();
             this.pnlRankedCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).BeginInit();
             this.pnlReasonsCard.SuspendLayout();
+            this.flpAlternativesActions.SuspendLayout();
             this.tabFunding.SuspendLayout();
-            this.pnlFundContent.SuspendLayout();
+            this.pnlFundingContent.SuspendLayout();
             this.pnlFilterCard.SuspendLayout();
             this.pnlFundingCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).BeginInit();
             this.pnlDetailCard.SuspendLayout();
             this.pnlSampleNote.SuspendLayout();
+            this.flpFundingActions.SuspendLayout();
             this.tabSummary.SuspendLayout();
-            this.pnlSumContent.SuspendLayout();
+            this.pnlSummaryContent.SuspendLayout();
             this.pnlIncludeCard.SuspendLayout();
             this.pnlPreviewCard.SuspendLayout();
-            this.pnlNotice.SuspendLayout();
-            this.pnlContext.SuspendLayout();
-            this.pnlTitle.SuspendLayout();
-            this.pnlActions.SuspendLayout();
-            this.flpActions.SuspendLayout();
-            this.pnlRail.SuspendLayout();
+            this.flpSummaryActions.SuspendLayout();
             this.pnlStatus.SuspendLayout();
+            this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBody
             // 
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.pnlBody.Controls.Add(this.tabMain);
-            this.pnlBody.Controls.Add(this.pnlNoticeGap);
-            this.pnlBody.Controls.Add(this.pnlNotice);
-            this.pnlBody.Controls.Add(this.pnlContextGap);
-            this.pnlBody.Controls.Add(this.pnlContext);
+            this.pnlBody.Controls.Add(this.tcMain);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(262, 105);
+            this.pnlBody.Location = new System.Drawing.Point(0, 33);
             this.pnlBody.Margin = new System.Windows.Forms.Padding(4);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Padding = new System.Windows.Forms.Padding(20, 10, 20, 9);
-            this.pnlBody.Size = new System.Drawing.Size(1218, 734);
+            this.pnlBody.Size = new System.Drawing.Size(1218, 886);
             this.pnlBody.TabIndex = 0;
             // 
-            // tabMain
+            // tcMain
             // 
-            this.tabMain.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabMain.Controls.Add(this.tabHome);
-            this.tabMain.Controls.Add(this.tabProfile);
-            this.tabMain.Controls.Add(this.tabSubjects);
-            this.tabMain.Controls.Add(this.tabInterests);
-            this.tabMain.Controls.Add(this.tabFaculty);
-            this.tabMain.Controls.Add(this.tabResults);
-            this.tabMain.Controls.Add(this.tabSummary);
-            this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tabMain.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabMain.Location = new System.Drawing.Point(20, 139);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(4);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(1178, 586);
-            this.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabMain.TabIndex = 0;
-            this.tabMain.TabStop = false;
-            this.tabMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabMain_Selecting);
+            this.tcMain.Controls.Add(this.tabHome);
+            this.tcMain.Controls.Add(this.tabProfile);
+            this.tcMain.Controls.Add(this.tabSubjects);
+            this.tcMain.Controls.Add(this.tabInterests);
+            this.tcMain.Controls.Add(this.tabFaculty);
+            this.tcMain.Controls.Add(this.tabResults);
+            this.tcMain.Controls.Add(this.tabSummary);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tcMain.Location = new System.Drawing.Point(20, 10);
+            this.tcMain.Margin = new System.Windows.Forms.Padding(4);
+            this.tcMain.Name = "tcMain";
+            this.tcMain.Padding = new System.Drawing.Point(6, 5);
+            this.tcMain.SelectedIndex = 0;
+            this.tcMain.Size = new System.Drawing.Size(1178, 867);
+            this.tcMain.TabIndex = 0;
+            this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
+            this.tcMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcMain_Selecting);
             // 
             // tabHome
             // 
             this.tabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.tabHome.Controls.Add(this.pnlHomeContent);
-            this.tabHome.Location = new System.Drawing.Point(4, 5);
+            this.tabHome.Location = new System.Drawing.Point(4, 36);
             this.tabHome.Margin = new System.Windows.Forms.Padding(4);
             this.tabHome.Name = "tabHome";
-            this.tabHome.Size = new System.Drawing.Size(1170, 577);
+            this.tabHome.Size = new System.Drawing.Size(1170, 827);
             this.tabHome.TabIndex = 0;
-            this.tabHome.Text = "UI 1 Homepage";
+            this.tabHome.Text = "Home";
             // 
             // pnlHomeContent
             // 
@@ -508,7 +510,7 @@
             this.pnlHomeContent.Location = new System.Drawing.Point(0, 0);
             this.pnlHomeContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlHomeContent.Name = "pnlHomeContent";
-            this.pnlHomeContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlHomeContent.Size = new System.Drawing.Size(1170, 827);
             this.pnlHomeContent.TabIndex = 0;
             // 
             // lblIntro
@@ -526,7 +528,7 @@
             // 
             this.pnlLearnerCard.BackColor = System.Drawing.Color.White;
             this.pnlLearnerCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLearnerCard.Controls.Add(this.lblLearnerHeadingBar);
+            this.pnlLearnerCard.Controls.Add(this.pnlLearnerHeadingBar);
             this.pnlLearnerCard.Controls.Add(this.lblLearnerHeading);
             this.pnlLearnerCard.Controls.Add(this.lblLearnerText);
             this.pnlLearnerCard.Controls.Add(this.btnStart);
@@ -536,20 +538,20 @@
             this.pnlLearnerCard.Size = new System.Drawing.Size(571, 374);
             this.pnlLearnerCard.TabIndex = 1;
             // 
-            // lblLearnerHeadingBar
+            // pnlLearnerHeadingBar
             // 
-            this.lblLearnerHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblLearnerHeadingBar.Location = new System.Drawing.Point(20, 25);
-            this.lblLearnerHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblLearnerHeadingBar.Name = "lblLearnerHeadingBar";
-            this.lblLearnerHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblLearnerHeadingBar.TabIndex = 0;
+            this.pnlLearnerHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlLearnerHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlLearnerHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlLearnerHeadingBar.Name = "pnlLearnerHeadingBar";
+            this.pnlLearnerHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlLearnerHeadingBar.TabIndex = 0;
             // 
             // lblLearnerHeading
             // 
             this.lblLearnerHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblLearnerHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblLearnerHeading.Location = new System.Drawing.Point(32, 20);
+            this.lblLearnerHeading.Location = new System.Drawing.Point(32, 10);
             this.lblLearnerHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLearnerHeading.Name = "lblLearnerHeading";
             this.lblLearnerHeading.Size = new System.Drawing.Size(500, 35);
@@ -590,7 +592,7 @@
             // 
             this.pnlStaffCard.BackColor = System.Drawing.Color.White;
             this.pnlStaffCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlStaffCard.Controls.Add(this.lblStaffHeadingBar);
+            this.pnlStaffCard.Controls.Add(this.pnlStaffHeadingBar);
             this.pnlStaffCard.Controls.Add(this.lblStaffHeading);
             this.pnlStaffCard.Controls.Add(this.lblStaffText);
             this.pnlStaffCard.Controls.Add(this.btnStaffLogin);
@@ -600,20 +602,20 @@
             this.pnlStaffCard.Size = new System.Drawing.Size(571, 374);
             this.pnlStaffCard.TabIndex = 2;
             // 
-            // lblStaffHeadingBar
+            // pnlStaffHeadingBar
             // 
-            this.lblStaffHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblStaffHeadingBar.Location = new System.Drawing.Point(20, 25);
-            this.lblStaffHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblStaffHeadingBar.Name = "lblStaffHeadingBar";
-            this.lblStaffHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblStaffHeadingBar.TabIndex = 0;
+            this.pnlStaffHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlStaffHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlStaffHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlStaffHeadingBar.Name = "pnlStaffHeadingBar";
+            this.pnlStaffHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlStaffHeadingBar.TabIndex = 0;
             // 
             // lblStaffHeading
             // 
             this.lblStaffHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblStaffHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblStaffHeading.Location = new System.Drawing.Point(32, 20);
+            this.lblStaffHeading.Location = new System.Drawing.Point(32, 10);
             this.lblStaffHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStaffHeading.Name = "lblStaffHeading";
             this.lblStaffHeading.Size = new System.Drawing.Size(500, 35);
@@ -668,52 +670,54 @@
             // tabProfile
             // 
             this.tabProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabProfile.Controls.Add(this.pnlProfContent);
-            this.tabProfile.Location = new System.Drawing.Point(4, 5);
+            this.tabProfile.Controls.Add(this.pnlProfileContent);
+            this.tabProfile.Controls.Add(this.lblProfileNotice);
+            this.tabProfile.Controls.Add(this.flpProfileActions);
+            this.tabProfile.Location = new System.Drawing.Point(4, 36);
             this.tabProfile.Margin = new System.Windows.Forms.Padding(4);
             this.tabProfile.Name = "tabProfile";
-            this.tabProfile.Size = new System.Drawing.Size(1170, 577);
+            this.tabProfile.Size = new System.Drawing.Size(1170, 827);
             this.tabProfile.TabIndex = 1;
-            this.tabProfile.Text = "UI 2 Learner profile";
+            this.tabProfile.Text = "1. Learner profile";
             // 
-            // pnlProfContent
+            // pnlProfileContent
             // 
-            this.pnlProfContent.Controls.Add(this.pnlWhoCard);
-            this.pnlProfContent.Controls.Add(this.pnlSchoolCard);
-            this.pnlProfContent.Controls.Add(this.pnlContactCard);
-            this.pnlProfContent.Controls.Add(this.pnlSessionCard);
-            this.pnlProfContent.Controls.Add(this.lblProfRequiredNote);
-            this.pnlProfContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProfContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlProfContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlProfContent.Name = "pnlProfContent";
-            this.pnlProfContent.Size = new System.Drawing.Size(1170, 577);
-            this.pnlProfContent.TabIndex = 0;
+            this.pnlProfileContent.Controls.Add(this.pnlWhoCard);
+            this.pnlProfileContent.Controls.Add(this.pnlSchoolCard);
+            this.pnlProfileContent.Controls.Add(this.pnlContactCard);
+            this.pnlProfileContent.Controls.Add(this.pnlSessionCard);
+            this.pnlProfileContent.Controls.Add(this.lblProfRequiredNote);
+            this.pnlProfileContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProfileContent.Location = new System.Drawing.Point(0, 60);
+            this.pnlProfileContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlProfileContent.Name = "pnlProfileContent";
+            this.pnlProfileContent.Size = new System.Drawing.Size(1170, 687);
+            this.pnlProfileContent.TabIndex = 0;
             // 
             // pnlWhoCard
             // 
             this.pnlWhoCard.BackColor = System.Drawing.Color.White;
             this.pnlWhoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlWhoCard.Controls.Add(this.lblWhoHeadingBar);
+            this.pnlWhoCard.Controls.Add(this.pnlWhoHeadingBar);
             this.pnlWhoCard.Controls.Add(this.lblWhoHeading);
             this.pnlWhoCard.Controls.Add(this.lblFirstName);
             this.pnlWhoCard.Controls.Add(this.txtFirstName);
             this.pnlWhoCard.Controls.Add(this.lblSurname);
             this.pnlWhoCard.Controls.Add(this.txtSurname);
-            this.pnlWhoCard.Location = new System.Drawing.Point(0, 0);
+            this.pnlWhoCard.Location = new System.Drawing.Point(0, 12);
             this.pnlWhoCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlWhoCard.Name = "pnlWhoCard";
             this.pnlWhoCard.Size = new System.Drawing.Size(1167, 124);
             this.pnlWhoCard.TabIndex = 0;
             // 
-            // lblWhoHeadingBar
+            // pnlWhoHeadingBar
             // 
-            this.lblWhoHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblWhoHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblWhoHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblWhoHeadingBar.Name = "lblWhoHeadingBar";
-            this.lblWhoHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblWhoHeadingBar.TabIndex = 0;
+            this.pnlWhoHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlWhoHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlWhoHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlWhoHeadingBar.Name = "pnlWhoHeadingBar";
+            this.pnlWhoHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlWhoHeadingBar.TabIndex = 0;
             // 
             // lblWhoHeading
             // 
@@ -777,7 +781,7 @@
             // 
             this.pnlSchoolCard.BackColor = System.Drawing.Color.White;
             this.pnlSchoolCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSchoolCard.Controls.Add(this.lblSchoolHeadingBar);
+            this.pnlSchoolCard.Controls.Add(this.pnlSchoolHeadingBar);
             this.pnlSchoolCard.Controls.Add(this.lblSchoolHeading);
             this.pnlSchoolCard.Controls.Add(this.lblGrade);
             this.pnlSchoolCard.Controls.Add(this.lblGradeStar);
@@ -796,20 +800,20 @@
             this.pnlSchoolCard.Controls.Add(this.lblAdvisingYearStar);
             this.pnlSchoolCard.Controls.Add(this.numAdvisingYear);
             this.pnlSchoolCard.Controls.Add(this.lblAdvisingYearError);
-            this.pnlSchoolCard.Location = new System.Drawing.Point(0, 138);
+            this.pnlSchoolCard.Location = new System.Drawing.Point(0, 150);
             this.pnlSchoolCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSchoolCard.Name = "pnlSchoolCard";
             this.pnlSchoolCard.Size = new System.Drawing.Size(1167, 160);
             this.pnlSchoolCard.TabIndex = 1;
             // 
-            // lblSchoolHeadingBar
+            // pnlSchoolHeadingBar
             // 
-            this.lblSchoolHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSchoolHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSchoolHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblSchoolHeadingBar.Name = "lblSchoolHeadingBar";
-            this.lblSchoolHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblSchoolHeadingBar.TabIndex = 0;
+            this.pnlSchoolHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlSchoolHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlSchoolHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSchoolHeadingBar.Name = "pnlSchoolHeadingBar";
+            this.pnlSchoolHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlSchoolHeadingBar.TabIndex = 0;
             // 
             // lblSchoolHeading
             // 
@@ -1042,7 +1046,7 @@
             // 
             this.pnlContactCard.BackColor = System.Drawing.Color.White;
             this.pnlContactCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlContactCard.Controls.Add(this.lblContactHeadingBar);
+            this.pnlContactCard.Controls.Add(this.pnlContactHeadingBar);
             this.pnlContactCard.Controls.Add(this.lblContactHeading);
             this.pnlContactCard.Controls.Add(this.lblEmail);
             this.pnlContactCard.Controls.Add(this.txtEmail);
@@ -1051,20 +1055,20 @@
             this.pnlContactCard.Controls.Add(this.txtMobile);
             this.pnlContactCard.Controls.Add(this.lblMobileError);
             this.pnlContactCard.Controls.Add(this.lblContactNote);
-            this.pnlContactCard.Location = new System.Drawing.Point(0, 310);
+            this.pnlContactCard.Location = new System.Drawing.Point(0, 322);
             this.pnlContactCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContactCard.Name = "pnlContactCard";
             this.pnlContactCard.Size = new System.Drawing.Size(1167, 154);
             this.pnlContactCard.TabIndex = 2;
             // 
-            // lblContactHeadingBar
+            // pnlContactHeadingBar
             // 
-            this.lblContactHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblContactHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblContactHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblContactHeadingBar.Name = "lblContactHeadingBar";
-            this.lblContactHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblContactHeadingBar.TabIndex = 0;
+            this.pnlContactHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlContactHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlContactHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlContactHeadingBar.Name = "pnlContactHeadingBar";
+            this.pnlContactHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlContactHeadingBar.TabIndex = 0;
             // 
             // lblContactHeading
             // 
@@ -1164,7 +1168,7 @@
             // 
             this.pnlSessionCard.BackColor = System.Drawing.Color.White;
             this.pnlSessionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSessionCard.Controls.Add(this.lblSessionHeadingBar);
+            this.pnlSessionCard.Controls.Add(this.pnlSessionHeadingBar);
             this.pnlSessionCard.Controls.Add(this.lblSessionHeading);
             this.pnlSessionCard.Controls.Add(this.lblSessionNumber);
             this.pnlSessionCard.Controls.Add(this.txtSessionNumber);
@@ -1174,20 +1178,20 @@
             this.pnlSessionCard.Controls.Add(this.txtCapturedBy);
             this.pnlSessionCard.Controls.Add(this.lblSessionStatus);
             this.pnlSessionCard.Controls.Add(this.txtSessionStatus);
-            this.pnlSessionCard.Location = new System.Drawing.Point(0, 478);
+            this.pnlSessionCard.Location = new System.Drawing.Point(0, 490);
             this.pnlSessionCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSessionCard.Name = "pnlSessionCard";
             this.pnlSessionCard.Size = new System.Drawing.Size(1167, 123);
             this.pnlSessionCard.TabIndex = 3;
             // 
-            // lblSessionHeadingBar
+            // pnlSessionHeadingBar
             // 
-            this.lblSessionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSessionHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSessionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblSessionHeadingBar.Name = "lblSessionHeadingBar";
-            this.lblSessionHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblSessionHeadingBar.TabIndex = 0;
+            this.pnlSessionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlSessionHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlSessionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSessionHeadingBar.Name = "pnlSessionHeadingBar";
+            this.pnlSessionHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlSessionHeadingBar.TabIndex = 0;
             // 
             // lblSessionHeading
             // 
@@ -1305,41 +1309,126 @@
             // 
             this.lblProfRequiredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblProfRequiredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
-            this.lblProfRequiredNote.Location = new System.Drawing.Point(0, 609);
+            this.lblProfRequiredNote.Location = new System.Drawing.Point(0, 621);
             this.lblProfRequiredNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProfRequiredNote.Name = "lblProfRequiredNote";
             this.lblProfRequiredNote.Size = new System.Drawing.Size(375, 22);
             this.lblProfRequiredNote.TabIndex = 4;
             this.lblProfRequiredNote.Text = "* indicates a required field.";
             // 
+            // lblProfileNotice
+            // 
+            this.lblProfileNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblProfileNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblProfileNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblProfileNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblProfileNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblProfileNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProfileNotice.Name = "lblProfileNotice";
+            this.lblProfileNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblProfileNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblProfileNotice.TabIndex = 1;
+            this.lblProfileNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpProfileActions
+            // 
+            this.flpProfileActions.Controls.Add(this.btnProfileSave);
+            this.flpProfileActions.Controls.Add(this.btnProfileBack);
+            this.flpProfileActions.Controls.Add(this.btnProfileCancel);
+            this.flpProfileActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpProfileActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpProfileActions.Location = new System.Drawing.Point(0, 747);
+            this.flpProfileActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpProfileActions.Name = "flpProfileActions";
+            this.flpProfileActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpProfileActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpProfileActions.TabIndex = 2;
+            this.flpProfileActions.WrapContents = false;
+            // 
+            // btnProfileSave
+            // 
+            this.btnProfileSave.AccessibleName = "Save and continue";
+            this.btnProfileSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnProfileSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileSave.FlatAppearance.BorderSize = 0;
+            this.btnProfileSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnProfileSave.ForeColor = System.Drawing.Color.White;
+            this.btnProfileSave.Location = new System.Drawing.Point(929, 15);
+            this.btnProfileSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileSave.Name = "btnProfileSave";
+            this.btnProfileSave.Size = new System.Drawing.Size(238, 50);
+            this.btnProfileSave.TabIndex = 0;
+            this.btnProfileSave.Text = "Save and continue";
+            this.btnProfileSave.UseVisualStyleBackColor = false;
+            this.btnProfileSave.Click += new System.EventHandler(this.btnProfileSave_Click);
+            // 
+            // btnProfileBack
+            // 
+            this.btnProfileBack.AccessibleName = "Back";
+            this.btnProfileBack.BackColor = System.Drawing.Color.White;
+            this.btnProfileBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnProfileBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnProfileBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnProfileBack.Location = new System.Drawing.Point(755, 15);
+            this.btnProfileBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileBack.Name = "btnProfileBack";
+            this.btnProfileBack.Size = new System.Drawing.Size(162, 50);
+            this.btnProfileBack.TabIndex = 1;
+            this.btnProfileBack.Text = "Back";
+            this.btnProfileBack.UseVisualStyleBackColor = false;
+            this.btnProfileBack.Click += new System.EventHandler(this.btnProfileBack_Click);
+            // 
+            // btnProfileCancel
+            // 
+            this.btnProfileCancel.AccessibleName = "Cancel";
+            this.btnProfileCancel.BackColor = System.Drawing.Color.White;
+            this.btnProfileCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnProfileCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnProfileCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnProfileCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnProfileCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileCancel.Name = "btnProfileCancel";
+            this.btnProfileCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnProfileCancel.TabIndex = 2;
+            this.btnProfileCancel.Text = "Cancel";
+            this.btnProfileCancel.UseVisualStyleBackColor = false;
+            this.btnProfileCancel.Click += new System.EventHandler(this.btnProfileCancel_Click);
+            // 
             // tabSubjects
             // 
             this.tabSubjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabSubjects.Controls.Add(this.pnlSubjContent);
-            this.tabSubjects.Location = new System.Drawing.Point(4, 5);
+            this.tabSubjects.Controls.Add(this.pnlSubjectsContent);
+            this.tabSubjects.Controls.Add(this.lblSubjectsNotice);
+            this.tabSubjects.Controls.Add(this.flpSubjectsActions);
+            this.tabSubjects.Location = new System.Drawing.Point(4, 36);
             this.tabSubjects.Margin = new System.Windows.Forms.Padding(4);
             this.tabSubjects.Name = "tabSubjects";
-            this.tabSubjects.Size = new System.Drawing.Size(1170, 577);
+            this.tabSubjects.Size = new System.Drawing.Size(1170, 827);
             this.tabSubjects.TabIndex = 2;
-            this.tabSubjects.Text = "UI 3 Subjects and marks";
+            this.tabSubjects.Text = "2. Subjects and marks";
             // 
-            // pnlSubjContent
+            // pnlSubjectsContent
             // 
-            this.pnlSubjContent.Controls.Add(this.pnlAddCard);
-            this.pnlSubjContent.Controls.Add(this.pnlSummary);
-            this.pnlSubjContent.Controls.Add(this.pnlCapturedCard);
-            this.pnlSubjContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSubjContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSubjContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlSubjContent.Name = "pnlSubjContent";
-            this.pnlSubjContent.Size = new System.Drawing.Size(1170, 577);
-            this.pnlSubjContent.TabIndex = 0;
+            this.pnlSubjectsContent.Controls.Add(this.pnlAddCard);
+            this.pnlSubjectsContent.Controls.Add(this.pnlSummary);
+            this.pnlSubjectsContent.Controls.Add(this.pnlCapturedCard);
+            this.pnlSubjectsContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSubjectsContent.Location = new System.Drawing.Point(0, 60);
+            this.pnlSubjectsContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSubjectsContent.Name = "pnlSubjectsContent";
+            this.pnlSubjectsContent.Size = new System.Drawing.Size(1170, 687);
+            this.pnlSubjectsContent.TabIndex = 0;
             // 
             // pnlAddCard
             // 
             this.pnlAddCard.BackColor = System.Drawing.Color.White;
             this.pnlAddCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAddCard.Controls.Add(this.lblAddHeadingBar);
+            this.pnlAddCard.Controls.Add(this.pnlAddHeadingBar);
             this.pnlAddCard.Controls.Add(this.lblAddHeading);
             this.pnlAddCard.Controls.Add(this.lblSubject);
             this.pnlAddCard.Controls.Add(this.lblSubjectStar);
@@ -1352,7 +1441,7 @@
             this.pnlAddCard.Controls.Add(this.numMark);
             this.pnlAddCard.Controls.Add(this.lblMarkError);
             this.pnlAddCard.Controls.Add(this.btnAddSubject);
-            this.pnlAddCard.Location = new System.Drawing.Point(0, 0);
+            this.pnlAddCard.Location = new System.Drawing.Point(0, 12);
             this.pnlAddCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlAddCard.Name = "pnlAddCard";
             this.pnlAddCard.Size = new System.Drawing.Size(1167, 144);
@@ -1360,14 +1449,14 @@
             this.pnlAddCard.Enter += new System.EventHandler(this.pnlAddCard_Enter);
             this.pnlAddCard.Leave += new System.EventHandler(this.pnlAddCard_Leave);
             // 
-            // lblAddHeadingBar
+            // pnlAddHeadingBar
             // 
-            this.lblAddHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblAddHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblAddHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblAddHeadingBar.Name = "lblAddHeadingBar";
-            this.lblAddHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblAddHeadingBar.TabIndex = 0;
+            this.pnlAddHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlAddHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlAddHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAddHeadingBar.Name = "pnlAddHeadingBar";
+            this.pnlAddHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlAddHeadingBar.TabIndex = 0;
             // 
             // lblAddHeading
             // 
@@ -1513,10 +1602,10 @@
             this.btnAddSubject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddSubject.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnAddSubject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAddSubject.Location = new System.Drawing.Point(975, 78);
+            this.btnAddSubject.Location = new System.Drawing.Point(975, 79);
             this.btnAddSubject.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddSubject.Name = "btnAddSubject";
-            this.btnAddSubject.Size = new System.Drawing.Size(168, 40);
+            this.btnAddSubject.Size = new System.Drawing.Size(168, 38);
             this.btnAddSubject.TabIndex = 12;
             this.btnAddSubject.Text = "Add subject";
             this.btnAddSubject.UseVisualStyleBackColor = false;
@@ -1527,7 +1616,7 @@
             this.pnlSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSummary.Controls.Add(this.lblSummary);
-            this.pnlSummary.Location = new System.Drawing.Point(0, 158);
+            this.pnlSummary.Location = new System.Drawing.Point(0, 170);
             this.pnlSummary.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Size = new System.Drawing.Size(1167, 87);
@@ -1548,25 +1637,25 @@
             // 
             this.pnlCapturedCard.BackColor = System.Drawing.Color.White;
             this.pnlCapturedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCapturedCard.Controls.Add(this.lblCapturedHeadingBar);
+            this.pnlCapturedCard.Controls.Add(this.pnlCapturedHeadingBar);
             this.pnlCapturedCard.Controls.Add(this.lblCapturedHeading);
             this.pnlCapturedCard.Controls.Add(this.lblCapturedCount);
             this.pnlCapturedCard.Controls.Add(this.dgvSubjects);
             this.pnlCapturedCard.Controls.Add(this.lblFooter);
-            this.pnlCapturedCard.Location = new System.Drawing.Point(0, 158);
+            this.pnlCapturedCard.Location = new System.Drawing.Point(0, 170);
             this.pnlCapturedCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCapturedCard.Name = "pnlCapturedCard";
             this.pnlCapturedCard.Size = new System.Drawing.Size(1167, 416);
             this.pnlCapturedCard.TabIndex = 2;
             // 
-            // lblCapturedHeadingBar
+            // pnlCapturedHeadingBar
             // 
-            this.lblCapturedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCapturedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblCapturedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblCapturedHeadingBar.Name = "lblCapturedHeadingBar";
-            this.lblCapturedHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblCapturedHeadingBar.TabIndex = 0;
+            this.pnlCapturedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlCapturedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlCapturedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlCapturedHeadingBar.Name = "pnlCapturedHeadingBar";
+            this.pnlCapturedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlCapturedHeadingBar.TabIndex = 0;
             // 
             // lblCapturedHeading
             // 
@@ -1597,8 +1686,8 @@
             this.dgvSubjects.AllowUserToAddRows = false;
             this.dgvSubjects.AllowUserToDeleteRows = false;
             this.dgvSubjects.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvSubjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvSubjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             this.dgvSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -1606,32 +1695,32 @@
             this.dgvSubjects.BackgroundColor = System.Drawing.Color.White;
             this.dgvSubjects.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvSubjects.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSubjects.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSubjects.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
             this.dgvSubjects.ColumnHeadersHeight = 34;
             this.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSubjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSubjSubjectName,
-            this.colSubjectLevel,
-            this.colSubjMark,
-            this.colAchievementLevel,
-            this.colRemove});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSubjects.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colSubjectsName,
+            this.colSubjectsLevel,
+            this.colSubjectsMark,
+            this.colSubjectsAchievement,
+            this.colSubjectsRemove});
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle35.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSubjects.DefaultCellStyle = dataGridViewCellStyle35;
             this.dgvSubjects.EnableHeadersVisualStyles = false;
             this.dgvSubjects.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvSubjects.Location = new System.Drawing.Point(20, 50);
@@ -1648,64 +1737,64 @@
             this.dgvSubjects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSubjects_CellContentClick);
             this.dgvSubjects.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvSubjects_DataBindingComplete);
             // 
-            // colSubjSubjectName
+            // colSubjectsName
             // 
-            this.colSubjSubjectName.DataPropertyName = "SubjectName";
-            this.colSubjSubjectName.FillWeight = 34F;
-            this.colSubjSubjectName.HeaderText = "Subject";
-            this.colSubjSubjectName.MinimumWidth = 6;
-            this.colSubjSubjectName.Name = "colSubjSubjectName";
-            this.colSubjSubjectName.ReadOnly = true;
+            this.colSubjectsName.DataPropertyName = "SubjectName";
+            this.colSubjectsName.FillWeight = 34F;
+            this.colSubjectsName.HeaderText = "Subject";
+            this.colSubjectsName.MinimumWidth = 6;
+            this.colSubjectsName.Name = "colSubjectsName";
+            this.colSubjectsName.ReadOnly = true;
             // 
-            // colSubjectLevel
+            // colSubjectsLevel
             // 
-            this.colSubjectLevel.DataPropertyName = "SubjectLevel";
-            this.colSubjectLevel.FillWeight = 22F;
-            this.colSubjectLevel.HeaderText = "Level";
-            this.colSubjectLevel.MinimumWidth = 6;
-            this.colSubjectLevel.Name = "colSubjectLevel";
-            this.colSubjectLevel.ReadOnly = true;
+            this.colSubjectsLevel.DataPropertyName = "SubjectLevel";
+            this.colSubjectsLevel.FillWeight = 22F;
+            this.colSubjectsLevel.HeaderText = "Level";
+            this.colSubjectsLevel.MinimumWidth = 6;
+            this.colSubjectsLevel.Name = "colSubjectsLevel";
+            this.colSubjectsLevel.ReadOnly = true;
             // 
-            // colSubjMark
+            // colSubjectsMark
             // 
-            this.colSubjMark.DataPropertyName = "Mark";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle3.Format = "0.0";
-            this.colSubjMark.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colSubjMark.FillWeight = 12F;
-            this.colSubjMark.HeaderText = "Mark %";
-            this.colSubjMark.MinimumWidth = 6;
-            this.colSubjMark.Name = "colSubjMark";
-            this.colSubjMark.ReadOnly = true;
+            this.colSubjectsMark.DataPropertyName = "Mark";
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle33.Format = "0.0";
+            this.colSubjectsMark.DefaultCellStyle = dataGridViewCellStyle33;
+            this.colSubjectsMark.FillWeight = 12F;
+            this.colSubjectsMark.HeaderText = "Mark %";
+            this.colSubjectsMark.MinimumWidth = 6;
+            this.colSubjectsMark.Name = "colSubjectsMark";
+            this.colSubjectsMark.ReadOnly = true;
             // 
-            // colAchievementLevel
+            // colSubjectsAchievement
             // 
-            this.colAchievementLevel.DataPropertyName = "AchievementLevel";
-            this.colAchievementLevel.FillWeight = 20F;
-            this.colAchievementLevel.HeaderText = "Achievement level";
-            this.colAchievementLevel.MinimumWidth = 6;
-            this.colAchievementLevel.Name = "colAchievementLevel";
-            this.colAchievementLevel.ReadOnly = true;
+            this.colSubjectsAchievement.DataPropertyName = "AchievementLevel";
+            this.colSubjectsAchievement.FillWeight = 20F;
+            this.colSubjectsAchievement.HeaderText = "Achievement level";
+            this.colSubjectsAchievement.MinimumWidth = 6;
+            this.colSubjectsAchievement.Name = "colSubjectsAchievement";
+            this.colSubjectsAchievement.ReadOnly = true;
             // 
-            // colRemove
+            // colSubjectsRemove
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.colRemove.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colRemove.FillWeight = 12F;
-            this.colRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colRemove.HeaderText = "Remove";
-            this.colRemove.MinimumWidth = 6;
-            this.colRemove.Name = "colRemove";
-            this.colRemove.ReadOnly = true;
-            this.colRemove.Text = "Remove";
-            this.colRemove.ToolTipText = "Remove this subject from the captured list";
-            this.colRemove.UseColumnTextForButtonValue = true;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle34.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.colSubjectsRemove.DefaultCellStyle = dataGridViewCellStyle34;
+            this.colSubjectsRemove.FillWeight = 12F;
+            this.colSubjectsRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colSubjectsRemove.HeaderText = "Remove";
+            this.colSubjectsRemove.MinimumWidth = 6;
+            this.colSubjectsRemove.Name = "colSubjectsRemove";
+            this.colSubjectsRemove.ReadOnly = true;
+            this.colSubjectsRemove.Text = "Remove";
+            this.colSubjectsRemove.ToolTipText = "Remove this subject from the captured list";
+            this.colSubjectsRemove.UseColumnTextForButtonValue = true;
             // 
             // lblFooter
             // 
@@ -1721,54 +1810,139 @@
             this.lblFooter.Text = "0 subjects captured";
             this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblSubjectsNotice
+            // 
+            this.lblSubjectsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblSubjectsNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSubjectsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblSubjectsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblSubjectsNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblSubjectsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectsNotice.Name = "lblSubjectsNotice";
+            this.lblSubjectsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblSubjectsNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblSubjectsNotice.TabIndex = 1;
+            this.lblSubjectsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpSubjectsActions
+            // 
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsSave);
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsBack);
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsCancel);
+            this.flpSubjectsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpSubjectsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpSubjectsActions.Location = new System.Drawing.Point(0, 747);
+            this.flpSubjectsActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpSubjectsActions.Name = "flpSubjectsActions";
+            this.flpSubjectsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpSubjectsActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpSubjectsActions.TabIndex = 2;
+            this.flpSubjectsActions.WrapContents = false;
+            // 
+            // btnSubjectsSave
+            // 
+            this.btnSubjectsSave.AccessibleName = "Save and continue";
+            this.btnSubjectsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnSubjectsSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsSave.FlatAppearance.BorderSize = 0;
+            this.btnSubjectsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnSubjectsSave.ForeColor = System.Drawing.Color.White;
+            this.btnSubjectsSave.Location = new System.Drawing.Point(929, 15);
+            this.btnSubjectsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsSave.Name = "btnSubjectsSave";
+            this.btnSubjectsSave.Size = new System.Drawing.Size(238, 50);
+            this.btnSubjectsSave.TabIndex = 0;
+            this.btnSubjectsSave.Text = "Save and continue";
+            this.btnSubjectsSave.UseVisualStyleBackColor = false;
+            this.btnSubjectsSave.Click += new System.EventHandler(this.btnSubjectsSave_Click);
+            // 
+            // btnSubjectsBack
+            // 
+            this.btnSubjectsBack.AccessibleName = "Back";
+            this.btnSubjectsBack.BackColor = System.Drawing.Color.White;
+            this.btnSubjectsBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSubjectsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSubjectsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSubjectsBack.Location = new System.Drawing.Point(755, 15);
+            this.btnSubjectsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsBack.Name = "btnSubjectsBack";
+            this.btnSubjectsBack.Size = new System.Drawing.Size(162, 50);
+            this.btnSubjectsBack.TabIndex = 1;
+            this.btnSubjectsBack.Text = "Back";
+            this.btnSubjectsBack.UseVisualStyleBackColor = false;
+            this.btnSubjectsBack.Click += new System.EventHandler(this.btnSubjectsBack_Click);
+            // 
+            // btnSubjectsCancel
+            // 
+            this.btnSubjectsCancel.AccessibleName = "Cancel";
+            this.btnSubjectsCancel.BackColor = System.Drawing.Color.White;
+            this.btnSubjectsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSubjectsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSubjectsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSubjectsCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnSubjectsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsCancel.Name = "btnSubjectsCancel";
+            this.btnSubjectsCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnSubjectsCancel.TabIndex = 2;
+            this.btnSubjectsCancel.Text = "Cancel";
+            this.btnSubjectsCancel.UseVisualStyleBackColor = false;
+            this.btnSubjectsCancel.Click += new System.EventHandler(this.btnSubjectsCancel_Click);
+            // 
             // tabInterests
             // 
             this.tabInterests.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabInterests.Controls.Add(this.pnlIntContent);
-            this.tabInterests.Location = new System.Drawing.Point(4, 5);
+            this.tabInterests.Controls.Add(this.pnlInterestsContent);
+            this.tabInterests.Controls.Add(this.lblInterestsNotice);
+            this.tabInterests.Controls.Add(this.flpInterestsActions);
+            this.tabInterests.Location = new System.Drawing.Point(4, 36);
             this.tabInterests.Margin = new System.Windows.Forms.Padding(4);
             this.tabInterests.Name = "tabInterests";
-            this.tabInterests.Size = new System.Drawing.Size(1170, 577);
+            this.tabInterests.Size = new System.Drawing.Size(1170, 827);
             this.tabInterests.TabIndex = 3;
-            this.tabInterests.Text = "UI 4 Interest questionnaire";
+            this.tabInterests.Text = "3. Interests";
             // 
-            // pnlIntContent
+            // pnlInterestsContent
             // 
-            this.pnlIntContent.Controls.Add(this.pnlQuestionCard);
-            this.pnlIntContent.Controls.Add(this.tileAnswered);
-            this.pnlIntContent.Controls.Add(this.tileCategory1);
-            this.pnlIntContent.Controls.Add(this.tileCategory2);
-            this.pnlIntContent.Controls.Add(this.tileCategory3);
-            this.pnlIntContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlIntContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlIntContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlIntContent.Name = "pnlIntContent";
-            this.pnlIntContent.Size = new System.Drawing.Size(1170, 577);
-            this.pnlIntContent.TabIndex = 0;
+            this.pnlInterestsContent.Controls.Add(this.pnlQuestionCard);
+            this.pnlInterestsContent.Controls.Add(this.pnlAnsweredTile);
+            this.pnlInterestsContent.Controls.Add(this.pnlCategory1Tile);
+            this.pnlInterestsContent.Controls.Add(this.pnlCategory2Tile);
+            this.pnlInterestsContent.Controls.Add(this.pnlCategory3Tile);
+            this.pnlInterestsContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlInterestsContent.Location = new System.Drawing.Point(0, 60);
+            this.pnlInterestsContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlInterestsContent.Name = "pnlInterestsContent";
+            this.pnlInterestsContent.Size = new System.Drawing.Size(1170, 687);
+            this.pnlInterestsContent.TabIndex = 0;
             // 
             // pnlQuestionCard
             // 
             this.pnlQuestionCard.BackColor = System.Drawing.Color.White;
             this.pnlQuestionCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlQuestionCard.Controls.Add(this.lblQuestionHeadingBar);
+            this.pnlQuestionCard.Controls.Add(this.pnlQuestionHeadingBar);
             this.pnlQuestionCard.Controls.Add(this.lblQuestionHeading);
             this.pnlQuestionCard.Controls.Add(this.lblAnsweredCount);
             this.pnlQuestionCard.Controls.Add(this.pnlStatementHeader);
             this.pnlQuestionCard.Controls.Add(this.pnlStatements);
-            this.pnlQuestionCard.Location = new System.Drawing.Point(0, 0);
+            this.pnlQuestionCard.Location = new System.Drawing.Point(0, 12);
             this.pnlQuestionCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlQuestionCard.Name = "pnlQuestionCard";
             this.pnlQuestionCard.Size = new System.Drawing.Size(1167, 468);
             this.pnlQuestionCard.TabIndex = 0;
             // 
-            // lblQuestionHeadingBar
+            // pnlQuestionHeadingBar
             // 
-            this.lblQuestionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblQuestionHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblQuestionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblQuestionHeadingBar.Name = "lblQuestionHeadingBar";
-            this.lblQuestionHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblQuestionHeadingBar.TabIndex = 0;
+            this.pnlQuestionHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlQuestionHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlQuestionHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlQuestionHeadingBar.Name = "pnlQuestionHeadingBar";
+            this.pnlQuestionHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlQuestionHeadingBar.TabIndex = 0;
             // 
             // lblQuestionHeading
             // 
@@ -1892,224 +2066,308 @@
             this.pnlStatements.Size = new System.Drawing.Size(1124, 362);
             this.pnlStatements.TabIndex = 4;
             // 
-            // tileAnswered
+            // pnlAnsweredTile
             // 
-            this.tileAnswered.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            this.tileAnswered.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileAnswered.Controls.Add(this.tileAnsweredCaption);
-            this.tileAnswered.Controls.Add(this.tileAnsweredValue);
-            this.tileAnswered.Controls.Add(this.tileAnsweredNote);
-            this.tileAnswered.Location = new System.Drawing.Point(0, 481);
-            this.tileAnswered.Margin = new System.Windows.Forms.Padding(4);
-            this.tileAnswered.Name = "tileAnswered";
-            this.tileAnswered.Size = new System.Drawing.Size(272, 92);
-            this.tileAnswered.TabIndex = 1;
+            this.pnlAnsweredTile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            this.pnlAnsweredTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAnsweredTile.Controls.Add(this.lblAnsweredTileCaption);
+            this.pnlAnsweredTile.Controls.Add(this.lblAnsweredTileValue);
+            this.pnlAnsweredTile.Controls.Add(this.lblAnsweredTileNote);
+            this.pnlAnsweredTile.Location = new System.Drawing.Point(0, 493);
+            this.pnlAnsweredTile.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAnsweredTile.Name = "pnlAnsweredTile";
+            this.pnlAnsweredTile.Size = new System.Drawing.Size(272, 92);
+            this.pnlAnsweredTile.TabIndex = 1;
             // 
-            // tileAnsweredCaption
+            // lblAnsweredTileCaption
             // 
-            this.tileAnsweredCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tileAnsweredCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileAnsweredCaption.Location = new System.Drawing.Point(15, 10);
-            this.tileAnsweredCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileAnsweredCaption.Name = "tileAnsweredCaption";
-            this.tileAnsweredCaption.Size = new System.Drawing.Size(242, 25);
-            this.tileAnsweredCaption.TabIndex = 0;
-            this.tileAnsweredCaption.Text = "Answered";
+            this.lblAnsweredTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblAnsweredTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblAnsweredTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblAnsweredTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnsweredTileCaption.Name = "lblAnsweredTileCaption";
+            this.lblAnsweredTileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblAnsweredTileCaption.TabIndex = 0;
+            this.lblAnsweredTileCaption.Text = "Answered";
             // 
-            // tileAnsweredValue
+            // lblAnsweredTileValue
             // 
-            this.tileAnsweredValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tileAnsweredValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
-            this.tileAnsweredValue.Location = new System.Drawing.Point(12, 30);
-            this.tileAnsweredValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileAnsweredValue.Name = "tileAnsweredValue";
-            this.tileAnsweredValue.Size = new System.Drawing.Size(242, 38);
-            this.tileAnsweredValue.TabIndex = 1;
-            this.tileAnsweredValue.Text = "—";
+            this.lblAnsweredTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblAnsweredTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
+            this.lblAnsweredTileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblAnsweredTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnsweredTileValue.Name = "lblAnsweredTileValue";
+            this.lblAnsweredTileValue.Size = new System.Drawing.Size(242, 38);
+            this.lblAnsweredTileValue.TabIndex = 1;
+            this.lblAnsweredTileValue.Text = "—";
             // 
-            // tileAnsweredNote
+            // lblAnsweredTileNote
             // 
-            this.tileAnsweredNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tileAnsweredNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileAnsweredNote.Location = new System.Drawing.Point(15, 65);
-            this.tileAnsweredNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileAnsweredNote.Name = "tileAnsweredNote";
-            this.tileAnsweredNote.Size = new System.Drawing.Size(242, 22);
-            this.tileAnsweredNote.TabIndex = 2;
+            this.lblAnsweredTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblAnsweredTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblAnsweredTileNote.Location = new System.Drawing.Point(15, 65);
+            this.lblAnsweredTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnsweredTileNote.Name = "lblAnsweredTileNote";
+            this.lblAnsweredTileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblAnsweredTileNote.TabIndex = 2;
             // 
-            // tileCategory1
+            // pnlCategory1Tile
             // 
-            this.tileCategory1.BackColor = System.Drawing.Color.White;
-            this.tileCategory1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory1.Controls.Add(this.tileCategory1Caption);
-            this.tileCategory1.Controls.Add(this.tileCategory1Value);
-            this.tileCategory1.Controls.Add(this.tileCategory1Note);
-            this.tileCategory1.Location = new System.Drawing.Point(298, 481);
-            this.tileCategory1.Margin = new System.Windows.Forms.Padding(4);
-            this.tileCategory1.Name = "tileCategory1";
-            this.tileCategory1.Size = new System.Drawing.Size(272, 92);
-            this.tileCategory1.TabIndex = 2;
-            this.tileCategory1.Visible = false;
+            this.pnlCategory1Tile.BackColor = System.Drawing.Color.White;
+            this.pnlCategory1Tile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCategory1Tile.Controls.Add(this.lblCategory1TileCaption);
+            this.pnlCategory1Tile.Controls.Add(this.lblCategory1TileValue);
+            this.pnlCategory1Tile.Controls.Add(this.lblCategory1TileNote);
+            this.pnlCategory1Tile.Location = new System.Drawing.Point(298, 493);
+            this.pnlCategory1Tile.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlCategory1Tile.Name = "pnlCategory1Tile";
+            this.pnlCategory1Tile.Size = new System.Drawing.Size(272, 92);
+            this.pnlCategory1Tile.TabIndex = 2;
+            this.pnlCategory1Tile.Visible = false;
             // 
-            // tileCategory1Caption
+            // lblCategory1TileCaption
             // 
-            this.tileCategory1Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tileCategory1Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory1Caption.Location = new System.Drawing.Point(15, 10);
-            this.tileCategory1Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory1Caption.Name = "tileCategory1Caption";
-            this.tileCategory1Caption.Size = new System.Drawing.Size(242, 25);
-            this.tileCategory1Caption.TabIndex = 0;
-            this.tileCategory1Caption.Text = "Category";
+            this.lblCategory1TileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblCategory1TileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblCategory1TileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblCategory1TileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory1TileCaption.Name = "lblCategory1TileCaption";
+            this.lblCategory1TileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblCategory1TileCaption.TabIndex = 0;
+            this.lblCategory1TileCaption.Text = "Category";
             // 
-            // tileCategory1Value
+            // lblCategory1TileValue
             // 
-            this.tileCategory1Value.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tileCategory1Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory1Value.Location = new System.Drawing.Point(12, 30);
-            this.tileCategory1Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory1Value.Name = "tileCategory1Value";
-            this.tileCategory1Value.Size = new System.Drawing.Size(242, 38);
-            this.tileCategory1Value.TabIndex = 1;
-            this.tileCategory1Value.Text = "—";
+            this.lblCategory1TileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblCategory1TileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.lblCategory1TileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblCategory1TileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory1TileValue.Name = "lblCategory1TileValue";
+            this.lblCategory1TileValue.Size = new System.Drawing.Size(242, 38);
+            this.lblCategory1TileValue.TabIndex = 1;
+            this.lblCategory1TileValue.Text = "—";
             // 
-            // tileCategory1Note
+            // lblCategory1TileNote
             // 
-            this.tileCategory1Note.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tileCategory1Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory1Note.Location = new System.Drawing.Point(15, 65);
-            this.tileCategory1Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory1Note.Name = "tileCategory1Note";
-            this.tileCategory1Note.Size = new System.Drawing.Size(242, 22);
-            this.tileCategory1Note.TabIndex = 2;
-            this.tileCategory1Note.Text = "provisional";
+            this.lblCategory1TileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblCategory1TileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblCategory1TileNote.Location = new System.Drawing.Point(15, 65);
+            this.lblCategory1TileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory1TileNote.Name = "lblCategory1TileNote";
+            this.lblCategory1TileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblCategory1TileNote.TabIndex = 2;
+            this.lblCategory1TileNote.Text = "provisional";
             // 
-            // tileCategory2
+            // pnlCategory2Tile
             // 
-            this.tileCategory2.BackColor = System.Drawing.Color.White;
-            this.tileCategory2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory2.Controls.Add(this.tileCategory2Caption);
-            this.tileCategory2.Controls.Add(this.tileCategory2Value);
-            this.tileCategory2.Controls.Add(this.tileCategory2Note);
-            this.tileCategory2.Location = new System.Drawing.Point(595, 481);
-            this.tileCategory2.Margin = new System.Windows.Forms.Padding(4);
-            this.tileCategory2.Name = "tileCategory2";
-            this.tileCategory2.Size = new System.Drawing.Size(272, 92);
-            this.tileCategory2.TabIndex = 3;
-            this.tileCategory2.Visible = false;
+            this.pnlCategory2Tile.BackColor = System.Drawing.Color.White;
+            this.pnlCategory2Tile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCategory2Tile.Controls.Add(this.lblCategory2TileCaption);
+            this.pnlCategory2Tile.Controls.Add(this.lblCategory2TileValue);
+            this.pnlCategory2Tile.Controls.Add(this.lblCategory2TileNote);
+            this.pnlCategory2Tile.Location = new System.Drawing.Point(595, 493);
+            this.pnlCategory2Tile.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlCategory2Tile.Name = "pnlCategory2Tile";
+            this.pnlCategory2Tile.Size = new System.Drawing.Size(272, 92);
+            this.pnlCategory2Tile.TabIndex = 3;
+            this.pnlCategory2Tile.Visible = false;
             // 
-            // tileCategory2Caption
+            // lblCategory2TileCaption
             // 
-            this.tileCategory2Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tileCategory2Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory2Caption.Location = new System.Drawing.Point(15, 10);
-            this.tileCategory2Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory2Caption.Name = "tileCategory2Caption";
-            this.tileCategory2Caption.Size = new System.Drawing.Size(242, 25);
-            this.tileCategory2Caption.TabIndex = 0;
-            this.tileCategory2Caption.Text = "Category";
+            this.lblCategory2TileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblCategory2TileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblCategory2TileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblCategory2TileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory2TileCaption.Name = "lblCategory2TileCaption";
+            this.lblCategory2TileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblCategory2TileCaption.TabIndex = 0;
+            this.lblCategory2TileCaption.Text = "Category";
             // 
-            // tileCategory2Value
+            // lblCategory2TileValue
             // 
-            this.tileCategory2Value.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tileCategory2Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory2Value.Location = new System.Drawing.Point(12, 30);
-            this.tileCategory2Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory2Value.Name = "tileCategory2Value";
-            this.tileCategory2Value.Size = new System.Drawing.Size(242, 38);
-            this.tileCategory2Value.TabIndex = 1;
-            this.tileCategory2Value.Text = "—";
+            this.lblCategory2TileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblCategory2TileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.lblCategory2TileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblCategory2TileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory2TileValue.Name = "lblCategory2TileValue";
+            this.lblCategory2TileValue.Size = new System.Drawing.Size(242, 38);
+            this.lblCategory2TileValue.TabIndex = 1;
+            this.lblCategory2TileValue.Text = "—";
             // 
-            // tileCategory2Note
+            // lblCategory2TileNote
             // 
-            this.tileCategory2Note.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tileCategory2Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory2Note.Location = new System.Drawing.Point(15, 65);
-            this.tileCategory2Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory2Note.Name = "tileCategory2Note";
-            this.tileCategory2Note.Size = new System.Drawing.Size(242, 22);
-            this.tileCategory2Note.TabIndex = 2;
-            this.tileCategory2Note.Text = "provisional";
+            this.lblCategory2TileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblCategory2TileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblCategory2TileNote.Location = new System.Drawing.Point(15, 65);
+            this.lblCategory2TileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory2TileNote.Name = "lblCategory2TileNote";
+            this.lblCategory2TileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblCategory2TileNote.TabIndex = 2;
+            this.lblCategory2TileNote.Text = "provisional";
             // 
-            // tileCategory3
+            // pnlCategory3Tile
             // 
-            this.tileCategory3.BackColor = System.Drawing.Color.White;
-            this.tileCategory3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tileCategory3.Controls.Add(this.tileCategory3Caption);
-            this.tileCategory3.Controls.Add(this.tileCategory3Value);
-            this.tileCategory3.Controls.Add(this.tileCategory3Note);
-            this.tileCategory3.Location = new System.Drawing.Point(892, 481);
-            this.tileCategory3.Margin = new System.Windows.Forms.Padding(4);
-            this.tileCategory3.Name = "tileCategory3";
-            this.tileCategory3.Size = new System.Drawing.Size(272, 92);
-            this.tileCategory3.TabIndex = 4;
-            this.tileCategory3.Visible = false;
+            this.pnlCategory3Tile.BackColor = System.Drawing.Color.White;
+            this.pnlCategory3Tile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCategory3Tile.Controls.Add(this.lblCategory3TileCaption);
+            this.pnlCategory3Tile.Controls.Add(this.lblCategory3TileValue);
+            this.pnlCategory3Tile.Controls.Add(this.lblCategory3TileNote);
+            this.pnlCategory3Tile.Location = new System.Drawing.Point(892, 493);
+            this.pnlCategory3Tile.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlCategory3Tile.Name = "pnlCategory3Tile";
+            this.pnlCategory3Tile.Size = new System.Drawing.Size(272, 92);
+            this.pnlCategory3Tile.TabIndex = 4;
+            this.pnlCategory3Tile.Visible = false;
             // 
-            // tileCategory3Caption
+            // lblCategory3TileCaption
             // 
-            this.tileCategory3Caption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.tileCategory3Caption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.tileCategory3Caption.Location = new System.Drawing.Point(15, 10);
-            this.tileCategory3Caption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory3Caption.Name = "tileCategory3Caption";
-            this.tileCategory3Caption.Size = new System.Drawing.Size(242, 25);
-            this.tileCategory3Caption.TabIndex = 0;
-            this.tileCategory3Caption.Text = "Category";
+            this.lblCategory3TileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblCategory3TileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblCategory3TileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblCategory3TileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory3TileCaption.Name = "lblCategory3TileCaption";
+            this.lblCategory3TileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblCategory3TileCaption.TabIndex = 0;
+            this.lblCategory3TileCaption.Text = "Category";
             // 
-            // tileCategory3Value
+            // lblCategory3TileValue
             // 
-            this.tileCategory3Value.Font = new System.Drawing.Font("Consolas", 18F);
-            this.tileCategory3Value.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.tileCategory3Value.Location = new System.Drawing.Point(12, 30);
-            this.tileCategory3Value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory3Value.Name = "tileCategory3Value";
-            this.tileCategory3Value.Size = new System.Drawing.Size(242, 38);
-            this.tileCategory3Value.TabIndex = 1;
-            this.tileCategory3Value.Text = "—";
+            this.lblCategory3TileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblCategory3TileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.lblCategory3TileValue.Location = new System.Drawing.Point(12, 30);
+            this.lblCategory3TileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory3TileValue.Name = "lblCategory3TileValue";
+            this.lblCategory3TileValue.Size = new System.Drawing.Size(242, 38);
+            this.lblCategory3TileValue.TabIndex = 1;
+            this.lblCategory3TileValue.Text = "—";
             // 
-            // tileCategory3Note
+            // lblCategory3TileNote
             // 
-            this.tileCategory3Note.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.tileCategory3Note.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.tileCategory3Note.Location = new System.Drawing.Point(15, 65);
-            this.tileCategory3Note.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.tileCategory3Note.Name = "tileCategory3Note";
-            this.tileCategory3Note.Size = new System.Drawing.Size(242, 22);
-            this.tileCategory3Note.TabIndex = 2;
-            this.tileCategory3Note.Text = "provisional";
+            this.lblCategory3TileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblCategory3TileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblCategory3TileNote.Location = new System.Drawing.Point(15, 65);
+            this.lblCategory3TileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategory3TileNote.Name = "lblCategory3TileNote";
+            this.lblCategory3TileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblCategory3TileNote.TabIndex = 2;
+            this.lblCategory3TileNote.Text = "provisional";
+            // 
+            // lblInterestsNotice
+            // 
+            this.lblInterestsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblInterestsNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblInterestsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblInterestsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInterestsNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblInterestsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInterestsNotice.Name = "lblInterestsNotice";
+            this.lblInterestsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblInterestsNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblInterestsNotice.TabIndex = 1;
+            this.lblInterestsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpInterestsActions
+            // 
+            this.flpInterestsActions.Controls.Add(this.btnInterestsSave);
+            this.flpInterestsActions.Controls.Add(this.btnInterestsBack);
+            this.flpInterestsActions.Controls.Add(this.btnInterestsCancel);
+            this.flpInterestsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpInterestsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpInterestsActions.Location = new System.Drawing.Point(0, 747);
+            this.flpInterestsActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpInterestsActions.Name = "flpInterestsActions";
+            this.flpInterestsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpInterestsActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpInterestsActions.TabIndex = 2;
+            this.flpInterestsActions.WrapContents = false;
+            // 
+            // btnInterestsSave
+            // 
+            this.btnInterestsSave.AccessibleName = "Save and continue";
+            this.btnInterestsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnInterestsSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsSave.FlatAppearance.BorderSize = 0;
+            this.btnInterestsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnInterestsSave.ForeColor = System.Drawing.Color.White;
+            this.btnInterestsSave.Location = new System.Drawing.Point(929, 15);
+            this.btnInterestsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsSave.Name = "btnInterestsSave";
+            this.btnInterestsSave.Size = new System.Drawing.Size(238, 50);
+            this.btnInterestsSave.TabIndex = 0;
+            this.btnInterestsSave.Text = "Save and continue";
+            this.btnInterestsSave.UseVisualStyleBackColor = false;
+            this.btnInterestsSave.Click += new System.EventHandler(this.btnInterestsSave_Click);
+            // 
+            // btnInterestsBack
+            // 
+            this.btnInterestsBack.AccessibleName = "Back";
+            this.btnInterestsBack.BackColor = System.Drawing.Color.White;
+            this.btnInterestsBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnInterestsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnInterestsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnInterestsBack.Location = new System.Drawing.Point(755, 15);
+            this.btnInterestsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsBack.Name = "btnInterestsBack";
+            this.btnInterestsBack.Size = new System.Drawing.Size(162, 50);
+            this.btnInterestsBack.TabIndex = 1;
+            this.btnInterestsBack.Text = "Back";
+            this.btnInterestsBack.UseVisualStyleBackColor = false;
+            this.btnInterestsBack.Click += new System.EventHandler(this.btnInterestsBack_Click);
+            // 
+            // btnInterestsCancel
+            // 
+            this.btnInterestsCancel.AccessibleName = "Cancel";
+            this.btnInterestsCancel.BackColor = System.Drawing.Color.White;
+            this.btnInterestsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnInterestsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnInterestsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnInterestsCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnInterestsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsCancel.Name = "btnInterestsCancel";
+            this.btnInterestsCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnInterestsCancel.TabIndex = 2;
+            this.btnInterestsCancel.Text = "Cancel";
+            this.btnInterestsCancel.UseVisualStyleBackColor = false;
+            this.btnInterestsCancel.Click += new System.EventHandler(this.btnInterestsCancel_Click);
             // 
             // tabFaculty
             // 
             this.tabFaculty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabFaculty.Controls.Add(this.pnlSelContent);
-            this.tabFaculty.Location = new System.Drawing.Point(4, 5);
+            this.tabFaculty.Controls.Add(this.pnlFacultyContent);
+            this.tabFaculty.Controls.Add(this.flpFacultyActions);
+            this.tabFaculty.Location = new System.Drawing.Point(4, 36);
             this.tabFaculty.Margin = new System.Windows.Forms.Padding(4);
             this.tabFaculty.Name = "tabFaculty";
-            this.tabFaculty.Size = new System.Drawing.Size(1170, 577);
+            this.tabFaculty.Size = new System.Drawing.Size(1170, 827);
             this.tabFaculty.TabIndex = 4;
-            this.tabFaculty.Text = "UI 5 Faculty and department";
+            this.tabFaculty.Text = "4. Faculty and programme";
             // 
-            // pnlSelContent
+            // pnlFacultyContent
             // 
-            this.pnlSelContent.Controls.Add(this.pnlSearchCard);
-            this.pnlSelContent.Controls.Add(this.pnlProgrammesCard);
-            this.pnlSelContent.Controls.Add(this.pnlRequirementsCard);
-            this.pnlSelContent.Controls.Add(this.pnlAlignmentCard);
-            this.pnlSelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSelContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSelContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlSelContent.Name = "pnlSelContent";
-            this.pnlSelContent.Size = new System.Drawing.Size(1170, 577);
-            this.pnlSelContent.TabIndex = 0;
+            this.pnlFacultyContent.Controls.Add(this.pnlSearchCard);
+            this.pnlFacultyContent.Controls.Add(this.pnlProgrammesCard);
+            this.pnlFacultyContent.Controls.Add(this.pnlRequirementsCard);
+            this.pnlFacultyContent.Controls.Add(this.pnlAlignmentCard);
+            this.pnlFacultyContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFacultyContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlFacultyContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlFacultyContent.Name = "pnlFacultyContent";
+            this.pnlFacultyContent.Size = new System.Drawing.Size(1170, 747);
+            this.pnlFacultyContent.TabIndex = 0;
             // 
             // pnlSearchCard
             // 
             this.pnlSearchCard.BackColor = System.Drawing.Color.White;
             this.pnlSearchCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSearchCard.Controls.Add(this.lblSearchHeadingBar);
+            this.pnlSearchCard.Controls.Add(this.pnlSearchHeadingBar);
             this.pnlSearchCard.Controls.Add(this.lblSearchHeading);
-            this.pnlSearchCard.Controls.Add(this.rbBrowse);
-            this.pnlSearchCard.Controls.Add(this.rbSearch);
+            this.pnlSearchCard.Controls.Add(this.rdoBrowse);
+            this.pnlSearchCard.Controls.Add(this.rdoSearch);
             this.pnlSearchCard.Controls.Add(this.lblSelFaculty);
             this.pnlSearchCard.Controls.Add(this.lblFacultyStar);
             this.pnlSearchCard.Controls.Add(this.cboSelFaculty);
@@ -2123,14 +2381,14 @@
             this.pnlSearchCard.Size = new System.Drawing.Size(1167, 147);
             this.pnlSearchCard.TabIndex = 0;
             // 
-            // lblSearchHeadingBar
+            // pnlSearchHeadingBar
             // 
-            this.lblSearchHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblSearchHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblSearchHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblSearchHeadingBar.Name = "lblSearchHeadingBar";
-            this.lblSearchHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblSearchHeadingBar.TabIndex = 0;
+            this.pnlSearchHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlSearchHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlSearchHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSearchHeadingBar.Name = "pnlSearchHeadingBar";
+            this.pnlSearchHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlSearchHeadingBar.TabIndex = 0;
             // 
             // lblSearchHeading
             // 
@@ -2144,35 +2402,35 @@
             this.lblSearchHeading.Text = "How would you like to find a programme?";
             this.lblSearchHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // rbBrowse
+            // rdoBrowse
             // 
-            this.rbBrowse.AccessibleName = "Browse by faculty";
-            this.rbBrowse.Checked = true;
-            this.rbBrowse.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.rbBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rbBrowse.Location = new System.Drawing.Point(25, 58);
-            this.rbBrowse.Margin = new System.Windows.Forms.Padding(4);
-            this.rbBrowse.Name = "rbBrowse";
-            this.rbBrowse.Size = new System.Drawing.Size(275, 30);
-            this.rbBrowse.TabIndex = 2;
-            this.rbBrowse.TabStop = true;
-            this.rbBrowse.Text = "Browse by faculty";
-            this.rbBrowse.UseVisualStyleBackColor = true;
-            this.rbBrowse.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
+            this.rdoBrowse.AccessibleName = "Browse by faculty";
+            this.rdoBrowse.Checked = true;
+            this.rdoBrowse.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rdoBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.rdoBrowse.Location = new System.Drawing.Point(25, 58);
+            this.rdoBrowse.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoBrowse.Name = "rdoBrowse";
+            this.rdoBrowse.Size = new System.Drawing.Size(275, 30);
+            this.rdoBrowse.TabIndex = 2;
+            this.rdoBrowse.TabStop = true;
+            this.rdoBrowse.Text = "Browse by faculty";
+            this.rdoBrowse.UseVisualStyleBackColor = true;
+            this.rdoBrowse.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
             // 
-            // rbSearch
+            // rdoSearch
             // 
-            this.rbSearch.AccessibleName = "Search by programme name";
-            this.rbSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.rbSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.rbSearch.Location = new System.Drawing.Point(25, 92);
-            this.rbSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.rbSearch.Name = "rbSearch";
-            this.rbSearch.Size = new System.Drawing.Size(275, 30);
-            this.rbSearch.TabIndex = 3;
-            this.rbSearch.Text = "Search by programme name";
-            this.rbSearch.UseVisualStyleBackColor = true;
-            this.rbSearch.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
+            this.rdoSearch.AccessibleName = "Search by programme name";
+            this.rdoSearch.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.rdoSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.rdoSearch.Location = new System.Drawing.Point(25, 92);
+            this.rdoSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoSearch.Name = "rdoSearch";
+            this.rdoSearch.Size = new System.Drawing.Size(275, 30);
+            this.rdoSearch.TabIndex = 3;
+            this.rdoSearch.Text = "Search by programme name";
+            this.rdoSearch.UseVisualStyleBackColor = true;
+            this.rdoSearch.CheckedChanged += new System.EventHandler(this.rbSearchMode_CheckedChanged);
             // 
             // lblSelFaculty
             // 
@@ -2215,7 +2473,7 @@
             // lblFacultyError
             // 
             this.lblFacultyError.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblFacultyError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
+            this.lblFacultyError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(38)))), ((int)(((byte)(44)))));
             this.lblFacultyError.Location = new System.Drawing.Point(338, 119);
             this.lblFacultyError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFacultyError.Name = "lblFacultyError";
@@ -2263,7 +2521,7 @@
             // 
             this.pnlProgrammesCard.BackColor = System.Drawing.Color.White;
             this.pnlProgrammesCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlProgrammesCard.Controls.Add(this.lblProgrammesHeadingBar);
+            this.pnlProgrammesCard.Controls.Add(this.pnlProgrammesHeadingBar);
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammesHeading);
             this.pnlProgrammesCard.Controls.Add(this.lblProgrammeCount);
             this.pnlProgrammesCard.Controls.Add(this.dgvProgrammes);
@@ -2273,14 +2531,14 @@
             this.pnlProgrammesCard.Size = new System.Drawing.Size(571, 368);
             this.pnlProgrammesCard.TabIndex = 1;
             // 
-            // lblProgrammesHeadingBar
+            // pnlProgrammesHeadingBar
             // 
-            this.lblProgrammesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblProgrammesHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblProgrammesHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblProgrammesHeadingBar.Name = "lblProgrammesHeadingBar";
-            this.lblProgrammesHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblProgrammesHeadingBar.TabIndex = 0;
+            this.pnlProgrammesHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlProgrammesHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlProgrammesHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlProgrammesHeadingBar.Name = "pnlProgrammesHeadingBar";
+            this.pnlProgrammesHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlProgrammesHeadingBar.TabIndex = 0;
             // 
             // lblProgrammesHeading
             // 
@@ -2311,40 +2569,40 @@
             this.dgvProgrammes.AllowUserToAddRows = false;
             this.dgvProgrammes.AllowUserToDeleteRows = false;
             this.dgvProgrammes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle36;
             this.dgvProgrammes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProgrammes.BackgroundColor = System.Drawing.Color.White;
             this.dgvProgrammes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvProgrammes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
             this.dgvProgrammes.ColumnHeadersHeight = 34;
             this.dgvProgrammes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProgrammes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSelProgrammeId,
-            this.colProgrammeName,
-            this.colMinimumAverage,
-            this.colSelect});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammes.DefaultCellStyle = dataGridViewCellStyle10;
+            this.colProgrammesId,
+            this.colProgrammesName,
+            this.colProgrammesMinimumAverage,
+            this.colProgrammesSelect});
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle40.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle40.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrammes.DefaultCellStyle = dataGridViewCellStyle40;
             this.dgvProgrammes.EnableHeadersVisualStyles = false;
             this.dgvProgrammes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvProgrammes.Location = new System.Drawing.Point(15, 72);
+            this.dgvProgrammes.Location = new System.Drawing.Point(20, 72);
             this.dgvProgrammes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProgrammes.MultiSelect = false;
             this.dgvProgrammes.Name = "dgvProgrammes";
@@ -2353,67 +2611,67 @@
             this.dgvProgrammes.RowHeadersWidth = 51;
             this.dgvProgrammes.RowTemplate.Height = 30;
             this.dgvProgrammes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProgrammes.Size = new System.Drawing.Size(539, 279);
+            this.dgvProgrammes.Size = new System.Drawing.Size(529, 279);
             this.dgvProgrammes.TabIndex = 3;
             this.dgvProgrammes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProgrammes_CellContentClick);
             this.dgvProgrammes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProgrammes_CellFormatting);
             this.dgvProgrammes.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SelGrid_DataBindingComplete);
             // 
-            // colSelProgrammeId
+            // colProgrammesId
             // 
-            this.colSelProgrammeId.DataPropertyName = "ProgrammeID";
-            this.colSelProgrammeId.FillWeight = 5F;
-            this.colSelProgrammeId.HeaderText = "Programme ID";
-            this.colSelProgrammeId.MinimumWidth = 6;
-            this.colSelProgrammeId.Name = "colSelProgrammeId";
-            this.colSelProgrammeId.ReadOnly = true;
-            this.colSelProgrammeId.Visible = false;
+            this.colProgrammesId.DataPropertyName = "ProgrammeID";
+            this.colProgrammesId.FillWeight = 5F;
+            this.colProgrammesId.HeaderText = "Programme ID";
+            this.colProgrammesId.MinimumWidth = 6;
+            this.colProgrammesId.Name = "colProgrammesId";
+            this.colProgrammesId.ReadOnly = true;
+            this.colProgrammesId.Visible = false;
             // 
-            // colProgrammeName
+            // colProgrammesName
             // 
-            this.colProgrammeName.DataPropertyName = "ProgrammeName";
-            this.colProgrammeName.FillWeight = 56F;
-            this.colProgrammeName.HeaderText = "Degree programme";
-            this.colProgrammeName.MinimumWidth = 6;
-            this.colProgrammeName.Name = "colProgrammeName";
-            this.colProgrammeName.ReadOnly = true;
+            this.colProgrammesName.DataPropertyName = "ProgrammeName";
+            this.colProgrammesName.FillWeight = 56F;
+            this.colProgrammesName.HeaderText = "Degree programme";
+            this.colProgrammesName.MinimumWidth = 6;
+            this.colProgrammesName.Name = "colProgrammesName";
+            this.colProgrammesName.ReadOnly = true;
             // 
-            // colMinimumAverage
+            // colProgrammesMinimumAverage
             // 
-            this.colMinimumAverage.DataPropertyName = "MinimumOverallAverage";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle8.Format = "0\'%\'";
-            dataGridViewCellStyle8.NullValue = "—";
-            this.colMinimumAverage.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colMinimumAverage.FillWeight = 20F;
-            this.colMinimumAverage.HeaderText = "Min. avg.";
-            this.colMinimumAverage.MinimumWidth = 6;
-            this.colMinimumAverage.Name = "colMinimumAverage";
-            this.colMinimumAverage.ReadOnly = true;
+            this.colProgrammesMinimumAverage.DataPropertyName = "MinimumOverallAverage";
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle38.Format = "0.#\'%\'";
+            dataGridViewCellStyle38.NullValue = "—";
+            this.colProgrammesMinimumAverage.DefaultCellStyle = dataGridViewCellStyle38;
+            this.colProgrammesMinimumAverage.FillWeight = 20F;
+            this.colProgrammesMinimumAverage.HeaderText = "Min. avg.";
+            this.colProgrammesMinimumAverage.MinimumWidth = 6;
+            this.colProgrammesMinimumAverage.Name = "colProgrammesMinimumAverage";
+            this.colProgrammesMinimumAverage.ReadOnly = true;
             // 
-            // colSelect
+            // colProgrammesSelect
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.colSelect.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colSelect.FillWeight = 24F;
-            this.colSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colSelect.HeaderText = "Choose";
-            this.colSelect.MinimumWidth = 6;
-            this.colSelect.Name = "colSelect";
-            this.colSelect.ReadOnly = true;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle39.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle39.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.White;
+            this.colProgrammesSelect.DefaultCellStyle = dataGridViewCellStyle39;
+            this.colProgrammesSelect.FillWeight = 24F;
+            this.colProgrammesSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.colProgrammesSelect.HeaderText = "Choose";
+            this.colProgrammesSelect.MinimumWidth = 6;
+            this.colProgrammesSelect.Name = "colProgrammesSelect";
+            this.colProgrammesSelect.ReadOnly = true;
             // 
             // pnlRequirementsCard
             // 
             this.pnlRequirementsCard.BackColor = System.Drawing.Color.White;
             this.pnlRequirementsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRequirementsCard.Controls.Add(this.lblRequirementsHeadingBar);
+            this.pnlRequirementsCard.Controls.Add(this.pnlRequirementsHeadingBar);
             this.pnlRequirementsCard.Controls.Add(this.lblRequirementsHeading);
             this.pnlRequirementsCard.Controls.Add(this.lblRequirementsProgramme);
             this.pnlRequirementsCard.Controls.Add(this.dgvRequirements);
@@ -2424,14 +2682,14 @@
             this.pnlRequirementsCard.Size = new System.Drawing.Size(571, 368);
             this.pnlRequirementsCard.TabIndex = 2;
             // 
-            // lblRequirementsHeadingBar
+            // pnlRequirementsHeadingBar
             // 
-            this.lblRequirementsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblRequirementsHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblRequirementsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblRequirementsHeadingBar.Name = "lblRequirementsHeadingBar";
-            this.lblRequirementsHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblRequirementsHeadingBar.TabIndex = 0;
+            this.pnlRequirementsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlRequirementsHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlRequirementsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlRequirementsHeadingBar.Name = "pnlRequirementsHeadingBar";
+            this.pnlRequirementsHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlRequirementsHeadingBar.TabIndex = 0;
             // 
             // lblRequirementsHeading
             // 
@@ -2463,94 +2721,94 @@
             this.dgvRequirements.AllowUserToAddRows = false;
             this.dgvRequirements.AllowUserToDeleteRows = false;
             this.dgvRequirements.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle41;
             this.dgvRequirements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRequirements.BackgroundColor = System.Drawing.Color.White;
             this.dgvRequirements.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvRequirements.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle42.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle42.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle42;
             this.dgvRequirements.ColumnHeadersHeight = 34;
             this.dgvRequirements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRequirements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRequirementSubject,
-            this.colRequirementMinimum,
-            this.colRequirementType});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRequirements.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colRequirementsSubject,
+            this.colRequirementsMinimum,
+            this.colRequirementsType});
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle45.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRequirements.DefaultCellStyle = dataGridViewCellStyle45;
             this.dgvRequirements.EnableHeadersVisualStyles = false;
             this.dgvRequirements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvRequirements.Location = new System.Drawing.Point(15, 72);
+            this.dgvRequirements.Location = new System.Drawing.Point(20, 72);
             this.dgvRequirements.Margin = new System.Windows.Forms.Padding(4);
             this.dgvRequirements.MultiSelect = false;
             this.dgvRequirements.Name = "dgvRequirements";
             this.dgvRequirements.ReadOnly = true;
             this.dgvRequirements.RowHeadersVisible = false;
             this.dgvRequirements.RowHeadersWidth = 51;
-            this.dgvRequirements.RowTemplate.Height = 24;
+            this.dgvRequirements.RowTemplate.Height = 30;
             this.dgvRequirements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRequirements.Size = new System.Drawing.Size(539, 229);
+            this.dgvRequirements.Size = new System.Drawing.Size(529, 229);
             this.dgvRequirements.TabIndex = 3;
             this.dgvRequirements.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SelGrid_DataBindingComplete);
             // 
-            // colRequirementSubject
+            // colRequirementsSubject
             // 
-            this.colRequirementSubject.DataPropertyName = "SubjectName";
-            this.colRequirementSubject.FillWeight = 46F;
-            this.colRequirementSubject.HeaderText = "Requirement";
-            this.colRequirementSubject.MinimumWidth = 6;
-            this.colRequirementSubject.Name = "colRequirementSubject";
-            this.colRequirementSubject.ReadOnly = true;
+            this.colRequirementsSubject.DataPropertyName = "SubjectName";
+            this.colRequirementsSubject.FillWeight = 46F;
+            this.colRequirementsSubject.HeaderText = "Requirement";
+            this.colRequirementsSubject.MinimumWidth = 6;
+            this.colRequirementsSubject.Name = "colRequirementsSubject";
+            this.colRequirementsSubject.ReadOnly = true;
             // 
-            // colRequirementMinimum
+            // colRequirementsMinimum
             // 
-            this.colRequirementMinimum.DataPropertyName = "MinimumMark";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle13.Format = "0\'%\'";
-            dataGridViewCellStyle13.NullValue = "—";
-            this.colRequirementMinimum.DefaultCellStyle = dataGridViewCellStyle13;
-            this.colRequirementMinimum.FillWeight = 22F;
-            this.colRequirementMinimum.HeaderText = "Minimum";
-            this.colRequirementMinimum.MinimumWidth = 6;
-            this.colRequirementMinimum.Name = "colRequirementMinimum";
-            this.colRequirementMinimum.ReadOnly = true;
+            this.colRequirementsMinimum.DataPropertyName = "MinimumMark";
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle43.Format = "0.#\'%\'";
+            dataGridViewCellStyle43.NullValue = "—";
+            this.colRequirementsMinimum.DefaultCellStyle = dataGridViewCellStyle43;
+            this.colRequirementsMinimum.FillWeight = 22F;
+            this.colRequirementsMinimum.HeaderText = "Minimum";
+            this.colRequirementsMinimum.MinimumWidth = 6;
+            this.colRequirementsMinimum.Name = "colRequirementsMinimum";
+            this.colRequirementsMinimum.ReadOnly = true;
             // 
-            // colRequirementType
+            // colRequirementsType
             // 
-            this.colRequirementType.DataPropertyName = "RequirementType";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.colRequirementType.DefaultCellStyle = dataGridViewCellStyle14;
-            this.colRequirementType.FillWeight = 32F;
-            this.colRequirementType.HeaderText = "Type";
-            this.colRequirementType.MinimumWidth = 6;
-            this.colRequirementType.Name = "colRequirementType";
-            this.colRequirementType.ReadOnly = true;
+            this.colRequirementsType.DataPropertyName = "RequirementType";
+            dataGridViewCellStyle44.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dataGridViewCellStyle44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.colRequirementsType.DefaultCellStyle = dataGridViewCellStyle44;
+            this.colRequirementsType.FillWeight = 32F;
+            this.colRequirementsType.HeaderText = "Type";
+            this.colRequirementsType.MinimumWidth = 6;
+            this.colRequirementsType.Name = "colRequirementsType";
+            this.colRequirementsType.ReadOnly = true;
             // 
             // lblSelSampleData
             // 
             this.lblSelSampleData.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSelSampleData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblSelSampleData.Location = new System.Drawing.Point(15, 309);
+            this.lblSelSampleData.Location = new System.Drawing.Point(20, 309);
             this.lblSelSampleData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelSampleData.Name = "lblSelSampleData";
-            this.lblSelSampleData.Size = new System.Drawing.Size(539, 42);
+            this.lblSelSampleData.Size = new System.Drawing.Size(529, 42);
             this.lblSelSampleData.TabIndex = 4;
             this.lblSelSampleData.Text = "Sample requirements held in the local database. Future Path does not publish offi" +
     "cial university admission requirements.";
@@ -2571,12 +2829,12 @@
             // 
             // lblAlignmentHeading
             // 
-            this.lblAlignmentHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblAlignmentHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblAlignmentHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAlignmentHeading.Location = new System.Drawing.Point(20, 12);
+            this.lblAlignmentHeading.Location = new System.Drawing.Point(20, 8);
             this.lblAlignmentHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAlignmentHeading.Name = "lblAlignmentHeading";
-            this.lblAlignmentHeading.Size = new System.Drawing.Size(375, 50);
+            this.lblAlignmentHeading.Size = new System.Drawing.Size(375, 64);
             this.lblAlignmentHeading.TabIndex = 0;
             this.lblAlignmentHeading.Text = "Interest alignment with this programme";
             this.lblAlignmentHeading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2619,60 +2877,130 @@
             this.lblAlignmentSource.Text = "Calculated from your questionnaire";
             this.lblAlignmentSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // flpFacultyActions
+            // 
+            this.flpFacultyActions.Controls.Add(this.btnFacultyCheck);
+            this.flpFacultyActions.Controls.Add(this.btnFacultyBack);
+            this.flpFacultyActions.Controls.Add(this.btnFacultyCancel);
+            this.flpFacultyActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpFacultyActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpFacultyActions.Location = new System.Drawing.Point(0, 747);
+            this.flpFacultyActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpFacultyActions.Name = "flpFacultyActions";
+            this.flpFacultyActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpFacultyActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpFacultyActions.TabIndex = 2;
+            this.flpFacultyActions.WrapContents = false;
+            // 
+            // btnFacultyCheck
+            // 
+            this.btnFacultyCheck.AccessibleName = "Check eligibility";
+            this.btnFacultyCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnFacultyCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyCheck.FlatAppearance.BorderSize = 0;
+            this.btnFacultyCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyCheck.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnFacultyCheck.ForeColor = System.Drawing.Color.White;
+            this.btnFacultyCheck.Location = new System.Drawing.Point(929, 15);
+            this.btnFacultyCheck.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyCheck.Name = "btnFacultyCheck";
+            this.btnFacultyCheck.Size = new System.Drawing.Size(238, 50);
+            this.btnFacultyCheck.TabIndex = 0;
+            this.btnFacultyCheck.Text = "Check eligibility";
+            this.btnFacultyCheck.UseVisualStyleBackColor = false;
+            this.btnFacultyCheck.Click += new System.EventHandler(this.btnFacultyCheck_Click);
+            // 
+            // btnFacultyBack
+            // 
+            this.btnFacultyBack.AccessibleName = "Back";
+            this.btnFacultyBack.BackColor = System.Drawing.Color.White;
+            this.btnFacultyBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFacultyBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFacultyBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFacultyBack.Location = new System.Drawing.Point(755, 15);
+            this.btnFacultyBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyBack.Name = "btnFacultyBack";
+            this.btnFacultyBack.Size = new System.Drawing.Size(162, 50);
+            this.btnFacultyBack.TabIndex = 1;
+            this.btnFacultyBack.Text = "Back";
+            this.btnFacultyBack.UseVisualStyleBackColor = false;
+            this.btnFacultyBack.Click += new System.EventHandler(this.btnFacultyBack_Click);
+            // 
+            // btnFacultyCancel
+            // 
+            this.btnFacultyCancel.AccessibleName = "Cancel";
+            this.btnFacultyCancel.BackColor = System.Drawing.Color.White;
+            this.btnFacultyCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFacultyCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFacultyCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFacultyCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnFacultyCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyCancel.Name = "btnFacultyCancel";
+            this.btnFacultyCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnFacultyCancel.TabIndex = 2;
+            this.btnFacultyCancel.Text = "Cancel";
+            this.btnFacultyCancel.UseVisualStyleBackColor = false;
+            this.btnFacultyCancel.Click += new System.EventHandler(this.btnFacultyCancel_Click);
+            // 
             // tabResults
             // 
             this.tabResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabResults.Controls.Add(this.tabResultsGroup);
-            this.tabResults.Location = new System.Drawing.Point(4, 5);
+            this.tabResults.Controls.Add(this.tcResults);
+            this.tabResults.Location = new System.Drawing.Point(4, 36);
             this.tabResults.Margin = new System.Windows.Forms.Padding(4);
             this.tabResults.Name = "tabResults";
-            this.tabResults.Size = new System.Drawing.Size(1170, 577);
+            this.tabResults.Size = new System.Drawing.Size(1170, 827);
             this.tabResults.TabIndex = 5;
-            this.tabResults.Text = "UI 6 Results";
+            this.tabResults.Text = "5. Results";
             // 
-            // tabResultsGroup
+            // tcResults
             // 
-            this.tabResultsGroup.Controls.Add(this.tabOutcome);
-            this.tabResultsGroup.Controls.Add(this.tabAlternatives);
-            this.tabResultsGroup.Controls.Add(this.tabFunding);
-            this.tabResultsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabResultsGroup.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tabResultsGroup.Location = new System.Drawing.Point(0, 0);
-            this.tabResultsGroup.Margin = new System.Windows.Forms.Padding(4);
-            this.tabResultsGroup.Name = "tabResultsGroup";
-            this.tabResultsGroup.Padding = new System.Drawing.Point(6, 5);
-            this.tabResultsGroup.SelectedIndex = 0;
-            this.tabResultsGroup.Size = new System.Drawing.Size(1170, 577);
-            this.tabResultsGroup.TabIndex = 0;
-            this.tabResultsGroup.SelectedIndexChanged += new System.EventHandler(this.tabResultsGroup_SelectedIndexChanged);
+            this.tcResults.Controls.Add(this.tabOutcome);
+            this.tcResults.Controls.Add(this.tabAlternatives);
+            this.tcResults.Controls.Add(this.tabFunding);
+            this.tcResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcResults.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tcResults.Location = new System.Drawing.Point(0, 0);
+            this.tcResults.Margin = new System.Windows.Forms.Padding(4);
+            this.tcResults.Name = "tcResults";
+            this.tcResults.Padding = new System.Drawing.Point(6, 5);
+            this.tcResults.SelectedIndex = 0;
+            this.tcResults.Size = new System.Drawing.Size(1170, 827);
+            this.tcResults.TabIndex = 0;
+            this.tcResults.SelectedIndexChanged += new System.EventHandler(this.tcResults_SelectedIndexChanged);
             // 
             // tabOutcome
             // 
             this.tabOutcome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabOutcome.Controls.Add(this.pnlOutContent);
+            this.tabOutcome.Controls.Add(this.pnlOutcomeContent);
+            this.tabOutcome.Controls.Add(this.flpOutcomeActions);
             this.tabOutcome.Location = new System.Drawing.Point(4, 36);
             this.tabOutcome.Margin = new System.Windows.Forms.Padding(4);
             this.tabOutcome.Name = "tabOutcome";
-            this.tabOutcome.Size = new System.Drawing.Size(1162, 537);
+            this.tabOutcome.Size = new System.Drawing.Size(1162, 787);
             this.tabOutcome.TabIndex = 0;
-            this.tabOutcome.Text = "Your outcome";
+            this.tabOutcome.Text = "Eligibility results";
             // 
-            // pnlOutContent
+            // pnlOutcomeContent
             // 
-            this.pnlOutContent.Controls.Add(this.pnlOutcome);
-            this.pnlOutContent.Controls.Add(this.pnlCheckedCard);
-            this.pnlOutContent.Controls.Add(this.pnlSubjectTile);
-            this.pnlOutContent.Controls.Add(this.pnlMarkTile);
-            this.pnlOutContent.Controls.Add(this.pnlInterestTile);
-            this.pnlOutContent.Controls.Add(this.pnlOverallTile);
-            this.pnlOutContent.Controls.Add(this.lblOutDisclaimer);
-            this.pnlOutContent.Controls.Add(this.lblOutSampleData);
-            this.pnlOutContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlOutContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlOutContent.Name = "pnlOutContent";
-            this.pnlOutContent.Size = new System.Drawing.Size(1162, 537);
-            this.pnlOutContent.TabIndex = 0;
+            this.pnlOutcomeContent.Controls.Add(this.pnlOutcome);
+            this.pnlOutcomeContent.Controls.Add(this.pnlCheckedCard);
+            this.pnlOutcomeContent.Controls.Add(this.pnlSubjectTile);
+            this.pnlOutcomeContent.Controls.Add(this.pnlMarkTile);
+            this.pnlOutcomeContent.Controls.Add(this.pnlInterestTile);
+            this.pnlOutcomeContent.Controls.Add(this.pnlOverallTile);
+            this.pnlOutcomeContent.Controls.Add(this.lblOutDisclaimer);
+            this.pnlOutcomeContent.Controls.Add(this.lblOutSampleData);
+            this.pnlOutcomeContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOutcomeContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlOutcomeContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlOutcomeContent.Name = "pnlOutcomeContent";
+            this.pnlOutcomeContent.Size = new System.Drawing.Size(1162, 707);
+            this.pnlOutcomeContent.TabIndex = 0;
             // 
             // pnlOutcome
             // 
@@ -2739,7 +3067,7 @@
             // 
             this.pnlCheckedCard.BackColor = System.Drawing.Color.White;
             this.pnlCheckedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCheckedCard.Controls.Add(this.lblCheckedHeadingBar);
+            this.pnlCheckedCard.Controls.Add(this.pnlCheckedHeadingBar);
             this.pnlCheckedCard.Controls.Add(this.lblCheckedHeading);
             this.pnlCheckedCard.Controls.Add(this.dgvChecked);
             this.pnlCheckedCard.Location = new System.Drawing.Point(0, 138);
@@ -2748,14 +3076,14 @@
             this.pnlCheckedCard.Size = new System.Drawing.Size(1157, 280);
             this.pnlCheckedCard.TabIndex = 1;
             // 
-            // lblCheckedHeadingBar
+            // pnlCheckedHeadingBar
             // 
-            this.lblCheckedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblCheckedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblCheckedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblCheckedHeadingBar.Name = "lblCheckedHeadingBar";
-            this.lblCheckedHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblCheckedHeadingBar.TabIndex = 0;
+            this.pnlCheckedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlCheckedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlCheckedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlCheckedHeadingBar.Name = "pnlCheckedHeadingBar";
+            this.pnlCheckedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlCheckedHeadingBar.TabIndex = 0;
             // 
             // lblCheckedHeading
             // 
@@ -2775,300 +3103,300 @@
             this.dgvChecked.AllowUserToAddRows = false;
             this.dgvChecked.AllowUserToDeleteRows = false;
             this.dgvChecked.AllowUserToResizeRows = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvChecked.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvChecked.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle46;
             this.dgvChecked.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChecked.BackgroundColor = System.Drawing.Color.White;
             this.dgvChecked.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvChecked.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvChecked.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle47.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle47.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvChecked.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
             this.dgvChecked.ColumnHeadersHeight = 34;
             this.dgvChecked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvChecked.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colOutSubjectName,
-            this.colMinimumMark,
-            this.colOutMark,
-            this.colRequirementOutcome,
-            this.colIsMet});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChecked.DefaultCellStyle = dataGridViewCellStyle21;
+            this.colCheckedSubject,
+            this.colCheckedMinimum,
+            this.colCheckedMark,
+            this.colCheckedOutcome,
+            this.colCheckedIsMet});
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle51.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle51.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle51.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle51.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle51.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChecked.DefaultCellStyle = dataGridViewCellStyle51;
             this.dgvChecked.EnableHeadersVisualStyles = false;
             this.dgvChecked.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.dgvChecked.Location = new System.Drawing.Point(15, 52);
+            this.dgvChecked.Location = new System.Drawing.Point(20, 52);
             this.dgvChecked.Margin = new System.Windows.Forms.Padding(4);
             this.dgvChecked.MultiSelect = false;
             this.dgvChecked.Name = "dgvChecked";
             this.dgvChecked.ReadOnly = true;
             this.dgvChecked.RowHeadersVisible = false;
             this.dgvChecked.RowHeadersWidth = 51;
-            this.dgvChecked.RowTemplate.Height = 24;
+            this.dgvChecked.RowTemplate.Height = 30;
             this.dgvChecked.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChecked.Size = new System.Drawing.Size(1125, 212);
+            this.dgvChecked.Size = new System.Drawing.Size(1115, 212);
             this.dgvChecked.TabIndex = 2;
             this.dgvChecked.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvChecked_CellFormatting);
             this.dgvChecked.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.OutGrid_DataBindingComplete);
             // 
-            // colOutSubjectName
+            // colCheckedSubject
             // 
-            this.colOutSubjectName.DataPropertyName = "SubjectName";
-            this.colOutSubjectName.FillWeight = 40F;
-            this.colOutSubjectName.HeaderText = "Requirement";
-            this.colOutSubjectName.MinimumWidth = 6;
-            this.colOutSubjectName.Name = "colOutSubjectName";
-            this.colOutSubjectName.ReadOnly = true;
+            this.colCheckedSubject.DataPropertyName = "SubjectName";
+            this.colCheckedSubject.FillWeight = 40F;
+            this.colCheckedSubject.HeaderText = "Requirement";
+            this.colCheckedSubject.MinimumWidth = 6;
+            this.colCheckedSubject.Name = "colCheckedSubject";
+            this.colCheckedSubject.ReadOnly = true;
             // 
-            // colMinimumMark
+            // colCheckedMinimum
             // 
-            this.colMinimumMark.DataPropertyName = "MinimumMark";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle18.Format = "0\'%\'";
-            dataGridViewCellStyle18.NullValue = "—";
-            this.colMinimumMark.DefaultCellStyle = dataGridViewCellStyle18;
-            this.colMinimumMark.FillWeight = 16F;
-            this.colMinimumMark.HeaderText = "Required";
-            this.colMinimumMark.MinimumWidth = 6;
-            this.colMinimumMark.Name = "colMinimumMark";
-            this.colMinimumMark.ReadOnly = true;
+            this.colCheckedMinimum.DataPropertyName = "MinimumMark";
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle48.Format = "0.#\'%\'";
+            dataGridViewCellStyle48.NullValue = "—";
+            this.colCheckedMinimum.DefaultCellStyle = dataGridViewCellStyle48;
+            this.colCheckedMinimum.FillWeight = 16F;
+            this.colCheckedMinimum.HeaderText = "Required";
+            this.colCheckedMinimum.MinimumWidth = 6;
+            this.colCheckedMinimum.Name = "colCheckedMinimum";
+            this.colCheckedMinimum.ReadOnly = true;
             // 
-            // colOutMark
+            // colCheckedMark
             // 
-            this.colOutMark.DataPropertyName = "Mark";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle19.Format = "0.#\'%\'";
-            dataGridViewCellStyle19.NullValue = "—";
-            this.colOutMark.DefaultCellStyle = dataGridViewCellStyle19;
-            this.colOutMark.FillWeight = 16F;
-            this.colOutMark.HeaderText = "Your result";
-            this.colOutMark.MinimumWidth = 6;
-            this.colOutMark.Name = "colOutMark";
-            this.colOutMark.ReadOnly = true;
+            this.colCheckedMark.DataPropertyName = "Mark";
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle49.Format = "0.#\'%\'";
+            dataGridViewCellStyle49.NullValue = "—";
+            this.colCheckedMark.DefaultCellStyle = dataGridViewCellStyle49;
+            this.colCheckedMark.FillWeight = 16F;
+            this.colCheckedMark.HeaderText = "Your result";
+            this.colCheckedMark.MinimumWidth = 6;
+            this.colCheckedMark.Name = "colCheckedMark";
+            this.colCheckedMark.ReadOnly = true;
             // 
-            // colRequirementOutcome
+            // colCheckedOutcome
             // 
-            this.colRequirementOutcome.DataPropertyName = "RequirementOutcome";
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.colRequirementOutcome.DefaultCellStyle = dataGridViewCellStyle20;
-            this.colRequirementOutcome.FillWeight = 28F;
-            this.colRequirementOutcome.HeaderText = "Outcome";
-            this.colRequirementOutcome.MinimumWidth = 6;
-            this.colRequirementOutcome.Name = "colRequirementOutcome";
-            this.colRequirementOutcome.ReadOnly = true;
+            this.colCheckedOutcome.DataPropertyName = "RequirementOutcome";
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.colCheckedOutcome.DefaultCellStyle = dataGridViewCellStyle50;
+            this.colCheckedOutcome.FillWeight = 28F;
+            this.colCheckedOutcome.HeaderText = "Outcome";
+            this.colCheckedOutcome.MinimumWidth = 6;
+            this.colCheckedOutcome.Name = "colCheckedOutcome";
+            this.colCheckedOutcome.ReadOnly = true;
             // 
-            // colIsMet
+            // colCheckedIsMet
             // 
-            this.colIsMet.DataPropertyName = "IsMet";
-            this.colIsMet.FillWeight = 5F;
-            this.colIsMet.HeaderText = "Met";
-            this.colIsMet.MinimumWidth = 6;
-            this.colIsMet.Name = "colIsMet";
-            this.colIsMet.ReadOnly = true;
-            this.colIsMet.Visible = false;
+            this.colCheckedIsMet.DataPropertyName = "IsMet";
+            this.colCheckedIsMet.FillWeight = 5F;
+            this.colCheckedIsMet.HeaderText = "Met";
+            this.colCheckedIsMet.MinimumWidth = 6;
+            this.colCheckedIsMet.Name = "colCheckedIsMet";
+            this.colCheckedIsMet.ReadOnly = true;
+            this.colCheckedIsMet.Visible = false;
             // 
             // pnlSubjectTile
             // 
             this.pnlSubjectTile.BackColor = System.Drawing.Color.White;
             this.pnlSubjectTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileCaption);
-            this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileValue);
-            this.pnlSubjectTile.Controls.Add(this.pnlSubjectTileNote);
+            this.pnlSubjectTile.Controls.Add(this.lblSubjectTileCaption);
+            this.pnlSubjectTile.Controls.Add(this.lblSubjectTileValue);
+            this.pnlSubjectTile.Controls.Add(this.lblSubjectTileNote);
             this.pnlSubjectTile.Location = new System.Drawing.Point(0, 438);
             this.pnlSubjectTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSubjectTile.Name = "pnlSubjectTile";
             this.pnlSubjectTile.Size = new System.Drawing.Size(272, 112);
             this.pnlSubjectTile.TabIndex = 2;
             // 
-            // pnlSubjectTileCaption
+            // lblSubjectTileCaption
             // 
-            this.pnlSubjectTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.pnlSubjectTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlSubjectTileCaption.Location = new System.Drawing.Point(15, 10);
-            this.pnlSubjectTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlSubjectTileCaption.Name = "pnlSubjectTileCaption";
-            this.pnlSubjectTileCaption.Size = new System.Drawing.Size(242, 25);
-            this.pnlSubjectTileCaption.TabIndex = 0;
-            this.pnlSubjectTileCaption.Text = "Subject match";
+            this.lblSubjectTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblSubjectTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblSubjectTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblSubjectTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectTileCaption.Name = "lblSubjectTileCaption";
+            this.lblSubjectTileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblSubjectTileCaption.TabIndex = 0;
+            this.lblSubjectTileCaption.Text = "Subject match";
             // 
-            // pnlSubjectTileValue
+            // lblSubjectTileValue
             // 
-            this.pnlSubjectTileValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.pnlSubjectTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlSubjectTileValue.Location = new System.Drawing.Point(12, 35);
-            this.pnlSubjectTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlSubjectTileValue.Name = "pnlSubjectTileValue";
-            this.pnlSubjectTileValue.Size = new System.Drawing.Size(242, 42);
-            this.pnlSubjectTileValue.TabIndex = 1;
-            this.pnlSubjectTileValue.Text = "—";
+            this.lblSubjectTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblSubjectTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblSubjectTileValue.Location = new System.Drawing.Point(12, 35);
+            this.lblSubjectTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectTileValue.Name = "lblSubjectTileValue";
+            this.lblSubjectTileValue.Size = new System.Drawing.Size(242, 42);
+            this.lblSubjectTileValue.TabIndex = 1;
+            this.lblSubjectTileValue.Text = "—";
             // 
-            // pnlSubjectTileNote
+            // lblSubjectTileNote
             // 
-            this.pnlSubjectTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.pnlSubjectTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlSubjectTileNote.Location = new System.Drawing.Point(15, 80);
-            this.pnlSubjectTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlSubjectTileNote.Name = "pnlSubjectTileNote";
-            this.pnlSubjectTileNote.Size = new System.Drawing.Size(242, 22);
-            this.pnlSubjectTileNote.TabIndex = 2;
-            this.pnlSubjectTileNote.Text = "required subjects present";
+            this.lblSubjectTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblSubjectTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblSubjectTileNote.Location = new System.Drawing.Point(15, 80);
+            this.lblSubjectTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectTileNote.Name = "lblSubjectTileNote";
+            this.lblSubjectTileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblSubjectTileNote.TabIndex = 2;
+            this.lblSubjectTileNote.Text = "required subjects present";
             // 
             // pnlMarkTile
             // 
             this.pnlMarkTile.BackColor = System.Drawing.Color.White;
             this.pnlMarkTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlMarkTile.Controls.Add(this.pnlMarkTileCaption);
-            this.pnlMarkTile.Controls.Add(this.pnlMarkTileValue);
-            this.pnlMarkTile.Controls.Add(this.pnlMarkTileNote);
+            this.pnlMarkTile.Controls.Add(this.lblMarkTileCaption);
+            this.pnlMarkTile.Controls.Add(this.lblMarkTileValue);
+            this.pnlMarkTile.Controls.Add(this.lblMarkTileNote);
             this.pnlMarkTile.Location = new System.Drawing.Point(295, 438);
             this.pnlMarkTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMarkTile.Name = "pnlMarkTile";
             this.pnlMarkTile.Size = new System.Drawing.Size(272, 112);
             this.pnlMarkTile.TabIndex = 3;
             // 
-            // pnlMarkTileCaption
+            // lblMarkTileCaption
             // 
-            this.pnlMarkTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.pnlMarkTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlMarkTileCaption.Location = new System.Drawing.Point(15, 10);
-            this.pnlMarkTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlMarkTileCaption.Name = "pnlMarkTileCaption";
-            this.pnlMarkTileCaption.Size = new System.Drawing.Size(242, 25);
-            this.pnlMarkTileCaption.TabIndex = 0;
-            this.pnlMarkTileCaption.Text = "Mark match";
+            this.lblMarkTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblMarkTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblMarkTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblMarkTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMarkTileCaption.Name = "lblMarkTileCaption";
+            this.lblMarkTileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblMarkTileCaption.TabIndex = 0;
+            this.lblMarkTileCaption.Text = "Mark match";
             // 
-            // pnlMarkTileValue
+            // lblMarkTileValue
             // 
-            this.pnlMarkTileValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.pnlMarkTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlMarkTileValue.Location = new System.Drawing.Point(12, 35);
-            this.pnlMarkTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlMarkTileValue.Name = "pnlMarkTileValue";
-            this.pnlMarkTileValue.Size = new System.Drawing.Size(242, 42);
-            this.pnlMarkTileValue.TabIndex = 1;
-            this.pnlMarkTileValue.Text = "—";
+            this.lblMarkTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblMarkTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblMarkTileValue.Location = new System.Drawing.Point(12, 35);
+            this.lblMarkTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMarkTileValue.Name = "lblMarkTileValue";
+            this.lblMarkTileValue.Size = new System.Drawing.Size(242, 42);
+            this.lblMarkTileValue.TabIndex = 1;
+            this.lblMarkTileValue.Text = "—";
             // 
-            // pnlMarkTileNote
+            // lblMarkTileNote
             // 
-            this.pnlMarkTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.pnlMarkTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlMarkTileNote.Location = new System.Drawing.Point(15, 80);
-            this.pnlMarkTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlMarkTileNote.Name = "pnlMarkTileNote";
-            this.pnlMarkTileNote.Size = new System.Drawing.Size(242, 22);
-            this.pnlMarkTileNote.TabIndex = 2;
-            this.pnlMarkTileNote.Text = "marks against minimums";
+            this.lblMarkTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblMarkTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblMarkTileNote.Location = new System.Drawing.Point(15, 80);
+            this.lblMarkTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMarkTileNote.Name = "lblMarkTileNote";
+            this.lblMarkTileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblMarkTileNote.TabIndex = 2;
+            this.lblMarkTileNote.Text = "marks against minimums";
             // 
             // pnlInterestTile
             // 
             this.pnlInterestTile.BackColor = System.Drawing.Color.White;
             this.pnlInterestTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlInterestTile.Controls.Add(this.pnlInterestTileCaption);
-            this.pnlInterestTile.Controls.Add(this.pnlInterestTileValue);
-            this.pnlInterestTile.Controls.Add(this.pnlInterestTileNote);
+            this.pnlInterestTile.Controls.Add(this.lblInterestTileCaption);
+            this.pnlInterestTile.Controls.Add(this.lblInterestTileValue);
+            this.pnlInterestTile.Controls.Add(this.lblInterestTileNote);
             this.pnlInterestTile.Location = new System.Drawing.Point(590, 438);
             this.pnlInterestTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInterestTile.Name = "pnlInterestTile";
             this.pnlInterestTile.Size = new System.Drawing.Size(272, 112);
             this.pnlInterestTile.TabIndex = 4;
             // 
-            // pnlInterestTileCaption
+            // lblInterestTileCaption
             // 
-            this.pnlInterestTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.pnlInterestTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlInterestTileCaption.Location = new System.Drawing.Point(15, 10);
-            this.pnlInterestTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlInterestTileCaption.Name = "pnlInterestTileCaption";
-            this.pnlInterestTileCaption.Size = new System.Drawing.Size(242, 25);
-            this.pnlInterestTileCaption.TabIndex = 0;
-            this.pnlInterestTileCaption.Text = "Interest match";
+            this.lblInterestTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblInterestTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInterestTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblInterestTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInterestTileCaption.Name = "lblInterestTileCaption";
+            this.lblInterestTileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblInterestTileCaption.TabIndex = 0;
+            this.lblInterestTileCaption.Text = "Interest match";
             // 
-            // pnlInterestTileValue
+            // lblInterestTileValue
             // 
-            this.pnlInterestTileValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.pnlInterestTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlInterestTileValue.Location = new System.Drawing.Point(12, 35);
-            this.pnlInterestTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlInterestTileValue.Name = "pnlInterestTileValue";
-            this.pnlInterestTileValue.Size = new System.Drawing.Size(242, 42);
-            this.pnlInterestTileValue.TabIndex = 1;
-            this.pnlInterestTileValue.Text = "—";
+            this.lblInterestTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblInterestTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInterestTileValue.Location = new System.Drawing.Point(12, 35);
+            this.lblInterestTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInterestTileValue.Name = "lblInterestTileValue";
+            this.lblInterestTileValue.Size = new System.Drawing.Size(242, 42);
+            this.lblInterestTileValue.TabIndex = 1;
+            this.lblInterestTileValue.Text = "—";
             // 
-            // pnlInterestTileNote
+            // lblInterestTileNote
             // 
-            this.pnlInterestTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.pnlInterestTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlInterestTileNote.Location = new System.Drawing.Point(15, 80);
-            this.pnlInterestTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlInterestTileNote.Name = "pnlInterestTileNote";
-            this.pnlInterestTileNote.Size = new System.Drawing.Size(242, 22);
-            this.pnlInterestTileNote.TabIndex = 2;
-            this.pnlInterestTileNote.Text = "from your questionnaire";
+            this.lblInterestTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblInterestTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblInterestTileNote.Location = new System.Drawing.Point(15, 80);
+            this.lblInterestTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInterestTileNote.Name = "lblInterestTileNote";
+            this.lblInterestTileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblInterestTileNote.TabIndex = 2;
+            this.lblInterestTileNote.Text = "from your questionnaire";
             // 
             // pnlOverallTile
             // 
             this.pnlOverallTile.BackColor = System.Drawing.Color.White;
             this.pnlOverallTile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOverallTile.Controls.Add(this.pnlOverallTileCaption);
-            this.pnlOverallTile.Controls.Add(this.pnlOverallTileValue);
-            this.pnlOverallTile.Controls.Add(this.pnlOverallTileNote);
+            this.pnlOverallTile.Controls.Add(this.lblOverallTileCaption);
+            this.pnlOverallTile.Controls.Add(this.lblOverallTileValue);
+            this.pnlOverallTile.Controls.Add(this.lblOverallTileNote);
             this.pnlOverallTile.Location = new System.Drawing.Point(885, 438);
             this.pnlOverallTile.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOverallTile.Name = "pnlOverallTile";
             this.pnlOverallTile.Size = new System.Drawing.Size(272, 112);
             this.pnlOverallTile.TabIndex = 5;
             // 
-            // pnlOverallTileCaption
+            // lblOverallTileCaption
             // 
-            this.pnlOverallTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.pnlOverallTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlOverallTileCaption.Location = new System.Drawing.Point(15, 10);
-            this.pnlOverallTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlOverallTileCaption.Name = "pnlOverallTileCaption";
-            this.pnlOverallTileCaption.Size = new System.Drawing.Size(242, 25);
-            this.pnlOverallTileCaption.TabIndex = 0;
-            this.pnlOverallTileCaption.Text = "Overall score";
+            this.lblOverallTileCaption.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblOverallTileCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblOverallTileCaption.Location = new System.Drawing.Point(15, 10);
+            this.lblOverallTileCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOverallTileCaption.Name = "lblOverallTileCaption";
+            this.lblOverallTileCaption.Size = new System.Drawing.Size(242, 25);
+            this.lblOverallTileCaption.TabIndex = 0;
+            this.lblOverallTileCaption.Text = "Overall score";
             // 
-            // pnlOverallTileValue
+            // lblOverallTileValue
             // 
-            this.pnlOverallTileValue.Font = new System.Drawing.Font("Consolas", 18F);
-            this.pnlOverallTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.pnlOverallTileValue.Location = new System.Drawing.Point(12, 35);
-            this.pnlOverallTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlOverallTileValue.Name = "pnlOverallTileValue";
-            this.pnlOverallTileValue.Size = new System.Drawing.Size(242, 42);
-            this.pnlOverallTileValue.TabIndex = 1;
-            this.pnlOverallTileValue.Text = "—";
+            this.lblOverallTileValue.Font = new System.Drawing.Font("Consolas", 18F);
+            this.lblOverallTileValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblOverallTileValue.Location = new System.Drawing.Point(12, 35);
+            this.lblOverallTileValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOverallTileValue.Name = "lblOverallTileValue";
+            this.lblOverallTileValue.Size = new System.Drawing.Size(242, 42);
+            this.lblOverallTileValue.TabIndex = 1;
+            this.lblOverallTileValue.Text = "—";
             // 
-            // pnlOverallTileNote
+            // lblOverallTileNote
             // 
-            this.pnlOverallTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.pnlOverallTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.pnlOverallTileNote.Location = new System.Drawing.Point(15, 80);
-            this.pnlOverallTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.pnlOverallTileNote.Name = "pnlOverallTileNote";
-            this.pnlOverallTileNote.Size = new System.Drawing.Size(242, 22);
-            this.pnlOverallTileNote.TabIndex = 2;
-            this.pnlOverallTileNote.Text = "of a possible 100";
+            this.lblOverallTileNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblOverallTileNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblOverallTileNote.Location = new System.Drawing.Point(15, 80);
+            this.lblOverallTileNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOverallTileNote.Name = "lblOverallTileNote";
+            this.lblOverallTileNote.Size = new System.Drawing.Size(242, 22);
+            this.lblOverallTileNote.TabIndex = 2;
+            this.lblOverallTileNote.Text = "of a possible 100";
             // 
             // lblOutDisclaimer
             // 
-            this.lblOutDisclaimer.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.lblOutDisclaimer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblOutDisclaimer.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblOutDisclaimer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
             this.lblOutDisclaimer.Location = new System.Drawing.Point(0, 558);
             this.lblOutDisclaimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutDisclaimer.Name = "lblOutDisclaimer";
@@ -3088,51 +3416,141 @@
             this.lblOutSampleData.Text = "Requirement data is locally stored sample data; check it against the official uni" +
     "versity source before you apply.";
             // 
+            // flpOutcomeActions
+            // 
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeSummary);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeAlternatives);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeFunding);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeBack);
+            this.flpOutcomeActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpOutcomeActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpOutcomeActions.Location = new System.Drawing.Point(0, 707);
+            this.flpOutcomeActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpOutcomeActions.Name = "flpOutcomeActions";
+            this.flpOutcomeActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpOutcomeActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpOutcomeActions.TabIndex = 2;
+            this.flpOutcomeActions.WrapContents = false;
+            // 
+            // btnOutcomeSummary
+            // 
+            this.btnOutcomeSummary.AccessibleName = "Continue to summary";
+            this.btnOutcomeSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnOutcomeSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeSummary.FlatAppearance.BorderSize = 0;
+            this.btnOutcomeSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnOutcomeSummary.ForeColor = System.Drawing.Color.White;
+            this.btnOutcomeSummary.Location = new System.Drawing.Point(919, 15);
+            this.btnOutcomeSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeSummary.Name = "btnOutcomeSummary";
+            this.btnOutcomeSummary.Size = new System.Drawing.Size(238, 50);
+            this.btnOutcomeSummary.TabIndex = 0;
+            this.btnOutcomeSummary.Text = "Continue to summary";
+            this.btnOutcomeSummary.UseVisualStyleBackColor = false;
+            this.btnOutcomeSummary.Click += new System.EventHandler(this.btnOutcomeSummary_Click);
+            // 
+            // btnOutcomeAlternatives
+            // 
+            this.btnOutcomeAlternatives.AccessibleName = "Alternative programmes";
+            this.btnOutcomeAlternatives.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeAlternatives.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeAlternatives.Location = new System.Drawing.Point(695, 15);
+            this.btnOutcomeAlternatives.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeAlternatives.Name = "btnOutcomeAlternatives";
+            this.btnOutcomeAlternatives.Size = new System.Drawing.Size(212, 50);
+            this.btnOutcomeAlternatives.TabIndex = 1;
+            this.btnOutcomeAlternatives.Text = "Alternative programmes";
+            this.btnOutcomeAlternatives.UseVisualStyleBackColor = false;
+            this.btnOutcomeAlternatives.Click += new System.EventHandler(this.btnOutcomeAlternatives_Click);
+            // 
+            // btnOutcomeFunding
+            // 
+            this.btnOutcomeFunding.AccessibleName = "Funding options";
+            this.btnOutcomeFunding.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeFunding.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeFunding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeFunding.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeFunding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeFunding.Location = new System.Drawing.Point(508, 15);
+            this.btnOutcomeFunding.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeFunding.Name = "btnOutcomeFunding";
+            this.btnOutcomeFunding.Size = new System.Drawing.Size(175, 50);
+            this.btnOutcomeFunding.TabIndex = 2;
+            this.btnOutcomeFunding.Text = "Funding options";
+            this.btnOutcomeFunding.UseVisualStyleBackColor = false;
+            this.btnOutcomeFunding.Click += new System.EventHandler(this.btnOutcomeFunding_Click);
+            // 
+            // btnOutcomeBack
+            // 
+            this.btnOutcomeBack.AccessibleName = "Back";
+            this.btnOutcomeBack.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeBack.Location = new System.Drawing.Point(334, 15);
+            this.btnOutcomeBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeBack.Name = "btnOutcomeBack";
+            this.btnOutcomeBack.Size = new System.Drawing.Size(162, 50);
+            this.btnOutcomeBack.TabIndex = 3;
+            this.btnOutcomeBack.Text = "Back";
+            this.btnOutcomeBack.UseVisualStyleBackColor = false;
+            this.btnOutcomeBack.Click += new System.EventHandler(this.btnOutcomeBack_Click);
+            // 
             // tabAlternatives
             // 
             this.tabAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabAlternatives.Controls.Add(this.pnlAltContent);
+            this.tabAlternatives.Controls.Add(this.pnlAlternativesContent);
+            this.tabAlternatives.Controls.Add(this.lblAlternativesNotice);
+            this.tabAlternatives.Controls.Add(this.flpAlternativesActions);
             this.tabAlternatives.Location = new System.Drawing.Point(4, 36);
             this.tabAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.tabAlternatives.Name = "tabAlternatives";
-            this.tabAlternatives.Size = new System.Drawing.Size(1162, 536);
+            this.tabAlternatives.Size = new System.Drawing.Size(1162, 790);
             this.tabAlternatives.TabIndex = 1;
             this.tabAlternatives.Text = "Alternative programmes";
             // 
-            // pnlAltContent
+            // pnlAlternativesContent
             // 
-            this.pnlAltContent.Controls.Add(this.pnlRankedCard);
-            this.pnlAltContent.Controls.Add(this.pnlReasonsCard);
-            this.pnlAltContent.Controls.Add(this.chkIncludeAlternatives);
-            this.pnlAltContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAltContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlAltContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlAltContent.Name = "pnlAltContent";
-            this.pnlAltContent.Size = new System.Drawing.Size(1162, 536);
-            this.pnlAltContent.TabIndex = 0;
+            this.pnlAlternativesContent.Controls.Add(this.pnlRankedCard);
+            this.pnlAlternativesContent.Controls.Add(this.pnlReasonsCard);
+            this.pnlAlternativesContent.Controls.Add(this.chkIncludeAlternatives);
+            this.pnlAlternativesContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAlternativesContent.Location = new System.Drawing.Point(0, 60);
+            this.pnlAlternativesContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlAlternativesContent.Name = "pnlAlternativesContent";
+            this.pnlAlternativesContent.Size = new System.Drawing.Size(1162, 650);
+            this.pnlAlternativesContent.TabIndex = 0;
             // 
             // pnlRankedCard
             // 
             this.pnlRankedCard.BackColor = System.Drawing.Color.White;
             this.pnlRankedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlRankedCard.Controls.Add(this.lblRankedHeadingBar);
+            this.pnlRankedCard.Controls.Add(this.pnlRankedHeadingBar);
             this.pnlRankedCard.Controls.Add(this.lblRankedHeading);
             this.pnlRankedCard.Controls.Add(this.lblRankedCount);
             this.pnlRankedCard.Controls.Add(this.dgvAlternatives);
-            this.pnlRankedCard.Location = new System.Drawing.Point(0, 0);
+            this.pnlRankedCard.Location = new System.Drawing.Point(0, 12);
             this.pnlRankedCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRankedCard.Name = "pnlRankedCard";
             this.pnlRankedCard.Size = new System.Drawing.Size(1157, 312);
             this.pnlRankedCard.TabIndex = 0;
             // 
-            // lblRankedHeadingBar
+            // pnlRankedHeadingBar
             // 
-            this.lblRankedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblRankedHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblRankedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblRankedHeadingBar.Name = "lblRankedHeadingBar";
-            this.lblRankedHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblRankedHeadingBar.TabIndex = 0;
+            this.pnlRankedHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlRankedHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlRankedHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlRankedHeadingBar.Name = "pnlRankedHeadingBar";
+            this.pnlRankedHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlRankedHeadingBar.TabIndex = 0;
             // 
             // lblRankedHeading
             // 
@@ -3163,41 +3581,41 @@
             this.dgvAlternatives.AllowUserToAddRows = false;
             this.dgvAlternatives.AllowUserToDeleteRows = false;
             this.dgvAlternatives.AllowUserToResizeRows = false;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle52;
             this.dgvAlternatives.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAlternatives.BackgroundColor = System.Drawing.Color.White;
             this.dgvAlternatives.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvAlternatives.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle53;
             this.dgvAlternatives.ColumnHeadersHeight = 34;
             this.dgvAlternatives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvAlternatives.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colRank,
-            this.colProgramme,
-            this.colFaculty,
-            this.colScore,
-            this.colOutcome,
-            this.colReason,
-            this.colAltProgrammeId,
-            this.colIsSelected});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle26.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlternatives.DefaultCellStyle = dataGridViewCellStyle26;
+            this.colAlternativesRank,
+            this.colAlternativesProgramme,
+            this.colAlternativesFaculty,
+            this.colAlternativesScore,
+            this.colAlternativesOutcome,
+            this.colAlternativesReason,
+            this.colAlternativesProgrammeId,
+            this.colAlternativesIsSelected});
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle56.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle56.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle56.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlternatives.DefaultCellStyle = dataGridViewCellStyle56;
             this.dgvAlternatives.EnableHeadersVisualStyles = false;
             this.dgvAlternatives.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvAlternatives.Location = new System.Drawing.Point(20, 52);
@@ -3215,108 +3633,108 @@
             this.dgvAlternatives.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvAlternatives_DataBindingComplete);
             this.dgvAlternatives.SelectionChanged += new System.EventHandler(this.dgvAlternatives_SelectionChanged);
             // 
-            // colRank
+            // colAlternativesRank
             // 
-            this.colRank.DataPropertyName = "AlternativeRank";
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colRank.DefaultCellStyle = dataGridViewCellStyle24;
-            this.colRank.FillWeight = 8F;
-            this.colRank.HeaderText = "Rank";
-            this.colRank.MinimumWidth = 6;
-            this.colRank.Name = "colRank";
-            this.colRank.ReadOnly = true;
+            this.colAlternativesRank.DataPropertyName = "AlternativeRank";
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colAlternativesRank.DefaultCellStyle = dataGridViewCellStyle54;
+            this.colAlternativesRank.FillWeight = 8F;
+            this.colAlternativesRank.HeaderText = "Rank";
+            this.colAlternativesRank.MinimumWidth = 6;
+            this.colAlternativesRank.Name = "colAlternativesRank";
+            this.colAlternativesRank.ReadOnly = true;
             // 
-            // colProgramme
+            // colAlternativesProgramme
             // 
-            this.colProgramme.DataPropertyName = "ProgrammeName";
-            this.colProgramme.FillWeight = 50F;
-            this.colProgramme.HeaderText = "Degree programme";
-            this.colProgramme.MinimumWidth = 6;
-            this.colProgramme.Name = "colProgramme";
-            this.colProgramme.ReadOnly = true;
+            this.colAlternativesProgramme.DataPropertyName = "ProgrammeName";
+            this.colAlternativesProgramme.FillWeight = 50F;
+            this.colAlternativesProgramme.HeaderText = "Degree programme";
+            this.colAlternativesProgramme.MinimumWidth = 6;
+            this.colAlternativesProgramme.Name = "colAlternativesProgramme";
+            this.colAlternativesProgramme.ReadOnly = true;
             // 
-            // colFaculty
+            // colAlternativesFaculty
             // 
-            this.colFaculty.DataPropertyName = "FacultyName";
-            this.colFaculty.FillWeight = 18F;
-            this.colFaculty.HeaderText = "Faculty";
-            this.colFaculty.MinimumWidth = 6;
-            this.colFaculty.Name = "colFaculty";
-            this.colFaculty.ReadOnly = true;
+            this.colAlternativesFaculty.DataPropertyName = "FacultyName";
+            this.colAlternativesFaculty.FillWeight = 18F;
+            this.colAlternativesFaculty.HeaderText = "Faculty";
+            this.colAlternativesFaculty.MinimumWidth = 6;
+            this.colAlternativesFaculty.Name = "colAlternativesFaculty";
+            this.colAlternativesFaculty.ReadOnly = true;
             // 
-            // colScore
+            // colAlternativesScore
             // 
-            this.colScore.DataPropertyName = "OverallScore";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle25.Format = "0";
-            this.colScore.DefaultCellStyle = dataGridViewCellStyle25;
-            this.colScore.FillWeight = 9F;
-            this.colScore.HeaderText = "Fit %";
-            this.colScore.MinimumWidth = 6;
-            this.colScore.Name = "colScore";
-            this.colScore.ReadOnly = true;
+            this.colAlternativesScore.DataPropertyName = "OverallScore";
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle55.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle55.Format = "0.#\'%\'";
+            this.colAlternativesScore.DefaultCellStyle = dataGridViewCellStyle55;
+            this.colAlternativesScore.FillWeight = 9F;
+            this.colAlternativesScore.HeaderText = "Fit";
+            this.colAlternativesScore.MinimumWidth = 6;
+            this.colAlternativesScore.Name = "colAlternativesScore";
+            this.colAlternativesScore.ReadOnly = true;
             // 
-            // colOutcome
+            // colAlternativesOutcome
             // 
-            this.colOutcome.DataPropertyName = "OutcomeCode";
-            this.colOutcome.FillWeight = 22F;
-            this.colOutcome.HeaderText = "Advisory outcome";
-            this.colOutcome.MinimumWidth = 6;
-            this.colOutcome.Name = "colOutcome";
-            this.colOutcome.ReadOnly = true;
+            this.colAlternativesOutcome.DataPropertyName = "OutcomeCode";
+            this.colAlternativesOutcome.FillWeight = 22F;
+            this.colAlternativesOutcome.HeaderText = "Advisory outcome";
+            this.colAlternativesOutcome.MinimumWidth = 6;
+            this.colAlternativesOutcome.Name = "colAlternativesOutcome";
+            this.colAlternativesOutcome.ReadOnly = true;
             // 
-            // colReason
+            // colAlternativesReason
             // 
-            this.colReason.DataPropertyName = "OutcomeReason";
-            this.colReason.FillWeight = 1F;
-            this.colReason.HeaderText = "Reason";
-            this.colReason.MinimumWidth = 6;
-            this.colReason.Name = "colReason";
-            this.colReason.ReadOnly = true;
-            this.colReason.Visible = false;
+            this.colAlternativesReason.DataPropertyName = "OutcomeReason";
+            this.colAlternativesReason.FillWeight = 1F;
+            this.colAlternativesReason.HeaderText = "Reason";
+            this.colAlternativesReason.MinimumWidth = 6;
+            this.colAlternativesReason.Name = "colAlternativesReason";
+            this.colAlternativesReason.ReadOnly = true;
+            this.colAlternativesReason.Visible = false;
             // 
-            // colAltProgrammeId
+            // colAlternativesProgrammeId
             // 
-            this.colAltProgrammeId.DataPropertyName = "ProgrammeID";
-            this.colAltProgrammeId.FillWeight = 1F;
-            this.colAltProgrammeId.HeaderText = "Programme ID";
-            this.colAltProgrammeId.MinimumWidth = 6;
-            this.colAltProgrammeId.Name = "colAltProgrammeId";
-            this.colAltProgrammeId.ReadOnly = true;
-            this.colAltProgrammeId.Visible = false;
+            this.colAlternativesProgrammeId.DataPropertyName = "ProgrammeID";
+            this.colAlternativesProgrammeId.FillWeight = 1F;
+            this.colAlternativesProgrammeId.HeaderText = "Programme ID";
+            this.colAlternativesProgrammeId.MinimumWidth = 6;
+            this.colAlternativesProgrammeId.Name = "colAlternativesProgrammeId";
+            this.colAlternativesProgrammeId.ReadOnly = true;
+            this.colAlternativesProgrammeId.Visible = false;
             // 
-            // colIsSelected
+            // colAlternativesIsSelected
             // 
-            this.colIsSelected.DataPropertyName = "IsSelectedProgramme";
-            this.colIsSelected.FillWeight = 1F;
-            this.colIsSelected.HeaderText = "Your selection";
-            this.colIsSelected.MinimumWidth = 6;
-            this.colIsSelected.Name = "colIsSelected";
-            this.colIsSelected.ReadOnly = true;
-            this.colIsSelected.Visible = false;
+            this.colAlternativesIsSelected.DataPropertyName = "IsSelectedProgramme";
+            this.colAlternativesIsSelected.FillWeight = 1F;
+            this.colAlternativesIsSelected.HeaderText = "Your selection";
+            this.colAlternativesIsSelected.MinimumWidth = 6;
+            this.colAlternativesIsSelected.Name = "colAlternativesIsSelected";
+            this.colAlternativesIsSelected.ReadOnly = true;
+            this.colAlternativesIsSelected.Visible = false;
             // 
             // pnlReasonsCard
             // 
             this.pnlReasonsCard.BackColor = System.Drawing.Color.White;
             this.pnlReasonsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlReasonsCard.Controls.Add(this.lblReasonsHeadingBar);
+            this.pnlReasonsCard.Controls.Add(this.pnlReasonsHeadingBar);
             this.pnlReasonsCard.Controls.Add(this.lblReasonsHeading);
             this.pnlReasonsCard.Controls.Add(this.lblReasons);
-            this.pnlReasonsCard.Location = new System.Drawing.Point(0, 335);
+            this.pnlReasonsCard.Location = new System.Drawing.Point(0, 347);
             this.pnlReasonsCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlReasonsCard.Name = "pnlReasonsCard";
             this.pnlReasonsCard.Size = new System.Drawing.Size(1157, 140);
             this.pnlReasonsCard.TabIndex = 1;
             // 
-            // lblReasonsHeadingBar
+            // pnlReasonsHeadingBar
             // 
-            this.lblReasonsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblReasonsHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblReasonsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblReasonsHeadingBar.Name = "lblReasonsHeadingBar";
-            this.lblReasonsHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblReasonsHeadingBar.TabIndex = 0;
+            this.pnlReasonsHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlReasonsHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlReasonsHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlReasonsHeadingBar.Name = "pnlReasonsHeadingBar";
+            this.pnlReasonsHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlReasonsHeadingBar.TabIndex = 0;
             // 
             // lblReasonsHeading
             // 
@@ -3347,7 +3765,7 @@
             this.chkIncludeAlternatives.AccessibleName = "Include these alternative programmes in my advisory summary";
             this.chkIncludeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkIncludeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.chkIncludeAlternatives.Location = new System.Drawing.Point(2, 492);
+            this.chkIncludeAlternatives.Location = new System.Drawing.Point(2, 504);
             this.chkIncludeAlternatives.Margin = new System.Windows.Forms.Padding(4);
             this.chkIncludeAlternatives.Name = "chkIncludeAlternatives";
             this.chkIncludeAlternatives.Size = new System.Drawing.Size(750, 30);
@@ -3356,28 +3774,112 @@
             this.chkIncludeAlternatives.UseVisualStyleBackColor = true;
             this.chkIncludeAlternatives.CheckedChanged += new System.EventHandler(this.chkIncludeAlternatives_CheckedChanged);
             // 
+            // lblAlternativesNotice
+            // 
+            this.lblAlternativesNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblAlternativesNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblAlternativesNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAlternativesNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblAlternativesNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblAlternativesNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlternativesNotice.Name = "lblAlternativesNotice";
+            this.lblAlternativesNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblAlternativesNotice.Size = new System.Drawing.Size(1162, 60);
+            this.lblAlternativesNotice.TabIndex = 1;
+            this.lblAlternativesNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpAlternativesActions
+            // 
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesSummary);
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesCompare);
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesBack);
+            this.flpAlternativesActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpAlternativesActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpAlternativesActions.Location = new System.Drawing.Point(0, 710);
+            this.flpAlternativesActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpAlternativesActions.Name = "flpAlternativesActions";
+            this.flpAlternativesActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpAlternativesActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpAlternativesActions.TabIndex = 2;
+            this.flpAlternativesActions.WrapContents = false;
+            // 
+            // btnAlternativesSummary
+            // 
+            this.btnAlternativesSummary.AccessibleName = "Continue to summary";
+            this.btnAlternativesSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnAlternativesSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesSummary.FlatAppearance.BorderSize = 0;
+            this.btnAlternativesSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnAlternativesSummary.ForeColor = System.Drawing.Color.White;
+            this.btnAlternativesSummary.Location = new System.Drawing.Point(919, 15);
+            this.btnAlternativesSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesSummary.Name = "btnAlternativesSummary";
+            this.btnAlternativesSummary.Size = new System.Drawing.Size(238, 50);
+            this.btnAlternativesSummary.TabIndex = 0;
+            this.btnAlternativesSummary.Text = "Continue to summary";
+            this.btnAlternativesSummary.UseVisualStyleBackColor = false;
+            this.btnAlternativesSummary.Click += new System.EventHandler(this.btnAlternativesSummary_Click);
+            // 
+            // btnAlternativesCompare
+            // 
+            this.btnAlternativesCompare.AccessibleName = "Compare with my selection";
+            this.btnAlternativesCompare.BackColor = System.Drawing.Color.White;
+            this.btnAlternativesCompare.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnAlternativesCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesCompare.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnAlternativesCompare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnAlternativesCompare.Location = new System.Drawing.Point(657, 15);
+            this.btnAlternativesCompare.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesCompare.Name = "btnAlternativesCompare";
+            this.btnAlternativesCompare.Size = new System.Drawing.Size(250, 50);
+            this.btnAlternativesCompare.TabIndex = 1;
+            this.btnAlternativesCompare.Text = "Compare with my selection";
+            this.btnAlternativesCompare.UseVisualStyleBackColor = false;
+            this.btnAlternativesCompare.Click += new System.EventHandler(this.btnAlternativesCompare_Click);
+            // 
+            // btnAlternativesBack
+            // 
+            this.btnAlternativesBack.AccessibleName = "Back";
+            this.btnAlternativesBack.BackColor = System.Drawing.Color.White;
+            this.btnAlternativesBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnAlternativesBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnAlternativesBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnAlternativesBack.Location = new System.Drawing.Point(483, 15);
+            this.btnAlternativesBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesBack.Name = "btnAlternativesBack";
+            this.btnAlternativesBack.Size = new System.Drawing.Size(162, 50);
+            this.btnAlternativesBack.TabIndex = 2;
+            this.btnAlternativesBack.Text = "Back";
+            this.btnAlternativesBack.UseVisualStyleBackColor = false;
+            this.btnAlternativesBack.Click += new System.EventHandler(this.btnAlternativesBack_Click);
+            // 
             // tabFunding
             // 
             this.tabFunding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabFunding.Controls.Add(this.pnlFundContent);
+            this.tabFunding.Controls.Add(this.pnlFundingContent);
+            this.tabFunding.Controls.Add(this.flpFundingActions);
             this.tabFunding.Location = new System.Drawing.Point(4, 36);
             this.tabFunding.Margin = new System.Windows.Forms.Padding(4);
             this.tabFunding.Name = "tabFunding";
-            this.tabFunding.Size = new System.Drawing.Size(1162, 536);
+            this.tabFunding.Size = new System.Drawing.Size(1162, 790);
             this.tabFunding.TabIndex = 2;
             this.tabFunding.Text = "Funding options";
             // 
-            // pnlFundContent
+            // pnlFundingContent
             // 
-            this.pnlFundContent.Controls.Add(this.pnlFilterCard);
-            this.pnlFundContent.Controls.Add(this.pnlFundingCard);
-            this.pnlFundContent.Controls.Add(this.pnlDetailCard);
-            this.pnlFundContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFundContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlFundContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlFundContent.Name = "pnlFundContent";
-            this.pnlFundContent.Size = new System.Drawing.Size(1162, 536);
-            this.pnlFundContent.TabIndex = 0;
+            this.pnlFundingContent.Controls.Add(this.pnlFilterCard);
+            this.pnlFundingContent.Controls.Add(this.pnlFundingCard);
+            this.pnlFundingContent.Controls.Add(this.pnlDetailCard);
+            this.pnlFundingContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFundingContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlFundingContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlFundingContent.Name = "pnlFundingContent";
+            this.pnlFundingContent.Size = new System.Drawing.Size(1162, 710);
+            this.pnlFundingContent.TabIndex = 0;
             // 
             // pnlFilterCard
             // 
@@ -3462,7 +3964,7 @@
             // 
             this.pnlFundingCard.BackColor = System.Drawing.Color.White;
             this.pnlFundingCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFundingCard.Controls.Add(this.lblFundingHeadingBar);
+            this.pnlFundingCard.Controls.Add(this.pnlFundingHeadingBar);
             this.pnlFundingCard.Controls.Add(this.lblFundingHeading);
             this.pnlFundingCard.Controls.Add(this.lblFundingCount);
             this.pnlFundingCard.Controls.Add(this.dgvFunding);
@@ -3472,14 +3974,14 @@
             this.pnlFundingCard.Size = new System.Drawing.Size(1157, 237);
             this.pnlFundingCard.TabIndex = 1;
             // 
-            // lblFundingHeadingBar
+            // pnlFundingHeadingBar
             // 
-            this.lblFundingHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblFundingHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblFundingHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblFundingHeadingBar.Name = "lblFundingHeadingBar";
-            this.lblFundingHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblFundingHeadingBar.TabIndex = 0;
+            this.pnlFundingHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlFundingHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlFundingHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlFundingHeadingBar.Name = "pnlFundingHeadingBar";
+            this.pnlFundingHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlFundingHeadingBar.TabIndex = 0;
             // 
             // lblFundingHeading
             // 
@@ -3510,42 +4012,42 @@
             this.dgvFunding.AllowUserToAddRows = false;
             this.dgvFunding.AllowUserToDeleteRows = false;
             this.dgvFunding.AllowUserToResizeRows = false;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvFunding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvFunding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle57;
             this.dgvFunding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFunding.BackgroundColor = System.Drawing.Color.White;
             this.dgvFunding.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvFunding.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFunding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle58.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle58.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle58.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFunding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle58;
             this.dgvFunding.ColumnHeadersHeight = 34;
             this.dgvFunding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvFunding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFundingName,
             this.colFundingType,
-            this.colLinkedTo,
-            this.colClosingDate,
-            this.colStatus,
+            this.colFundingLinkedTo,
+            this.colFundingClosingDate,
+            this.colFundingStatus,
             this.colFundingId,
-            this.colEligibility,
-            this.colDocuments,
-            this.colContact});
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFunding.DefaultCellStyle = dataGridViewCellStyle30;
+            this.colFundingEligibility,
+            this.colFundingDocuments,
+            this.colFundingContact});
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle60.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle60.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle60.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFunding.DefaultCellStyle = dataGridViewCellStyle60;
             this.dgvFunding.EnableHeadersVisualStyles = false;
             this.dgvFunding.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvFunding.Location = new System.Drawing.Point(20, 52);
@@ -3581,34 +4083,34 @@
             this.colFundingType.Name = "colFundingType";
             this.colFundingType.ReadOnly = true;
             // 
-            // colLinkedTo
+            // colFundingLinkedTo
             // 
-            this.colLinkedTo.DataPropertyName = "LinkedTo";
-            this.colLinkedTo.FillWeight = 22F;
-            this.colLinkedTo.HeaderText = "Linked to";
-            this.colLinkedTo.MinimumWidth = 6;
-            this.colLinkedTo.Name = "colLinkedTo";
-            this.colLinkedTo.ReadOnly = true;
+            this.colFundingLinkedTo.DataPropertyName = "LinkedTo";
+            this.colFundingLinkedTo.FillWeight = 22F;
+            this.colFundingLinkedTo.HeaderText = "Linked to";
+            this.colFundingLinkedTo.MinimumWidth = 6;
+            this.colFundingLinkedTo.Name = "colFundingLinkedTo";
+            this.colFundingLinkedTo.ReadOnly = true;
             // 
-            // colClosingDate
+            // colFundingClosingDate
             // 
-            this.colClosingDate.DataPropertyName = "ClosingDate";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle29.Format = "dd/MM/yyyy";
-            this.colClosingDate.DefaultCellStyle = dataGridViewCellStyle29;
-            this.colClosingDate.FillWeight = 16F;
-            this.colClosingDate.HeaderText = "Closing date";
-            this.colClosingDate.MinimumWidth = 6;
-            this.colClosingDate.Name = "colClosingDate";
-            this.colClosingDate.ReadOnly = true;
+            this.colFundingClosingDate.DataPropertyName = "ClosingDate";
+            dataGridViewCellStyle59.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle59.Format = "dd/MM/yyyy";
+            this.colFundingClosingDate.DefaultCellStyle = dataGridViewCellStyle59;
+            this.colFundingClosingDate.FillWeight = 16F;
+            this.colFundingClosingDate.HeaderText = "Closing date";
+            this.colFundingClosingDate.MinimumWidth = 6;
+            this.colFundingClosingDate.Name = "colFundingClosingDate";
+            this.colFundingClosingDate.ReadOnly = true;
             // 
-            // colStatus
+            // colFundingStatus
             // 
-            this.colStatus.FillWeight = 12F;
-            this.colStatus.HeaderText = "Status";
-            this.colStatus.MinimumWidth = 6;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
+            this.colFundingStatus.FillWeight = 12F;
+            this.colFundingStatus.HeaderText = "Status";
+            this.colFundingStatus.MinimumWidth = 6;
+            this.colFundingStatus.Name = "colFundingStatus";
+            this.colFundingStatus.ReadOnly = true;
             // 
             // colFundingId
             // 
@@ -3620,41 +4122,41 @@
             this.colFundingId.ReadOnly = true;
             this.colFundingId.Visible = false;
             // 
-            // colEligibility
+            // colFundingEligibility
             // 
-            this.colEligibility.DataPropertyName = "EligibilityDescription";
-            this.colEligibility.FillWeight = 1F;
-            this.colEligibility.HeaderText = "Eligibility";
-            this.colEligibility.MinimumWidth = 6;
-            this.colEligibility.Name = "colEligibility";
-            this.colEligibility.ReadOnly = true;
-            this.colEligibility.Visible = false;
+            this.colFundingEligibility.DataPropertyName = "EligibilityDescription";
+            this.colFundingEligibility.FillWeight = 1F;
+            this.colFundingEligibility.HeaderText = "Eligibility";
+            this.colFundingEligibility.MinimumWidth = 6;
+            this.colFundingEligibility.Name = "colFundingEligibility";
+            this.colFundingEligibility.ReadOnly = true;
+            this.colFundingEligibility.Visible = false;
             // 
-            // colDocuments
+            // colFundingDocuments
             // 
-            this.colDocuments.DataPropertyName = "RequiredDocuments";
-            this.colDocuments.FillWeight = 1F;
-            this.colDocuments.HeaderText = "Required documents";
-            this.colDocuments.MinimumWidth = 6;
-            this.colDocuments.Name = "colDocuments";
-            this.colDocuments.ReadOnly = true;
-            this.colDocuments.Visible = false;
+            this.colFundingDocuments.DataPropertyName = "RequiredDocuments";
+            this.colFundingDocuments.FillWeight = 1F;
+            this.colFundingDocuments.HeaderText = "Required documents";
+            this.colFundingDocuments.MinimumWidth = 6;
+            this.colFundingDocuments.Name = "colFundingDocuments";
+            this.colFundingDocuments.ReadOnly = true;
+            this.colFundingDocuments.Visible = false;
             // 
-            // colContact
+            // colFundingContact
             // 
-            this.colContact.DataPropertyName = "ContactInformation";
-            this.colContact.FillWeight = 1F;
-            this.colContact.HeaderText = "Contact";
-            this.colContact.MinimumWidth = 6;
-            this.colContact.Name = "colContact";
-            this.colContact.ReadOnly = true;
-            this.colContact.Visible = false;
+            this.colFundingContact.DataPropertyName = "ContactInformation";
+            this.colFundingContact.FillWeight = 1F;
+            this.colFundingContact.HeaderText = "Contact";
+            this.colFundingContact.MinimumWidth = 6;
+            this.colFundingContact.Name = "colFundingContact";
+            this.colFundingContact.ReadOnly = true;
+            this.colFundingContact.Visible = false;
             // 
             // pnlDetailCard
             // 
             this.pnlDetailCard.BackColor = System.Drawing.Color.White;
             this.pnlDetailCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDetailCard.Controls.Add(this.lblDetailHeadingBar);
+            this.pnlDetailCard.Controls.Add(this.pnlDetailHeadingBar);
             this.pnlDetailCard.Controls.Add(this.lblDetailHeading);
             this.pnlDetailCard.Controls.Add(this.lblEligibility);
             this.pnlDetailCard.Controls.Add(this.txtEligibility);
@@ -3669,20 +4171,20 @@
             this.pnlDetailCard.Size = new System.Drawing.Size(1157, 231);
             this.pnlDetailCard.TabIndex = 2;
             // 
-            // lblDetailHeadingBar
+            // pnlDetailHeadingBar
             // 
-            this.lblDetailHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblDetailHeadingBar.Location = new System.Drawing.Point(20, 12);
-            this.lblDetailHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblDetailHeadingBar.Name = "lblDetailHeadingBar";
-            this.lblDetailHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblDetailHeadingBar.TabIndex = 0;
+            this.pnlDetailHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlDetailHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlDetailHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlDetailHeadingBar.Name = "pnlDetailHeadingBar";
+            this.pnlDetailHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlDetailHeadingBar.TabIndex = 0;
             // 
             // lblDetailHeading
             // 
             this.lblDetailHeading.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDetailHeading.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblDetailHeading.Location = new System.Drawing.Point(32, 8);
+            this.lblDetailHeading.Location = new System.Drawing.Point(32, 10);
             this.lblDetailHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDetailHeading.Name = "lblDetailHeading";
             this.lblDetailHeading.Size = new System.Drawing.Size(1108, 35);
@@ -3692,7 +4194,7 @@
             // 
             // lblEligibility
             // 
-            this.lblEligibility.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblEligibility.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblEligibility.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.lblEligibility.Location = new System.Drawing.Point(20, 48);
             this.lblEligibility.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -3717,7 +4219,7 @@
             // 
             // lblDocuments
             // 
-            this.lblDocuments.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblDocuments.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblDocuments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.lblDocuments.Location = new System.Drawing.Point(400, 48);
             this.lblDocuments.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -3742,7 +4244,7 @@
             // 
             // lblContact
             // 
-            this.lblContact.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.lblContact.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
             this.lblContact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.lblContact.Location = new System.Drawing.Point(780, 48);
             this.lblContact.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -3767,9 +4269,8 @@
             // 
             // pnlSampleNote
             // 
-            this.pnlSampleNote.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            this.pnlSampleNote.BackColor = System.Drawing.Color.White;
             this.pnlSampleNote.Controls.Add(this.lblSampleNote);
-            this.pnlSampleNote.Controls.Add(this.pnlSampleNoteBar);
             this.pnlSampleNote.Location = new System.Drawing.Point(20, 165);
             this.pnlSampleNote.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSampleNote.Name = "pnlSampleNote";
@@ -3779,55 +4280,96 @@
             // lblSampleNote
             // 
             this.lblSampleNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSampleNote.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSampleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(93)))), ((int)(((byte)(24)))));
-            this.lblSampleNote.Location = new System.Drawing.Point(6, 0);
+            this.lblSampleNote.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblSampleNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
+            this.lblSampleNote.Location = new System.Drawing.Point(0, 0);
             this.lblSampleNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSampleNote.Name = "lblSampleNote";
-            this.lblSampleNote.Padding = new System.Windows.Forms.Padding(15, 0, 10, 0);
-            this.lblSampleNote.Size = new System.Drawing.Size(1109, 48);
+            this.lblSampleNote.Size = new System.Drawing.Size(1115, 48);
             this.lblSampleNote.TabIndex = 0;
             this.lblSampleNote.Text = "Sample information. Verify every closing date and requirement with the funder bef" +
     "ore you apply. Future Path does not submit applications.";
             this.lblSampleNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlSampleNoteBar
+            // flpFundingActions
             // 
-            this.pnlSampleNoteBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlSampleNoteBar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSampleNoteBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSampleNoteBar.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlSampleNoteBar.Name = "pnlSampleNoteBar";
-            this.pnlSampleNoteBar.Size = new System.Drawing.Size(6, 48);
-            this.pnlSampleNoteBar.TabIndex = 1;
+            this.flpFundingActions.Controls.Add(this.btnFundingAdd);
+            this.flpFundingActions.Controls.Add(this.btnFundingBack);
+            this.flpFundingActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpFundingActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpFundingActions.Location = new System.Drawing.Point(0, 710);
+            this.flpFundingActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpFundingActions.Name = "flpFundingActions";
+            this.flpFundingActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpFundingActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpFundingActions.TabIndex = 2;
+            this.flpFundingActions.WrapContents = false;
+            // 
+            // btnFundingAdd
+            // 
+            this.btnFundingAdd.AccessibleName = "Add to Summary";
+            this.btnFundingAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnFundingAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFundingAdd.FlatAppearance.BorderSize = 0;
+            this.btnFundingAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFundingAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnFundingAdd.ForeColor = System.Drawing.Color.White;
+            this.btnFundingAdd.Location = new System.Drawing.Point(919, 15);
+            this.btnFundingAdd.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFundingAdd.Name = "btnFundingAdd";
+            this.btnFundingAdd.Size = new System.Drawing.Size(238, 50);
+            this.btnFundingAdd.TabIndex = 0;
+            this.btnFundingAdd.Text = "Add to Summary";
+            this.btnFundingAdd.UseVisualStyleBackColor = false;
+            this.btnFundingAdd.Click += new System.EventHandler(this.btnFundingAdd_Click);
+            // 
+            // btnFundingBack
+            // 
+            this.btnFundingBack.AccessibleName = "Back";
+            this.btnFundingBack.BackColor = System.Drawing.Color.White;
+            this.btnFundingBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFundingBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFundingBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFundingBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFundingBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFundingBack.Location = new System.Drawing.Point(745, 15);
+            this.btnFundingBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFundingBack.Name = "btnFundingBack";
+            this.btnFundingBack.Size = new System.Drawing.Size(162, 50);
+            this.btnFundingBack.TabIndex = 1;
+            this.btnFundingBack.Text = "Back";
+            this.btnFundingBack.UseVisualStyleBackColor = false;
+            this.btnFundingBack.Click += new System.EventHandler(this.btnFundingBack_Click);
             // 
             // tabSummary
             // 
             this.tabSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
-            this.tabSummary.Controls.Add(this.pnlSumContent);
-            this.tabSummary.Location = new System.Drawing.Point(4, 5);
+            this.tabSummary.Controls.Add(this.pnlSummaryContent);
+            this.tabSummary.Controls.Add(this.lblSummaryNotice);
+            this.tabSummary.Controls.Add(this.flpSummaryActions);
+            this.tabSummary.Location = new System.Drawing.Point(4, 36);
             this.tabSummary.Margin = new System.Windows.Forms.Padding(4);
             this.tabSummary.Name = "tabSummary";
-            this.tabSummary.Size = new System.Drawing.Size(1170, 577);
+            this.tabSummary.Size = new System.Drawing.Size(1170, 830);
             this.tabSummary.TabIndex = 6;
-            this.tabSummary.Text = "UI 7 Advisory summary";
+            this.tabSummary.Text = "6. Advisory summary";
             // 
-            // pnlSumContent
+            // pnlSummaryContent
             // 
-            this.pnlSumContent.Controls.Add(this.pnlIncludeCard);
-            this.pnlSumContent.Controls.Add(this.pnlPreviewCard);
-            this.pnlSumContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSumContent.Location = new System.Drawing.Point(0, 0);
-            this.pnlSumContent.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlSumContent.Name = "pnlSumContent";
-            this.pnlSumContent.Size = new System.Drawing.Size(1170, 577);
-            this.pnlSumContent.TabIndex = 0;
+            this.pnlSummaryContent.Controls.Add(this.pnlIncludeCard);
+            this.pnlSummaryContent.Controls.Add(this.pnlPreviewCard);
+            this.pnlSummaryContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSummaryContent.Location = new System.Drawing.Point(0, 60);
+            this.pnlSummaryContent.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSummaryContent.Name = "pnlSummaryContent";
+            this.pnlSummaryContent.Size = new System.Drawing.Size(1170, 690);
+            this.pnlSummaryContent.TabIndex = 0;
             // 
             // pnlIncludeCard
             // 
             this.pnlIncludeCard.BackColor = System.Drawing.Color.White;
             this.pnlIncludeCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlIncludeCard.Controls.Add(this.lblIncludeHeadingBar);
+            this.pnlIncludeCard.Controls.Add(this.pnlIncludeHeadingBar);
             this.pnlIncludeCard.Controls.Add(this.lblIncludeHeading);
             this.pnlIncludeCard.Controls.Add(this.lblExportFormat);
             this.pnlIncludeCard.Controls.Add(this.lblExportFormatStar);
@@ -3845,20 +4387,20 @@
             this.pnlIncludeCard.Controls.Add(this.lblGeneratedHint);
             this.pnlIncludeCard.Controls.Add(this.lblPrintNote);
             this.pnlIncludeCard.Controls.Add(this.lblSumRequiredNote);
-            this.pnlIncludeCard.Location = new System.Drawing.Point(0, 0);
+            this.pnlIncludeCard.Location = new System.Drawing.Point(0, 12);
             this.pnlIncludeCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlIncludeCard.Name = "pnlIncludeCard";
             this.pnlIncludeCard.Size = new System.Drawing.Size(374, 573);
             this.pnlIncludeCard.TabIndex = 0;
             // 
-            // lblIncludeHeadingBar
+            // pnlIncludeHeadingBar
             // 
-            this.lblIncludeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblIncludeHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblIncludeHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblIncludeHeadingBar.Name = "lblIncludeHeadingBar";
-            this.lblIncludeHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblIncludeHeadingBar.TabIndex = 0;
+            this.pnlIncludeHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlIncludeHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlIncludeHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlIncludeHeadingBar.Name = "pnlIncludeHeadingBar";
+            this.pnlIncludeHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlIncludeHeadingBar.TabIndex = 0;
             // 
             // lblIncludeHeading
             // 
@@ -3966,10 +4508,10 @@
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnBrowse.Location = new System.Drawing.Point(250, 182);
+            this.btnBrowse.Location = new System.Drawing.Point(250, 181);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(102, 36);
+            this.btnBrowse.Size = new System.Drawing.Size(102, 38);
             this.btnBrowse.TabIndex = 9;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = false;
@@ -4074,25 +4616,25 @@
             // 
             this.pnlPreviewCard.BackColor = System.Drawing.Color.White;
             this.pnlPreviewCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPreviewCard.Controls.Add(this.lblPreviewHeadingBar);
+            this.pnlPreviewCard.Controls.Add(this.pnlPreviewHeadingBar);
             this.pnlPreviewCard.Controls.Add(this.lblPreviewHeading);
             this.pnlPreviewCard.Controls.Add(this.lblPreviewMeta);
             this.pnlPreviewCard.Controls.Add(this.pnlPreviewRule);
             this.pnlPreviewCard.Controls.Add(this.rvSummary);
-            this.pnlPreviewCard.Location = new System.Drawing.Point(395, 0);
+            this.pnlPreviewCard.Location = new System.Drawing.Point(395, 12);
             this.pnlPreviewCard.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPreviewCard.Name = "pnlPreviewCard";
             this.pnlPreviewCard.Size = new System.Drawing.Size(772, 573);
             this.pnlPreviewCard.TabIndex = 1;
             // 
-            // lblPreviewHeadingBar
+            // pnlPreviewHeadingBar
             // 
-            this.lblPreviewHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblPreviewHeadingBar.Location = new System.Drawing.Point(20, 15);
-            this.lblPreviewHeadingBar.Margin = new System.Windows.Forms.Padding(4);
-            this.lblPreviewHeadingBar.Name = "lblPreviewHeadingBar";
-            this.lblPreviewHeadingBar.Size = new System.Drawing.Size(5, 25);
-            this.lblPreviewHeadingBar.TabIndex = 0;
+            this.pnlPreviewHeadingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
+            this.pnlPreviewHeadingBar.Location = new System.Drawing.Point(20, 15);
+            this.pnlPreviewHeadingBar.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlPreviewHeadingBar.Name = "pnlPreviewHeadingBar";
+            this.pnlPreviewHeadingBar.Size = new System.Drawing.Size(5, 25);
+            this.pnlPreviewHeadingBar.TabIndex = 0;
             // 
             // lblPreviewHeading
             // 
@@ -4144,486 +4686,99 @@
             this.rvSummary.Size = new System.Drawing.Size(722, 500);
             this.rvSummary.TabIndex = 4;
             // 
-            // pnlNoticeGap
-            // 
-            this.pnlNoticeGap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNoticeGap.Location = new System.Drawing.Point(20, 127);
-            this.pnlNoticeGap.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlNoticeGap.Name = "pnlNoticeGap";
-            this.pnlNoticeGap.Size = new System.Drawing.Size(1178, 12);
-            this.pnlNoticeGap.TabIndex = 1;
-            // 
-            // pnlNotice
-            // 
-            this.pnlNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.pnlNotice.Controls.Add(this.lblNotice);
-            this.pnlNotice.Controls.Add(this.pnlNoticeBar);
-            this.pnlNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNotice.Location = new System.Drawing.Point(20, 67);
-            this.pnlNotice.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlNotice.Name = "pnlNotice";
-            this.pnlNotice.Size = new System.Drawing.Size(1178, 60);
-            this.pnlNotice.TabIndex = 2;
-            // 
-            // lblNotice
-            // 
-            this.lblNotice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblNotice.Location = new System.Drawing.Point(6, 0);
-            this.lblNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNotice.Name = "lblNotice";
-            this.lblNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
-            this.lblNotice.Size = new System.Drawing.Size(1172, 60);
-            this.lblNotice.TabIndex = 0;
-            this.lblNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlNoticeBar
-            // 
-            this.pnlNoticeBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.pnlNoticeBar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlNoticeBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNoticeBar.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlNoticeBar.Name = "pnlNoticeBar";
-            this.pnlNoticeBar.Size = new System.Drawing.Size(6, 60);
-            this.pnlNoticeBar.TabIndex = 1;
-            // 
-            // pnlContextGap
-            // 
-            this.pnlContextGap.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContextGap.Location = new System.Drawing.Point(20, 55);
-            this.pnlContextGap.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlContextGap.Name = "pnlContextGap";
-            this.pnlContextGap.Size = new System.Drawing.Size(1178, 12);
-            this.pnlContextGap.TabIndex = 3;
-            // 
-            // pnlContext
-            // 
-            this.pnlContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.pnlContext.Controls.Add(this.lblContext);
-            this.pnlContext.Controls.Add(this.pnlContextBar);
-            this.pnlContext.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlContext.Location = new System.Drawing.Point(20, 10);
-            this.pnlContext.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlContext.Name = "pnlContext";
-            this.pnlContext.Size = new System.Drawing.Size(1178, 45);
-            this.pnlContext.TabIndex = 4;
-            // 
-            // lblContext
-            // 
-            this.lblContext.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblContext.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblContext.Location = new System.Drawing.Point(6, 0);
-            this.lblContext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblContext.Name = "lblContext";
-            this.lblContext.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.lblContext.Size = new System.Drawing.Size(1172, 45);
-            this.lblContext.TabIndex = 0;
-            this.lblContext.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlContextBar
-            // 
-            this.pnlContextBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.pnlContextBar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlContextBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlContextBar.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlContextBar.Name = "pnlContextBar";
-            this.pnlContextBar.Size = new System.Drawing.Size(6, 45);
-            this.pnlContextBar.TabIndex = 1;
-            // 
-            // pnlTitle
-            // 
-            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.pnlTitle.Controls.Add(this.lblTitle);
-            this.pnlTitle.Controls.Add(this.lblSubtitle);
-            this.pnlTitle.Controls.Add(this.lblBadge);
-            this.pnlTitle.Controls.Add(this.pnlTitleRule);
-            this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTitle.Location = new System.Drawing.Point(262, 0);
-            this.pnlTitle.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1218, 105);
-            this.pnlTitle.TabIndex = 1;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 20F);
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(25, 12);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(700, 50);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Welcome to Future Path";
-            // 
-            // lblSubtitle
-            // 
-            this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(30, 68);
-            this.lblSubtitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(1142, 22);
-            this.lblSubtitle.TabIndex = 1;
-            // 
-            // lblBadge
-            // 
-            this.lblBadge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBadge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.lblBadge.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.lblBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblBadge.Location = new System.Drawing.Point(1005, 20);
-            this.lblBadge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBadge.Name = "lblBadge";
-            this.lblBadge.Size = new System.Drawing.Size(188, 30);
-            this.lblBadge.TabIndex = 2;
-            this.lblBadge.Text = "LEARNER";
-            this.lblBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlTitleRule
-            // 
-            this.pnlTitleRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlTitleRule.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTitleRule.Location = new System.Drawing.Point(0, 101);
-            this.pnlTitleRule.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlTitleRule.Name = "pnlTitleRule";
-            this.pnlTitleRule.Size = new System.Drawing.Size(1218, 4);
-            this.pnlTitleRule.TabIndex = 3;
-            // 
-            // pnlActions
-            // 
-            this.pnlActions.BackColor = System.Drawing.Color.White;
-            this.pnlActions.Controls.Add(this.flpActions);
-            this.pnlActions.Controls.Add(this.lblActionHint);
-            this.pnlActions.Controls.Add(this.pnlActionRule);
-            this.pnlActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlActions.Location = new System.Drawing.Point(262, 839);
-            this.pnlActions.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlActions.Name = "pnlActions";
-            this.pnlActions.Size = new System.Drawing.Size(1218, 80);
-            this.pnlActions.TabIndex = 2;
-            // 
-            // flpActions
-            // 
-            this.flpActions.Controls.Add(this.btnPrimary);
-            this.flpActions.Controls.Add(this.btnAlternatives);
-            this.flpActions.Controls.Add(this.btnCompare);
-            this.flpActions.Controls.Add(this.btnFunding);
-            this.flpActions.Controls.Add(this.btnBack);
-            this.flpActions.Controls.Add(this.btnCancel);
-            this.flpActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpActions.Location = new System.Drawing.Point(412, 1);
-            this.flpActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpActions.Name = "flpActions";
-            this.flpActions.Padding = new System.Windows.Forms.Padding(0, 14, 25, 0);
-            this.flpActions.Size = new System.Drawing.Size(806, 79);
-            this.flpActions.TabIndex = 0;
-            this.flpActions.WrapContents = false;
-            // 
-            // btnPrimary
-            // 
-            this.btnPrimary.AccessibleName = "Save and continue";
-            this.btnPrimary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnPrimary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrimary.FlatAppearance.BorderSize = 0;
-            this.btnPrimary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrimary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnPrimary.ForeColor = System.Drawing.Color.White;
-            this.btnPrimary.Location = new System.Drawing.Point(543, 14);
-            this.btnPrimary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnPrimary.Name = "btnPrimary";
-            this.btnPrimary.Size = new System.Drawing.Size(238, 50);
-            this.btnPrimary.TabIndex = 0;
-            this.btnPrimary.Text = "Save and continue";
-            this.btnPrimary.UseVisualStyleBackColor = false;
-            this.btnPrimary.Click += new System.EventHandler(this.btnPrimary_Click);
-            // 
-            // btnAlternatives
-            // 
-            this.btnAlternatives.AccessibleName = "Alternative programmes";
-            this.btnAlternatives.BackColor = System.Drawing.Color.White;
-            this.btnAlternatives.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAlternatives.Location = new System.Drawing.Point(319, 14);
-            this.btnAlternatives.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnAlternatives.Name = "btnAlternatives";
-            this.btnAlternatives.Size = new System.Drawing.Size(212, 50);
-            this.btnAlternatives.TabIndex = 1;
-            this.btnAlternatives.Text = "Alternative programmes";
-            this.btnAlternatives.UseVisualStyleBackColor = false;
-            this.btnAlternatives.Click += new System.EventHandler(this.btnAlternatives_Click);
-            // 
-            // btnCompare
-            // 
-            this.btnCompare.AccessibleName = "Compare with my selection";
-            this.btnCompare.BackColor = System.Drawing.Color.White;
-            this.btnCompare.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCompare.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnCompare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnCompare.Location = new System.Drawing.Point(57, 14);
-            this.btnCompare.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnCompare.Name = "btnCompare";
-            this.btnCompare.Size = new System.Drawing.Size(250, 50);
-            this.btnCompare.TabIndex = 2;
-            this.btnCompare.Text = "Compare with my selection";
-            this.btnCompare.UseVisualStyleBackColor = false;
-            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
-            // 
-            // btnFunding
-            // 
-            this.btnFunding.AccessibleName = "Funding options";
-            this.btnFunding.BackColor = System.Drawing.Color.White;
-            this.btnFunding.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnFunding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFunding.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnFunding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnFunding.Location = new System.Drawing.Point(-130, 14);
-            this.btnFunding.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFunding.Name = "btnFunding";
-            this.btnFunding.Size = new System.Drawing.Size(175, 50);
-            this.btnFunding.TabIndex = 3;
-            this.btnFunding.Text = "Funding options";
-            this.btnFunding.UseVisualStyleBackColor = false;
-            this.btnFunding.Click += new System.EventHandler(this.btnFunding_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.AccessibleName = "Back";
-            this.btnBack.BackColor = System.Drawing.Color.White;
-            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnBack.Location = new System.Drawing.Point(-304, 14);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(162, 50);
-            this.btnBack.TabIndex = 4;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.AccessibleName = "Cancel";
-            this.btnCancel.BackColor = System.Drawing.Color.White;
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnCancel.Location = new System.Drawing.Point(-478, 14);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(162, 50);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // lblActionHint
-            // 
-            this.lblActionHint.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblActionHint.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblActionHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(96)))), ((int)(((byte)(108)))));
-            this.lblActionHint.Location = new System.Drawing.Point(0, 1);
-            this.lblActionHint.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblActionHint.Name = "lblActionHint";
-            this.lblActionHint.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblActionHint.Size = new System.Drawing.Size(412, 79);
-            this.lblActionHint.TabIndex = 1;
-            this.lblActionHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlActionRule
-            // 
-            this.pnlActionRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
-            this.pnlActionRule.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlActionRule.Location = new System.Drawing.Point(0, 0);
-            this.pnlActionRule.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlActionRule.Name = "pnlActionRule";
-            this.pnlActionRule.Size = new System.Drawing.Size(1218, 1);
-            this.pnlActionRule.TabIndex = 2;
-            // 
-            // pnlRail
-            // 
-            this.pnlRail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.pnlRail.Controls.Add(this.lblBrand);
-            this.pnlRail.Controls.Add(this.pnlBrandRule);
-            this.pnlRail.Controls.Add(this.btnNavHome);
-            this.pnlRail.Controls.Add(this.lblStep1);
-            this.pnlRail.Controls.Add(this.lblStep2);
-            this.pnlRail.Controls.Add(this.lblStep3);
-            this.pnlRail.Controls.Add(this.lblStep4);
-            this.pnlRail.Controls.Add(this.lblStep5);
-            this.pnlRail.Controls.Add(this.lblStep6);
-            this.pnlRail.Controls.Add(this.lblRailFooter);
-            this.pnlRail.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlRail.Location = new System.Drawing.Point(0, 0);
-            this.pnlRail.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlRail.Name = "pnlRail";
-            this.pnlRail.Size = new System.Drawing.Size(262, 919);
-            this.pnlRail.TabIndex = 3;
-            // 
-            // lblBrand
-            // 
-            this.lblBrand.Font = new System.Drawing.Font("Segoe UI Semibold", 12F);
-            this.lblBrand.ForeColor = System.Drawing.Color.White;
-            this.lblBrand.Location = new System.Drawing.Point(0, 0);
-            this.lblBrand.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(262, 82);
-            this.lblBrand.TabIndex = 0;
-            this.lblBrand.Text = "Future Path";
-            this.lblBrand.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlBrandRule
-            // 
-            this.pnlBrandRule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(137)))), ((int)(((byte)(43)))));
-            this.pnlBrandRule.Location = new System.Drawing.Point(30, 82);
-            this.pnlBrandRule.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlBrandRule.Name = "pnlBrandRule";
-            this.pnlBrandRule.Size = new System.Drawing.Size(202, 2);
-            this.pnlBrandRule.TabIndex = 1;
-            // 
-            // btnNavHome
-            // 
-            this.btnNavHome.AccessibleName = "Home";
-            this.btnNavHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnNavHome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNavHome.FlatAppearance.BorderSize = 0;
-            this.btnNavHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(64)))), ((int)(((byte)(104)))));
-            this.btnNavHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNavHome.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnNavHome.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.btnNavHome.Location = new System.Drawing.Point(0, 105);
-            this.btnNavHome.Margin = new System.Windows.Forms.Padding(4);
-            this.btnNavHome.Name = "btnNavHome";
-            this.btnNavHome.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnNavHome.Size = new System.Drawing.Size(262, 45);
-            this.btnNavHome.TabIndex = 2;
-            this.btnNavHome.Text = "Home";
-            this.btnNavHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNavHome.UseVisualStyleBackColor = false;
-            this.btnNavHome.Click += new System.EventHandler(this.btnNavHome_Click);
-            // 
-            // lblStep1
-            // 
-            this.lblStep1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(64)))), ((int)(((byte)(104)))));
-            this.lblStep1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblStep1.ForeColor = System.Drawing.Color.White;
-            this.lblStep1.Location = new System.Drawing.Point(0, 150);
-            this.lblStep1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep1.Name = "lblStep1";
-            this.lblStep1.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep1.Size = new System.Drawing.Size(262, 45);
-            this.lblStep1.TabIndex = 3;
-            this.lblStep1.Text = "Learner profile";
-            this.lblStep1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep1.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblStep2
-            // 
-            this.lblStep2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblStep2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep2.Location = new System.Drawing.Point(0, 195);
-            this.lblStep2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep2.Name = "lblStep2";
-            this.lblStep2.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep2.Size = new System.Drawing.Size(262, 45);
-            this.lblStep2.TabIndex = 4;
-            this.lblStep2.Text = "Subjects and marks";
-            this.lblStep2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep2.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblStep3
-            // 
-            this.lblStep3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblStep3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep3.Location = new System.Drawing.Point(0, 240);
-            this.lblStep3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep3.Name = "lblStep3";
-            this.lblStep3.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep3.Size = new System.Drawing.Size(262, 45);
-            this.lblStep3.TabIndex = 5;
-            this.lblStep3.Text = "Interest questionnaire";
-            this.lblStep3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep3.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblStep4
-            // 
-            this.lblStep4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblStep4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep4.Location = new System.Drawing.Point(0, 285);
-            this.lblStep4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep4.Name = "lblStep4";
-            this.lblStep4.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep4.Size = new System.Drawing.Size(262, 45);
-            this.lblStep4.TabIndex = 6;
-            this.lblStep4.Text = "Faculty and department";
-            this.lblStep4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep4.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblStep5
-            // 
-            this.lblStep5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblStep5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep5.Location = new System.Drawing.Point(0, 330);
-            this.lblStep5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep5.Name = "lblStep5";
-            this.lblStep5.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep5.Size = new System.Drawing.Size(262, 45);
-            this.lblStep5.TabIndex = 7;
-            this.lblStep5.Text = "Eligibility results";
-            this.lblStep5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep5.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblStep6
-            // 
-            this.lblStep6.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblStep6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(130)))), ((int)(((byte)(158)))));
-            this.lblStep6.Location = new System.Drawing.Point(0, 375);
-            this.lblStep6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStep6.Name = "lblStep6";
-            this.lblStep6.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.lblStep6.Size = new System.Drawing.Size(262, 45);
-            this.lblStep6.TabIndex = 8;
-            this.lblStep6.Text = "Advisory summary";
-            this.lblStep6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStep6.Click += new System.EventHandler(this.lblStep_Click);
-            // 
-            // lblRailFooter
-            // 
-            this.lblRailFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblRailFooter.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblRailFooter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
-            this.lblRailFooter.Location = new System.Drawing.Point(0, 819);
-            this.lblRailFooter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRailFooter.Name = "lblRailFooter";
-            this.lblRailFooter.Padding = new System.Windows.Forms.Padding(20, 0, 10, 0);
-            this.lblRailFooter.Size = new System.Drawing.Size(262, 100);
-            this.lblRailFooter.TabIndex = 9;
-            this.lblRailFooter.Text = "Session\r\nSelf-service";
-            this.lblRailFooter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // lblSummaryNotice
+            // 
+            this.lblSummaryNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblSummaryNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSummaryNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblSummaryNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblSummaryNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblSummaryNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSummaryNotice.Name = "lblSummaryNotice";
+            this.lblSummaryNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblSummaryNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblSummaryNotice.TabIndex = 1;
+            this.lblSummaryNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpSummaryActions
+            // 
+            this.flpSummaryActions.Controls.Add(this.btnSummaryExport);
+            this.flpSummaryActions.Controls.Add(this.btnSummaryBack);
+            this.flpSummaryActions.Controls.Add(this.btnSummaryCancel);
+            this.flpSummaryActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpSummaryActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpSummaryActions.Location = new System.Drawing.Point(0, 750);
+            this.flpSummaryActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpSummaryActions.Name = "flpSummaryActions";
+            this.flpSummaryActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpSummaryActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpSummaryActions.TabIndex = 2;
+            this.flpSummaryActions.WrapContents = false;
+            // 
+            // btnSummaryExport
+            // 
+            this.btnSummaryExport.AccessibleName = "Save and export";
+            this.btnSummaryExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnSummaryExport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSummaryExport.FlatAppearance.BorderSize = 0;
+            this.btnSummaryExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummaryExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnSummaryExport.ForeColor = System.Drawing.Color.White;
+            this.btnSummaryExport.Location = new System.Drawing.Point(929, 15);
+            this.btnSummaryExport.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSummaryExport.Name = "btnSummaryExport";
+            this.btnSummaryExport.Size = new System.Drawing.Size(238, 50);
+            this.btnSummaryExport.TabIndex = 0;
+            this.btnSummaryExport.Text = "Save and export";
+            this.btnSummaryExport.UseVisualStyleBackColor = false;
+            this.btnSummaryExport.Click += new System.EventHandler(this.btnSummaryExport_Click);
+            // 
+            // btnSummaryBack
+            // 
+            this.btnSummaryBack.AccessibleName = "Back";
+            this.btnSummaryBack.BackColor = System.Drawing.Color.White;
+            this.btnSummaryBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSummaryBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSummaryBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummaryBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSummaryBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSummaryBack.Location = new System.Drawing.Point(755, 15);
+            this.btnSummaryBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSummaryBack.Name = "btnSummaryBack";
+            this.btnSummaryBack.Size = new System.Drawing.Size(162, 50);
+            this.btnSummaryBack.TabIndex = 1;
+            this.btnSummaryBack.Text = "Back";
+            this.btnSummaryBack.UseVisualStyleBackColor = false;
+            this.btnSummaryBack.Click += new System.EventHandler(this.btnSummaryBack_Click);
+            // 
+            // btnSummaryCancel
+            // 
+            this.btnSummaryCancel.AccessibleName = "Cancel";
+            this.btnSummaryCancel.BackColor = System.Drawing.Color.White;
+            this.btnSummaryCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSummaryCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSummaryCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummaryCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSummaryCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSummaryCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnSummaryCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSummaryCancel.Name = "btnSummaryCancel";
+            this.btnSummaryCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnSummaryCancel.TabIndex = 2;
+            this.btnSummaryCancel.Text = "Cancel";
+            this.btnSummaryCancel.UseVisualStyleBackColor = false;
+            this.btnSummaryCancel.Click += new System.EventHandler(this.btnSummaryCancel_Click);
             // 
             // pnlStatus
             // 
             this.pnlStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlStatus.Controls.Add(this.lblStatus);
+            this.pnlStatus.Controls.Add(this.lblLearnerContext);
             this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlStatus.Location = new System.Drawing.Point(0, 919);
             this.pnlStatus.Margin = new System.Windows.Forms.Padding(4);
             this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(1480, 32);
+            this.pnlStatus.Size = new System.Drawing.Size(1218, 32);
             this.pnlStatus.TabIndex = 4;
             // 
             // lblStatus
@@ -4636,40 +4791,80 @@
             this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.lblStatus.Size = new System.Drawing.Size(1480, 32);
+            this.lblStatus.Size = new System.Drawing.Size(1203, 32);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblLearnerContext
+            // 
+            this.lblLearnerContext.AccessibleName = "Learner";
+            this.lblLearnerContext.AutoSize = true;
+            this.lblLearnerContext.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblLearnerContext.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLearnerContext.ForeColor = System.Drawing.Color.White;
+            this.lblLearnerContext.Location = new System.Drawing.Point(1203, 0);
+            this.lblLearnerContext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLearnerContext.Name = "lblLearnerContext";
+            this.lblLearnerContext.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+            this.lblLearnerContext.Size = new System.Drawing.Size(15, 19);
+            this.lblLearnerContext.TabIndex = 1;
+            this.lblLearnerContext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // mnuMain
+            // 
+            this.mnuMain.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.mnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHome,
+            this.mnuExit});
+            this.mnuMain.Location = new System.Drawing.Point(0, 0);
+            this.mnuMain.Name = "mnuMain";
+            this.mnuMain.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
+            this.mnuMain.Size = new System.Drawing.Size(1218, 33);
+            this.mnuMain.TabIndex = 2;
+            this.mnuMain.Text = "Main menu";
+            // 
+            // mnuHome
+            // 
+            this.mnuHome.Name = "mnuHome";
+            this.mnuHome.Size = new System.Drawing.Size(70, 27);
+            this.mnuHome.Text = "&Home";
+            this.mnuHome.Click += new System.EventHandler(this.mnuHome_Click);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(51, 27);
+            this.mnuExit.Text = "E&xit";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+            // 
             // MainForm
             // 
-            this.AcceptButton = this.btnPrimary;
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1480, 951);
+            this.ClientSize = new System.Drawing.Size(1218, 951);
             this.Controls.Add(this.pnlBody);
-            this.Controls.Add(this.pnlTitle);
-            this.Controls.Add(this.pnlActions);
-            this.Controls.Add(this.pnlRail);
             this.Controls.Add(this.pnlStatus);
+            this.Controls.Add(this.mnuMain);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.mnuMain;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Future Path — Homepage";
+            this.Text = "Future Path — Home";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.pnlBody.ResumeLayout(false);
-            this.tabMain.ResumeLayout(false);
+            this.tcMain.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
             this.pnlHomeContent.ResumeLayout(false);
             this.pnlLearnerCard.ResumeLayout(false);
             this.pnlStaffCard.ResumeLayout(false);
             this.tabProfile.ResumeLayout(false);
-            this.pnlProfContent.ResumeLayout(false);
+            this.pnlProfileContent.ResumeLayout(false);
             this.pnlWhoCard.ResumeLayout(false);
             this.pnlWhoCard.PerformLayout();
             this.pnlSchoolCard.ResumeLayout(false);
@@ -4679,24 +4874,27 @@
             this.pnlContactCard.PerformLayout();
             this.pnlSessionCard.ResumeLayout(false);
             this.pnlSessionCard.PerformLayout();
+            this.flpProfileActions.ResumeLayout(false);
             this.tabSubjects.ResumeLayout(false);
-            this.pnlSubjContent.ResumeLayout(false);
+            this.pnlSubjectsContent.ResumeLayout(false);
             this.pnlAddCard.ResumeLayout(false);
             this.pnlAddCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMark)).EndInit();
             this.pnlSummary.ResumeLayout(false);
             this.pnlCapturedCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).EndInit();
+            this.flpSubjectsActions.ResumeLayout(false);
             this.tabInterests.ResumeLayout(false);
-            this.pnlIntContent.ResumeLayout(false);
+            this.pnlInterestsContent.ResumeLayout(false);
             this.pnlQuestionCard.ResumeLayout(false);
             this.pnlStatementHeader.ResumeLayout(false);
-            this.tileAnswered.ResumeLayout(false);
-            this.tileCategory1.ResumeLayout(false);
-            this.tileCategory2.ResumeLayout(false);
-            this.tileCategory3.ResumeLayout(false);
+            this.pnlAnsweredTile.ResumeLayout(false);
+            this.pnlCategory1Tile.ResumeLayout(false);
+            this.pnlCategory2Tile.ResumeLayout(false);
+            this.pnlCategory3Tile.ResumeLayout(false);
+            this.flpInterestsActions.ResumeLayout(false);
             this.tabFaculty.ResumeLayout(false);
-            this.pnlSelContent.ResumeLayout(false);
+            this.pnlFacultyContent.ResumeLayout(false);
             this.pnlSearchCard.ResumeLayout(false);
             this.pnlSearchCard.PerformLayout();
             this.pnlProgrammesCard.ResumeLayout(false);
@@ -4704,10 +4902,11 @@
             this.pnlRequirementsCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).EndInit();
             this.pnlAlignmentCard.ResumeLayout(false);
+            this.flpFacultyActions.ResumeLayout(false);
             this.tabResults.ResumeLayout(false);
-            this.tabResultsGroup.ResumeLayout(false);
+            this.tcResults.ResumeLayout(false);
             this.tabOutcome.ResumeLayout(false);
-            this.pnlOutContent.ResumeLayout(false);
+            this.pnlOutcomeContent.ResumeLayout(false);
             this.pnlOutcome.ResumeLayout(false);
             this.pnlCheckedCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChecked)).EndInit();
@@ -4715,13 +4914,15 @@
             this.pnlMarkTile.ResumeLayout(false);
             this.pnlInterestTile.ResumeLayout(false);
             this.pnlOverallTile.ResumeLayout(false);
+            this.flpOutcomeActions.ResumeLayout(false);
             this.tabAlternatives.ResumeLayout(false);
-            this.pnlAltContent.ResumeLayout(false);
+            this.pnlAlternativesContent.ResumeLayout(false);
             this.pnlRankedCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).EndInit();
             this.pnlReasonsCard.ResumeLayout(false);
+            this.flpAlternativesActions.ResumeLayout(false);
             this.tabFunding.ResumeLayout(false);
-            this.pnlFundContent.ResumeLayout(false);
+            this.pnlFundingContent.ResumeLayout(false);
             this.pnlFilterCard.ResumeLayout(false);
             this.pnlFilterCard.PerformLayout();
             this.pnlFundingCard.ResumeLayout(false);
@@ -4729,51 +4930,51 @@
             this.pnlDetailCard.ResumeLayout(false);
             this.pnlDetailCard.PerformLayout();
             this.pnlSampleNote.ResumeLayout(false);
+            this.flpFundingActions.ResumeLayout(false);
             this.tabSummary.ResumeLayout(false);
-            this.pnlSumContent.ResumeLayout(false);
+            this.pnlSummaryContent.ResumeLayout(false);
             this.pnlIncludeCard.ResumeLayout(false);
             this.pnlIncludeCard.PerformLayout();
             this.pnlPreviewCard.ResumeLayout(false);
-            this.pnlNotice.ResumeLayout(false);
-            this.pnlContext.ResumeLayout(false);
-            this.pnlTitle.ResumeLayout(false);
-            this.pnlActions.ResumeLayout(false);
-            this.flpActions.ResumeLayout(false);
-            this.pnlRail.ResumeLayout(false);
+            this.flpSummaryActions.ResumeLayout(false);
             this.pnlStatus.ResumeLayout(false);
+            this.pnlStatus.PerformLayout();
+            this.mnuMain.ResumeLayout(false);
+            this.mnuMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel pnlBody;
-        private System.Windows.Forms.TabControl tabMain;
+        private System.Windows.Forms.TabControl tcMain;
         private System.Windows.Forms.TabPage tabHome;
         private System.Windows.Forms.Panel pnlHomeContent;
         private System.Windows.Forms.Label lblIntro;
         private System.Windows.Forms.Panel pnlLearnerCard;
-        private System.Windows.Forms.Panel lblLearnerHeadingBar;
+        private System.Windows.Forms.Panel pnlLearnerHeadingBar;
         private System.Windows.Forms.Label lblLearnerHeading;
         private System.Windows.Forms.Label lblLearnerText;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Panel pnlStaffCard;
-        private System.Windows.Forms.Panel lblStaffHeadingBar;
+        private System.Windows.Forms.Panel pnlStaffHeadingBar;
         private System.Windows.Forms.Label lblStaffHeading;
         private System.Windows.Forms.Label lblStaffText;
         private System.Windows.Forms.Button btnStaffLogin;
         private System.Windows.Forms.Label lblHomeDisclaimer;
         private System.Windows.Forms.TabPage tabProfile;
-        private System.Windows.Forms.Panel pnlProfContent;
+        private System.Windows.Forms.Panel pnlProfileContent;
         private System.Windows.Forms.Panel pnlWhoCard;
-        private System.Windows.Forms.Panel lblWhoHeadingBar;
+        private System.Windows.Forms.Panel pnlWhoHeadingBar;
         private System.Windows.Forms.Label lblWhoHeading;
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label lblSurname;
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.Panel pnlSchoolCard;
-        private System.Windows.Forms.Panel lblSchoolHeadingBar;
+        private System.Windows.Forms.Panel pnlSchoolHeadingBar;
         private System.Windows.Forms.Label lblSchoolHeading;
         private System.Windows.Forms.Label lblGrade;
         private System.Windows.Forms.Label lblGradeStar;
@@ -4793,7 +4994,7 @@
         private System.Windows.Forms.NumericUpDown numAdvisingYear;
         private System.Windows.Forms.Label lblAdvisingYearError;
         private System.Windows.Forms.Panel pnlContactCard;
-        private System.Windows.Forms.Panel lblContactHeadingBar;
+        private System.Windows.Forms.Panel pnlContactHeadingBar;
         private System.Windows.Forms.Label lblContactHeading;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.TextBox txtEmail;
@@ -4803,7 +5004,7 @@
         private System.Windows.Forms.Label lblMobileError;
         private System.Windows.Forms.Label lblContactNote;
         private System.Windows.Forms.Panel pnlSessionCard;
-        private System.Windows.Forms.Panel lblSessionHeadingBar;
+        private System.Windows.Forms.Panel pnlSessionHeadingBar;
         private System.Windows.Forms.Label lblSessionHeading;
         private System.Windows.Forms.Label lblSessionNumber;
         private System.Windows.Forms.TextBox txtSessionNumber;
@@ -4815,9 +5016,9 @@
         private System.Windows.Forms.TextBox txtSessionStatus;
         private System.Windows.Forms.Label lblProfRequiredNote;
         private System.Windows.Forms.TabPage tabSubjects;
-        private System.Windows.Forms.Panel pnlSubjContent;
+        private System.Windows.Forms.Panel pnlSubjectsContent;
         private System.Windows.Forms.Panel pnlAddCard;
-        private System.Windows.Forms.Panel lblAddHeadingBar;
+        private System.Windows.Forms.Panel pnlAddHeadingBar;
         private System.Windows.Forms.Label lblAddHeading;
         private System.Windows.Forms.Label lblSubject;
         private System.Windows.Forms.Label lblSubjectStar;
@@ -4833,20 +5034,20 @@
         private System.Windows.Forms.Panel pnlSummary;
         private System.Windows.Forms.Label lblSummary;
         private System.Windows.Forms.Panel pnlCapturedCard;
-        private System.Windows.Forms.Panel lblCapturedHeadingBar;
+        private System.Windows.Forms.Panel pnlCapturedHeadingBar;
         private System.Windows.Forms.Label lblCapturedHeading;
         private System.Windows.Forms.Label lblCapturedCount;
         private System.Windows.Forms.DataGridView dgvSubjects;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjSubjectName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectLevel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAchievementLevel;
-        private System.Windows.Forms.DataGridViewButtonColumn colRemove;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectsLevel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectsMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSubjectsAchievement;
+        private System.Windows.Forms.DataGridViewButtonColumn colSubjectsRemove;
         private System.Windows.Forms.Label lblFooter;
         private System.Windows.Forms.TabPage tabInterests;
-        private System.Windows.Forms.Panel pnlIntContent;
+        private System.Windows.Forms.Panel pnlInterestsContent;
         private System.Windows.Forms.Panel pnlQuestionCard;
-        private System.Windows.Forms.Panel lblQuestionHeadingBar;
+        private System.Windows.Forms.Panel pnlQuestionHeadingBar;
         private System.Windows.Forms.Label lblQuestionHeading;
         private System.Windows.Forms.Label lblAnsweredCount;
         private System.Windows.Forms.Panel pnlStatementHeader;
@@ -4857,29 +5058,29 @@
         private System.Windows.Forms.Label lblHeaderResponse4;
         private System.Windows.Forms.Label lblHeaderResponse5;
         private System.Windows.Forms.Panel pnlStatements;
-        private System.Windows.Forms.Panel tileAnswered;
-        private System.Windows.Forms.Label tileAnsweredCaption;
-        private System.Windows.Forms.Label tileAnsweredValue;
-        private System.Windows.Forms.Label tileAnsweredNote;
-        private System.Windows.Forms.Panel tileCategory1;
-        private System.Windows.Forms.Label tileCategory1Caption;
-        private System.Windows.Forms.Label tileCategory1Value;
-        private System.Windows.Forms.Label tileCategory1Note;
-        private System.Windows.Forms.Panel tileCategory2;
-        private System.Windows.Forms.Label tileCategory2Caption;
-        private System.Windows.Forms.Label tileCategory2Value;
-        private System.Windows.Forms.Label tileCategory2Note;
-        private System.Windows.Forms.Panel tileCategory3;
-        private System.Windows.Forms.Label tileCategory3Caption;
-        private System.Windows.Forms.Label tileCategory3Value;
-        private System.Windows.Forms.Label tileCategory3Note;
+        private System.Windows.Forms.Panel pnlAnsweredTile;
+        private System.Windows.Forms.Label lblAnsweredTileCaption;
+        private System.Windows.Forms.Label lblAnsweredTileValue;
+        private System.Windows.Forms.Label lblAnsweredTileNote;
+        private System.Windows.Forms.Panel pnlCategory1Tile;
+        private System.Windows.Forms.Label lblCategory1TileCaption;
+        private System.Windows.Forms.Label lblCategory1TileValue;
+        private System.Windows.Forms.Label lblCategory1TileNote;
+        private System.Windows.Forms.Panel pnlCategory2Tile;
+        private System.Windows.Forms.Label lblCategory2TileCaption;
+        private System.Windows.Forms.Label lblCategory2TileValue;
+        private System.Windows.Forms.Label lblCategory2TileNote;
+        private System.Windows.Forms.Panel pnlCategory3Tile;
+        private System.Windows.Forms.Label lblCategory3TileCaption;
+        private System.Windows.Forms.Label lblCategory3TileValue;
+        private System.Windows.Forms.Label lblCategory3TileNote;
         private System.Windows.Forms.TabPage tabFaculty;
-        private System.Windows.Forms.Panel pnlSelContent;
+        private System.Windows.Forms.Panel pnlFacultyContent;
         private System.Windows.Forms.Panel pnlSearchCard;
-        private System.Windows.Forms.Panel lblSearchHeadingBar;
+        private System.Windows.Forms.Panel pnlSearchHeadingBar;
         private System.Windows.Forms.Label lblSearchHeading;
-        private System.Windows.Forms.RadioButton rbBrowse;
-        private System.Windows.Forms.RadioButton rbSearch;
+        private System.Windows.Forms.RadioButton rdoBrowse;
+        private System.Windows.Forms.RadioButton rdoSearch;
         private System.Windows.Forms.Label lblSelFaculty;
         private System.Windows.Forms.Label lblFacultyStar;
         private System.Windows.Forms.ComboBox cboSelFaculty;
@@ -4888,22 +5089,22 @@
         private System.Windows.Forms.TextBox txtProgrammeSearch;
         private System.Windows.Forms.Label lblSearchHint;
         private System.Windows.Forms.Panel pnlProgrammesCard;
-        private System.Windows.Forms.Panel lblProgrammesHeadingBar;
+        private System.Windows.Forms.Panel pnlProgrammesHeadingBar;
         private System.Windows.Forms.Label lblProgrammesHeading;
         private System.Windows.Forms.Label lblProgrammeCount;
         private System.Windows.Forms.DataGridView dgvProgrammes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSelProgrammeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMinimumAverage;
-        private System.Windows.Forms.DataGridViewButtonColumn colSelect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colProgrammesMinimumAverage;
+        private System.Windows.Forms.DataGridViewButtonColumn colProgrammesSelect;
         private System.Windows.Forms.Panel pnlRequirementsCard;
-        private System.Windows.Forms.Panel lblRequirementsHeadingBar;
+        private System.Windows.Forms.Panel pnlRequirementsHeadingBar;
         private System.Windows.Forms.Label lblRequirementsHeading;
         private System.Windows.Forms.Label lblRequirementsProgramme;
         private System.Windows.Forms.DataGridView dgvRequirements;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementSubject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementMinimum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsSubject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsMinimum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementsType;
         private System.Windows.Forms.Label lblSelSampleData;
         private System.Windows.Forms.Panel pnlAlignmentCard;
         private System.Windows.Forms.Label lblAlignmentHeading;
@@ -4911,63 +5112,63 @@
         private System.Windows.Forms.Label lblStrongestCategories;
         private System.Windows.Forms.Label lblAlignmentSource;
         private System.Windows.Forms.TabPage tabResults;
-        private System.Windows.Forms.TabControl tabResultsGroup;
+        private System.Windows.Forms.TabControl tcResults;
         private System.Windows.Forms.TabPage tabOutcome;
-        private System.Windows.Forms.Panel pnlOutContent;
+        private System.Windows.Forms.Panel pnlOutcomeContent;
         private System.Windows.Forms.Panel pnlOutcome;
         private System.Windows.Forms.Label lblOutcomeChip;
         private System.Windows.Forms.Label lblOutcomeHeadline;
         private System.Windows.Forms.Label lblOutcomeExplanation;
         private System.Windows.Forms.Panel pnlOutcomeBar;
         private System.Windows.Forms.Panel pnlCheckedCard;
-        private System.Windows.Forms.Panel lblCheckedHeadingBar;
+        private System.Windows.Forms.Panel pnlCheckedHeadingBar;
         private System.Windows.Forms.Label lblCheckedHeading;
         private System.Windows.Forms.DataGridView dgvChecked;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOutSubjectName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMinimumMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOutMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRequirementOutcome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsMet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckedSubject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckedMinimum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckedMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckedOutcome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckedIsMet;
         private System.Windows.Forms.Panel pnlSubjectTile;
-        private System.Windows.Forms.Label pnlSubjectTileCaption;
-        private System.Windows.Forms.Label pnlSubjectTileValue;
-        private System.Windows.Forms.Label pnlSubjectTileNote;
+        private System.Windows.Forms.Label lblSubjectTileCaption;
+        private System.Windows.Forms.Label lblSubjectTileValue;
+        private System.Windows.Forms.Label lblSubjectTileNote;
         private System.Windows.Forms.Panel pnlMarkTile;
-        private System.Windows.Forms.Label pnlMarkTileCaption;
-        private System.Windows.Forms.Label pnlMarkTileValue;
-        private System.Windows.Forms.Label pnlMarkTileNote;
+        private System.Windows.Forms.Label lblMarkTileCaption;
+        private System.Windows.Forms.Label lblMarkTileValue;
+        private System.Windows.Forms.Label lblMarkTileNote;
         private System.Windows.Forms.Panel pnlInterestTile;
-        private System.Windows.Forms.Label pnlInterestTileCaption;
-        private System.Windows.Forms.Label pnlInterestTileValue;
-        private System.Windows.Forms.Label pnlInterestTileNote;
+        private System.Windows.Forms.Label lblInterestTileCaption;
+        private System.Windows.Forms.Label lblInterestTileValue;
+        private System.Windows.Forms.Label lblInterestTileNote;
         private System.Windows.Forms.Panel pnlOverallTile;
-        private System.Windows.Forms.Label pnlOverallTileCaption;
-        private System.Windows.Forms.Label pnlOverallTileValue;
-        private System.Windows.Forms.Label pnlOverallTileNote;
+        private System.Windows.Forms.Label lblOverallTileCaption;
+        private System.Windows.Forms.Label lblOverallTileValue;
+        private System.Windows.Forms.Label lblOverallTileNote;
         private System.Windows.Forms.Label lblOutDisclaimer;
         private System.Windows.Forms.Label lblOutSampleData;
         private System.Windows.Forms.TabPage tabAlternatives;
-        private System.Windows.Forms.Panel pnlAltContent;
+        private System.Windows.Forms.Panel pnlAlternativesContent;
         private System.Windows.Forms.Panel pnlRankedCard;
-        private System.Windows.Forms.Panel lblRankedHeadingBar;
+        private System.Windows.Forms.Panel pnlRankedHeadingBar;
         private System.Windows.Forms.Label lblRankedHeading;
         private System.Windows.Forms.Label lblRankedCount;
         private System.Windows.Forms.DataGridView dgvAlternatives;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRank;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colProgramme;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFaculty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colScore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOutcome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAltProgrammeId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIsSelected;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesRank;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesProgramme;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesFaculty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesScore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesOutcome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesReason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesProgrammeId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAlternativesIsSelected;
         private System.Windows.Forms.Panel pnlReasonsCard;
-        private System.Windows.Forms.Panel lblReasonsHeadingBar;
+        private System.Windows.Forms.Panel pnlReasonsHeadingBar;
         private System.Windows.Forms.Label lblReasonsHeading;
         private System.Windows.Forms.Label lblReasons;
         private System.Windows.Forms.CheckBox chkIncludeAlternatives;
         private System.Windows.Forms.TabPage tabFunding;
-        private System.Windows.Forms.Panel pnlFundContent;
+        private System.Windows.Forms.Panel pnlFundingContent;
         private System.Windows.Forms.Panel pnlFilterCard;
         private System.Windows.Forms.Label lblFundFaculty;
         private System.Windows.Forms.ComboBox cboFundFaculty;
@@ -4975,21 +5176,21 @@
         private System.Windows.Forms.ComboBox cboFundingType;
         private System.Windows.Forms.CheckBox chkOpenOnly;
         private System.Windows.Forms.Panel pnlFundingCard;
-        private System.Windows.Forms.Panel lblFundingHeadingBar;
+        private System.Windows.Forms.Panel pnlFundingHeadingBar;
         private System.Windows.Forms.Label lblFundingHeading;
         private System.Windows.Forms.Label lblFundingCount;
         private System.Windows.Forms.DataGridView dgvFunding;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLinkedTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colClosingDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingLinkedTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingClosingDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFundingId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colEligibility;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDocuments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colContact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingEligibility;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingDocuments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFundingContact;
         private System.Windows.Forms.Panel pnlDetailCard;
-        private System.Windows.Forms.Panel lblDetailHeadingBar;
+        private System.Windows.Forms.Panel pnlDetailHeadingBar;
         private System.Windows.Forms.Label lblDetailHeading;
         private System.Windows.Forms.Label lblEligibility;
         private System.Windows.Forms.TextBox txtEligibility;
@@ -4999,11 +5200,10 @@
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.Panel pnlSampleNote;
         private System.Windows.Forms.Label lblSampleNote;
-        private System.Windows.Forms.Panel pnlSampleNoteBar;
         private System.Windows.Forms.TabPage tabSummary;
-        private System.Windows.Forms.Panel pnlSumContent;
+        private System.Windows.Forms.Panel pnlSummaryContent;
         private System.Windows.Forms.Panel pnlIncludeCard;
-        private System.Windows.Forms.Panel lblIncludeHeadingBar;
+        private System.Windows.Forms.Panel pnlIncludeHeadingBar;
         private System.Windows.Forms.Label lblIncludeHeading;
         private System.Windows.Forms.Label lblExportFormat;
         private System.Windows.Forms.Label lblExportFormatStar;
@@ -5022,47 +5222,53 @@
         private System.Windows.Forms.Label lblPrintNote;
         private System.Windows.Forms.Label lblSumRequiredNote;
         private System.Windows.Forms.Panel pnlPreviewCard;
-        private System.Windows.Forms.Panel lblPreviewHeadingBar;
+        private System.Windows.Forms.Panel pnlPreviewHeadingBar;
         private System.Windows.Forms.Label lblPreviewHeading;
         private System.Windows.Forms.Label lblPreviewMeta;
         private System.Windows.Forms.Panel pnlPreviewRule;
         private Microsoft.Reporting.WinForms.ReportViewer rvSummary;
-        private System.Windows.Forms.Panel pnlNoticeGap;
-        private System.Windows.Forms.Panel pnlNotice;
-        private System.Windows.Forms.Label lblNotice;
-        private System.Windows.Forms.Panel pnlNoticeBar;
-        private System.Windows.Forms.Panel pnlContextGap;
-        private System.Windows.Forms.Panel pnlContext;
-        private System.Windows.Forms.Label lblContext;
-        private System.Windows.Forms.Panel pnlContextBar;
-        private System.Windows.Forms.Panel pnlTitle;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblSubtitle;
-        private System.Windows.Forms.Label lblBadge;
-        private System.Windows.Forms.Panel pnlTitleRule;
-        private System.Windows.Forms.Panel pnlActions;
-        private System.Windows.Forms.FlowLayoutPanel flpActions;
-        private System.Windows.Forms.Button btnPrimary;
-        private System.Windows.Forms.Button btnAlternatives;
-        private System.Windows.Forms.Button btnCompare;
-        private System.Windows.Forms.Button btnFunding;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblActionHint;
-        private System.Windows.Forms.Panel pnlActionRule;
-        private System.Windows.Forms.Panel pnlRail;
-        private System.Windows.Forms.Label lblBrand;
-        private System.Windows.Forms.Panel pnlBrandRule;
-        private System.Windows.Forms.Button btnNavHome;
-        private System.Windows.Forms.Label lblStep1;
-        private System.Windows.Forms.Label lblStep2;
-        private System.Windows.Forms.Label lblStep3;
-        private System.Windows.Forms.Label lblStep4;
-        private System.Windows.Forms.Label lblStep5;
-        private System.Windows.Forms.Label lblStep6;
-        private System.Windows.Forms.Label lblRailFooter;
         private System.Windows.Forms.Panel pnlStatus;
         private System.Windows.Forms.Label lblStatus;
-        private System.ServiceProcess.ServiceController serviceController1;
+        private System.Windows.Forms.MenuStrip mnuMain;
+        private System.Windows.Forms.ToolStripMenuItem mnuHome;
+        private System.Windows.Forms.ToolStripMenuItem mnuExit;
+        private System.Windows.Forms.Label lblLearnerContext;
+        private System.Windows.Forms.Label lblProfileNotice;
+        private System.Windows.Forms.FlowLayoutPanel flpProfileActions;
+        private System.Windows.Forms.Button btnProfileSave;
+        private System.Windows.Forms.Button btnProfileBack;
+        private System.Windows.Forms.Button btnProfileCancel;
+        private System.Windows.Forms.Label lblSubjectsNotice;
+        private System.Windows.Forms.FlowLayoutPanel flpSubjectsActions;
+        private System.Windows.Forms.Button btnSubjectsSave;
+        private System.Windows.Forms.Button btnSubjectsBack;
+        private System.Windows.Forms.Button btnSubjectsCancel;
+        private System.Windows.Forms.Label lblInterestsNotice;
+        private System.Windows.Forms.FlowLayoutPanel flpInterestsActions;
+        private System.Windows.Forms.Button btnInterestsSave;
+        private System.Windows.Forms.Button btnInterestsBack;
+        private System.Windows.Forms.Button btnInterestsCancel;
+        private System.Windows.Forms.FlowLayoutPanel flpFacultyActions;
+        private System.Windows.Forms.Button btnFacultyCheck;
+        private System.Windows.Forms.Button btnFacultyBack;
+        private System.Windows.Forms.Button btnFacultyCancel;
+        private System.Windows.Forms.FlowLayoutPanel flpOutcomeActions;
+        private System.Windows.Forms.Button btnOutcomeSummary;
+        private System.Windows.Forms.Button btnOutcomeAlternatives;
+        private System.Windows.Forms.Button btnOutcomeFunding;
+        private System.Windows.Forms.Button btnOutcomeBack;
+        private System.Windows.Forms.Label lblAlternativesNotice;
+        private System.Windows.Forms.FlowLayoutPanel flpAlternativesActions;
+        private System.Windows.Forms.Button btnAlternativesSummary;
+        private System.Windows.Forms.Button btnAlternativesCompare;
+        private System.Windows.Forms.Button btnAlternativesBack;
+        private System.Windows.Forms.FlowLayoutPanel flpFundingActions;
+        private System.Windows.Forms.Button btnFundingAdd;
+        private System.Windows.Forms.Button btnFundingBack;
+        private System.Windows.Forms.Label lblSummaryNotice;
+        private System.Windows.Forms.FlowLayoutPanel flpSummaryActions;
+        private System.Windows.Forms.Button btnSummaryExport;
+        private System.Windows.Forms.Button btnSummaryBack;
+        private System.Windows.Forms.Button btnSummaryCancel;
     }
 }

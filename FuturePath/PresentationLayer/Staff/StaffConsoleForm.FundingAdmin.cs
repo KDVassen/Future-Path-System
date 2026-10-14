@@ -17,8 +17,8 @@ namespace FuturePath.PresentationLayer
     /// <c>FUNDING_TYPE_n</c>), eligibility, documents, closing date, contact, merit / need flags, the
     /// linked faculties and programmes (<c>FUNDINGFACULTY</c> / <c>FUNDINGPROGRAMME</c>) and Active.
     /// </para>
-    /// The console's action band calls <see cref="FundingAdminAddNew"/>, <see cref="FundingAdminUpdateSelected"/>,
-    /// <see cref="FundingAdminDeactivateSelected"/> and <see cref="FundingAdminCancelEdit"/>. Nothing is
+    /// The tab's own buttons run <see cref="btnFundingAdminAdd_Click"/>, <see cref="btnFundingAdminUpdate_Click"/>,
+    /// <see cref="btnFundingAdminDeactivate_Click"/> and <see cref="btnFundingAdminCancel_Click"/>. Nothing is
     /// deleted, and the BLL re-validates every save and checks that the user is an Administrator.
     /// </summary>
     public partial class StaffConsoleForm
@@ -26,16 +26,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>FundingID of the funding option being edited, or null when the form holds a new one.</summary>
         private int? fundingAdminSelectedFundingId;
 
-        #region Screen contract (called by the console)
-
-        /// <summary>The noun the console puts on its Add / Update buttons.</summary>
-        private string FundingAdminItemNoun
-        {
-            get { return "funding option"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called each time UI 13.3 is shown. The first time it binds the funding type, faculty and
+        /// Called by <see cref="PageShown"/> each time UI 13.3 is shown. The first time it binds the funding type, faculty and
         /// programme lists and the grid (replaces the old tab's constructor and <c>LoadData</c>).
         /// </summary>
         /// <param name="firstTime">True the first time this page is shown in this console.</param>
@@ -70,8 +64,12 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Select a funding option to edit it, or fill in the form to add one.", false);
         }
 
-        /// <summary>Validates the form and adds a new funding option.</summary>
-        private void FundingAdminAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add funding option: validates the form and adds a new funding option.</summary>
+        private void btnFundingAdminAdd_Click(object sender, EventArgs e)
         {
             if (!FundingAdminValidateForm())
             {
@@ -98,8 +96,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option added: " + name + ".", false);
         }
 
-        /// <summary>Validates the form and saves it over the funding option selected in the grid.</summary>
-        private void FundingAdminUpdateSelected()
+        /// <summary>Update funding option: validates the form and saves it over the funding option selected in the grid.</summary>
+        private void btnFundingAdminUpdate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue)
             {
@@ -130,8 +128,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option updated.", false);
         }
 
-        /// <summary>Deactivates the selected funding option after confirmation. Nothing is deleted.</summary>
-        private void FundingAdminDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected funding option after confirmation. Nothing is deleted.</summary>
+        private void btnFundingAdminDeactivate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue || dgvFunding.SelectedRows.Count == 0)
             {
@@ -168,8 +166,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Discards the form's changes and clears the grid selection.</summary>
-        private void FundingAdminCancelEdit()
+        /// <summary>Cancel: discards the form's changes and clears the grid selection.</summary>
+        private void btnFundingAdminCancel_Click(object sender, EventArgs e)
         {
             dgvFunding.ClearSelection();
             FundingAdminClearForm();
@@ -285,22 +283,16 @@ namespace FuturePath.PresentationLayer
             FundingAdminLoadFundingDetail(fundingAdminSelectedFundingId.Value);
         }
 
-        /// <summary>Display formatting only: green Active / grey Inactive status chips.</summary>
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colFndStatus.Index && e.Value is bool)
+            if (e.ColumnIndex == colFundingStatus.Index && e.Value is bool)
             {
-                bool active = (bool)e.Value;
-                e.Value = active ? "Active" : "Inactive";
-                e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-                e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
-                e.FormattingApplied = true;
+                FormatStatusChip(e, (bool)e.Value);
             }
         }
 
-        /// <summary>Shows "n funding options · m active" above the grid.</summary>
+        /// <summary>Shows "n funding options · m active" in the grid card's heading row.</summary>
         private void FundingAdminUpdateFundingCount()
         {
             int active = 0;
@@ -310,8 +302,7 @@ namespace FuturePath.PresentationLayer
             }
 
             int total = dgvFunding.Rows.Count;
-            lblFundingCount.Text = total + (total == 1 ? " funding option" : " funding options") + " · " + active +
-                " active. Learners see active options only.";
+            lblFundingCount.Text = total + (total == 1 ? " funding option" : " funding options") + " · " + active + " active";
         }
 
         #endregion
@@ -322,9 +313,10 @@ namespace FuturePath.PresentationLayer
         private bool FundingAdminValidateForm()
         {
             var problems = new List<string>();
-            if (!FundingAdminCheckFundingName()) problems.Add("Funding name");
-            if (!FundingAdminCheckFundingType()) problems.Add("Funding type");
-            if (!FundingAdminCheckEligibility()) problems.Add("Eligibility description");
+            var invalid = new List<Control>();
+            if (!FundingAdminCheckFundingName()) { problems.Add("Funding name"); invalid.Add(txtFundingName); }
+            if (!FundingAdminCheckFundingType()) { problems.Add("Funding type"); invalid.Add(cboFundingType); }
+            if (!FundingAdminCheckEligibility()) { problems.Add("Eligibility description"); invalid.Add(txtEligibility); }
 
             if (problems.Count == 0)
             {
@@ -332,11 +324,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblFndSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct: " +
-                string.Join(", ", problems) + ".";
-            pnlFndSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the funding option can be saved.", true);
+            ShowFormSummary(pnlFndSummary, lblFndSummary, problems, invalid[0], "the funding option");
             return false;
         }
 
@@ -404,7 +392,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the grid row's IsActive cell is true.</summary>
         private bool FundingAdminRowIsActive(DataGridViewRow row)
         {
-            object value = row.Cells[colFndStatus.Index].Value;
+            object value = row.Cells[colFundingStatus.Index].Value;
             return value is bool && (bool)value;
         }
 

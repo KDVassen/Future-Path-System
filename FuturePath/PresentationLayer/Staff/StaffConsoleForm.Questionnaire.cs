@@ -11,9 +11,9 @@ namespace FuturePath.PresentationLayer
     /// left (with "Show all categories"), a read-only grid of stored <c>InterestQuestion</c> rows
     /// (Order · Statement · Category · Status chip) with a count line, and a maintenance form below it
     /// (Statement* with an "n / 255" counter, Category*, Display order*, Active). Learners answer every
-    /// active question on UI 4 on a 1–5 scale. The console's action band calls
-    /// <see cref="QuestionnaireAddNew"/>, <see cref="QuestionnaireUpdateSelected"/>,
-    /// <see cref="QuestionnaireDeactivateSelected"/> and <see cref="QuestionnaireCancelEdit"/>.
+    /// active question on UI 4 on a 1–5 scale. The tab's own buttons run
+    /// <see cref="btnQuestionnaireAdd_Click"/>, <see cref="btnQuestionnaireUpdate_Click"/>,
+    /// <see cref="btnQuestionnaireDeactivate_Click"/> and <see cref="btnQuestionnaireCancel_Click"/>.
     /// Nothing is ever deleted.
     /// </summary>
     public partial class StaffConsoleForm
@@ -29,16 +29,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
         private bool questionnaireLoading;
 
-        #region Console contract (action band and page switching)
-
-        /// <summary>Noun used by the action band: "Add question", "Update question".</summary>
-        private string QuestionnaireItemNoun
-        {
-            get { return "question"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 13.5 appears. The first time, it prepares the grid
+        /// Called by <see cref="PageShown"/> each time UI 13.5 appears. The first time, it prepares the grid
         /// and loads the category lists and the questions; afterwards the page keeps its state.
         /// </summary>
         /// <param name="firstTime">True the first time the page is shown in this console.</param>
@@ -49,15 +43,19 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdQuestions.AutoGenerateColumns = false;
+            dgvQuestions.AutoGenerateColumns = false;
             txtStatement.MaxLength = QuestionnaireStatementMaxLength;
             QuestionnaireLoadCategoryLists();
             QuestionnaireLoadQuestions();
             QuestionnaireClearForm();
         }
 
-        /// <summary>Adds a new question from the form (validated here and again in the BLL).</summary>
-        private void QuestionnaireAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add question: adds a new question from the form (validated here and again in the BLL).</summary>
+        private void btnQuestionnaireAdd_Click(object sender, EventArgs e)
         {
             if (!QuestionnaireValidateForm())
             {
@@ -79,8 +77,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question added. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Saves the form over the question selected in the grid.</summary>
-        private void QuestionnaireUpdateSelected()
+        /// <summary>Update question: saves the form over the question selected in the grid.</summary>
+        private void btnQuestionnaireUpdate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
             {
@@ -108,8 +106,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question updated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Deactivates the selected question after confirmation (never deletes it).</summary>
-        private void QuestionnaireDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected question after confirmation (never deletes it).</summary>
+        private void btnQuestionnaireDeactivate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
             {
@@ -145,8 +143,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question deactivated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
-        private void QuestionnaireCancelEdit()
+        /// <summary>Cancel: discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
+        private void btnQuestionnaireCancel_Click(object sender, EventArgs e)
         {
             QuestionnaireClearForm();
             ReportStatus("Edit cancelled. Nothing was saved.", false);
@@ -184,10 +182,10 @@ namespace FuturePath.PresentationLayer
                 int? scopeCategoryId = cboScopeCategory.SelectedIndex >= 0 && cboScopeCategory.SelectedValue != null
                     ? (int?)Convert.ToInt32(cboScopeCategory.SelectedValue, CultureInfo.InvariantCulture)
                     : null;
-                // TODO BLL: grdQuestions.DataSource = InterestController.GetQuestions(scopeCategoryId, includeInactive: true);
+                // TODO BLL: dgvQuestions.DataSource = InterestController.GetQuestions(scopeCategoryId, includeInactive: true);
                 //           Columns: QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive;
                 //           ordered by DisplayOrder. A null scope returns every category.
-                grdQuestions.ClearSelection();
+                dgvQuestions.ClearSelection();
             }
             catch (Exception)
             {
@@ -241,11 +239,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "N questions · M active" (and the scope) from the bound rows.</summary>
         private void QuestionnaireUpdateCountLine()
         {
-            int total = grdQuestions.Rows.Count;
+            int total = dgvQuestions.Rows.Count;
             int active = 0;
-            foreach (DataGridViewRow row in grdQuestions.Rows)
+            foreach (DataGridViewRow row in dgvQuestions.Rows)
             {
-                if (QuestionnaireIsTrue(row.Cells[colQuestionStatus.Index].Value))
+                if (QuestionnaireIsTrue(row.Cells[colQuestionsStatus.Index].Value))
                 {
                     active++;
                 }
@@ -255,32 +253,25 @@ namespace FuturePath.PresentationLayer
             lblQuestionCount.Text = total + (total == 1 ? " question" : " questions") + scope + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
-        private void grdQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        private void dgvQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colQuestionStatus.Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == colQuestionsStatus.Index)
             {
-                return;
+                FormatStatusChip(e, QuestionnaireIsTrue(e.Value));
             }
-
-            bool active = QuestionnaireIsTrue(e.Value);
-            e.Value = active ? "✓ Active" : "Inactive";
-            e.CellStyle.ForeColor = active ? GreenColour : MutedColour;
-            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-            e.CellStyle.Font = ChipFont;
-            e.FormattingApplied = true;
         }
 
         /// <summary>
         /// After (re)binding, starts with no row selected, so the form stays ready for a new
         /// question until the administrator picks one, and refreshes the count line.
         /// </summary>
-        private void grdQuestions_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvQuestions_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = questionnaireLoading;
             questionnaireLoading = true;
-            grdQuestions.ClearSelection();
-            grdQuestions.CurrentCell = null;
+            dgvQuestions.ClearSelection();
+            dgvQuestions.CurrentCell = null;
             questionnaireLoading = wasLoading;
             QuestionnaireUpdateCountLine();
         }
@@ -289,15 +280,15 @@ namespace FuturePath.PresentationLayer
         /// Copies the question the administrator selects into the form. Only a selection made in the
         /// focused grid counts, not the automatic first-row selection on binding.
         /// </summary>
-        private void grdQuestions_SelectionChanged(object sender, EventArgs e)
+        private void dgvQuestions_SelectionChanged(object sender, EventArgs e)
         {
-            if (questionnaireLoading || !grdQuestions.Focused || grdQuestions.SelectedRows.Count == 0)
+            if (questionnaireLoading || !dgvQuestions.Focused || dgvQuestions.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdQuestions.SelectedRows[0];
-            object id = row.Cells[colQuestionId.Index].Value;
+            DataGridViewRow row = dgvQuestions.SelectedRows[0];
+            object id = row.Cells[colQuestionsId.Index].Value;
             if (id == null || id == DBNull.Value)
             {
                 return;
@@ -305,18 +296,18 @@ namespace FuturePath.PresentationLayer
 
             QuestionnaireClearValidation();
             questionnaireSelectedId = Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            questionnaireSelectedIsActive = QuestionnaireIsTrue(row.Cells[colQuestionStatus.Index].Value);
-            txtStatement.Text = Convert.ToString(row.Cells[colQuestionText.Index].Value, CultureInfo.CurrentCulture);
+            questionnaireSelectedIsActive = QuestionnaireIsTrue(row.Cells[colQuestionsStatus.Index].Value);
+            txtStatement.Text = Convert.ToString(row.Cells[colQuestionsText.Index].Value, CultureInfo.CurrentCulture);
             chkQuestionActive.Checked = questionnaireSelectedIsActive;
 
-            object order = row.Cells[colDisplayOrder.Index].Value;
+            object order = row.Cells[colQuestionsDisplayOrder.Index].Value;
             if (order != null && order != DBNull.Value)
             {
                 decimal value = Convert.ToDecimal(order, CultureInfo.InvariantCulture);
                 numDisplayOrder.Value = Math.Max(numDisplayOrder.Minimum, Math.Min(numDisplayOrder.Maximum, value));
             }
 
-            object categoryId = row.Cells[colQuestionCategoryId.Index].Value;
+            object categoryId = row.Cells[colQuestionsCategoryId.Index].Value;
             if (cboQuestionCategory.DataSource != null && categoryId != null && categoryId != DBNull.Value)
             {
                 cboQuestionCategory.SelectedValue = categoryId;
@@ -324,7 +315,7 @@ namespace FuturePath.PresentationLayer
             else
             {
                 cboQuestionCategory.SelectedIndex = cboQuestionCategory.FindStringExact(
-                    Convert.ToString(row.Cells[colQuestionCategory.Index].Value, CultureInfo.CurrentCulture));
+                    Convert.ToString(row.Cells[colQuestionsCategory.Index].Value, CultureInfo.CurrentCulture));
             }
         }
 
@@ -341,10 +332,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Validates the whole form; shows field messages and the validation summary.</summary>
         private bool QuestionnaireValidateForm()
         {
-            var problems = new List<KeyValuePair<Control, string>>();
-            if (!QuestionnaireCheckStatement()) problems.Add(new KeyValuePair<Control, string>(txtStatement, lblStatementError.Text.TrimStart('⚠', ' ')));
-            if (!QuestionnaireCheckCategory()) problems.Add(new KeyValuePair<Control, string>(cboQuestionCategory, lblQuestionCategoryError.Text.TrimStart('⚠', ' ')));
-            if (!QuestionnaireCheckDisplayOrder()) problems.Add(new KeyValuePair<Control, string>(numDisplayOrder, lblDisplayOrderError.Text.TrimStart('⚠', ' ')));
+            var problems = new List<string>();
+            var invalid = new List<Control>();
+            if (!QuestionnaireCheckStatement()) { problems.Add("Statement"); invalid.Add(txtStatement); }
+            if (!QuestionnaireCheckCategory()) { problems.Add("Category"); invalid.Add(cboQuestionCategory); }
+            if (!QuestionnaireCheckDisplayOrder()) { problems.Add("Display order"); invalid.Add(numDisplayOrder); }
 
             if (problems.Count == 0)
             {
@@ -352,16 +344,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            var lines = new List<string>();
-            foreach (KeyValuePair<Control, string> problem in problems)
-            {
-                lines.Add("• " + problem.Value);
-            }
-
-            lblQuestionSummary.Text = string.Join(Environment.NewLine, lines);
-            pnlQuestionSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct before the question can be saved.", true);
-            problems[0].Key.Focus();
+            ShowFormSummary(pnlQuestionSummary, lblQuestionSummary, problems, invalid[0], "the question");
             return false;
         }
 
@@ -417,7 +400,7 @@ namespace FuturePath.PresentationLayer
         private void QuestionnaireClearForm()
         {
             questionnaireLoading = true;
-            grdQuestions.ClearSelection();
+            dgvQuestions.ClearSelection();
             questionnaireLoading = false;
 
             questionnaireSelectedId = null;

@@ -17,8 +17,8 @@ namespace FuturePath.PresentationLayer
     /// once every requirement is met. Validation fires on Generate report; the BLL checks the role again
     /// before generating and logs the export in <c>ExportReport</c> (Section 8).
     /// <para>
-    /// Generate report, Preview and Cancel are the console's action-band buttons: the host calls
-    /// <see cref="ReportsGenerate"/> and <see cref="ReportsPreview"/>, and Cancel returns to the dashboard.
+    /// The tab's own buttons are Generate report (<see cref="btnReportsGenerate_Click"/>) and Preview
+    /// (<see cref="btnReportsPreview_Click"/>); the other tabs are reached through the tab headers.
     /// </para>
     /// </summary>
     public partial class StaffConsoleForm
@@ -31,7 +31,7 @@ namespace FuturePath.PresentationLayer
         private bool reportsLoading = true;
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 11 appears. The first time, sets the default period
+        /// Called by <see cref="PageShown"/> each time UI 11 appears. The first time, sets the default period
         /// (1 January to today) and folder, binds the lists and applies the rules of the default report
         /// (FP-DIE). Later visits keep what the user entered (the console keeps the screen alive) and only
         /// refresh the readiness panel, so its scope and "last generated" line are current.
@@ -81,7 +81,7 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Fills this screen with the filters of UI 10.3c, whose Generate report opens UI 11 already filtered
-        /// (the host's <c>OpenReports</c> shows this page first, so the lists are bound and the IDs can be
+        /// (<c>OpenReports</c> selects this tab first, so the lists are bound and the IDs can be
         /// selected straight away).
         /// </summary>
         /// <param name="reportCode">"FP-LSR", "FP-DIE" or "FP-LER".</param>
@@ -563,13 +563,13 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        #region Buttons
+        #region Button click events
 
         /// <summary>
-        /// Generate report (action band) → validate, confirm, generate. The BLL checks the role and logs
-        /// the export in ExportReport.
+        /// Generate report → validate, confirm, generate. The BLL checks the role and logs the export in
+        /// ExportReport.
         /// </summary>
-        private void ReportsGenerate()
+        private void btnReportsGenerate_Click(object sender, EventArgs e)
         {
             if (ReportsValidateAll().Count > 0)
             {
@@ -602,8 +602,8 @@ namespace FuturePath.PresentationLayer
             SetStatus(ReportsSelectedName + " generated and saved to " + txtSaveTo.Text.Trim() + ".", GreenColour, Color.White);
         }
 
-        /// <summary>Preview (action band) → validate the parameters, then show the report without saving or logging it.</summary>
-        private void ReportsPreview()
+        /// <summary>Preview → validate the parameters, then show the report without saving or logging it.</summary>
+        private void btnReportsPreview_Click(object sender, EventArgs e)
         {
             bool valid = ReportsCheckPeriod() & ReportsCheckSessionNumber();
             ReportsUpdateReadiness();

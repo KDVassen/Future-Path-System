@@ -11,7 +11,7 @@ namespace FuturePath.PresentationLayer
     public partial class MainForm
     {
         /// <summary>
-        /// Called by ShowPage each time UI 1 is shown (ShowPage has already set the status band). Puts the
+        /// Called by PageShown each time UI 1 is shown (PageShown has already set the status bar). Puts the
         /// focus on <b>Start advisory session</b>, so Enter starts a session as it did on the old homepage.
         /// </summary>
         private void HomeShown()

@@ -11,7 +11,7 @@ namespace FuturePath.PresentationLayer
     /// The outcome band carries a status chip (marker + words) and always states <b>why</b> the
     /// outcome was reached. Green marks a requirement met, amber a gap or "not currently
     /// eligible", grey-blue "more information needed" — red is never used for an outcome
-    /// (decisions.md §2). Back, Funding options and Alternative programmes (host buttons) leave the
+    /// (decisions.md §2). Back, Funding options and Alternative programmes leave the
     /// stored outcome unchanged, and Continue to summary carries it through to UI 7.
     /// </summary>
     public partial class MainForm
@@ -27,10 +27,10 @@ namespace FuturePath.PresentationLayer
         private string outcomeExplanation;
         private double? outcomeScore;
 
-        #region Shown, primary action and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 6 appears: redraws the outcome band for the checked
+        /// Called by PageShown each time UI 6 appears: redraws the outcome band for the checked
         /// programme, shows the ready status and reloads the requirement check.
         /// </summary>
         private void OutcomeShown()
@@ -41,9 +41,27 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Continue to summary → UI 7, carrying the outcome through.</summary>
-        private void OutcomePrimary()
+        private void btnOutcomeSummary_Click(object sender, EventArgs e)
         {
             OpenSummary(tabOutcome);
+        }
+
+        /// <summary>Alternative programmes → UI 6.1a (Sequence 2 runs when the tab is shown).</summary>
+        private void btnOutcomeAlternatives_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabAlternatives;
+        }
+
+        /// <summary>Funding options → UI 6.2b, the learner's yes/no choice to view funding (spec Section 7).</summary>
+        private void btnOutcomeFunding_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabFunding;
+        }
+
+        /// <summary>Back → UI 5, where another programme can be checked.</summary>
+        private void btnOutcomeBack_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectedTab = tabFaculty;
         }
 
         /// <summary>
@@ -58,12 +76,12 @@ namespace FuturePath.PresentationLayer
             outcomeScore = null;
             OutcomeRender();
 
-            dgvChecked.AutoGenerateColumns = false;   // bind to the Designer columns only (colRequirementOutcome, colIsMet, …)
+            dgvChecked.AutoGenerateColumns = false;   // bind to the Designer columns only (colCheckedOutcome, colCheckedIsMet, …)
             dgvChecked.DataSource = null;
             OutcomeShowFigures(null, null, null);
-            pnlSubjectTileNote.Text = "required subjects present";
-            pnlMarkTileNote.Text = "marks against minimums";
-            pnlInterestTileNote.Text = "from your questionnaire";
+            lblSubjectTileNote.Text = "required subjects present";
+            lblMarkTileNote.Text = "marks against minimums";
+            lblInterestTileNote.Text = "from your questionnaire";
         }
 
         #endregion
@@ -143,7 +161,7 @@ namespace FuturePath.PresentationLayer
             lblOutcomeExplanation.Text = string.IsNullOrWhiteSpace(outcomeExplanation) ? fallback : outcomeExplanation.Trim();
             lblOutcomeChip.AccessibleDescription = headline + ". " + lblOutcomeExplanation.Text;
 
-            pnlOverallTileValue.Text = outcomeScore.HasValue
+            lblOverallTileValue.Text = outcomeScore.HasValue
                 ? outcomeScore.Value.ToString("0", CultureInfo.CurrentCulture)
                 : "—";
         }
@@ -154,9 +172,9 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void OutcomeShowFigures(double? subjectScore, double? markScore, double? interestScore)
         {
-            pnlSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
-            pnlMarkTileValue.Text = OutcomeFormatFigure(markScore);
-            pnlInterestTileValue.Text = OutcomeFormatFigure(interestScore);
+            lblSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
+            lblMarkTileValue.Text = OutcomeFormatFigure(markScore);
+            lblInterestTileValue.Text = OutcomeFormatFigure(interestScore);
         }
 
         /// <summary>A whole-number figure for a tile, or a dash when there is none.</summary>
@@ -171,12 +189,12 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void dgvChecked_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colRequirementOutcome.Index || e.Value == null)
+            if (e.RowIndex < 0 || e.ColumnIndex != colCheckedOutcome.Index || e.Value == null)
             {
                 return;
             }
 
-            object met = dgvChecked.Rows[e.RowIndex].Cells[colIsMet.Index].Value;
+            object met = dgvChecked.Rows[e.RowIndex].Cells[colCheckedIsMet.Index].Value;
             bool isMet = met is bool && (bool)met;
             e.Value = (isMet ? "✓ " : "! ") + e.Value;
             e.CellStyle.ForeColor = isMet ? GreenColour : AmberText;
@@ -214,8 +232,8 @@ namespace FuturePath.PresentationLayer
                 //           (rows: SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet — from MatchResult)
                 // TODO BLL: var result = EligibilityController.GetSelectedResult(SessionId.Value);
                 //           OutcomeShowFigures(result.SubjectMatchScore, result.MarkMatchScore, result.InterestMatchScore);
-                //           pnlSubjectTileNote.Text = result.SubjectNote; pnlMarkTileNote.Text = result.MarkNote;
-                //           pnlInterestTileNote.Text = result.StrongestCategory;
+                //           lblSubjectTileNote.Text = result.SubjectNote; lblMarkTileNote.Text = result.MarkNote;
+                //           lblInterestTileNote.Text = result.StrongestCategory;
             }
             catch (Exception)
             {

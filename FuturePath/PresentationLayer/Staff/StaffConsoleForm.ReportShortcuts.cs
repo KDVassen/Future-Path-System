@@ -9,19 +9,14 @@ namespace FuturePath.PresentationLayer
     /// UI 10.3c — Advisory reports tab of the Sessions dashboard (read-only).
     /// The advisor sets a session date range and optional faculty, grade and outcome filters, and
     /// sees the three reports (FP-LSR, FP-DIE, FP-LER) with their scope, the number of rows those
-    /// criteria put in scope and when each was last generated. <b>Generate report</b> checks the
+    /// criteria put in scope and when each was last generated. Find lists the reports for the criteria
+    /// and Clear resets them, as on 10.1a and 10.2b. <b>Generate report</b> checks the
     /// date range and opens Report generation (UI 11) already filtered.
     /// </summary>
     public partial class StaffConsoleForm
     {
-        /// <summary>Caption of the primary button while UI 10.3c is on show.</summary>
-        private string ReportShortcutsPrimaryText
-        {
-            get { return "Generate report"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.3c appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.3c appears. The first time, it prepares the
         /// grid, sets the current year to date as the default period, binds the filter lists and lists
         /// the reports.
         /// </summary>
@@ -33,7 +28,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdReports.AutoGenerateColumns = false;
+            dgvReports.AutoGenerateColumns = false;
             dtpRscFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
             dtpRscTo.Value = DateTime.Today;
             lblRscResultsCount.Text = "Rows in scope follow the criteria above";
@@ -41,11 +36,13 @@ namespace FuturePath.PresentationLayer
             ReportShortcutsFind();
         }
 
+        #region Button click events
+
         /// <summary>
-        /// Generate report (the tab's primary action): validates the period, then opens UI 11 for the
-        /// selected report with this tab's criteria applied.
+        /// Generate report: validates the period, then opens UI 11 for the selected report with this
+        /// tab's criteria applied.
         /// </summary>
-        private void ReportShortcutsPrimary()
+        private void btnReportShortcutsGenerate_Click(object sender, EventArgs e)
         {
             if (!ReportShortcutsCheckDateRange())
             {
@@ -54,13 +51,13 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            if (grdReports.CurrentRow == null)
+            if (dgvReports.CurrentRow == null)
             {
                 ReportStatus("Select a report in the list first, then choose Generate report.", true);
                 return;
             }
 
-            string reportCode = Convert.ToString(grdReports.CurrentRow.Cells[colReportCode.Index].Value, CultureInfo.InvariantCulture);
+            string reportCode = Convert.ToString(dgvReports.CurrentRow.Cells[colReportsCode.Index].Value, CultureInfo.InvariantCulture);
             if (string.IsNullOrEmpty(reportCode))
             {
                 ReportStatus("This report could not be opened. Please select Find and try again.", true);
@@ -71,6 +68,8 @@ namespace FuturePath.PresentationLayer
                 ReportShortcutsSelectedId(cboRscFaculty), ReportShortcutsSelectedId(cboRscGrade),
                 cboRscOutcome.SelectedIndex >= 0 ? Convert.ToString(cboRscOutcome.SelectedValue, CultureInfo.InvariantCulture) : null);
         }
+
+        #endregion
 
         #region Business Logic Layer hooks
 
@@ -134,7 +133,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdReports.DataSource = reports;
+            dgvReports.DataSource = reports;
             int count = reports == null ? 0 : reports.Rows.Count;
             if (count == 0)
             {
@@ -181,10 +180,25 @@ namespace FuturePath.PresentationLayer
             ReportShortcutsFind();
         }
 
-        /// <summary>Shows Last generated as dd/MM/yyyy HH:mm, or "Never" (display formatting only).</summary>
-        private void grdReports_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        /// <summary>Clears the criteria (back to the current year to date), any field message and the report list.</summary>
+        private void btnRscClear_Click(object sender, EventArgs e)
         {
-            if (e.ColumnIndex != colLastGenerated.Index)
+            dtpRscFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
+            dtpRscTo.Value = DateTime.Today;
+            cboRscFaculty.SelectedIndex = -1;
+            cboRscGrade.SelectedIndex = -1;
+            cboRscOutcome.SelectedIndex = -1;
+            ReportShortcutsCheckDateRange();
+            dgvReports.DataSource = null;
+            lblRscResultsCount.Text = "Rows in scope follow the criteria above";
+            ReportStatus("Search criteria cleared.", false);
+            dtpRscFrom.Focus();
+        }
+
+        /// <summary>Shows Last generated as dd/MM/yyyy HH:mm, or "Never" (display formatting only).</summary>
+        private void dgvReports_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex != colReportsLastGenerated.Index)
             {
                 return;
             }
@@ -203,14 +217,32 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Double-clicking a report is the same as Generate report.</summary>
-        private void grdReports_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvReports_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                ReportShortcutsPrimary();
+                btnReportShortcutsGenerate_Click(sender, e);
             }
         }
 
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // StaffConsoleForm
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "StaffConsoleForm";
+            this.Load += new System.EventHandler(this.StaffConsoleForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void StaffConsoleForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

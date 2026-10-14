@@ -12,9 +12,9 @@ namespace FuturePath.PresentationLayer
     /// The administrator scopes the view with a Faculty ComboBox and a Degree programme ListBox
     /// (inactive programmes stay listed, marked "(inactive)"), reads the stored requirements in a
     /// read-only grid with green Active / grey Inactive status chips, and maintains one requirement
-    /// at a time in the "Add or edit a requirement" form. The console's action band calls
-    /// <see cref="RequirementsAddNew"/>, <see cref="RequirementsUpdateSelected"/>,
-    /// <see cref="RequirementsDeactivateSelected"/> and <see cref="RequirementsCancelEdit"/>. Nothing is
+    /// at a time in the "Add or edit a requirement" form, driven by the tab's own buttons
+    /// (<see cref="btnRequirementsAdd_Click"/>, <see cref="btnRequirementsUpdate_Click"/>,
+    /// <see cref="btnRequirementsDeactivate_Click"/>, <see cref="btnRequirementsCancel_Click"/>). Nothing is
     /// ever deleted, and every save is re-checked by the BLL, which also confirms that the signed-in user
     /// is an Administrator.
     /// </summary>
@@ -32,16 +32,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the programme's "Minimum average" row (DegreeProgramme.MinimumOverallAverage) is being edited.</summary>
         private bool requirementsEditingMinimumAverage;
 
-        #region Screen contract (called by the console)
-
-        /// <summary>The noun the console puts on its Add / Update buttons.</summary>
-        private string RequirementsItemNoun
-        {
-            get { return "requirement"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called each time UI 13.2 is shown. The first time it binds the faculty scope list and the form's
+        /// Called by <see cref="PageShown"/> each time UI 13.2 is shown. The first time it binds the faculty scope list and the form's
         /// lists and empties the form (replaces the old tab's constructor and <c>LoadData</c>).
         /// </summary>
         /// <param name="firstTime">True the first time this page is shown in this console.</param>
@@ -77,8 +71,12 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Validates the form and adds it as a new requirement of the selected programme.</summary>
-        private void RequirementsAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add requirement: validates the form and adds it as a new requirement of the selected programme.</summary>
+        private void btnRequirementsAdd_Click(object sender, EventArgs e)
         {
             if (lstProgrammes.SelectedIndex < 0)
             {
@@ -117,8 +115,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement added for " + subject + ".", false);
         }
 
-        /// <summary>Validates the form and saves it over the requirement selected in the grid.</summary>
-        private void RequirementsUpdateSelected()
+        /// <summary>Update requirement: validates the form and saves it over the requirement selected in the grid.</summary>
+        private void btnRequirementsUpdate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0)
             {
@@ -157,8 +155,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement updated.", false);
         }
 
-        /// <summary>Deactivates the selected requirement after confirmation. Nothing is deleted.</summary>
-        private void RequirementsDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected requirement after confirmation. Nothing is deleted.</summary>
+        private void btnRequirementsDeactivate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0 || !requirementsSelectedRequirementId.HasValue)
             {
@@ -197,8 +195,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement for " + subject + " deactivated.", false);
         }
 
-        /// <summary>Discards the form's changes and clears the grid selection, ready for a new requirement.</summary>
-        private void RequirementsCancelEdit()
+        /// <summary>Cancel: discards the form's changes and clears the grid selection, ready for a new requirement.</summary>
+        private void btnRequirementsCancel_Click(object sender, EventArgs e)
         {
             dgvRequirements.ClearSelection();
             RequirementsClearForm();
@@ -341,20 +339,20 @@ namespace FuturePath.PresentationLayer
 
             DataGridViewRow row = dgvRequirements.SelectedRows[0];
             RequirementsClearValidation();
-            requirementsSelectedRequirementId = RequirementsToNullableInt(row.Cells[colRequirementId.Index].Value);
+            requirementsSelectedRequirementId = RequirementsToNullableInt(row.Cells[colRequirementsId.Index].Value);
             requirementsEditingMinimumAverage = !requirementsSelectedRequirementId.HasValue;
             RequirementsSetSubjectFieldsEnabled(!requirementsEditingMinimumAverage);
 
-            RequirementsSelectValue(cboRequirementType, row.Cells[colRequirementType.Index].Value);
-            RequirementsSelectValue(cboSubject, row.Cells[colSubjectId.Index].Value);
-            object alternative = row.Cells[colAlternativeSubjectId.Index].Value;
+            RequirementsSelectValue(cboRequirementType, row.Cells[colRequirementsType.Index].Value);
+            RequirementsSelectValue(cboSubject, row.Cells[colRequirementsSubjectId.Index].Value);
+            object alternative = row.Cells[colRequirementsAlternativeSubjectId.Index].Value;
             RequirementsSelectValue(cboAlternative, RequirementsIsEmpty(alternative) ? (object)RequirementsNoAlternativeValue : alternative);
 
-            object mark = row.Cells[colMinimumMark.Index].Value;
+            object mark = row.Cells[colRequirementsMinimumMark.Index].Value;
             decimal value = RequirementsIsEmpty(mark) ? 0m : Convert.ToDecimal(mark, CultureInfo.InvariantCulture);
             numMinimumMark.Value = Math.Max(numMinimumMark.Minimum, Math.Min(numMinimumMark.Maximum, value));
             chkReqActive.Checked = RequirementsRowIsActive(row);
-            txtAdvisoryNote.Text = Convert.ToString(row.Cells[colAdvisoryNote.Index].Value, CultureInfo.CurrentCulture);
+            txtAdvisoryNote.Text = Convert.ToString(row.Cells[colRequirementsAdvisoryNote.Index].Value, CultureInfo.CurrentCulture);
 
             ReportStatus(requirementsEditingMinimumAverage
                 ? "Editing the programme's minimum average. Set the mark, then choose Update requirement."
@@ -364,25 +362,19 @@ namespace FuturePath.PresentationLayer
         /// <summary>Display formatting only: status chips and dashes for empty cells.</summary>
         private void dgvRequirements_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colReqStatus.Index && e.Value is bool)
+            if (e.ColumnIndex == colRequirementsStatus.Index && e.Value is bool)
             {
-                bool active = (bool)e.Value;
-                e.Value = active ? "Active" : "Inactive";
-                e.CellStyle.ForeColor = active ? GreenColour : GreyColour;
-                e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-                e.CellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
-                e.FormattingApplied = true;
+                FormatStatusChip(e, (bool)e.Value);
             }
-            else if ((e.ColumnIndex == colSubject.Index || e.ColumnIndex == colAlternative.Index
-                      || e.ColumnIndex == colMinimumMark.Index) && RequirementsIsEmpty(e.Value))
+            else if ((e.ColumnIndex == colRequirementsSubject.Index || e.ColumnIndex == colRequirementsAlternative.Index
+                      || e.ColumnIndex == colRequirementsMinimumMark.Index) && RequirementsIsEmpty(e.Value))
             {
                 e.Value = "—";
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colMinimumMark.Index && e.Value is decimal)
+            else if (e.ColumnIndex == colRequirementsMinimumMark.Index && e.Value is decimal)
             {
-                e.Value = ((decimal)e.Value).ToString("0.##", CultureInfo.CurrentCulture);
+                e.Value = ((decimal)e.Value).ToString("0.#'%'", CultureInfo.CurrentCulture);
                 e.FormattingApplied = true;
             }
         }
@@ -395,14 +387,15 @@ namespace FuturePath.PresentationLayer
         private bool RequirementsValidateForm()
         {
             var problems = new List<string>();
+            var invalid = new List<Control>();
             if (!requirementsEditingMinimumAverage)
             {
-                if (!RequirementsCheckRequirementType()) problems.Add("Requirement type");
-                if (!RequirementsCheckSubject()) problems.Add("Subject");
-                if (!RequirementsCheckAlternative()) problems.Add("Accepted alternative");
+                if (!RequirementsCheckRequirementType()) { problems.Add("Requirement type"); invalid.Add(cboRequirementType); }
+                if (!RequirementsCheckSubject()) { problems.Add("Subject"); invalid.Add(cboSubject); }
+                if (!RequirementsCheckAlternative()) { problems.Add("Accepted alternative"); invalid.Add(cboAlternative); }
             }
 
-            if (!RequirementsCheckMinimumMark()) problems.Add("Min. mark %");
+            if (!RequirementsCheckMinimumMark()) { problems.Add("Min. mark %"); invalid.Add(numMinimumMark); }
 
             if (problems.Count == 0)
             {
@@ -410,11 +403,7 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            lblReqSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct: " +
-                string.Join(", ", problems) + ".";
-            pnlReqSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the requirement can be saved.", true);
+            ShowFormSummary(pnlReqSummary, lblReqSummary, problems, invalid[0], "the requirement");
             return false;
         }
 
@@ -508,7 +497,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the grid row's IsActive cell is true.</summary>
         private bool RequirementsRowIsActive(DataGridViewRow row)
         {
-            object value = row.Cells[colReqStatus.Index].Value;
+            object value = row.Cells[colRequirementsStatus.Index].Value;
             return value is bool && (bool)value;
         }
 

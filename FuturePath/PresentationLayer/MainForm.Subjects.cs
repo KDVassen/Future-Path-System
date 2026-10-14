@@ -21,11 +21,6 @@ namespace FuturePath.PresentationLayer
     /// </summary>
     public partial class MainForm
     {
-        // Layout of the captured-subjects card with and without the validation summary above it.
-        private const int SubjectsCapturedTopPlain = 126;
-        private const int SubjectsCapturedTopWithSummary = 206;
-        private const int SubjectsContentBottom = 459;
-
         private const string SubjectsStepStatus = "Step 2 of 6 · Add every subject on your latest report, then save and continue.";
         private const string SubjectsNoDataText = "—";
 
@@ -73,7 +68,7 @@ namespace FuturePath.PresentationLayer
         #region Showing and resetting
 
         /// <summary>
-        /// Called by ShowPage each time UI 3 is shown: binds the grid to the captured rows once, loads the
+        /// Called by PageShown each time UI 3 is shown: binds the grid to the captured rows once, loads the
         /// subject list and minimum count the first time in a session, and refreshes the totals, the notice
         /// and whether Save and continue is available.
         /// </summary>
@@ -111,7 +106,6 @@ namespace FuturePath.PresentationLayer
 
             subjectsMinimumCount = null;
             subjectsLoaded = false;
-            AcceptButton = btnPrimary;
             SubjectsRefreshTotals();
         }
 
@@ -317,9 +311,12 @@ namespace FuturePath.PresentationLayer
                                   Environment.NewLine + "• " + string.Join(Environment.NewLine + "• ", lines);
             }
 
+            // The card keeps its bottom edge; its top starts where the summary does, or below it with the same gap
+            // as between the Add card and the summary. Read from the Designer controls, so it is right at any DPI.
             pnlSummary.Visible = show;
-            int top = show ? SubjectsCapturedTopWithSummary : SubjectsCapturedTopPlain;
-            pnlCapturedCard.SetBounds(0, top, pnlCapturedCard.Width, SubjectsContentBottom - top);
+            int bottom = pnlCapturedCard.Bottom;
+            int top = show ? pnlSummary.Bottom + (pnlSummary.Top - pnlAddCard.Bottom) : pnlSummary.Top;
+            pnlCapturedCard.SetBounds(pnlCapturedCard.Left, top, pnlCapturedCard.Width, bottom - top);
         }
 
         /// <summary>Clears every field message and hides the summary.</summary>
@@ -411,7 +408,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>The Remove button in a row removes that subject and recalculates the totals.</summary>
         private void dgvSubjects_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= subjectsRows.Count || e.ColumnIndex != colRemove.Index)
+            if (e.RowIndex < 0 || e.RowIndex >= subjectsRows.Count || e.ColumnIndex != colSubjectsRemove.Index)
             {
                 return;
             }
@@ -446,8 +443,7 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Recalculates the captured count and average (display only) and the "n of min captured" caption.
-        /// While UI 3 is on screen it also refreshes the notice panel and whether Save and continue is
-        /// available (at least one subject).
+        /// It also refreshes the notice and whether Save and continue is available (at least one subject).
         /// </summary>
         private void SubjectsRefreshTotals()
         {
@@ -461,17 +457,13 @@ namespace FuturePath.PresentationLayer
                 : countText;
             dgvSubjects.ClearSelection();
 
-            // The action band and notice panel belong to whichever screen is showing.
-            if (CurrentPage == tabSubjects)
-            {
-                SetPrimaryEnabled(count >= 1);
-                SubjectsUpdateNotice();
-            }
+            SetPrimaryEnabled(btnSubjectsSave, count >= 1);
+            SubjectsUpdateNotice();
         }
 
         #endregion
 
-        #region Notice panel and Enter key
+        #region Notice and Enter key
 
         /// <summary>
         /// Amber when fewer than MIN_SUBJECT_COUNT subjects are captured (a warning, never a block),
@@ -482,22 +474,22 @@ namespace FuturePath.PresentationLayer
             int count = subjectsRows.Count;
             if (!subjectsMinimumCount.HasValue)
             {
-                ShowNotice("Add each subject on your latest school report with its mark. Save and continue opens once at least " +
-                           "one subject is captured.", BlueTint, BlueColour, InkColour);
+                ShowNotice(lblSubjectsNotice, "Add each subject on your latest school report with its mark. Save and continue opens once at least " +
+                           "one subject is captured.", BlueTint, InkColour);
                 return;
             }
 
             int needed = subjectsMinimumCount.Value - count;
             if (needed > 0)
             {
-                ShowNotice(needed + (needed == 1 ? " more subject" : " more subjects") + " needed. Future Path checks eligibility " +
+                ShowNotice(lblSubjectsNotice, needed + (needed == 1 ? " more subject" : " more subjects") + " needed. Future Path checks eligibility " +
                            "against at least " + subjectsMinimumCount.Value + " subjects; you have captured " + count +
-                           ". You can still continue, but the outcome may be less complete.", AmberTint, AmberColour, AmberText);
+                           ". You can still continue, but the outcome may be less complete.", AmberTint, AmberText);
             }
             else
             {
-                ShowNotice("✓ Enough subjects captured (" + count + " of " + subjectsMinimumCount.Value + "). Add any extra subjects, " +
-                           "such as Advanced Programme subjects, or save and continue.", GreenTint, GreenColour, GreenColour);
+                ShowNotice(lblSubjectsNotice, "✓ Enough subjects captured (" + count + " of " + subjectsMinimumCount.Value + "). Add any extra subjects, " +
+                           "such as Advanced Programme subjects, or save and continue.", GreenTint, GreenColour);
             }
         }
 
@@ -510,18 +502,18 @@ namespace FuturePath.PresentationLayer
         /// <summary>Outside the group, Enter means Save and continue again.</summary>
         private void pnlAddCard_Leave(object sender, EventArgs e)
         {
-            AcceptButton = btnPrimary;
+            AcceptButton = btnSubjectsSave;
         }
 
         #endregion
 
-        #region Save and continue
+        #region Button click events
 
         /// <summary>
         /// Save and continue → UI 4. Invalid data in the Add-a-subject group raises UI 3.1a
         /// (Invalid or duplicate subjects) and refocuses the offending control.
         /// </summary>
-        private void SubjectsPrimary()
+        private void btnSubjectsSave_Click(object sender, EventArgs e)
         {
             subjectsRawMarkText = numMark.ContainsFocus ? numMark.Text : subjectsRawMarkText;
             if (cboSubject.SelectedIndex >= 0 || pnlSummary.Visible)
@@ -564,24 +556,18 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabInterests, 3);
         }
 
+        /// <summary>Back → UI 2. The captured subjects are kept.</summary>
+        private void btnSubjectsBack_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectedTab = tabProfile;
+        }
+
+        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        private void btnSubjectsCancel_Click(object sender, EventArgs e)
+        {
+            GoHome();
+        }
+
         #endregion
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // MainForm
-            // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Name = "MainForm";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

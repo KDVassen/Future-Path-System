@@ -12,7 +12,7 @@ namespace FuturePath.PresentationLayer
     /// UI 2 — Learner Profile Capture (step 1 of 6; spec 2.3.2).
     /// Names and contact details are optional. Grade, school, province and advising year are
     /// required. Session details are system-supplied and read-only. On <b>Save and continue</b>,
-    /// a missing or invalid value turns its label and control red, the notice panel turns red and
+    /// a missing or invalid value turns its label and control red, the notice turns red and
     /// names the field, and UI 2.1a (Invalid Profile Data) is raised.
     /// </summary>
     public partial class MainForm
@@ -35,7 +35,7 @@ namespace FuturePath.PresentationLayer
         #region Showing and resetting
 
         /// <summary>
-        /// Called by ShowPage each time UI 2 is shown: binds the lists the first time, shows the system-supplied
+        /// Called by PageShown each time UI 2 is shown: binds the lists the first time, shows the system-supplied
         /// session details, and shows the blue guidance notice unless a red error notice is standing.
         /// </summary>
         private void ProfileShown()
@@ -152,7 +152,7 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// The learner context strip text shown on UI 3 onward: name (or "Learner (name not given)") · grade ·
+        /// The learner line shown in the status bar from UI 3 onward: name (or "Learner (name not given)") · grade ·
         /// school · province, and the session number once the BLL has assigned one.
         /// </summary>
         private string ProfileContextLine()
@@ -249,29 +249,29 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        #region Notice panel
+        #region Notice
 
         /// <summary>Shows the blue guidance notice (what is required and what is optional).</summary>
         private void ProfileShowGuidance()
         {
-            ShowNotice(ProfileGuidanceText, BlueTint, BlueColour, InkColour);
+            ShowNotice(lblProfileNotice, ProfileGuidanceText, BlueTint, InkColour);
         }
 
         /// <summary>Shows the red notice naming the first field to correct.</summary>
         private void ProfileShowNoticeError(string message)
         {
-            ShowNotice(message, RedTint, RedColour, RedColour);
+            ShowNotice(lblProfileNotice, message, RedTint, RedColour);
         }
 
         #endregion
 
-        #region Save and continue
+        #region Button click events
 
         /// <summary>
         /// Save and continue → validate, save, then UI 3; or UI 2.1a (Invalid profile data) if anything is
         /// invalid, with the focus returned to the first field to correct.
         /// </summary>
-        private void ProfilePrimary()
+        private void btnProfileSave_Click(object sender, EventArgs e)
         {
             var problems = new List<KeyValuePair<Control, string>>();
             if (!ProfileCheckGrade()) problems.Add(new KeyValuePair<Control, string>(cboGrade, lblGradeError.Text.TrimStart('⚠', ' ')));
@@ -304,6 +304,18 @@ namespace FuturePath.PresentationLayer
             ProfileShowGuidance();
             LearnerContext = ProfileContextLine();
             GoToStep(tabSubjects, 2);
+        }
+
+        /// <summary>Back on the first step leaves the session (the Home tab asks first).</summary>
+        private void btnProfileBack_Click(object sender, EventArgs e)
+        {
+            GoHome();
+        }
+
+        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        private void btnProfileCancel_Click(object sender, EventArgs e)
+        {
+            GoHome();
         }
 
         #endregion

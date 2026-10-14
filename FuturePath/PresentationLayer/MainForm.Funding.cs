@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace FuturePath.PresentationLayer
 {
     /// <summary>
-    /// UI 6.2b — Funding Options (rail step 5; spec 2.3.8).
+    /// UI 6.2b — Funding Options (step 5 of 6; spec 2.3.8).
     /// Nothing is typed. The learner sets the Faculty and Funding type filters (both bound to stored
     /// reference data), may limit the list to options that are still open, and selects a row to fill
     /// the read-only detail card. Only <b>active</b> funding linked to the faculty or programme is
@@ -23,10 +23,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True once both filters have been bound for this session.</summary>
         private bool fundingListsLoaded;
 
-        #region Shown, primary action and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 6.2b appears: shows the ready status, binds the filters once
+        /// Called by PageShown each time UI 6.2b appears: shows the ready status, binds the filters once
         /// per session and lists the funding for the UI 5 faculty.
         /// </summary>
         private void FundingShown()
@@ -41,7 +41,7 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Add to Summary → sets FundingInfoRequested = 1, then opens UI 7 (Back there returns here).</summary>
-        private void FundingPrimary()
+        private void btnFundingAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -54,6 +54,12 @@ namespace FuturePath.PresentationLayer
             }
 
             OpenSummary(tabFunding);
+        }
+
+        /// <summary>Back → UI 6 (Eligibility results).</summary>
+        private void btnFundingBack_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabOutcome;
         }
 
         /// <summary>
@@ -200,9 +206,9 @@ namespace FuturePath.PresentationLayer
             }
 
             lblDetailHeading.Text = FundingCellText(row, colFundingName);
-            txtEligibility.Text = FundingCellText(row, colEligibility);
-            txtDocuments.Text = FundingCellText(row, colDocuments);
-            txtContact.Text = FundingCellText(row, colContact);
+            txtEligibility.Text = FundingCellText(row, colFundingEligibility);
+            txtDocuments.Text = FundingCellText(row, colFundingDocuments);
+            txtContact.Text = FundingCellText(row, colFundingContact);
         }
 
         /// <summary>Shows the first option's details as soon as the list is filled.</summary>
@@ -226,12 +232,12 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colStatus.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colFundingStatus.Index)
             {
                 return;
             }
 
-            object closing = dgvFunding.Rows[e.RowIndex].Cells[colClosingDate.Index].Value;
+            object closing = dgvFunding.Rows[e.RowIndex].Cells[colFundingClosingDate.Index].Value;
             bool open = closing == null || closing == DBNull.Value
                         || Convert.ToDateTime(closing, CultureInfo.InvariantCulture).Date >= DateTime.Today;
             e.Value = open ? "✓ Open" : "– Closed";

@@ -22,8 +22,6 @@ namespace FuturePath.PresentationLayer
         /// <summary>Minimum password length checked in the form (the BLL checks it again).</summary>
         private const int AccountsMinimumPasswordLength = 8;
 
-        private const string AccountsOwnAccountMessage = "Active: you cannot deactivate your own account. Ask another administrator.";
-
         /// <summary>UserID of the account being edited; null while adding a new account.</summary>
         private int? accountsSelectedUserId;
 
@@ -33,16 +31,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
         private bool accountsLoading;
 
-        #region Console contract (action band and page switching)
-
-        /// <summary>Noun used by the action band: "Add user account", "Update user account".</summary>
-        private string AccountsItemNoun
-        {
-            get { return "user account"; }
-        }
+        #region Page shown
 
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 13.6 appears. The first time, it prepares the grid
+        /// Called by <see cref="PageShown"/> each time UI 13.6 appears. The first time, it prepares the grid
         /// and loads the role list and the accounts. Every time, both password boxes start empty, so a
         /// password typed before moving to another page never waits on screen.
         /// </summary>
@@ -55,14 +47,18 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdAccounts.AutoGenerateColumns = false;
+            dgvAccounts.AutoGenerateColumns = false;
             AccountsLoadRoles();
             AccountsLoadAccounts();
             AccountsClearForm();
         }
 
-        /// <summary>Adds a new account. A password is required; the boxes are cleared afterwards whatever happens.</summary>
-        private void AccountsAddNew()
+        #endregion
+
+        #region Button click events
+
+        /// <summary>Add user account: a password is required; the boxes are cleared afterwards whatever happens.</summary>
+        private void btnAccountsAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -93,10 +89,10 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Saves the form over the selected account. Leaving both password boxes blank keeps the current
-        /// password; entering one resets it. The boxes are cleared afterwards whatever happens.
+        /// Update user account: saves the form over the selected account. Leaving both password boxes blank
+        /// keeps the current password; entering one resets it. The boxes are cleared afterwards whatever happens.
         /// </summary>
-        private void AccountsUpdateSelected()
+        private void btnAccountsUpdate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -133,8 +129,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Deactivates the selected account after confirmation (never deletes it, never your own).</summary>
-        private void AccountsDeactivateSelected()
+        /// <summary>Deactivate: deactivates the selected account after confirmation (never deletes it, never your own).</summary>
+        private void btnAccountsDeactivate_Click(object sender, EventArgs e)
         {
             AccountsClearPasswords();
             if (!accountsSelectedUserId.HasValue)
@@ -178,8 +174,8 @@ namespace FuturePath.PresentationLayer
             ReportStatus("User account \"" + username + "\" deactivated.", false);
         }
 
-        /// <summary>Discards the edit, clears the form, both password boxes and the grid selection.</summary>
-        private void AccountsCancelEdit()
+        /// <summary>Cancel: discards the edit, clears the form, both password boxes and the grid selection.</summary>
+        private void btnAccountsCancel_Click(object sender, EventArgs e)
         {
             AccountsClearForm();
             ReportStatus("Edit cancelled. Nothing was saved.", false);
@@ -209,10 +205,10 @@ namespace FuturePath.PresentationLayer
             accountsLoading = true;
             try
             {
-                // TODO BLL: grdAccounts.DataSource = UserAccountController.GetAccounts(UserId);
+                // TODO BLL: dgvAccounts.DataSource = UserAccountController.GetAccounts(UserId);
                 //           Columns: UserID, Username, FullName, Role, IsActive — the BLL never returns PasswordHash.
                 //           The BLL checks that UserId's Role = Administrator before returning the list.
-                grdAccounts.ClearSelection();
+                dgvAccounts.ClearSelection();
             }
             catch (Exception)
             {
@@ -257,11 +253,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "N accounts · M active" from the bound rows.</summary>
         private void AccountsUpdateCountLine()
         {
-            int total = grdAccounts.Rows.Count;
+            int total = dgvAccounts.Rows.Count;
             int active = 0;
-            foreach (DataGridViewRow row in grdAccounts.Rows)
+            foreach (DataGridViewRow row in dgvAccounts.Rows)
             {
-                if (AccountsIsTrue(row.Cells[colAccountStatus.Index].Value))
+                if (AccountsIsTrue(row.Cells[colAccountsStatus.Index].Value))
                 {
                     active++;
                 }
@@ -270,32 +266,25 @@ namespace FuturePath.PresentationLayer
             lblAccountCount.Text = total + (total == 1 ? " account" : " accounts") + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip: words plus colour, green Active / grey Inactive.</summary>
-        private void grdAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        private void dgvAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colAccountStatus.Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == colAccountsStatus.Index)
             {
-                return;
+                FormatStatusChip(e, AccountsIsTrue(e.Value));
             }
-
-            bool active = AccountsIsTrue(e.Value);
-            e.Value = active ? "✓ Active" : "Inactive";
-            e.CellStyle.ForeColor = active ? GreenColour : MutedColour;
-            e.CellStyle.BackColor = active ? GreenTint : GreyTint;
-            e.CellStyle.Font = ChipFont;
-            e.FormattingApplied = true;
         }
 
         /// <summary>
         /// After (re)binding, starts with no row selected, so the form stays ready for a new
         /// account until the administrator picks one, and refreshes the count line.
         /// </summary>
-        private void grdAccounts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void dgvAccounts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = accountsLoading;
             accountsLoading = true;
-            grdAccounts.ClearSelection();
-            grdAccounts.CurrentCell = null;
+            dgvAccounts.ClearSelection();
+            dgvAccounts.CurrentCell = null;
             accountsLoading = wasLoading;
             AccountsUpdateCountLine();
         }
@@ -304,15 +293,15 @@ namespace FuturePath.PresentationLayer
         /// Copies the account the administrator selects into the form; password boxes always start empty.
         /// Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
         /// </summary>
-        private void grdAccounts_SelectionChanged(object sender, EventArgs e)
+        private void dgvAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            if (accountsLoading || !grdAccounts.Focused || grdAccounts.SelectedRows.Count == 0)
+            if (accountsLoading || !dgvAccounts.Focused || dgvAccounts.SelectedRows.Count == 0)
             {
                 return;
             }
 
-            DataGridViewRow row = grdAccounts.SelectedRows[0];
-            object id = row.Cells[colUserId.Index].Value;
+            DataGridViewRow row = dgvAccounts.SelectedRows[0];
+            object id = row.Cells[colAccountsUserId.Index].Value;
             if (id == null || id == DBNull.Value)
             {
                 return;
@@ -321,10 +310,10 @@ namespace FuturePath.PresentationLayer
             AccountsClearValidation();
             AccountsClearPasswords();
             accountsSelectedUserId = Convert.ToInt32(id, CultureInfo.InvariantCulture);
-            accountsSelectedIsActive = AccountsIsTrue(row.Cells[colAccountStatus.Index].Value);
-            txtUsername.Text = Convert.ToString(row.Cells[colUsername.Index].Value, CultureInfo.CurrentCulture);
-            txtFullName.Text = Convert.ToString(row.Cells[colFullName.Index].Value, CultureInfo.CurrentCulture);
-            cboRole.SelectedIndex = cboRole.FindStringExact(Convert.ToString(row.Cells[colRole.Index].Value, CultureInfo.CurrentCulture));
+            accountsSelectedIsActive = AccountsIsTrue(row.Cells[colAccountsStatus.Index].Value);
+            txtUsername.Text = Convert.ToString(row.Cells[colAccountsUsername.Index].Value, CultureInfo.CurrentCulture);
+            txtFullName.Text = Convert.ToString(row.Cells[colAccountsFullName.Index].Value, CultureInfo.CurrentCulture);
+            cboRole.SelectedIndex = cboRole.FindStringExact(Convert.ToString(row.Cells[colAccountsRole.Index].Value, CultureInfo.CurrentCulture));
             chkAccountActive.Checked = accountsSelectedIsActive;
 
             if (accountsSelectedUserId.Value == UserId)
@@ -343,19 +332,18 @@ namespace FuturePath.PresentationLayer
         /// <param name="isNew">True on Add: the password is then required.</param>
         private bool AccountsValidateForm(bool isNew)
         {
-            var problems = new List<KeyValuePair<Control, string>>();
-            if (!AccountsCheckUsername()) problems.Add(AccountsProblem(txtUsername, lblUsernameError));
-            if (!AccountsCheckFullName()) problems.Add(AccountsProblem(txtFullName, lblFullNameError));
-            if (!AccountsCheckRole()) problems.Add(AccountsProblem(cboRole, lblRoleError));
-            if (!AccountsCheckNewPassword(isNew)) problems.Add(AccountsProblem(txtNewPassword, lblNewPasswordError));
-            if (!AccountsCheckConfirmPassword(isNew)) problems.Add(AccountsProblem(txtConfirmPassword, lblConfirmPasswordError));
+            var problems = new List<string>();
+            var invalid = new List<Control>();
+            if (!AccountsCheckUsername()) { problems.Add("Username"); invalid.Add(txtUsername); }
+            if (!AccountsCheckFullName()) { problems.Add("Full name"); invalid.Add(txtFullName); }
+            if (!AccountsCheckRole()) { problems.Add("Role"); invalid.Add(cboRole); }
+            if (!AccountsCheckNewPassword(isNew)) { problems.Add("New password"); invalid.Add(txtNewPassword); }
+            if (!AccountsCheckConfirmPassword(isNew)) { problems.Add("Confirm password"); invalid.Add(txtConfirmPassword); }
 
+            // An Administrator may not switch off their own account: Active turns red and is listed in the summary.
             bool ownAccountOff = !isNew && accountsSelectedUserId.HasValue && accountsSelectedUserId.Value == UserId && !chkAccountActive.Checked;
             chkAccountActive.ForeColor = ownAccountOff ? RedColour : InkColour;
-            if (ownAccountOff)
-            {
-                problems.Add(new KeyValuePair<Control, string>(chkAccountActive, AccountsOwnAccountMessage));
-            }
+            if (ownAccountOff) { problems.Add("Active"); invalid.Add(chkAccountActive); }
 
             if (problems.Count == 0)
             {
@@ -363,27 +351,8 @@ namespace FuturePath.PresentationLayer
                 return true;
             }
 
-            // The summary names each field; the full correction is in the field message under it.
-            var lines = new List<string>();
-            foreach (KeyValuePair<Control, string> problem in problems)
-            {
-                int colon = problem.Value.IndexOf(':');
-                lines.Add("• " + (colon > 0 ? problem.Value.Substring(0, colon) : problem.Value));
-            }
-
-            lblAccountSummary.Text = "⚠ " + problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct (see the message under each):" +
-                Environment.NewLine + string.Join(Environment.NewLine, lines);
-            pnlAccountSummary.Visible = true;
-            ReportStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") +
-                " to correct before the account can be saved. Re-enter any password.", true);
-            problems[0].Key.Focus();
+            ShowFormSummary(pnlAccountSummary, lblAccountSummary, problems, invalid[0], "the account");
             return false;
-        }
-
-        /// <summary>One summary entry: the control to focus and its field message without the warning glyph.</summary>
-        private static KeyValuePair<Control, string> AccountsProblem(Control input, Label messageLabel)
-        {
-            return new KeyValuePair<Control, string>(input, messageLabel.Text.TrimStart('⚠', ' '));
         }
 
         /// <summary>Username: required, at most 50 characters of letters, digits, . _ and -.</summary>
@@ -475,7 +444,7 @@ namespace FuturePath.PresentationLayer
         private void AccountsClearForm()
         {
             accountsLoading = true;
-            grdAccounts.ClearSelection();
+            dgvAccounts.ClearSelection();
             accountsLoading = false;
 
             accountsSelectedUserId = null;

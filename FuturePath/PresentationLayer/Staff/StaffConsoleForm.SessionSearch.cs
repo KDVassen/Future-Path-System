@@ -13,7 +13,7 @@ namespace FuturePath.PresentationLayer
     /// advisory outcome; none is required. On <b>Find</b>, a session number not in the form
     /// yyyy-NNNN, or a from-date later than the to-date, turns its label and control red with a
     /// field message. The grid lists matching sessions with the outcome read back from the stored
-    /// RecommendationResult (never recalculated). The status band turns amber when nothing matches
+    /// RecommendationResult (never recalculated). The status bar turns amber when nothing matches
     /// and blue when results show. <b>Open advisory summary</b> and <b>Export advisory summary</b>
     /// regenerate the FP-LSR report for the selected session.
     /// </summary>
@@ -25,14 +25,8 @@ namespace FuturePath.PresentationLayer
         private int? sessionSearchLearnerFilterId;
         private string sessionSearchLearnerFilterSurname;
 
-        /// <summary>Caption of the primary button while UI 10.2b is on show.</summary>
-        private string SessionSearchPrimaryText
-        {
-            get { return "Open advisory summary"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.2b appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.2b appears. The first time, it prepares the
         /// grid and binds the outcome list, then shows the search guidance.
         /// </summary>
         /// <param name="firstTime">True the first time the tab is shown in this console.</param>
@@ -43,17 +37,21 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdSessions.AutoGenerateColumns = false;
+            dgvSessions.AutoGenerateColumns = false;
             lblSesResultsCount.Text = "Search to list sessions";
             SessionSearchLoadLists();
             ReportStatus("Search on any field — none is required. Tick a date box to use that date.", false);
         }
 
-        /// <summary>Opens the FP-LSR advisory summary of the selected session (the tab's primary action).</summary>
-        private void SessionSearchPrimary()
+        #region Button click events
+
+        /// <summary>Open advisory summary: opens the FP-LSR of the selected session in the report viewer.</summary>
+        private void btnSessionSearchOpen_Click(object sender, EventArgs e)
         {
             SessionSearchOpenSummary(false);
         }
+
+        #endregion
 
         /// <summary>
         /// Lists the sessions of one learner, used when the advisor opens a learner from UI 10.1a.
@@ -138,7 +136,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search and validation
 
-        /// <summary>Validates the criteria, runs the search and reports the result in the status band.</summary>
+        /// <summary>Validates the criteria, runs the search and reports the result in the status bar.</summary>
         private void SessionSearchFind()
         {
             bool numberValid = SessionSearchCheckSessionNumber();
@@ -175,7 +173,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdSessions.DataSource = results;
+            dgvSessions.DataSource = results;
             int count = results == null ? 0 : results.Rows.Count;
             lblSesResultsCount.Text = count + " of " + Math.Max(total, count) + " sessions match";
             if (count == 0)
@@ -243,7 +241,7 @@ namespace FuturePath.PresentationLayer
             sessionSearchLearnerFilterSurname = null;
             SessionSearchCheckSessionNumber();
             SessionSearchCheckDateRange();
-            grdSessions.DataSource = null;
+            dgvSessions.DataSource = null;
             lblSesResultsCount.Text = "Search to list sessions";
         }
 
@@ -258,7 +256,7 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Double-clicking a session is the same as Open advisory summary.</summary>
-        private void grdSessions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvSessions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -274,22 +272,22 @@ namespace FuturePath.PresentationLayer
         /// <param name="export">True to export to a file; false to open the preview.</param>
         private void SessionSearchOpenSummary(bool export)
         {
-            if (grdSessions.CurrentRow == null)
+            if (dgvSessions.CurrentRow == null)
             {
                 ReportStatus("Select a session in the list first.", true);
                 return;
             }
 
-            DataGridViewRow row = grdSessions.CurrentRow;
+            DataGridViewRow row = dgvSessions.CurrentRow;
             int sessionId;
-            if (!int.TryParse(Convert.ToString(row.Cells[colSessionId.Index].Value, CultureInfo.InvariantCulture), out sessionId))
+            if (!int.TryParse(Convert.ToString(row.Cells[colSessionsId.Index].Value, CultureInfo.InvariantCulture), out sessionId))
             {
                 ReportStatus("This session could not be opened. Please search again.", true);
                 return;
             }
 
-            string sessionNumber = Convert.ToString(row.Cells[colSession.Index].Value, CultureInfo.InvariantCulture);
-            if (!string.Equals(Convert.ToString(row.Cells[colSessionStatus.Index].Value, CultureInfo.InvariantCulture),
+            string sessionNumber = Convert.ToString(row.Cells[colSessionsNumber.Index].Value, CultureInfo.InvariantCulture);
+            if (!string.Equals(Convert.ToString(row.Cells[colSessionsStatus.Index].Value, CultureInfo.InvariantCulture),
                     SessionSearchCompletedStatus, StringComparison.OrdinalIgnoreCase))
             {
                 ReportStatus("Session " + sessionNumber + " is still in progress. Its advisory summary exists only once the session is completed.", true);
@@ -345,24 +343,24 @@ namespace FuturePath.PresentationLayer
         #region Grid display (formatting only — the outcome is read back, never recalculated)
 
         /// <summary>Formats dates as dd/MM/yyyy, Exported as Yes/No and the outcome as marker + words.</summary>
-        private void grdSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null || e.Value == DBNull.Value)
             {
                 return;
             }
 
-            if (e.ColumnIndex == colDate.Index && e.Value is DateTime)
+            if (e.ColumnIndex == colSessionsDate.Index && e.Value is DateTime)
             {
                 e.Value = ((DateTime)e.Value).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colExported.Index && e.Value is bool)
+            else if (e.ColumnIndex == colSessionsExported.Index && e.Value is bool)
             {
                 e.Value = (bool)e.Value ? "Yes" : "No";
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colOutcome.Index)
+            else if (e.ColumnIndex == colSessionsOutcome.Index)
             {
                 e.Value = SessionSearchOutcomeChip(Convert.ToString(e.Value, CultureInfo.InvariantCulture)).Text;
                 e.FormattingApplied = true;
@@ -373,16 +371,16 @@ namespace FuturePath.PresentationLayer
         /// Paints the outcome as a chip: tinted box, coloured border and marker + words, so the
         /// outcome is never shown by colour alone and never in red (spec 2.2.6).
         /// </summary>
-        private void grdSessions_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void dgvSessions_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colOutcome.Index || e.Value == null || e.Value == DBNull.Value)
+            if (e.RowIndex < 0 || e.ColumnIndex != colSessionsOutcome.Index || e.Value == null || e.Value == DBNull.Value)
             {
                 return;
             }
 
             e.PaintBackground(e.CellBounds, true);
             SessionSearchChip chip = SessionSearchOutcomeChip(Convert.ToString(e.Value, CultureInfo.InvariantCulture));
-            Font chipFont = e.CellStyle.Font ?? grdSessions.Font;
+            Font chipFont = e.CellStyle.Font ?? dgvSessions.Font;
             Size textSize = TextRenderer.MeasureText(chip.Text, chipFont);
             var box = new Rectangle(e.CellBounds.X + 6, e.CellBounds.Y + 4,
                 Math.Min(textSize.Width + 12, e.CellBounds.Width - 12), e.CellBounds.Height - 9);

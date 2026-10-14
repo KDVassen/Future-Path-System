@@ -19,14 +19,8 @@ namespace FuturePath.PresentationLayer
     /// </summary>
     public partial class StaffConsoleForm
     {
-        /// <summary>Caption of the primary button while UI 10.1a is on show.</summary>
-        private string LearnerSearchPrimaryText
-        {
-            get { return "Open learner profile"; }
-        }
-
         /// <summary>
-        /// Called by <see cref="ShowPage"/> each time UI 10.1a appears. The first time, it prepares the
+        /// Called by <see cref="PageShown"/> each time UI 10.1a appears. The first time, it prepares the
         /// grid and binds the grade and province lists, then shows the search guidance.
         /// </summary>
         /// <param name="firstTime">True the first time the tab is shown in this console.</param>
@@ -37,36 +31,40 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdLearners.AutoGenerateColumns = false;
+            dgvLearners.AutoGenerateColumns = false;
             lblLrnResultsCount.Text = "Search to list learners";
             LearnerSearchLoadLists();
             ReportStatus("Search on any field, or leave them all blank to list every learner.", false);
         }
 
+        #region Button click events
+
         /// <summary>
-        /// Open learner profile (the tab's primary action): moves to the Advisory session tab (10.2b)
-        /// and lists the selected learner's sessions there.
+        /// Open learner profile: moves to the Advisory session tab (10.2b) and lists the selected
+        /// learner's sessions there.
         /// </summary>
-        private void LearnerSearchPrimary()
+        private void btnLearnerSearchOpen_Click(object sender, EventArgs e)
         {
-            if (grdLearners.CurrentRow == null)
+            if (dgvLearners.CurrentRow == null)
             {
                 ReportStatus("Select a learner in the list first, then choose Open learner profile.", true);
                 return;
             }
 
-            DataGridViewRow row = grdLearners.CurrentRow;
+            DataGridViewRow row = dgvLearners.CurrentRow;
             int learnerId;
-            if (!int.TryParse(Convert.ToString(row.Cells[colLearnerId.Index].Value, CultureInfo.InvariantCulture), out learnerId))
+            if (!int.TryParse(Convert.ToString(row.Cells[colLearnersId.Index].Value, CultureInfo.InvariantCulture), out learnerId))
             {
                 ReportStatus("This learner's sessions could not be opened. Please search again.", true);
                 return;
             }
 
-            string learnerName = Convert.ToString(row.Cells[colLrnLearner.Index].Value, CultureInfo.CurrentCulture);
-            ShowPage(tabSessionSearch);
+            string learnerName = Convert.ToString(row.Cells[colLearnersName.Index].Value, CultureInfo.CurrentCulture);
+            SelectPage(tabSessionSearch);
             SessionSearchShowLearnerSessions(learnerId, learnerName);
         }
+
+        #endregion
 
         #region Business Logic Layer hooks
 
@@ -103,7 +101,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search
 
-        /// <summary>Runs the search and reports the result in the status band.</summary>
+        /// <summary>Runs the search and reports the result in the status bar.</summary>
         private void LearnerSearchFind()
         {
             int? gradeLevelId = cboLrnGrade.SelectedValue is int ? (int?)(int)cboLrnGrade.SelectedValue : null;
@@ -121,7 +119,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            grdLearners.DataSource = results;
+            dgvLearners.DataSource = results;
             int count = results == null ? 0 : results.Rows.Count;
             lblLrnResultsCount.Text = count == 1 ? "1 learner matches" : count + " learners match";
             if (count == 0)
@@ -148,21 +146,21 @@ namespace FuturePath.PresentationLayer
             txtSchool.Clear();
             cboLrnGrade.SelectedIndex = -1;
             cboProvince.SelectedIndex = -1;
-            grdLearners.DataSource = null;
+            dgvLearners.DataSource = null;
             lblLrnResultsCount.Text = "Search to list learners";
             ReportStatus("Search criteria cleared.", false);
             txtLrnSurname.Focus();
         }
 
         /// <summary>Shows the last session date as dd/MM/yyyy (display formatting only).</summary>
-        private void grdLearners_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvLearners_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == colLastSession.Index && e.Value is DateTime)
+            if (e.ColumnIndex == colLearnersLastSession.Index && e.Value is DateTime)
             {
                 e.Value = ((DateTime)e.Value).ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colLastSession.Index && (e.Value == null || e.Value == DBNull.Value))
+            else if (e.ColumnIndex == colLearnersLastSession.Index && (e.Value == null || e.Value == DBNull.Value))
             {
                 e.Value = "—";
                 e.CellStyle.ForeColor = MutedColour;
@@ -175,11 +173,11 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Double-clicking a learner is the same as Open learner profile.</summary>
-        private void grdLearners_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvLearners_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                LearnerSearchPrimary();
+                btnLearnerSearchOpen_Click(sender, e);
             }
         }
 
