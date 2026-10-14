@@ -9,7 +9,7 @@
 #>
 . "$PSScriptRoot\TestHelpers.ps1"
 
-$ctx = Initialize-FuturePathTest
+$ctx = Initialize-FuturePathTest -SchemaOnly   # empty schema: this script inserts its own fixture rows
 
 function Get-Scalar($sql) { return (Invoke-TestQuery $ctx $sql).Rows[0][0] }
 

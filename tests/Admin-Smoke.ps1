@@ -12,7 +12,7 @@
 #>
 . "$PSScriptRoot\TestHelpers.ps1"
 
-$ctx = Initialize-FuturePathTest
+$ctx = Initialize-FuturePathTest -SchemaOnly   # empty schema: this script inserts its own fixture rows
 
 function Get-Value([string]$Sql) {
     # First column of the first row of a query on the test copy.

@@ -6,7 +6,7 @@
 #>
 . "$PSScriptRoot\TestHelpers.ps1"
 
-$ctx = Initialize-FuturePathTest
+$ctx = Initialize-FuturePathTest -SchemaOnly   # empty schema: this script inserts its own fixture rows
 
 # Database copy attaches and SystemParameter can be read (empty schema gives 0 rows).
 $parameters = (New-Object FuturePath.DatabaseLayer.SystemParameterRepository).GetParameters()

@@ -17,6 +17,8 @@
     - Run every test script in its own process (powershell.exe -File ...), because a loaded
       assembly stays locked until the process ends:
         powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
+    - Tests that insert their own fixture rows use Initialize-FuturePathTest -SchemaOnly (an empty
+      database built from CreateSchema.sql); the others get a copy of the seeded FuturePath.mdf.
     - Engine-only tests need no database: call Initialize-FuturePathTest -NoDatabase and
       Set-TestSettings with the SystemParameter values to use.
 #>
@@ -30,13 +32,54 @@ $script:TestsPassed  = 0
 $script:TestsFailed  = 0
 $script:Failures     = New-Object System.Collections.Generic.List[string]
 
+function New-SchemaOnlyDatabase {
+    <#
+    .SYNOPSIS Builds an EMPTY database (CreateSchema.sql only, no seed rows) as FuturePath.mdf in a folder.
+    #>
+    param([string]$Folder)
+    $name = 'FuturePathSchema_' + [guid]::NewGuid().ToString('N').Substring(0, 8)
+    $mdf = Join-Path $Folder 'FuturePath.mdf'
+    $ldf = Join-Path $Folder 'FuturePath_log.ldf'
+    $master = New-Object System.Data.SqlClient.SqlConnection('Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=60')
+    $master.Open()
+    try {
+        $create = $master.CreateCommand()
+        $create.CommandText = "CREATE DATABASE [$name] ON (NAME = N'FuturePath', FILENAME = N'" + $mdf.Replace("'", "''") +
+                              "') LOG ON (NAME = N'FuturePath_log', FILENAME = N'" + $ldf.Replace("'", "''") + "')"
+        [void]$create.ExecuteNonQuery()
+
+        $database = New-Object System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=$name;Integrated Security=True;Connect Timeout=60")
+        $database.Open()
+        try {
+            $script = [System.IO.File]::ReadAllText((Join-Path $script:ProjectDir 'Database\CreateSchema.sql'))
+            foreach ($batch in [regex]::Split($script, '^\s*GO\s*$', [System.Text.RegularExpressions.RegexOptions]::Multiline)) {
+                if ($batch.Trim().Length -eq 0) { continue }
+                $command = $database.CreateCommand()
+                $command.CommandText = $batch
+                [void]$command.ExecuteNonQuery()
+            }
+        } finally {
+            $database.Close()
+            [System.Data.SqlClient.SqlConnection]::ClearAllPools()
+        }
+
+        $detach = $master.CreateCommand()
+        $detach.CommandText = "ALTER DATABASE [$name] SET SINGLE_USER WITH ROLLBACK IMMEDIATE; EXEC master.dbo.sp_detach_db @dbname = N'$name'"
+        [void]$detach.ExecuteNonQuery()
+    } finally {
+        $master.Close()
+    }
+}
+
 function Initialize-FuturePathTest {
     <#
     .SYNOPSIS Loads FuturePath.exe and (unless -NoDatabase) attaches a fresh copy of the database.
-    .PARAMETER MdfPath Database to copy (default: FuturePath\FuturePath.mdf, built by Database\BuildDatabase.ps1).
+    .PARAMETER MdfPath Database to copy (default: FuturePath\FuturePath.mdf, the seeded database built by Database\BuildDatabase.ps1).
+    .PARAMETER SchemaOnly Attach an EMPTY database (schema only) instead, for tests that insert their own fixture rows.
     #>
     param(
         [switch]$NoDatabase,
+        [switch]$SchemaOnly,
         [string]$MdfPath = (Join-Path $script:ProjectDir 'FuturePath.mdf')
     )
     if (-not (Test-Path $script:ExePath)) {
@@ -49,12 +92,16 @@ function Initialize-FuturePathTest {
         return $context
     }
 
-    $ldfSource = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($MdfPath), [System.IO.Path]::GetFileNameWithoutExtension($MdfPath) + '_log.ldf')
     $temp = Join-Path ([System.IO.Path]::GetTempPath()) ('FuturePathTest_' + [guid]::NewGuid().ToString('N').Substring(0, 8))
     New-Item -ItemType Directory -Path $temp | Out-Null
-    Copy-Item $MdfPath (Join-Path $temp 'FuturePath.mdf')
-    if (Test-Path $ldfSource) {
-        Copy-Item $ldfSource (Join-Path $temp 'FuturePath_log.ldf')
+    if ($SchemaOnly) {
+        New-SchemaOnlyDatabase $temp
+    } else {
+        $ldfSource = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($MdfPath), [System.IO.Path]::GetFileNameWithoutExtension($MdfPath) + '_log.ldf')
+        Copy-Item $MdfPath (Join-Path $temp 'FuturePath.mdf')
+        if (Test-Path $ldfSource) {
+            Copy-Item $ldfSource (Join-Path $temp 'FuturePath_log.ldf')
+        }
     }
 
     $context.TempFolder = $temp
