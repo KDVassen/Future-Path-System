@@ -17,11 +17,16 @@
 .PARAMETER SchemaOnly
     Build the empty schema without running SeedData.sql.
 
+.PARAMETER KeepLocalDbRunning
+    Skip the "sqllocaldb stop" step. Use it when other programs (tests) are using LocalDB at the
+    same time and the .mdf is not attached anywhere.
+
 .EXAMPLE
     powershell -ExecutionPolicy Bypass -File FuturePath\Database\BuildDatabase.ps1
 #>
 param(
-    [switch]$SchemaOnly
+    [switch]$SchemaOnly,
+    [switch]$KeepLocalDbRunning
 )
 
 $ErrorActionPreference = 'Stop'
@@ -53,10 +58,12 @@ function Invoke-Sql([System.Data.SqlClient.SqlConnection]$connection, [string]$s
     [void]$command.ExecuteNonQuery()
 }
 
-Write-Host "Releasing old LocalDB locks..."
 & sqllocaldb start MSSQLLocalDB | Out-Null
-& sqllocaldb stop MSSQLLocalDB -k | Out-Null
-& sqllocaldb start MSSQLLocalDB | Out-Null
+if (-not $KeepLocalDbRunning) {
+    Write-Host "Releasing old LocalDB locks..."
+    & sqllocaldb stop MSSQLLocalDB -k | Out-Null
+    & sqllocaldb start MSSQLLocalDB | Out-Null
+}
 
 foreach ($file in @($mdfPath, $ldfPath)) {
     if (Test-Path $file) { Remove-Item $file -Force }

@@ -161,10 +161,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\TC01-TC05.ps1
 
 | Area | Files |
 |---|---|
-| Shared contract (coordinator; change only by agreement) | `DB.cs`, every entity / result class, `SystemSettings`, `SystemParameterRepository`, `CreateSchema.sql`, `BuildDatabase.ps1`, `FuturePath.csproj`, `App.config`, `Properties/Settings.*`, `tests/TestHelpers.ps1`, this file, `decisions.md` |
+| Shared contract (coordinator; change only by agreement) | `DB.cs`, every entity / result class, `SystemSettings`, `SystemParameterRepository`, `SubjectRepository`, `LoginController`, the read methods of `UserAccountRepository`, `CreateSchema.sql`, `BuildDatabase.ps1`, `FuturePath.csproj`, `App.config`, `Properties/Settings.*`, `tests/TestHelpers.ps1`, `tests/Contract-Smoke.ps1`, this file, `decisions.md` |
 | Seed and tests | `SeedData.sql`, `tests/PartB-Regression.ps1`, `tests/TC01-TC05.ps1`, the Part B section of `plan-and-tests.md` |
-| Learner journey | `LearnerRepository`, `AdvisorySessionRepository`, `DegreeProgrammeRepository`, `RecommendationEngine`, `LearnerController`, `EligibilityController`, `RecommendationController`, `tests/Engine-PartB.ps1` |
-| Admin and reference data | `FacultyRepository`, `SubjectRepository`, `GradeLevelRepository`, `InterestRepository`, `FundingRepository`, `UserAccountRepository`, `LoginController`, `UserAccountController`, `ReferenceDataController`, `InterestController`, `FundingController`, `tests/Admin-Smoke.ps1` |
+| Learner journey | `LearnerRepository`, `AdvisorySessionRepository`, `DegreeProgrammeRepository`, `RecommendationEngine`, `LearnerController`, `EligibilityController`, `RecommendationController`, `tests/Engine-PartB.ps1`, `tests/Learner-Smoke.ps1` |
+| Admin and reference data | `FacultyRepository`, `GradeLevelRepository`, `InterestRepository`, `FundingRepository`, `UserAccountRepository` (maintenance methods), `UserAccountController`, `ReferenceDataController`, `InterestController`, `FundingController`, `tests/Admin-Smoke.ps1` |
 | Reports and search | `ReportRepository`, `ExportReportRepository`, `SessionSearchRepository`, `ReportController`, `SessionSearchController`, `tests/Reports-Smoke.ps1` |
 
 ## 8. Notes for the forms round (next)

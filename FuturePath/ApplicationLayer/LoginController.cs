@@ -31,7 +31,16 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         public UserAccount Authenticate(string username, string password)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password))
+            {
+                return null;
+            }
+            UserAccount account = userAccountRepository.FindByUsername(username);
+            if (account == null || !account.Authenticate(username, password))
+            {
+                return null;
+            }
+            return account;
         }
 
         /// <summary>
@@ -40,13 +49,23 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         public UserAccount CheckStaff(int actorUserID)
         {
-            throw new NotImplementedException();
+            UserAccount account = userAccountRepository.FindById(actorUserID);
+            if (account == null || !account.IsActive)
+            {
+                throw new UnauthorizedAccessException("Please sign in as a Career Advisor or Administrator to do this.");
+            }
+            return account;
         }
 
         /// <summary>Returns the active Administrator account with this ID, or throws UnauthorizedAccessException.</summary>
         public UserAccount CheckAdministrator(int actorUserID)
         {
-            throw new NotImplementedException();
+            UserAccount account = CheckStaff(actorUserID);
+            if (!account.IsAdministrator)
+            {
+                throw new UnauthorizedAccessException("Only an Administrator can change reference data and user accounts.");
+            }
+            return account;
         }
         #endregion
     }

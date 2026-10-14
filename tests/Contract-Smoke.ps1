@@ -60,6 +60,33 @@ Assert-True ([FuturePath.ApplicationLayer.UserAccount]::VerifyPassword('Correct-
 Assert-True (-not [FuturePath.ApplicationLayer.UserAccount]::VerifyPassword('wrong', $hash)) 'Hash rejects a wrong password'
 Assert-True (-not ($hash -like '*Correct-Horse-1*')) 'Hash does not contain the password'
 
+# --- Shared repositories and the role checks (database copy, own fixture rows) ---
+$adminHash = [FuturePath.ApplicationLayer.UserAccount]::HashPassword('Admin-Test-1')
+$advisorHash = [FuturePath.ApplicationLayer.UserAccount]::HashPassword('Advisor-Test-1')
+[void](Invoke-TestQuery $ctx ("INSERT INTO UserAccount (Username, PasswordHash, FullName, Role, IsActive) VALUES " +
+    "('smoke.admin', '$adminHash', 'Smoke Admin', 'Administrator', 1), " +
+    "('smoke.advisor', '$advisorHash', 'Smoke Advisor', 'Career Advisor', 1), " +
+    "('smoke.gone', '$advisorHash', 'Smoke Inactive', 'Career Advisor', 0); " +
+    "INSERT INTO Subject (SubjectName, SubjectLevel, IsActive) VALUES ('Mathematics', 'Core', 1), ('Old Subject', 'Elective', 0)"))
+$ids = Invoke-TestQuery $ctx "SELECT UserID, Username FROM UserAccount"
+$adminId = ($ids.Rows | Where-Object { $_.Username -eq 'smoke.admin' }).UserID
+$advisorId = ($ids.Rows | Where-Object { $_.Username -eq 'smoke.advisor' }).UserID
+$inactiveId = ($ids.Rows | Where-Object { $_.Username -eq 'smoke.gone' }).UserID
+
+$login = New-Object FuturePath.ApplicationLayer.LoginController
+Assert-Equal 'Smoke Admin' $login.Authenticate('SMOKE.ADMIN', 'Admin-Test-1').FullName 'Login works and the username is not case-sensitive'
+Assert-True ($login.Authenticate('smoke.admin', 'wrong') -eq $null) 'Wrong password returns null'
+Assert-True ($login.Authenticate('nobody', 'Admin-Test-1') -eq $null) 'Unknown username returns null'
+Assert-True ($login.Authenticate('smoke.gone', 'Advisor-Test-1') -eq $null) 'Inactive account cannot log in'
+Assert-Equal 'Administrator' $login.CheckAdministrator($adminId).RoleName 'Administrator passes CheckAdministrator'
+Assert-Throws { $login.CheckAdministrator($advisorId) } 'UnauthorizedAccessException' 'Career Advisor fails CheckAdministrator'
+Assert-Equal 'Career Advisor' $login.CheckStaff($advisorId).RoleName 'Career Advisor passes CheckStaff'
+Assert-Throws { $login.CheckStaff($inactiveId) } 'UnauthorizedAccessException' 'Inactive account fails CheckStaff'
+
+$subjectRepository = New-Object FuturePath.DatabaseLayer.SubjectRepository
+Assert-Equal 1 $subjectRepository.GetSubjects($false).Count 'Active subjects only'
+Assert-Equal 2 $subjectRepository.GetSubjects($true).Count 'Inactive subjects included on request'
+
 # Session numbers.
 Assert-Equal '2026-0007' ([FuturePath.ApplicationLayer.AdvisorySession]::FormatSessionNumber([datetime]'2026-03-01', 7)) 'Session number format'
 Assert-Equal 'Not Currently Eligible' ([FuturePath.ApplicationLayer.AdvisoryOutcome]::GetCategory('NCE')) 'NCE shows as Not Currently Eligible'

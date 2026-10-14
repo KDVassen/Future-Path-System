@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
@@ -12,12 +13,15 @@ namespace FuturePath.DatabaseLayer
     {
         #region Data Members
         private string table = "UserAccount";
+        private string sqlLocal = "SELECT UserID, Username, PasswordHash, FullName, Role, IsActive FROM UserAccount";
+        private Collection<UserAccount> accounts;
         #endregion
 
         #region Constructor
         /// <summary>Creates the repository (no database work until a method is called).</summary>
         public UserAccountRepository() : base()
         {
+            accounts = new Collection<UserAccount>();
         }
         #endregion
 
@@ -25,25 +29,52 @@ namespace FuturePath.DatabaseLayer
         /// <summary>The account with this username (not case-sensitive), or null.</summary>
         public UserAccount FindByUsername(string username)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return null;
+            }
+            FillDataSet(sqlLocal + " WHERE Username = @Username", table, Param("@Username", SqlDbType.VarChar, username.Trim()));
+            Add2Collection();
+            return accounts.Count > 0 ? accounts[0] : null;
         }
 
         /// <summary>One account, or null.</summary>
         public UserAccount FindById(int userID)
         {
-            throw new NotImplementedException();
+            FillDataSet(sqlLocal + " WHERE UserID = @UserID", table, Param("@UserID", SqlDbType.Int, userID));
+            Add2Collection();
+            return accounts.Count > 0 ? accounts[0] : null;
         }
 
         /// <summary>Every account, ordered by FullName.</summary>
         public Collection<UserAccount> GetAccounts()
         {
-            throw new NotImplementedException();
+            FillDataSet(sqlLocal + " ORDER BY FullName", table);
+            Add2Collection();
+            return accounts;
         }
 
         /// <summary>True if another account already has this username.</summary>
         public bool UsernameExists(string username, int? excludeUserID)
         {
-            throw new NotImplementedException();
+            object count = ExecuteScalar("SELECT COUNT(*) FROM UserAccount WHERE Username = @Username AND (@ExcludeID IS NULL OR UserID <> @ExcludeID)",
+                                         Param("@Username", SqlDbType.VarChar, (username ?? "").Trim()),
+                                         Param("@ExcludeID", SqlDbType.Int, excludeUserID));
+            return Convert.ToInt32(count) > 0;
+        }
+        #endregion
+
+        #region Utility Methods
+        /// <summary>Turns the filled UserAccount rows into UserAccount objects (Waitering Add2Collection).</summary>
+        private void Add2Collection()
+        {
+            accounts = new Collection<UserAccount>();
+            foreach (DataRow row in GetTable(table).Rows)
+            {
+                accounts.Add(new UserAccount(ReadInt(row, "UserID").Value, ReadString(row, "Username"), ReadString(row, "PasswordHash"),
+                                             ReadString(row, "FullName"), UserAccount.RoleFromText(ReadString(row, "Role")),
+                                             ReadBool(row, "IsActive")));
+            }
         }
         #endregion
 
