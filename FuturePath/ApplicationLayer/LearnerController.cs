@@ -31,6 +31,7 @@ namespace FuturePath.ApplicationLayer
         private AdvisorySessionRepository sessionRepository;
         private SubjectRepository subjectRepository;
         private DegreeProgrammeRepository programmeRepository;
+        private FacultyRepository facultyRepository;
         private LoginController loginController;
         #endregion
 
@@ -42,6 +43,7 @@ namespace FuturePath.ApplicationLayer
             sessionRepository = new AdvisorySessionRepository();
             subjectRepository = new SubjectRepository();
             programmeRepository = new DegreeProgrammeRepository();
+            facultyRepository = new FacultyRepository();
             loginController = new LoginController();
         }
         #endregion
@@ -287,9 +289,9 @@ namespace FuturePath.ApplicationLayer
         #region Faculty and programme (UI 5)
         /// <summary>
         /// Stores the preferred faculty and selected programme. The programme must exist, be active
-        /// and belong to an active faculty; the preferred faculty must be an active faculty that
-        /// offers active programmes. The preferred faculty may differ from the programme's faculty
-        /// (that difference is what the faculty bonus measures). Throws ArgumentException if not valid.
+        /// and belong to an active faculty; the preferred faculty must be an active faculty. The
+        /// preferred faculty may differ from the programme's faculty (that difference is what the
+        /// faculty bonus measures). Throws ArgumentException if not valid.
         /// </summary>
         public void SaveProgrammeSelection(int sessionID, int preferredFacultyID, int selectedProgrammeID)
         {
@@ -300,13 +302,13 @@ namespace FuturePath.ApplicationLayer
 
             // The programme: exists, active, and under an active faculty
             DegreeProgramme programme = programmeRepository.FindById(selectedProgrammeID);
-            if (programme == null || !programme.IsActive || !IsOffered(programme.FacultyID, programme.ProgrammeID))
+            if (programme == null || !programme.IsActive || !IsActiveFaculty(programme.FacultyID))
             {
                 throw new ArgumentException("Choose an active degree programme from the list.");
             }
 
-            // The preferred faculty: its active programmes are only listed when the faculty itself is active
-            if (preferredFacultyID != programme.FacultyID && programmeRepository.GetProgrammes(preferredFacultyID, false).Count == 0)
+            // The preferred faculty: exists and active
+            if (!IsActiveFaculty(preferredFacultyID))
             {
                 throw new ArgumentException("Choose a faculty from the list.");
             }
@@ -349,17 +351,11 @@ namespace FuturePath.ApplicationLayer
             return null;
         }
 
-        /// <summary>True if the programme is listed among the active programmes of its (active) faculty.</summary>
-        private bool IsOffered(int facultyID, int programmeID)
+        /// <summary>True if the faculty exists and is active.</summary>
+        private bool IsActiveFaculty(int facultyID)
         {
-            foreach (DegreeProgramme offered in programmeRepository.GetProgrammes(facultyID, false))
-            {
-                if (offered.ProgrammeID == programmeID)
-                {
-                    return true;
-                }
-            }
-            return false;
+            Faculty faculty = facultyRepository.FindById(facultyID);
+            return faculty != null && faculty.IsActive;
         }
 
         /// <summary>A mobile number without its spaces and dashes.</summary>
