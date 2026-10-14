@@ -295,6 +295,9 @@ ServiceFabricBackup/
 *.mdf
 *.ldf
 *.ndf
+# Future Path ships its LocalDB database in the project (Waitering System style)
+!FuturePath/FuturePath.mdf
+!FuturePath/FuturePath_log.ldf
 
 # Business Intelligence projects
 *.rdl.data

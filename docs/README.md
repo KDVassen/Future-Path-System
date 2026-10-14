@@ -9,6 +9,7 @@ both are built on).
 | `spec/INF2011S_Team_14_Part_1.pdf` (+ `.txt`) | The submitted Part 1 Systems Specification, Team 14 | Always the final word. Search the `.txt`. |
 | `design/decisions.md` | Clashes between spec and design notes, how each was resolved, what is still open | Before schema, rule-engine, UI 2/3/7 or report work |
 | `design/classes-and-sequences.md` | Class diagram and both sequence diagrams as text, plus the class ↔ table mapping | Writing controllers, entities, repositories, the engine |
+| `design/application-layer.md` | How the BLL and Data Layer are built: Waitering pattern, conventions, outcome rules, database build, tests | Changing or calling any controller, repository or entity |
 | `design/database.md` | All 19 tables, constraints, SystemParameter keys, seed minimums | Creating or changing the database or queries |
 | `design/screens-inventory-and-flow.md` | Screen IDs, navigation, UI 10 tabs | Building navigation or a new screen |
 | `design/screens-standards.md` | Form sizes, zones, fonts, colours, buttons, messages | Building any form |
