@@ -203,6 +203,9 @@
     <EmbeddedResource Include="PresentationLayer\Reports\FpDie.rdlc" />
     <EmbeddedResource Include="PresentationLayer\Reports\FpLer.rdlc" />
     <EmbeddedResource Include="PresentationLayer\Reports\FpLsr.rdlc" />
+    <EmbeddedResource Include="PresentationLayer\Staff\StaffConsoleForm.ReportShortcuts.resx">
+      <DependentUpon>StaffConsoleForm.ReportShortcuts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

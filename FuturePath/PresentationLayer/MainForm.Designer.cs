@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.tcMain = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -126,6 +126,11 @@
             this.lblSessionStatus = new System.Windows.Forms.Label();
             this.txtSessionStatus = new System.Windows.Forms.TextBox();
             this.lblProfRequiredNote = new System.Windows.Forms.Label();
+            this.lblProfileNotice = new System.Windows.Forms.Label();
+            this.flpProfileActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnProfileSave = new System.Windows.Forms.Button();
+            this.btnProfileBack = new System.Windows.Forms.Button();
+            this.btnProfileCancel = new System.Windows.Forms.Button();
             this.tabSubjects = new System.Windows.Forms.TabPage();
             this.pnlSubjectsContent = new System.Windows.Forms.Panel();
             this.pnlAddCard = new System.Windows.Forms.Panel();
@@ -155,6 +160,11 @@
             this.colSubjectsAchievement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSubjectsRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lblFooter = new System.Windows.Forms.Label();
+            this.lblSubjectsNotice = new System.Windows.Forms.Label();
+            this.flpSubjectsActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSubjectsSave = new System.Windows.Forms.Button();
+            this.btnSubjectsBack = new System.Windows.Forms.Button();
+            this.btnSubjectsCancel = new System.Windows.Forms.Button();
             this.tabInterests = new System.Windows.Forms.TabPage();
             this.pnlInterestsContent = new System.Windows.Forms.Panel();
             this.pnlQuestionCard = new System.Windows.Forms.Panel();
@@ -185,6 +195,11 @@
             this.lblCategory3TileCaption = new System.Windows.Forms.Label();
             this.lblCategory3TileValue = new System.Windows.Forms.Label();
             this.lblCategory3TileNote = new System.Windows.Forms.Label();
+            this.lblInterestsNotice = new System.Windows.Forms.Label();
+            this.flpInterestsActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnInterestsSave = new System.Windows.Forms.Button();
+            this.btnInterestsBack = new System.Windows.Forms.Button();
+            this.btnInterestsCancel = new System.Windows.Forms.Button();
             this.tabFaculty = new System.Windows.Forms.TabPage();
             this.pnlFacultyContent = new System.Windows.Forms.Panel();
             this.pnlSearchCard = new System.Windows.Forms.Panel();
@@ -222,6 +237,10 @@
             this.lblAlignmentValue = new System.Windows.Forms.Label();
             this.lblStrongestCategories = new System.Windows.Forms.Label();
             this.lblAlignmentSource = new System.Windows.Forms.Label();
+            this.flpFacultyActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnFacultyCheck = new System.Windows.Forms.Button();
+            this.btnFacultyBack = new System.Windows.Forms.Button();
+            this.btnFacultyCancel = new System.Windows.Forms.Button();
             this.tabResults = new System.Windows.Forms.TabPage();
             this.tcResults = new System.Windows.Forms.TabControl();
             this.tabOutcome = new System.Windows.Forms.TabPage();
@@ -258,6 +277,11 @@
             this.lblOverallTileNote = new System.Windows.Forms.Label();
             this.lblOutDisclaimer = new System.Windows.Forms.Label();
             this.lblOutSampleData = new System.Windows.Forms.Label();
+            this.flpOutcomeActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnOutcomeSummary = new System.Windows.Forms.Button();
+            this.btnOutcomeAlternatives = new System.Windows.Forms.Button();
+            this.btnOutcomeFunding = new System.Windows.Forms.Button();
+            this.btnOutcomeBack = new System.Windows.Forms.Button();
             this.tabAlternatives = new System.Windows.Forms.TabPage();
             this.pnlAlternativesContent = new System.Windows.Forms.Panel();
             this.pnlRankedCard = new System.Windows.Forms.Panel();
@@ -278,6 +302,11 @@
             this.lblReasonsHeading = new System.Windows.Forms.Label();
             this.lblReasons = new System.Windows.Forms.Label();
             this.chkIncludeAlternatives = new System.Windows.Forms.CheckBox();
+            this.lblAlternativesNotice = new System.Windows.Forms.Label();
+            this.flpAlternativesActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAlternativesSummary = new System.Windows.Forms.Button();
+            this.btnAlternativesCompare = new System.Windows.Forms.Button();
+            this.btnAlternativesBack = new System.Windows.Forms.Button();
             this.tabFunding = new System.Windows.Forms.TabPage();
             this.pnlFundingContent = new System.Windows.Forms.Panel();
             this.pnlFilterCard = new System.Windows.Forms.Panel();
@@ -311,6 +340,9 @@
             this.txtContact = new System.Windows.Forms.TextBox();
             this.pnlSampleNote = new System.Windows.Forms.Panel();
             this.lblSampleNote = new System.Windows.Forms.Label();
+            this.flpFundingActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnFundingAdd = new System.Windows.Forms.Button();
+            this.btnFundingBack = new System.Windows.Forms.Button();
             this.tabSummary = new System.Windows.Forms.TabPage();
             this.pnlSummaryContent = new System.Windows.Forms.Panel();
             this.pnlIncludeCard = new System.Windows.Forms.Panel();
@@ -338,49 +370,17 @@
             this.lblPreviewMeta = new System.Windows.Forms.Label();
             this.pnlPreviewRule = new System.Windows.Forms.Panel();
             this.rvSummary = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.pnlStatus = new System.Windows.Forms.Panel();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.mnuMain = new System.Windows.Forms.MenuStrip();
-            this.mnuHome = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblLearnerContext = new System.Windows.Forms.Label();
-            this.lblProfileNotice = new System.Windows.Forms.Label();
-            this.flpProfileActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnProfileSave = new System.Windows.Forms.Button();
-            this.btnProfileBack = new System.Windows.Forms.Button();
-            this.btnProfileCancel = new System.Windows.Forms.Button();
-            this.lblSubjectsNotice = new System.Windows.Forms.Label();
-            this.flpSubjectsActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSubjectsSave = new System.Windows.Forms.Button();
-            this.btnSubjectsBack = new System.Windows.Forms.Button();
-            this.btnSubjectsCancel = new System.Windows.Forms.Button();
-            this.lblInterestsNotice = new System.Windows.Forms.Label();
-            this.flpInterestsActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnInterestsSave = new System.Windows.Forms.Button();
-            this.btnInterestsBack = new System.Windows.Forms.Button();
-            this.btnInterestsCancel = new System.Windows.Forms.Button();
-            this.flpFacultyActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnFacultyCheck = new System.Windows.Forms.Button();
-            this.btnFacultyBack = new System.Windows.Forms.Button();
-            this.btnFacultyCancel = new System.Windows.Forms.Button();
-            this.flpOutcomeActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnOutcomeSummary = new System.Windows.Forms.Button();
-            this.btnOutcomeAlternatives = new System.Windows.Forms.Button();
-            this.btnOutcomeFunding = new System.Windows.Forms.Button();
-            this.btnOutcomeBack = new System.Windows.Forms.Button();
-            this.lblAlternativesNotice = new System.Windows.Forms.Label();
-            this.flpAlternativesActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAlternativesSummary = new System.Windows.Forms.Button();
-            this.btnAlternativesCompare = new System.Windows.Forms.Button();
-            this.btnAlternativesBack = new System.Windows.Forms.Button();
-            this.flpFundingActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnFundingAdd = new System.Windows.Forms.Button();
-            this.btnFundingBack = new System.Windows.Forms.Button();
             this.lblSummaryNotice = new System.Windows.Forms.Label();
             this.flpSummaryActions = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSummaryExport = new System.Windows.Forms.Button();
             this.btnSummaryBack = new System.Windows.Forms.Button();
             this.btnSummaryCancel = new System.Windows.Forms.Button();
+            this.pnlStatus = new System.Windows.Forms.Panel();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblLearnerContext = new System.Windows.Forms.Label();
+            this.mnuMain = new System.Windows.Forms.MenuStrip();
+            this.mnuHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBody.SuspendLayout();
             this.tcMain.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -394,6 +394,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numAdvisingYear)).BeginInit();
             this.pnlContactCard.SuspendLayout();
             this.pnlSessionCard.SuspendLayout();
+            this.flpProfileActions.SuspendLayout();
             this.tabSubjects.SuspendLayout();
             this.pnlSubjectsContent.SuspendLayout();
             this.pnlAddCard.SuspendLayout();
@@ -401,6 +402,7 @@
             this.pnlSummary.SuspendLayout();
             this.pnlCapturedCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).BeginInit();
+            this.flpSubjectsActions.SuspendLayout();
             this.tabInterests.SuspendLayout();
             this.pnlInterestsContent.SuspendLayout();
             this.pnlQuestionCard.SuspendLayout();
@@ -409,6 +411,7 @@
             this.pnlCategory1Tile.SuspendLayout();
             this.pnlCategory2Tile.SuspendLayout();
             this.pnlCategory3Tile.SuspendLayout();
+            this.flpInterestsActions.SuspendLayout();
             this.tabFaculty.SuspendLayout();
             this.pnlFacultyContent.SuspendLayout();
             this.pnlSearchCard.SuspendLayout();
@@ -417,6 +420,7 @@
             this.pnlRequirementsCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).BeginInit();
             this.pnlAlignmentCard.SuspendLayout();
+            this.flpFacultyActions.SuspendLayout();
             this.tabResults.SuspendLayout();
             this.tcResults.SuspendLayout();
             this.tabOutcome.SuspendLayout();
@@ -428,11 +432,13 @@
             this.pnlMarkTile.SuspendLayout();
             this.pnlInterestTile.SuspendLayout();
             this.pnlOverallTile.SuspendLayout();
+            this.flpOutcomeActions.SuspendLayout();
             this.tabAlternatives.SuspendLayout();
             this.pnlAlternativesContent.SuspendLayout();
             this.pnlRankedCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).BeginInit();
             this.pnlReasonsCard.SuspendLayout();
+            this.flpAlternativesActions.SuspendLayout();
             this.tabFunding.SuspendLayout();
             this.pnlFundingContent.SuspendLayout();
             this.pnlFilterCard.SuspendLayout();
@@ -440,19 +446,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunding)).BeginInit();
             this.pnlDetailCard.SuspendLayout();
             this.pnlSampleNote.SuspendLayout();
+            this.flpFundingActions.SuspendLayout();
             this.tabSummary.SuspendLayout();
             this.pnlSummaryContent.SuspendLayout();
             this.pnlIncludeCard.SuspendLayout();
             this.pnlPreviewCard.SuspendLayout();
-            this.pnlStatus.SuspendLayout();
-            this.flpProfileActions.SuspendLayout();
-            this.flpSubjectsActions.SuspendLayout();
-            this.flpInterestsActions.SuspendLayout();
-            this.flpFacultyActions.SuspendLayout();
-            this.flpOutcomeActions.SuspendLayout();
-            this.flpAlternativesActions.SuspendLayout();
-            this.flpFundingActions.SuspendLayout();
             this.flpSummaryActions.SuspendLayout();
+            this.pnlStatus.SuspendLayout();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -461,11 +461,11 @@
             this.pnlBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
             this.pnlBody.Controls.Add(this.tcMain);
             this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBody.Location = new System.Drawing.Point(0, 30);
+            this.pnlBody.Location = new System.Drawing.Point(0, 33);
             this.pnlBody.Margin = new System.Windows.Forms.Padding(4);
             this.pnlBody.Name = "pnlBody";
             this.pnlBody.Padding = new System.Windows.Forms.Padding(20, 10, 20, 9);
-            this.pnlBody.Size = new System.Drawing.Size(1218, 889);
+            this.pnlBody.Size = new System.Drawing.Size(1218, 886);
             this.pnlBody.TabIndex = 0;
             // 
             // tcMain
@@ -484,10 +484,10 @@
             this.tcMain.Name = "tcMain";
             this.tcMain.Padding = new System.Drawing.Point(6, 5);
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(1178, 870);
+            this.tcMain.Size = new System.Drawing.Size(1178, 867);
             this.tcMain.TabIndex = 0;
-            this.tcMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcMain_Selecting);
             this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
+            this.tcMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcMain_Selecting);
             // 
             // tabHome
             // 
@@ -496,7 +496,7 @@
             this.tabHome.Location = new System.Drawing.Point(4, 36);
             this.tabHome.Margin = new System.Windows.Forms.Padding(4);
             this.tabHome.Name = "tabHome";
-            this.tabHome.Size = new System.Drawing.Size(1170, 830);
+            this.tabHome.Size = new System.Drawing.Size(1170, 827);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             // 
@@ -510,7 +510,7 @@
             this.pnlHomeContent.Location = new System.Drawing.Point(0, 0);
             this.pnlHomeContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlHomeContent.Name = "pnlHomeContent";
-            this.pnlHomeContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlHomeContent.Size = new System.Drawing.Size(1170, 827);
             this.pnlHomeContent.TabIndex = 0;
             // 
             // lblIntro
@@ -676,7 +676,7 @@
             this.tabProfile.Location = new System.Drawing.Point(4, 36);
             this.tabProfile.Margin = new System.Windows.Forms.Padding(4);
             this.tabProfile.Name = "tabProfile";
-            this.tabProfile.Size = new System.Drawing.Size(1170, 830);
+            this.tabProfile.Size = new System.Drawing.Size(1170, 827);
             this.tabProfile.TabIndex = 1;
             this.tabProfile.Text = "1. Learner profile";
             // 
@@ -688,10 +688,10 @@
             this.pnlProfileContent.Controls.Add(this.pnlSessionCard);
             this.pnlProfileContent.Controls.Add(this.lblProfRequiredNote);
             this.pnlProfileContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProfileContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlProfileContent.Location = new System.Drawing.Point(0, 60);
             this.pnlProfileContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlProfileContent.Name = "pnlProfileContent";
-            this.pnlProfileContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlProfileContent.Size = new System.Drawing.Size(1170, 687);
             this.pnlProfileContent.TabIndex = 0;
             // 
             // pnlWhoCard
@@ -1316,6 +1316,89 @@
             this.lblProfRequiredNote.TabIndex = 4;
             this.lblProfRequiredNote.Text = "* indicates a required field.";
             // 
+            // lblProfileNotice
+            // 
+            this.lblProfileNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblProfileNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblProfileNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblProfileNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblProfileNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblProfileNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProfileNotice.Name = "lblProfileNotice";
+            this.lblProfileNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblProfileNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblProfileNotice.TabIndex = 1;
+            this.lblProfileNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpProfileActions
+            // 
+            this.flpProfileActions.Controls.Add(this.btnProfileSave);
+            this.flpProfileActions.Controls.Add(this.btnProfileBack);
+            this.flpProfileActions.Controls.Add(this.btnProfileCancel);
+            this.flpProfileActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpProfileActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpProfileActions.Location = new System.Drawing.Point(0, 747);
+            this.flpProfileActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpProfileActions.Name = "flpProfileActions";
+            this.flpProfileActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpProfileActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpProfileActions.TabIndex = 2;
+            this.flpProfileActions.WrapContents = false;
+            // 
+            // btnProfileSave
+            // 
+            this.btnProfileSave.AccessibleName = "Save and continue";
+            this.btnProfileSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnProfileSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileSave.FlatAppearance.BorderSize = 0;
+            this.btnProfileSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnProfileSave.ForeColor = System.Drawing.Color.White;
+            this.btnProfileSave.Location = new System.Drawing.Point(929, 15);
+            this.btnProfileSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileSave.Name = "btnProfileSave";
+            this.btnProfileSave.Size = new System.Drawing.Size(238, 50);
+            this.btnProfileSave.TabIndex = 0;
+            this.btnProfileSave.Text = "Save and continue";
+            this.btnProfileSave.UseVisualStyleBackColor = false;
+            this.btnProfileSave.Click += new System.EventHandler(this.btnProfileSave_Click);
+            // 
+            // btnProfileBack
+            // 
+            this.btnProfileBack.AccessibleName = "Back";
+            this.btnProfileBack.BackColor = System.Drawing.Color.White;
+            this.btnProfileBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnProfileBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnProfileBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnProfileBack.Location = new System.Drawing.Point(755, 15);
+            this.btnProfileBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileBack.Name = "btnProfileBack";
+            this.btnProfileBack.Size = new System.Drawing.Size(162, 50);
+            this.btnProfileBack.TabIndex = 1;
+            this.btnProfileBack.Text = "Back";
+            this.btnProfileBack.UseVisualStyleBackColor = false;
+            this.btnProfileBack.Click += new System.EventHandler(this.btnProfileBack_Click);
+            // 
+            // btnProfileCancel
+            // 
+            this.btnProfileCancel.AccessibleName = "Cancel";
+            this.btnProfileCancel.BackColor = System.Drawing.Color.White;
+            this.btnProfileCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProfileCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnProfileCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProfileCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnProfileCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnProfileCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnProfileCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnProfileCancel.Name = "btnProfileCancel";
+            this.btnProfileCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnProfileCancel.TabIndex = 2;
+            this.btnProfileCancel.Text = "Cancel";
+            this.btnProfileCancel.UseVisualStyleBackColor = false;
+            this.btnProfileCancel.Click += new System.EventHandler(this.btnProfileCancel_Click);
+            // 
             // tabSubjects
             // 
             this.tabSubjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -1325,7 +1408,7 @@
             this.tabSubjects.Location = new System.Drawing.Point(4, 36);
             this.tabSubjects.Margin = new System.Windows.Forms.Padding(4);
             this.tabSubjects.Name = "tabSubjects";
-            this.tabSubjects.Size = new System.Drawing.Size(1170, 830);
+            this.tabSubjects.Size = new System.Drawing.Size(1170, 827);
             this.tabSubjects.TabIndex = 2;
             this.tabSubjects.Text = "2. Subjects and marks";
             // 
@@ -1335,10 +1418,10 @@
             this.pnlSubjectsContent.Controls.Add(this.pnlSummary);
             this.pnlSubjectsContent.Controls.Add(this.pnlCapturedCard);
             this.pnlSubjectsContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSubjectsContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlSubjectsContent.Location = new System.Drawing.Point(0, 60);
             this.pnlSubjectsContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSubjectsContent.Name = "pnlSubjectsContent";
-            this.pnlSubjectsContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlSubjectsContent.Size = new System.Drawing.Size(1170, 687);
             this.pnlSubjectsContent.TabIndex = 0;
             // 
             // pnlAddCard
@@ -1603,8 +1686,8 @@
             this.dgvSubjects.AllowUserToAddRows = false;
             this.dgvSubjects.AllowUserToDeleteRows = false;
             this.dgvSubjects.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvSubjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvSubjects.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             this.dgvSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -1612,15 +1695,15 @@
             this.dgvSubjects.BackgroundColor = System.Drawing.Color.White;
             this.dgvSubjects.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvSubjects.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSubjects.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSubjects.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
             this.dgvSubjects.ColumnHeadersHeight = 34;
             this.dgvSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSubjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1629,15 +1712,15 @@
             this.colSubjectsMark,
             this.colSubjectsAchievement,
             this.colSubjectsRemove});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSubjects.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle35.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSubjects.DefaultCellStyle = dataGridViewCellStyle35;
             this.dgvSubjects.EnableHeadersVisualStyles = false;
             this.dgvSubjects.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvSubjects.Location = new System.Drawing.Point(20, 50);
@@ -1675,10 +1758,10 @@
             // colSubjectsMark
             // 
             this.colSubjectsMark.DataPropertyName = "Mark";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle3.Format = "0.0";
-            this.colSubjectsMark.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle33.Format = "0.0";
+            this.colSubjectsMark.DefaultCellStyle = dataGridViewCellStyle33;
             this.colSubjectsMark.FillWeight = 12F;
             this.colSubjectsMark.HeaderText = "Mark %";
             this.colSubjectsMark.MinimumWidth = 6;
@@ -1696,13 +1779,13 @@
             // 
             // colSubjectsRemove
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.colSubjectsRemove.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle34.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(243)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.colSubjectsRemove.DefaultCellStyle = dataGridViewCellStyle34;
             this.colSubjectsRemove.FillWeight = 12F;
             this.colSubjectsRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colSubjectsRemove.HeaderText = "Remove";
@@ -1727,6 +1810,89 @@
             this.lblFooter.Text = "0 subjects captured";
             this.lblFooter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblSubjectsNotice
+            // 
+            this.lblSubjectsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblSubjectsNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSubjectsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblSubjectsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblSubjectsNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblSubjectsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubjectsNotice.Name = "lblSubjectsNotice";
+            this.lblSubjectsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblSubjectsNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblSubjectsNotice.TabIndex = 1;
+            this.lblSubjectsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpSubjectsActions
+            // 
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsSave);
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsBack);
+            this.flpSubjectsActions.Controls.Add(this.btnSubjectsCancel);
+            this.flpSubjectsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpSubjectsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpSubjectsActions.Location = new System.Drawing.Point(0, 747);
+            this.flpSubjectsActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpSubjectsActions.Name = "flpSubjectsActions";
+            this.flpSubjectsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpSubjectsActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpSubjectsActions.TabIndex = 2;
+            this.flpSubjectsActions.WrapContents = false;
+            // 
+            // btnSubjectsSave
+            // 
+            this.btnSubjectsSave.AccessibleName = "Save and continue";
+            this.btnSubjectsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnSubjectsSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsSave.FlatAppearance.BorderSize = 0;
+            this.btnSubjectsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnSubjectsSave.ForeColor = System.Drawing.Color.White;
+            this.btnSubjectsSave.Location = new System.Drawing.Point(929, 15);
+            this.btnSubjectsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsSave.Name = "btnSubjectsSave";
+            this.btnSubjectsSave.Size = new System.Drawing.Size(238, 50);
+            this.btnSubjectsSave.TabIndex = 0;
+            this.btnSubjectsSave.Text = "Save and continue";
+            this.btnSubjectsSave.UseVisualStyleBackColor = false;
+            this.btnSubjectsSave.Click += new System.EventHandler(this.btnSubjectsSave_Click);
+            // 
+            // btnSubjectsBack
+            // 
+            this.btnSubjectsBack.AccessibleName = "Back";
+            this.btnSubjectsBack.BackColor = System.Drawing.Color.White;
+            this.btnSubjectsBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSubjectsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSubjectsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSubjectsBack.Location = new System.Drawing.Point(755, 15);
+            this.btnSubjectsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsBack.Name = "btnSubjectsBack";
+            this.btnSubjectsBack.Size = new System.Drawing.Size(162, 50);
+            this.btnSubjectsBack.TabIndex = 1;
+            this.btnSubjectsBack.Text = "Back";
+            this.btnSubjectsBack.UseVisualStyleBackColor = false;
+            this.btnSubjectsBack.Click += new System.EventHandler(this.btnSubjectsBack_Click);
+            // 
+            // btnSubjectsCancel
+            // 
+            this.btnSubjectsCancel.AccessibleName = "Cancel";
+            this.btnSubjectsCancel.BackColor = System.Drawing.Color.White;
+            this.btnSubjectsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSubjectsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnSubjectsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubjectsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnSubjectsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnSubjectsCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnSubjectsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnSubjectsCancel.Name = "btnSubjectsCancel";
+            this.btnSubjectsCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnSubjectsCancel.TabIndex = 2;
+            this.btnSubjectsCancel.Text = "Cancel";
+            this.btnSubjectsCancel.UseVisualStyleBackColor = false;
+            this.btnSubjectsCancel.Click += new System.EventHandler(this.btnSubjectsCancel_Click);
+            // 
             // tabInterests
             // 
             this.tabInterests.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -1736,7 +1902,7 @@
             this.tabInterests.Location = new System.Drawing.Point(4, 36);
             this.tabInterests.Margin = new System.Windows.Forms.Padding(4);
             this.tabInterests.Name = "tabInterests";
-            this.tabInterests.Size = new System.Drawing.Size(1170, 830);
+            this.tabInterests.Size = new System.Drawing.Size(1170, 827);
             this.tabInterests.TabIndex = 3;
             this.tabInterests.Text = "3. Interests";
             // 
@@ -1748,10 +1914,10 @@
             this.pnlInterestsContent.Controls.Add(this.pnlCategory2Tile);
             this.pnlInterestsContent.Controls.Add(this.pnlCategory3Tile);
             this.pnlInterestsContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlInterestsContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlInterestsContent.Location = new System.Drawing.Point(0, 60);
             this.pnlInterestsContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInterestsContent.Name = "pnlInterestsContent";
-            this.pnlInterestsContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlInterestsContent.Size = new System.Drawing.Size(1170, 687);
             this.pnlInterestsContent.TabIndex = 0;
             // 
             // pnlQuestionCard
@@ -2086,6 +2252,89 @@
             this.lblCategory3TileNote.TabIndex = 2;
             this.lblCategory3TileNote.Text = "provisional";
             // 
+            // lblInterestsNotice
+            // 
+            this.lblInterestsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblInterestsNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblInterestsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblInterestsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblInterestsNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblInterestsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInterestsNotice.Name = "lblInterestsNotice";
+            this.lblInterestsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblInterestsNotice.Size = new System.Drawing.Size(1170, 60);
+            this.lblInterestsNotice.TabIndex = 1;
+            this.lblInterestsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpInterestsActions
+            // 
+            this.flpInterestsActions.Controls.Add(this.btnInterestsSave);
+            this.flpInterestsActions.Controls.Add(this.btnInterestsBack);
+            this.flpInterestsActions.Controls.Add(this.btnInterestsCancel);
+            this.flpInterestsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpInterestsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpInterestsActions.Location = new System.Drawing.Point(0, 747);
+            this.flpInterestsActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpInterestsActions.Name = "flpInterestsActions";
+            this.flpInterestsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpInterestsActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpInterestsActions.TabIndex = 2;
+            this.flpInterestsActions.WrapContents = false;
+            // 
+            // btnInterestsSave
+            // 
+            this.btnInterestsSave.AccessibleName = "Save and continue";
+            this.btnInterestsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnInterestsSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsSave.FlatAppearance.BorderSize = 0;
+            this.btnInterestsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnInterestsSave.ForeColor = System.Drawing.Color.White;
+            this.btnInterestsSave.Location = new System.Drawing.Point(929, 15);
+            this.btnInterestsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsSave.Name = "btnInterestsSave";
+            this.btnInterestsSave.Size = new System.Drawing.Size(238, 50);
+            this.btnInterestsSave.TabIndex = 0;
+            this.btnInterestsSave.Text = "Save and continue";
+            this.btnInterestsSave.UseVisualStyleBackColor = false;
+            this.btnInterestsSave.Click += new System.EventHandler(this.btnInterestsSave_Click);
+            // 
+            // btnInterestsBack
+            // 
+            this.btnInterestsBack.AccessibleName = "Back";
+            this.btnInterestsBack.BackColor = System.Drawing.Color.White;
+            this.btnInterestsBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnInterestsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnInterestsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnInterestsBack.Location = new System.Drawing.Point(755, 15);
+            this.btnInterestsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsBack.Name = "btnInterestsBack";
+            this.btnInterestsBack.Size = new System.Drawing.Size(162, 50);
+            this.btnInterestsBack.TabIndex = 1;
+            this.btnInterestsBack.Text = "Back";
+            this.btnInterestsBack.UseVisualStyleBackColor = false;
+            this.btnInterestsBack.Click += new System.EventHandler(this.btnInterestsBack_Click);
+            // 
+            // btnInterestsCancel
+            // 
+            this.btnInterestsCancel.AccessibleName = "Cancel";
+            this.btnInterestsCancel.BackColor = System.Drawing.Color.White;
+            this.btnInterestsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInterestsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnInterestsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInterestsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnInterestsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnInterestsCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnInterestsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnInterestsCancel.Name = "btnInterestsCancel";
+            this.btnInterestsCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnInterestsCancel.TabIndex = 2;
+            this.btnInterestsCancel.Text = "Cancel";
+            this.btnInterestsCancel.UseVisualStyleBackColor = false;
+            this.btnInterestsCancel.Click += new System.EventHandler(this.btnInterestsCancel_Click);
+            // 
             // tabFaculty
             // 
             this.tabFaculty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -2094,7 +2343,7 @@
             this.tabFaculty.Location = new System.Drawing.Point(4, 36);
             this.tabFaculty.Margin = new System.Windows.Forms.Padding(4);
             this.tabFaculty.Name = "tabFaculty";
-            this.tabFaculty.Size = new System.Drawing.Size(1170, 830);
+            this.tabFaculty.Size = new System.Drawing.Size(1170, 827);
             this.tabFaculty.TabIndex = 4;
             this.tabFaculty.Text = "4. Faculty and programme";
             // 
@@ -2108,7 +2357,7 @@
             this.pnlFacultyContent.Location = new System.Drawing.Point(0, 0);
             this.pnlFacultyContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFacultyContent.Name = "pnlFacultyContent";
-            this.pnlFacultyContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlFacultyContent.Size = new System.Drawing.Size(1170, 747);
             this.pnlFacultyContent.TabIndex = 0;
             // 
             // pnlSearchCard
@@ -2320,21 +2569,21 @@
             this.dgvProgrammes.AllowUserToAddRows = false;
             this.dgvProgrammes.AllowUserToDeleteRows = false;
             this.dgvProgrammes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvProgrammes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle36;
             this.dgvProgrammes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProgrammes.BackgroundColor = System.Drawing.Color.White;
             this.dgvProgrammes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvProgrammes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProgrammes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
             this.dgvProgrammes.ColumnHeadersHeight = 34;
             this.dgvProgrammes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProgrammes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -2342,15 +2591,15 @@
             this.colProgrammesName,
             this.colProgrammesMinimumAverage,
             this.colProgrammesSelect});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProgrammes.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle40.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle40.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProgrammes.DefaultCellStyle = dataGridViewCellStyle40;
             this.dgvProgrammes.EnableHeadersVisualStyles = false;
             this.dgvProgrammes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvProgrammes.Location = new System.Drawing.Point(20, 72);
@@ -2390,11 +2639,11 @@
             // colProgrammesMinimumAverage
             // 
             this.colProgrammesMinimumAverage.DataPropertyName = "MinimumOverallAverage";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle8.Format = "0.#\'%\'";
-            dataGridViewCellStyle8.NullValue = "—";
-            this.colProgrammesMinimumAverage.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle38.Format = "0.#\'%\'";
+            dataGridViewCellStyle38.NullValue = "—";
+            this.colProgrammesMinimumAverage.DefaultCellStyle = dataGridViewCellStyle38;
             this.colProgrammesMinimumAverage.FillWeight = 20F;
             this.colProgrammesMinimumAverage.HeaderText = "Min. avg.";
             this.colProgrammesMinimumAverage.MinimumWidth = 6;
@@ -2403,14 +2652,14 @@
             // 
             // colProgrammesSelect
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.colProgrammesSelect.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle39.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle39.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.White;
+            this.colProgrammesSelect.DefaultCellStyle = dataGridViewCellStyle39;
             this.colProgrammesSelect.FillWeight = 24F;
             this.colProgrammesSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colProgrammesSelect.HeaderText = "Choose";
@@ -2472,36 +2721,36 @@
             this.dgvRequirements.AllowUserToAddRows = false;
             this.dgvRequirements.AllowUserToDeleteRows = false;
             this.dgvRequirements.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvRequirements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle41;
             this.dgvRequirements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvRequirements.BackgroundColor = System.Drawing.Color.White;
             this.dgvRequirements.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvRequirements.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle42.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle42.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRequirements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle42;
             this.dgvRequirements.ColumnHeadersHeight = 34;
             this.dgvRequirements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRequirements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colRequirementsSubject,
             this.colRequirementsMinimum,
             this.colRequirementsType});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRequirements.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle45.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRequirements.DefaultCellStyle = dataGridViewCellStyle45;
             this.dgvRequirements.EnableHeadersVisualStyles = false;
             this.dgvRequirements.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvRequirements.Location = new System.Drawing.Point(20, 72);
@@ -2529,11 +2778,11 @@
             // colRequirementsMinimum
             // 
             this.colRequirementsMinimum.DataPropertyName = "MinimumMark";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle13.Format = "0.#\'%\'";
-            dataGridViewCellStyle13.NullValue = "—";
-            this.colRequirementsMinimum.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle43.Format = "0.#\'%\'";
+            dataGridViewCellStyle43.NullValue = "—";
+            this.colRequirementsMinimum.DefaultCellStyle = dataGridViewCellStyle43;
             this.colRequirementsMinimum.FillWeight = 22F;
             this.colRequirementsMinimum.HeaderText = "Minimum";
             this.colRequirementsMinimum.MinimumWidth = 6;
@@ -2543,9 +2792,9 @@
             // colRequirementsType
             // 
             this.colRequirementsType.DataPropertyName = "RequirementType";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.colRequirementsType.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle44.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            dataGridViewCellStyle44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.colRequirementsType.DefaultCellStyle = dataGridViewCellStyle44;
             this.colRequirementsType.FillWeight = 32F;
             this.colRequirementsType.HeaderText = "Type";
             this.colRequirementsType.MinimumWidth = 6;
@@ -2628,6 +2877,75 @@
             this.lblAlignmentSource.Text = "Calculated from your questionnaire";
             this.lblAlignmentSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // flpFacultyActions
+            // 
+            this.flpFacultyActions.Controls.Add(this.btnFacultyCheck);
+            this.flpFacultyActions.Controls.Add(this.btnFacultyBack);
+            this.flpFacultyActions.Controls.Add(this.btnFacultyCancel);
+            this.flpFacultyActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpFacultyActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpFacultyActions.Location = new System.Drawing.Point(0, 747);
+            this.flpFacultyActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpFacultyActions.Name = "flpFacultyActions";
+            this.flpFacultyActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
+            this.flpFacultyActions.Size = new System.Drawing.Size(1170, 80);
+            this.flpFacultyActions.TabIndex = 2;
+            this.flpFacultyActions.WrapContents = false;
+            // 
+            // btnFacultyCheck
+            // 
+            this.btnFacultyCheck.AccessibleName = "Check eligibility";
+            this.btnFacultyCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnFacultyCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyCheck.FlatAppearance.BorderSize = 0;
+            this.btnFacultyCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyCheck.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnFacultyCheck.ForeColor = System.Drawing.Color.White;
+            this.btnFacultyCheck.Location = new System.Drawing.Point(929, 15);
+            this.btnFacultyCheck.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyCheck.Name = "btnFacultyCheck";
+            this.btnFacultyCheck.Size = new System.Drawing.Size(238, 50);
+            this.btnFacultyCheck.TabIndex = 0;
+            this.btnFacultyCheck.Text = "Check eligibility";
+            this.btnFacultyCheck.UseVisualStyleBackColor = false;
+            this.btnFacultyCheck.Click += new System.EventHandler(this.btnFacultyCheck_Click);
+            // 
+            // btnFacultyBack
+            // 
+            this.btnFacultyBack.AccessibleName = "Back";
+            this.btnFacultyBack.BackColor = System.Drawing.Color.White;
+            this.btnFacultyBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFacultyBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFacultyBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFacultyBack.Location = new System.Drawing.Point(755, 15);
+            this.btnFacultyBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyBack.Name = "btnFacultyBack";
+            this.btnFacultyBack.Size = new System.Drawing.Size(162, 50);
+            this.btnFacultyBack.TabIndex = 1;
+            this.btnFacultyBack.Text = "Back";
+            this.btnFacultyBack.UseVisualStyleBackColor = false;
+            this.btnFacultyBack.Click += new System.EventHandler(this.btnFacultyBack_Click);
+            // 
+            // btnFacultyCancel
+            // 
+            this.btnFacultyCancel.AccessibleName = "Cancel";
+            this.btnFacultyCancel.BackColor = System.Drawing.Color.White;
+            this.btnFacultyCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFacultyCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFacultyCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacultyCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFacultyCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFacultyCancel.Location = new System.Drawing.Point(581, 15);
+            this.btnFacultyCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFacultyCancel.Name = "btnFacultyCancel";
+            this.btnFacultyCancel.Size = new System.Drawing.Size(162, 50);
+            this.btnFacultyCancel.TabIndex = 2;
+            this.btnFacultyCancel.Text = "Cancel";
+            this.btnFacultyCancel.UseVisualStyleBackColor = false;
+            this.btnFacultyCancel.Click += new System.EventHandler(this.btnFacultyCancel_Click);
+            // 
             // tabResults
             // 
             this.tabResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -2635,7 +2953,7 @@
             this.tabResults.Location = new System.Drawing.Point(4, 36);
             this.tabResults.Margin = new System.Windows.Forms.Padding(4);
             this.tabResults.Name = "tabResults";
-            this.tabResults.Size = new System.Drawing.Size(1170, 830);
+            this.tabResults.Size = new System.Drawing.Size(1170, 827);
             this.tabResults.TabIndex = 5;
             this.tabResults.Text = "5. Results";
             // 
@@ -2651,7 +2969,7 @@
             this.tcResults.Name = "tcResults";
             this.tcResults.Padding = new System.Drawing.Point(6, 5);
             this.tcResults.SelectedIndex = 0;
-            this.tcResults.Size = new System.Drawing.Size(1170, 830);
+            this.tcResults.Size = new System.Drawing.Size(1170, 827);
             this.tcResults.TabIndex = 0;
             this.tcResults.SelectedIndexChanged += new System.EventHandler(this.tcResults_SelectedIndexChanged);
             // 
@@ -2663,7 +2981,7 @@
             this.tabOutcome.Location = new System.Drawing.Point(4, 36);
             this.tabOutcome.Margin = new System.Windows.Forms.Padding(4);
             this.tabOutcome.Name = "tabOutcome";
-            this.tabOutcome.Size = new System.Drawing.Size(1162, 790);
+            this.tabOutcome.Size = new System.Drawing.Size(1162, 787);
             this.tabOutcome.TabIndex = 0;
             this.tabOutcome.Text = "Eligibility results";
             // 
@@ -2681,7 +2999,7 @@
             this.pnlOutcomeContent.Location = new System.Drawing.Point(0, 0);
             this.pnlOutcomeContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlOutcomeContent.Name = "pnlOutcomeContent";
-            this.pnlOutcomeContent.Size = new System.Drawing.Size(1162, 537);
+            this.pnlOutcomeContent.Size = new System.Drawing.Size(1162, 707);
             this.pnlOutcomeContent.TabIndex = 0;
             // 
             // pnlOutcome
@@ -2785,21 +3103,21 @@
             this.dgvChecked.AllowUserToAddRows = false;
             this.dgvChecked.AllowUserToDeleteRows = false;
             this.dgvChecked.AllowUserToResizeRows = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvChecked.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvChecked.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle46;
             this.dgvChecked.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChecked.BackgroundColor = System.Drawing.Color.White;
             this.dgvChecked.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvChecked.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvChecked.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle47.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle47.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvChecked.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
             this.dgvChecked.ColumnHeadersHeight = 34;
             this.dgvChecked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvChecked.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -2808,15 +3126,15 @@
             this.colCheckedMark,
             this.colCheckedOutcome,
             this.colCheckedIsMet});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChecked.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle51.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle51.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle51.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle51.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle51.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChecked.DefaultCellStyle = dataGridViewCellStyle51;
             this.dgvChecked.EnableHeadersVisualStyles = false;
             this.dgvChecked.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvChecked.Location = new System.Drawing.Point(20, 52);
@@ -2845,11 +3163,11 @@
             // colCheckedMinimum
             // 
             this.colCheckedMinimum.DataPropertyName = "MinimumMark";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle18.Format = "0.#\'%\'";
-            dataGridViewCellStyle18.NullValue = "—";
-            this.colCheckedMinimum.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle48.Format = "0.#\'%\'";
+            dataGridViewCellStyle48.NullValue = "—";
+            this.colCheckedMinimum.DefaultCellStyle = dataGridViewCellStyle48;
             this.colCheckedMinimum.FillWeight = 16F;
             this.colCheckedMinimum.HeaderText = "Required";
             this.colCheckedMinimum.MinimumWidth = 6;
@@ -2859,11 +3177,11 @@
             // colCheckedMark
             // 
             this.colCheckedMark.DataPropertyName = "Mark";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle19.Format = "0.#\'%\'";
-            dataGridViewCellStyle19.NullValue = "—";
-            this.colCheckedMark.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle49.Format = "0.#\'%\'";
+            dataGridViewCellStyle49.NullValue = "—";
+            this.colCheckedMark.DefaultCellStyle = dataGridViewCellStyle49;
             this.colCheckedMark.FillWeight = 16F;
             this.colCheckedMark.HeaderText = "Your result";
             this.colCheckedMark.MinimumWidth = 6;
@@ -2873,8 +3191,8 @@
             // colCheckedOutcome
             // 
             this.colCheckedOutcome.DataPropertyName = "RequirementOutcome";
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.colCheckedOutcome.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.colCheckedOutcome.DefaultCellStyle = dataGridViewCellStyle50;
             this.colCheckedOutcome.FillWeight = 28F;
             this.colCheckedOutcome.HeaderText = "Outcome";
             this.colCheckedOutcome.MinimumWidth = 6;
@@ -3098,6 +3416,94 @@
             this.lblOutSampleData.Text = "Requirement data is locally stored sample data; check it against the official uni" +
     "versity source before you apply.";
             // 
+            // flpOutcomeActions
+            // 
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeSummary);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeAlternatives);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeFunding);
+            this.flpOutcomeActions.Controls.Add(this.btnOutcomeBack);
+            this.flpOutcomeActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpOutcomeActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpOutcomeActions.Location = new System.Drawing.Point(0, 707);
+            this.flpOutcomeActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpOutcomeActions.Name = "flpOutcomeActions";
+            this.flpOutcomeActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpOutcomeActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpOutcomeActions.TabIndex = 2;
+            this.flpOutcomeActions.WrapContents = false;
+            // 
+            // btnOutcomeSummary
+            // 
+            this.btnOutcomeSummary.AccessibleName = "Continue to summary";
+            this.btnOutcomeSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnOutcomeSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeSummary.FlatAppearance.BorderSize = 0;
+            this.btnOutcomeSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnOutcomeSummary.ForeColor = System.Drawing.Color.White;
+            this.btnOutcomeSummary.Location = new System.Drawing.Point(919, 15);
+            this.btnOutcomeSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeSummary.Name = "btnOutcomeSummary";
+            this.btnOutcomeSummary.Size = new System.Drawing.Size(238, 50);
+            this.btnOutcomeSummary.TabIndex = 0;
+            this.btnOutcomeSummary.Text = "Continue to summary";
+            this.btnOutcomeSummary.UseVisualStyleBackColor = false;
+            this.btnOutcomeSummary.Click += new System.EventHandler(this.btnOutcomeSummary_Click);
+            // 
+            // btnOutcomeAlternatives
+            // 
+            this.btnOutcomeAlternatives.AccessibleName = "Alternative programmes";
+            this.btnOutcomeAlternatives.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeAlternatives.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeAlternatives.Location = new System.Drawing.Point(695, 15);
+            this.btnOutcomeAlternatives.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeAlternatives.Name = "btnOutcomeAlternatives";
+            this.btnOutcomeAlternatives.Size = new System.Drawing.Size(212, 50);
+            this.btnOutcomeAlternatives.TabIndex = 1;
+            this.btnOutcomeAlternatives.Text = "Alternative programmes";
+            this.btnOutcomeAlternatives.UseVisualStyleBackColor = false;
+            this.btnOutcomeAlternatives.Click += new System.EventHandler(this.btnOutcomeAlternatives_Click);
+            // 
+            // btnOutcomeFunding
+            // 
+            this.btnOutcomeFunding.AccessibleName = "Funding options";
+            this.btnOutcomeFunding.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeFunding.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeFunding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeFunding.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeFunding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeFunding.Location = new System.Drawing.Point(508, 15);
+            this.btnOutcomeFunding.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeFunding.Name = "btnOutcomeFunding";
+            this.btnOutcomeFunding.Size = new System.Drawing.Size(175, 50);
+            this.btnOutcomeFunding.TabIndex = 2;
+            this.btnOutcomeFunding.Text = "Funding options";
+            this.btnOutcomeFunding.UseVisualStyleBackColor = false;
+            this.btnOutcomeFunding.Click += new System.EventHandler(this.btnOutcomeFunding_Click);
+            // 
+            // btnOutcomeBack
+            // 
+            this.btnOutcomeBack.AccessibleName = "Back";
+            this.btnOutcomeBack.BackColor = System.Drawing.Color.White;
+            this.btnOutcomeBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutcomeBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnOutcomeBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutcomeBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnOutcomeBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnOutcomeBack.Location = new System.Drawing.Point(334, 15);
+            this.btnOutcomeBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnOutcomeBack.Name = "btnOutcomeBack";
+            this.btnOutcomeBack.Size = new System.Drawing.Size(162, 50);
+            this.btnOutcomeBack.TabIndex = 3;
+            this.btnOutcomeBack.Text = "Back";
+            this.btnOutcomeBack.UseVisualStyleBackColor = false;
+            this.btnOutcomeBack.Click += new System.EventHandler(this.btnOutcomeBack_Click);
+            // 
             // tabAlternatives
             // 
             this.tabAlternatives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -3117,10 +3523,10 @@
             this.pnlAlternativesContent.Controls.Add(this.pnlReasonsCard);
             this.pnlAlternativesContent.Controls.Add(this.chkIncludeAlternatives);
             this.pnlAlternativesContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAlternativesContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlAlternativesContent.Location = new System.Drawing.Point(0, 60);
             this.pnlAlternativesContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlAlternativesContent.Name = "pnlAlternativesContent";
-            this.pnlAlternativesContent.Size = new System.Drawing.Size(1162, 536);
+            this.pnlAlternativesContent.Size = new System.Drawing.Size(1162, 650);
             this.pnlAlternativesContent.TabIndex = 0;
             // 
             // pnlRankedCard
@@ -3175,21 +3581,21 @@
             this.dgvAlternatives.AllowUserToAddRows = false;
             this.dgvAlternatives.AllowUserToDeleteRows = false;
             this.dgvAlternatives.AllowUserToResizeRows = false;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvAlternatives.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle52;
             this.dgvAlternatives.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAlternatives.BackgroundColor = System.Drawing.Color.White;
             this.dgvAlternatives.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvAlternatives.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAlternatives.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle53;
             this.dgvAlternatives.ColumnHeadersHeight = 34;
             this.dgvAlternatives.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvAlternatives.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -3201,15 +3607,15 @@
             this.colAlternativesReason,
             this.colAlternativesProgrammeId,
             this.colAlternativesIsSelected});
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle26.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAlternatives.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle56.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle56.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle56.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAlternatives.DefaultCellStyle = dataGridViewCellStyle56;
             this.dgvAlternatives.EnableHeadersVisualStyles = false;
             this.dgvAlternatives.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvAlternatives.Location = new System.Drawing.Point(20, 52);
@@ -3230,8 +3636,8 @@
             // colAlternativesRank
             // 
             this.colAlternativesRank.DataPropertyName = "AlternativeRank";
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Consolas", 10F);
-            this.colAlternativesRank.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Consolas", 10F);
+            this.colAlternativesRank.DefaultCellStyle = dataGridViewCellStyle54;
             this.colAlternativesRank.FillWeight = 8F;
             this.colAlternativesRank.HeaderText = "Rank";
             this.colAlternativesRank.MinimumWidth = 6;
@@ -3259,10 +3665,10 @@
             // colAlternativesScore
             // 
             this.colAlternativesScore.DataPropertyName = "OverallScore";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle25.Format = "0.#\'%\'";
-            this.colAlternativesScore.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle55.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle55.Format = "0.#\'%\'";
+            this.colAlternativesScore.DefaultCellStyle = dataGridViewCellStyle55;
             this.colAlternativesScore.FillWeight = 9F;
             this.colAlternativesScore.HeaderText = "Fit";
             this.colAlternativesScore.MinimumWidth = 6;
@@ -3368,6 +3774,89 @@
             this.chkIncludeAlternatives.UseVisualStyleBackColor = true;
             this.chkIncludeAlternatives.CheckedChanged += new System.EventHandler(this.chkIncludeAlternatives_CheckedChanged);
             // 
+            // lblAlternativesNotice
+            // 
+            this.lblAlternativesNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.lblAlternativesNotice.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblAlternativesNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAlternativesNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.lblAlternativesNotice.Location = new System.Drawing.Point(0, 0);
+            this.lblAlternativesNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAlternativesNotice.Name = "lblAlternativesNotice";
+            this.lblAlternativesNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
+            this.lblAlternativesNotice.Size = new System.Drawing.Size(1162, 60);
+            this.lblAlternativesNotice.TabIndex = 1;
+            this.lblAlternativesNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpAlternativesActions
+            // 
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesSummary);
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesCompare);
+            this.flpAlternativesActions.Controls.Add(this.btnAlternativesBack);
+            this.flpAlternativesActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpAlternativesActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpAlternativesActions.Location = new System.Drawing.Point(0, 710);
+            this.flpAlternativesActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpAlternativesActions.Name = "flpAlternativesActions";
+            this.flpAlternativesActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpAlternativesActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpAlternativesActions.TabIndex = 2;
+            this.flpAlternativesActions.WrapContents = false;
+            // 
+            // btnAlternativesSummary
+            // 
+            this.btnAlternativesSummary.AccessibleName = "Continue to summary";
+            this.btnAlternativesSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnAlternativesSummary.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesSummary.FlatAppearance.BorderSize = 0;
+            this.btnAlternativesSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnAlternativesSummary.ForeColor = System.Drawing.Color.White;
+            this.btnAlternativesSummary.Location = new System.Drawing.Point(919, 15);
+            this.btnAlternativesSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesSummary.Name = "btnAlternativesSummary";
+            this.btnAlternativesSummary.Size = new System.Drawing.Size(238, 50);
+            this.btnAlternativesSummary.TabIndex = 0;
+            this.btnAlternativesSummary.Text = "Continue to summary";
+            this.btnAlternativesSummary.UseVisualStyleBackColor = false;
+            this.btnAlternativesSummary.Click += new System.EventHandler(this.btnAlternativesSummary_Click);
+            // 
+            // btnAlternativesCompare
+            // 
+            this.btnAlternativesCompare.AccessibleName = "Compare with my selection";
+            this.btnAlternativesCompare.BackColor = System.Drawing.Color.White;
+            this.btnAlternativesCompare.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnAlternativesCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesCompare.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnAlternativesCompare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnAlternativesCompare.Location = new System.Drawing.Point(657, 15);
+            this.btnAlternativesCompare.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesCompare.Name = "btnAlternativesCompare";
+            this.btnAlternativesCompare.Size = new System.Drawing.Size(250, 50);
+            this.btnAlternativesCompare.TabIndex = 1;
+            this.btnAlternativesCompare.Text = "Compare with my selection";
+            this.btnAlternativesCompare.UseVisualStyleBackColor = false;
+            this.btnAlternativesCompare.Click += new System.EventHandler(this.btnAlternativesCompare_Click);
+            // 
+            // btnAlternativesBack
+            // 
+            this.btnAlternativesBack.AccessibleName = "Back";
+            this.btnAlternativesBack.BackColor = System.Drawing.Color.White;
+            this.btnAlternativesBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAlternativesBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnAlternativesBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlternativesBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnAlternativesBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnAlternativesBack.Location = new System.Drawing.Point(483, 15);
+            this.btnAlternativesBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnAlternativesBack.Name = "btnAlternativesBack";
+            this.btnAlternativesBack.Size = new System.Drawing.Size(162, 50);
+            this.btnAlternativesBack.TabIndex = 2;
+            this.btnAlternativesBack.Text = "Back";
+            this.btnAlternativesBack.UseVisualStyleBackColor = false;
+            this.btnAlternativesBack.Click += new System.EventHandler(this.btnAlternativesBack_Click);
+            // 
             // tabFunding
             // 
             this.tabFunding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(246)))), ((int)(((byte)(249)))));
@@ -3389,7 +3878,7 @@
             this.pnlFundingContent.Location = new System.Drawing.Point(0, 0);
             this.pnlFundingContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlFundingContent.Name = "pnlFundingContent";
-            this.pnlFundingContent.Size = new System.Drawing.Size(1162, 536);
+            this.pnlFundingContent.Size = new System.Drawing.Size(1162, 710);
             this.pnlFundingContent.TabIndex = 0;
             // 
             // pnlFilterCard
@@ -3523,21 +4012,21 @@
             this.dgvFunding.AllowUserToAddRows = false;
             this.dgvFunding.AllowUserToDeleteRows = false;
             this.dgvFunding.AllowUserToResizeRows = false;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.dgvFunding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
+            this.dgvFunding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle57;
             this.dgvFunding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFunding.BackgroundColor = System.Drawing.Color.White;
             this.dgvFunding.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvFunding.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFunding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle58.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle58.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle58.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFunding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle58;
             this.dgvFunding.ColumnHeadersHeight = 34;
             this.dgvFunding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvFunding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -3550,15 +4039,15 @@
             this.colFundingEligibility,
             this.colFundingDocuments,
             this.colFundingContact});
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle30.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFunding.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle60.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle60.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle60.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFunding.DefaultCellStyle = dataGridViewCellStyle60;
             this.dgvFunding.EnableHeadersVisualStyles = false;
             this.dgvFunding.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(220)))), ((int)(((byte)(227)))));
             this.dgvFunding.Location = new System.Drawing.Point(20, 52);
@@ -3606,9 +4095,9 @@
             // colFundingClosingDate
             // 
             this.colFundingClosingDate.DataPropertyName = "ClosingDate";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Consolas", 10F);
-            dataGridViewCellStyle29.Format = "dd/MM/yyyy";
-            this.colFundingClosingDate.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle59.Font = new System.Drawing.Font("Consolas", 10F);
+            dataGridViewCellStyle59.Format = "dd/MM/yyyy";
+            this.colFundingClosingDate.DefaultCellStyle = dataGridViewCellStyle59;
             this.colFundingClosingDate.FillWeight = 16F;
             this.colFundingClosingDate.HeaderText = "Closing date";
             this.colFundingClosingDate.MinimumWidth = 6;
@@ -3796,12 +4285,61 @@
             this.lblSampleNote.Location = new System.Drawing.Point(0, 0);
             this.lblSampleNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSampleNote.Name = "lblSampleNote";
-            this.lblSampleNote.Padding = new System.Windows.Forms.Padding(0);
             this.lblSampleNote.Size = new System.Drawing.Size(1115, 48);
             this.lblSampleNote.TabIndex = 0;
             this.lblSampleNote.Text = "Sample information. Verify every closing date and requirement with the funder bef" +
     "ore you apply. Future Path does not submit applications.";
             this.lblSampleNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flpFundingActions
+            // 
+            this.flpFundingActions.Controls.Add(this.btnFundingAdd);
+            this.flpFundingActions.Controls.Add(this.btnFundingBack);
+            this.flpFundingActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flpFundingActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flpFundingActions.Location = new System.Drawing.Point(0, 710);
+            this.flpFundingActions.Margin = new System.Windows.Forms.Padding(4);
+            this.flpFundingActions.Name = "flpFundingActions";
+            this.flpFundingActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
+            this.flpFundingActions.Size = new System.Drawing.Size(1162, 80);
+            this.flpFundingActions.TabIndex = 2;
+            this.flpFundingActions.WrapContents = false;
+            // 
+            // btnFundingAdd
+            // 
+            this.btnFundingAdd.AccessibleName = "Add to Summary";
+            this.btnFundingAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
+            this.btnFundingAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFundingAdd.FlatAppearance.BorderSize = 0;
+            this.btnFundingAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFundingAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnFundingAdd.ForeColor = System.Drawing.Color.White;
+            this.btnFundingAdd.Location = new System.Drawing.Point(919, 15);
+            this.btnFundingAdd.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFundingAdd.Name = "btnFundingAdd";
+            this.btnFundingAdd.Size = new System.Drawing.Size(238, 50);
+            this.btnFundingAdd.TabIndex = 0;
+            this.btnFundingAdd.Text = "Add to Summary";
+            this.btnFundingAdd.UseVisualStyleBackColor = false;
+            this.btnFundingAdd.Click += new System.EventHandler(this.btnFundingAdd_Click);
+            // 
+            // btnFundingBack
+            // 
+            this.btnFundingBack.AccessibleName = "Back";
+            this.btnFundingBack.BackColor = System.Drawing.Color.White;
+            this.btnFundingBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFundingBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
+            this.btnFundingBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFundingBack.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnFundingBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
+            this.btnFundingBack.Location = new System.Drawing.Point(745, 15);
+            this.btnFundingBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnFundingBack.Name = "btnFundingBack";
+            this.btnFundingBack.Size = new System.Drawing.Size(162, 50);
+            this.btnFundingBack.TabIndex = 1;
+            this.btnFundingBack.Text = "Back";
+            this.btnFundingBack.UseVisualStyleBackColor = false;
+            this.btnFundingBack.Click += new System.EventHandler(this.btnFundingBack_Click);
             // 
             // tabSummary
             // 
@@ -3821,10 +4359,10 @@
             this.pnlSummaryContent.Controls.Add(this.pnlIncludeCard);
             this.pnlSummaryContent.Controls.Add(this.pnlPreviewCard);
             this.pnlSummaryContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSummaryContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlSummaryContent.Location = new System.Drawing.Point(0, 60);
             this.pnlSummaryContent.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSummaryContent.Name = "pnlSummaryContent";
-            this.pnlSummaryContent.Size = new System.Drawing.Size(1170, 577);
+            this.pnlSummaryContent.Size = new System.Drawing.Size(1170, 690);
             this.pnlSummaryContent.TabIndex = 0;
             // 
             // pnlIncludeCard
@@ -4148,614 +4686,6 @@
             this.rvSummary.Size = new System.Drawing.Size(722, 500);
             this.rvSummary.TabIndex = 4;
             // 
-            // pnlStatus
-            // 
-            this.pnlStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
-            this.pnlStatus.Controls.Add(this.lblStatus);
-            this.pnlStatus.Controls.Add(this.lblLearnerContext);
-            this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStatus.Location = new System.Drawing.Point(0, 919);
-            this.pnlStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(1218, 32);
-            this.pnlStatus.TabIndex = 4;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AccessibleName = "Status";
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblStatus.ForeColor = System.Drawing.Color.White;
-            this.lblStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.lblStatus.Size = new System.Drawing.Size(1203, 32);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // mnuMain
-            // 
-            this.mnuMain.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.mnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuHome,
-            this.mnuExit});
-            this.mnuMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.mnuMain.Size = new System.Drawing.Size(1218, 30);
-            this.mnuMain.TabIndex = 2;
-            this.mnuMain.Text = "Main menu";
-            // 
-            // mnuHome
-            // 
-            this.mnuHome.Name = "mnuHome";
-            this.mnuHome.Size = new System.Drawing.Size(66, 24);
-            this.mnuHome.Text = "&Home";
-            this.mnuHome.Click += new System.EventHandler(this.mnuHome_Click);
-            // 
-            // mnuExit
-            // 
-            this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(47, 24);
-            this.mnuExit.Text = "E&xit";
-            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
-            // 
-            // lblLearnerContext
-            // 
-            this.lblLearnerContext.AccessibleName = "Learner";
-            this.lblLearnerContext.AutoSize = true;
-            this.lblLearnerContext.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblLearnerContext.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblLearnerContext.ForeColor = System.Drawing.Color.White;
-            this.lblLearnerContext.Location = new System.Drawing.Point(1203, 0);
-            this.lblLearnerContext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLearnerContext.Name = "lblLearnerContext";
-            this.lblLearnerContext.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            this.lblLearnerContext.Size = new System.Drawing.Size(15, 19);
-            this.lblLearnerContext.TabIndex = 1;
-            this.lblLearnerContext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblProfileNotice
-            // 
-            this.lblProfileNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.lblProfileNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblProfileNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblProfileNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblProfileNotice.Location = new System.Drawing.Point(0, 0);
-            this.lblProfileNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProfileNotice.Name = "lblProfileNotice";
-            this.lblProfileNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
-            this.lblProfileNotice.Size = new System.Drawing.Size(1170, 60);
-            this.lblProfileNotice.TabIndex = 1;
-            this.lblProfileNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flpProfileActions
-            // 
-            this.flpProfileActions.Controls.Add(this.btnProfileSave);
-            this.flpProfileActions.Controls.Add(this.btnProfileBack);
-            this.flpProfileActions.Controls.Add(this.btnProfileCancel);
-            this.flpProfileActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpProfileActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpProfileActions.Location = new System.Drawing.Point(0, 750);
-            this.flpProfileActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpProfileActions.Name = "flpProfileActions";
-            this.flpProfileActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
-            this.flpProfileActions.Size = new System.Drawing.Size(1170, 80);
-            this.flpProfileActions.TabIndex = 2;
-            this.flpProfileActions.WrapContents = false;
-            // 
-            // btnProfileSave
-            // 
-            this.btnProfileSave.AccessibleName = "Save and continue";
-            this.btnProfileSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnProfileSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProfileSave.FlatAppearance.BorderSize = 0;
-            this.btnProfileSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProfileSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnProfileSave.ForeColor = System.Drawing.Color.White;
-            this.btnProfileSave.Location = new System.Drawing.Point(929, 15);
-            this.btnProfileSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnProfileSave.Name = "btnProfileSave";
-            this.btnProfileSave.Size = new System.Drawing.Size(238, 50);
-            this.btnProfileSave.TabIndex = 0;
-            this.btnProfileSave.Text = "Save and continue";
-            this.btnProfileSave.UseVisualStyleBackColor = false;
-            this.btnProfileSave.Click += new System.EventHandler(this.btnProfileSave_Click);
-            // 
-            // btnProfileBack
-            // 
-            this.btnProfileBack.AccessibleName = "Back";
-            this.btnProfileBack.BackColor = System.Drawing.Color.White;
-            this.btnProfileBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProfileBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnProfileBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProfileBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnProfileBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnProfileBack.Location = new System.Drawing.Point(755, 15);
-            this.btnProfileBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnProfileBack.Name = "btnProfileBack";
-            this.btnProfileBack.Size = new System.Drawing.Size(162, 50);
-            this.btnProfileBack.TabIndex = 1;
-            this.btnProfileBack.Text = "Back";
-            this.btnProfileBack.UseVisualStyleBackColor = false;
-            this.btnProfileBack.Click += new System.EventHandler(this.btnProfileBack_Click);
-            // 
-            // btnProfileCancel
-            // 
-            this.btnProfileCancel.AccessibleName = "Cancel";
-            this.btnProfileCancel.BackColor = System.Drawing.Color.White;
-            this.btnProfileCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnProfileCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnProfileCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProfileCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnProfileCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnProfileCancel.Location = new System.Drawing.Point(581, 15);
-            this.btnProfileCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnProfileCancel.Name = "btnProfileCancel";
-            this.btnProfileCancel.Size = new System.Drawing.Size(162, 50);
-            this.btnProfileCancel.TabIndex = 2;
-            this.btnProfileCancel.Text = "Cancel";
-            this.btnProfileCancel.UseVisualStyleBackColor = false;
-            this.btnProfileCancel.Click += new System.EventHandler(this.btnProfileCancel_Click);
-            // 
-            // lblSubjectsNotice
-            // 
-            this.lblSubjectsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.lblSubjectsNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSubjectsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSubjectsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblSubjectsNotice.Location = new System.Drawing.Point(0, 0);
-            this.lblSubjectsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSubjectsNotice.Name = "lblSubjectsNotice";
-            this.lblSubjectsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
-            this.lblSubjectsNotice.Size = new System.Drawing.Size(1170, 60);
-            this.lblSubjectsNotice.TabIndex = 1;
-            this.lblSubjectsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flpSubjectsActions
-            // 
-            this.flpSubjectsActions.Controls.Add(this.btnSubjectsSave);
-            this.flpSubjectsActions.Controls.Add(this.btnSubjectsBack);
-            this.flpSubjectsActions.Controls.Add(this.btnSubjectsCancel);
-            this.flpSubjectsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpSubjectsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpSubjectsActions.Location = new System.Drawing.Point(0, 750);
-            this.flpSubjectsActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpSubjectsActions.Name = "flpSubjectsActions";
-            this.flpSubjectsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
-            this.flpSubjectsActions.Size = new System.Drawing.Size(1170, 80);
-            this.flpSubjectsActions.TabIndex = 2;
-            this.flpSubjectsActions.WrapContents = false;
-            // 
-            // btnSubjectsSave
-            // 
-            this.btnSubjectsSave.AccessibleName = "Save and continue";
-            this.btnSubjectsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnSubjectsSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSubjectsSave.FlatAppearance.BorderSize = 0;
-            this.btnSubjectsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubjectsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnSubjectsSave.ForeColor = System.Drawing.Color.White;
-            this.btnSubjectsSave.Location = new System.Drawing.Point(929, 15);
-            this.btnSubjectsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSubjectsSave.Name = "btnSubjectsSave";
-            this.btnSubjectsSave.Size = new System.Drawing.Size(238, 50);
-            this.btnSubjectsSave.TabIndex = 0;
-            this.btnSubjectsSave.Text = "Save and continue";
-            this.btnSubjectsSave.UseVisualStyleBackColor = false;
-            this.btnSubjectsSave.Click += new System.EventHandler(this.btnSubjectsSave_Click);
-            // 
-            // btnSubjectsBack
-            // 
-            this.btnSubjectsBack.AccessibleName = "Back";
-            this.btnSubjectsBack.BackColor = System.Drawing.Color.White;
-            this.btnSubjectsBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSubjectsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnSubjectsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubjectsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnSubjectsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnSubjectsBack.Location = new System.Drawing.Point(755, 15);
-            this.btnSubjectsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSubjectsBack.Name = "btnSubjectsBack";
-            this.btnSubjectsBack.Size = new System.Drawing.Size(162, 50);
-            this.btnSubjectsBack.TabIndex = 1;
-            this.btnSubjectsBack.Text = "Back";
-            this.btnSubjectsBack.UseVisualStyleBackColor = false;
-            this.btnSubjectsBack.Click += new System.EventHandler(this.btnSubjectsBack_Click);
-            // 
-            // btnSubjectsCancel
-            // 
-            this.btnSubjectsCancel.AccessibleName = "Cancel";
-            this.btnSubjectsCancel.BackColor = System.Drawing.Color.White;
-            this.btnSubjectsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSubjectsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnSubjectsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubjectsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnSubjectsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnSubjectsCancel.Location = new System.Drawing.Point(581, 15);
-            this.btnSubjectsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSubjectsCancel.Name = "btnSubjectsCancel";
-            this.btnSubjectsCancel.Size = new System.Drawing.Size(162, 50);
-            this.btnSubjectsCancel.TabIndex = 2;
-            this.btnSubjectsCancel.Text = "Cancel";
-            this.btnSubjectsCancel.UseVisualStyleBackColor = false;
-            this.btnSubjectsCancel.Click += new System.EventHandler(this.btnSubjectsCancel_Click);
-            // 
-            // lblInterestsNotice
-            // 
-            this.lblInterestsNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.lblInterestsNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblInterestsNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblInterestsNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblInterestsNotice.Location = new System.Drawing.Point(0, 0);
-            this.lblInterestsNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblInterestsNotice.Name = "lblInterestsNotice";
-            this.lblInterestsNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
-            this.lblInterestsNotice.Size = new System.Drawing.Size(1170, 60);
-            this.lblInterestsNotice.TabIndex = 1;
-            this.lblInterestsNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flpInterestsActions
-            // 
-            this.flpInterestsActions.Controls.Add(this.btnInterestsSave);
-            this.flpInterestsActions.Controls.Add(this.btnInterestsBack);
-            this.flpInterestsActions.Controls.Add(this.btnInterestsCancel);
-            this.flpInterestsActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpInterestsActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpInterestsActions.Location = new System.Drawing.Point(0, 750);
-            this.flpInterestsActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpInterestsActions.Name = "flpInterestsActions";
-            this.flpInterestsActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
-            this.flpInterestsActions.Size = new System.Drawing.Size(1170, 80);
-            this.flpInterestsActions.TabIndex = 2;
-            this.flpInterestsActions.WrapContents = false;
-            // 
-            // btnInterestsSave
-            // 
-            this.btnInterestsSave.AccessibleName = "Save and continue";
-            this.btnInterestsSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnInterestsSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInterestsSave.FlatAppearance.BorderSize = 0;
-            this.btnInterestsSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInterestsSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnInterestsSave.ForeColor = System.Drawing.Color.White;
-            this.btnInterestsSave.Location = new System.Drawing.Point(929, 15);
-            this.btnInterestsSave.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnInterestsSave.Name = "btnInterestsSave";
-            this.btnInterestsSave.Size = new System.Drawing.Size(238, 50);
-            this.btnInterestsSave.TabIndex = 0;
-            this.btnInterestsSave.Text = "Save and continue";
-            this.btnInterestsSave.UseVisualStyleBackColor = false;
-            this.btnInterestsSave.Click += new System.EventHandler(this.btnInterestsSave_Click);
-            // 
-            // btnInterestsBack
-            // 
-            this.btnInterestsBack.AccessibleName = "Back";
-            this.btnInterestsBack.BackColor = System.Drawing.Color.White;
-            this.btnInterestsBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInterestsBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnInterestsBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInterestsBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnInterestsBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnInterestsBack.Location = new System.Drawing.Point(755, 15);
-            this.btnInterestsBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnInterestsBack.Name = "btnInterestsBack";
-            this.btnInterestsBack.Size = new System.Drawing.Size(162, 50);
-            this.btnInterestsBack.TabIndex = 1;
-            this.btnInterestsBack.Text = "Back";
-            this.btnInterestsBack.UseVisualStyleBackColor = false;
-            this.btnInterestsBack.Click += new System.EventHandler(this.btnInterestsBack_Click);
-            // 
-            // btnInterestsCancel
-            // 
-            this.btnInterestsCancel.AccessibleName = "Cancel";
-            this.btnInterestsCancel.BackColor = System.Drawing.Color.White;
-            this.btnInterestsCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInterestsCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnInterestsCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInterestsCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnInterestsCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnInterestsCancel.Location = new System.Drawing.Point(581, 15);
-            this.btnInterestsCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnInterestsCancel.Name = "btnInterestsCancel";
-            this.btnInterestsCancel.Size = new System.Drawing.Size(162, 50);
-            this.btnInterestsCancel.TabIndex = 2;
-            this.btnInterestsCancel.Text = "Cancel";
-            this.btnInterestsCancel.UseVisualStyleBackColor = false;
-            this.btnInterestsCancel.Click += new System.EventHandler(this.btnInterestsCancel_Click);
-            // 
-            // flpFacultyActions
-            // 
-            this.flpFacultyActions.Controls.Add(this.btnFacultyCheck);
-            this.flpFacultyActions.Controls.Add(this.btnFacultyBack);
-            this.flpFacultyActions.Controls.Add(this.btnFacultyCancel);
-            this.flpFacultyActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpFacultyActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpFacultyActions.Location = new System.Drawing.Point(0, 750);
-            this.flpFacultyActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpFacultyActions.Name = "flpFacultyActions";
-            this.flpFacultyActions.Padding = new System.Windows.Forms.Padding(0, 15, 3, 0);
-            this.flpFacultyActions.Size = new System.Drawing.Size(1170, 80);
-            this.flpFacultyActions.TabIndex = 2;
-            this.flpFacultyActions.WrapContents = false;
-            // 
-            // btnFacultyCheck
-            // 
-            this.btnFacultyCheck.AccessibleName = "Check eligibility";
-            this.btnFacultyCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnFacultyCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFacultyCheck.FlatAppearance.BorderSize = 0;
-            this.btnFacultyCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacultyCheck.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnFacultyCheck.ForeColor = System.Drawing.Color.White;
-            this.btnFacultyCheck.Location = new System.Drawing.Point(929, 15);
-            this.btnFacultyCheck.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFacultyCheck.Name = "btnFacultyCheck";
-            this.btnFacultyCheck.Size = new System.Drawing.Size(238, 50);
-            this.btnFacultyCheck.TabIndex = 0;
-            this.btnFacultyCheck.Text = "Check eligibility";
-            this.btnFacultyCheck.UseVisualStyleBackColor = false;
-            this.btnFacultyCheck.Click += new System.EventHandler(this.btnFacultyCheck_Click);
-            // 
-            // btnFacultyBack
-            // 
-            this.btnFacultyBack.AccessibleName = "Back";
-            this.btnFacultyBack.BackColor = System.Drawing.Color.White;
-            this.btnFacultyBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFacultyBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnFacultyBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacultyBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnFacultyBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnFacultyBack.Location = new System.Drawing.Point(755, 15);
-            this.btnFacultyBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFacultyBack.Name = "btnFacultyBack";
-            this.btnFacultyBack.Size = new System.Drawing.Size(162, 50);
-            this.btnFacultyBack.TabIndex = 1;
-            this.btnFacultyBack.Text = "Back";
-            this.btnFacultyBack.UseVisualStyleBackColor = false;
-            this.btnFacultyBack.Click += new System.EventHandler(this.btnFacultyBack_Click);
-            // 
-            // btnFacultyCancel
-            // 
-            this.btnFacultyCancel.AccessibleName = "Cancel";
-            this.btnFacultyCancel.BackColor = System.Drawing.Color.White;
-            this.btnFacultyCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFacultyCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnFacultyCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFacultyCancel.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnFacultyCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnFacultyCancel.Location = new System.Drawing.Point(581, 15);
-            this.btnFacultyCancel.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFacultyCancel.Name = "btnFacultyCancel";
-            this.btnFacultyCancel.Size = new System.Drawing.Size(162, 50);
-            this.btnFacultyCancel.TabIndex = 2;
-            this.btnFacultyCancel.Text = "Cancel";
-            this.btnFacultyCancel.UseVisualStyleBackColor = false;
-            this.btnFacultyCancel.Click += new System.EventHandler(this.btnFacultyCancel_Click);
-            // 
-            // flpOutcomeActions
-            // 
-            this.flpOutcomeActions.Controls.Add(this.btnOutcomeSummary);
-            this.flpOutcomeActions.Controls.Add(this.btnOutcomeAlternatives);
-            this.flpOutcomeActions.Controls.Add(this.btnOutcomeFunding);
-            this.flpOutcomeActions.Controls.Add(this.btnOutcomeBack);
-            this.flpOutcomeActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpOutcomeActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpOutcomeActions.Location = new System.Drawing.Point(0, 710);
-            this.flpOutcomeActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpOutcomeActions.Name = "flpOutcomeActions";
-            this.flpOutcomeActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
-            this.flpOutcomeActions.Size = new System.Drawing.Size(1162, 80);
-            this.flpOutcomeActions.TabIndex = 2;
-            this.flpOutcomeActions.WrapContents = false;
-            // 
-            // btnOutcomeSummary
-            // 
-            this.btnOutcomeSummary.AccessibleName = "Continue to summary";
-            this.btnOutcomeSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnOutcomeSummary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOutcomeSummary.FlatAppearance.BorderSize = 0;
-            this.btnOutcomeSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutcomeSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnOutcomeSummary.ForeColor = System.Drawing.Color.White;
-            this.btnOutcomeSummary.Location = new System.Drawing.Point(919, 15);
-            this.btnOutcomeSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnOutcomeSummary.Name = "btnOutcomeSummary";
-            this.btnOutcomeSummary.Size = new System.Drawing.Size(238, 50);
-            this.btnOutcomeSummary.TabIndex = 0;
-            this.btnOutcomeSummary.Text = "Continue to summary";
-            this.btnOutcomeSummary.UseVisualStyleBackColor = false;
-            this.btnOutcomeSummary.Click += new System.EventHandler(this.btnOutcomeSummary_Click);
-            // 
-            // btnOutcomeAlternatives
-            // 
-            this.btnOutcomeAlternatives.AccessibleName = "Alternative programmes";
-            this.btnOutcomeAlternatives.BackColor = System.Drawing.Color.White;
-            this.btnOutcomeAlternatives.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOutcomeAlternatives.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnOutcomeAlternatives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutcomeAlternatives.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnOutcomeAlternatives.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnOutcomeAlternatives.Location = new System.Drawing.Point(695, 15);
-            this.btnOutcomeAlternatives.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnOutcomeAlternatives.Name = "btnOutcomeAlternatives";
-            this.btnOutcomeAlternatives.Size = new System.Drawing.Size(212, 50);
-            this.btnOutcomeAlternatives.TabIndex = 1;
-            this.btnOutcomeAlternatives.Text = "Alternative programmes";
-            this.btnOutcomeAlternatives.UseVisualStyleBackColor = false;
-            this.btnOutcomeAlternatives.Click += new System.EventHandler(this.btnOutcomeAlternatives_Click);
-            // 
-            // btnOutcomeFunding
-            // 
-            this.btnOutcomeFunding.AccessibleName = "Funding options";
-            this.btnOutcomeFunding.BackColor = System.Drawing.Color.White;
-            this.btnOutcomeFunding.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOutcomeFunding.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnOutcomeFunding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutcomeFunding.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnOutcomeFunding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnOutcomeFunding.Location = new System.Drawing.Point(508, 15);
-            this.btnOutcomeFunding.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnOutcomeFunding.Name = "btnOutcomeFunding";
-            this.btnOutcomeFunding.Size = new System.Drawing.Size(175, 50);
-            this.btnOutcomeFunding.TabIndex = 2;
-            this.btnOutcomeFunding.Text = "Funding options";
-            this.btnOutcomeFunding.UseVisualStyleBackColor = false;
-            this.btnOutcomeFunding.Click += new System.EventHandler(this.btnOutcomeFunding_Click);
-            // 
-            // btnOutcomeBack
-            // 
-            this.btnOutcomeBack.AccessibleName = "Back";
-            this.btnOutcomeBack.BackColor = System.Drawing.Color.White;
-            this.btnOutcomeBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOutcomeBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnOutcomeBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutcomeBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnOutcomeBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnOutcomeBack.Location = new System.Drawing.Point(334, 15);
-            this.btnOutcomeBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnOutcomeBack.Name = "btnOutcomeBack";
-            this.btnOutcomeBack.Size = new System.Drawing.Size(162, 50);
-            this.btnOutcomeBack.TabIndex = 3;
-            this.btnOutcomeBack.Text = "Back";
-            this.btnOutcomeBack.UseVisualStyleBackColor = false;
-            this.btnOutcomeBack.Click += new System.EventHandler(this.btnOutcomeBack_Click);
-            // 
-            // lblAlternativesNotice
-            // 
-            this.lblAlternativesNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
-            this.lblAlternativesNotice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblAlternativesNotice.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblAlternativesNotice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.lblAlternativesNotice.Location = new System.Drawing.Point(0, 0);
-            this.lblAlternativesNotice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAlternativesNotice.Name = "lblAlternativesNotice";
-            this.lblAlternativesNotice.Padding = new System.Windows.Forms.Padding(18, 0, 12, 0);
-            this.lblAlternativesNotice.Size = new System.Drawing.Size(1162, 60);
-            this.lblAlternativesNotice.TabIndex = 1;
-            this.lblAlternativesNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flpAlternativesActions
-            // 
-            this.flpAlternativesActions.Controls.Add(this.btnAlternativesSummary);
-            this.flpAlternativesActions.Controls.Add(this.btnAlternativesCompare);
-            this.flpAlternativesActions.Controls.Add(this.btnAlternativesBack);
-            this.flpAlternativesActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpAlternativesActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpAlternativesActions.Location = new System.Drawing.Point(0, 710);
-            this.flpAlternativesActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpAlternativesActions.Name = "flpAlternativesActions";
-            this.flpAlternativesActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
-            this.flpAlternativesActions.Size = new System.Drawing.Size(1162, 80);
-            this.flpAlternativesActions.TabIndex = 2;
-            this.flpAlternativesActions.WrapContents = false;
-            // 
-            // btnAlternativesSummary
-            // 
-            this.btnAlternativesSummary.AccessibleName = "Continue to summary";
-            this.btnAlternativesSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnAlternativesSummary.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlternativesSummary.FlatAppearance.BorderSize = 0;
-            this.btnAlternativesSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlternativesSummary.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnAlternativesSummary.ForeColor = System.Drawing.Color.White;
-            this.btnAlternativesSummary.Location = new System.Drawing.Point(919, 15);
-            this.btnAlternativesSummary.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnAlternativesSummary.Name = "btnAlternativesSummary";
-            this.btnAlternativesSummary.Size = new System.Drawing.Size(238, 50);
-            this.btnAlternativesSummary.TabIndex = 0;
-            this.btnAlternativesSummary.Text = "Continue to summary";
-            this.btnAlternativesSummary.UseVisualStyleBackColor = false;
-            this.btnAlternativesSummary.Click += new System.EventHandler(this.btnAlternativesSummary_Click);
-            // 
-            // btnAlternativesCompare
-            // 
-            this.btnAlternativesCompare.AccessibleName = "Compare with my selection";
-            this.btnAlternativesCompare.BackColor = System.Drawing.Color.White;
-            this.btnAlternativesCompare.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlternativesCompare.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnAlternativesCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlternativesCompare.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnAlternativesCompare.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAlternativesCompare.Location = new System.Drawing.Point(657, 15);
-            this.btnAlternativesCompare.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnAlternativesCompare.Name = "btnAlternativesCompare";
-            this.btnAlternativesCompare.Size = new System.Drawing.Size(250, 50);
-            this.btnAlternativesCompare.TabIndex = 1;
-            this.btnAlternativesCompare.Text = "Compare with my selection";
-            this.btnAlternativesCompare.UseVisualStyleBackColor = false;
-            this.btnAlternativesCompare.Click += new System.EventHandler(this.btnAlternativesCompare_Click);
-            // 
-            // btnAlternativesBack
-            // 
-            this.btnAlternativesBack.AccessibleName = "Back";
-            this.btnAlternativesBack.BackColor = System.Drawing.Color.White;
-            this.btnAlternativesBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlternativesBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnAlternativesBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlternativesBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnAlternativesBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnAlternativesBack.Location = new System.Drawing.Point(483, 15);
-            this.btnAlternativesBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnAlternativesBack.Name = "btnAlternativesBack";
-            this.btnAlternativesBack.Size = new System.Drawing.Size(162, 50);
-            this.btnAlternativesBack.TabIndex = 2;
-            this.btnAlternativesBack.Text = "Back";
-            this.btnAlternativesBack.UseVisualStyleBackColor = false;
-            this.btnAlternativesBack.Click += new System.EventHandler(this.btnAlternativesBack_Click);
-            // 
-            // flpFundingActions
-            // 
-            this.flpFundingActions.Controls.Add(this.btnFundingAdd);
-            this.flpFundingActions.Controls.Add(this.btnFundingBack);
-            this.flpFundingActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flpFundingActions.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpFundingActions.Location = new System.Drawing.Point(0, 710);
-            this.flpFundingActions.Margin = new System.Windows.Forms.Padding(4);
-            this.flpFundingActions.Name = "flpFundingActions";
-            this.flpFundingActions.Padding = new System.Windows.Forms.Padding(0, 15, 5, 0);
-            this.flpFundingActions.Size = new System.Drawing.Size(1162, 80);
-            this.flpFundingActions.TabIndex = 2;
-            this.flpFundingActions.WrapContents = false;
-            // 
-            // btnFundingAdd
-            // 
-            this.btnFundingAdd.AccessibleName = "Add to Summary";
-            this.btnFundingAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(41)))), ((int)(((byte)(75)))));
-            this.btnFundingAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFundingAdd.FlatAppearance.BorderSize = 0;
-            this.btnFundingAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFundingAdd.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnFundingAdd.ForeColor = System.Drawing.Color.White;
-            this.btnFundingAdd.Location = new System.Drawing.Point(919, 15);
-            this.btnFundingAdd.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFundingAdd.Name = "btnFundingAdd";
-            this.btnFundingAdd.Size = new System.Drawing.Size(238, 50);
-            this.btnFundingAdd.TabIndex = 0;
-            this.btnFundingAdd.Text = "Add to Summary";
-            this.btnFundingAdd.UseVisualStyleBackColor = false;
-            this.btnFundingAdd.Click += new System.EventHandler(this.btnFundingAdd_Click);
-            // 
-            // btnFundingBack
-            // 
-            this.btnFundingBack.AccessibleName = "Back";
-            this.btnFundingBack.BackColor = System.Drawing.Color.White;
-            this.btnFundingBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFundingBack.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(95)))), ((int)(((byte)(168)))));
-            this.btnFundingBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFundingBack.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnFundingBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
-            this.btnFundingBack.Location = new System.Drawing.Point(745, 15);
-            this.btnFundingBack.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnFundingBack.Name = "btnFundingBack";
-            this.btnFundingBack.Size = new System.Drawing.Size(162, 50);
-            this.btnFundingBack.TabIndex = 1;
-            this.btnFundingBack.Text = "Back";
-            this.btnFundingBack.UseVisualStyleBackColor = false;
-            this.btnFundingBack.Click += new System.EventHandler(this.btnFundingBack_Click);
-            // 
             // lblSummaryNotice
             // 
             this.lblSummaryNotice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(238)))), ((int)(((byte)(246)))));
@@ -4839,6 +4769,75 @@
             this.btnSummaryCancel.UseVisualStyleBackColor = false;
             this.btnSummaryCancel.Click += new System.EventHandler(this.btnSummaryCancel_Click);
             // 
+            // pnlStatus
+            // 
+            this.pnlStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlStatus.Controls.Add(this.lblStatus);
+            this.pnlStatus.Controls.Add(this.lblLearnerContext);
+            this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlStatus.Location = new System.Drawing.Point(0, 919);
+            this.pnlStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlStatus.Name = "pnlStatus";
+            this.pnlStatus.Size = new System.Drawing.Size(1218, 32);
+            this.pnlStatus.TabIndex = 4;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AccessibleName = "Status";
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblStatus.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Location = new System.Drawing.Point(0, 0);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.lblStatus.Size = new System.Drawing.Size(1203, 32);
+            this.lblStatus.TabIndex = 0;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLearnerContext
+            // 
+            this.lblLearnerContext.AccessibleName = "Learner";
+            this.lblLearnerContext.AutoSize = true;
+            this.lblLearnerContext.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblLearnerContext.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lblLearnerContext.ForeColor = System.Drawing.Color.White;
+            this.lblLearnerContext.Location = new System.Drawing.Point(1203, 0);
+            this.lblLearnerContext.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLearnerContext.Name = "lblLearnerContext";
+            this.lblLearnerContext.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
+            this.lblLearnerContext.Size = new System.Drawing.Size(15, 19);
+            this.lblLearnerContext.TabIndex = 1;
+            this.lblLearnerContext.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // mnuMain
+            // 
+            this.mnuMain.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.mnuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuHome,
+            this.mnuExit});
+            this.mnuMain.Location = new System.Drawing.Point(0, 0);
+            this.mnuMain.Name = "mnuMain";
+            this.mnuMain.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
+            this.mnuMain.Size = new System.Drawing.Size(1218, 33);
+            this.mnuMain.TabIndex = 2;
+            this.mnuMain.Text = "Main menu";
+            // 
+            // mnuHome
+            // 
+            this.mnuHome.Name = "mnuHome";
+            this.mnuHome.Size = new System.Drawing.Size(70, 27);
+            this.mnuHome.Text = "&Home";
+            this.mnuHome.Click += new System.EventHandler(this.mnuHome_Click);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(51, 27);
+            this.mnuExit.Text = "E&xit";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -4851,8 +4850,8 @@
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(31)))), ((int)(((byte)(36)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MainMenuStrip = this.mnuMain;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -4875,6 +4874,7 @@
             this.pnlContactCard.PerformLayout();
             this.pnlSessionCard.ResumeLayout(false);
             this.pnlSessionCard.PerformLayout();
+            this.flpProfileActions.ResumeLayout(false);
             this.tabSubjects.ResumeLayout(false);
             this.pnlSubjectsContent.ResumeLayout(false);
             this.pnlAddCard.ResumeLayout(false);
@@ -4883,6 +4883,7 @@
             this.pnlSummary.ResumeLayout(false);
             this.pnlCapturedCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubjects)).EndInit();
+            this.flpSubjectsActions.ResumeLayout(false);
             this.tabInterests.ResumeLayout(false);
             this.pnlInterestsContent.ResumeLayout(false);
             this.pnlQuestionCard.ResumeLayout(false);
@@ -4891,6 +4892,7 @@
             this.pnlCategory1Tile.ResumeLayout(false);
             this.pnlCategory2Tile.ResumeLayout(false);
             this.pnlCategory3Tile.ResumeLayout(false);
+            this.flpInterestsActions.ResumeLayout(false);
             this.tabFaculty.ResumeLayout(false);
             this.pnlFacultyContent.ResumeLayout(false);
             this.pnlSearchCard.ResumeLayout(false);
@@ -4900,6 +4902,7 @@
             this.pnlRequirementsCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequirements)).EndInit();
             this.pnlAlignmentCard.ResumeLayout(false);
+            this.flpFacultyActions.ResumeLayout(false);
             this.tabResults.ResumeLayout(false);
             this.tcResults.ResumeLayout(false);
             this.tabOutcome.ResumeLayout(false);
@@ -4911,11 +4914,13 @@
             this.pnlMarkTile.ResumeLayout(false);
             this.pnlInterestTile.ResumeLayout(false);
             this.pnlOverallTile.ResumeLayout(false);
+            this.flpOutcomeActions.ResumeLayout(false);
             this.tabAlternatives.ResumeLayout(false);
             this.pnlAlternativesContent.ResumeLayout(false);
             this.pnlRankedCard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlternatives)).EndInit();
             this.pnlReasonsCard.ResumeLayout(false);
+            this.flpAlternativesActions.ResumeLayout(false);
             this.tabFunding.ResumeLayout(false);
             this.pnlFundingContent.ResumeLayout(false);
             this.pnlFilterCard.ResumeLayout(false);
@@ -4925,23 +4930,17 @@
             this.pnlDetailCard.ResumeLayout(false);
             this.pnlDetailCard.PerformLayout();
             this.pnlSampleNote.ResumeLayout(false);
+            this.flpFundingActions.ResumeLayout(false);
             this.tabSummary.ResumeLayout(false);
             this.pnlSummaryContent.ResumeLayout(false);
             this.pnlIncludeCard.ResumeLayout(false);
             this.pnlIncludeCard.PerformLayout();
             this.pnlPreviewCard.ResumeLayout(false);
-            this.flpProfileActions.ResumeLayout(false);
-            this.flpSubjectsActions.ResumeLayout(false);
-            this.flpInterestsActions.ResumeLayout(false);
-            this.flpFacultyActions.ResumeLayout(false);
-            this.flpOutcomeActions.ResumeLayout(false);
-            this.flpAlternativesActions.ResumeLayout(false);
-            this.flpFundingActions.ResumeLayout(false);
             this.flpSummaryActions.ResumeLayout(false);
-            this.mnuMain.ResumeLayout(false);
-            this.mnuMain.PerformLayout();
             this.pnlStatus.ResumeLayout(false);
             this.pnlStatus.PerformLayout();
+            this.mnuMain.ResumeLayout(false);
+            this.mnuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
