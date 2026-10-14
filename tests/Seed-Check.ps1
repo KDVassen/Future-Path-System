@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Checks the seed data (FuturePath\Database\SeedData.sql) against the seed rules: row counts, the
     Part B rows, the requirement constraints, interest data, funding coverage, system parameters,
@@ -50,8 +50,9 @@ try {
         GradeLevel = 2; SystemParameter = 28; Faculty = 5; Subject = 16; DegreeProgramme = 11
         ProgrammeRequirement = 39; InterestCategory = 9; InterestQuestion = 13; DegreeInterestMapping = 29
         FundingOption = 10; FundingFaculty = 15; FundingProgramme = 14; Learner = 13; AdvisorySession = 13
-        LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 3; RecommendationResult = 0; ExportReport = 0
+        LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 3
     }
+    # RecommendationResult and ExportReport rows are made by Database\GenerateSeedResults.ps1 (checked in section 11).
     foreach ($tableName in $expectedCounts.Keys) {
         Assert-Equal $expectedCounts[$tableName] (Get-Scalar "SELECT COUNT(*) FROM $tableName") "$tableName has $($expectedCounts[$tableName]) rows"
     }
@@ -267,7 +268,9 @@ try {
         Assert-Equal $e.Subjects $actualMarks "Session $id subjects and marks are exactly Part B"
         Assert-Equal $activeQuestionCount (Get-Scalar "SELECT COUNT(*) FROM LearnerInterestResponse r JOIN InterestQuestion q ON q.QuestionID = r.QuestionID WHERE r.SessionID = $id AND q.IsActive = 1") "Session $id answers every active question"
     }
-    Assert-Equal 0 (Get-Scalar "SELECT COUNT(*) FROM AdvisorySession WHERE SessionStatus <> 'In progress' OR DateCompleted IS NOT NULL") 'Every session is seeded In progress, not completed'
+    # Sessions 6-12 were completed and exported by GenerateSeedResults.ps1; 1-5 (Part B) and 13 stay In progress.
+    Assert-Equal '6,7,8,9,10,11,12' (((Invoke-TestQuery $ctx "SELECT SessionID FROM AdvisorySession WHERE SessionStatus = 'Completed' AND DateCompleted IS NOT NULL ORDER BY SessionID").Rows | ForEach-Object { $_.SessionID }) -join ',') 'Sessions 6-12 are Completed with a DateCompleted'
+    Assert-Equal 0 (Get-Scalar "SELECT COUNT(*) FROM AdvisorySession WHERE SessionID IN (1, 2, 3, 4, 5, 13) AND (SessionStatus <> 'In progress' OR DateCompleted IS NOT NULL)") 'Part B sessions and session 13 are still In progress'
     Assert-Equal 0 (Get-Scalar 'SELECT COUNT(*) FROM AdvisorySession WHERE SessionID <> LearnerID') 'SessionID = LearnerID for every session'
     Assert-Equal 0 (Get-Scalar 'SELECT COUNT(*) FROM (SELECT LearnerID FROM AdvisorySession GROUP BY LearnerID HAVING COUNT(*) > 1) x') 'One session per learner (CheckEligibility reaches it by learner ID)'
     Assert-Equal 2 (Get-Scalar 'SELECT COUNT(DISTINCT GradeLevelID) FROM AdvisorySession') 'Sessions cover both grades'
@@ -416,6 +419,21 @@ try {
         $code = if ($match.HasMissingRequired -or $match.LargestShortfall -gt 2) { 'NCE' } elseif ($match.LargestShortfall -gt 0 -or -not $match.AverageMet) { 'POSSIBLE' } elseif ((0.3 * $match.SubjectScore + 0.3 * $match.MarkScore + 0.3 * 80 + 10) -ge 75) { 'STRONG' } else { 'POSSIBLE' }
         Assert-Equal $case[1] $code "Labeeqah with Mathematics $($case[0]) is $($case[1]) (boundary)"
     }
+
+    # ---------- 11. Stored results (made by the real engine in Database\GenerateSeedResults.ps1) ----------
+    Write-Host "`n--- Stored results from GenerateSeedResults.ps1 ---"
+    foreach ($sessionID in ($scenarios.Keys | Sort-Object)) {
+        $selected = Invoke-TestQuery $ctx "SELECT OutcomeCode, OutcomeReason FROM RecommendationResult WHERE SessionID = $sessionID AND IsSelectedProgramme = 1"
+        Assert-Equal 1 $selected.Rows.Count "Session $sessionID has exactly one stored selected result"
+        if ($selected.Rows.Count -eq 1) {
+            Assert-Equal $scenarios[$sessionID][0] $selected.Rows[0].OutcomeCode "Session $sessionID stored outcome is $($scenarios[$sessionID][0])"
+            Assert-True (([string]$selected.Rows[0].OutcomeReason).Length -gt 0) "Session $sessionID stored outcome has a reason"
+        }
+    }
+    Assert-AtLeast 1 (Get-Scalar 'SELECT COUNT(*) FROM RecommendationResult WHERE IsSelectedProgramme = 0 AND AlternativeRank = 1') 'Ranked alternatives are stored'
+    Assert-Equal 0 (Get-Scalar 'SELECT COUNT(*) FROM RecommendationResult r JOIN DegreeProgramme p ON p.ProgrammeID = r.ProgrammeID WHERE p.IsActive = 0') 'No stored result is for an inactive programme'
+    Assert-Equal '6,7,8,9,10,11,12' (((Invoke-TestQuery $ctx "SELECT SessionID FROM ExportReport WHERE ReportCode = 'FP-LSR' AND GeneratedByUserID IS NULL AND ParametersUsed IS NULL ORDER BY SessionID").Rows | ForEach-Object { $_.SessionID }) -join ',') 'Each completed session has its learner FP-LSR export logged'
+    Assert-Equal 7 (Get-Scalar 'SELECT COUNT(*) FROM ExportReport') 'Seven exports logged in total'
 
 } catch {
     # An unexpected error is a failure, never a silent stop; the database copy is always detached.

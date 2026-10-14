@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Reports and staff session search: SessionSearchController, ExportReportRepository and the
     ReportController catalogue, formats, parameters text, validation, scope counts and export log.
@@ -16,7 +16,7 @@ param([switch]$SkipPostMerge)
 
 . "$PSScriptRoot\TestHelpers.ps1"
 
-$ctx = Initialize-FuturePathTest
+$ctx = Initialize-FuturePathTest -SchemaOnly   # empty schema: this script inserts its own fixture rows
 
 # =====================================================================================
 # Fixture rows (the database copy starts empty)

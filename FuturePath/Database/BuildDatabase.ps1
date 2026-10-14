@@ -102,3 +102,15 @@ finally {
 }
 
 Write-Host "Done: $mdfPath"
+
+# The seed holds only the sessions' inputs; their results come from the real engine.
+if (-not $SchemaOnly) {
+    $exePath = Join-Path $projectFolder 'bin\Debug\FuturePath.exe'
+    if (Test-Path $exePath) {
+        Write-Host "Storing the seeded sessions' results with the engine (GenerateSeedResults.ps1)"
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $databaseFolder 'GenerateSeedResults.ps1')
+        if ($LASTEXITCODE -ne 0) { throw "GenerateSeedResults.ps1 failed." }
+    } else {
+        Write-Host "Build the project, then run Database\GenerateSeedResults.ps1 to store the seeded sessions' results." -ForegroundColor Yellow
+    }
+}

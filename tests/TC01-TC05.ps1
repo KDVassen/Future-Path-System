@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     The demonstration test cases TC01-TC05 (spec Section 10, plan-and-tests.md), plus the
     security and inactive-data checks, run through the real controllers on a copy of the seeded
@@ -156,6 +156,7 @@ try {
         Assert-Equal '1|1' ((Invoke-TestQuery $ctx "SELECT CAST(AlternativesInSummary AS VARCHAR) + '|' + CAST(FundingInfoRequested AS VARCHAR) AS V FROM AdvisorySession WHERE SessionID = 3").Rows[0].V) 'TC05: the alternatives and funding choices are stored on the session'
 
         $reportController = New-Object FuturePath.ApplicationLayer.ReportController
+        $exportsBefore = Get-Count 'SELECT COUNT(*) FROM ExportReport'   # the seed already logs the completed sessions' exports
         $data = $reportController.GetLearnerSummary(3)
         $header = $data.Tables['ReportHeader']
         Assert-Equal 1 $header.Rows.Count 'TC05: FP-LSR has one header row'
@@ -175,14 +176,14 @@ try {
         Assert-True ($data.Tables['Alternatives'].Rows.Count -ge 1) 'TC05: FP-LSR includes the chosen alternatives'
         Assert-True ($data.Tables['FundingOptions'].Rows.Count -ge 1) 'TC05: FP-LSR includes funding (requested)'
         Assert-True (-not ($data.Tables['FundingOptions'].Rows | Where-Object { $_['FundingName'] -eq 'Marula Leaf Commerce Bursary' })) 'TC05: FP-LSR never lists inactive funding'
-        Assert-Equal 0 (Get-Count 'SELECT COUNT(*) FROM ExportReport') 'TC05: building the summary logs nothing'
+        Assert-Equal $exportsBefore (Get-Count 'SELECT COUNT(*) FROM ExportReport') 'TC05: building the summary logs nothing'
 
         $reportController.CompleteLearnerSession(3, 'PDF', (Get-Date))
         $session = (Invoke-TestQuery $ctx 'SELECT SessionStatus, DateCompleted FROM AdvisorySession WHERE SessionID = 3').Rows[0]
         Assert-Equal 'Completed' $session.SessionStatus 'TC05: session 3 is Completed'
         Assert-True (-not ($session.DateCompleted -is [DBNull])) 'TC05: session 3 has a DateCompleted'
         Assert-Equal 1 (Get-Count "SELECT COUNT(*) FROM ExportReport WHERE ReportCode = 'FP-LSR' AND SessionID = 3 AND GeneratedByUserID IS NULL AND ExportFormat = 'PDF' AND ParametersUsed IS NULL") 'TC05: one FP-LSR export is logged for session 3 (learner export: GeneratedByUserID NULL)'
-        Assert-Equal 1 (Get-Count 'SELECT COUNT(*) FROM ExportReport') 'TC05: exactly one export row exists'
+        Assert-Equal ($exportsBefore + 1) (Get-Count 'SELECT COUNT(*) FROM ExportReport') 'TC05: completing the session adds exactly one export row'
     } catch {
         Assert-Equal 'no exception' $_.Exception.Message 'TC05'
     }
