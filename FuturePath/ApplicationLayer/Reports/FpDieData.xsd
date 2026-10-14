@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FpDieData: typed DataSet for FP-DIE "Degree Interest and Eligibility Report" (spec 6.2, docs/design/reports.md).
+  The Business Logic Layer fills it from completed sessions in the requested period; PresentationLayer\Reports\FpDie.rdlc
+  only formats, sorts and totals it. Every count, rate, percentage, shortfall and chart note is computed by the BLL.
+  It holds no learner names or profile data. Each RDLC DataSet has the same name as its DataTable.
+    ReportHeader          1 row   masthead, parameter line, key-figure totals, page 3 totals and the chart notes
+    OutcomeSummary        4 rows  key-figure strip, section 2 pie and its legend, section 4 shared legend
+    FacultyOutcomes       n rows  section 1 table: advisory outcomes by faculty
+    FacultyOutcomeSlices  n x 4   section 4 pies: one pie per faculty, one row per faculty and outcome
+    ProgrammeOutcomes     n rows  section 3 table: degree programmes selected
+    SubjectGaps           n rows  section 5 bar: required subjects not taken at all
+    MarkShortfalls        n rows  section 6 table: subjects taken but below the stored minimum
+    FundingCategories     n rows  section 7 table: funding categories requested
+  Outcome order (OutcomeOrder) is fixed: 1 Strong match, 2 Possible match, 3 Not currently eligible,
+  4 More information needed. The report keys slice colour and marker (✓ ! ✗ ?) on it.
+-->
+<xs:schema id="FpDieData" targetNamespace="http://tempuri.org/FpDieData.xsd" xmlns:mstns="http://tempuri.org/FpDieData.xsd" xmlns="http://tempuri.org/FpDieData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FpDieData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- One row. -->
+        <xs:element name="ReportHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- "FP-DIE" (ExportReport.ReportCode) -->
+              <xs:element name="ReportCode" type="xs:string" />
+              <!-- the requested period (required parameters), dates only -->
+              <xs:element name="PeriodStart" type="xs:dateTime" />
+              <xs:element name="PeriodEnd" type="xs:dateTime" />
+              <!-- the optional filters as printed: "All faculties" or FacultyName, "All grades" or GradeDescription,
+                   "All outcomes" or the outcome name -->
+              <xs:element name="FacultyFilter" type="xs:string" />
+              <xs:element name="GradeFilter" type="xs:string" />
+              <xs:element name="OutcomeFilter" type="xs:string" />
+              <!-- true when the user ticked "include inactive" on UI 11 (default false: excluded) -->
+              <xs:element name="IncludeInactive" type="xs:boolean" />
+              <!-- UserAccount.FullName and Role, e.g. "A. Naidoo, System Administrator" -->
+              <xs:element name="GeneratedByName" type="xs:string" minOccurs="0" />
+              <!-- ExportReport.DateGenerated -->
+              <xs:element name="GeneratedAt" type="xs:dateTime" />
+              <!-- completed sessions in the period after the filters, and the distinct learners behind them -->
+              <xs:element name="SessionsInScope" type="xs:int" />
+              <xs:element name="LearnerCount" type="xs:int" />
+              <!-- (Strong + Possible) / SessionsInScope x 100, e.g. 66.7; null when there are no sessions -->
+              <xs:element name="EligibilityRate" type="xs:decimal" minOccurs="0" />
+              <!-- sessions with at least one required subject not taken (section 5 subtitle) -->
+              <xs:element name="SubjectGapSessions" type="xs:int" />
+              <!-- sessions with at least one mark below the stored minimum, and the average shortfall in
+                   percentage points across every such mark (section 6 totals row) -->
+              <xs:element name="MarkGapSessions" type="xs:int" />
+              <xs:element name="AverageShortfall" type="xs:decimal" minOccurs="0" />
+              <!-- sessions with AdvisorySession.FundingInfoRequested = 1 (section 7 subtitle) -->
+              <xs:element name="FundingRequestSessions" type="xs:int" />
+              <!-- the one-line plain-language takeaway printed under each chart (sections 2, 4 and 5) -->
+              <xs:element name="OutcomeChartNote" type="xs:string" minOccurs="0" />
+              <xs:element name="FacultyChartNote" type="xs:string" minOccurs="0" />
+              <xs:element name="SubjectGapChartNote" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Four rows, one per outcome, including outcomes with no sessions (SessionCount 0). -->
+        <xs:element name="OutcomeSummary">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- RecommendationResult.OutcomeCode -->
+              <xs:element name="OutcomeCode" type="xs:string" />
+              <!-- "Strong match", "Possible match", "Not currently eligible", "More information needed" -->
+              <xs:element name="OutcomeName" type="xs:string" />
+              <!-- 1 Strong, 2 Possible, 3 Not currently eligible, 4 More information needed -->
+              <xs:element name="OutcomeOrder" type="xs:int" />
+              <xs:element name="SessionCount" type="xs:int" />
+              <!-- SessionCount / SessionsInScope x 100, e.g. 33.3 -->
+              <xs:element name="SessionPercent" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per faculty with at least one session (faculty of the selected programme). -->
+        <xs:element name="FacultyOutcomes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacultyName" type="xs:string" />
+              <xs:element name="SessionCount" type="xs:int" />
+              <xs:element name="StrongMatchCount" type="xs:int" />
+              <xs:element name="PossibleMatchCount" type="xs:int" />
+              <xs:element name="NotEligibleCount" type="xs:int" />
+              <xs:element name="MoreInfoNeededCount" type="xs:int" />
+              <!-- (Strong + Possible) / SessionCount x 100 -->
+              <xs:element name="EligibilityRate" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Four rows per faculty in FacultyOutcomes (zero counts included), for the small-multiple pies. -->
+        <xs:element name="FacultyOutcomeSlices">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacultyName" type="xs:string" />
+              <!-- the faculty's SessionCount, repeated on each of its four rows (pie caption and order) -->
+              <xs:element name="FacultySessionCount" type="xs:int" />
+              <xs:element name="OutcomeCode" type="xs:string" />
+              <xs:element name="OutcomeName" type="xs:string" />
+              <xs:element name="OutcomeOrder" type="xs:int" />
+              <xs:element name="SessionCount" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per degree programme selected in the period (IsSelectedProgramme = 1). -->
+        <xs:element name="ProgrammeOutcomes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProgrammeName" type="xs:string" />
+              <xs:element name="FacultyName" type="xs:string" />
+              <xs:element name="SelectionCount" type="xs:int" />
+              <xs:element name="StrongMatchCount" type="xs:int" />
+              <xs:element name="PossibleMatchCount" type="xs:int" />
+              <xs:element name="NotEligibleCount" type="xs:int" />
+              <xs:element name="MoreInfoNeededCount" type="xs:int" />
+              <!-- (Strong + Possible) / SelectionCount x 100 -->
+              <xs:element name="EligibilityRate" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per required subject not taken at all (LearnerSubject against ProgrammeRequirement, at report time). -->
+        <xs:element name="SubjectGaps">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SubjectName" type="xs:string" />
+              <!-- sessions whose selected programme requires the subject and that did not take it -->
+              <xs:element name="GapCount" type="xs:int" />
+              <!-- GapCount as a % of all subject-gap occurrences, e.g. 50.0 -->
+              <xs:element name="GapPercent" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per subject taken but below the stored minimum mark. -->
+        <xs:element name="MarkShortfalls">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SubjectName" type="xs:string" />
+              <xs:element name="SessionCount" type="xs:int" />
+              <!-- average of (MinimumMark - Mark) in percentage points -->
+              <xs:element name="AverageShortfall" type="xs:decimal" />
+              <!-- the lowest mark seen below the minimum for this subject -->
+              <xs:element name="LowestMark" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per funding type (SystemParameter FUNDING_TYPE_1..4). -->
+        <xs:element name="FundingCategories">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- FundingOption.FundingType: Scholarship, Bursary, Financial Aid, External Funding -->
+              <xs:element name="FundingType" type="xs:string" />
+              <!-- sessions whose selected programme or its faculty is linked to an option of this type (UI 6.2b lists it) -->
+              <xs:element name="OfferedCount" type="xs:int" />
+              <!-- of those, sessions that added funding to their summary (FundingInfoRequested = 1) -->
+              <xs:element name="AddedToSummaryCount" type="xs:int" />
+              <!-- the faculty with the most FundingFaculty links for this type -->
+              <xs:element name="MostLinkedFaculty" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

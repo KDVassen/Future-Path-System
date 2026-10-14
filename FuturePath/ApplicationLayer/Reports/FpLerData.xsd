@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FpLerData: typed DataSet for FP-LER "Learners Not Currently Eligible" (spec 6.3, docs/design/reports.md).
+  The Business Logic Layer fills it; PresentationLayer\Reports\FpLer.rdlc only formats, sorts and totals it.
+  One DataTable per data region; each RDLC DataSet has the same name as its DataTable.
+    ReportHeader      1 row   masthead, restriction/fact line and chart notes (all counts and % computed by the BLL)
+    ReasonSummary     n rows  bar chart "Why learners are on this list" (one row per reason category)
+    FacultySummary    n rows  pie chart and its legend "Which faculties carry the follow-up"
+    ExceptionListing  n rows  one row per exception session (Not Currently Eligible or More Information Needed)
+-->
+<xs:schema id="FpLerData" targetNamespace="http://tempuri.org/FpLerData.xsd" xmlns:mstns="http://tempuri.org/FpLerData.xsd" xmlns="http://tempuri.org/FpLerData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FpLerData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <!-- One row. -->
+        <xs:element name="ReportHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- "FP-LER" (ExportReport.ReportCode) -->
+              <xs:element name="ReportCode" type="xs:string" />
+              <!-- e.g. "1 January – 15 September 2026" -->
+              <xs:element name="PeriodText" type="xs:string" />
+              <!-- the optional filters used, e.g. "Faculty: All · Grade: All" -->
+              <xs:element name="ParametersText" type="xs:string" />
+              <!-- UserAccount.FullName and Role, e.g. "A. Naidoo, System Administrator" -->
+              <xs:element name="GeneratedByName" type="xs:string" />
+              <!-- ExportReport.DateGenerated -->
+              <xs:element name="GeneratedAt" type="xs:dateTime" />
+              <!-- completed sessions in the period after the faculty/grade filters -->
+              <xs:element name="SessionsInScope" type="xs:int" />
+              <!-- exception sessions listed, and their % of SessionsInScope (e.g. 27.3) -->
+              <xs:element name="ExceptionCount" type="xs:int" />
+              <xs:element name="ExceptionPercent" type="xs:decimal" />
+              <!-- the outcome split -->
+              <xs:element name="NotEligibleCount" type="xs:int" />
+              <xs:element name="MoreInfoNeededCount" type="xs:int" />
+              <!-- distinct learners behind the exception sessions -->
+              <xs:element name="LearnersAffected" type="xs:int" />
+              <!-- the one-line plain-language note printed under each chart -->
+              <xs:element name="ReasonChartNote" type="xs:string" minOccurs="0" />
+              <xs:element name="FacultyChartNote" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per reason category; a session can record more than one reason. -->
+        <xs:element name="ReasonSummary">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- e.g. "Mathematics mark below the minimum", "Advisory session incomplete" -->
+              <xs:element name="ReasonCategory" type="xs:string" />
+              <xs:element name="ReasonCount" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per faculty that has at least one exception. -->
+        <xs:element name="FacultySummary">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacultyID" type="xs:int" />
+              <xs:element name="FacultyName" type="xs:string" />
+              <xs:element name="ExceptionCount" type="xs:int" />
+              <!-- % of all exceptions in the report (e.g. 25.7) -->
+              <xs:element name="ExceptionPercent" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- One row per exception session (selected programme's RecommendationResult). -->
+        <xs:element name="ExceptionListing">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacultyID" type="xs:int" />
+              <!-- as stored, e.g. "Commerce"; the group heading prints "Faculty of Commerce" -->
+              <xs:element name="FacultyName" type="xs:string" />
+              <!-- order of the faculty blocks in the listing (e.g. FacultyID order) -->
+              <xs:element name="FacultySortOrder" type="xs:int" />
+              <xs:element name="SessionID" type="xs:int" />
+              <!-- yyyy-NNNN, built from SessionDate and SessionID (decisions.md §3) -->
+              <xs:element name="SessionNumber" type="xs:string" />
+              <xs:element name="SessionDate" type="xs:dateTime" />
+              <!-- Learner.FirstName + " " + Learner.LastName -->
+              <xs:element name="LearnerName" type="xs:string" />
+              <!-- 11 or 12 -->
+              <xs:element name="Grade" type="xs:int" />
+              <xs:element name="SchoolName" type="xs:string" />
+              <!-- the qualification selected; null if the session ended before one was selected -->
+              <xs:element name="ProgrammeName" type="xs:string" minOccurs="0" />
+              <!-- display words: "Not currently eligible" or "More information needed" -->
+              <xs:element name="OutcomeName" type="xs:string" />
+              <!-- 1/0 flags, exactly one of them is 1; the report sums them for group headings and the total row -->
+              <xs:element name="NotEligibleCount" type="xs:int" />
+              <xs:element name="MoreInfoNeededCount" type="xs:int" />
+              <!-- the specific reason (RecommendationResult.OutcomeReason, short form) -->
+              <xs:element name="OutcomeReason" type="xs:string" />
+              <!-- the top-ranked alternative (AlternativeRank = 1); null if none was suggested -->
+              <xs:element name="AlternativeProgramme" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
