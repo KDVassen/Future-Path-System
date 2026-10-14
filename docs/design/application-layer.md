@@ -169,6 +169,26 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\TC01-TC05.ps1
 
 ## 8. Notes for the forms round (next)
 
+- The synthetic **"Minimum average"** row (UI 13.2) and **"Overall average"** row (UI 5) come last. Their values:
+  - `RequirementID` DBNull;
+  - `RequirementType` "Required";
+  - `SubjectID`, `AlternativeSubjectID` and `AlternativeMinimumMark` DBNull;
+  - `AlternativeSubjectName` "";
+  - `IsActive` true;
+  - `MinimumMark` = the programme minimum.
+- A minimum average or minimum mark of 0 on UI 13.1 / 13.2 means "no minimum" (stored as NULL). Minimums accept two decimals.
+- Form TODO calls that change:
+
+  | Form TODO | Use instead |
+  |---|---|
+  | `GetFaculties(includeInactive)` | `GetFaculties(includeInactive, includeAllRow)` |
+  | `GetGradeLevels()` | `GetGradeLevels(includeAllRow)` |
+  | `GetAllProgrammes` / `GetDegreeProgrammes` | `GetProgrammes(null, false)` |
+  | `GetSubjects()` | `GetSubjects(includeInactive)` |
+  | `SaveRequirement` | also passes `alternativeMinimumMark` |
+  | `CalculateCategoryScores(SessionId, …)` | `CalculateCategoryScores(responses)` |
+  | `GetProgrammeAlignment` | returns a `decimal` plus an `out string strongestCategories` |
+  | Funding type combos | ValueMember `FundingType` |
 - Create controllers inside the forms' existing `try` blocks, never as field initialisers.
 - `MainForm.Outcome.cs` must map `NCE` and `MOREINFO` (use `AdvisoryOutcome.GetCategory(code)`).
 - Align the TODO calls with these signatures:
