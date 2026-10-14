@@ -41,9 +41,11 @@ namespace FuturePath.ApplicationLayer
 
         #region Learner view (UI 6.2b)
         /// <summary>
-        /// The funding types from FUNDING_TYPE_n: ParameterCode, ParameterValue. With includeAllRow
-        /// an "All funding types" row (ParameterValue "") comes first. The value is the type text
-        /// stored in FundingOption.FundingType.
+        /// The funding types from FUNDING_TYPE_n with columns ParameterCode, ParameterValue (the
+        /// text to show) and FundingType (the value to filter or store: the type text kept in
+        /// FundingOption.FundingType). With includeAllRow an "All funding types" row comes first,
+        /// with ParameterCode "" and FundingType "" (no filter). Bind DisplayMember = ParameterValue,
+        /// ValueMember = FundingType.
         /// </summary>
         public DataTable GetFundingTypes(bool includeAllRow)
         {
