@@ -7085,11 +7085,12 @@
             //
             // mnuMain
             //
+            this.mnuMain.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSignOut,
             this.mnuExit});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuMain.Size = new System.Drawing.Size(974, 24);
+            this.mnuMain.Size = new System.Drawing.Size(974, 27);
             this.mnuMain.TabIndex = 2;
             this.mnuMain.Text = "Main menu";
             this.mnuMain.Name = "mnuMain";
