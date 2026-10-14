@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 
 namespace FuturePath.DatabaseLayer
@@ -8,6 +7,7 @@ namespace FuturePath.DatabaseLayer
     {
         #region Data Members
         private string table = "GradeLevel";
+        private string sqlLocal = "SELECT GradeLevelID, GradeDescription, MarkBasis FROM GradeLevel";
         #endregion
 
         #region Constructor
@@ -18,10 +18,14 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read
-        /// <summary>Columns GradeLevelID, GradeDescription, MarkBasis, ordered by GradeLevelID.</summary>
+        /// <summary>
+        /// Columns GradeLevelID, GradeDescription, MarkBasis, ordered by GradeLevelID. A new table
+        /// is returned every call, so the caller may add rows to it and bind it to several combos.
+        /// </summary>
         public DataTable GetGradeLevels()
         {
-            throw new NotImplementedException();
+            FillDataSet(sqlLocal + " ORDER BY GradeLevelID", table);
+            return GetTable(table).Copy();
         }
         #endregion
     }
