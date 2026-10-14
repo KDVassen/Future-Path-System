@@ -226,23 +226,5 @@ namespace FuturePath.PresentationLayer
         }
 
         #endregion
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // StaffConsoleForm
-            // 
-            this.ClientSize = new System.Drawing.Size(282, 253);
-            this.Name = "StaffConsoleForm";
-            this.Load += new System.EventHandler(this.StaffConsoleForm_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void StaffConsoleForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
