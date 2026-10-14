@@ -118,12 +118,12 @@ namespace FuturePath.PresentationLayer
 
             cboSelFaculty.SelectedIndex = -1;
             txtProgrammeSearch.Text = string.Empty;
-            rbBrowse.Checked = true;
+            rdoBrowse.Checked = true;
             txtProgrammeSearch.Enabled = false;
             lblSearchHint.Text = "Disabled while browsing by faculty";
 
             // Bind only to the Designer columns: auto-generated columns would replace them, and the
-            // column fields used below (colSelect, colSelProgrammeId, …) would no longer be in the grid.
+            // column fields used below (colProgrammesSelect, colProgrammesId, …) would no longer be in the grid.
             dgvProgrammes.AutoGenerateColumns = false;
             dgvRequirements.AutoGenerateColumns = false;
             dgvProgrammes.DataSource = null;
@@ -161,7 +161,7 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                if (rbBrowse.Checked)
+                if (rdoBrowse.Checked)
                 {
                     // TODO BLL: dgvProgrammes.DataSource = cboSelFaculty.SelectedIndex < 0 ? null
                     //               : ReferenceDataController.GetActiveProgrammes((int)cboSelFaculty.SelectedValue);
@@ -254,7 +254,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            bool searching = rbSearch.Checked;
+            bool searching = rdoSearch.Checked;
             txtProgrammeSearch.Enabled = searching;
             lblSearchHint.Text = searching
                 ? "Searches all faculties"
@@ -271,7 +271,7 @@ namespace FuturePath.PresentationLayer
         private void cboSelFaculty_SelectionChangeCommitted(object sender, EventArgs e)
         {
             FacultyCheckFaculty();
-            if (rbBrowse.Checked)
+            if (rdoBrowse.Checked)
             {
                 FacultyClearSelectedProgramme();
                 FacultyLoadProgrammes();
@@ -287,7 +287,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>Relists the programmes as the search text changes (search mode only).</summary>
         private void txtProgrammeSearch_TextChanged(object sender, EventArgs e)
         {
-            if (rbSearch.Checked)
+            if (rdoSearch.Checked)
             {
                 FacultyClearSelectedProgramme();
                 FacultyLoadProgrammes();
@@ -297,20 +297,20 @@ namespace FuturePath.PresentationLayer
         /// <summary>The in-grid Select button chooses that programme and loads its requirements.</summary>
         private void dgvProgrammes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colSelect.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colProgrammesSelect.Index)
             {
                 return;
             }
 
             DataGridViewRow row = dgvProgrammes.Rows[e.RowIndex];
-            object id = row.Cells[colSelProgrammeId.Index].Value;
+            object id = row.Cells[colProgrammesId.Index].Value;
             if (!(id is int))
             {
                 return;
             }
 
             facultyProgrammeId = (int)id;
-            facultyProgrammeName = Convert.ToString(row.Cells[colProgrammeName.Index].Value);
+            facultyProgrammeName = Convert.ToString(row.Cells[colProgrammesName.Index].Value);
             dgvProgrammes.Invalidate();
             FacultyLoadProgrammeDetails();
             SetStatus("Selected " + facultyProgrammeName + ". Check eligibility when you are ready.", DeepNavy, Color.White);
@@ -319,12 +319,12 @@ namespace FuturePath.PresentationLayer
         /// <summary>Shows "Selected" on the chosen programme's button and "Select" on every other row.</summary>
         private void dgvProgrammes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colSelect.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colProgrammesSelect.Index)
             {
                 return;
             }
 
-            object id = dgvProgrammes.Rows[e.RowIndex].Cells[colSelProgrammeId.Index].Value;
+            object id = dgvProgrammes.Rows[e.RowIndex].Cells[colProgrammesId.Index].Value;
             bool chosen = facultyProgrammeId.HasValue && id is int && (int)id == facultyProgrammeId.Value;
             e.Value = chosen ? "✓ Selected" : "Select";
             e.CellStyle.BackColor = chosen ? GreenColour : NavyColour;

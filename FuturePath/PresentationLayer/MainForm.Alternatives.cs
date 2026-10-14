@@ -70,7 +70,7 @@ namespace FuturePath.PresentationLayer
             {
                 if (AlternativesIsSelectedRow(row))
                 {
-                    dgvAlternatives.CurrentCell = row.Cells[colProgramme.Index];
+                    dgvAlternatives.CurrentCell = row.Cells[colAlternativesProgramme.Index];
                     row.Selected = true;
                     AlternativesShowReason(row);
                     SetStatus("Your own selection is highlighted in the list. Compare its fit and reason with the ranked programmes.",
@@ -244,7 +244,7 @@ namespace FuturePath.PresentationLayer
         {
             if (dgvAlternatives.Rows.Count > 0)
             {
-                dgvAlternatives.CurrentCell = dgvAlternatives.Rows[0].Cells[colProgramme.Index];
+                dgvAlternatives.CurrentCell = dgvAlternatives.Rows[0].Cells[colAlternativesProgramme.Index];
                 AlternativesShowReason(dgvAlternatives.Rows[0]);
             }
         }
@@ -261,7 +261,7 @@ namespace FuturePath.PresentationLayer
             }
 
             DataGridViewRow row = dgvAlternatives.Rows[e.RowIndex];
-            if (e.ColumnIndex == colOutcome.Index && e.Value != null)
+            if (e.ColumnIndex == colAlternativesOutcome.Index && e.Value != null)
             {
                 string code = Convert.ToString(e.Value, CultureInfo.InvariantCulture);
                 e.Value = AlternativesOutcomeMarker(code) + " " + AlternativesOutcomeWords(code);
@@ -271,12 +271,12 @@ namespace FuturePath.PresentationLayer
                 e.CellStyle.BackColor = kind == 'S' ? GreenTint : (kind == 'I' ? BlueTint : AmberTint);
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colProgramme.Index && AlternativesIsSelectedRow(row))
+            else if (e.ColumnIndex == colAlternativesProgramme.Index && AlternativesIsSelectedRow(row))
             {
                 e.Value = Convert.ToString(e.Value, CultureInfo.CurrentCulture) + " · your selection";
                 e.FormattingApplied = true;
             }
-            else if (e.ColumnIndex == colRank.Index && (e.Value == null || e.Value == DBNull.Value))
+            else if (e.ColumnIndex == colAlternativesRank.Index && (e.Value == null || e.Value == DBNull.Value))
             {
                 e.Value = "—";
                 e.FormattingApplied = true;
@@ -286,9 +286,9 @@ namespace FuturePath.PresentationLayer
         /// <summary>Writes "Why rank n is suggested — programme" and the stored reason into the reasons panel.</summary>
         private void AlternativesShowReason(DataGridViewRow row)
         {
-            string programme = Convert.ToString(row.Cells[colProgramme.Index].Value, CultureInfo.CurrentCulture);
-            string reason = Convert.ToString(row.Cells[colReason.Index].Value, CultureInfo.CurrentCulture);
-            object rank = row.Cells[colRank.Index].Value;
+            string programme = Convert.ToString(row.Cells[colAlternativesProgramme.Index].Value, CultureInfo.CurrentCulture);
+            string reason = Convert.ToString(row.Cells[colAlternativesReason.Index].Value, CultureInfo.CurrentCulture);
+            object rank = row.Cells[colAlternativesRank.Index].Value;
 
             lblReasonsHeading.Text = AlternativesIsSelectedRow(row) || rank == null || rank == DBNull.Value
                 ? "How your own selection compares — " + programme
@@ -299,13 +299,13 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when the row is the learner's own programme from UI 5.</summary>
         private bool AlternativesIsSelectedRow(DataGridViewRow row)
         {
-            object flag = row.Cells[colIsSelected.Index].Value;
+            object flag = row.Cells[colAlternativesIsSelected.Index].Value;
             if (flag is bool && (bool)flag)
             {
                 return true;
             }
 
-            object id = row.Cells[colAltProgrammeId.Index].Value;
+            object id = row.Cells[colAlternativesProgrammeId.Index].Value;
             return SelectedProgrammeId.HasValue && id != null && id != DBNull.Value
                    && Convert.ToInt32(id, CultureInfo.InvariantCulture) == SelectedProgrammeId.Value;
         }

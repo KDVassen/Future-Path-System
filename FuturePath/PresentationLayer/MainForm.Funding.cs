@@ -206,9 +206,9 @@ namespace FuturePath.PresentationLayer
             }
 
             lblDetailHeading.Text = FundingCellText(row, colFundingName);
-            txtEligibility.Text = FundingCellText(row, colEligibility);
-            txtDocuments.Text = FundingCellText(row, colDocuments);
-            txtContact.Text = FundingCellText(row, colContact);
+            txtEligibility.Text = FundingCellText(row, colFundingEligibility);
+            txtDocuments.Text = FundingCellText(row, colFundingDocuments);
+            txtContact.Text = FundingCellText(row, colFundingContact);
         }
 
         /// <summary>Shows the first option's details as soon as the list is filled.</summary>
@@ -232,12 +232,12 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colStatus.Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != colFundingStatus.Index)
             {
                 return;
             }
 
-            object closing = dgvFunding.Rows[e.RowIndex].Cells[colClosingDate.Index].Value;
+            object closing = dgvFunding.Rows[e.RowIndex].Cells[colFundingClosingDate.Index].Value;
             bool open = closing == null || closing == DBNull.Value
                         || Convert.ToDateTime(closing, CultureInfo.InvariantCulture).Date >= DateTime.Today;
             e.Value = open ? "✓ Open" : "– Closed";

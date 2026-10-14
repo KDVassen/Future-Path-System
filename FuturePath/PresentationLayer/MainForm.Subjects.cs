@@ -408,7 +408,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>The Remove button in a row removes that subject and recalculates the totals.</summary>
         private void dgvSubjects_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.RowIndex >= subjectsRows.Count || e.ColumnIndex != colRemove.Index)
+            if (e.RowIndex < 0 || e.RowIndex >= subjectsRows.Count || e.ColumnIndex != colSubjectsRemove.Index)
             {
                 return;
             }

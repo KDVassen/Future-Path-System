@@ -76,12 +76,12 @@ namespace FuturePath.PresentationLayer
             outcomeScore = null;
             OutcomeRender();
 
-            dgvChecked.AutoGenerateColumns = false;   // bind to the Designer columns only (colRequirementOutcome, colIsMet, …)
+            dgvChecked.AutoGenerateColumns = false;   // bind to the Designer columns only (colCheckedOutcome, colCheckedIsMet, …)
             dgvChecked.DataSource = null;
             OutcomeShowFigures(null, null, null);
-            pnlSubjectTileNote.Text = "required subjects present";
-            pnlMarkTileNote.Text = "marks against minimums";
-            pnlInterestTileNote.Text = "from your questionnaire";
+            lblSubjectTileNote.Text = "required subjects present";
+            lblMarkTileNote.Text = "marks against minimums";
+            lblInterestTileNote.Text = "from your questionnaire";
         }
 
         #endregion
@@ -161,7 +161,7 @@ namespace FuturePath.PresentationLayer
             lblOutcomeExplanation.Text = string.IsNullOrWhiteSpace(outcomeExplanation) ? fallback : outcomeExplanation.Trim();
             lblOutcomeChip.AccessibleDescription = headline + ". " + lblOutcomeExplanation.Text;
 
-            pnlOverallTileValue.Text = outcomeScore.HasValue
+            lblOverallTileValue.Text = outcomeScore.HasValue
                 ? outcomeScore.Value.ToString("0", CultureInfo.CurrentCulture)
                 : "—";
         }
@@ -172,9 +172,9 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void OutcomeShowFigures(double? subjectScore, double? markScore, double? interestScore)
         {
-            pnlSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
-            pnlMarkTileValue.Text = OutcomeFormatFigure(markScore);
-            pnlInterestTileValue.Text = OutcomeFormatFigure(interestScore);
+            lblSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
+            lblMarkTileValue.Text = OutcomeFormatFigure(markScore);
+            lblInterestTileValue.Text = OutcomeFormatFigure(interestScore);
         }
 
         /// <summary>A whole-number figure for a tile, or a dash when there is none.</summary>
@@ -189,12 +189,12 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void dgvChecked_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != colRequirementOutcome.Index || e.Value == null)
+            if (e.RowIndex < 0 || e.ColumnIndex != colCheckedOutcome.Index || e.Value == null)
             {
                 return;
             }
 
-            object met = dgvChecked.Rows[e.RowIndex].Cells[colIsMet.Index].Value;
+            object met = dgvChecked.Rows[e.RowIndex].Cells[colCheckedIsMet.Index].Value;
             bool isMet = met is bool && (bool)met;
             e.Value = (isMet ? "✓ " : "! ") + e.Value;
             e.CellStyle.ForeColor = isMet ? GreenColour : AmberText;
@@ -232,8 +232,8 @@ namespace FuturePath.PresentationLayer
                 //           (rows: SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet — from MatchResult)
                 // TODO BLL: var result = EligibilityController.GetSelectedResult(SessionId.Value);
                 //           OutcomeShowFigures(result.SubjectMatchScore, result.MarkMatchScore, result.InterestMatchScore);
-                //           pnlSubjectTileNote.Text = result.SubjectNote; pnlMarkTileNote.Text = result.MarkNote;
-                //           pnlInterestTileNote.Text = result.StrongestCategory;
+                //           lblSubjectTileNote.Text = result.SubjectNote; lblMarkTileNote.Text = result.MarkNote;
+                //           lblInterestTileNote.Text = result.StrongestCategory;
             }
             catch (Exception)
             {

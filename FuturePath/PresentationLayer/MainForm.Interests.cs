@@ -254,8 +254,8 @@ namespace FuturePath.PresentationLayer
             pnlStatements.ResumeLayout(true);
             interestsLoaded = false;
 
-            Label[] captions = { tileCategory1Caption, tileCategory2Caption, tileCategory3Caption };
-            Label[] values = { tileCategory1Value, tileCategory2Value, tileCategory3Value };
+            Label[] captions = { lblCategory1TileCaption, lblCategory2TileCaption, lblCategory3TileCaption };
+            Label[] values = { lblCategory1TileValue, lblCategory2TileValue, lblCategory3TileValue };
             for (int i = 0; i < captions.Length; i++)
             {
                 captions[i].Text = "Category";
@@ -310,9 +310,9 @@ namespace FuturePath.PresentationLayer
                 SetStatus("Your category scores could not be worked out yet. Your answers are kept.", AmberColour, InkColour);
             }
 
-            Panel[] tiles = { tileCategory1, tileCategory2, tileCategory3 };
-            Label[] captions = { tileCategory1Caption, tileCategory2Caption, tileCategory3Caption };
-            Label[] values = { tileCategory1Value, tileCategory2Value, tileCategory3Value };
+            Panel[] tiles = { pnlCategory1Tile, pnlCategory2Tile, pnlCategory3Tile };
+            Label[] captions = { lblCategory1TileCaption, lblCategory2TileCaption, lblCategory3TileCaption };
+            Label[] values = { lblCategory1TileValue, lblCategory2TileValue, lblCategory3TileValue };
             for (int i = 0; i < tiles.Length; i++)
             {
                 bool show = i < scores.Count;
@@ -359,11 +359,11 @@ namespace FuturePath.PresentationLayer
             }
 
             lblAnsweredCount.Text = answered + " of " + total + " answered";
-            tileAnsweredValue.Text = answered + " / " + total;
+            lblAnsweredTileValue.Text = answered + " / " + total;
             bool complete = total > 0 && outstanding == 0;
-            tileAnswered.BackColor = complete ? GreenTint : AmberTint;
-            tileAnsweredValue.ForeColor = complete ? GreenColour : AmberText;
-            tileAnsweredNote.Text = total == 0 ? "no statements loaded" : complete ? "all answered" : outstanding + " outstanding";
+            pnlAnsweredTile.BackColor = complete ? GreenTint : AmberTint;
+            lblAnsweredTileValue.ForeColor = complete ? GreenColour : AmberText;
+            lblAnsweredTileNote.Text = total == 0 ? "no statements loaded" : complete ? "all answered" : outstanding + " outstanding";
 
             if (total == 0)
             {
