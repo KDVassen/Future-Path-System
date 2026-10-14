@@ -16,8 +16,8 @@ namespace FuturePath.PresentationLayer
     /// (FpLsr.rdlc in the ReportViewer), rendered from the stored session, so the learner sees exactly what is
     /// exported; alternatives appear only if ticked on UI 6.1a and funding only if added on UI 6.2b. <b>Save and export</b> validates, asks for confirmation, writes the file,
     /// completes the session and logs the export. An unusable folder raises a dialog that names the
-    /// folder; success is shown in the status band, never in a modal, and the primary button becomes
-    /// <b>Finish</b>. Back (host button) returns to the screen that opened UI 7; Back and Cancel write nothing.
+    /// folder; success is shown in the status bar, never in a modal, and the primary button becomes
+    /// <b>Finish</b>. Back returns to the tab that opened UI 7; Back and Cancel write nothing.
     /// </summary>
     public partial class MainForm
     {
@@ -31,7 +31,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True once the summary has been saved; the primary button then becomes Finish.</summary>
         private bool summaryExported;
 
-        /// <summary>The success message shown in the status band after the export.</summary>
+        /// <summary>The success message shown in the status bar after the export.</summary>
         private string summaryExportedMessage;
 
         private DateTime? summaryGeneratedOn;
@@ -49,10 +49,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>True once the preview's RenderingComplete handler is attached.</summary>
         private bool summaryViewerReady;
 
-        #region Shown, primary action and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 7 appears: binds the export formats once per session, shows
+        /// Called by PageShown each time UI 7 appears: binds the export formats once per session, shows
         /// the guidance notice and rebuilds the preview from the stored session. After the export it only
         /// restores the completed (Finish) state.
         /// </summary>
@@ -77,13 +77,13 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Save and export → validate both required fields, check the folder, confirm, export, then
-        /// report success in the status band. After success the button reads Finish and returns home.
+        /// report success in the status bar. After success the button reads Finish and returns home.
         /// </summary>
-        private void SummaryPrimary()
+        private void btnSummaryExport_Click(object sender, EventArgs e)
         {
             if (summaryExported)
             {
-                FinishSession();
+                GoHome();   // the session is complete, so the Home tab does not ask
                 return;
             }
 
@@ -92,8 +92,8 @@ namespace FuturePath.PresentationLayer
             if (!SummaryCheckFolder()) problems.Add(new KeyValuePair<Control, string>(txtSaveTo, lblSaveToError.Text.TrimStart('⚠', ' ')));
             if (problems.Count > 0)
             {
-                ShowNotice(problems[0].Value + (problems.Count > 1 ? "  (" + problems.Count + " fields to correct)" : string.Empty),
-                           RedTint, RedColour, RedColour);
+                ShowNotice(lblSummaryNotice, problems[0].Value + (problems.Count > 1 ? "  (" + problems.Count + " fields to correct)" : string.Empty),
+                           RedTint, RedColour);
                 SetStatus(problems.Count + (problems.Count == 1 ? " entry" : " entries") + " to correct before you can export.",
                           RedColour, Color.White);
                 problems[0].Key.Focus();
@@ -168,6 +168,23 @@ namespace FuturePath.PresentationLayer
             rvSummary.Reset();
             CheckField(true, cboExportFormat, lblExportFormat, lblExportFormatError, string.Empty);
             CheckField(true, txtSaveTo, lblSaveTo, lblSaveToError, string.Empty);
+
+            btnSummaryExport.Text = "Save and export";
+            btnSummaryExport.AccessibleName = btnSummaryExport.Text;
+            btnSummaryBack.Visible = true;
+            btnSummaryCancel.Visible = true;
+        }
+
+        /// <summary>Back → the tab that opened UI 7 (UI 6, 6.1a or 6.2b). Nothing is written.</summary>
+        private void btnSummaryBack_Click(object sender, EventArgs e)
+        {
+            SelectPage(summaryReturnPage ?? tabOutcome);
+        }
+
+        /// <summary>Cancel leaves the session (the Home tab asks first). Nothing is written.</summary>
+        private void btnSummaryCancel_Click(object sender, EventArgs e)
+        {
+            GoHome();
         }
 
         #endregion
@@ -404,10 +421,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>Shows the blue guidance notice: saving completes the session.</summary>
         private void SummaryShowGuidance()
         {
-            ShowNotice(SummaryGuidanceText, BlueTint, BlueColour, InkColour);
+            ShowNotice(lblSummaryNotice, SummaryGuidanceText, BlueTint, InkColour);
         }
 
-        /// <summary>Success is shown in the status band (never a modal) and the screen switches to Finish.</summary>
+        /// <summary>Success is shown in the status bar (never a modal) and the screen switches to Finish.</summary>
         private void SummaryShowExported(string folder)
         {
             summaryExported = true;
@@ -421,15 +438,17 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// The completed state of the action band: only the primary button, reading Finish (it returns
-        /// to the homepage), with the success message in the status band.
+        /// The completed state of UI 7: only the primary button, reading Finish (it returns to the
+        /// homepage), a green notice, and the success message in the status bar.
         /// </summary>
         private void SummaryApplyFinishState()
         {
-            PrimaryText("Finish");
-            btnPrimary.AccessibleName = "Finish and return to the homepage";
-            ShowButtons(btnPrimary);
-            lblActionHint.Text = "Session completed · Finish returns to the homepage.";
+            btnSummaryExport.Text = "Finish";
+            btnSummaryExport.AccessibleName = "Finish and return to the homepage";
+            SetPrimaryEnabled(btnSummaryExport, true);
+            btnSummaryBack.Visible = false;
+            btnSummaryCancel.Visible = false;
+            ShowNotice(lblSummaryNotice, "✓ Session completed. Finish returns to the homepage.", GreenTint, GreenColour);
             SetStatus(summaryExportedMessage, GreenColour, Color.White);
         }
 

@@ -24,11 +24,7 @@ namespace FuturePath.PresentationLayer
         // Fonts and sizes of the statement rows built at runtime (spec 2.2.5: body 10 pt, caption 8 pt).
         private static readonly Font InterestsStatementFont = new Font("Segoe UI", 10F);
         private static readonly Font InterestsCategoryFont = new Font("Segoe UI", 8F);
-        private const int InterestsRowHeight = 36;
-        private const int InterestsRowWidth = 881;            // statement panel client width less a vertical scroll bar
-        private const int InterestsStatementWidth = 470;
-        private const int InterestsFirstResponseColumn = 493; // matches the header labels in the Designer
-        private const int InterestsResponseColumnWidth = 78;
+        private const int InterestsRowHeight = 36;   // at 100% scaling
 
         /// <summary>Captions of the 1–5 scale, used for the radio buttons' accessible names.</summary>
         private static readonly string[] InterestsResponseCaptions = { "Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree" };
@@ -118,7 +114,7 @@ namespace FuturePath.PresentationLayer
             }
 
             // Rows fill the panel when they all fit; otherwise leave room for the vertical scroll bar.
-            if (interestsRows.Count * InterestsRowHeight <= pnlStatements.ClientSize.Height)
+            if (interestsRows.Count * LogicalToDeviceUnits(InterestsRowHeight) <= pnlStatements.ClientSize.Height)
             {
                 foreach (InterestQuestionRow row in interestsRows)
                 {
@@ -150,12 +146,23 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private Panel InterestsBuildRowPanel(InterestQuestionRow row, string statement)
         {
+            // The radio buttons line up under the Strongly disagree … Strongly agree header labels, so the
+            // columns are read from those Designer labels. The other sizes are pixels at 100% scaling, so
+            // LogicalToDeviceUnits converts them for the screen's scale (e.g. 36 → 45 at 125%).
+            int firstResponseColumn = lblHeaderResponse1.Left;
+            int responseColumnWidth = lblHeaderResponse1.Width;
+            int rowHeight = LogicalToDeviceUnits(InterestsRowHeight);
+            int margin = LogicalToDeviceUnits(12);
+            int statementWidth = firstResponseColumn - 2 * margin;
+            int rowWidth = pnlStatements.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            Size radioSize = new Size(LogicalToDeviceUnits(16), LogicalToDeviceUnits(18));
+
             int number = row.Index + 1;
             var panel = new Panel
             {
                 Name = "pnlQuestion" + number,
-                Location = new Point(0, row.Index * InterestsRowHeight),
-                Size = new Size(InterestsRowWidth, InterestsRowHeight),
+                Location = new Point(0, row.Index * rowHeight),
+                Size = new Size(rowWidth, rowHeight),
                 AccessibleName = "Statement " + number,
                 Tag = row
             };
@@ -167,8 +174,8 @@ namespace FuturePath.PresentationLayer
                 Font = InterestsStatementFont,
                 ForeColor = InkColour,
                 AutoEllipsis = true,
-                Location = new Point(12, 1),
-                Size = new Size(InterestsStatementWidth, 19)
+                Location = new Point(margin, LogicalToDeviceUnits(1)),
+                Size = new Size(statementWidth, LogicalToDeviceUnits(19))
             };
 
             row.CategoryLabel = new Label
@@ -176,8 +183,8 @@ namespace FuturePath.PresentationLayer
                 Name = "lblQuestionCategory" + number,
                 Font = InterestsCategoryFont,
                 ForeColor = MutedColour,
-                Location = new Point(12, 19),
-                Size = new Size(InterestsStatementWidth, 16)
+                Location = new Point(margin, LogicalToDeviceUnits(19)),
+                Size = new Size(statementWidth, LogicalToDeviceUnits(16))
             };
 
             panel.Controls.Add(statementLabel);
@@ -189,9 +196,9 @@ namespace FuturePath.PresentationLayer
                     Name = "rdoQuestion" + number + "Response" + value,
                     Tag = value,
                     AccessibleName = "Statement " + number + ": " + InterestsResponseCaptions[value - 1],
-                    Location = new Point(InterestsFirstResponseColumn + (value - 1) * InterestsResponseColumnWidth
-                                         + (InterestsResponseColumnWidth - 16) / 2, 9),
-                    Size = new Size(16, 18),
+                    Location = new Point(firstResponseColumn + (value - 1) * responseColumnWidth
+                                         + (responseColumnWidth - radioSize.Width) / 2, LogicalToDeviceUnits(9)),
+                    Size = radioSize,
                     UseVisualStyleBackColor = true
                 };
                 option.CheckedChanged += InterestsResponse_CheckedChanged;
@@ -220,7 +227,7 @@ namespace FuturePath.PresentationLayer
         #region Showing and resetting
 
         /// <summary>
-        /// Called by ShowPage each time UI 4 is shown: loads the questions the first time in a session, then
+        /// Called by PageShown each time UI 4 is shown: loads the questions the first time in a session, then
         /// refreshes the shading, tiles and notice, and keeps Save and continue disabled until every
         /// statement is answered.
         /// </summary>
@@ -358,38 +365,33 @@ namespace FuturePath.PresentationLayer
             tileAnsweredValue.ForeColor = complete ? GreenColour : AmberText;
             tileAnsweredNote.Text = total == 0 ? "no statements loaded" : complete ? "all answered" : outstanding + " outstanding";
 
-            // The action band and notice panel belong to whichever screen is showing.
-            if (CurrentPage == tabInterests)
+            if (total == 0)
             {
-                if (total == 0)
-                {
-                    ShowNotice("The questionnaire statements are read from stored data and appear here once they are loaded.",
-                        BlueTint, BlueColour, InkColour);
-                }
-                else if (complete)
-                {
-                    ShowNotice("✓ All " + total + " statements answered. Save and continue to choose a faculty and programme.",
-                        GreenTint, GreenColour, GreenColour);
-                }
-                else
-                {
-                    ShowNotice(outstanding + (outstanding == 1 ? " statement" : " statements") + " still to answer. The interest " +
-                               "alignment score is calculated only once all " + total + " are answered; the outstanding statements " +
-                               "are shaded below.", AmberTint, AmberColour, AmberText);
-                }
-
-                SetPrimaryEnabled(complete);
+                ShowNotice(lblInterestsNotice, "The questionnaire statements are read from stored data and appear here once they are loaded.",
+                    BlueTint, InkColour);
+            }
+            else if (complete)
+            {
+                ShowNotice(lblInterestsNotice, "✓ All " + total + " statements answered. Save and continue to choose a faculty and programme.",
+                    GreenTint, GreenColour);
+            }
+            else
+            {
+                ShowNotice(lblInterestsNotice, outstanding + (outstanding == 1 ? " statement" : " statements") + " still to answer. The interest " +
+                           "alignment score is calculated only once all " + total + " are answered; the outstanding statements " +
+                           "are shaded below.", AmberTint, AmberText);
             }
 
+            SetPrimaryEnabled(btnInterestsSave, complete);
             InterestsRefreshCategoryScores();
         }
 
         #endregion
 
-        #region Save and continue
+        #region Button click events
 
         /// <summary>Save and continue (enabled only when every statement is answered) → UI 5.</summary>
-        private void InterestsPrimary()
+        private void btnInterestsSave_Click(object sender, EventArgs e)
         {
             if (interestsRows.Count == 0 || interestsRows.Any(r => !r.Response.HasValue))
             {
@@ -407,6 +409,18 @@ namespace FuturePath.PresentationLayer
             }
 
             GoToStep(tabFaculty, 4);
+        }
+
+        /// <summary>Back → UI 3. The answers are kept.</summary>
+        private void btnInterestsBack_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectedTab = tabSubjects;
+        }
+
+        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        private void btnInterestsCancel_Click(object sender, EventArgs e)
+        {
+            GoHome();
         }
 
         #endregion

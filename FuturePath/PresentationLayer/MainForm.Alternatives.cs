@@ -7,13 +7,13 @@ using System.Windows.Forms;
 namespace FuturePath.PresentationLayer
 {
     /// <summary>
-    /// UI 6.1a — Alternative Programmes (rail step 5; spec 2.3.7, Sequence 2).
+    /// UI 6.1a — Alternative Programmes (step 5 of 6; spec 2.3.7, Sequence 2).
     /// Future Path ranks every <b>active</b> programme against the learner's captured subjects, marks
     /// and interest profile. Nothing is typed: selecting a ranked row rewrites the reasons panel, so
     /// every recommendation states why it is suggested, not only its rank and score. The
     /// "Include these alternative programmes" box is unticked by default and is saved to
     /// <c>AdvisorySession.AlternativesInSummary</c>. There is no validation on this screen.
-    /// Compare with my selection and Back are host buttons; Compare calls <see cref="AlternativesCompare"/>.
+    /// Its buttons (Continue to summary, Compare with my selection, Back) sit along the bottom of the tab.
     /// </summary>
     public partial class MainForm
     {
@@ -35,10 +35,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>Why more information is needed, as returned with that outcome.</summary>
         private string alternativesMoreInfoText;
 
-        #region Shown, primary action, compare and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 6.1a appears: shows the ready status and the guidance notice,
+        /// Called by PageShown each time UI 6.1a appears: shows the ready status and the guidance notice,
         /// then ranks the programmes (Sequence 2) unless they were already ranked for this selection.
         /// </summary>
         private void AlternativesShown()
@@ -53,18 +53,18 @@ namespace FuturePath.PresentationLayer
             }
 
             AlternativesShowNotice();
-            btnCompare.Enabled = !alternativesMoreInfo;
+            btnAlternativesCompare.Enabled = !alternativesMoreInfo;
             AlternativesLoad();
         }
 
         /// <summary>Continue to summary → UI 7; Back on UI 7 returns here.</summary>
-        private void AlternativesPrimary()
+        private void btnAlternativesSummary_Click(object sender, EventArgs e)
         {
             OpenSummary(tabAlternatives);
         }
 
         /// <summary>Compare with my selection: selects and shows the learner's own programme row. Changes nothing.</summary>
-        private void AlternativesCompare()
+        private void btnAlternativesCompare_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgvAlternatives.Rows)
             {
@@ -81,6 +81,12 @@ namespace FuturePath.PresentationLayer
 
             SetStatus("Your selected programme is not in this list. Go back to see its outcome on Eligibility results.",
                       AmberColour, InkColour);
+        }
+
+        /// <summary>Back → UI 6 (Eligibility results).</summary>
+        private void btnAlternativesBack_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabOutcome;
         }
 
         /// <summary>
@@ -105,7 +111,7 @@ namespace FuturePath.PresentationLayer
             lblRankedCount.Text = string.Empty;
             lblReasonsHeading.Text = "Why each programme is suggested";
             lblReasons.Text = "Select a programme in the list to see why it is suggested.";
-            btnCompare.Enabled = true;
+            btnAlternativesCompare.Enabled = true;
         }
 
         #endregion
@@ -122,7 +128,6 @@ namespace FuturePath.PresentationLayer
         /// <param name="explanation">Why the outcome was reached (shown with it, never the label alone).</param>
         private void AlternativesShowOutcome(string category, string explanation)
         {
-            bool showing = CurrentPage == tabAlternatives;
             alternativesRanked = false;   // a new eligibility check makes the earlier ranking stale (Sequence 2 runs again)
             if (AlternativesOutcomeKind(category) == 'I')
             {
@@ -134,10 +139,10 @@ namespace FuturePath.PresentationLayer
                 lblReasons.Text = string.IsNullOrEmpty(explanation)
                     ? "Future Path needs your subjects, marks and interest questionnaire before it can rank other programmes."
                     : explanation;
-                if (showing)
+                AlternativesShowNotice();
+                btnAlternativesCompare.Enabled = false;
+                if (CurrentPage == tabAlternatives)
                 {
-                    AlternativesShowNotice();
-                    btnCompare.Enabled = false;
                     SetStatus("More information is needed before alternative programmes can be ranked.", AmberColour, InkColour);
                 }
 
@@ -148,10 +153,7 @@ namespace FuturePath.PresentationLayer
             alternativesMoreInfo = false;
             alternativesMoreInfoText = null;
             alternativesSelectedOutcome = AlternativesOutcomeWords(category).ToLower(CultureInfo.CurrentCulture);
-            if (showing)
-            {
-                AlternativesShowNotice();
-            }
+            AlternativesShowNotice();
         }
 
         /// <summary>
@@ -165,7 +167,7 @@ namespace FuturePath.PresentationLayer
         {
             alternativesMoreInfo = false;
             alternativesMoreInfoText = null;
-            btnCompare.Enabled = true;
+            btnAlternativesCompare.Enabled = true;
             dgvAlternatives.AutoGenerateColumns = false;
             dgvAlternatives.DataSource = rankedAlternatives;
 
@@ -177,10 +179,7 @@ namespace FuturePath.PresentationLayer
                 lblReasons.Text = "No other active programme could be ranked for your profile.";
             }
 
-            if (CurrentPage == tabAlternatives)
-            {
-                AlternativesShowNotice();
-            }
+            AlternativesShowNotice();
         }
 
         #endregion
@@ -350,17 +349,17 @@ namespace FuturePath.PresentationLayer
         #region Notice and tick box
 
         /// <summary>
-        /// Shows the notice panel: blue guidance naming the learner's own outcome, or amber when more
+        /// Fills the notice: blue guidance naming the learner's own outcome, or amber when more
         /// information is needed before anything can be ranked.
         /// </summary>
         private void AlternativesShowNotice()
         {
             if (alternativesMoreInfo)
             {
-                ShowNotice("? More information needed — " + (string.IsNullOrEmpty(alternativesMoreInfoText)
+                ShowNotice(lblAlternativesNotice, "? More information needed — " + (string.IsNullOrEmpty(alternativesMoreInfoText)
                         ? "go back and complete your subjects, marks and interest questionnaire, then try again."
                         : alternativesMoreInfoText),
-                    AmberTint, AmberColour, AmberText);
+                    AmberTint, AmberText);
                 return;
             }
 
@@ -368,9 +367,9 @@ namespace FuturePath.PresentationLayer
             string opening = string.IsNullOrEmpty(alternativesSelectedOutcome)
                 ? "Every active programme"
                 : selection + " returned a " + alternativesSelectedOutcome + ", so every active programme";
-            ShowNotice(opening + " has been ranked against your subjects, marks and interests. " +
+            ShowNotice(lblAlternativesNotice, opening + " has been ranked against your subjects, marks and interests. " +
                        "Your own selection stays in the list for comparison.",
-                       BlueTint, BlueColour, InkColour);
+                       BlueTint, InkColour);
         }
 
         /// <summary>Saves the learner's include / leave-out choice as soon as it changes.</summary>

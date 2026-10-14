@@ -11,7 +11,7 @@ namespace FuturePath.PresentationLayer
     /// The outcome band carries a status chip (marker + words) and always states <b>why</b> the
     /// outcome was reached. Green marks a requirement met, amber a gap or "not currently
     /// eligible", grey-blue "more information needed" — red is never used for an outcome
-    /// (decisions.md §2). Back, Funding options and Alternative programmes (host buttons) leave the
+    /// (decisions.md §2). Back, Funding options and Alternative programmes leave the
     /// stored outcome unchanged, and Continue to summary carries it through to UI 7.
     /// </summary>
     public partial class MainForm
@@ -27,10 +27,10 @@ namespace FuturePath.PresentationLayer
         private string outcomeExplanation;
         private double? outcomeScore;
 
-        #region Shown, primary action and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 6 appears: redraws the outcome band for the checked
+        /// Called by PageShown each time UI 6 appears: redraws the outcome band for the checked
         /// programme, shows the ready status and reloads the requirement check.
         /// </summary>
         private void OutcomeShown()
@@ -41,9 +41,27 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>Continue to summary → UI 7, carrying the outcome through.</summary>
-        private void OutcomePrimary()
+        private void btnOutcomeSummary_Click(object sender, EventArgs e)
         {
             OpenSummary(tabOutcome);
+        }
+
+        /// <summary>Alternative programmes → UI 6.1a (Sequence 2 runs when the tab is shown).</summary>
+        private void btnOutcomeAlternatives_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabAlternatives;
+        }
+
+        /// <summary>Funding options → UI 6.2b, the learner's yes/no choice to view funding (spec Section 7).</summary>
+        private void btnOutcomeFunding_Click(object sender, EventArgs e)
+        {
+            tcResults.SelectedTab = tabFunding;
+        }
+
+        /// <summary>Back → UI 5, where another programme can be checked.</summary>
+        private void btnOutcomeBack_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectedTab = tabFaculty;
         }
 
         /// <summary>

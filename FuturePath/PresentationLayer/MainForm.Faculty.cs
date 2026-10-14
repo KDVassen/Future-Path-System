@@ -33,10 +33,10 @@ namespace FuturePath.PresentationLayer
         /// <summary>The chosen programme's DegreeProgramme.ProgrammeName (not yet checked).</summary>
         private string facultyProgrammeName;
 
-        #region Shown, primary action and reset (called by the host)
+        #region Shown, button clicks and reset
 
         /// <summary>
-        /// Called by ShowPage each time UI 5 appears: binds the faculty list once per session, restores
+        /// Called by PageShown each time UI 5 appears: binds the faculty list once per session, restores
         /// the preferred faculty if the list was reloaded, and shows the ready status.
         /// </summary>
         private void FacultyShown()
@@ -59,11 +59,11 @@ namespace FuturePath.PresentationLayer
         /// Check eligibility → saves the selection, runs Sequence 1 and shows the outcome on UI 6.
         /// The button stays active, so another programme can be checked after coming Back.
         /// </summary>
-        private void FacultyPrimary()
+        private void btnFacultyCheck_Click(object sender, EventArgs e)
         {
             if (!FacultyCheckFaculty())
             {
-                SetStatus("Choose a faculty before you check eligibility.", AmberColour, InkColour);
+                SetStatus("Choose a faculty before you check eligibility.", RedColour, Color.White);
                 cboSelFaculty.Focus();
                 return;
             }
@@ -93,6 +93,18 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabOutcome, 5);
         }
 
+        /// <summary>Back → UI 4. Nothing is written.</summary>
+        private void btnFacultyBack_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectedTab = tabInterests;
+        }
+
+        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        private void btnFacultyCancel_Click(object sender, EventArgs e)
+        {
+            GoHome();
+        }
+
         /// <summary>
         /// Returns UI 5 to a brand-new state for the next learner (spec 2.1): browse mode, no faculty,
         /// no search text, no programmes, no selection, no requirements or alignment, no amber message,
@@ -118,11 +130,7 @@ namespace FuturePath.PresentationLayer
             lblProgrammeCount.Text = "Choose a faculty to list its active programmes.";
             FacultyLoadProgrammeDetails();
 
-            lblSelFaculty.ForeColor = InkColour;
-            cboSelFaculty.BackColor = SystemColors.Window;
-            lblFacultyError.Text = string.Empty;
-            lblFacultyError.Visible = false;
-            cboSelFaculty.AccessibleDescription = null;
+            CheckField(true, cboSelFaculty, lblSelFaculty, lblFacultyError, null);
         }
 
         #endregion
@@ -342,20 +350,14 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Faculty is required, but no selection can be invalid (2.3.5), so a missing faculty is an
-        /// outstanding requirement: amber label and message, never red.
+        /// Faculty is required: a missing faculty shows red, like every other required field
+        /// (decisions.md D12 — a deliberate change from the amber in spec 2.3.5).
         /// </summary>
         /// <returns>True when a faculty is chosen.</returns>
         private bool FacultyCheckFaculty()
         {
-            bool chosen = cboSelFaculty.SelectedIndex >= 0;
-            const string message = "Choose your preferred faculty.";
-            lblSelFaculty.ForeColor = chosen ? InkColour : AmberText;
-            cboSelFaculty.BackColor = chosen ? SystemColors.Window : AmberTint;
-            lblFacultyError.Text = chosen ? string.Empty : "! " + message;
-            lblFacultyError.Visible = !chosen;
-            cboSelFaculty.AccessibleDescription = chosen ? null : message;
-            return chosen;
+            return CheckField(cboSelFaculty.SelectedIndex >= 0, cboSelFaculty, lblSelFaculty, lblFacultyError,
+                "Faculty: choose your preferred faculty.");
         }
 
         #endregion
