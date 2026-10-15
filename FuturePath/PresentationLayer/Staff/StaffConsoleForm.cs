@@ -165,7 +165,7 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>UI 10.3c "Generate report" → UI 11, already filtered (spec 2.1).</summary>
-        private void OpenReports(string reportCode, DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcome)
+        private void OpenReports(string reportCode, DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcome)
         {
             tcConsole.SelectedTab = tabReports;
             ReportsApplyFilter(reportCode, from, to, facultyId, gradeLevelId, outcome);

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -73,10 +74,16 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboLrnGrade.DataSource = ReferenceDataController.GetGradeLevels();
-                //           cboLrnGrade.DisplayMember = "GradeDescription"; cboLrnGrade.ValueMember = "GradeLevelID";
-                // TODO BLL: cboProvince.DataSource = ReferenceDataController.GetProvinces();
-                //           (Province has no table yet: proposed SystemParameter PROVINCE_1..9, as on UI 2.)
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboLrnGrade.DisplayMember = "GradeDescription";
+                cboLrnGrade.ValueMember = "GradeLevelID";
+                cboLrnGrade.DataSource = referenceDataController.GetGradeLevels(false);
+
+                // The SystemParameter rows PROVINCE_1..9, as on UI 2 (decisions.md D16).
+                cboProvince.DisplayMember = "ParameterValue";
+                cboProvince.ValueMember = "ParameterValue";
+                cboProvince.DataSource = referenceDataController.GetProvinces();
+
                 cboLrnGrade.SelectedIndex = -1;
                 cboProvince.SelectedIndex = -1;
             }
@@ -87,14 +94,14 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Asks the BLL for matching learners. The result carries only LearnerID, LearnerName,
+        /// Asks the BLL for matching learners (a grade of 0 and a blank field mean "any"). The BLL checks the
+        /// role before returning learner data (Section 8). The result carries only LearnerID, LearnerName,
         /// GradeDescription, SchoolName, Province, SessionCount and LastSessionDate — no contact details.
         /// </summary>
-        private DataTable LearnerSearchFindLearners(string surname, string firstName, int? gradeLevelId, string school, string province)
+        private DataTable LearnerSearchFindLearners(string surname, string firstName, int gradeLevelId, string school, string province)
         {
-            // TODO BLL: return LearnerController.FindLearners(surname, firstName, gradeLevelId, school, province, UserId);
-            //           (the BLL checks the role before returning learner data — Section 8)
-            return null;
+            LearnerController learnerController = new LearnerController();
+            return learnerController.FindLearners(UserId, surname, firstName, gradeLevelId, school, province);
         }
 
         #endregion
@@ -104,14 +111,11 @@ namespace FuturePath.PresentationLayer
         /// <summary>Runs the search and reports the result in the status bar.</summary>
         private void LearnerSearchFind()
         {
-            int? gradeLevelId = cboLrnGrade.SelectedValue is int ? (int?)(int)cboLrnGrade.SelectedValue : null;
-            string province = cboProvince.SelectedIndex >= 0 ? cboProvince.Text : null;
-
             DataTable results;
             try
             {
-                results = LearnerSearchFindLearners(txtLrnSurname.Text.Trim(), txtFirstName.Text.Trim(), gradeLevelId,
-                    txtSchool.Text.Trim(), province);
+                results = LearnerSearchFindLearners(txtLrnSurname.Text.Trim(), txtFirstName.Text.Trim(), SelectedId(cboLrnGrade),
+                    txtSchool.Text.Trim(), SelectedCode(cboProvince));
             }
             catch (Exception)
             {
@@ -120,8 +124,16 @@ namespace FuturePath.PresentationLayer
             }
 
             dgvLearners.DataSource = results;
-            int count = results == null ? 0 : results.Rows.Count;
-            lblLrnResultsCount.Text = count == 1 ? "1 learner matches" : count + " learners match";
+            int count = results.Rows.Count;
+            if (count == 1)
+            {
+                lblLrnResultsCount.Text = "1 learner matches";
+            }
+            else
+            {
+                lblLrnResultsCount.Text = count + " learners match";
+            }
+
             if (count == 0)
             {
                 ReportStatus("No learners match these criteria. Clear a field to widen the search.", true);

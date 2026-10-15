@@ -87,10 +87,10 @@ namespace FuturePath.PresentationLayer
         /// <param name="reportCode">"FP-LSR", "FP-DIE" or "FP-LER".</param>
         /// <param name="from">First session date in scope.</param>
         /// <param name="to">Last session date in scope.</param>
-        /// <param name="facultyId">Faculty.FacultyID, or null for all faculties.</param>
-        /// <param name="gradeLevelId">GradeLevel.GradeLevelID, or null for all grades.</param>
-        /// <param name="outcome">RecommendationResult.OutcomeCode, or null for all outcomes.</param>
-        private void ReportsApplyFilter(string reportCode, DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcome)
+        /// <param name="facultyId">Faculty.FacultyID, or 0 for all faculties.</param>
+        /// <param name="gradeLevelId">GradeLevel.GradeLevelID, or 0 for all grades.</param>
+        /// <param name="outcome">RecommendationResult.OutcomeCode, or "" for all outcomes.</param>
+        private void ReportsApplyFilter(string reportCode, DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcome)
         {
             reportsLoading = true;
             rdoLearnerSummary.Checked = reportCode == ReportsLearnerSummaryCode;
