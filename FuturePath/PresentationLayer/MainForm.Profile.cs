@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -121,10 +122,16 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboGrade.DataSource = ReferenceDataController.GetGradeLevels();
-                //           cboGrade.DisplayMember = "GradeDescription"; cboGrade.ValueMember = "GradeLevelID";
-                // TODO BLL: cboProvince.DataSource = ReferenceDataController.GetProvinces();
-                //           Province is value-bound (2.3.2) but has no table yet: proposed SystemParameter PROVINCE_1..9.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboGrade.DisplayMember = "GradeDescription";
+                cboGrade.ValueMember = "GradeLevelID";
+                cboGrade.DataSource = referenceDataController.GetGradeLevels(false);
+
+                // Province is value-bound (2.3.2) to the SystemParameter rows PROVINCE_1..9 (decisions.md D16).
+                cboProvince.DisplayMember = "ParameterValue";
+                cboProvince.ValueMember = "ParameterValue";
+                cboProvince.DataSource = referenceDataController.GetProvinces();
+
                 cboGrade.SelectedIndex = -1;
                 cboProvince.SelectedIndex = -1;
                 profileListsLoaded = true;
@@ -137,18 +144,26 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Saves the learner and opens (or updates) the "In progress" advisory session
-        /// (decisions.md D3). The BLL validates again and returns the IDs and the session number.
+        /// (decisions.md D3). The BLL validates again and returns the session with its IDs and number.
+        /// The first save sends session ID 0, which tells the BLL to create the learner and the session.
         /// </summary>
         private void ProfileSave()
         {
-            // TODO BLL: var saved = LearnerController.SaveProfile(SessionId, txtFirstName.Text.Trim(), txtSurname.Text.Trim(),
-            //               (int)cboGrade.SelectedValue, txtSchool.Text.Trim(), cboProvince.Text,
-            //               (short)numAdvisingYear.Value, txtEmail.Text.Trim(), txtMobile.Text.Trim());
-            //           SessionId = saved.SessionId; LearnerId = saved.LearnerId; SessionNumber = saved.SessionNumber;
-            if (!string.IsNullOrEmpty(SessionNumber))
+            int sessionId = 0;
+            if (SessionId.HasValue)
             {
-                txtSessionNumber.Text = SessionNumber;
+                sessionId = SessionId.Value;
             }
+
+            LearnerController learnerController = new LearnerController();
+            AdvisorySession session = learnerController.SaveProfile(sessionId, txtFirstName.Text.Trim(), txtSurname.Text.Trim(),
+                (int)cboGrade.SelectedValue, txtSchool.Text.Trim(), cboProvince.Text,
+                (short)numAdvisingYear.Value, txtEmail.Text.Trim(), txtMobile.Text.Trim());
+
+            SessionId = session.SessionID;
+            LearnerId = session.LearnerID;
+            SessionNumber = session.SessionNumber;
+            txtSessionNumber.Text = SessionNumber;
         }
 
         /// <summary>
@@ -293,6 +308,13 @@ namespace FuturePath.PresentationLayer
             try
             {
                 ProfileSave();
+            }
+            catch (ArgumentException ex)
+            {
+                // The BLL's own check failed: its message names the field and the fix.
+                ProfileShowNoticeError(ex.Message);
+                SetStatus(ex.Message, RedColour, Color.White);
+                return;
             }
             catch (Exception)
             {

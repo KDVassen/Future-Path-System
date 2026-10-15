@@ -120,6 +120,26 @@ namespace FuturePath.PresentationLayer
             tcMain.SelectedTab = tabHome;
         }
 
+        /// <summary>
+        /// Called after the subjects (UI 3) or the questionnaire answers (UI 4) are saved again once the
+        /// eligibility check has run. Saving them deletes the session's results in the BLL (decisions.md D20),
+        /// so the results and the summary lock again until Check eligibility is pressed on UI 5, and nothing
+        /// from the earlier check stays on screen (decisions.md D23).
+        /// </summary>
+        private void ForgetResults()
+        {
+            if (highestStepReached <= 4)
+            {
+                return;
+            }
+
+            highestStepReached = 4;
+            OutcomeReset();
+            AlternativesReset();
+            FundingReset();
+            SummaryReset();
+        }
+
         /// <summary>UI 6, 6.1a or 6.2b → UI 7. Back on UI 7 returns to the tab that opened it.</summary>
         private void OpenSummary(TabPage from)
         {

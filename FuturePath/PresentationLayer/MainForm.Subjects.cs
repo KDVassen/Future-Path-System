@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -30,8 +30,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>True once the subject list and the minimum subject count have been loaded for this session.</summary>
         private bool subjectsLoaded;
 
-        /// <summary>The stored minimum subject count (SystemParameter MIN_SUBJECT_COUNT); null until loaded.</summary>
-        private int? subjectsMinimumCount;
+        /// <summary>The stored minimum subject count (SystemParameter MIN_SUBJECT_COUNT); 0 until it is loaded.</summary>
+        private int subjectsMinimumCount;
 
         /// <summary>
         /// The mark exactly as typed. The NumericUpDown clamps and rounds its text when it loses focus,
@@ -104,7 +104,7 @@ namespace FuturePath.PresentationLayer
             subjectsRawMarkText = numMark.Text;
             SubjectsClearEntryErrors();
 
-            subjectsMinimumCount = null;
+            subjectsMinimumCount = 0;
             subjectsLoaded = false;
             SubjectsRefreshTotals();
         }
@@ -115,16 +115,17 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Binds the subject list to active <c>Subject</c> rows and reads the stored minimum subject
-        /// count. Nothing is hard-coded: until the BLL exists the list stays empty.
+        /// count (MIN_SUBJECT_COUNT; 0 if it is missing). Nothing is hard-coded.
         /// </summary>
         private void SubjectsLoadReferenceData()
         {
             try
             {
-                // TODO BLL: cboSubject.DataSource = ReferenceDataController.GetActiveSubjects();   // SubjectID, SubjectName, SubjectLevel
-                //           cboSubject.DisplayMember = "SubjectName"; cboSubject.ValueMember = "SubjectID";
-                // TODO BLL: subjectsMinimumCount = ReferenceDataController.GetParameterInt("MIN_SUBJECT_COUNT");
-                subjectsMinimumCount = null;
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboSubject.DisplayMember = "SubjectName";
+                cboSubject.ValueMember = "SubjectID";
+                cboSubject.DataSource = referenceDataController.GetActiveSubjects();
+                subjectsMinimumCount = referenceDataController.GetParameterInt(SystemSettings.MinSubjectCountCode);
                 cboSubject.SelectedIndex = -1;
                 txtSubjectLevel.Text = string.Empty;
                 subjectsLoaded = true;
@@ -136,82 +137,74 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Asks the BLL to accept a subject for this session. The BLL re-checks the mark range
-        /// (LearnerSubject.validateMarkRange) and duplicates (UNIQUE(SessionID, SubjectID)), and
-        /// returns the NSC achievement level for the mark from the NSC_LEVEL_n parameters.
+        /// The NSC achievement level for a mark, worked out by the BLL from the NSC_LEVEL_1..7
+        /// parameters, e.g. 72 gives "6  70–79%". The subject itself is only kept in the grid
+        /// until <b>Save and continue</b>, so adding or removing a row writes nothing.
         /// </summary>
-        /// <returns>The achievement level to show, or an em dash until the BLL exists.</returns>
-        private string SubjectsAddSubject(int subjectId, decimal mark)
+        private string SubjectsGetAchievementLevel(decimal mark)
         {
-            // TODO BLL: LearnerController.AddSubject(SessionId.Value, subjectId, mark);   // learner.addSubject(subject, mark), held until Save
-            // TODO BLL: return LearnerController.GetAchievementLevel(mark);               // e.g. "6  70–79%" from NSC_LEVEL_1..7
-            return SubjectsNoDataText;
-        }
-
-        /// <summary>Tells the BLL a captured subject was removed from this session.</summary>
-        private void SubjectsRemoveSubject(int subjectId)
-        {
-            // TODO BLL: LearnerController.RemoveSubject(SessionId.Value, subjectId);
+            LearnerController learnerController = new LearnerController();
+            return learnerController.GetAchievementLevel(mark);
         }
 
         /// <summary>
-        /// Writes the captured subjects as <c>LearnerSubject</c> rows for the session. Only
-        /// <b>Save and continue</b> writes; Cancel and Back leave without writing anything (2.3.3).
+        /// Writes the captured subjects as <c>LearnerSubject</c> rows for the session, replacing any saved
+        /// before. Only <b>Save and continue</b> writes; Cancel and Back leave without writing anything (2.3.3).
+        /// The BLL validates every subject and mark again.
         /// </summary>
         private void SubjectsSave()
         {
-            // TODO BLL: LearnerController.SaveSubjects(SessionId.Value,
-            //               subjectsRows.Select(r => new KeyValuePair<int, decimal>(r.SubjectId, r.Mark)).ToList());
-            //           The BLL validates every mark again and relies on UNIQUE(SessionID, SubjectID).
+            List<KeyValuePair<int, decimal>> subjectMarks = new List<KeyValuePair<int, decimal>>();
+            foreach (CapturedSubjectRow row in subjectsRows)
+            {
+                subjectMarks.Add(new KeyValuePair<int, decimal>(row.SubjectId, row.Mark));
+            }
+
+            LearnerController learnerController = new LearnerController();
+            learnerController.SaveSubjects(SessionId.Value, subjectMarks);
         }
 
         #endregion
 
         #region Reading the selected subject
 
-        /// <summary>
-        /// Reads a named member from a bound list item, whether the list is a DataTable
-        /// (DataRowView) or a list of entity objects.
-        /// </summary>
-        private static object SubjectsReadMember(object item, string member)
-        {
-            if (item == null)
-            {
-                return null;
-            }
-
-            var rowView = item as DataRowView;
-            if (rowView != null)
-            {
-                return rowView.Row.Table.Columns.Contains(member) ? rowView[member] : null;
-            }
-
-            var property = TypeDescriptor.GetProperties(item).Find(member, true);
-            return property == null ? null : property.GetValue(item);
-        }
-
-        /// <summary>The SubjectID of the selected subject, or null when nothing usable is selected.</summary>
-        private int? SubjectsSelectedSubjectId()
+        /// <summary>The Subject chosen in the list (bound to the BLL's Subject objects), or null when none is chosen.</summary>
+        private Subject SubjectsSelectedSubject()
         {
             if (cboSubject.SelectedIndex < 0)
             {
                 return null;
             }
 
-            object value = SubjectsReadMember(cboSubject.SelectedItem, "SubjectID");
-            if (value == null || value == DBNull.Value)
-            {
-                return null;
-            }
-
-            return Convert.ToInt32(value, CultureInfo.InvariantCulture);
+            return cboSubject.SelectedItem as Subject;
         }
 
-        /// <summary>Fills the read-only Subject level box from the selected item's SubjectLevel.</summary>
+        /// <summary>True when the subject is already in the captured grid.</summary>
+        private bool SubjectsIsCaptured(int subjectId)
+        {
+            foreach (CapturedSubjectRow row in subjectsRows)
+            {
+                if (row.SubjectId == subjectId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>Fills the read-only Subject level box from the selected subject's SubjectLevel.</summary>
         private void cboSubject_SelectedIndexChanged(object sender, EventArgs e)
         {
-            object level = SubjectsReadMember(cboSubject.SelectedItem, "SubjectLevel");
-            txtSubjectLevel.Text = level == null || level == DBNull.Value ? string.Empty : level.ToString();
+            Subject subject = SubjectsSelectedSubject();
+            if (subject == null)
+            {
+                txtSubjectLevel.Text = string.Empty;
+            }
+            else
+            {
+                txtSubjectLevel.Text = subject.SubjectLevel;
+            }
         }
 
         #endregion
@@ -224,13 +217,13 @@ namespace FuturePath.PresentationLayer
         /// <returns>The message to show, or null when the subject is valid.</returns>
         private string SubjectsSubjectProblem()
         {
-            int? subjectId = SubjectsSelectedSubjectId();
-            if (subjectId == null)
+            Subject subject = SubjectsSelectedSubject();
+            if (subject == null)
             {
                 return "Subject: choose a subject from the list.";
             }
 
-            if (subjectsRows.Any(r => r.SubjectId == subjectId.Value))
+            if (SubjectsIsCaptured(subject.SubjectID))
             {
                 return cboSubject.Text + " is already captured in this session; each subject may be entered once.";
             }
@@ -373,11 +366,11 @@ namespace FuturePath.PresentationLayer
 
             decimal mark;
             SubjectsMarkProblem(out mark);
-            int subjectId = SubjectsSelectedSubjectId().Value;
+            Subject subject = SubjectsSelectedSubject();
             string achievement;
             try
             {
-                achievement = SubjectsAddSubject(subjectId, mark);
+                achievement = SubjectsGetAchievementLevel(mark);
             }
             catch (Exception)
             {
@@ -385,14 +378,18 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            subjectsRows.Add(new CapturedSubjectRow
+            if (string.IsNullOrEmpty(achievement))
             {
-                SubjectId = subjectId,
-                SubjectName = cboSubject.Text,
-                SubjectLevel = txtSubjectLevel.Text,
-                Mark = mark,
-                AchievementLevel = string.IsNullOrEmpty(achievement) ? SubjectsNoDataText : achievement
-            });
+                achievement = SubjectsNoDataText;
+            }
+
+            CapturedSubjectRow captured = new CapturedSubjectRow();
+            captured.SubjectId = subject.SubjectID;
+            captured.SubjectName = subject.SubjectName;
+            captured.SubjectLevel = subject.SubjectLevel;
+            captured.Mark = mark;
+            captured.AchievementLevel = achievement;
+            subjectsRows.Add(captured);
 
             // Ready for the next subject.
             cboSubject.SelectedIndex = -1;
@@ -413,17 +410,8 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
+            // Nothing is written until Save and continue, so the row only leaves the grid.
             CapturedSubjectRow row = subjectsRows[e.RowIndex];
-            try
-            {
-                SubjectsRemoveSubject(row.SubjectId);
-            }
-            catch (Exception)
-            {
-                SetStatus("This subject could not be removed. Please try again.", RedColour, Color.White);
-                return;
-            }
-
             subjectsRows.RemoveAt(e.RowIndex);
             if (pnlSummary.Visible)
             {
@@ -452,9 +440,14 @@ namespace FuturePath.PresentationLayer
             lblFooter.Text = count == 0
                 ? "No subjects captured yet"
                 : countText + "     Average " + subjectsRows.Average(r => r.Mark).ToString("0.0", CultureInfo.CurrentCulture) + " %";
-            lblCapturedCount.Text = subjectsMinimumCount.HasValue
-                ? count + " of " + subjectsMinimumCount.Value + " captured"
-                : countText;
+            if (subjectsMinimumCount > 0)
+            {
+                lblCapturedCount.Text = count + " of " + subjectsMinimumCount + " captured";
+            }
+            else
+            {
+                lblCapturedCount.Text = countText;
+            }
             dgvSubjects.ClearSelection();
 
             SetPrimaryEnabled(btnSubjectsSave, count >= 1);
@@ -472,23 +465,23 @@ namespace FuturePath.PresentationLayer
         private void SubjectsUpdateNotice()
         {
             int count = subjectsRows.Count;
-            if (!subjectsMinimumCount.HasValue)
+            if (subjectsMinimumCount <= 0)
             {
                 ShowNotice(lblSubjectsNotice, "Add each subject on your latest school report with its mark. Save and continue opens once at least " +
                            "one subject is captured.", BlueTint, InkColour);
                 return;
             }
 
-            int needed = subjectsMinimumCount.Value - count;
+            int needed = subjectsMinimumCount - count;
             if (needed > 0)
             {
                 ShowNotice(lblSubjectsNotice, needed + (needed == 1 ? " more subject" : " more subjects") + " needed. Future Path checks eligibility " +
-                           "against at least " + subjectsMinimumCount.Value + " subjects; you have captured " + count +
+                           "against at least " + subjectsMinimumCount + " subjects; you have captured " + count +
                            ". You can still continue, but the outcome may be less complete.", AmberTint, AmberText);
             }
             else
             {
-                ShowNotice(lblSubjectsNotice, "✓ Enough subjects captured (" + count + " of " + subjectsMinimumCount.Value + "). Add any extra subjects, " +
+                ShowNotice(lblSubjectsNotice, "✓ Enough subjects captured (" + count + " of " + subjectsMinimumCount + "). Add any extra subjects, " +
                            "such as Advanced Programme subjects, or save and continue.", GreenTint, GreenColour);
             }
         }
@@ -547,12 +540,19 @@ namespace FuturePath.PresentationLayer
             {
                 SubjectsSave();
             }
+            catch (ArgumentException ex)
+            {
+                // The BLL's own check failed: its message names the subject or mark to fix.
+                SetStatus(ex.Message, RedColour, Color.White);
+                return;
+            }
             catch (Exception)
             {
                 SetStatus("Your subjects could not be saved. Please try again.", RedColour, Color.White);
                 return;
             }
 
+            ForgetResults();
             GoToStep(tabInterests, 3);
         }
 
