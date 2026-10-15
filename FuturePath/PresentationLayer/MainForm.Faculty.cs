@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -75,11 +77,17 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            int? facultyId = cboSelFaculty.SelectedValue is int ? (int?)(int)cboSelFaculty.SelectedValue : null;
+            int facultyId = (int)cboSelFaculty.SelectedValue;
             try
             {
                 FacultySaveSelection(facultyId, facultyProgrammeId.Value);
                 FacultyRunEligibilityCheck(facultyProgrammeId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                // The BLL refused the selection (e.g. the programme was deactivated meanwhile); its message says why.
+                SetStatus(ex.Message, AmberColour, InkColour);
+                return;
             }
             catch (Exception)
             {
@@ -142,8 +150,10 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboSelFaculty.DataSource = ReferenceDataController.GetActiveFaculties();
-                //           cboSelFaculty.DisplayMember = "FacultyName"; cboSelFaculty.ValueMember = "FacultyID";
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboSelFaculty.DisplayMember = "FacultyName";
+                cboSelFaculty.ValueMember = "FacultyID";
+                cboSelFaculty.DataSource = referenceDataController.GetActiveFaculties();
                 cboSelFaculty.SelectedIndex = -1;
                 facultyListsLoaded = true;
             }
@@ -161,22 +171,33 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
+                ReferenceDataController referenceDataController = new ReferenceDataController();
                 if (rdoBrowse.Checked)
                 {
-                    // TODO BLL: dgvProgrammes.DataSource = cboSelFaculty.SelectedIndex < 0 ? null
-                    //               : ReferenceDataController.GetActiveProgrammes((int)cboSelFaculty.SelectedValue);
-                    lblProgrammeCount.Text = cboSelFaculty.SelectedIndex < 0
-                        ? "Choose a faculty to list its active programmes."
-                        : dgvProgrammes.Rows.Count + " active programmes in " + cboSelFaculty.Text;
+                    if (cboSelFaculty.SelectedIndex < 0)
+                    {
+                        dgvProgrammes.DataSource = null;
+                        lblProgrammeCount.Text = "Choose a faculty to list its active programmes.";
+                    }
+                    else
+                    {
+                        dgvProgrammes.DataSource = referenceDataController.GetActiveProgrammes((int)cboSelFaculty.SelectedValue);
+                        lblProgrammeCount.Text = dgvProgrammes.Rows.Count + " active programmes in " + cboSelFaculty.Text;
+                    }
                 }
                 else
                 {
                     string text = txtProgrammeSearch.Text.Trim();
-                    // TODO BLL: dgvProgrammes.DataSource = text.Length == 0 ? null
-                    //               : ReferenceDataController.SearchActiveProgrammes(text);
-                    lblProgrammeCount.Text = text.Length == 0
-                        ? "Type part of a programme name to search every faculty."
-                        : dgvProgrammes.Rows.Count + " active programmes matching \"" + text + "\"";
+                    if (text.Length == 0)
+                    {
+                        dgvProgrammes.DataSource = null;
+                        lblProgrammeCount.Text = "Type part of a programme name to search every faculty.";
+                    }
+                    else
+                    {
+                        dgvProgrammes.DataSource = referenceDataController.SearchActiveProgrammes(text);
+                        lblProgrammeCount.Text = dgvProgrammes.Rows.Count + " active programmes matching \"" + text + "\"";
+                    }
                 }
 
                 dgvProgrammes.Invalidate();
@@ -193,24 +214,34 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void FacultyLoadProgrammeDetails()
         {
-            lblRequirementsProgramme.Text = facultyProgrammeName ?? "No programme selected yet";
             lblAlignmentValue.Text = "—";
             lblStrongestCategories.Text = "Select a programme to see how your questionnaire answers align with it.";
             if (!facultyProgrammeId.HasValue)
             {
+                lblRequirementsProgramme.Text = "No programme selected yet";
                 dgvRequirements.DataSource = null;
                 return;
             }
 
+            lblRequirementsProgramme.Text = facultyProgrammeName;
             try
             {
-                // TODO BLL: dgvRequirements.DataSource =
-                //               ReferenceDataController.GetActiveRequirements(facultyProgrammeId.Value);
-                //           (rows: SubjectName, MinimumMark, RequirementType; plus an "Overall average" row
-                //            from DegreeProgramme.MinimumOverallAverage)
-                // TODO BLL: var alignment = InterestController.GetProgrammeAlignment(SessionId.Value, facultyProgrammeId.Value);
-                //           lblAlignmentValue.Text = alignment.AlignmentPercent.ToString("0") + "%";
-                //           lblStrongestCategories.Text = "Strongest categories: " + string.Join(", ", alignment.StrongestCategories);
+                // Active requirements (SubjectName, MinimumMark, RequirementType), then an "Overall average" row
+                // from DegreeProgramme.MinimumOverallAverage when the programme sets one.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                dgvRequirements.DataSource = referenceDataController.GetActiveRequirements(facultyProgrammeId.Value);
+
+                InterestController interestController = new InterestController();
+                ProgrammeAlignment alignment = interestController.GetProgrammeAlignment(SessionId.Value, facultyProgrammeId.Value);
+                lblAlignmentValue.Text = alignment.AlignmentPercent.ToString("0", CultureInfo.CurrentCulture) + "%";
+                if (alignment.StrongestCategories.Length == 0)
+                {
+                    lblStrongestCategories.Text = "None of your questionnaire answers is linked to this programme's interest categories.";
+                }
+                else
+                {
+                    lblStrongestCategories.Text = "Strongest categories: " + alignment.StrongestCategories;
+                }
             }
             catch (Exception)
             {
@@ -224,9 +255,10 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         /// <param name="facultyId">The faculty chosen in the Faculty combo.</param>
         /// <param name="programmeId">The programme chosen with its Select button.</param>
-        private void FacultySaveSelection(int? facultyId, int programmeId)
+        private void FacultySaveSelection(int facultyId, int programmeId)
         {
-            // TODO BLL: LearnerController.SaveProgrammeSelection(SessionId.Value, facultyId.Value, programmeId);
+            LearnerController learnerController = new LearnerController();
+            learnerController.SaveProgrammeSelection(SessionId.Value, facultyId, programmeId);
         }
 
         /// <summary>
@@ -238,8 +270,9 @@ namespace FuturePath.PresentationLayer
         /// <param name="programmeId">The programme being checked.</param>
         private void FacultyRunEligibilityCheck(int programmeId)
         {
-            // TODO BLL: AdvisoryOutcome outcome = EligibilityController.CheckEligibility(LearnerId.Value, programmeId);
-            //           DisplayOutcome(outcome.Category, outcome.Explanation, outcome.OverallScore);
+            EligibilityController eligibilityController = new EligibilityController();
+            AdvisoryOutcome outcome = eligibilityController.CheckEligibility(LearnerId.Value, programmeId);
+            DisplayOutcome(outcome.Code, outcome.Explanation, outcome.OverallScore);
         }
 
         #endregion
