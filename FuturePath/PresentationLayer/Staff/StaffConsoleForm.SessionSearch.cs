@@ -332,7 +332,7 @@ namespace FuturePath.PresentationLayer
                 using (var save = new SaveFileDialog())
                 {
                     save.Title = "Save advisory summary";
-                    save.Filter = "PDF document (*.pdf)|*.pdf|Word document (*.docx)|*.docx";
+                    save.Filter = ExportFilterOf(LsrCode);
                     save.FileName = "FP-LSR " + sessionNumber;
                     if (save.ShowDialog(this) != DialogResult.OK)
                     {
