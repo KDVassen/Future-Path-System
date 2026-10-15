@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -36,7 +36,11 @@ namespace FuturePath.DatabaseLayer
             }
             FillDataSet(sqlLocal + " WHERE Username = @Username", table, Param("@Username", SqlDbType.VarChar, username.Trim()));
             Add2Collection();
-            return accounts.Count > 0 ? accounts[0] : null;
+            if (accounts.Count == 0)
+            {
+                return null;
+            }
+            return accounts[0];
         }
 
         /// <summary>One account, or null.</summary>
@@ -44,7 +48,11 @@ namespace FuturePath.DatabaseLayer
         {
             FillDataSet(sqlLocal + " WHERE UserID = @UserID", table, Param("@UserID", SqlDbType.Int, userID));
             Add2Collection();
-            return accounts.Count > 0 ? accounts[0] : null;
+            if (accounts.Count == 0)
+            {
+                return null;
+            }
+            return accounts[0];
         }
 
         /// <summary>Every account, ordered by FullName.</summary>
@@ -56,10 +64,10 @@ namespace FuturePath.DatabaseLayer
         }
 
         /// <summary>True if another account already has this username.</summary>
-        public bool UsernameExists(string username, int? excludeUserID)
+        public bool UsernameExists(string username, int excludeUserID)
         {
-            object count = ExecuteScalar("SELECT COUNT(*) FROM UserAccount WHERE Username = @Username AND (@ExcludeID IS NULL OR UserID <> @ExcludeID)",
-                                         Param("@Username", SqlDbType.VarChar, (username ?? "").Trim()),
+            object count = ExecuteScalar("SELECT COUNT(*) FROM UserAccount WHERE Username = @Username AND UserID <> @ExcludeID",
+                                         Param("@Username", SqlDbType.VarChar, TextOrEmpty(username)),
                                          Param("@ExcludeID", SqlDbType.Int, excludeUserID));
             return Convert.ToInt32(count) > 0;
         }
@@ -72,7 +80,7 @@ namespace FuturePath.DatabaseLayer
             accounts = new Collection<UserAccount>();
             foreach (DataRow row in GetTable(table).Rows)
             {
-                accounts.Add(new UserAccount(ReadInt(row, "UserID").Value, ReadString(row, "Username"), ReadString(row, "PasswordHash"),
+                accounts.Add(new UserAccount(ReadInt(row, "UserID"), ReadString(row, "Username"), ReadString(row, "PasswordHash"),
                                              ReadString(row, "FullName"), UserAccount.RoleFromText(ReadString(row, "Role")),
                                              ReadBool(row, "IsActive")));
             }
@@ -120,7 +128,7 @@ namespace FuturePath.DatabaseLayer
             {
                 // The INSERT returned the new key into the row (FirstReturnedRecord).
                 DataTable accountTable = GetTable(table);
-                account.UserID = ReadInt(accountTable.Rows[accountTable.Rows.Count - 1], "UserID").Value;
+                account.UserID = ReadInt(accountTable.Rows[accountTable.Rows.Count - 1], "UserID");
             }
             return account.UserID;
         }

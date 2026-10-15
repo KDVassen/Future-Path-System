@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Smoke test for the administration and reference-data slice: lookups, faculty maintenance,
     interest categories / questions / weights, funding options and user accounts, plus the
@@ -172,18 +172,18 @@ Assert-Equal 'Required, Recommended' (($requirementTypes.Rows | ForEach-Object {
 Assert-True ($requirementTypes.Columns.Contains('Description')) 'GetRequirementTypes: has a Description column to display'
 
 Assert-Equal 7 $reference.GetParameterInt('MIN_SUBJECT_COUNT') 'GetParameterInt: MIN_SUBJECT_COUNT is 7'
-Assert-True ($reference.GetParameterInt('NO_SUCH_CODE') -eq $null) 'GetParameterInt: a missing code returns null'
-Assert-True ($reference.GetParameterInt('PROVINCE_1') -eq $null) 'GetParameterInt: a non-number returns null'
-Assert-True ($reference.GetParameterInt('') -eq $null) 'GetParameterInt: a blank code returns null'
+Assert-Equal 0 $reference.GetParameterInt('NO_SUCH_CODE') 'GetParameterInt: a missing code returns 0'
+Assert-Equal 0 $reference.GetParameterInt('PROVINCE_1') 'GetParameterInt: a non-number returns 0'
+Assert-Equal 0 $reference.GetParameterInt('') 'GetParameterInt: a blank code returns 0'
 Assert-Equal 0 $reference.SearchActiveProgrammes('  ').Count 'SearchActiveProgrammes: blank text returns none'
 
 # ---------------------------------------------------------------------------------------------
 # Faculty maintenance (UI 13.1)
 # ---------------------------------------------------------------------------------------------
-$engineeringId = $reference.SaveFaculty($adminId, $null, '  Engineering  ', $null)
+$engineeringId = $reference.SaveFaculty($adminId, 0, '  Engineering  ', $true)
 Assert-True ($engineeringId -gt 0) 'SaveFaculty: Add returns the new FacultyID'
 Assert-Equal 'Engineering|True' ((Get-Value "SELECT FacultyName + '|' + CAST(CASE WHEN IsActive = 1 THEN 'True' ELSE 'False' END AS VARCHAR(5)) FROM Faculty WHERE FacultyID = $engineeringId")) 'SaveFaculty: stored trimmed and active'
-Assert-Equal $engineeringId ($reference.SaveFaculty($adminId, $engineeringId, 'Engineering and the Built Environment', $null)) 'SaveFaculty: Edit returns the same FacultyID'
+Assert-Equal $engineeringId ($reference.SaveFaculty($adminId, $engineeringId, 'Engineering and the Built Environment', $true)) 'SaveFaculty: Edit returns the same FacultyID'
 Assert-Equal 'Engineering and the Built Environment' (Get-Value "SELECT FacultyName FROM Faculty WHERE FacultyID = $engineeringId") 'SaveFaculty: renamed'
 Assert-Equal 0 ($reference.ValidateFaculty($engineeringId, 'Engineering and the Built Environment')).Count 'ValidateFaculty: keeping its own name is not a duplicate'
 $duplicate = $reference.ValidateFaculty($null, 'commerce')
@@ -199,8 +199,8 @@ Assert-Equal 0 (Get-Value "SELECT COUNT(*) FROM Faculty WHERE FacultyName = 'Law
 $reference.DeactivateFaculty($adminId, $engineeringId)
 Assert-Equal $false (Get-Value "SELECT IsActive FROM Faculty WHERE FacultyID = $engineeringId") 'DeactivateFaculty: IsActive = 0'
 Assert-Equal 2 $reference.GetActiveFaculties().Count 'DeactivateFaculty: drops out of the active list'
-[void]$reference.SaveFaculty($adminId, $engineeringId, 'Engineering', $null)
-Assert-Equal 'Engineering|False' ((Get-Value "SELECT FacultyName + '|' + CASE WHEN IsActive = 1 THEN 'True' ELSE 'False' END FROM Faculty WHERE FacultyID = $engineeringId")) 'SaveFaculty: rename with isActive null keeps it inactive'
+[void]$reference.SaveFaculty($adminId, $engineeringId, 'Engineering', $false)
+Assert-Equal 'Engineering|False' ((Get-Value "SELECT FacultyName + '|' + CASE WHEN IsActive = 1 THEN 'True' ELSE 'False' END FROM Faculty WHERE FacultyID = $engineeringId")) 'SaveFaculty: rename of an inactive faculty keeps it inactive'
 Assert-Throws { $reference.DeactivateFaculty($adminId, 99999) } 'ArgumentException' 'DeactivateFaculty: unknown faculty refused'
 
 # ---------------------------------------------------------------------------------------------

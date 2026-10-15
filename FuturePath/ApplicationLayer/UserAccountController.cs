@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
@@ -80,7 +80,7 @@ namespace FuturePath.ApplicationLayer
         /// (max 100); role valid; a password of at least 8 characters on Add (optional on Update);
         /// an Administrator cannot deactivate their own account or remove their own Administrator role.
         /// </summary>
-        public Collection<string> ValidateAccount(int actorUserID, int? userID, string username, string fullName, string role, bool isActive, string newPassword)
+        public Collection<string> ValidateAccount(int actorUserID, int userID, string username, string fullName, string role, bool isActive, string newPassword)
         {
             Collection<string> problems = new Collection<string>();
 
@@ -107,7 +107,7 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("Choose a role: " + UserAccount.RoleAdministratorText + " or " + UserAccount.RoleCareerAdvisorText + ".");
             }
 
-            if (!userID.HasValue)
+            if (userID == 0)
             {
                 // A new account must have a password.
                 if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < UserAccount.MinimumPasswordLength)
@@ -121,7 +121,7 @@ namespace FuturePath.ApplicationLayer
             }
 
             // An Administrator may not lock themselves out.
-            if (userID.HasValue && userID.Value == actorUserID)
+            if (userID == actorUserID)
             {
                 if (!isActive)
                 {
@@ -136,11 +136,11 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (userID null) or updates an account (Administrator only). A non-blank newPassword
+        /// Adds (userID 0) or updates an account (Administrator only). A non-blank newPassword
         /// sets a new salted hash; blank keeps the old one on Update. Returns the UserID.
         /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
         /// </summary>
-        public int SaveAccount(int actorUserID, int? userID, string username, string fullName, string role, bool isActive, string newPassword)
+        public int SaveAccount(int actorUserID, int userID, string username, string fullName, string role, bool isActive, string newPassword)
         {
             loginController.CheckAdministrator(actorUserID);
             Collection<string> problems = ValidateAccount(actorUserID, userID, username, fullName, role, isActive, newPassword);
@@ -151,7 +151,7 @@ namespace FuturePath.ApplicationLayer
 
             UserAccount account;
             DB.DBOperation operation;
-            if (!userID.HasValue)
+            if (userID == 0)
             {
                 account = new UserAccount(0, username.Trim(), "", fullName.Trim(), UserAccount.RoleFromText(role), isActive);
                 account.SetPassword(newPassword);
@@ -159,7 +159,7 @@ namespace FuturePath.ApplicationLayer
             }
             else
             {
-                account = userAccountRepository.FindById(userID.Value);
+                account = userAccountRepository.FindById(userID);
                 if (account == null)
                 {
                     throw new ArgumentException("The selected account no longer exists. Refresh the list and try again.");

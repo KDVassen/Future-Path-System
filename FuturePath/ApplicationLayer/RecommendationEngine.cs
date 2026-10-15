@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -41,7 +41,11 @@ namespace FuturePath.ApplicationLayer
                 subjectScore = matchResult.SubjectScore;
                 markScore = matchResult.MarkScore;
             }
-            decimal facultyScore = facultyBonus ? 100 : 0;
+            decimal facultyScore = 0;
+            if (facultyBonus)
+            {
+                facultyScore = 100;
+            }
 
             // The four weighted parts (application-layer.md §4)
             decimal overall = SystemSettings.WeightSubject * subjectScore
@@ -130,12 +134,12 @@ namespace FuturePath.ApplicationLayer
                             + "%) is below the " + FormatNumber(SystemSettings.ThresholdStrong) + "% a strong match needs.";
             }
 
-            // Recommended subjects only add advice; they never change the outcome
-            if (matchResult.Notes.Count > 0)
+            // RecommendationResult.OutcomeReason holds at most 500 characters
+            if (explanation.Length > MaximumExplanationLength)
             {
-                explanation += " Advice: " + JoinSentences(matchResult.Notes);
+                explanation = explanation.Substring(0, MaximumExplanationLength);
             }
-            return new AdvisoryOutcome(outcome, LimitLength(explanation), overallScore);
+            return new AdvisoryOutcome(outcome, explanation, overallScore);
         }
 
         /// <summary>
@@ -287,16 +291,6 @@ namespace FuturePath.ApplicationLayer
                 text += sentence;
             }
             return text;
-        }
-
-        /// <summary>Cuts an explanation to 500 characters (ending in "...") so it always fits OutcomeReason.</summary>
-        private static string LimitLength(string text)
-        {
-            if (text.Length <= MaximumExplanationLength)
-            {
-                return text;
-            }
-            return text.Substring(0, MaximumExplanationLength - 3) + "...";
         }
 
         /// <summary>Formats a number without trailing zeros (58, 57.5), the same on any regional setting.</summary>

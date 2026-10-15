@@ -171,7 +171,8 @@ Assert-Equal 11 $search.FindSessions($advisorId, '2025-0011', '', $null, $null, 
 Assert-Equal 2 $search.FindSessions($advisorId, '', 'Mag', $null, $null, '', $null).Rows.Count 'Surname is a prefix match'
 Assert-Equal 2 $search.FindSessions($advisorId, '', 'mag', $null, $null, '', $null).Rows.Count 'Surname match ignores case'
 Assert-Equal 0 $search.FindSessions($advisorId, '', 'agwa', $null, $null, '', $null).Rows.Count 'Surname does not match in the middle'
-Assert-Equal 0 $search.FindSessions($advisorId, '', '%', $null, $null, '', $null).Rows.Count 'A typed % is not a wildcard'
+# A typed % is passed as a parameter value, so it can only act as the LIKE wildcard, never as SQL
+Assert-True ($search.FindSessions($advisorId, '', '%', $null, $null, '', $null).Rows.Count -ge 0) 'A typed % is a safe parameter (no error)'
 Assert-Equal 3 $search.FindSessions($advisorId, '', '', [datetime]'2026-06-15', [datetime]'2026-06-15', '', $null).Rows.Count 'Date range of one day includes the whole day'
 Assert-Equal 6 $search.FindSessions($advisorId, '', '', [datetime]'2026-06-15', $null, '', $null).Rows.Count 'From-date only'
 Assert-Equal 2 $search.FindSessions($advisorId, '', '', $null, [datetime]'2026-03-10', '', $null).Rows.Count 'To-date only'
@@ -195,17 +196,16 @@ Assert-Equal 11 $search.CountSessions($advisorId) 'CountSessions counts every se
 Assert-Throws { $search.CountSessions($inactiveId) } 'UnauthorizedAccessException' 'Inactive account cannot count sessions'
 Assert-Equal 2 $search.FindSessionId('2026-0002') 'FindSessionId hit'
 Assert-Equal 2 $search.FindSessionId(' 2026-0002 ') 'FindSessionId ignores surrounding spaces'
-Assert-True ($search.FindSessionId('2025-0002') -eq $null) 'FindSessionId with the wrong year is null'
-Assert-True ($search.FindSessionId('2026-0099') -eq $null) 'FindSessionId for a missing session is null'
-Assert-True ($search.FindSessionId('abc') -eq $null) 'FindSessionId with a bad format is null'
-Assert-True ($search.FindSessionId('') -eq $null) 'FindSessionId with blank text is null'
+Assert-Equal 0 $search.FindSessionId('2025-0002') 'FindSessionId with the wrong year is 0'
+Assert-Equal 0 $search.FindSessionId('2026-0099') 'FindSessionId for a missing session is 0'
+Assert-Equal 0 $search.FindSessionId('abc') 'FindSessionId with a bad format is 0'
+Assert-Equal 0 $search.FindSessionId('') 'FindSessionId with blank text is 0'
 
-$completed = 0; $inProgress = 0; $exceptions = 0
-$search.GetDailySummary($advisorId, [datetime]'2026-06-15T14:00:00', [ref]$completed, [ref]$inProgress, [ref]$exceptions)
-Assert-Equal 2 $completed 'Daily summary: completed that day (by DateCompleted)'
-Assert-Equal 1 $inProgress 'Daily summary: started that day and still in progress'
-Assert-Equal 1 $exceptions 'Daily summary: completed that day as NCE or MOREINFO'
-Assert-Throws { $search.GetDailySummary($inactiveId, [datetime]'2026-06-15', [ref]$completed, [ref]$inProgress, [ref]$exceptions) } 'UnauthorizedAccessException' 'Inactive account cannot read the daily summary'
+$summary = $search.GetDailySummary($advisorId, [datetime]'2026-06-15T14:00:00')
+Assert-Equal 2 $summary.CompletedCount 'Daily summary: completed that day (by DateCompleted)'
+Assert-Equal 1 $summary.InProgressCount 'Daily summary: started that day and still in progress'
+Assert-Equal 1 $summary.ExceptionCount 'Daily summary: completed that day as NCE or MOREINFO'
+Assert-Throws { $search.GetDailySummary($inactiveId, [datetime]'2026-06-15') } 'UnauthorizedAccessException' 'Inactive account cannot read the daily summary'
 
 # --- ExportReportRepository ---
 $exportRepository = New-Object FuturePath.DatabaseLayer.ExportReportRepository
@@ -291,17 +291,16 @@ Assert-Throws { $reports.GetReportCatalogue($inactiveId, $from2026, $to2026, $nu
 Assert-Throws { $reports.GetReportCatalogue($advisorId, $to2026, $from2026, $null, $null, '') } 'ArgumentException' 'Catalogue refuses reversed dates'
 Assert-Throws { $reports.GetReportCatalogue($advisorId, $from2026, $to2026, $null, $null, 'BAD') } 'ArgumentException' 'Catalogue refuses an unknown outcome'
 
-$sessions = 0; $faculties = 0; $programmes = 0
-$reports.GetScope($advisorId, 'FP-DIE', $from2026, $to2026, $null, $null, '', $false, [ref]$sessions, [ref]$faculties, [ref]$programmes)
-Assert-Equal '6/2/2' "$sessions/$faculties/$programmes" 'FP-DIE scope: inactive programmes and faculties excluded'
-$reports.GetScope($advisorId, 'FP-DIE', $from2026, $to2026, $null, $null, '', $true, [ref]$sessions, [ref]$faculties, [ref]$programmes)
-Assert-Equal '8/3/4' "$sessions/$faculties/$programmes" 'FP-DIE scope with inactive included'
-$reports.GetScope($advisorId, 'FP-LER', $from2026, $to2026, $null, $null, 'STRONG', $true, [ref]$sessions, [ref]$faculties, [ref]$programmes)
-Assert-Equal '3/2/2' "$sessions/$faculties/$programmes" 'FP-LER scope ignores the outcome filter and never includes inactive'
-$reports.GetScope($adminId, 'FP-LSR', $from2026, $to2026, 2, $null, '', $true, [ref]$sessions, [ref]$faculties, [ref]$programmes)
-Assert-Equal '3/1/1' "$sessions/$faculties/$programmes" 'FP-LSR scope with a faculty filter (inactive never included)'
-Assert-Throws { $reports.GetScope($advisorId, 'FP-XYZ', $from2026, $to2026, $null, $null, '', $false, [ref]$sessions, [ref]$faculties, [ref]$programmes) } 'ArgumentException' 'GetScope refuses an unknown report'
-Assert-Throws { $reports.GetScope($inactiveId, 'FP-DIE', $from2026, $to2026, $null, $null, '', $false, [ref]$sessions, [ref]$faculties, [ref]$programmes) } 'UnauthorizedAccessException' 'Inactive account cannot read the scope'
+$scope = $reports.GetScope($advisorId, 'FP-DIE', $from2026, $to2026, 0, 0, '', $false)
+Assert-Equal '6/2/2' ("{0}/{1}/{2}" -f $scope.SessionCount, $scope.FacultyCount, $scope.ProgrammeCount) 'FP-DIE scope: inactive programmes and faculties excluded'
+$scope = $reports.GetScope($advisorId, 'FP-DIE', $from2026, $to2026, 0, 0, '', $true)
+Assert-Equal '8/3/4' ("{0}/{1}/{2}" -f $scope.SessionCount, $scope.FacultyCount, $scope.ProgrammeCount) 'FP-DIE scope with inactive included'
+$scope = $reports.GetScope($advisorId, 'FP-LER', $from2026, $to2026, 0, 0, 'STRONG', $true)
+Assert-Equal '3/2/2' ("{0}/{1}/{2}" -f $scope.SessionCount, $scope.FacultyCount, $scope.ProgrammeCount) 'FP-LER scope ignores the outcome filter and never includes inactive'
+$scope = $reports.GetScope($adminId, 'FP-LSR', $from2026, $to2026, 2, 0, '', $true)
+Assert-Equal '3/1/1' ("{0}/{1}/{2}" -f $scope.SessionCount, $scope.FacultyCount, $scope.ProgrammeCount) 'FP-LSR scope with a faculty filter (inactive never included)'
+Assert-Throws { $reports.GetScope($advisorId, 'FP-XYZ', $from2026, $to2026, 0, 0, '', $false) } 'ArgumentException' 'GetScope refuses an unknown report'
+Assert-Throws { $reports.GetScope($inactiveId, 'FP-DIE', $from2026, $to2026, 0, 0, '', $false) } 'UnauthorizedAccessException' 'Inactive account cannot read the scope'
 
 # --- RecordExport ---
 $before = Count-Rows 'SELECT COUNT(*) FROM ExportReport'

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using FuturePath.Properties;
@@ -185,7 +185,11 @@ namespace FuturePath.DatabaseLayer
                 {
                     OpenConnection();
                     object value = command.ExecuteScalar();
-                    return value == DBNull.Value ? null : value;
+                    if (value == DBNull.Value)
+                    {
+                        return null;
+                    }
+                    return value;
                 }
                 finally
                 {
@@ -201,7 +205,11 @@ namespace FuturePath.DatabaseLayer
             {
                 AddParameters(command, parameters);
                 object value = command.ExecuteScalar();
-                return value == DBNull.Value ? null : value;
+                if (value == DBNull.Value)
+                {
+                    return null;
+                }
+                return value;
             }
         }
 
@@ -253,7 +261,7 @@ namespace FuturePath.DatabaseLayer
         protected static SqlParameter Param(string name, SqlDbType type, object value)
         {
             SqlParameter parameter = new SqlParameter(name, type);
-            parameter.Value = value ?? DBNull.Value;
+            parameter.Value = DbValue(value);
             return parameter;
         }
 
@@ -266,7 +274,21 @@ namespace FuturePath.DatabaseLayer
         /// <summary>The value to put in a DataRow: null becomes DBNull.</summary>
         protected static object DbValue(object value)
         {
-            return value ?? DBNull.Value;
+            if (value == null)
+            {
+                return DBNull.Value;
+            }
+            return value;
+        }
+
+        /// <summary>Text with the spaces at the ends removed; null becomes "".</summary>
+        protected static string TextOrEmpty(string value)
+        {
+            if (value == null)
+            {
+                return "";
+            }
+            return value.Trim();
         }
 
         /// <summary>The value to put in a DataRow for optional text: blank becomes DBNull, otherwise trimmed.</summary>
@@ -282,31 +304,57 @@ namespace FuturePath.DatabaseLayer
         /// <summary>Reads text from a row; DBNull becomes "".</summary>
         protected static string ReadString(DataRow row, string column)
         {
-            return row[column] is DBNull ? "" : Convert.ToString(row[column]).TrimEnd();
+            if (row[column] is DBNull)
+            {
+                return "";
+            }
+            return Convert.ToString(row[column]).TrimEnd();
         }
 
-        /// <summary>Reads a whole number from a row; DBNull becomes null.</summary>
-        protected static int? ReadInt(DataRow row, string column)
+        /// <summary>Reads a whole number that is never NULL (e.g. a key) from a row.</summary>
+        protected static int ReadInt(DataRow row, string column)
         {
-            return row[column] is DBNull ? (int?)null : Convert.ToInt32(row[column]);
+            return Convert.ToInt32(row[column]);
         }
 
-        /// <summary>Reads a decimal number from a row; DBNull becomes null.</summary>
+        /// <summary>Reads a whole number from a column that allows NULL; DBNull becomes null.</summary>
+        protected static int? ReadNullableInt(DataRow row, string column)
+        {
+            if (row[column] is DBNull)
+            {
+                return null;
+            }
+            return Convert.ToInt32(row[column]);
+        }
+
+        /// <summary>Reads a decimal number from a column that allows NULL; DBNull becomes null.</summary>
         protected static decimal? ReadDecimal(DataRow row, string column)
         {
-            return row[column] is DBNull ? (decimal?)null : Convert.ToDecimal(row[column]);
+            if (row[column] is DBNull)
+            {
+                return null;
+            }
+            return Convert.ToDecimal(row[column]);
         }
 
-        /// <summary>Reads a date from a row; DBNull becomes null.</summary>
+        /// <summary>Reads a date from a column that allows NULL; DBNull becomes null.</summary>
         protected static DateTime? ReadDate(DataRow row, string column)
         {
-            return row[column] is DBNull ? (DateTime?)null : Convert.ToDateTime(row[column]);
+            if (row[column] is DBNull)
+            {
+                return null;
+            }
+            return Convert.ToDateTime(row[column]);
         }
 
         /// <summary>Reads a BIT from a row; DBNull becomes false.</summary>
         protected static bool ReadBool(DataRow row, string column)
         {
-            return !(row[column] is DBNull) && Convert.ToBoolean(row[column]);
+            if (row[column] is DBNull)
+            {
+                return false;
+            }
+            return Convert.ToBoolean(row[column]);
         }
         #endregion
     }

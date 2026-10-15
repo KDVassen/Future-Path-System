@@ -20,7 +20,7 @@
        admin           FuturePath-Admin1
        advisor         FuturePath-Advisor1
        former.advisor  FuturePath-Former1
-   The stored values are PBKDF2 hashes made with UserAccount.HashPassword.
+   The stored values are salted SHA-256 hashes (salt:hash) made with UserAccount.HashPassword.
    ===================================================================== */
 
 SET NOCOUNT ON;
@@ -501,8 +501,8 @@ GO
 
 SET IDENTITY_INSERT UserAccount ON;
 INSERT INTO UserAccount (UserID, Username, PasswordHash, FullName, Role, IsActive) VALUES
-    (1, 'admin',          '10000:DxS3ixBg4Xorc3FQpt4zVw==:NsmwChErwV2xPcJxb0iJFdVlbrpbqmUvXqBtbbiqMNg=', 'Ruth Arendse',  'Administrator',  1),
-    (2, 'advisor',        '10000:gfFpzbIFuJV1v9/e5LmSNA==:tbhKIZfgODBnW2EkZtXBaUGc8IRLEGgfeJLTKgU7wTw=', 'Kagiso Molefe', 'Career Advisor', 1),
-    (3, 'former.advisor', '10000:B2ZZvQld9avL0lOG9/LD6g==:UM6D1RNUan6AuflrdHS2fygxw6h5+PBAS3YlfIsbCqs=', 'Megan Pillay',  'Career Advisor', 0);
+    (1, 'admin',          '/QCkBFNWPwPdjsUJ5R+K4w==:I3CKALC3mFpc/TQPVOrpi8q6VvTTRXnwpJz/SR19mOc=', 'Ruth Arendse',  'Administrator',  1),
+    (2, 'advisor',        'INyXI8Q7EIgy5UEskrseUg==:ZnNIAz5avWiLdV42Les8g8dX4E7jb4gAIFmFh/DVZRI=', 'Kagiso Molefe', 'Career Advisor', 1),
+    (3, 'former.advisor', 'm+CgljWcfRwYLdum/W1M4w==:OgYdspxAx1W1hii+LZ4XYxUodu9rDEAeOn0ZO3lKetE=', 'Megan Pillay',  'Career Advisor', 0);
 SET IDENTITY_INSERT UserAccount OFF;
 GO

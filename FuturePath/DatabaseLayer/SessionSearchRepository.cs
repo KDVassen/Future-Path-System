@@ -1,5 +1,7 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
@@ -16,15 +18,16 @@ namespace FuturePath.DatabaseLayer
         #region Data Members
         private string table = "SessionSearch";
 
-        // One row per session: the learner, grade, selected programme and the selected result's
-        // outcome (LEFT JOINs, so sessions without a programme or result still appear).
+        // One row per session: the learner, grade, selected programme, the selected result's
+        // outcome and how many exports were logged (LEFT JOINs, so sessions without a programme
+        // or result still appear).
         private string sqlSearch =
             "SELECT s.SessionID, s.SessionStatus, s.SessionDate," +
             " LTRIM(RTRIM(ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, ''))) AS LearnerName," +
             " g.GradeDescription AS Grade," +
             " ISNULL(p.ProgrammeName, '') AS ProgrammeName," +
             " ISNULL(r.OutcomeCode, '') AS OutcomeCode," +
-            " CAST(CASE WHEN EXISTS (SELECT 1 FROM ExportReport e WHERE e.SessionID = s.SessionID) THEN 1 ELSE 0 END AS BIT) AS IsExported" +
+            " (SELECT COUNT(*) FROM ExportReport e WHERE e.SessionID = s.SessionID) AS ExportCount" +
             " FROM AdvisorySession s" +
             " INNER JOIN Learner l ON l.LearnerID = s.LearnerID" +
             " INNER JOIN GradeLevel g ON g.GradeLevelID = s.GradeLevelID" +
@@ -41,32 +44,61 @@ namespace FuturePath.DatabaseLayer
 
         #region Session search (UI 10.2b)
         /// <summary>
-        /// Sessions matching every filter given (null = no filter), newest first. Columns:
-        /// SessionID, SessionStatus, SessionDate, LearnerName, Grade, ProgrammeName, OutcomeCode
-        /// ("" when there is no result yet) and IsExported. sessionID and sessionYear go together
-        /// (a session number yyyy-NNNN). surname matches the start of Learner.LastName.
+        /// Sessions matching every filter given, newest first. A sessionID, year or learnerID of 0,
+        /// a blank surname or outcome code, and a null date mean "no filter". sessionID and
+        /// sessionYear go together (a session number yyyy-NNNN). surname matches the start of
+        /// Learner.LastName. Columns: SessionID, SessionStatus, SessionDate, LearnerName, Grade,
+        /// ProgrammeName, OutcomeCode ("" when there is no result yet) and IsExported.
         /// Returns a new table every call, so the caller may add columns to it.
         /// </summary>
-        public DataTable FindSessions(int? sessionID, int? sessionYear, string surname, DateTime? fromDate, DateTime? beforeDate,
-                                      string outcomeCode, int? learnerID)
+        public DataTable FindSessions(int sessionID, int sessionYear, string surname, DateTime? fromDate, DateTime? beforeDate,
+                                      string outcomeCode, int learnerID)
         {
-            string sql = sqlSearch +
-                " WHERE (@SessionID IS NULL OR (s.SessionID = @SessionID AND YEAR(s.SessionDate) = @SessionYear))" +
-                " AND (@Surname IS NULL OR l.LastName LIKE @Surname)" +
-                " AND (@FromDate IS NULL OR s.SessionDate >= @FromDate)" +
-                " AND (@BeforeDate IS NULL OR s.SessionDate < @BeforeDate)" +
-                " AND (@OutcomeCode IS NULL OR r.OutcomeCode = @OutcomeCode)" +
-                " AND (@LearnerID IS NULL OR s.LearnerID = @LearnerID)" +
-                " ORDER BY s.SessionDate DESC, s.SessionID DESC";
-            FillDataSet(sql, table,
-                        Param("@SessionID", SqlDbType.Int, sessionID),
-                        Param("@SessionYear", SqlDbType.Int, sessionYear),
-                        Param("@Surname", SqlDbType.VarChar, StartsWithPattern(surname)),
-                        Param("@FromDate", SqlDbType.DateTime, fromDate),
-                        Param("@BeforeDate", SqlDbType.DateTime, beforeDate),
-                        Param("@OutcomeCode", SqlDbType.VarChar, outcomeCode),
-                        Param("@LearnerID", SqlDbType.Int, learnerID));
-            return GetTable(table).Copy();
+            // Only the filters that were given are added to the WHERE clause (each as a parameter)
+            string sql = sqlSearch + " WHERE 1 = 1";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (sessionID > 0)
+            {
+                sql += " AND s.SessionID = @SessionID AND YEAR(s.SessionDate) = @SessionYear";
+                parameters.Add(Param("@SessionID", SqlDbType.Int, sessionID));
+                parameters.Add(Param("@SessionYear", SqlDbType.Int, sessionYear));
+            }
+            if (!string.IsNullOrWhiteSpace(surname))
+            {
+                sql += " AND l.LastName LIKE @Surname";
+                parameters.Add(Param("@Surname", SqlDbType.VarChar, surname.Trim() + "%"));
+            }
+            if (fromDate.HasValue)
+            {
+                sql += " AND s.SessionDate >= @FromDate";
+                parameters.Add(Param("@FromDate", SqlDbType.DateTime, fromDate.Value));
+            }
+            if (beforeDate.HasValue)
+            {
+                sql += " AND s.SessionDate < @BeforeDate";
+                parameters.Add(Param("@BeforeDate", SqlDbType.DateTime, beforeDate.Value));
+            }
+            if (!string.IsNullOrWhiteSpace(outcomeCode))
+            {
+                sql += " AND r.OutcomeCode = @OutcomeCode";
+                parameters.Add(Param("@OutcomeCode", SqlDbType.VarChar, outcomeCode.Trim()));
+            }
+            if (learnerID > 0)
+            {
+                sql += " AND s.LearnerID = @LearnerID";
+                parameters.Add(Param("@LearnerID", SqlDbType.Int, learnerID));
+            }
+            FillDataSet(sql + " ORDER BY s.SessionDate DESC, s.SessionID DESC", table, parameters.ToArray());
+
+            // "Exported" (UI 10.2b) means at least one ExportReport row exists for the session
+            DataTable sessions = GetTable(table).Copy();
+            sessions.Columns.Add("IsExported", typeof(bool));
+            foreach (DataRow row in sessions.Rows)
+            {
+                row["IsExported"] = Convert.ToInt32(row["ExportCount"]) > 0;
+            }
+            sessions.Columns.Remove("ExportCount");
+            return sessions;
         }
 
         /// <summary>The total number of advisory sessions stored.</summary>
@@ -124,22 +156,6 @@ namespace FuturePath.DatabaseLayer
                                          Param("@NotEligible", SqlDbType.VarChar, AdvisoryOutcome.CodeNotEligible),
                                          Param("@MoreInfo", SqlDbType.VarChar, AdvisoryOutcome.CodeMoreInformation));
             return Convert.ToInt32(count);
-        }
-        #endregion
-
-        #region Utility Methods
-        /// <summary>
-        /// Turns typed text into a LIKE pattern for "starts with": the LIKE wildcards [ % _ are
-        /// escaped so they are matched literally, then % is added. Blank text gives null (no filter).
-        /// </summary>
-        private static string StartsWithPattern(string text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                return null;
-            }
-            string escaped = text.Trim().Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
-            return escaped + "%";
         }
         #endregion
     }

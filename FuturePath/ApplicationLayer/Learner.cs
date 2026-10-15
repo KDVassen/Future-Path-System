@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
@@ -103,8 +103,21 @@ namespace FuturePath.ApplicationLayer
         {
             get
             {
-                string name = ((firstName ?? "") + " " + (lastName ?? "")).Trim();
-                return name.Length == 0 ? "Learner" : name;
+                string name = "";
+                if (firstName != null)
+                {
+                    name = firstName;
+                }
+                if (lastName != null)
+                {
+                    name = name + " " + lastName;
+                }
+                name = name.Trim();
+                if (name.Length == 0)
+                {
+                    return "Learner";
+                }
+                return name;
             }
         }
 
@@ -176,7 +189,7 @@ namespace FuturePath.ApplicationLayer
             {
                 throw new ArgumentException("Enter a mark for " + subject.SubjectName + " from 0 to 100, with at most one decimal place.");
             }
-            LearnerSubject learnerSubject = new LearnerSubject(0, currentSessionID ?? 0, subject.SubjectID, subject.SubjectName, subject.SubjectLevel, mark);
+            LearnerSubject learnerSubject = new LearnerSubject(0, SessionIDOrZero(), subject.SubjectID, subject.SubjectName, subject.SubjectLevel, mark);
             subjects.Add(learnerSubject);
             return learnerSubject;
         }
@@ -242,7 +255,7 @@ namespace FuturePath.ApplicationLayer
                     return;
                 }
             }
-            responses.Add(new LearnerInterestResponse(0, currentSessionID ?? 0, questionID, categoryID, responseValue));
+            responses.Add(new LearnerInterestResponse(0, SessionIDOrZero(), questionID, categoryID, responseValue));
         }
 
         /// <summary>
@@ -251,7 +264,21 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         public int GetPreferredFacultyId()
         {
-            return preferredFacultyID ?? 0;
+            if (preferredFacultyID.HasValue)
+            {
+                return preferredFacultyID.Value;
+            }
+            return 0;
+        }
+
+        /// <summary>The current session's ID, or 0 when the learner has no session yet.</summary>
+        private int SessionIDOrZero()
+        {
+            if (currentSessionID.HasValue)
+            {
+                return currentSessionID.Value;
+            }
+            return 0;
         }
 
         /// <summary>

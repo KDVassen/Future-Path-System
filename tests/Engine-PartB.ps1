@@ -135,8 +135,7 @@ for ($i = 1; $i -le 30; $i++) {
         'Required', [decimal]50, $null, '', $null, '', $true)))
 }
 $outcome = Invoke-Check $gadija $long
-Assert-True ($outcome.Explanation.Length -le 500) ('Explanation fits OutcomeReason VARCHAR(500): ' + $outcome.Explanation.Length + ' characters')
-Assert-True ($outcome.Explanation.EndsWith('...')) 'A cut explanation ends with "..."'
+Assert-Equal 500 $outcome.Explanation.Length 'A long explanation is cut to the 500 characters OutcomeReason holds'
 
 # --- Missing information --------------------------------------------------------------------
 $empty = New-Object FuturePath.ApplicationLayer.Learner

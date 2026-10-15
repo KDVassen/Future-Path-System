@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -72,21 +72,17 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Active funding linked to the faculty or programme (both null: all active funding),
+        /// Active funding linked to the faculty or programme (both 0: all active funding),
         /// filtered by funding type ("" or null: all) and, with openOnly, to options still open
-        /// today. Ordered by closing date, nearest first (no closing date last). A faculty or
-        /// programme ID of 0 (an "All" row) is treated as no filter.
+        /// today. Ordered by closing date, nearest first (no closing date last).
         /// </summary>
-        public Collection<FundingOption> GetActiveFunding(int? facultyID, int? programmeID, string fundingType, bool openOnly)
+        public Collection<FundingOption> GetActiveFunding(int facultyID, int programmeID, string fundingType, bool openOnly)
         {
-            int? faculty = (facultyID.HasValue && facultyID.Value > 0) ? facultyID : null;
-            int? programme = (programmeID.HasValue && programmeID.Value > 0) ? programmeID : null;
-            string type = (fundingType ?? "").Trim();
-
             fundingOptions = new Collection<FundingOption>();
-            foreach (FundingOption option in fundingRepository.GetActiveFundingFor(faculty, programme))
+            foreach (FundingOption option in fundingRepository.GetActiveFundingFor(facultyID, programmeID))
             {
-                if (type.Length > 0 && !string.Equals(option.FundingType, type, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrWhiteSpace(fundingType)
+                    && !string.Equals(option.FundingType, fundingType.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
@@ -125,7 +121,7 @@ namespace FuturePath.ApplicationLayer
         /// FUNDING_TYPE_n values, eligibility required (max 500), documents max 255, contact max
         /// 150. Returns one message per problem.
         /// </summary>
-        public Collection<string> ValidateFunding(int? fundingID, string fundingName, string fundingType, string eligibilityDescription,
+        public Collection<string> ValidateFunding(int fundingID, string fundingName, string fundingType, string eligibilityDescription,
                                                   string requiredDocuments, DateTime? closingDate, string contactInformation)
         {
             Collection<string> problems = new Collection<string>();
@@ -169,12 +165,12 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (fundingID null) or updates a funding option and its faculty and programme links in
+        /// Adds (fundingID 0) or updates a funding option and its faculty and programme links in
         /// one transaction (Administrator only). Repeated IDs in the lists are saved once. Returns
         /// the FundingID. Throws ArgumentException if invalid, UnauthorizedAccessException if not
         /// an Administrator.
         /// </summary>
-        public int SaveFunding(int actorUserID, int? fundingID, string fundingName, string fundingType, string eligibilityDescription,
+        public int SaveFunding(int actorUserID, int fundingID, string fundingName, string fundingType, string eligibilityDescription,
                                string requiredDocuments, DateTime? closingDate, string contactInformation, bool isMeritBased,
                                bool isNeedBased, bool isActive, IList<int> facultyIDs, IList<int> programmeIDs)
         {
@@ -185,16 +181,26 @@ namespace FuturePath.ApplicationLayer
             {
                 throw new ArgumentException(problems[0]);
             }
-            if (fundingID.HasValue && fundingRepository.FindById(fundingID.Value) == null)
+            if (fundingID > 0 && fundingRepository.FindById(fundingID) == null)
             {
                 throw new ArgumentException("The selected funding option no longer exists. Refresh the list and try again.");
             }
 
             // The option is built whole: Save replaces every column and every link in one transaction.
-            FundingOption option = new FundingOption(fundingID ?? 0, fundingName.Trim(), FindFundingType(fundingType),
-                                                     eligibilityDescription.Trim(), (requiredDocuments ?? "").Trim(),
-                                                     closingDate.HasValue ? closingDate.Value.Date : (DateTime?)null,
-                                                     (contactInformation ?? "").Trim(), isMeritBased, isNeedBased, isActive);
+            FundingOption option = new FundingOption();
+            option.FundingID = fundingID;
+            option.FundingName = fundingName.Trim();
+            option.FundingType = FindFundingType(fundingType);
+            option.EligibilityDescription = eligibilityDescription.Trim();
+            option.RequiredDocuments = TextOrEmpty(requiredDocuments);
+            if (closingDate.HasValue)
+            {
+                option.ClosingDate = closingDate.Value.Date;
+            }
+            option.ContactInformation = TextOrEmpty(contactInformation);
+            option.IsMeritBased = isMeritBased;
+            option.IsNeedBased = isNeedBased;
+            option.IsActive = isActive;
             if (facultyIDs != null)
             {
                 foreach (int facultyID in facultyIDs)
@@ -231,6 +237,16 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
+        /// <summary>Text with the spaces at the ends removed; null becomes "".</summary>
+        private static string TextOrEmpty(string text)
+        {
+            if (text == null)
+            {
+                return "";
+            }
+            return text.Trim();
+        }
+
         /// <summary>
         /// The funding type as stored in its FUNDING_TYPE_n parameter, or null if the text is not
         /// one of them (not case-sensitive). Funding types are never typed into the code.

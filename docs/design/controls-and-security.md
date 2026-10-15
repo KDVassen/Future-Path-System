@@ -1,4 +1,4 @@
-# Future Path — input/output controls and security (spec Sections 7 and 8)
+﻿# Future Path — input/output controls and security (spec Sections 7 and 8)
 
 ## Input formats (7 — formalised inputs)
 
@@ -59,6 +59,6 @@
   are never rendered or enabled for a Career Advisor.
 - **Business Logic Layer**: every method that changes reference data or user accounts checks
   `Role == Administrator` itself before running.
-- **Data**: `UserAccount` holds username, **salted password hash** (e.g. PBKDF2 via
-  `Rfc2898DeriveBytes`, never plaintext), role and active status. It is the single source of
+- **Data**: `UserAccount` holds username, **salted password hash** (a random salt plus SHA-256,
+  stored as `salt:hash`; never plaintext), role and active status. It is the single source of
   truth for login. Seed at least one active Administrator and one active Career Advisor.

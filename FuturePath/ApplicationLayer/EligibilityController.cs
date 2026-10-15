@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
@@ -203,7 +203,13 @@ namespace FuturePath.ApplicationLayer
             AdvisorySession session = sessionRepository.FindById(sessionID);
             if (session.SelectedProgrammeID != programme.ProgrammeID)
             {
-                sessionRepository.SaveProgrammeSelection(sessionID, learner.PreferredFacultyID ?? programme.FacultyID, programme.ProgrammeID);
+                // The learner's preferred faculty, or the programme's own faculty if none was chosen
+                int facultyID = programme.FacultyID;
+                if (learner.PreferredFacultyID.HasValue)
+                {
+                    facultyID = learner.PreferredFacultyID.Value;
+                }
+                sessionRepository.SaveProgrammeSelection(sessionID, facultyID, programme.ProgrammeID);
             }
             // Class diagram recordOutcome(outcome): the session's outcome is the selected result's OutcomeCode
             session.RecordOutcome(outcome.Code);

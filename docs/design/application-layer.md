@@ -1,4 +1,4 @@
-# Future Path: Application and Data Layer contract
+﻿# Future Path: Application and Data Layer contract
 
 How the Business Logic Layer (`FuturePath/ApplicationLayer`) and Data Layer
 (`FuturePath/DatabaseLayer`) are built, and what every class promises. Read this before you
@@ -79,6 +79,27 @@ finally { CloseConnection(); }
   - Reference lists return `Collection<Entity>`.
   - Grids that join tables, compute columns, or include a synthetic row return a `DataTable` with exactly the column names given in the method's XML doc. The forms bind by those names.
   - "All" rows use **0** (IDs) or **""** (codes) as their value.
+- **0 means "not given".** No public method takes `int?`, `bool?` or `decimal?`.
+  - An ID of 0 means "new" in SaveX methods (e.g. `SaveFaculty(actor, 0, "Law", true)` adds) and "all" in filters (e.g. `GetProgrammes(0, false)`).
+  - A minimum mark or average of 0 means "no minimum".
+  - Nullable types remain only on entity properties whose database column allows NULL (e.g. `DegreeProgramme.MinimumOverallAverage`), so the class mirrors its table.
+- **Results are returned, never passed back through `out` parameters.**
+  - Several values come back in a small result class: `DailySummary`, `ReportScope`, `ProgrammeAlignment`.
+  - Our own parse methods return a value: `LearnerSubject.ParseMark` gives -1 for an invalid mark, and `AdvisorySession.GetSessionID` / `GetSessionYear` give 0 for an invalid number.
+  - .NET's own `int.TryParse` and `decimal.TryParse` are still used inside them.
+- **Plain `if` / `else`.** The code has no `??` and no `? :`.
+- **SQL WHERE clauses are built with `if` statements.** Only the filters that were given are added, each as a parameter:
+  ```csharp
+  string sql = sqlLocal + " WHERE 1 = 1";
+  List<SqlParameter> parameters = new List<SqlParameter>();
+  if (facultyID > 0)
+  {
+      sql += " AND p.FacultyID = @FacultyID";
+      parameters.Add(Param("@FacultyID", SqlDbType.Int, facultyID));
+  }
+  FillDataSet(sql, table, parameters.ToArray());
+  ```
+  Parameters are the only defence against SQL injection, and they are always used. A typed `%` in a search box is passed as a parameter value, so at worst it acts as the LIKE wildcard; it never becomes SQL.
 - **Validation runs twice.** The form validates for feedback. `ValidateX(...)` returns a `Collection<string>` of messages for the ValidationDialog, and every `SaveX(...)` validates again, throwing `ArgumentException` with the first message.
 - **Messages are written for the user.** Name the field and the fix, for example "Enter a mark for Mathematics from 0 to 100, with at most one decimal place." Never include exception text or SQL.
 - **Role checks (spec Section 8, decisions.md D11).**
@@ -201,21 +222,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
   |---|---|
   | `GetFaculties(includeInactive)` | `GetFaculties(includeInactive, includeAllRow)` |
   | `GetGradeLevels()` | `GetGradeLevels(includeAllRow)` |
-  | `GetAllProgrammes` / `GetDegreeProgrammes` | `GetProgrammes(null, false)` |
+  | `GetAllProgrammes` / `GetDegreeProgrammes` | `GetProgrammes(0, false)` |
   | `GetSubjects()` | `GetSubjects(includeInactive)` |
   | `SaveRequirement` | also passes `alternativeMinimumMark` |
   | `CalculateCategoryScores(SessionId, …)` | `CalculateCategoryScores(responses)` |
-  | `GetProgrammeAlignment` | returns a `decimal` plus an `out string strongestCategories` |
+  | `GetProgrammeAlignment` | returns a `ProgrammeAlignment` (AlignmentPercent, StrongestCategories) |
+  | `GetDailySummary` | returns a `DailySummary` (CompletedCount, InProgressCount, ExceptionCount) |
+  | `ReportController.GetScope` | returns a `ReportScope` (SessionCount, FacultyCount, ProgrammeCount) |
+  | Any "null = new" or "null = all" argument | pass 0 instead |
   | Funding type combos | ValueMember `FundingType` |
 - Create controllers inside the forms' existing `try` blocks, never as field initialisers.
 - `MainForm.Outcome.cs` must map `NCE` and `MOREINFO` (use `AdvisoryOutcome.GetCategory(code)`).
 - Align the TODO calls with these signatures:
   - `GetFaculties(includeInactive, includeAllRow)`;
   - `GetProgrammes(facultyID, includeInactive)`;
-  - the funding type filter uses the type text (ParameterValue);
-  - `GetDailySummary` uses `out` parameters.
+  - the funding type filter uses the type text (ParameterValue).
 - Call `ReportController.CompleteLearnerSession` **before** writing the FP-LSR file on UI 7, so a failure never leaves a written file for an incomplete session.
-- Map the "All" rows: 0 / "" → null filter.
+- The "All" rows already carry 0 / "", which the controllers read as "no filter", so pass them straight through.
 - **Known limitation:** `CompleteLearnerSession` makes two writes, the session status and then the ExportReport row, through two repositories with no shared transaction.
   - If the second write fails, the session is Completed but has no export row.
   - Both values are validated first, so this needs a database failure between the two statements. On a local single-user LocalDB that is unlikely.

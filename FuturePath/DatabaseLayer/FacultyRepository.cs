@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -30,8 +30,12 @@ namespace FuturePath.DatabaseLayer
         /// <summary>Faculties ordered by name; inactive ones only when includeInactive is true.</summary>
         public Collection<Faculty> GetFaculties(bool includeInactive)
         {
-            FillDataSet(sqlLocal + " WHERE (@IncludeInactive = 1 OR IsActive = 1) ORDER BY FacultyName", table,
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlLocal;
+            if (!includeInactive)
+            {
+                sql += " WHERE IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY FacultyName", table);
             Add2Collection();
             return faculties;
         }
@@ -41,14 +45,18 @@ namespace FuturePath.DatabaseLayer
         {
             FillDataSet(sqlLocal + " WHERE FacultyID = @FacultyID", table, Param("@FacultyID", SqlDbType.Int, facultyID));
             Add2Collection();
-            return faculties.Count > 0 ? faculties[0] : null;
+            if (faculties.Count == 0)
+            {
+                return null;
+            }
+            return faculties[0];
         }
 
         /// <summary>True if another faculty already has this name.</summary>
-        public bool FacultyNameExists(string facultyName, int? excludeFacultyID)
+        public bool FacultyNameExists(string facultyName, int excludeFacultyID)
         {
-            object count = ExecuteScalar("SELECT COUNT(*) FROM Faculty WHERE FacultyName = @FacultyName AND (@ExcludeID IS NULL OR FacultyID <> @ExcludeID)",
-                                         Param("@FacultyName", SqlDbType.VarChar, (facultyName ?? "").Trim()),
+            object count = ExecuteScalar("SELECT COUNT(*) FROM Faculty WHERE FacultyName = @FacultyName AND FacultyID <> @ExcludeID",
+                                         Param("@FacultyName", SqlDbType.VarChar, TextOrEmpty(facultyName)),
                                          Param("@ExcludeID", SqlDbType.Int, excludeFacultyID));
             return Convert.ToInt32(count) > 0;
         }
@@ -61,7 +69,7 @@ namespace FuturePath.DatabaseLayer
             faculties = new Collection<Faculty>();
             foreach (DataRow row in GetTable(table).Rows)
             {
-                faculties.Add(new Faculty(ReadInt(row, "FacultyID").Value, ReadString(row, "FacultyName"), ReadBool(row, "IsActive")));
+                faculties.Add(new Faculty(ReadInt(row, "FacultyID"), ReadString(row, "FacultyName"), ReadBool(row, "IsActive")));
             }
         }
 
@@ -114,7 +122,7 @@ namespace FuturePath.DatabaseLayer
             {
                 // The INSERT returned the new key into the row (FirstReturnedRecord).
                 DataTable facultyTable = GetTable(table);
-                faculty.FacultyID = ReadInt(facultyTable.Rows[facultyTable.Rows.Count - 1], "FacultyID").Value;
+                faculty.FacultyID = ReadInt(facultyTable.Rows[facultyTable.Rows.Count - 1], "FacultyID");
             }
             return faculty.FacultyID;
         }

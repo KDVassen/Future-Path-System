@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
@@ -33,14 +33,16 @@ namespace FuturePath.ApplicationLayer
         /// UI 9 "Today" card: sessions completed that day, sessions started that day and still in
         /// progress, and completed that day with outcome Not Currently Eligible or More Information Needed.
         /// </summary>
-        public void GetDailySummary(int actorUserID, DateTime day, out int completedCount, out int inProgressCount, out int exceptionCount)
+        public DailySummary GetDailySummary(int actorUserID, DateTime day)
         {
             loginController.CheckStaff(actorUserID);
             DateTime dayStart = day.Date;
             DateTime dayEnd = day.Date.AddDays(1);
-            completedCount = searchRepository.CountCompleted(dayStart, dayEnd);
-            inProgressCount = searchRepository.CountStartedInProgress(dayStart, dayEnd);
-            exceptionCount = searchRepository.CountExceptionsCompleted(dayStart, dayEnd);
+            DailySummary summary = new DailySummary();
+            summary.CompletedCount = searchRepository.CountCompleted(dayStart, dayEnd);
+            summary.InProgressCount = searchRepository.CountStartedInProgress(dayStart, dayEnd);
+            summary.ExceptionCount = searchRepository.CountExceptionsCompleted(dayStart, dayEnd);
+            return summary;
         }
 
         /// <summary>
@@ -50,9 +52,7 @@ namespace FuturePath.ApplicationLayer
         public Collection<string> ValidateSearch(string sessionNumber, DateTime? fromDate, DateTime? toDate)
         {
             Collection<string> messages = new Collection<string>();
-            int year;
-            int sessionID;
-            if (!string.IsNullOrWhiteSpace(sessionNumber) && !AdvisorySession.TryParseSessionNumber(sessionNumber, out year, out sessionID))
+            if (!string.IsNullOrWhiteSpace(sessionNumber) && !AdvisorySession.IsValidSessionNumber(sessionNumber))
             {
                 messages.Add("Session number: use the form yyyy-NNNN, e.g. 2026-0417, or leave it blank.");
             }
@@ -64,13 +64,13 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// UI 10.2b search. Every filter is optional (blank or null = no filter). Returns SessionID,
+        /// UI 10.2b search. Every filter is optional (blank, null or a learnerID of 0 = no filter). Returns SessionID,
         /// SessionStatus, SessionNumber, SessionDate, LearnerName, Grade, ProgrammeName, OutcomeCode,
         /// IsExported (an ExportReport row exists), newest first.
         /// Throws ArgumentException (with the first validation message) for a badly formed
         /// session number, reversed dates or an unknown outcome code.
         /// </summary>
-        public DataTable FindSessions(int actorUserID, string sessionNumber, string surname, DateTime? fromDate, DateTime? toDate, string outcomeCode, int? learnerID)
+        public DataTable FindSessions(int actorUserID, string sessionNumber, string surname, DateTime? fromDate, DateTime? toDate, string outcomeCode, int learnerID)
         {
             loginController.CheckStaff(actorUserID);
 
@@ -81,16 +81,9 @@ namespace FuturePath.ApplicationLayer
                 throw new ArgumentException(messages[0]);
             }
 
-            // A session number yyyy-NNNN becomes the SessionID and the year it was started.
-            int? sessionIDFilter = null;
-            int? yearFilter = null;
-            int year;
-            int sessionID;
-            if (AdvisorySession.TryParseSessionNumber(sessionNumber, out year, out sessionID))
-            {
-                sessionIDFilter = sessionID;
-                yearFilter = year;
-            }
+            // A session number yyyy-NNNN becomes the SessionID and the year it was started (0 = no filter).
+            int sessionIDFilter = AdvisorySession.GetSessionID(sessionNumber);
+            int yearFilter = AdvisorySession.GetSessionYear(sessionNumber);
 
             // Whole days: from the start of fromDate up to the start of the day after toDate.
             DateTime? fromFilter = null;
@@ -105,7 +98,7 @@ namespace FuturePath.ApplicationLayer
             }
 
             // "All" outcomes is blank; anything else must be one of the four stored codes.
-            string outcomeFilter = null;
+            string outcomeFilter = "";
             if (!string.IsNullOrWhiteSpace(outcomeCode))
             {
                 if (!AdvisoryOutcome.IsValidCode(outcomeCode))
@@ -115,14 +108,8 @@ namespace FuturePath.ApplicationLayer
                 outcomeFilter = outcomeCode.Trim().ToUpperInvariant();
             }
 
-            int? learnerFilter = null;
-            if (learnerID.HasValue && learnerID.Value > 0)
-            {
-                learnerFilter = learnerID;
-            }
-
             DataTable sessions = searchRepository.FindSessions(sessionIDFilter, yearFilter, surname, fromFilter, beforeFilter,
-                                                               outcomeFilter, learnerFilter);
+                                                               outcomeFilter, learnerID);
             AddSessionNumbers(sessions);
             return sessions;
         }
@@ -134,18 +121,14 @@ namespace FuturePath.ApplicationLayer
             return searchRepository.CountSessions();
         }
 
-        /// <summary>The SessionID for a session number (yyyy-NNNN), or null if it is invalid or does not exist.</summary>
-        public int? FindSessionId(string sessionNumber)
+        /// <summary>The SessionID for a session number (yyyy-NNNN), or 0 if it is invalid or does not exist.</summary>
+        public int FindSessionId(string sessionNumber)
         {
-            int year;
-            int sessionID;
-            if (!AdvisorySession.TryParseSessionNumber(sessionNumber, out year, out sessionID))
+            int sessionID = AdvisorySession.GetSessionID(sessionNumber);
+            int year = AdvisorySession.GetSessionYear(sessionNumber);
+            if (sessionID == 0 || !searchRepository.SessionExists(sessionID, year))
             {
-                return null;
-            }
-            if (!searchRepository.SessionExists(sessionID, year))
-            {
-                return null;
+                return 0;
             }
             return sessionID;
         }

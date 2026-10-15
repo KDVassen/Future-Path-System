@@ -294,7 +294,7 @@ try {
     $login = New-Object FuturePath.ApplicationLayer.LoginController
     foreach ($row in $users.Rows) {
         $password = Get-SeedPassword ([string]$row.Username)
-        Assert-True (([string]$row.PasswordHash).Split(':').Count -eq 3 -and -not ([string]$row.PasswordHash).Contains($password)) "$($row.Username): password is stored as a salted hash, not plaintext"
+        Assert-True (([string]$row.PasswordHash).Split(':').Count -eq 2 -and -not ([string]$row.PasswordHash).Contains($password)) "$($row.Username): password is stored as a salted hash (salt:hash), not plaintext"
         Assert-True ([FuturePath.ApplicationLayer.UserAccount]::VerifyPassword($password, [string]$row.PasswordHash)) "$($row.Username): the recorded test password matches the stored hash"
     }
     $admin = $login.Authenticate('admin', (Get-SeedPassword 'admin'))

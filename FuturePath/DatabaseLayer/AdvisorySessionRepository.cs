@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -64,7 +64,14 @@ namespace FuturePath.DatabaseLayer
             // The session's outcome is the OutcomeCode of its selected programme's result row
             object outcomeCode = ExecuteScalar("SELECT OutcomeCode FROM RecommendationResult WHERE SessionID = @SessionID AND IsSelectedProgramme = 1",
                                                Param("@SessionID", SqlDbType.Int, sessionID));
-            session.RecordOutcome(outcomeCode == null ? "" : Convert.ToString(outcomeCode));
+            if (outcomeCode == null)
+            {
+                session.RecordOutcome("");
+            }
+            else
+            {
+                session.RecordOutcome(Convert.ToString(outcomeCode));
+            }
             return session;
         }
 
@@ -74,7 +81,11 @@ namespace FuturePath.DatabaseLayer
             FillDataSet(sqlResults + " WHERE r.SessionID = @SessionID AND r.IsSelectedProgramme = 1", resultTable,
                         Param("@SessionID", SqlDbType.Int, sessionID));
             AddResults2Collection();
-            return results.Count > 0 ? results[0] : null;
+            if (results.Count == 0)
+            {
+                return null;
+            }
+            return results[0];
         }
 
         /// <summary>All results of a session with ProgrammeName and FacultyName: the selected one first, then alternatives by rank.</summary>
@@ -95,11 +106,11 @@ namespace FuturePath.DatabaseLayer
             foreach (DataRow row in GetTable(table).Rows)
             {
                 AdvisorySession session = new AdvisorySession();
-                session.SessionID = ReadInt(row, "SessionID").Value;
-                session.LearnerID = ReadInt(row, "LearnerID").Value;
-                session.GradeLevelID = ReadInt(row, "GradeLevelID").Value;
-                session.PreferredFacultyID = ReadInt(row, "PreferredFacultyID");
-                session.SelectedProgrammeID = ReadInt(row, "SelectedProgrammeID");
+                session.SessionID = ReadInt(row, "SessionID");
+                session.LearnerID = ReadInt(row, "LearnerID");
+                session.GradeLevelID = ReadInt(row, "GradeLevelID");
+                session.PreferredFacultyID = ReadNullableInt(row, "PreferredFacultyID");
+                session.SelectedProgrammeID = ReadNullableInt(row, "SelectedProgrammeID");
                 session.SessionDate = ReadDate(row, "SessionDate").Value;
                 session.AdvisingYear = Convert.ToInt16(row["AdvisingYear"]);
                 session.FundingInfoRequested = ReadBool(row, "FundingInfoRequested");
@@ -117,9 +128,9 @@ namespace FuturePath.DatabaseLayer
             foreach (DataRow row in GetTable(resultTable).Rows)
             {
                 RecommendationResult result = new RecommendationResult();
-                result.ResultID = ReadInt(row, "ResultID").Value;
-                result.SessionID = ReadInt(row, "SessionID").Value;
-                result.ProgrammeID = ReadInt(row, "ProgrammeID").Value;
+                result.ResultID = ReadInt(row, "ResultID");
+                result.SessionID = ReadInt(row, "SessionID");
+                result.ProgrammeID = ReadInt(row, "ProgrammeID");
                 result.ProgrammeName = ReadString(row, "ProgrammeName");
                 result.FacultyName = ReadString(row, "FacultyName");
                 result.SubjectMatchScore = ReadDecimal(row, "SubjectMatchScore");
@@ -129,7 +140,7 @@ namespace FuturePath.DatabaseLayer
                 result.OverallScore = ReadDecimal(row, "OverallScore");
                 result.OutcomeCode = ReadString(row, "OutcomeCode");
                 result.OutcomeReason = ReadString(row, "OutcomeReason");
-                result.AlternativeRank = ReadInt(row, "AlternativeRank");
+                result.AlternativeRank = ReadNullableInt(row, "AlternativeRank");
                 result.IsSelectedProgramme = ReadBool(row, "IsSelectedProgramme");
                 results.Add(result);
             }
@@ -165,7 +176,7 @@ namespace FuturePath.DatabaseLayer
                                          Param("@FacultyBonus", SqlDbType.Bit, result.FacultyBonus),
                                          Param("@OverallScore", SqlDbType.Decimal, result.OverallScore),
                                          Param("@OutcomeCode", SqlDbType.VarChar, result.OutcomeCode),
-                                         Param("@OutcomeReason", SqlDbType.VarChar, result.OutcomeReason ?? ""),
+                                         Param("@OutcomeReason", SqlDbType.VarChar, TextOrEmpty(result.OutcomeReason)),
                                          Param("@AlternativeRank", SqlDbType.Int, result.AlternativeRank),
                                          Param("@IsSelectedProgramme", SqlDbType.Bit, result.IsSelectedProgramme));
             result.ResultID = Convert.ToInt32(newID);
@@ -180,7 +191,11 @@ namespace FuturePath.DatabaseLayer
         /// </summary>
         public AdvisorySession Save(AdvisorySession session)
         {
-            DB.DBOperation operation = session.SessionID == 0 ? DB.DBOperation.Add : DB.DBOperation.Edit;
+            DB.DBOperation operation = DB.DBOperation.Edit;
+            if (session.SessionID == 0)
+            {
+                operation = DB.DBOperation.Add;
+            }
             DataSetChange(session, operation);
             UpdateDataSource(session, operation);
             return session;

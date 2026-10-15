@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Checks the shared contract: the harness loads FuturePath.exe, a database copy attaches, and the
     entity rule methods behave (requirement checks, match scores, interest score, password hash).
@@ -25,9 +25,15 @@ Assert-True ([FuturePath.ApplicationLayer.LearnerSubject]::IsValidMark(0)) 'Mark
 Assert-True ([FuturePath.ApplicationLayer.LearnerSubject]::IsValidMark(100)) 'Mark 100 is valid'
 Assert-True (-not [FuturePath.ApplicationLayer.LearnerSubject]::IsValidMark(-1)) 'Mark -1 is invalid'
 Assert-True (-not [FuturePath.ApplicationLayer.LearnerSubject]::IsValidMark(72.55)) 'Mark with two decimals is invalid'
-$parsed = [decimal]0
-Assert-True (-not [FuturePath.ApplicationLayer.LearnerSubject]::TryParseMark('abc', [ref]$parsed)) 'Letters are not a mark'
-Assert-True ([FuturePath.ApplicationLayer.LearnerSubject]::TryParseMark('72,5', [ref]$parsed)) 'Comma decimal is accepted'
+Assert-Equal -1 ([FuturePath.ApplicationLayer.LearnerSubject]::ParseMark('abc')) 'Letters are not a mark (-1)'
+Assert-Equal 72.5 ([FuturePath.ApplicationLayer.LearnerSubject]::ParseMark('72,5')) 'Comma decimal is accepted'
+Assert-Equal -1 ([FuturePath.ApplicationLayer.LearnerSubject]::ParseMark('101')) 'Mark 101 is not a mark (-1)'
+Assert-Equal 7 ([FuturePath.ApplicationLayer.AdvisorySession]::GetSessionID('2026-0007')) 'Session number gives its SessionID'
+Assert-Equal 2026 ([FuturePath.ApplicationLayer.AdvisorySession]::GetSessionYear('2026-0007')) 'Session number gives its year'
+Assert-Equal 0 ([FuturePath.ApplicationLayer.AdvisorySession]::GetSessionID('26-7')) 'A badly formed session number gives 0'
+$storedHash = [FuturePath.ApplicationLayer.UserAccount]::HashPassword('Test-Password-1')
+Assert-Equal 2 ($storedHash.Split(':').Count) 'A stored hash is salt:hash'
+Assert-True ($storedHash -ne [FuturePath.ApplicationLayer.UserAccount]::HashPassword('Test-Password-1')) 'The same password gets a different salted hash each time'
 
 $programme = New-Object FuturePath.ApplicationLayer.DegreeProgramme(1, 2, 'BSc Biological Sciences', 60, $true)
 $programme.GetRequirements().Add((New-Object FuturePath.ApplicationLayer.ProgrammeRequirement(1, 1, 2, 'Mathematics', 'Required', 60, $null, '', $null, '', $true)))

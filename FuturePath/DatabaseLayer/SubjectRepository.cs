@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.ApplicationLayer;
 
@@ -25,8 +25,12 @@ namespace FuturePath.DatabaseLayer
         /// <summary>Subjects ordered by name; inactive ones only when includeInactive is true.</summary>
         public Collection<Subject> GetSubjects(bool includeInactive)
         {
-            FillDataSet(sqlLocal + " WHERE (@IncludeInactive = 1 OR IsActive = 1) ORDER BY SubjectName", table,
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlLocal;
+            if (!includeInactive)
+            {
+                sql += " WHERE IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY SubjectName", table);
             Add2Collection();
             return subjects;
         }
@@ -36,7 +40,11 @@ namespace FuturePath.DatabaseLayer
         {
             FillDataSet(sqlLocal + " WHERE SubjectID = @SubjectID", table, Param("@SubjectID", SqlDbType.Int, subjectID));
             Add2Collection();
-            return subjects.Count > 0 ? subjects[0] : null;
+            if (subjects.Count == 0)
+            {
+                return null;
+            }
+            return subjects[0];
         }
         #endregion
 
@@ -47,7 +55,7 @@ namespace FuturePath.DatabaseLayer
             subjects = new Collection<Subject>();
             foreach (DataRow row in GetTable(table).Rows)
             {
-                subjects.Add(new Subject(ReadInt(row, "SubjectID").Value, ReadString(row, "SubjectName"),
+                subjects.Add(new Subject(ReadInt(row, "SubjectID"), ReadString(row, "SubjectName"),
                                          ReadString(row, "SubjectLevel"), ReadBool(row, "IsActive")));
             }
         }

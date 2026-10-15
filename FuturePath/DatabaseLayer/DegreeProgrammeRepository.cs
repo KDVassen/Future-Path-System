@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -92,20 +93,31 @@ namespace FuturePath.DatabaseLayer
             FillDataSet(sqlProgrammes + " WHERE p.ProgrammeID = @ProgrammeID", programmeTable,
                         Param("@ProgrammeID", SqlDbType.Int, programmeID));
             Add2Collection();
-            return programmes.Count > 0 ? programmes[0] : null;
+            if (programmes.Count == 0)
+            {
+                return null;
+            }
+            return programmes[0];
         }
 
         /// <summary>
-        /// Programmes with FacultyName, ordered by name. facultyID null means every faculty.
+        /// Programmes with FacultyName, ordered by name. A facultyID of 0 means every faculty.
         /// Without includeInactive, inactive programmes and programmes under an inactive faculty are left out.
         /// </summary>
-        public Collection<DegreeProgramme> GetProgrammes(int? facultyID, bool includeInactive)
+        public Collection<DegreeProgramme> GetProgrammes(int facultyID, bool includeInactive)
         {
-            FillDataSet(sqlProgrammes + " WHERE (@FacultyID IS NULL OR p.FacultyID = @FacultyID)"
-                        + " AND (@IncludeInactive = 1 OR (p.IsActive = 1 AND f.IsActive = 1)) ORDER BY p.ProgrammeName",
-                        programmeTable,
-                        Param("@FacultyID", SqlDbType.Int, facultyID),
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlProgrammes + " WHERE 1 = 1";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (facultyID > 0)
+            {
+                sql += " AND p.FacultyID = @FacultyID";
+                parameters.Add(Param("@FacultyID", SqlDbType.Int, facultyID));
+            }
+            if (!includeInactive)
+            {
+                sql += " AND p.IsActive = 1 AND f.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY p.ProgrammeName", programmeTable, parameters.ToArray());
             Add2Collection();
             return programmes;
         }
@@ -121,16 +133,16 @@ namespace FuturePath.DatabaseLayer
                 return new Collection<DegreeProgramme>();
             }
             FillDataSet(sqlProgrammes + " WHERE p.IsActive = 1 AND f.IsActive = 1 AND p.ProgrammeName LIKE '%' + @Text + '%' ORDER BY p.ProgrammeName",
-                        programmeTable, Param("@Text", SqlDbType.VarChar, EscapeLike(text.Trim())));
+                        programmeTable, Param("@Text", SqlDbType.VarChar, text.Trim()));
             Add2Collection();
             return programmes;
         }
 
         /// <summary>True if another programme already has this name (not case-sensitive).</summary>
-        public bool ProgrammeNameExists(string programmeName, int? excludeProgrammeID)
+        public bool ProgrammeNameExists(string programmeName, int excludeProgrammeID)
         {
-            object count = ExecuteScalar("SELECT COUNT(*) FROM DegreeProgramme WHERE ProgrammeName = @Name AND (@ExcludeID IS NULL OR ProgrammeID <> @ExcludeID)",
-                                         Param("@Name", SqlDbType.VarChar, (programmeName ?? "").Trim()),
+            object count = ExecuteScalar("SELECT COUNT(*) FROM DegreeProgramme WHERE ProgrammeName = @Name AND ProgrammeID <> @ExcludeID",
+                                         Param("@Name", SqlDbType.VarChar, TextOrEmpty(programmeName)),
                                          Param("@ExcludeID", SqlDbType.Int, excludeProgrammeID));
             return Convert.ToInt32(count) > 0;
         }
@@ -138,10 +150,12 @@ namespace FuturePath.DatabaseLayer
         /// <summary>A programme's requirements with SubjectName and AlternativeSubjectName, in RequirementID order.</summary>
         public Collection<ProgrammeRequirement> GetRequirements(int programmeID, bool includeInactive)
         {
-            FillDataSet(sqlRequirements + " WHERE r.ProgrammeID = @ProgrammeID AND (@IncludeInactive = 1 OR r.IsActive = 1) ORDER BY r.RequirementID",
-                        requirementTable,
-                        Param("@ProgrammeID", SqlDbType.Int, programmeID),
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlRequirements + " WHERE r.ProgrammeID = @ProgrammeID";
+            if (!includeInactive)
+            {
+                sql += " AND r.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY r.RequirementID", requirementTable, Param("@ProgrammeID", SqlDbType.Int, programmeID));
             AddRequirements2Collection();
             return requirements;
         }
@@ -152,14 +166,18 @@ namespace FuturePath.DatabaseLayer
             FillDataSet(sqlRequirements + " WHERE r.RequirementID = @RequirementID", requirementTable,
                         Param("@RequirementID", SqlDbType.Int, requirementID));
             AddRequirements2Collection();
-            return requirements.Count > 0 ? requirements[0] : null;
+            if (requirements.Count == 0)
+            {
+                return null;
+            }
+            return requirements[0];
         }
 
         /// <summary>True if the programme already has a requirement for this subject (UNIQUE(ProgrammeID, SubjectID)).</summary>
-        public bool RequirementExists(int programmeID, int subjectID, int? excludeRequirementID)
+        public bool RequirementExists(int programmeID, int subjectID, int excludeRequirementID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM ProgrammeRequirement WHERE ProgrammeID = @ProgrammeID AND SubjectID = @SubjectID"
-                                         + " AND (@ExcludeID IS NULL OR RequirementID <> @ExcludeID)",
+                                         + " AND RequirementID <> @ExcludeID",
                                          Param("@ProgrammeID", SqlDbType.Int, programmeID),
                                          Param("@SubjectID", SqlDbType.Int, subjectID),
                                          Param("@ExcludeID", SqlDbType.Int, excludeRequirementID));
@@ -174,7 +192,7 @@ namespace FuturePath.DatabaseLayer
             programmes = new Collection<DegreeProgramme>();
             foreach (DataRow row in GetTable(programmeTable).Rows)
             {
-                DegreeProgramme programme = new DegreeProgramme(ReadInt(row, "ProgrammeID").Value, ReadInt(row, "FacultyID").Value,
+                DegreeProgramme programme = new DegreeProgramme(ReadInt(row, "ProgrammeID"), ReadInt(row, "FacultyID"),
                                                                 ReadString(row, "ProgrammeName"), ReadDecimal(row, "MinimumOverallAverage"),
                                                                 ReadBool(row, "IsActive"));
                 programme.FacultyName = ReadString(row, "FacultyName");
@@ -188,10 +206,10 @@ namespace FuturePath.DatabaseLayer
             requirements = new Collection<ProgrammeRequirement>();
             foreach (DataRow row in GetTable(requirementTable).Rows)
             {
-                requirements.Add(new ProgrammeRequirement(ReadInt(row, "RequirementID").Value, ReadInt(row, "ProgrammeID").Value,
-                                                          ReadInt(row, "SubjectID").Value, ReadString(row, "SubjectName"),
+                requirements.Add(new ProgrammeRequirement(ReadInt(row, "RequirementID"), ReadInt(row, "ProgrammeID"),
+                                                          ReadInt(row, "SubjectID"), ReadString(row, "SubjectName"),
                                                           ReadString(row, "RequirementType"), ReadDecimal(row, "MinimumMark"),
-                                                          ReadInt(row, "AlternativeSubjectID"), ReadString(row, "AlternativeSubjectName"),
+                                                          ReadNullableInt(row, "AlternativeSubjectID"), ReadString(row, "AlternativeSubjectName"),
                                                           ReadDecimal(row, "AlternativeMinimumMark"), ReadString(row, "AdvisoryNote"),
                                                           ReadBool(row, "IsActive")));
             }
@@ -213,7 +231,7 @@ namespace FuturePath.DatabaseLayer
             FillDataSet(sqlMappings, mappingTable, Param("@ProgrammeID", SqlDbType.Int, programme.ProgrammeID));
             foreach (DataRow row in GetTable(mappingTable).Rows)
             {
-                programme.InterestMappings.Add(new DegreeInterestMapping(ReadInt(row, "ProgrammeID").Value, ReadInt(row, "CategoryID").Value,
+                programme.InterestMappings.Add(new DegreeInterestMapping(ReadInt(row, "ProgrammeID"), ReadInt(row, "CategoryID"),
                                                                          ReadString(row, "CategoryName"), ReadDecimal(row, "RelevanceWeight").Value));
             }
         }
@@ -222,7 +240,7 @@ namespace FuturePath.DatabaseLayer
         private void FillRow(DataRow row, DegreeProgramme programme)
         {
             row["FacultyID"] = programme.FacultyID;
-            row["ProgrammeName"] = (programme.ProgrammeName ?? "").Trim();
+            row["ProgrammeName"] = TextOrEmpty(programme.ProgrammeName);
             row["MinimumOverallAverage"] = DbValue(programme.MinimumOverallAverage);
             row["IsActive"] = programme.IsActive;
         }
@@ -245,12 +263,6 @@ namespace FuturePath.DatabaseLayer
             row["AlternativeMinimumMark"] = DbValue(requirement.AlternativeMinimumMark);
             row["AdvisoryNote"] = DbText(requirement.AdvisoryNote);
             row["IsActive"] = requirement.IsActive;
-        }
-
-        /// <summary>Makes LIKE wildcards in typed text (%, _ and [) match themselves.</summary>
-        private static string EscapeLike(string text)
-        {
-            return text.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
         }
         #endregion
 

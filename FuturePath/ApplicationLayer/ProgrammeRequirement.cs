@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
@@ -172,7 +173,12 @@ namespace FuturePath.ApplicationLayer
             {
                 alternative = FindSubject(learnerSubjects, alternativeSubjectID.Value);
             }
-            decimal? alternativeMinimum = alternativeMinimumMark ?? minimumMark;
+            // The alternative's own minimum, or the main minimum when it has none
+            decimal? alternativeMinimum = minimumMark;
+            if (alternativeMinimumMark.HasValue)
+            {
+                alternativeMinimum = alternativeMinimumMark;
+            }
 
             if (direct != null && Meets(direct.Mark, minimumMark))
             {
@@ -190,8 +196,8 @@ namespace FuturePath.ApplicationLayer
             {
                 return MakeCheck(alternative, alternativeMinimum, RequirementCheck.ResultGap, alternativeMinimum.Value - alternative.Mark);
             }
-            return new RequirementCheck(requirementID, subjectName, "", alternativeSubjectName ?? "", requirementType,
-                                        minimumMark, null, RequirementCheck.ResultMissing, null, advisoryNote ?? "");
+            return new RequirementCheck(requirementID, subjectName, "", alternativeSubjectName, requirementType,
+                                        minimumMark, null, RequirementCheck.ResultMissing, null, advisoryNote);
         }
 
         /// <summary>True if Required or Recommended.</summary>
@@ -209,8 +215,8 @@ namespace FuturePath.ApplicationLayer
         /// <summary>Builds a check for a captured subject.</summary>
         private RequirementCheck MakeCheck(LearnerSubject taken, decimal? minimum, string resultCode, decimal? shortfall)
         {
-            return new RequirementCheck(requirementID, subjectName, taken.SubjectName, alternativeSubjectName ?? "", requirementType,
-                                        minimum, taken.Mark, resultCode, shortfall, advisoryNote ?? "");
+            return new RequirementCheck(requirementID, subjectName, taken.SubjectName, alternativeSubjectName, requirementType,
+                                        minimum, taken.Mark, resultCode, shortfall, advisoryNote);
         }
 
         /// <summary>Finds a subject in the learner's captured subjects, or returns null.</summary>
@@ -233,7 +239,12 @@ namespace FuturePath.ApplicationLayer
         /// <summary>Returns e.g. "Mathematics (Required, 60%)".</summary>
         public override string ToString()
         {
-            return subjectName + " (" + requirementType + (minimumMark.HasValue ? ", " + minimumMark.Value.ToString("0.#") + "%" : "") + ")";
+            string text = subjectName + " (" + requirementType;
+            if (minimumMark.HasValue)
+            {
+                text += ", " + minimumMark.Value.ToString("0.#", CultureInfo.InvariantCulture) + "%";
+            }
+            return text + ")";
         }
         #endregion
     }

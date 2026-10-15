@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
@@ -109,17 +109,17 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>A whole-number system parameter (e.g. MIN_SUBJECT_COUNT), or null if it is missing or not a number.</summary>
-        public int? GetParameterInt(string code)
+        /// <summary>A whole-number system parameter (e.g. MIN_SUBJECT_COUNT), or 0 if it is missing or not a number.</summary>
+        public int GetParameterInt(string code)
         {
             if (string.IsNullOrWhiteSpace(code) || !SystemSettings.Contains(code.Trim()))
             {
-                return null;
+                return 0;
             }
             int value;
             if (!int.TryParse(SystemSettings.GetText(code.Trim()), NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
             {
-                return null;
+                return 0;
             }
             return value;
         }
@@ -146,10 +146,10 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Programmes with FacultyName, ordered by name; facultyID null means every faculty. Without
+        /// Programmes with FacultyName, ordered by name; a facultyID of 0 means every faculty. Without
         /// includeInactive, inactive programmes and programmes under an inactive faculty are left out.
         /// </summary>
-        public Collection<DegreeProgramme> GetProgrammes(int? facultyID, bool includeInactive)
+        public Collection<DegreeProgramme> GetProgrammes(int facultyID, bool includeInactive)
         {
             programmes = programmeRepository.GetProgrammes(facultyID, includeInactive);
             return programmes;
@@ -264,7 +264,7 @@ namespace FuturePath.ApplicationLayer
 
         #region Faculty maintenance (UI 13.1)
         /// <summary>Checks a faculty: name required, at most 60 characters, not already used. Returns one message per problem.</summary>
-        public Collection<string> ValidateFaculty(int? facultyID, string facultyName)
+        public Collection<string> ValidateFaculty(int facultyID, string facultyName)
         {
             Collection<string> problems = new Collection<string>();
             if (string.IsNullOrWhiteSpace(facultyName))
@@ -283,11 +283,11 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (facultyID null) or renames a faculty (Administrator only). isActive null keeps the
-        /// current value (a new faculty is then active). Returns the FacultyID.
-        /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
+        /// Adds (facultyID 0) or updates a faculty's name and active flag (Administrator only).
+        /// Returns the FacultyID. Throws ArgumentException if invalid, UnauthorizedAccessException
+        /// if not an Administrator.
         /// </summary>
-        public int SaveFaculty(int actorUserID, int? facultyID, string facultyName, bool? isActive)
+        public int SaveFaculty(int actorUserID, int facultyID, string facultyName, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
             Collection<string> problems = ValidateFaculty(facultyID, facultyName);
@@ -298,19 +298,16 @@ namespace FuturePath.ApplicationLayer
 
             Faculty faculty;
             DB.DBOperation operation;
-            if (!facultyID.HasValue)
+            if (facultyID == 0)
             {
-                faculty = new Faculty(0, facultyName.Trim(), isActive ?? true);
+                faculty = new Faculty(0, facultyName.Trim(), isActive);
                 operation = DB.DBOperation.Add;
             }
             else
             {
-                faculty = FindFaculty(facultyID.Value);
+                faculty = FindFaculty(facultyID);
                 faculty.FacultyName = facultyName.Trim();
-                if (isActive.HasValue)
-                {
-                    faculty.IsActive = isActive.Value;
-                }
+                faculty.IsActive = isActive;
                 operation = DB.DBOperation.Edit;
             }
 
@@ -332,9 +329,9 @@ namespace FuturePath.ApplicationLayer
         #region Programme maintenance (UI 13.1)
         /// <summary>
         /// Checks a programme: existing faculty, name required (max 100) and not already used,
-        /// minimum average 0-100 with at most two decimals when given. Returns one message per problem.
+        /// minimum average 0-100 with at most two decimals (0 = no minimum). Returns one message per problem.
         /// </summary>
-        public Collection<string> ValidateProgramme(int? programmeID, int facultyID, string programmeName, decimal? minimumOverallAverage)
+        public Collection<string> ValidateProgramme(int programmeID, int facultyID, string programmeName, decimal minimumOverallAverage)
         {
             Collection<string> problems = new Collection<string>();
             if (facultyID <= 0 || facultyRepository.FindById(facultyID) == null)
@@ -355,7 +352,7 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("A programme called " + programmeName.Trim() + " already exists. Enter a different name.");
             }
 
-            if (minimumOverallAverage.HasValue && !IsValidPercentage(minimumOverallAverage.Value))
+            if (!IsValidPercentage(minimumOverallAverage))
             {
                 problems.Add("Enter a minimum overall average from 0 to 100, with at most two decimal places.");
             }
@@ -363,10 +360,10 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (programmeID null) or updates a programme (Administrator only). A minimum average of
-        /// null or 0 means the programme sets none. Returns the ProgrammeID.
+        /// Adds (programmeID 0) or updates a programme (Administrator only). A minimum average of 0
+        /// means the programme sets none. Returns the ProgrammeID.
         /// </summary>
-        public int SaveProgramme(int actorUserID, int? programmeID, int facultyID, string programmeName, decimal? minimumOverallAverage, bool isActive)
+        public int SaveProgramme(int actorUserID, int programmeID, int facultyID, string programmeName, decimal minimumOverallAverage, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
             Collection<string> problems = ValidateProgramme(programmeID, facultyID, programmeName, minimumOverallAverage);
@@ -377,20 +374,20 @@ namespace FuturePath.ApplicationLayer
 
             DegreeProgramme programme;
             DB.DBOperation operation;
-            if (!programmeID.HasValue)
+            if (programmeID == 0)
             {
-                programme = new DegreeProgramme(0, facultyID, programmeName.Trim(), NoMinimumIfZero(minimumOverallAverage), isActive);
+                programme = new DegreeProgramme();
                 operation = DB.DBOperation.Add;
             }
             else
             {
-                programme = FindProgramme(programmeID.Value);
-                programme.FacultyID = facultyID;
-                programme.ProgrammeName = programmeName.Trim();
-                programme.MinimumOverallAverage = NoMinimumIfZero(minimumOverallAverage);
-                programme.IsActive = isActive;
+                programme = FindProgramme(programmeID);
                 operation = DB.DBOperation.Edit;
             }
+            programme.FacultyID = facultyID;
+            programme.ProgrammeName = programmeName.Trim();
+            programme.MinimumOverallAverage = NoMinimumIfZero(minimumOverallAverage);
+            programme.IsActive = isActive;
 
             DataMaintenance(programme, operation);
             return FinalizeChanges(programme, operation);
@@ -410,12 +407,12 @@ namespace FuturePath.ApplicationLayer
         #region Requirement maintenance (UI 13.2)
         /// <summary>
         /// Checks a requirement: existing programme, valid type, existing subject, one requirement
-        /// per subject per programme, alternative (0 or null means none) existing and different
-        /// from the subject, marks 0-100 with at most two decimals, note at most 255 characters.
+        /// per subject per programme, alternative (0 means none) existing and different from the
+        /// subject, marks 0-100 with at most two decimals, note at most 255 characters.
         /// Returns one message per problem.
         /// </summary>
-        public Collection<string> ValidateRequirement(int? requirementID, int programmeID, string requirementType, int subjectID,
-                                                      int? alternativeSubjectID, decimal? minimumMark, decimal? alternativeMinimumMark, string advisoryNote)
+        public Collection<string> ValidateRequirement(int requirementID, int programmeID, string requirementType, int subjectID,
+                                                      int alternativeSubjectID, decimal minimumMark, decimal alternativeMinimumMark, string advisoryNote)
         {
             Collection<string> problems = new Collection<string>();
             if (programmeID <= 0 || programmeRepository.FindById(programmeID) == null)
@@ -428,7 +425,11 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("Choose a requirement type: " + ProgrammeRequirement.TypeRequired + " or " + ProgrammeRequirement.TypeRecommended + ".");
             }
 
-            Subject subject = subjectID > 0 ? subjectRepository.FindById(subjectID) : null;
+            Subject subject = null;
+            if (subjectID > 0)
+            {
+                subject = subjectRepository.FindById(subjectID);
+            }
             if (subject == null)
             {
                 problems.Add("Choose a subject from the list.");
@@ -438,24 +439,23 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("This programme already has a requirement for " + subject.SubjectName + ". Edit that requirement instead.");
             }
 
-            int? alternative = NoAlternativeIfZero(alternativeSubjectID);
-            if (alternative.HasValue)
+            if (alternativeSubjectID > 0)
             {
-                if (alternative.Value == subjectID)
+                if (alternativeSubjectID == subjectID)
                 {
                     problems.Add("Choose an accepted alternative that is different from the subject, or None.");
                 }
-                else if (subjectRepository.FindById(alternative.Value) == null)
+                else if (subjectRepository.FindById(alternativeSubjectID) == null)
                 {
                     problems.Add("Choose an accepted alternative from the list, or None.");
                 }
             }
 
-            if (minimumMark.HasValue && !IsValidPercentage(minimumMark.Value))
+            if (!IsValidPercentage(minimumMark))
             {
                 problems.Add("Enter a minimum mark from 0 to 100, with at most two decimal places.");
             }
-            if (alternativeMinimumMark.HasValue && !IsValidPercentage(alternativeMinimumMark.Value))
+            if (!IsValidPercentage(alternativeMinimumMark))
             {
                 problems.Add("Enter the alternative's minimum mark from 0 to 100, with at most two decimal places.");
             }
@@ -468,16 +468,16 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (requirementID null) or updates a requirement (Administrator only). An
-        /// alternativeSubjectID of null or 0 means no alternative. Returns the RequirementID.
+        /// Adds (requirementID 0) or updates a requirement (Administrator only). 0 means "not set":
+        /// an alternativeSubjectID of 0 is no alternative, a minimum mark of 0 is no minimum, and an
+        /// alternative minimum of 0 means the main minimum applies. Returns the RequirementID.
         /// Changes apply to new advisory sessions only.
         /// </summary>
-        public int SaveRequirement(int actorUserID, int? requirementID, int programmeID, string requirementType, int subjectID,
-                                   int? alternativeSubjectID, decimal? minimumMark, decimal? alternativeMinimumMark, bool isActive, string advisoryNote)
+        public int SaveRequirement(int actorUserID, int requirementID, int programmeID, string requirementType, int subjectID,
+                                   int alternativeSubjectID, decimal minimumMark, decimal alternativeMinimumMark, bool isActive, string advisoryNote)
         {
             loginController.CheckAdministrator(actorUserID);
-            int? alternative = NoAlternativeIfZero(alternativeSubjectID);
-            Collection<string> problems = ValidateRequirement(requirementID, programmeID, requirementType, subjectID, alternative,
+            Collection<string> problems = ValidateRequirement(requirementID, programmeID, requirementType, subjectID, alternativeSubjectID,
                                                               minimumMark, alternativeMinimumMark, advisoryNote);
             if (problems.Count > 0)
             {
@@ -486,24 +486,33 @@ namespace FuturePath.ApplicationLayer
 
             ProgrammeRequirement requirement;
             DB.DBOperation operation;
-            if (!requirementID.HasValue)
+            if (requirementID == 0)
             {
                 requirement = new ProgrammeRequirement();
                 operation = DB.DBOperation.Add;
             }
             else
             {
-                requirement = FindRequirement(requirementID.Value);
+                requirement = FindRequirement(requirementID);
                 operation = DB.DBOperation.Edit;
             }
             requirement.ProgrammeID = programmeID;
             requirement.RequirementType = requirementType;
             requirement.SubjectID = subjectID;
-            requirement.MinimumMark = minimumMark;
-            requirement.AlternativeSubjectID = alternative;
-            // Without an alternative there is no alternative minimum either.
-            requirement.AlternativeMinimumMark = alternative.HasValue ? alternativeMinimumMark : null;
-            requirement.AdvisoryNote = advisoryNote == null ? "" : advisoryNote.Trim();
+            requirement.MinimumMark = NoMinimumIfZero(minimumMark);
+            // No alternative (0) is stored as NULL, and then there is no alternative minimum either
+            requirement.AlternativeSubjectID = null;
+            requirement.AlternativeMinimumMark = null;
+            if (alternativeSubjectID > 0)
+            {
+                requirement.AlternativeSubjectID = alternativeSubjectID;
+                requirement.AlternativeMinimumMark = NoMinimumIfZero(alternativeMinimumMark);
+            }
+            requirement.AdvisoryNote = "";
+            if (advisoryNote != null)
+            {
+                requirement.AdvisoryNote = advisoryNote.Trim();
+            }
             requirement.IsActive = isActive;
 
             DataMaintenance(requirement, operation);
@@ -522,12 +531,12 @@ namespace FuturePath.ApplicationLayer
 
         /// <summary>
         /// Saves the "Minimum average" row of UI 13.2 into DegreeProgramme.MinimumOverallAverage
-        /// (Administrator only). null or 0 clears it.
+        /// (Administrator only). 0 clears it.
         /// </summary>
-        public void SaveMinimumAverage(int actorUserID, int programmeID, decimal? minimumOverallAverage)
+        public void SaveMinimumAverage(int actorUserID, int programmeID, decimal minimumOverallAverage)
         {
             loginController.CheckAdministrator(actorUserID);
-            if (minimumOverallAverage.HasValue && !IsValidPercentage(minimumOverallAverage.Value))
+            if (!IsValidPercentage(minimumOverallAverage))
             {
                 throw new ArgumentException("Enter a minimum average from 0 to 100, with at most two decimal places.");
             }
@@ -617,20 +626,10 @@ namespace FuturePath.ApplicationLayer
             return value >= 0 && value <= 100 && decimal.Round(value, 2) == value;
         }
 
-        /// <summary>A minimum average of 0 means "no minimum", which is stored as NULL.</summary>
-        private static decimal? NoMinimumIfZero(decimal? value)
+        /// <summary>A minimum of 0 means "no minimum", which is stored as NULL.</summary>
+        private static decimal? NoMinimumIfZero(decimal value)
         {
-            if (!value.HasValue || value.Value == 0)
-            {
-                return null;
-            }
-            return value;
-        }
-
-        /// <summary>The "None" alternative (0) is stored as NULL.</summary>
-        private static int? NoAlternativeIfZero(int? value)
-        {
-            if (!value.HasValue || value.Value == 0)
+            if (value == 0)
             {
                 return null;
             }
@@ -640,7 +639,11 @@ namespace FuturePath.ApplicationLayer
         /// <summary>The value for a DataTable cell: null becomes DBNull.</summary>
         private static object ValueOrDBNull(object value)
         {
-            return value ?? DBNull.Value;
+            if (value == null)
+            {
+                return DBNull.Value;
+            }
+            return value;
         }
         #endregion
     }

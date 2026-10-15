@@ -23,36 +23,35 @@ namespace FuturePath.ApplicationLayer
         /// worked out at report time from each session's subjects and the programme's current
         /// requirements; sessions with no subjects captured are not counted as gaps.
         /// </summary>
-        public FpDieData BuildDegreeInterestReport(int actorUserID, DateTime fromDate, DateTime toDate, int? facultyID, int? gradeLevelID, string outcomeCode, bool includeInactive)
+        public FpDieData BuildDegreeInterestReport(int actorUserID, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID, string outcomeCode, bool includeInactive)
         {
             UserAccount actor = loginController.CheckStaff(actorUserID);
             CheckPeriod(fromDate, toDate);
-            int? faculty = OptionalId(facultyID);
-            int? grade = OptionalId(gradeLevelID);
             string outcome = OptionalOutcome(outcomeCode);
 
-            DataTable sessions = reportRepository.GetCompletedSessions(PeriodStart(fromDate), PeriodEnd(toDate), faculty, grade, outcome, includeInactive);
+            DataTable sessions = reportRepository.GetCompletedSessions(PeriodStart(fromDate), PeriodEnd(toDate), facultyID, gradeLevelID, outcome, includeInactive);
 
             FpDieData data = new FpDieData();
+            FpDieData.ReportHeaderRow header = data.ReportHeader.NewReportHeaderRow();
             AddOutcomeSummaryRows(data, sessions);
             AddFacultyOutcomeRows(data, sessions);
             AddProgrammeOutcomeRows(data, sessions);
-            int subjectGapSessions;
-            int markGapSessions;
-            decimal? averageShortfall;
-            AddGapRows(data, sessions, out subjectGapSessions, out markGapSessions, out averageShortfall);
+            AddGapRows(data, sessions, header);
             AddFundingCategoryRows(data, sessions);
 
             int sessionCount = sessions.Rows.Count;
             int eligibleCount = CountOutcome(sessions, AdvisoryOutcome.CodeStrong) + CountOutcome(sessions, AdvisoryOutcome.CodePossible);
 
-            FpDieData.ReportHeaderRow header = data.ReportHeader.NewReportHeaderRow();
             header.ReportCode = ExportReport.CodeDegreeInterest;
             header.PeriodStart = fromDate.Date;
             header.PeriodEnd = toDate.Date;
-            header.FacultyFilter = faculty.HasValue ? FacultyText(faculty.Value) : "All faculties";
-            header.GradeFilter = grade.HasValue ? GradeText(grade.Value) : "All grades";
-            header.OutcomeFilter = outcome != null ? SentenceCase(AdvisoryOutcome.GetCategory(outcome)) : "All outcomes";
+            header.FacultyFilter = FacultyText(facultyID, "All faculties");
+            header.GradeFilter = GradeText(gradeLevelID, "All grades");
+            header.OutcomeFilter = "All outcomes";
+            if (outcome.Length > 0)
+            {
+                header.OutcomeFilter = SentenceCase(AdvisoryOutcome.GetCategory(outcome));
+            }
             header.IncludeInactive = includeInactive;
             header.GeneratedByName = actor.FullName + ", " + actor.RoleName;
             header.GeneratedAt = DateTime.Now;
@@ -65,16 +64,6 @@ namespace FuturePath.ApplicationLayer
             else
             {
                 header.EligibilityRate = Percent(eligibleCount, sessionCount);
-            }
-            header.SubjectGapSessions = subjectGapSessions;
-            header.MarkGapSessions = markGapSessions;
-            if (averageShortfall.HasValue)
-            {
-                header.AverageShortfall = averageShortfall.Value;
-            }
-            else
-            {
-                header.SetAverageShortfallNull();
             }
             header.FundingRequestSessions = CountFundingRequests(sessions);
 
@@ -120,21 +109,19 @@ namespace FuturePath.ApplicationLayer
         /// The listing is ordered by faculty name, then Not Currently Eligible before More
         /// Information Needed, then session date, newest first.
         /// </summary>
-        public FpLerData BuildNotEligibleReport(int actorUserID, DateTime fromDate, DateTime toDate, int? facultyID, int? gradeLevelID)
+        public FpLerData BuildNotEligibleReport(int actorUserID, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID)
         {
             UserAccount actor = loginController.CheckStaff(actorUserID);
             CheckPeriod(fromDate, toDate);
-            int? faculty = OptionalId(facultyID);
-            int? grade = OptionalId(gradeLevelID);
 
             // Sessions in scope: every completed session in the period after the faculty and grade filters.
-            DataTable scope = reportRepository.GetScopeCounts(PeriodStart(fromDate), PeriodEnd(toDate), faculty, grade, null, false, false);
+            DataTable scope = reportRepository.GetScopeCounts(PeriodStart(fromDate), PeriodEnd(toDate), facultyID, gradeLevelID, "", false, false);
             int sessionsInScope = Convert.ToInt32(scope.Rows[0]["SessionCount"]);
-            DataTable exceptions = reportRepository.GetExceptionSessions(PeriodStart(fromDate), PeriodEnd(toDate), faculty, grade);
+            DataTable exceptions = reportRepository.GetExceptionSessions(PeriodStart(fromDate), PeriodEnd(toDate), facultyID, gradeLevelID);
 
             FpLerData data = new FpLerData();
-            List<OutcomeTally> faculties = new List<OutcomeTally>();
-            List<CountTally> reasons = new List<CountTally>();
+            List<ReportTally> faculties = new List<ReportTally>();
+            List<ReportTally> reasons = new List<ReportTally>();
             Dictionary<int, DegreeProgramme> programmes = new Dictionary<int, DegreeProgramme>();
             int facultySortOrder = 0;
             int previousFacultyID = 0;
@@ -149,23 +136,22 @@ namespace FuturePath.ApplicationLayer
                 }
                 AddExceptionRow(data, session, facultySortOrder);
 
-                string facultyName = TextOf(session["FacultyName"]);
-                FindOrAddTally(faculties, sessionFacultyID, facultyName, facultyName).Add(TextOf(session["OutcomeCode"]));
+                FindOrAddTally(faculties, sessionFacultyID, TextOf(session["FacultyName"])).AddOutcome(TextOf(session["OutcomeCode"]));
                 foreach (string reason in GetReasonCategories(session, programmes))
                 {
-                    FindOrAddCount(reasons, reason).Count++;
+                    FindOrAddTally(reasons, 0, reason).Count++;
                 }
             }
 
             // Reasons and faculties, most frequent first.
             reasons.Sort(CompareCountsDescending);
-            foreach (CountTally reason in reasons)
+            foreach (ReportTally reason in reasons)
             {
                 data.ReasonSummary.AddReasonSummaryRow(reason.Name, reason.Count);
             }
             int exceptionCount = exceptions.Rows.Count;
             faculties.Sort(CompareSessionsDescending);
-            foreach (OutcomeTally tally in faculties)
+            foreach (ReportTally tally in faculties)
             {
                 data.FacultySummary.AddFacultySummaryRow(tally.ID, tally.Name, tally.SessionCount, Percent(tally.SessionCount, exceptionCount));
             }
@@ -173,8 +159,7 @@ namespace FuturePath.ApplicationLayer
             FpLerData.ReportHeaderRow header = data.ReportHeader.NewReportHeaderRow();
             header.ReportCode = ExportReport.CodeNotEligible;
             header.PeriodText = FormatPeriod(fromDate, toDate);
-            header.ParametersText = "Faculty: " + (faculty.HasValue ? FacultyText(faculty.Value) : "All")
-                                    + " \u00B7 Grade: " + (grade.HasValue ? GradeText(grade.Value) : "All");
+            header.ParametersText = "Faculty: " + FacultyText(facultyID, "All") + " \u00B7 Grade: " + GradeText(gradeLevelID, "All");
             header.GeneratedByName = actor.FullName + ", " + actor.RoleName;
             header.GeneratedAt = DateTime.Now;
             header.SessionsInScope = sessionsInScope;
@@ -223,14 +208,13 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         private static void AddFacultyOutcomeRows(FpDieData data, DataTable sessions)
         {
-            List<OutcomeTally> faculties = new List<OutcomeTally>();
+            List<ReportTally> faculties = new List<ReportTally>();
             foreach (DataRow session in sessions.Rows)
             {
-                string facultyName = TextOf(session["FacultyName"]);
-                FindOrAddTally(faculties, Convert.ToInt32(session["FacultyID"]), facultyName, facultyName).Add(TextOf(session["OutcomeCode"]));
+                FindOrAddTally(faculties, Convert.ToInt32(session["FacultyID"]), TextOf(session["FacultyName"])).AddOutcome(TextOf(session["OutcomeCode"]));
             }
             faculties.Sort(CompareSessionsDescending);
-            foreach (OutcomeTally tally in faculties)
+            foreach (ReportTally tally in faculties)
             {
                 data.FacultyOutcomes.AddFacultyOutcomesRow(tally.Name, tally.SessionCount, tally.StrongCount, tally.PossibleCount,
                                                            tally.NotEligibleCount, tally.MoreInfoCount, tally.EligibilityRate);
@@ -246,14 +230,15 @@ namespace FuturePath.ApplicationLayer
         /// <summary>FP-DIE section 3: one row per selected programme, most selections first.</summary>
         private static void AddProgrammeOutcomeRows(FpDieData data, DataTable sessions)
         {
-            List<OutcomeTally> programmes = new List<OutcomeTally>();
+            List<ReportTally> programmes = new List<ReportTally>();
             foreach (DataRow session in sessions.Rows)
             {
-                FindOrAddTally(programmes, Convert.ToInt32(session["ProgrammeID"]), TextOf(session["ProgrammeName"]),
-                               TextOf(session["FacultyName"])).Add(TextOf(session["OutcomeCode"]));
+                ReportTally programme = FindOrAddTally(programmes, Convert.ToInt32(session["ProgrammeID"]), TextOf(session["ProgrammeName"]));
+                programme.FacultyName = TextOf(session["FacultyName"]);
+                programme.AddOutcome(TextOf(session["OutcomeCode"]));
             }
             programmes.Sort(CompareSessionsDescending);
-            foreach (OutcomeTally tally in programmes)
+            foreach (ReportTally tally in programmes)
             {
                 data.ProgrammeOutcomes.AddProgrammeOutcomesRow(tally.Name, tally.FacultyName, tally.SessionCount, tally.StrongCount,
                                                                tally.PossibleCount, tally.NotEligibleCount, tally.MoreInfoCount, tally.EligibilityRate);
@@ -265,15 +250,16 @@ namespace FuturePath.ApplicationLayer
         /// - SubjectGaps: a Required subject MISSING (not taken, no accepted alternative);
         /// - MarkShortfalls: a Required check that is a GAP (the subject taken is below its minimum),
         ///   with the number of times, the average shortfall in points and the lowest mark.
-        /// Also returns the sessions with at least one of each and the average shortfall over all GAPs.
+        /// Also writes onto the header the sessions with at least one of each and the average
+        /// shortfall over all GAPs.
         /// </summary>
-        private void AddGapRows(FpDieData data, DataTable sessions, out int subjectGapSessions, out int markGapSessions, out decimal? averageShortfall)
+        private void AddGapRows(FpDieData data, DataTable sessions, FpDieData.ReportHeaderRow header)
         {
-            List<CountTally> subjectGaps = new List<CountTally>();
-            List<CountTally> markGaps = new List<CountTally>();
+            List<ReportTally> subjectGaps = new List<ReportTally>();
+            List<ReportTally> markGaps = new List<ReportTally>();
             Dictionary<int, DegreeProgramme> programmes = new Dictionary<int, DegreeProgramme>();
-            subjectGapSessions = 0;
-            markGapSessions = 0;
+            int subjectGapSessions = 0;
+            int markGapSessions = 0;
             decimal shortfallTotal = 0;
             int shortfallCount = 0;
 
@@ -294,14 +280,15 @@ namespace FuturePath.ApplicationLayer
                     }
                     if (check.ResultCode == RequirementCheck.ResultMissing)
                     {
-                        FindOrAddCount(subjectGaps, check.SubjectName).Count++;
+                        FindOrAddTally(subjectGaps, 0, check.SubjectName).Count++;
                         hasSubjectGap = true;
                     }
                     else if (check.ResultCode == RequirementCheck.ResultGap)
                     {
-                        decimal shortfall = check.Shortfall ?? 0;
-                        decimal mark = check.Mark ?? 0;
-                        CountTally tally = FindOrAddCount(markGaps, check.SubjectTakenName);
+                        // A GAP check always has the mark and the shortfall
+                        decimal shortfall = check.Shortfall.Value;
+                        decimal mark = check.Mark.Value;
+                        ReportTally tally = FindOrAddTally(markGaps, 0, check.SubjectTakenName);
                         if (tally.Count == 0 || mark < tally.LowestMark)
                         {
                             tally.LowestMark = mark;
@@ -324,24 +311,30 @@ namespace FuturePath.ApplicationLayer
             }
 
             int gapOccurrences = 0;
-            foreach (CountTally tally in subjectGaps)
+            foreach (ReportTally tally in subjectGaps)
             {
                 gapOccurrences += tally.Count;
             }
             subjectGaps.Sort(CompareCountsDescending);
-            foreach (CountTally tally in subjectGaps)
+            foreach (ReportTally tally in subjectGaps)
             {
                 data.SubjectGaps.AddSubjectGapsRow(tally.Name, tally.Count, Percent(tally.Count, gapOccurrences));
             }
             markGaps.Sort(CompareCountsDescending);
-            foreach (CountTally tally in markGaps)
+            foreach (ReportTally tally in markGaps)
             {
                 data.MarkShortfalls.AddMarkShortfallsRow(tally.Name, tally.Count, Math.Round(tally.ShortfallTotal / tally.Count, 1), tally.LowestMark);
             }
-            averageShortfall = null;
+
+            header.SubjectGapSessions = subjectGapSessions;
+            header.MarkGapSessions = markGapSessions;
             if (shortfallCount > 0)
             {
-                averageShortfall = Math.Round(shortfallTotal / shortfallCount, 1);
+                header.AverageShortfall = Math.Round(shortfallTotal / shortfallCount, 1);
+            }
+            else
+            {
+                header.SetAverageShortfallNull();
             }
         }
 
@@ -357,17 +350,18 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         private void AddFundingCategoryRows(FpDieData data, DataTable sessions)
         {
-            Collection<FundingOption> options = fundingRepository.GetActiveFundingFor(null, null);
-            List<FundingTally> tallies = new List<FundingTally>();
+            Collection<FundingOption> options = fundingRepository.GetActiveFundingFor(0, 0);
+            List<ReportTally> tallies = new List<ReportTally>();
             foreach (string fundingType in SystemSettings.GetNumberedValues(SystemSettings.FundingTypePrefix))
             {
-                FundingTally tally = new FundingTally();
-                tally.FundingType = fundingType;
+                ReportTally tally = new ReportTally();
+                tally.Name = fundingType;
                 foreach (DataRow session in sessions.Rows)
                 {
                     if (HasFundingOfType(options, fundingType, Convert.ToInt32(session["FacultyID"]), Convert.ToInt32(session["ProgrammeID"])))
                     {
-                        tally.OfferedCount++;
+                        // Count = sessions offered this funding type
+                        tally.Count++;
                         if (Convert.ToBoolean(session["FundingInfoRequested"]))
                         {
                             tally.AddedCount++;
@@ -379,11 +373,11 @@ namespace FuturePath.ApplicationLayer
             }
 
             tallies.Sort(CompareFundingDescending);
-            foreach (FundingTally tally in tallies)
+            foreach (ReportTally tally in tallies)
             {
                 FpDieData.FundingCategoriesRow row = data.FundingCategories.NewFundingCategoriesRow();
-                row.FundingType = tally.FundingType;
-                row.OfferedCount = tally.OfferedCount;
+                row.FundingType = tally.Name;
+                row.OfferedCount = tally.Count;
                 row.AddedToSummaryCount = tally.AddedCount;
                 if (tally.MostLinkedFaculty.Length == 0)
                 {
@@ -398,7 +392,7 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>One FP-LER listing row from an exception session.</summary>
-        private static void AddExceptionRow(FpLerData data, DataRow session, int facultySortOrder)
+        private void AddExceptionRow(FpLerData data, DataRow session, int facultySortOrder)
         {
             int sessionID = Convert.ToInt32(session["SessionID"]);
             DateTime sessionDate = Convert.ToDateTime(session["SessionDate"]);
@@ -412,7 +406,11 @@ namespace FuturePath.ApplicationLayer
             row.SessionNumber = AdvisorySession.FormatSessionNumber(sessionDate, sessionID);
             row.SessionDate = sessionDate;
             row.LearnerName = LearnerName(session["FirstName"], session["LastName"]);
-            row.Grade = Convert.ToInt32(session["GradeLevelID"]) == (int)GradeLevel.Grade11 ? 11 : 12;
+            row.Grade = 12;
+            if (Convert.ToInt32(session["GradeLevelID"]) == (int)GradeLevel.Grade11)
+            {
+                row.Grade = 11;
+            }
             row.SchoolName = TextOf(session["SchoolName"]);
             string programmeName = TextOf(session["ProgrammeName"]);
             if (programmeName.Length == 0)
@@ -424,10 +422,19 @@ namespace FuturePath.ApplicationLayer
                 row.ProgrammeName = programmeName;
             }
             row.OutcomeName = SentenceCase(AdvisoryOutcome.GetCategory(outcome));
-            row.NotEligibleCount = outcome == AdvisoryOutcome.CodeNotEligible ? 1 : 0;
-            row.MoreInfoNeededCount = outcome == AdvisoryOutcome.CodeMoreInformation ? 1 : 0;
+            // Each listing row counts towards one of the two exception outcomes
+            row.NotEligibleCount = 0;
+            row.MoreInfoNeededCount = 0;
+            if (outcome == AdvisoryOutcome.CodeNotEligible)
+            {
+                row.NotEligibleCount = 1;
+            }
+            if (outcome == AdvisoryOutcome.CodeMoreInformation)
+            {
+                row.MoreInfoNeededCount = 1;
+            }
             row.OutcomeReason = FirstSentence(TextOf(session["OutcomeReason"]));
-            string alternative = TextOf(session["AlternativeProgramme"]);
+            string alternative = FindBestAlternative(sessionID);
             if (alternative.Length == 0)
             {
                 row.SetAlternativeProgrammeNull();
@@ -498,17 +505,33 @@ namespace FuturePath.ApplicationLayer
             {
                 return null;
             }
-            DegreeProgramme programme;
-            if (!programmes.TryGetValue(programmeID, out programme))
+            if (!programmes.ContainsKey(programmeID))
             {
-                programme = programmeRepository.FindByIdWithRequirements(programmeID);
-                programmes[programmeID] = programme;
+                programmes[programmeID] = programmeRepository.FindByIdWithRequirements(programmeID);
             }
+            DegreeProgramme programme = programmes[programmeID];
             if (programme == null)
             {
                 return null;
             }
             return programme.EvaluateSubjectAndMarkMatch(learner.GetSubjects());
+        }
+
+        /// <summary>
+        /// The recommended alternative for FP-LER: the best-ranked stored alternative of the session
+        /// whose programme is still active (under an active faculty), or "" if there is none.
+        /// </summary>
+        private string FindBestAlternative(int sessionID)
+        {
+            // FindResults lists the selected programme first, then the alternatives by rank
+            foreach (RecommendationResult result in sessionRepository.FindResults(sessionID))
+            {
+                if (!result.IsSelectedProgramme && reportRepository.IsProgrammeCurrent(result.ProgrammeID))
+                {
+                    return result.ProgrammeName;
+                }
+            }
+            return "";
         }
 
         /// <summary>True if an active option of this type is linked to the faculty or the programme.</summary>
@@ -528,7 +551,7 @@ namespace FuturePath.ApplicationLayer
         /// <summary>The faculty with the most links to active options of this type ("" if none); ties go to the first name A-Z.</summary>
         private static string FindMostLinkedFaculty(Collection<FundingOption> options, string fundingType)
         {
-            List<CountTally> faculties = new List<CountTally>();
+            List<ReportTally> faculties = new List<ReportTally>();
             foreach (FundingOption option in options)
             {
                 if (!option.IsActive || !string.Equals(option.FundingType, fundingType, StringComparison.OrdinalIgnoreCase))
@@ -537,7 +560,7 @@ namespace FuturePath.ApplicationLayer
                 }
                 foreach (FundingFaculty link in option.FacultyLinks)
                 {
-                    FindOrAddCount(faculties, link.FacultyName).Count++;
+                    FindOrAddTally(faculties, 0, link.FacultyName).Count++;
                 }
             }
             if (faculties.Count == 0)

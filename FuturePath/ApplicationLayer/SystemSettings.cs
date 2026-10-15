@@ -129,12 +129,11 @@ namespace FuturePath.ApplicationLayer
         public static string GetText(string code)
         {
             EnsureLoaded();
-            string value;
-            if (!parameters.TryGetValue(code, out value))
+            if (!parameters.ContainsKey(code))
             {
                 throw new InvalidOperationException("The system setting " + code + " is missing. Ask an Administrator to check the SystemParameter table.");
             }
-            return value;
+            return parameters[code];
         }
 
         /// <summary>Returns a parameter as a whole number.</summary>
@@ -183,12 +182,14 @@ namespace FuturePath.ApplicationLayer
             DataTable table = new DataTable("Parameters");
             table.Columns.Add("ParameterCode", typeof(string));
             table.Columns.Add("ParameterValue", typeof(string));
+            // FUNDING_TYPE_1, FUNDING_TYPE_2, ... until a number is missing
             int number = 1;
-            string value;
-            while (parameters.TryGetValue(prefix + number.ToString(CultureInfo.InvariantCulture), out value))
+            string code = prefix + number.ToString(CultureInfo.InvariantCulture);
+            while (parameters.ContainsKey(code))
             {
-                table.Rows.Add(prefix + number.ToString(CultureInfo.InvariantCulture), value);
+                table.Rows.Add(code, parameters[code]);
                 number++;
+                code = prefix + number.ToString(CultureInfo.InvariantCulture);
             }
             return table;
         }

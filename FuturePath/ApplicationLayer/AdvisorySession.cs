@@ -132,7 +132,14 @@ namespace FuturePath.ApplicationLayer
         /// <summary>The session number shown to people: yyyy-NNNN, built from SessionDate and SessionID (not stored).</summary>
         public string SessionNumber
         {
-            get { return sessionID > 0 ? FormatSessionNumber(sessionDate, sessionID) : ""; }
+            get
+            {
+                if (sessionID == 0)
+                {
+                    return "";
+                }
+                return FormatSessionNumber(sessionDate, sessionID);
+            }
         }
 
         /// <summary>True once the session has been completed on UI 7.</summary>
@@ -198,25 +205,41 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Reads a session number typed by staff ("2026-0007"). Returns false if it is not in
-        /// the yyyy-NNNN format, so a typo never throws.
+        /// True if staff typed a session number in the yyyy-NNNN format, e.g. "2026-0007"
+        /// (four digits, a dash, four digits, and not session 0000).
         /// </summary>
-        public static bool TryParseSessionNumber(string text, out int year, out int sessionID)
+        public static bool IsValidSessionNumber(string text)
         {
-            year = 0;
-            sessionID = 0;
             if (string.IsNullOrWhiteSpace(text))
             {
                 return false;
             }
-            Match match = Regex.Match(text.Trim(), @"^(\d{4})-(\d{4})$");
-            if (!match.Success)
+            string number = text.Trim();
+            if (!Regex.IsMatch(number, @"^\d{4}-\d{4}$"))
             {
                 return false;
             }
-            year = int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
-            sessionID = int.Parse(match.Groups[2].Value, CultureInfo.InvariantCulture);
-            return sessionID > 0;
+            return number.Substring(5) != "0000";
+        }
+
+        /// <summary>The year part of a session number ("2026-0007" gives 2026), or 0 if it is not valid.</summary>
+        public static int GetSessionYear(string text)
+        {
+            if (!IsValidSessionNumber(text))
+            {
+                return 0;
+            }
+            return int.Parse(text.Trim().Substring(0, 4), CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>The SessionID part of a session number ("2026-0007" gives 7), or 0 if it is not valid.</summary>
+        public static int GetSessionID(string text)
+        {
+            if (!IsValidSessionNumber(text))
+            {
+                return 0;
+            }
+            return int.Parse(text.Trim().Substring(5), CultureInfo.InvariantCulture);
         }
 
         /// <summary>Returns the session number and status.</summary>

@@ -1,14 +1,14 @@
-using System;
-using System.Globalization;
+﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FuturePath.ApplicationLayer
 {
     /// <summary>
     /// A staff login: a Career Advisor or an Administrator. Learners never log in, so this class
-    /// has no associations (class diagram). Passwords are never stored. Only a salted PBKDF2
-    /// hash is kept, in the form "iterations:salt:hash" (spec Section 8). Maps to UserAccount.
+    /// has no associations (class diagram). Passwords are never stored: only a salted SHA-256
+    /// hash is kept, in the form "salt:hash" (spec Section 8). Maps to UserAccount.
     /// </summary>
     public class UserAccount
     {
@@ -29,9 +29,8 @@ namespace FuturePath.ApplicationLayer
         /// <summary>The shortest password accepted.</summary>
         public const int MinimumPasswordLength = 8;
 
-        private const int Iterations = 10000;
+        // Bytes of random salt added to each password before hashing
         private const int SaltSize = 16;
-        private const int HashSize = 32;
 
         private int userID;
         private string username;
@@ -146,8 +145,8 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Makes a salted PBKDF2 (SHA-256) hash of a password: "iterations:salt:hash" in Base64.
-        /// A new random salt is used every time, so equal passwords get different hashes.
+        /// Makes a salted hash of a password, stored as "salt:hash" (both in Base64). The salt is
+        /// 16 random bytes, new every time, so two equal passwords get different hashes.
         /// </summary>
         public static string HashPassword(string password)
         {
@@ -155,18 +154,16 @@ namespace FuturePath.ApplicationLayer
             {
                 throw new ArgumentException("Enter a password.");
             }
-            byte[] salt = new byte[SaltSize];
-            using (RandomNumberGenerator random = RandomNumberGenerator.Create())
-            {
-                random.GetBytes(salt);
-            }
-            byte[] hash = DeriveHash(password, salt, Iterations);
-            return Iterations.ToString(CultureInfo.InvariantCulture) + ":" + Convert.ToBase64String(salt) + ":" + Convert.ToBase64String(hash);
+            byte[] saltBytes = new byte[SaltSize];
+            RandomNumberGenerator random = RandomNumberGenerator.Create();
+            random.GetBytes(saltBytes);
+            string salt = Convert.ToBase64String(saltBytes);
+            return salt + ":" + HashWithSalt(password, salt);
         }
 
         /// <summary>
-        /// True if the password produces the stored hash. A missing or damaged hash returns
-        /// false and never throws.
+        /// True if the password gives the stored hash: the password is hashed again with the
+        /// stored salt and the two hashes are compared. A missing or damaged hash returns false.
         /// </summary>
         public static bool VerifyPassword(string password, string storedHash)
         {
@@ -175,39 +172,23 @@ namespace FuturePath.ApplicationLayer
                 return false;
             }
             string[] parts = storedHash.Split(':');
-            if (parts.Length != 3)
+            if (parts.Length != 2)
             {
                 return false;
             }
-            int iterations;
-            if (!int.TryParse(parts[0], NumberStyles.None, CultureInfo.InvariantCulture, out iterations) || iterations <= 0)
-            {
-                return false;
-            }
-            byte[] salt;
-            byte[] expected;
-            try
-            {
-                salt = Convert.FromBase64String(parts[1]);
-                expected = Convert.FromBase64String(parts[2]);
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-            byte[] actual = DeriveHash(password, salt, iterations);
-            return SameBytes(expected, actual);
+            string salt = parts[0];
+            string hash = parts[1];
+            return HashWithSalt(password, salt) == hash;
         }
 
         /// <summary>Turns stored role text into a RoleType. Throws ArgumentException for unknown text.</summary>
         public static RoleType RoleFromText(string text)
         {
-            string value = (text ?? "").Trim();
-            if (string.Equals(value, RoleAdministratorText, StringComparison.OrdinalIgnoreCase))
+            if (IsSameText(text, RoleAdministratorText))
             {
                 return RoleType.Administrator;
             }
-            if (string.Equals(value, RoleCareerAdvisorText, StringComparison.OrdinalIgnoreCase))
+            if (IsSameText(text, RoleCareerAdvisorText))
             {
                 return RoleType.CareerAdvisor;
             }
@@ -217,15 +198,17 @@ namespace FuturePath.ApplicationLayer
         /// <summary>Turns a RoleType into its stored text.</summary>
         public static string RoleToText(RoleType value)
         {
-            return value == RoleType.Administrator ? RoleAdministratorText : RoleCareerAdvisorText;
+            if (value == RoleType.Administrator)
+            {
+                return RoleAdministratorText;
+            }
+            return RoleCareerAdvisorText;
         }
 
         /// <summary>True if the role text is Administrator or Career Advisor.</summary>
         public static bool IsValidRoleText(string text)
         {
-            string value = (text ?? "").Trim();
-            return string.Equals(value, RoleAdministratorText, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(value, RoleCareerAdvisorText, StringComparison.OrdinalIgnoreCase);
+            return IsSameText(text, RoleAdministratorText) || IsSameText(text, RoleCareerAdvisorText);
         }
 
         /// <summary>True if a username is 1 to 50 letters, digits, '.', '_' or '-'.</summary>
@@ -234,28 +217,22 @@ namespace FuturePath.ApplicationLayer
             return !string.IsNullOrWhiteSpace(text) && text.Trim().Length <= 50 && Regex.IsMatch(text.Trim(), @"^[A-Za-z0-9._\-]+$");
         }
 
-        /// <summary>PBKDF2 with SHA-256.</summary>
-        private static byte[] DeriveHash(string password, byte[] salt, int iterations)
+        /// <summary>The SHA-256 hash (Base64) of the salt followed by the password.</summary>
+        private static string HashWithSalt(string password, string salt)
         {
-            using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations, HashAlgorithmName.SHA256))
-            {
-                return pbkdf2.GetBytes(HashSize);
-            }
+            SHA256 sha = SHA256.Create();
+            byte[] hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(salt + password));
+            return Convert.ToBase64String(hashBytes);
         }
 
-        /// <summary>Compares two hashes in constant time, so timing does not reveal how much matched.</summary>
-        private static bool SameBytes(byte[] a, byte[] b)
+        /// <summary>True if the text (ignoring spaces at the ends and capitals) equals the expected text.</summary>
+        private static bool IsSameText(string text, string expected)
         {
-            if (a == null || b == null || a.Length != b.Length)
+            if (text == null)
             {
                 return false;
             }
-            int difference = 0;
-            for (int i = 0; i < a.Length; i++)
-            {
-                difference |= a[i] ^ b[i];
-            }
-            return difference == 0;
+            return string.Equals(text.Trim(), expected, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>Returns "Full name (Role)". Never includes the hash.</summary>

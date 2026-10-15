@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ApplicationLayer\AdvisoryOutcome.cs" />
     <Compile Include="ApplicationLayer\AdvisorySession.cs" />
+    <Compile Include="ApplicationLayer\DailySummary.cs" />
     <Compile Include="ApplicationLayer\DegreeInterestMapping.cs" />
     <Compile Include="ApplicationLayer\DegreeProgramme.cs" />
     <Compile Include="ApplicationLayer\EligibilityController.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ApplicationLayer\LearnerSubject.cs" />
     <Compile Include="ApplicationLayer\LoginController.cs" />
     <Compile Include="ApplicationLayer\MatchResult.cs" />
+    <Compile Include="ApplicationLayer\ProgrammeAlignment.cs" />
     <Compile Include="ApplicationLayer\ProgrammeRequirement.cs" />
     <Compile Include="ApplicationLayer\RecommendationController.cs" />
     <Compile Include="ApplicationLayer\RecommendationEngine.cs" />
@@ -91,6 +93,7 @@
       <DependentUpon>ReportController.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationLayer\RequirementCheck.cs" />
+    <Compile Include="ApplicationLayer\ReportScope.cs" />
     <Compile Include="ApplicationLayer\SessionSearchController.cs" />
     <Compile Include="ApplicationLayer\Subject.cs" />
     <Compile Include="ApplicationLayer\SystemSettings.cs" />

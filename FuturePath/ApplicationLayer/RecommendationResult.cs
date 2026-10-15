@@ -1,4 +1,4 @@
-namespace FuturePath.ApplicationLayer
+﻿namespace FuturePath.ApplicationLayer
 {
     /// <summary>
     /// The stored result of checking one programme in a session. The selected programme's row
@@ -128,7 +128,14 @@ namespace FuturePath.ApplicationLayer
         /// <summary>The outcome in words, e.g. "Possible Match".</summary>
         public string OutcomeCategory
         {
-            get { return AdvisoryOutcome.IsValidCode(outcomeCode) ? AdvisoryOutcome.GetCategory(outcomeCode) : ""; }
+            get
+            {
+                if (AdvisoryOutcome.IsValidCode(outcomeCode))
+                {
+                    return AdvisoryOutcome.GetCategory(outcomeCode);
+                }
+                return "";
+            }
         }
         #endregion
 

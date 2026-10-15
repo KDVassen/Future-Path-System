@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -34,10 +35,14 @@ namespace FuturePath.DatabaseLayer
         /// <summary>Funding options with their links (and link names), ordered by FundingName; inactive ones only when includeInactive is true.</summary>
         public Collection<FundingOption> GetFundingOptions(bool includeInactive)
         {
-            FillDataSet(sqlLocal + " WHERE (@IncludeInactive = 1 OR IsActive = 1) ORDER BY FundingName", table,
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlLocal;
+            if (!includeInactive)
+            {
+                sql += " WHERE IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY FundingName", table);
             Add2Collection();
-            LoadLinks(null, false);
+            LoadLinks(0, false);
             return fundingOptions;
         }
 
@@ -55,32 +60,37 @@ namespace FuturePath.DatabaseLayer
         }
 
         /// <summary>
-        /// Active funding linked to the faculty OR the programme (links to inactive faculties or
-        /// programmes do not count), with links, ordered by ClosingDate (nearest first, no date last).
-        /// With both null, every active funding option. Only the links that count are loaded.
+        /// Active funding linked to the faculty OR the programme, with links, ordered by ClosingDate
+        /// (nearest first, no closing date last). 0 means "not given"; with both 0, every active
+        /// funding option. Links to inactive faculties or programmes are not loaded, so they do not count.
         /// </summary>
-        public Collection<FundingOption> GetActiveFundingFor(int? facultyID, int? programmeID)
+        public Collection<FundingOption> GetActiveFundingFor(int facultyID, int programmeID)
         {
-            // A faculty link counts only if the faculty is active; a programme link only if the
-            // programme and its faculty are both active (application-layer.md §3 "Currency of data").
-            string sql = sqlLocal + " WHERE IsActive = 1 AND ((@FacultyID IS NULL AND @ProgrammeID IS NULL)" +
-                         " OR EXISTS (SELECT 1 FROM FundingFaculty ff INNER JOIN Faculty f ON f.FacultyID = ff.FacultyID" +
-                         "            WHERE ff.FundingID = FundingOption.FundingID AND ff.FacultyID = @FacultyID AND f.IsActive = 1)" +
-                         " OR EXISTS (SELECT 1 FROM FundingProgramme fp INNER JOIN DegreeProgramme p ON p.ProgrammeID = fp.ProgrammeID" +
-                         "            INNER JOIN Faculty pf ON pf.FacultyID = p.FacultyID" +
-                         "            WHERE fp.FundingID = FundingOption.FundingID AND fp.ProgrammeID = @ProgrammeID AND p.IsActive = 1 AND pf.IsActive = 1))" +
-                         " ORDER BY CASE WHEN ClosingDate IS NULL THEN 1 ELSE 0 END, ClosingDate, FundingName";
-            FillDataSet(sql, table, Param("@FacultyID", SqlDbType.Int, facultyID), Param("@ProgrammeID", SqlDbType.Int, programmeID));
+            // 1. Every active option, nearest closing date first (no closing date sorts as the last date)
+            FillDataSet(sqlLocal + " WHERE IsActive = 1 ORDER BY ISNULL(ClosingDate, '9999-12-31'), FundingName", table);
             Add2Collection();
-            LoadLinks(null, true);
+
+            // 2. Their links to active faculties and active programmes
+            LoadLinks(0, true);
+
+            // 3. Keep only the options linked to the faculty or to the programme
+            Collection<FundingOption> linked = new Collection<FundingOption>();
+            foreach (FundingOption option in fundingOptions)
+            {
+                if (option.LinksTo(facultyID, programmeID))
+                {
+                    linked.Add(option);
+                }
+            }
+            fundingOptions = linked;
             return fundingOptions;
         }
 
         /// <summary>True if another funding option already has this name.</summary>
-        public bool FundingNameExists(string fundingName, int? excludeFundingID)
+        public bool FundingNameExists(string fundingName, int excludeFundingID)
         {
-            object count = ExecuteScalar("SELECT COUNT(*) FROM FundingOption WHERE FundingName = @FundingName AND (@ExcludeID IS NULL OR FundingID <> @ExcludeID)",
-                                         Param("@FundingName", SqlDbType.VarChar, (fundingName ?? "").Trim()),
+            object count = ExecuteScalar("SELECT COUNT(*) FROM FundingOption WHERE FundingName = @FundingName AND FundingID <> @ExcludeID",
+                                         Param("@FundingName", SqlDbType.VarChar, TextOrEmpty(fundingName)),
                                          Param("@ExcludeID", SqlDbType.Int, excludeFundingID));
             return Convert.ToInt32(count) > 0;
         }
@@ -174,7 +184,7 @@ namespace FuturePath.DatabaseLayer
             fundingOptions = new Collection<FundingOption>();
             foreach (DataRow row in GetTable(table).Rows)
             {
-                fundingOptions.Add(new FundingOption(ReadInt(row, "FundingID").Value, ReadString(row, "FundingName"), ReadString(row, "FundingType"),
+                fundingOptions.Add(new FundingOption(ReadInt(row, "FundingID"), ReadString(row, "FundingName"), ReadString(row, "FundingType"),
                                                      ReadString(row, "EligibilityDescription"), ReadString(row, "RequiredDocuments"),
                                                      ReadDate(row, "ClosingDate"), ReadString(row, "ContactInformation"),
                                                      ReadBool(row, "IsMeritBased"), ReadBool(row, "IsNeedBased"), ReadBool(row, "IsActive")));
@@ -183,38 +193,56 @@ namespace FuturePath.DatabaseLayer
 
         /// <summary>
         /// Reads the faculty and programme links (with their names) and attaches each one to its
-        /// option in fundingOptions. fundingID null reads the links of every option. With
+        /// option in fundingOptions. A fundingID of 0 reads the links of every option. With
         /// activeOnly, links to inactive faculties, inactive programmes and programmes under an
         /// inactive faculty are left out.
         /// </summary>
-        private void LoadLinks(int? fundingID, bool activeOnly)
+        private void LoadLinks(int fundingID, bool activeOnly)
         {
-            FillDataSet("SELECT ff.FundingID, ff.FacultyID, f.FacultyName FROM FundingFaculty ff " +
-                        "INNER JOIN Faculty f ON f.FacultyID = ff.FacultyID " +
-                        "WHERE (@FundingID IS NULL OR ff.FundingID = @FundingID) AND (@ActiveOnly = 0 OR f.IsActive = 1) " +
-                        "ORDER BY f.FacultyName", facultyLinkTable,
-                        Param("@FundingID", SqlDbType.Int, fundingID), Param("@ActiveOnly", SqlDbType.Bit, activeOnly));
+            // The faculty links
+            string sql = "SELECT ff.FundingID, ff.FacultyID, f.FacultyName FROM FundingFaculty ff " +
+                         "INNER JOIN Faculty f ON f.FacultyID = ff.FacultyID WHERE 1 = 1";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (fundingID > 0)
+            {
+                sql += " AND ff.FundingID = @FundingID";
+                parameters.Add(Param("@FundingID", SqlDbType.Int, fundingID));
+            }
+            if (activeOnly)
+            {
+                sql += " AND f.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY f.FacultyName", facultyLinkTable, parameters.ToArray());
             foreach (DataRow row in GetTable(facultyLinkTable).Rows)
             {
-                FundingOption option = FindOption(ReadInt(row, "FundingID").Value);
+                FundingOption option = FindOption(ReadInt(row, "FundingID"));
                 if (option != null)
                 {
-                    option.FacultyLinks.Add(new FundingFaculty(option.FundingID, ReadInt(row, "FacultyID").Value, ReadString(row, "FacultyName")));
+                    option.FacultyLinks.Add(new FundingFaculty(option.FundingID, ReadInt(row, "FacultyID"), ReadString(row, "FacultyName")));
                 }
             }
 
-            FillDataSet("SELECT fp.FundingID, fp.ProgrammeID, p.ProgrammeName FROM FundingProgramme fp " +
-                        "INNER JOIN DegreeProgramme p ON p.ProgrammeID = fp.ProgrammeID " +
-                        "INNER JOIN Faculty pf ON pf.FacultyID = p.FacultyID " +
-                        "WHERE (@FundingID IS NULL OR fp.FundingID = @FundingID) AND (@ActiveOnly = 0 OR (p.IsActive = 1 AND pf.IsActive = 1)) " +
-                        "ORDER BY p.ProgrammeName", programmeLinkTable,
-                        Param("@FundingID", SqlDbType.Int, fundingID), Param("@ActiveOnly", SqlDbType.Bit, activeOnly));
+            // The programme links (a new parameter list: one parameter object cannot be used by two commands)
+            sql = "SELECT fp.FundingID, fp.ProgrammeID, p.ProgrammeName FROM FundingProgramme fp " +
+                  "INNER JOIN DegreeProgramme p ON p.ProgrammeID = fp.ProgrammeID " +
+                  "INNER JOIN Faculty pf ON pf.FacultyID = p.FacultyID WHERE 1 = 1";
+            parameters = new List<SqlParameter>();
+            if (fundingID > 0)
+            {
+                sql += " AND fp.FundingID = @FundingID";
+                parameters.Add(Param("@FundingID", SqlDbType.Int, fundingID));
+            }
+            if (activeOnly)
+            {
+                sql += " AND p.IsActive = 1 AND pf.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY p.ProgrammeName", programmeLinkTable, parameters.ToArray());
             foreach (DataRow row in GetTable(programmeLinkTable).Rows)
             {
-                FundingOption option = FindOption(ReadInt(row, "FundingID").Value);
+                FundingOption option = FindOption(ReadInt(row, "FundingID"));
                 if (option != null)
                 {
-                    option.ProgrammeLinks.Add(new FundingProgramme(option.FundingID, ReadInt(row, "ProgrammeID").Value, ReadString(row, "ProgrammeName")));
+                    option.ProgrammeLinks.Add(new FundingProgramme(option.FundingID, ReadInt(row, "ProgrammeID"), ReadString(row, "ProgrammeName")));
                 }
             }
         }

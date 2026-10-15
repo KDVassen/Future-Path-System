@@ -147,13 +147,17 @@ namespace FuturePath.ApplicationLayer
                 header.LastName = learner.LastName.Trim();
             }
 
-            string gradeDescription;
-            string markBasis;
-            ReadGradeLevel(session.GradeLevelID, out gradeDescription, out markBasis);
-            header.GradeDescription = gradeDescription;
-            header.MarkBasis = markBasis;
-            header.SchoolName = learner.SchoolName ?? "";
-            header.Province = learner.Province ?? "";
+            // The grade's description and mark basis, e.g. "Grade 11" and "Projected"
+            header.GradeDescription = "";
+            header.MarkBasis = "";
+            DataTable grades = reportRepository.GetGradeLevel(session.GradeLevelID);
+            if (grades.Rows.Count > 0)
+            {
+                header.GradeDescription = TextOf(grades.Rows[0]["GradeDescription"]);
+                header.MarkBasis = TextOf(grades.Rows[0]["MarkBasis"]);
+            }
+            header.SchoolName = TextOf(learner.SchoolName);
+            header.Province = TextOf(learner.Province);
             header.SubjectCount = learner.GetSubjects().Count;
             if (match.OverallAverage.HasValue)
             {
@@ -164,8 +168,8 @@ namespace FuturePath.ApplicationLayer
                 header.SetOverallAverageNull();
             }
 
-            header.ProgrammeName = !string.IsNullOrEmpty(programme.ProgrammeName) ? programme.ProgrammeName : (selected.ProgrammeName ?? "");
-            header.FacultyName = !string.IsNullOrEmpty(programme.FacultyName) ? programme.FacultyName : (selected.FacultyName ?? "");
+            header.ProgrammeName = TextOf(programme.ProgrammeName);
+            header.FacultyName = TextOf(programme.FacultyName);
             if (programme.MinimumOverallAverage.HasValue)
             {
                 header.MinimumOverallAverage = programme.MinimumOverallAverage.Value;
@@ -209,8 +213,8 @@ namespace FuturePath.ApplicationLayer
             header.RequirementsMet = requirementsMet;
 
             // The outcome and its reason are READ BACK from the stored result, never recalculated.
-            header.OutcomeCode = selected.OutcomeCode ?? "";
-            header.OutcomeReason = selected.OutcomeReason ?? "";
+            header.OutcomeCode = TextOf(selected.OutcomeCode);
+            header.OutcomeReason = TextOf(selected.OutcomeReason);
             header.QuestionsAnswered = learner.GetResponses().Count;
             header.OverallGuidance = BuildGuidance(selected.OutcomeCode, header.ProgrammeName, match, session.Grade);
             header.IncludeAlternatives = session.AlternativesInSummary;
@@ -282,7 +286,11 @@ namespace FuturePath.ApplicationLayer
                 {
                     row.SetMinimumMarkNull();
                 }
-                row.ResultCode = check.IsMet ? ResultMet : ResultGap;
+                row.ResultCode = ResultGap;
+                if (check.IsMet)
+                {
+                    row.ResultCode = ResultMet;
+                }
                 if (check.ResultCode == RequirementCheck.ResultGap && check.Shortfall.HasValue)
                 {
                     row.Shortfall = check.Shortfall.Value;
@@ -401,10 +409,10 @@ namespace FuturePath.ApplicationLayer
                 {
                     row.SetAlternativeRankNull();
                 }
-                row.ProgrammeName = result.ProgrammeName ?? "";
-                row.FacultyName = result.FacultyName ?? "";
+                row.ProgrammeName = TextOf(result.ProgrammeName);
+                row.FacultyName = TextOf(result.FacultyName);
                 row.OverallScore = result.OverallScore.Value;
-                row.OutcomeCode = result.OutcomeCode ?? "";
+                row.OutcomeCode = TextOf(result.OutcomeCode);
                 if (string.IsNullOrWhiteSpace(result.OutcomeReason))
                 {
                     row.SetOutcomeReasonNull();
@@ -424,17 +432,32 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         private void AddFundingRows(FpLsrData data, AdvisorySession session)
         {
-            foreach (FundingOption option in fundingRepository.GetActiveFundingFor(session.PreferredFacultyID, session.SelectedProgrammeID))
+            // The session's preferred faculty and selected programme (0 when not chosen)
+            int facultyID = 0;
+            if (session.PreferredFacultyID.HasValue)
+            {
+                facultyID = session.PreferredFacultyID.Value;
+            }
+            int programmeID = 0;
+            if (session.SelectedProgrammeID.HasValue)
+            {
+                programmeID = session.SelectedProgrammeID.Value;
+            }
+            foreach (FundingOption option in fundingRepository.GetActiveFundingFor(facultyID, programmeID))
             {
                 if (!option.IsActive || !option.IsOpen)
                 {
                     continue;
                 }
                 FpLsrData.FundingOptionsRow row = data.FundingOptions.NewFundingOptionsRow();
-                row.FundingName = option.FundingName ?? "";
-                row.FundingType = option.FundingType ?? "";
-                row.LinkedTo = option.LinkedTo.Length > 0 ? option.LinkedTo : "All faculties";
-                row.EligibilityDescription = option.EligibilityDescription ?? "";
+                row.FundingName = TextOf(option.FundingName);
+                row.FundingType = TextOf(option.FundingType);
+                row.LinkedTo = option.LinkedTo;
+                if (row.LinkedTo.Length == 0)
+                {
+                    row.LinkedTo = "All faculties";
+                }
+                row.EligibilityDescription = TextOf(option.EligibilityDescription);
                 if (string.IsNullOrWhiteSpace(option.RequiredDocuments))
                 {
                     row.SetRequiredDocumentsNull();
@@ -465,7 +488,11 @@ namespace FuturePath.ApplicationLayer
             {
                 return ResultNotAssessed;
             }
-            return match.AverageMet ? ResultMet : ResultGap;
+            if (match.AverageMet)
+            {
+                return ResultMet;
+            }
+            return ResultGap;
         }
 
         /// <summary>
@@ -476,7 +503,7 @@ namespace FuturePath.ApplicationLayer
         {
             string gaps = JoinSentences(match.GapList);
             string guidance;
-            switch ((outcomeCode ?? "").Trim().ToUpperInvariant())
+            switch (TextOf(outcomeCode).ToUpperInvariant())
             {
                 case AdvisoryOutcome.CodeStrong:
                     guidance = "You appear to meet the stored requirements for " + programmeName + ". Confirm the requirements and "
@@ -495,10 +522,13 @@ namespace FuturePath.ApplicationLayer
                     }
                     break;
                 case AdvisoryOutcome.CodeNotEligible:
-                    guidance = "You do not currently meet one or more stored requirements for " + programmeName + "."
-                               + (gaps.Length > 0 ? " " + gaps : "")
-                               + " Talk to your teacher or a Career Advisor about your subject choices and marks, and look at the "
-                               + "alternative programmes, which may suit you now.";
+                    guidance = "You do not currently meet one or more stored requirements for " + programmeName + ".";
+                    if (gaps.Length > 0)
+                    {
+                        guidance += " " + gaps;
+                    }
+                    guidance += " Talk to your teacher or a Career Advisor about your subject choices and marks, and look at the "
+                                + "alternative programmes, which may suit you now.";
                     break;
                 default:
                     guidance = "The check could not be completed because some information was missing. Capture all your subjects "
@@ -510,19 +540,6 @@ namespace FuturePath.ApplicationLayer
                 guidance += " Your Grade 11 marks are projected, so the outcome can change when your final marks are known.";
             }
             return guidance;
-        }
-
-        /// <summary>Reads the grade's description and mark basis (e.g. "Grade 11", "Projected"); "" if it is not found.</summary>
-        private void ReadGradeLevel(int gradeLevelID, out string gradeDescription, out string markBasis)
-        {
-            gradeDescription = "";
-            markBasis = "";
-            DataTable grades = reportRepository.GetGradeLevel(gradeLevelID);
-            if (grades.Rows.Count > 0)
-            {
-                gradeDescription = TextOf(grades.Rows[0]["GradeDescription"]);
-                markBasis = TextOf(grades.Rows[0]["MarkBasis"]);
-            }
         }
 
         /// <summary>Sets Table 1's AdvisoryNote, or null when the requirement has none.</summary>

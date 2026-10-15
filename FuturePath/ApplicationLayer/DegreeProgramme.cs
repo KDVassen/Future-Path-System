@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
@@ -167,8 +167,17 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            result.SubjectScore = requiredCount == 0 ? 100 : Math.Round(100m * requiredCaptured / requiredCount, 2);
-            result.MarkScore = markCount == 0 ? 100 : Math.Round(100m * marksMet / markCount, 2);
+            // A programme with no Required subject (or no minimum mark) scores 100 on that part.
+            result.SubjectScore = 100;
+            if (requiredCount > 0)
+            {
+                result.SubjectScore = Math.Round(100m * requiredCaptured / requiredCount, 2);
+            }
+            result.MarkScore = 100;
+            if (markCount > 0)
+            {
+                result.MarkScore = Math.Round(100m * marksMet / markCount, 2);
+            }
 
             // The overall average includes every captured subject (decisions.md).
             if (learnerSubjects.Count > 0)
@@ -183,7 +192,12 @@ namespace FuturePath.ApplicationLayer
             result.MinimumOverallAverage = minimumOverallAverage;
             if (!result.AverageMet)
             {
-                result.GapList.Add("Overall average " + FormatNumber(result.OverallAverage ?? 0) + "% is below the "
+                decimal average = 0;
+                if (result.OverallAverage.HasValue)
+                {
+                    average = result.OverallAverage.Value;
+                }
+                result.GapList.Add("Overall average " + FormatNumber(average) + "% is below the "
                                    + FormatNumber(minimumOverallAverage.Value) + "% minimum average for " + programmeName + ".");
             }
             return result;

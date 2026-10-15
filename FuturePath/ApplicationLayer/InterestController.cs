@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -52,7 +52,7 @@ namespace FuturePath.ApplicationLayer
         /// <summary>UI 4 statements: QuestionID, QuestionText, CategoryID, CategoryName, DisplayOrder (active only, in display order).</summary>
         public DataTable GetActiveQuestions()
         {
-            questions = interestRepository.GetQuestions(null, false);
+            questions = interestRepository.GetQuestions(0, false);
 
             DataTable table = new DataTable("Questions");
             table.Columns.Add("QuestionID", typeof(int));
@@ -82,7 +82,7 @@ namespace FuturePath.ApplicationLayer
             }
 
             // 1. An in-memory learner holds the answers, so the scoring rule lives in one place (Learner).
-            Collection<InterestQuestion> activeQuestions = interestRepository.GetQuestions(null, false);
+            Collection<InterestQuestion> activeQuestions = interestRepository.GetQuestions(0, false);
             Learner learner = new Learner();
             foreach (KeyValuePair<int, int> answer in responses)
             {
@@ -126,7 +126,7 @@ namespace FuturePath.ApplicationLayer
                 throw new ArgumentException("Answer the interest statements before you continue.");
             }
 
-            Collection<InterestQuestion> activeQuestions = interestRepository.GetQuestions(null, false);
+            Collection<InterestQuestion> activeQuestions = interestRepository.GetQuestions(0, false);
             Collection<LearnerInterestResponse> answers = new Collection<LearnerInterestResponse>();
             foreach (KeyValuePair<int, int> answer in responses)
             {
@@ -148,21 +148,21 @@ namespace FuturePath.ApplicationLayer
         /// UI 5 interest-alignment strip: the learner's interest score for the programme
         /// (Learner.CalculateInterestScore over the programme's categories), and the names of the
         /// learner's strongest mapped categories (comma-separated, best first, at most three;
-        /// categories with relevance weight 0 do not count). Returns 0 and "" if the session or
-        /// the programme does not exist.
+        /// categories with relevance weight 0 do not count). Returns 0% and no categories if the
+        /// session or the programme does not exist.
         /// </summary>
-        public decimal GetProgrammeAlignment(int sessionID, int programmeID, out string strongestCategories)
+        public ProgrammeAlignment GetProgrammeAlignment(int sessionID, int programmeID)
         {
-            strongestCategories = "";
+            ProgrammeAlignment alignment = new ProgrammeAlignment();
             Learner learner = learnerRepository.FindBySessionId(sessionID);
             DegreeProgramme programme = programmeRepository.FindByIdWithRequirements(programmeID);
             if (learner == null || programme == null)
             {
-                return 0;
+                return alignment;
             }
 
             Collection<InterestCategory> categories = programme.GetInterestCategories();
-            decimal alignment = learner.CalculateInterestScore(categories);
+            alignment.AlignmentPercent = learner.CalculateInterestScore(categories);
 
             // The learner's own score in each mapped category, highest first.
             List<KeyValuePair<string, decimal>> ranked = new List<KeyValuePair<string, decimal>>();
@@ -176,10 +176,16 @@ namespace FuturePath.ApplicationLayer
             }
             ranked.Sort(CompareScores);
 
+            string strongest = "";
             for (int i = 0; i < ranked.Count && i < StrongestCategoryCount; i++)
             {
-                strongestCategories += (i > 0 ? ", " : "") + ranked[i].Key;
+                if (i > 0)
+                {
+                    strongest += ", ";
+                }
+                strongest += ranked[i].Key;
             }
+            alignment.StrongestCategories = strongest;
             return alignment;
         }
         #endregion
@@ -192,7 +198,7 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>Checks a category: name required, at most 60 characters, not already used.</summary>
-        public Collection<string> ValidateCategory(int? categoryID, string categoryName)
+        public Collection<string> ValidateCategory(int categoryID, string categoryName)
         {
             Collection<string> problems = new Collection<string>();
             if (string.IsNullOrWhiteSpace(categoryName))
@@ -211,10 +217,10 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (categoryID null) or updates a category (Administrator only). Returns the CategoryID.
+        /// Adds (categoryID 0) or updates a category (Administrator only). Returns the CategoryID.
         /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
         /// </summary>
-        public int SaveInterestCategory(int actorUserID, int? categoryID, string categoryName, bool isActive)
+        public int SaveInterestCategory(int actorUserID, int categoryID, string categoryName, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
             Collection<string> problems = ValidateCategory(categoryID, categoryName);
@@ -225,14 +231,14 @@ namespace FuturePath.ApplicationLayer
 
             InterestCategory category;
             DB.DBOperation operation;
-            if (!categoryID.HasValue)
+            if (categoryID == 0)
             {
                 category = new InterestCategory(0, categoryName.Trim(), isActive);
                 operation = DB.DBOperation.Add;
             }
             else
             {
-                category = FindCategory(categoryID.Value);
+                category = FindCategory(categoryID);
                 category.CategoryName = categoryName.Trim();
                 category.IsActive = isActive;
                 operation = DB.DBOperation.Edit;
@@ -285,9 +291,9 @@ namespace FuturePath.ApplicationLayer
         #region Questions (UI 13.5)
         /// <summary>
         /// QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive, ordered by
-        /// DisplayOrder; categoryID null means all.
+        /// DisplayOrder; a categoryID of 0 means all.
         /// </summary>
-        public DataTable GetQuestions(int? categoryID, bool includeInactive)
+        public DataTable GetQuestions(int categoryID, bool includeInactive)
         {
             DataTable table = new DataTable("Questions");
             table.Columns.Add("QuestionID", typeof(int));
@@ -331,10 +337,10 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Adds (questionID null) or updates a question (Administrator only). Returns the QuestionID.
+        /// Adds (questionID 0) or updates a question (Administrator only). Returns the QuestionID.
         /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
         /// </summary>
-        public int SaveQuestion(int actorUserID, int? questionID, string questionText, int categoryID, int displayOrder, bool isActive)
+        public int SaveQuestion(int actorUserID, int questionID, string questionText, int categoryID, int displayOrder, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
             Collection<string> problems = ValidateQuestion(questionText, categoryID, displayOrder);
@@ -345,14 +351,14 @@ namespace FuturePath.ApplicationLayer
 
             InterestQuestion question;
             DB.DBOperation operation;
-            if (!questionID.HasValue)
+            if (questionID == 0)
             {
                 question = new InterestQuestion(0, categoryID, questionText.Trim(), displayOrder, isActive);
                 operation = DB.DBOperation.Add;
             }
             else
             {
-                question = FindQuestion(questionID.Value);
+                question = FindQuestion(questionID);
                 question.CategoryID = categoryID;
                 question.QuestionText = questionText.Trim();
                 question.DisplayOrder = displayOrder;

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
 {
@@ -112,7 +112,12 @@ namespace FuturePath.ApplicationLayer
                 {
                     return null;
                 }
-                return minimumOverallAverage.Value - (overallAverage ?? 0);
+                decimal average = 0;
+                if (overallAverage.HasValue)
+                {
+                    average = overallAverage.Value;
+                }
+                return minimumOverallAverage.Value - average;
             }
         }
 

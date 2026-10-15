@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
@@ -145,11 +145,19 @@ namespace FuturePath.ApplicationLayer
                 string text = "";
                 foreach (FundingFaculty link in facultyLinks)
                 {
-                    text += (text.Length > 0 ? ", " : "") + link.FacultyName;
+                    if (text.Length > 0)
+                    {
+                        text += ", ";
+                    }
+                    text += link.FacultyName;
                 }
                 foreach (FundingProgramme link in programmeLinks)
                 {
-                    text += (text.Length > 0 ? ", " : "") + link.ProgrammeName;
+                    if (text.Length > 0)
+                    {
+                        text += ", ";
+                    }
+                    text += link.ProgrammeName;
                 }
                 return text;
             }
@@ -164,7 +172,14 @@ namespace FuturePath.ApplicationLayer
         /// <summary>"Open" or "Closed" (the UI 6.2b status chip).</summary>
         public string Status
         {
-            get { return IsOpen ? "Open" : "Closed"; }
+            get
+            {
+                if (IsOpen)
+                {
+                    return "Open";
+                }
+                return "Closed";
+            }
         }
         #endregion
 
@@ -213,25 +228,25 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// True if the funding is linked to the faculty or to the programme. With no faculty and
-        /// no programme given, every funding option matches.
+        /// True if the funding is linked to the faculty or to the programme. 0 means "not given";
+        /// with no faculty and no programme given, every funding option matches.
         /// </summary>
-        public bool LinksTo(int? facultyID, int? programmeID)
+        public bool LinksTo(int facultyID, int programmeID)
         {
-            if (!facultyID.HasValue && !programmeID.HasValue)
+            if (facultyID == 0 && programmeID == 0)
             {
                 return true;
             }
             foreach (FundingFaculty link in facultyLinks)
             {
-                if (facultyID.HasValue && link.FacultyID == facultyID.Value)
+                if (link.FacultyID == facultyID)
                 {
                     return true;
                 }
             }
             foreach (FundingProgramme link in programmeLinks)
             {
-                if (programmeID.HasValue && link.ProgrammeID == programmeID.Value)
+                if (link.ProgrammeID == programmeID)
                 {
                     return true;
                 }

@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using FuturePath.ApplicationLayer;
@@ -14,7 +15,7 @@ namespace FuturePath.DatabaseLayer
     /// The period queries all share one FROM / WHERE: COMPLETED sessions joined to their
     /// SELECTED RecommendationResult (IsSelectedProgramme = 1), that result's programme and the
     /// programme's faculty. The controller passes the period as a start and an exclusive end.
-    /// Every filter is optional (null = no filter).
+    /// A faculty or grade of 0, or a blank outcome code, means "no filter".
     /// </summary>
     public class ReportRepository : DB
     {
@@ -30,18 +31,6 @@ namespace FuturePath.DatabaseLayer
             " INNER JOIN RecommendationResult r ON r.SessionID = s.SessionID AND r.IsSelectedProgramme = 1" +
             " INNER JOIN DegreeProgramme p ON p.ProgrammeID = r.ProgrammeID" +
             " INNER JOIN Faculty f ON f.FacultyID = p.FacultyID";
-
-        // The period and the optional filters. @ExceptionsOnly keeps only Not Currently Eligible
-        // and More Information Needed; without @IncludeInactive, inactive programmes and
-        // programmes under an inactive faculty are left out.
-        private string sqlPeriodWhere =
-            " WHERE s.SessionStatus = @Completed" +
-            " AND s.SessionDate >= @PeriodStart AND s.SessionDate < @PeriodEnd" +
-            " AND (@FacultyID IS NULL OR p.FacultyID = @FacultyID)" +
-            " AND (@GradeLevelID IS NULL OR s.GradeLevelID = @GradeLevelID)" +
-            " AND (@OutcomeCode IS NULL OR r.OutcomeCode = @OutcomeCode)" +
-            " AND (@ExceptionsOnly = 0 OR r.OutcomeCode IN (@NotEligible, @MoreInfo))" +
-            " AND (@IncludeInactive = 1 OR (p.IsActive = 1 AND f.IsActive = 1))";
         #endregion
 
         #region Constructor
@@ -56,13 +45,14 @@ namespace FuturePath.DatabaseLayer
         /// One row with SessionCount, FacultyCount and ProgrammeCount for the completed sessions
         /// in the period after the filters (UI 11 readiness panel, UI 10.3c rows in scope).
         /// </summary>
-        public DataTable GetScopeCounts(DateTime periodStart, DateTime periodEnd, int? facultyID, int? gradeLevelID,
+        public DataTable GetScopeCounts(DateTime periodStart, DateTime periodEnd, int facultyID, int gradeLevelID,
                                         string outcomeCode, bool includeInactive, bool exceptionsOnly)
         {
+            List<SqlParameter> parameters = new List<SqlParameter>();
             string sql = "SELECT COUNT(*) AS SessionCount, COUNT(DISTINCT p.FacultyID) AS FacultyCount," +
-                         " COUNT(DISTINCT p.ProgrammeID) AS ProgrammeCount" + sqlPeriodFrom + sqlPeriodWhere;
-            FillDataSet(sql, scopeTable, PeriodParameters(periodStart, periodEnd, facultyID, gradeLevelID, outcomeCode,
-                                                          includeInactive, exceptionsOnly));
+                         " COUNT(DISTINCT p.ProgrammeID) AS ProgrammeCount" + sqlPeriodFrom +
+                         BuildPeriodWhere(parameters, periodStart, periodEnd, facultyID, gradeLevelID, outcomeCode, includeInactive, exceptionsOnly);
+            FillDataSet(sql, scopeTable, parameters.ToArray());
             return GetTable(scopeTable).Copy();
         }
 
@@ -71,15 +61,16 @@ namespace FuturePath.DatabaseLayer
         /// SessionID, LearnerID, SessionDate, FundingInfoRequested, ProgrammeID, ProgrammeName,
         /// FacultyID, FacultyName, OutcomeCode. No learner names are read.
         /// </summary>
-        public DataTable GetCompletedSessions(DateTime periodStart, DateTime periodEnd, int? facultyID, int? gradeLevelID,
+        public DataTable GetCompletedSessions(DateTime periodStart, DateTime periodEnd, int facultyID, int gradeLevelID,
                                               string outcomeCode, bool includeInactive)
         {
+            List<SqlParameter> parameters = new List<SqlParameter>();
             string sql = "SELECT s.SessionID, s.LearnerID, s.SessionDate, s.FundingInfoRequested," +
                          " p.ProgrammeID, p.ProgrammeName, p.FacultyID, f.FacultyName, r.OutcomeCode" +
-                         sqlPeriodFrom + sqlPeriodWhere +
+                         sqlPeriodFrom +
+                         BuildPeriodWhere(parameters, periodStart, periodEnd, facultyID, gradeLevelID, outcomeCode, includeInactive, false) +
                          " ORDER BY s.SessionDate, s.SessionID";
-            FillDataSet(sql, degreeInterestTable, PeriodParameters(periodStart, periodEnd, facultyID, gradeLevelID, outcomeCode,
-                                                                   includeInactive, false));
+            FillDataSet(sql, degreeInterestTable, parameters.ToArray());
             return GetTable(degreeInterestTable).Copy();
         }
 
@@ -87,27 +78,21 @@ namespace FuturePath.DatabaseLayer
         /// FP-LER: completed sessions in the period whose stored outcome is Not Currently Eligible
         /// or More Information Needed, active programmes under active faculties only. Columns:
         /// SessionID, LearnerID, SessionDate, GradeLevelID, FirstName, LastName, SchoolName,
-        /// ProgrammeID, ProgrammeName, FacultyID, FacultyName, OutcomeCode, OutcomeReason and
-        /// AlternativeProgramme (the best-ranked stored alternative that is still active, or NULL).
+        /// ProgrammeID, ProgrammeName, FacultyID, FacultyName, OutcomeCode, OutcomeReason.
         /// Ordered by faculty name, then Not Currently Eligible before More Information Needed,
         /// then session date, newest first.
         /// </summary>
-        public DataTable GetExceptionSessions(DateTime periodStart, DateTime periodEnd, int? facultyID, int? gradeLevelID)
+        public DataTable GetExceptionSessions(DateTime periodStart, DateTime periodEnd, int facultyID, int gradeLevelID)
         {
+            List<SqlParameter> parameters = new List<SqlParameter>();
             string sql = "SELECT s.SessionID, s.LearnerID, s.SessionDate, s.GradeLevelID, l.FirstName, l.LastName, l.SchoolName," +
-                         " p.ProgrammeID, p.ProgrammeName, p.FacultyID, f.FacultyName, r.OutcomeCode, r.OutcomeReason," +
-                         " (SELECT TOP 1 ap.ProgrammeName FROM RecommendationResult a" +
-                         "   INNER JOIN DegreeProgramme ap ON ap.ProgrammeID = a.ProgrammeID" +
-                         "   INNER JOIN Faculty af ON af.FacultyID = ap.FacultyID" +
-                         "   WHERE a.SessionID = s.SessionID AND a.IsSelectedProgramme = 0 AND a.AlternativeRank IS NOT NULL" +
-                         "   AND ap.IsActive = 1 AND af.IsActive = 1" +
-                         "   ORDER BY a.AlternativeRank) AS AlternativeProgramme" +
+                         " p.ProgrammeID, p.ProgrammeName, p.FacultyID, f.FacultyName, r.OutcomeCode, r.OutcomeReason" +
                          sqlPeriodFrom +
                          " INNER JOIN Learner l ON l.LearnerID = s.LearnerID" +
-                         sqlPeriodWhere +
-                         " ORDER BY f.FacultyName, CASE WHEN r.OutcomeCode = @NotEligible THEN 1 ELSE 2 END," +
-                         " s.SessionDate DESC, s.SessionID DESC";
-            FillDataSet(sql, exceptionTable, PeriodParameters(periodStart, periodEnd, facultyID, gradeLevelID, null, false, true));
+                         BuildPeriodWhere(parameters, periodStart, periodEnd, facultyID, gradeLevelID, "", false, true) +
+                         // NCE sorts before MOREINFO when sorted Z to A (N comes after M)
+                         " ORDER BY f.FacultyName, r.OutcomeCode DESC, s.SessionDate DESC, s.SessionID DESC";
+            FillDataSet(sql, exceptionTable, parameters.ToArray());
             return GetTable(exceptionTable).Copy();
         }
         #endregion
@@ -118,7 +103,11 @@ namespace FuturePath.DatabaseLayer
         {
             object name = ExecuteScalar("SELECT FacultyName FROM Faculty WHERE FacultyID = @FacultyID",
                                         Param("@FacultyID", SqlDbType.Int, facultyID));
-            return name == null ? "" : Convert.ToString(name).TrimEnd();
+            if (name == null)
+            {
+                return "";
+            }
+            return Convert.ToString(name).TrimEnd();
         }
 
         /// <summary>The grade with columns GradeLevelID, GradeDescription and MarkBasis (no rows if it does not exist).</summary>
@@ -143,31 +132,55 @@ namespace FuturePath.DatabaseLayer
         {
             object status = ExecuteScalar("SELECT SessionStatus FROM AdvisorySession WHERE SessionID = @SessionID",
                                           Param("@SessionID", SqlDbType.Int, sessionID));
-            return status == null ? "" : Convert.ToString(status).TrimEnd();
+            if (status == null)
+            {
+                return "";
+            }
+            return Convert.ToString(status).TrimEnd();
         }
         #endregion
 
         #region Utility Methods
         /// <summary>
-        /// A new set of parameters for the shared period WHERE clause (a parameter object can
-        /// belong to only one command, so every query gets its own).
+        /// Builds the WHERE clause shared by the period queries: completed sessions in the period,
+        /// plus only the filters that were given. Each value is added to parameters, never typed
+        /// into the SQL text.
         /// </summary>
-        private static SqlParameter[] PeriodParameters(DateTime periodStart, DateTime periodEnd, int? facultyID, int? gradeLevelID,
-                                                       string outcomeCode, bool includeInactive, bool exceptionsOnly)
+        private static string BuildPeriodWhere(List<SqlParameter> parameters, DateTime periodStart, DateTime periodEnd, int facultyID,
+                                               int gradeLevelID, string outcomeCode, bool includeInactive, bool exceptionsOnly)
         {
-            return new SqlParameter[]
+            string where = " WHERE s.SessionStatus = @Completed AND s.SessionDate >= @PeriodStart AND s.SessionDate < @PeriodEnd";
+            parameters.Add(Param("@Completed", SqlDbType.VarChar, AdvisorySession.StatusCompleted));
+            parameters.Add(Param("@PeriodStart", SqlDbType.DateTime, periodStart));
+            parameters.Add(Param("@PeriodEnd", SqlDbType.DateTime, periodEnd));
+
+            if (facultyID > 0)
             {
-                Param("@Completed", SqlDbType.VarChar, AdvisorySession.StatusCompleted),
-                Param("@PeriodStart", SqlDbType.DateTime, periodStart),
-                Param("@PeriodEnd", SqlDbType.DateTime, periodEnd),
-                Param("@FacultyID", SqlDbType.Int, facultyID),
-                Param("@GradeLevelID", SqlDbType.Int, gradeLevelID),
-                Param("@OutcomeCode", SqlDbType.VarChar, outcomeCode),
-                Param("@ExceptionsOnly", SqlDbType.Bit, exceptionsOnly),
-                Param("@NotEligible", SqlDbType.VarChar, AdvisoryOutcome.CodeNotEligible),
-                Param("@MoreInfo", SqlDbType.VarChar, AdvisoryOutcome.CodeMoreInformation),
-                Param("@IncludeInactive", SqlDbType.Bit, includeInactive)
-            };
+                where += " AND p.FacultyID = @FacultyID";
+                parameters.Add(Param("@FacultyID", SqlDbType.Int, facultyID));
+            }
+            if (gradeLevelID > 0)
+            {
+                where += " AND s.GradeLevelID = @GradeLevelID";
+                parameters.Add(Param("@GradeLevelID", SqlDbType.Int, gradeLevelID));
+            }
+            if (!string.IsNullOrEmpty(outcomeCode))
+            {
+                where += " AND r.OutcomeCode = @OutcomeCode";
+                parameters.Add(Param("@OutcomeCode", SqlDbType.VarChar, outcomeCode));
+            }
+            if (exceptionsOnly)
+            {
+                // FP-LER: only Not Currently Eligible and More Information Needed
+                where += " AND r.OutcomeCode IN (@NotEligible, @MoreInfo)";
+                parameters.Add(Param("@NotEligible", SqlDbType.VarChar, AdvisoryOutcome.CodeNotEligible));
+                parameters.Add(Param("@MoreInfo", SqlDbType.VarChar, AdvisoryOutcome.CodeMoreInformation));
+            }
+            if (!includeInactive)
+            {
+                where += " AND p.IsActive = 1 AND f.IsActive = 1";
+            }
+            return where;
         }
         #endregion
     }

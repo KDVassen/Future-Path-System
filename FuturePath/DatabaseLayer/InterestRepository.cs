@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -38,8 +39,12 @@ namespace FuturePath.DatabaseLayer
         /// <summary>Categories ordered by name; inactive ones only when includeInactive is true.</summary>
         public Collection<InterestCategory> GetCategories(bool includeInactive)
         {
-            FillDataSet(sqlCategories + " WHERE (@IncludeInactive = 1 OR IsActive = 1) ORDER BY CategoryName", categoryTable,
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlCategories;
+            if (!includeInactive)
+            {
+                sql += " WHERE IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY CategoryName", categoryTable);
             AddCategories2Collection();
             return categories;
         }
@@ -54,8 +59,12 @@ namespace FuturePath.DatabaseLayer
                          "(SELECT COUNT(*) FROM InterestQuestion q WHERE q.CategoryID = c.CategoryID AND q.IsActive = 1) AS QuestionCount, " +
                          "(SELECT COUNT(*) FROM DegreeInterestMapping m WHERE m.CategoryID = c.CategoryID) AS MappedProgrammeCount, " +
                          "c.IsActive " +
-                         "FROM InterestCategory c WHERE (@IncludeInactive = 1 OR c.IsActive = 1) ORDER BY c.CategoryName";
-            FillDataSet(sql, categoryListTable, Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+                         "FROM InterestCategory c";
+            if (!includeInactive)
+            {
+                sql += " WHERE c.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY c.CategoryName", categoryListTable);
             return GetTable(categoryListTable).Copy();
         }
 
@@ -64,14 +73,18 @@ namespace FuturePath.DatabaseLayer
         {
             FillDataSet(sqlCategories + " WHERE CategoryID = @CategoryID", categoryTable, Param("@CategoryID", SqlDbType.Int, categoryID));
             AddCategories2Collection();
-            return categories.Count > 0 ? categories[0] : null;
+            if (categories.Count == 0)
+            {
+                return null;
+            }
+            return categories[0];
         }
 
         /// <summary>True if another category already has this name.</summary>
-        public bool CategoryNameExists(string categoryName, int? excludeCategoryID)
+        public bool CategoryNameExists(string categoryName, int excludeCategoryID)
         {
-            object count = ExecuteScalar("SELECT COUNT(*) FROM InterestCategory WHERE CategoryName = @CategoryName AND (@ExcludeID IS NULL OR CategoryID <> @ExcludeID)",
-                                         Param("@CategoryName", SqlDbType.VarChar, (categoryName ?? "").Trim()),
+            object count = ExecuteScalar("SELECT COUNT(*) FROM InterestCategory WHERE CategoryName = @CategoryName AND CategoryID <> @ExcludeID",
+                                         Param("@CategoryName", SqlDbType.VarChar, TextOrEmpty(categoryName)),
                                          Param("@ExcludeID", SqlDbType.Int, excludeCategoryID));
             return Convert.ToInt32(count) > 0;
         }
@@ -116,7 +129,7 @@ namespace FuturePath.DatabaseLayer
             {
                 // The INSERT returned the new key into the row (FirstReturnedRecord).
                 DataTable rows = GetTable(categoryTable);
-                category.CategoryID = ReadInt(rows.Rows[rows.Rows.Count - 1], "CategoryID").Value;
+                category.CategoryID = ReadInt(rows.Rows[rows.Rows.Count - 1], "CategoryID");
             }
             return category.CategoryID;
         }
@@ -124,17 +137,24 @@ namespace FuturePath.DatabaseLayer
 
         #region Questions
         /// <summary>
-        /// Questions with CategoryName, ordered by DisplayOrder then QuestionID. categoryID null
+        /// Questions with CategoryName, ordered by DisplayOrder then QuestionID. A categoryID of 0
         /// means every category. Without includeInactive, inactive questions and questions in
         /// inactive categories are left out.
         /// </summary>
-        public Collection<InterestQuestion> GetQuestions(int? categoryID, bool includeInactive)
+        public Collection<InterestQuestion> GetQuestions(int categoryID, bool includeInactive)
         {
-            FillDataSet(sqlQuestions + " WHERE (@CategoryID IS NULL OR q.CategoryID = @CategoryID)" +
-                        " AND (@IncludeInactive = 1 OR (q.IsActive = 1 AND c.IsActive = 1))" +
-                        " ORDER BY q.DisplayOrder, q.QuestionID", questionTable,
-                        Param("@CategoryID", SqlDbType.Int, categoryID),
-                        Param("@IncludeInactive", SqlDbType.Bit, includeInactive));
+            string sql = sqlQuestions + " WHERE 1 = 1";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (categoryID > 0)
+            {
+                sql += " AND q.CategoryID = @CategoryID";
+                parameters.Add(Param("@CategoryID", SqlDbType.Int, categoryID));
+            }
+            if (!includeInactive)
+            {
+                sql += " AND q.IsActive = 1 AND c.IsActive = 1";
+            }
+            FillDataSet(sql + " ORDER BY q.DisplayOrder, q.QuestionID", questionTable, parameters.ToArray());
             AddQuestions2Collection();
             return questions;
         }
@@ -144,7 +164,11 @@ namespace FuturePath.DatabaseLayer
         {
             FillDataSet(sqlQuestions + " WHERE q.QuestionID = @QuestionID", questionTable, Param("@QuestionID", SqlDbType.Int, questionID));
             AddQuestions2Collection();
-            return questions.Count > 0 ? questions[0] : null;
+            if (questions.Count == 0)
+            {
+                return null;
+            }
+            return questions[0];
         }
 
         /// <summary>Adds a new question row to the DataSet, or changes the existing row (Edit).</summary>
@@ -187,7 +211,7 @@ namespace FuturePath.DatabaseLayer
             {
                 // The INSERT returned the new key into the row (FirstReturnedRecord).
                 DataTable rows = GetTable(questionTable);
-                question.QuestionID = ReadInt(rows.Rows[rows.Rows.Count - 1], "QuestionID").Value;
+                question.QuestionID = ReadInt(rows.Rows[rows.Rows.Count - 1], "QuestionID");
             }
             return question.QuestionID;
         }
@@ -227,7 +251,7 @@ namespace FuturePath.DatabaseLayer
             categories = new Collection<InterestCategory>();
             foreach (DataRow row in GetTable(categoryTable).Rows)
             {
-                categories.Add(new InterestCategory(ReadInt(row, "CategoryID").Value, ReadString(row, "CategoryName"), ReadBool(row, "IsActive")));
+                categories.Add(new InterestCategory(ReadInt(row, "CategoryID"), ReadString(row, "CategoryName"), ReadBool(row, "IsActive")));
             }
         }
 
@@ -237,8 +261,8 @@ namespace FuturePath.DatabaseLayer
             questions = new Collection<InterestQuestion>();
             foreach (DataRow row in GetTable(questionTable).Rows)
             {
-                InterestQuestion question = new InterestQuestion(ReadInt(row, "QuestionID").Value, ReadInt(row, "CategoryID").Value,
-                                                                 ReadString(row, "QuestionText"), ReadInt(row, "DisplayOrder").Value,
+                InterestQuestion question = new InterestQuestion(ReadInt(row, "QuestionID"), ReadInt(row, "CategoryID"),
+                                                                 ReadString(row, "QuestionText"), ReadInt(row, "DisplayOrder"),
                                                                  ReadBool(row, "IsActive"));
                 question.CategoryName = ReadString(row, "CategoryName");
                 questions.Add(question);

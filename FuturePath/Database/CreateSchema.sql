@@ -162,7 +162,7 @@ CREATE TABLE RecommendationResult (
 
 /* ---------- Security and system ---------- */
 
-/* PasswordHash format: "iterations:saltBase64:hashBase64" (PBKDF2, UserAccount.HashPassword). */
+/* PasswordHash format: "saltBase64:hashBase64" (salted SHA-256, UserAccount.HashPassword). */
 CREATE TABLE UserAccount (
     UserID               INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_UserAccount PRIMARY KEY,
     Username             VARCHAR(50)  NOT NULL CONSTRAINT UQ_UserAccount_Username UNIQUE,

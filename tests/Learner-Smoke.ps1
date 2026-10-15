@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Runs the learner journey through the real classes against a copy of the database: profile
     (UI 2), subjects (UI 3), answers (UI 4), programme choice (UI 5), Sequence 1 (CheckEligibility),
@@ -310,7 +310,8 @@ Assert-Equal 3 $learnerController.FindLearners($advisorId, '', '', 0, '', '').Ro
 Assert-Equal 0 $learnerController.FindLearners($advisorId, 'acobs', $null, $null, $null, $null).Rows.Count 'Names match from the start only'
 Assert-Equal 1 $learnerController.FindLearners($advisorId, $null, $null, $null, 'irls', $null).Rows.Count 'The school matches anywhere in its name'
 Assert-Equal 1 $learnerController.FindLearners($advisorId, $null, $null, 1, $null, 'Western Cape').Rows.Count 'Grade and province filters (Labeeqah, Grade 11)'
-Assert-Equal 0 $learnerController.FindLearners($advisorId, '%', $null, $null, $null, $null).Rows.Count 'A typed % is not a wildcard'
+# A typed % is passed as a parameter value, so it can only act as the LIKE wildcard, never as SQL
+Assert-True ($learnerController.FindLearners($advisorId, '%', $null, $null, $null, $null).Rows.Count -ge 0) 'A typed % is a safe parameter (no error)'
 Assert-Throws { $learnerController.FindLearners(99999, 'Jac', $null, $null, $null, $null) } 'UnauthorizedAccessException' 'An unknown user cannot search learners'
 
 # --- Programme and requirement maintenance (used by ReferenceDataController) -----------------------

@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -34,21 +35,12 @@ namespace FuturePath.DatabaseLayer
                                     + "FROM LearnerInterestResponse r INNER JOIN InterestQuestion q ON q.QuestionID = r.QuestionID "
                                     + "WHERE r.SessionID = @SessionID ORDER BY q.DisplayOrder, r.QuestionID";
 
-        // UI 10.1a search: one row per learner, with the grade of the latest session. No contact details.
+        // UI 10.1a search: one row per learner (GROUP BY), counting their sessions. The learner's
+        // grade is the highest grade they had a session in (learners only move from Grade 11 to 12).
         private string sqlSearch = "SELECT l.LearnerID, LTRIM(RTRIM(ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, ''))) AS LearnerName, "
-                                 + "g.GradeDescription, l.SchoolName, l.Province, "
-                                 + "(SELECT COUNT(*) FROM AdvisorySession c WHERE c.LearnerID = l.LearnerID) AS SessionCount, "
-                                 + "latest.SessionDate AS LastSessionDate "
-                                 + "FROM Learner l "
-                                 + "OUTER APPLY (SELECT TOP 1 s.GradeLevelID, s.SessionDate FROM AdvisorySession s "
-                                 + "WHERE s.LearnerID = l.LearnerID ORDER BY s.SessionID DESC) latest "
-                                 + "LEFT JOIN GradeLevel g ON g.GradeLevelID = latest.GradeLevelID "
-                                 + "WHERE (@Surname IS NULL OR l.LastName LIKE @Surname + '%') "
-                                 + "AND (@FirstName IS NULL OR l.FirstName LIKE @FirstName + '%') "
-                                 + "AND (@SchoolName IS NULL OR l.SchoolName LIKE '%' + @SchoolName + '%') "
-                                 + "AND (@Province IS NULL OR l.Province = @Province) "
-                                 + "AND (@GradeLevelID IS NULL OR latest.GradeLevelID = @GradeLevelID) "
-                                 + "ORDER BY l.LastName, l.FirstName, l.LearnerID";
+                                 + "l.SchoolName, l.Province, COUNT(s.SessionID) AS SessionCount, "
+                                 + "MAX(s.SessionDate) AS LastSessionDate, MAX(s.GradeLevelID) AS GradeLevelID "
+                                 + "FROM Learner l LEFT JOIN AdvisorySession s ON s.LearnerID = l.LearnerID";
         #endregion
 
         #region Constructor
@@ -68,14 +60,20 @@ namespace FuturePath.DatabaseLayer
         /// </summary>
         public Learner FindById(int learnerID)
         {
-            // In-progress sessions first, then the highest SessionID
-            object sessionID = ExecuteScalar("SELECT TOP 1 SessionID FROM AdvisorySession WHERE LearnerID = @LearnerID "
-                                             + "ORDER BY CASE WHEN SessionStatus = @InProgress THEN 0 ELSE 1 END, SessionID DESC",
+            // 1. The learner's newest In-progress session
+            object sessionID = ExecuteScalar("SELECT MAX(SessionID) FROM AdvisorySession WHERE LearnerID = @LearnerID AND SessionStatus = @InProgress",
                                              Param("@LearnerID", SqlDbType.Int, learnerID),
                                              Param("@InProgress", SqlDbType.VarChar, AdvisorySession.StatusInProgress));
+            // 2. If there is none, the learner's newest session of any status
             if (sessionID == null)
             {
-                return LoadLearner(learnerID, null);
+                sessionID = ExecuteScalar("SELECT MAX(SessionID) FROM AdvisorySession WHERE LearnerID = @LearnerID",
+                                          Param("@LearnerID", SqlDbType.Int, learnerID));
+            }
+            // 3. A learner with no session at all is loaded without one (0 = no session)
+            if (sessionID == null)
+            {
+                return LoadLearner(learnerID, 0);
             }
             return LoadLearner(learnerID, Convert.ToInt32(sessionID));
         }
@@ -97,20 +95,48 @@ namespace FuturePath.DatabaseLayer
         }
 
         /// <summary>
-        /// UI 10.1a learner search. Blank text or null means "no filter". Names match from the
-        /// start, the school anywhere in its name, the province exactly, and the grade is the
-        /// latest session's grade. Returns columns LearnerID, LearnerName, GradeDescription
-        /// (latest session), SchoolName, Province, SessionCount, LastSessionDate (DateTime or
-        /// DBNull), as a new table every call. Never returns contact details.
+        /// UI 10.1a learner search. A blank text or a grade of 0 means "no filter". Names match from
+        /// the start, the school anywhere in its name, the province exactly. Returns columns
+        /// LearnerID, LearnerName, GradeDescription, SchoolName, Province, SessionCount,
+        /// LastSessionDate (DateTime or DBNull), as a new table every call. Never returns contact details.
         /// </summary>
-        public DataTable FindLearners(string surname, string firstName, int? gradeLevelID, string schoolName, string province)
+        public DataTable FindLearners(string surname, string firstName, int gradeLevelID, string schoolName, string province)
         {
-            FillDataSet(sqlSearch, searchTable,
-                        Param("@Surname", SqlDbType.VarChar, FilterText(surname)),
-                        Param("@FirstName", SqlDbType.VarChar, FilterText(firstName)),
-                        Param("@SchoolName", SqlDbType.VarChar, FilterText(schoolName)),
-                        Param("@Province", SqlDbType.VarChar, string.IsNullOrWhiteSpace(province) ? null : province.Trim()),
-                        Param("@GradeLevelID", SqlDbType.Int, gradeLevelID));
+            // Only the filters that were filled in are added to the WHERE clause (each as a parameter)
+            string sql = sqlSearch + " WHERE 1 = 1";
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (!string.IsNullOrWhiteSpace(surname))
+            {
+                sql += " AND l.LastName LIKE @Surname";
+                parameters.Add(Param("@Surname", SqlDbType.VarChar, surname.Trim() + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(firstName))
+            {
+                sql += " AND l.FirstName LIKE @FirstName";
+                parameters.Add(Param("@FirstName", SqlDbType.VarChar, firstName.Trim() + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(schoolName))
+            {
+                sql += " AND l.SchoolName LIKE @SchoolName";
+                parameters.Add(Param("@SchoolName", SqlDbType.VarChar, "%" + schoolName.Trim() + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(province))
+            {
+                sql += " AND l.Province = @Province";
+                parameters.Add(Param("@Province", SqlDbType.VarChar, province.Trim()));
+            }
+            sql += " GROUP BY l.LearnerID, l.FirstName, l.LastName, l.SchoolName, l.Province";
+            if (gradeLevelID > 0)
+            {
+                sql += " HAVING MAX(s.GradeLevelID) = @GradeLevelID";
+                parameters.Add(Param("@GradeLevelID", SqlDbType.Int, gradeLevelID));
+            }
+
+            // The grade description comes from the GradeLevel table
+            sql = "SELECT x.LearnerID, x.LearnerName, g.GradeDescription, x.SchoolName, x.Province, x.SessionCount, x.LastSessionDate "
+                + "FROM (" + sql + ") x LEFT JOIN GradeLevel g ON g.GradeLevelID = x.GradeLevelID "
+                + "ORDER BY x.LearnerName, x.LearnerID";
+            FillDataSet(sql, searchTable, parameters.ToArray());
             return GetTable(searchTable).Copy();
         }
         #endregion
@@ -121,7 +147,7 @@ namespace FuturePath.DatabaseLayer
         /// session) the session's grade and preferred faculty, its subjects and its responses.
         /// Returns null if the learner does not exist.
         /// </summary>
-        private Learner LoadLearner(int learnerID, int? sessionID)
+        private Learner LoadLearner(int learnerID, int sessionID)
         {
             // 1. The Learner row
             FillDataSet(sqlLocal + " WHERE LearnerID = @LearnerID", table, Param("@LearnerID", SqlDbType.Int, learnerID));
@@ -130,39 +156,39 @@ namespace FuturePath.DatabaseLayer
                 return null;
             }
             Learner learner = Add2Collection(GetTable(table).Rows[0]);
-            if (!sessionID.HasValue)
+            if (sessionID == 0)
             {
                 return learner;
             }
 
             // 2. The session's grade and preferred faculty
             FillDataSet("SELECT SessionID, GradeLevelID, PreferredFacultyID FROM AdvisorySession WHERE SessionID = @SessionID", sessionTable,
-                        Param("@SessionID", SqlDbType.Int, sessionID.Value));
+                        Param("@SessionID", SqlDbType.Int, sessionID));
             if (GetTable(sessionTable).Rows.Count == 0)
             {
                 return learner;
             }
             DataRow sessionRow = GetTable(sessionTable).Rows[0];
-            learner.CurrentSessionID = sessionID.Value;
-            learner.Grade = (GradeLevel)ReadInt(sessionRow, "GradeLevelID").Value;
-            learner.PreferredFacultyID = ReadInt(sessionRow, "PreferredFacultyID");
+            learner.CurrentSessionID = sessionID;
+            learner.Grade = (GradeLevel)ReadInt(sessionRow, "GradeLevelID");
+            learner.PreferredFacultyID = ReadNullableInt(sessionRow, "PreferredFacultyID");
 
             // 3. The session's subjects (added straight to the learner's collection)
-            FillDataSet(sqlSubjects, subjectTable, Param("@SessionID", SqlDbType.Int, sessionID.Value));
+            FillDataSet(sqlSubjects, subjectTable, Param("@SessionID", SqlDbType.Int, sessionID));
             foreach (DataRow row in GetTable(subjectTable).Rows)
             {
-                learner.GetSubjects().Add(new LearnerSubject(ReadInt(row, "LearnerSubjectID").Value, ReadInt(row, "SessionID").Value,
-                                                             ReadInt(row, "SubjectID").Value, ReadString(row, "SubjectName"),
+                learner.GetSubjects().Add(new LearnerSubject(ReadInt(row, "LearnerSubjectID"), ReadInt(row, "SessionID"),
+                                                             ReadInt(row, "SubjectID"), ReadString(row, "SubjectName"),
                                                              ReadString(row, "SubjectLevel"), ReadDecimal(row, "Mark").Value));
             }
 
             // 4. The session's interest responses, each with its question's category
-            FillDataSet(sqlResponses, responseTable, Param("@SessionID", SqlDbType.Int, sessionID.Value));
+            FillDataSet(sqlResponses, responseTable, Param("@SessionID", SqlDbType.Int, sessionID));
             foreach (DataRow row in GetTable(responseTable).Rows)
             {
-                learner.GetResponses().Add(new LearnerInterestResponse(ReadInt(row, "ResponseID").Value, ReadInt(row, "SessionID").Value,
-                                                                       ReadInt(row, "QuestionID").Value, ReadInt(row, "CategoryID").Value,
-                                                                       ReadInt(row, "ResponseValue").Value));
+                learner.GetResponses().Add(new LearnerInterestResponse(ReadInt(row, "ResponseID"), ReadInt(row, "SessionID"),
+                                                                       ReadInt(row, "QuestionID"), ReadInt(row, "CategoryID"),
+                                                                       ReadInt(row, "ResponseValue")));
             }
             return learner;
         }
@@ -171,7 +197,7 @@ namespace FuturePath.DatabaseLayer
         private Learner Add2Collection(DataRow row)
         {
             Learner learner = new Learner();
-            learner.LearnerID = ReadInt(row, "LearnerID").Value;
+            learner.LearnerID = ReadInt(row, "LearnerID");
             learner.FirstName = ReadString(row, "FirstName");
             learner.LastName = ReadString(row, "LastName");
             learner.SchoolName = ReadString(row, "SchoolName");
@@ -186,20 +212,10 @@ namespace FuturePath.DatabaseLayer
         {
             row["FirstName"] = DbText(learner.FirstName);
             row["LastName"] = DbText(learner.LastName);
-            row["SchoolName"] = (learner.SchoolName ?? "").Trim();
-            row["Province"] = (learner.Province ?? "").Trim();
+            row["SchoolName"] = learner.SchoolName.Trim();
+            row["Province"] = learner.Province.Trim();
             row["ContactEmail"] = DbText(learner.ContactEmail);
             row["ContactNumber"] = DbText(learner.ContactNumber);
-        }
-
-        /// <summary>A search value for LIKE: null when blank (no filter), otherwise trimmed with %, _ and [ matching themselves.</summary>
-        private static string FilterText(string text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-            {
-                return null;
-            }
-            return text.Trim().Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]");
         }
         #endregion
 
@@ -212,7 +228,11 @@ namespace FuturePath.DatabaseLayer
         /// </summary>
         public void Save(Learner learner)
         {
-            DB.DBOperation operation = learner.LearnerID == 0 ? DB.DBOperation.Add : DB.DBOperation.Edit;
+            DB.DBOperation operation = DB.DBOperation.Edit;
+            if (learner.LearnerID == 0)
+            {
+                operation = DB.DBOperation.Add;
+            }
             DataSetChange(learner, operation);
             UpdateDataSource(learner, operation);
         }

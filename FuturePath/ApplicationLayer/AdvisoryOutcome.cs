@@ -169,7 +169,12 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         public static OutcomeType FromCode(string code)
         {
-            switch ((code ?? "").Trim().ToUpperInvariant())
+            string value = "";
+            if (code != null)
+            {
+                value = code.Trim().ToUpperInvariant();
+            }
+            switch (value)
             {
                 case CodeStrong:
                     return OutcomeType.StrongMatch;
@@ -187,7 +192,11 @@ namespace FuturePath.ApplicationLayer
         /// <summary>True if the code is one of the four stored outcome codes.</summary>
         public static bool IsValidCode(string code)
         {
-            string value = (code ?? "").Trim().ToUpperInvariant();
+            if (code == null)
+            {
+                return false;
+            }
+            string value = code.Trim().ToUpperInvariant();
             return value == CodeStrong || value == CodePossible || value == CodeNotEligible || value == CodeMoreInformation;
         }
 

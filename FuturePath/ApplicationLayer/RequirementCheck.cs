@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
@@ -128,7 +128,7 @@ namespace FuturePath.ApplicationLayer
                     case ResultAlternative:
                         return "Met with " + subjectTakenName;
                     case ResultGap:
-                        return FormatNumber(shortfall ?? 0) + " points below minimum";
+                        return FormatNumber(shortfall.Value) + " points below minimum";
                     default:
                         return "Not captured";
                 }
@@ -178,22 +178,26 @@ namespace FuturePath.ApplicationLayer
         /// </summary>
         public string Describe()
         {
-            string needed = IsRequired ? "required" : "recommended";
+            string needed = "recommended";
+            if (IsRequired)
+            {
+                needed = "required";
+            }
             switch (resultCode)
             {
                 case ResultMet:
                     if (minimumMark.HasValue)
                     {
-                        return subjectName + " " + FormatNumber(mark ?? 0) + "% meets the " + FormatNumber(minimumMark.Value) + "% minimum.";
+                        return subjectName + " " + FormatNumber(mark.Value) + "% meets the " + FormatNumber(minimumMark.Value) + "% minimum.";
                     }
                     return subjectName + " was captured.";
                 case ResultAlternative:
-                    return subjectTakenName + " " + FormatNumber(mark ?? 0) + "% is accepted in place of " + subjectName + ".";
+                    return subjectTakenName + " " + FormatNumber(mark.Value) + "% is accepted in place of " + subjectName + ".";
                 case ResultGap:
-                    return subjectTakenName + " " + FormatNumber(mark ?? 0) + "% is " + FormatNumber(shortfall ?? 0)
-                           + " points below the " + FormatNumber(minimumMark ?? 0) + "% minimum.";
+                    return subjectTakenName + " " + FormatNumber(mark.Value) + "% is " + FormatNumber(shortfall.Value)
+                           + " points below the " + FormatNumber(minimumMark.Value) + "% minimum.";
                 default:
-                    if (alternativeSubjectName.Length > 0)
+                    if (!string.IsNullOrEmpty(alternativeSubjectName))
                     {
                         return subjectName + " (or " + alternativeSubjectName + ") is " + needed + " but was not captured.";
                     }

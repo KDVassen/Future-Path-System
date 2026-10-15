@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -107,12 +107,12 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Saves the UI 2 profile. The first call (sessionID null) creates the Learner and an
+        /// Saves the UI 2 profile. The first call (sessionID 0) creates the Learner and an
         /// In-progress AdvisorySession; later calls update both. Returns the session (SessionID,
         /// LearnerID, SessionNumber). Throws ArgumentException if the profile is invalid, if the
         /// session does not exist, or if the session has already been completed.
         /// </summary>
-        public AdvisorySession SaveProfile(int? sessionID, string firstName, string lastName, int gradeLevelID, string schoolName,
+        public AdvisorySession SaveProfile(int sessionID, string firstName, string lastName, int gradeLevelID, string schoolName,
                                            string province, short advisingYear, string contactEmail, string contactNumber)
         {
             // Validate again (the form already did), including the name lengths
@@ -133,9 +133,9 @@ namespace FuturePath.ApplicationLayer
             GradeLevel grade = (GradeLevel)gradeLevelID;
             string storedProvince = FindProvince(province);
             string storedNumber = FormatMobile(contactNumber);
-            string storedEmail = (contactEmail ?? "").Trim();
+            string storedEmail = Clean(contactEmail);
 
-            if (!sessionID.HasValue)
+            if (sessionID == 0)
             {
                 // First save: a new learner (class diagram constructor) and a new In-progress session
                 Learner newLearner = new Learner(Clean(firstName), Clean(lastName), grade, schoolName.Trim(), storedProvince, storedEmail, storedNumber);
@@ -146,7 +146,7 @@ namespace FuturePath.ApplicationLayer
             }
 
             // Later saves: update the learner and the session
-            AdvisorySession session = sessionRepository.FindById(sessionID.Value);
+            AdvisorySession session = sessionRepository.FindById(sessionID);
             if (session == null)
             {
                 throw new ArgumentException("We could not find your advisory session. Start again from step 1.");
@@ -155,7 +155,7 @@ namespace FuturePath.ApplicationLayer
             {
                 throw new ArgumentException("This advisory session has been completed, so its profile can no longer be changed.");
             }
-            Learner learner = learnerRepository.FindBySessionId(sessionID.Value);
+            Learner learner = learnerRepository.FindBySessionId(sessionID);
             if (learner == null)
             {
                 throw new ArgumentException("We could not find your learner profile. Start again from step 1.");
@@ -206,9 +206,8 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            // Mark: 0 to 100 with at most one decimal place (letters and signs fail)
-            decimal mark;
-            if (!LearnerSubject.TryParseMark(markText, out mark))
+            // Mark: 0 to 100 with at most one decimal place (letters and signs give -1)
+            if (LearnerSubject.ParseMark(markText) < 0)
             {
                 messages.Add("Enter a mark for " + subjectName + " from 0 to 100, with at most one decimal place.");
             }
@@ -246,7 +245,12 @@ namespace FuturePath.ApplicationLayer
                 if (mark >= lowerBounds[i])
                 {
                     int level = i + 1;
-                    decimal upperBound = (i == lowerBounds.Count - 1) ? LearnerSubject.MaximumMark : lowerBounds[i + 1] - 1;
+                    // The band ends just below the next level (the top level ends at 100)
+                    decimal upperBound = LearnerSubject.MaximumMark;
+                    if (i < lowerBounds.Count - 1)
+                    {
+                        upperBound = lowerBounds[i + 1] - 1;
+                    }
                     return level.ToString(CultureInfo.InvariantCulture) + "  " + FormatNumber(lowerBounds[i]) + "–" + FormatNumber(upperBound) + "%";
                 }
             }
@@ -319,16 +323,12 @@ namespace FuturePath.ApplicationLayer
         #region Staff search (UI 10.1a)
         /// <summary>
         /// UI 10.1a learner search (Career Advisor or Administrator; throws
-        /// UnauthorizedAccessException otherwise). A grade of 0 or null means every grade.
+        /// UnauthorizedAccessException otherwise). A grade of 0 means every grade.
         /// See LearnerRepository.FindLearners for the columns.
         /// </summary>
-        public DataTable FindLearners(int actorUserID, string surname, string firstName, int? gradeLevelID, string schoolName, string province)
+        public DataTable FindLearners(int actorUserID, string surname, string firstName, int gradeLevelID, string schoolName, string province)
         {
             loginController.CheckStaff(actorUserID);
-            if (gradeLevelID.HasValue && gradeLevelID.Value <= 0)
-            {
-                gradeLevelID = null;
-            }
             return learnerRepository.FindLearners(surname, firstName, gradeLevelID, schoolName, province);
         }
         #endregion
@@ -361,7 +361,7 @@ namespace FuturePath.ApplicationLayer
         /// <summary>A mobile number without its spaces and dashes.</summary>
         private static string DigitsOnly(string number)
         {
-            return (number ?? "").Trim().Replace(" ", "").Replace("-", "");
+            return Clean(number).Replace(" ", "").Replace("-", "");
         }
 
         /// <summary>A valid mobile number stored as "0XX XXX XXXX", or "" when none was given.</summary>
@@ -378,7 +378,11 @@ namespace FuturePath.ApplicationLayer
         /// <summary>Trimmed text, or "" for null.</summary>
         private static string Clean(string text)
         {
-            return (text ?? "").Trim();
+            if (text == null)
+            {
+                return "";
+            }
+            return text.Trim();
         }
 
         /// <summary>Formats a number without trailing zeros, the same on any regional setting.</summary>

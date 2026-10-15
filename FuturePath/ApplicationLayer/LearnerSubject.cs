@@ -108,23 +108,27 @@ namespace FuturePath.ApplicationLayer
         }
 
         /// <summary>
-        /// Reads a mark typed by the user ("75", "72.5" or "72,5"). Returns false for letters,
+        /// Reads a mark typed by the user ("75", "72.5" or "72,5"). Returns -1 for letters,
         /// signs, more than one decimal place, or a value outside 0 to 100, so bad input never
         /// throws an exception.
         /// </summary>
-        public static bool TryParseMark(string text, out decimal value)
+        public static decimal ParseMark(string text)
         {
-            value = 0;
             if (string.IsNullOrWhiteSpace(text))
             {
-                return false;
+                return -1;
             }
             string cleaned = text.Trim().Replace(',', '.');
+            decimal value;
             if (!decimal.TryParse(cleaned, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out value))
             {
-                return false;
+                return -1;
             }
-            return IsValidMark(value);
+            if (!IsValidMark(value))
+            {
+                return -1;
+            }
+            return value;
         }
 
         /// <summary>Returns "Subject: mark%".</summary>
