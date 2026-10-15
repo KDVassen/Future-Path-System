@@ -183,7 +183,7 @@ namespace FuturePath.PresentationLayer
 
             // One console for both roles: it removes the pages this role may not reach (decisions.md D11)
             // and opens on the role's own dashboard (UI 9 or UI 12).
-            var console = new StaffConsoleForm(homeForm, account.UserID, account.FullName, account.RoleName);
+            StaffConsoleForm console = new StaffConsoleForm(homeForm, account.UserID, account.FullName, account.RoleName);
             txtPassword.Clear();
             console.Show();
             navigating = true;
