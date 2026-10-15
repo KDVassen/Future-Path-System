@@ -1,0 +1,653 @@
+DEPARTMENT OF INFORMATION SYSTEMS
+INF2011S – Systems Design & Development
+
+
+         Future Path
+   Student Advising System
+
+Case Study and Test Data Specification
+
+
+
+
+                                          1
+Contents
+•   Part A: Case Study
+•   1. Business Background
+•   2. Strategic Purpose of the System
+•   3. Operating Details
+•   4. Important System Constraint
+•   5. Existing Problem Context
+•   6. Typical Business Processes
+•   7. System Users
+•   8. Data Requirements
+•   9. Recommendation Logic
+•   10. Reports
+•   11. Input and Output Controls
+•   12. Security and Privacy Considerations
+•   13. Future Requirements
+•   14. Project Task
+•   Part B: Test Data Specification
+
+
+
+
+                                              2
+PART A
+
+
+Future Path Student Advising System Case Study
+
+1. Business Background
+Many Grade 11 and Grade 12 learners in South Africa face uncertainty when deciding what to study after
+school. Learners are often interested in particular degrees or career paths but may not know whether their
+current subjects, marks and interests align with the requirements of those qualifications. In many cases,
+learners only discover that they do not meet the minimum requirements when they are already close to
+applying, or after they have already submitted an application.
+
+This problem is especially common among learners who do not have regular access to career advisors,
+university open days or detailed admission information. Some learners rely on parents, teachers, friends, social
+media or outdated information when making important study decisions. This can result in unrealistic study
+choices, missed funding opportunities, late applications and poor alignment between the learner’s strengths
+and their intended field of study.
+
+To support learners earlier in their decision-making process, a new standalone Information System has been
+proposed. The system will be called Future Path. Future Path is a student pathway advising system designed to
+help Grade 11 and Grade 12 learners explore possible study options, check whether they appear to meet the
+minimum criteria for selected degrees, identify gaps in their current academic profile, view relevant funding
+information, and export an advisory summary that can be shared with a parent, teacher or career advisor.
+
+The system is not intended to make official admission decisions. Instead, it provides preliminary guidance
+based on locally stored degree information, subject requirements, interest categories, funding options and
+rule-based recommendation logic.
+
+2. Strategic Purpose of Future Path
+The purpose of the system is to provide learners with a structured and accessible way to understand their
+possible study pathways before they formally apply to university. The system aims to:
+
+•   help learners understand whether their school subjects and marks align with selected qualifications;
+•   suggest alternative degrees where the learner’s current academic profile may be better suited;
+•   match learner interests to faculties, degrees and career areas;
+•   identify subject or mark gaps that the learner may need to improve;
+•   provide faculty- or degree-related funding information;
+•   generate an exportable advisory report that can be shown to parents, teachers or career advisors;
+•   support more informed, realistic and timely study decisions.
+
+The system will be developed as a standalone Windows Forms-based desktop application with a local
+relational database. It must follow a three-tier architecture consisting of a presentation layer, business logic
+layer and data layer. The system must not rely on a web server, cloud service, internet connection or external
+APIs.
+
+
+                                                                                                              3
+3. Operating Details
+Future Path will be used by learners, school career advisors and system administrators.
+
+Learners will enter their current school grade, subjects, marks, areas of interest and preferred faculty or
+qualification. Future Path will then use locally stored rules and data to generate an advisory outcome. This
+outcome may indicate that the learner is a strong match, a possible match, or not currently eligible for the
+selected qualification.
+
+For example, a learner may be interested in a Bachelor of Commerce degree but may not know whether
+Mathematics is required, whether Mathematical Literacy is accepted, or what level of performance is
+expected. Another learner may be interested in a Science-related qualification but may not know whether
+Physical Sciences is required. Future Path should guide learners by comparing their information against the
+qualification requirements stored in the system.
+
+Future Path should also allow learners to complete a short interest questionnaire. The learner’s responses will
+be used to calculate an interest alignment score. This score will help the system suggest study areas that may
+be suitable for the learner’s interests.
+
+Future Path should also ask whether the learner would like more information about possible funding options.
+If the learner selects this option, the system should display funding information linked to the selected faculty,
+qualification or study field. This may include scholarships, bursaries, financial aid options, merit awards, or
+other sample funding opportunities stored in the database.
+
+Once the learner has completed the advising process, the system should allow the learner to export a
+summary report. This report should include the learner’s selected degree, subject and mark summary,
+eligibility outcome, interest match result, identified gaps, possible alternative qualifications, and relevant
+funding options.
+
+
+
+
+                                                                                                               4
+                     Figure 1: High-Level System Process Flow for Future Path Student Advising System
+
+4. Important System Constraint
+Future Path must include recommendation and advising functionality. However, the system must not use
+ChatGPT, Gemini, Copilot, online APIs, cloud-based AI tools or any external services.
+
+The recommendation and advising functionality must be implemented using local system logic, such as:
+
+•   rule-based eligibility checking;
+•   keyword or category matching;
+•   interest scoring;
+•   weighted recommendation scores;
+•   subject and mark comparison;
+•   ranking of possible degrees;
+•   gap analysis;
+•   database-driven advisory messages.
+
+The system should therefore simulate an intelligent advising experience while remaining fully standalone and
+database-driven.
+
+5. Existing Problem Context
+Currently, many learners make study choices using fragmented information. A learner may check a university
+website, ask a teacher, speak to a parent, attend an open day, or rely on advice from peers. However, this
+process is often inconsistent. Learners may not understand how minimum requirements work, may confuse
+admission requirements with selection likelihood, or may overlook funding opportunities.
+
+
+
+                                                                                                               5
+Schools may also have limited career guidance capacity. One teacher may be responsible for advising many
+learners, and it may not be practical to manually assess each learner’s subjects, marks, interests and possible
+degree options. Learners may also be embarrassed to ask questions or may not know what questions to ask.
+
+Future Path is intended to support this process by providing a structured, repeatable and transparent advising
+tool.
+
+6. Typical Business Processes
+
+6.1 Learner Profile Creation
+A learner starts by creating a basic profile. The system should allow the learner to enter their name, current
+grade, school, province and contact details. The system may also allow the learner to continue without
+entering sensitive personal information, depending on the design decisions made by the project team.
+
+The learner must indicate whether they are currently in Grade 11 or Grade 12. This is important because Grade
+11 learners may be using projected or current marks, while Grade 12 learners may be using final or most
+recent results.
+
+6.2 Capturing Subjects and Marks
+The learner must enter their school subjects and current marks. The system should allow the learner to add
+multiple subjects, such as Mathematics, Mathematical Literacy, Physical Sciences, Life Sciences, Accounting,
+Business Studies, Geography, History, English and other relevant subjects.
+
+The system must validate marks to ensure that they are within a valid range. For example, a mark cannot be
+below 0 or above 100. The system should also prevent a learner from entering the same subject more than
+once for the same advising session.
+
+6.3 Selecting a Preferred Faculty or Qualification
+The learner can either select a preferred faculty first or search for a specific qualification. Faculties may include
+Commerce, Humanities, Science, Engineering, Health Sciences, Law, Education or other locally stored faculty
+options.
+
+ The learner may select one degree programme for assessment during an advisory session. The system may
+recommend multiple alternative programmes. The system should retrieve the requirements for the selected
+degree from the database and compare these requirements with the learner’s captured subjects and marks.
+
+6.4 Completing an Interest Questionnaire
+The learner should answer a short interest questionnaire. This questionnaire will help the system determine
+whether the learner’s interests align with the selected qualification.
+
+Example interest areas may include:
+
+•   working with numbers and data;
+•   solving technical or scientific problems;
+•   helping people and communities;
+•   writing, debating and analysing ideas;
+•   working with business and entrepreneurship;
+                                                                                                                    6
+•      designing systems or technology solutions;
+•      working in healthcare or life sciences;
+•      understanding society, politics or law.
+
+Each response should contribute to one or more interest categories. The system should use these responses to
+calculate an interest alignment score for relevant degrees or faculties.
+
+6.5 Checking Degree Eligibility
+The system should compare the learner’s subjects and marks against the stored requirements for the selected
+qualification.
+
+The system should produce one of the following advisory outcomes:
+
+    Outcome                                                Meaning
+    Strong Match                                           The learner appears to meet the minimum
+                                                           requirements and has strong interest alignment.
+ Possible Match                                            The learner meets some requirements, but has one
+                                                           or more gaps or weaker alignment.
+ Not Currently Eligible                                    The learner does not currently meet one or more
+                                                           important requirements.
+ More Information Needed                                   The system cannot complete the check because
+                                                           required information is missing.
+The system must clearly explain the reason for the outcome. For example, it should not only say “Not Currently
+Eligible”. It should explain that the learner may be missing a required subject or that a mark is below the
+required threshold.
+
+6.6 Recommending Alternative Degrees
+If the learner does not appear to meet the requirements for the selected degree, the system should
+recommend possible alternatives. These recommendations should be based on the learner’s current subjects,
+marks and interest profile.
+
+For example, if a learner is interested in a qualification that requires Mathematics but only has Mathematical
+Literacy, the system may suggest alternative qualifications where Mathematical Literacy is accepted,
+depending on the locally stored sample data.
+
+6.7 Viewing Funding Options
+After the system displays the learner’s advisory outcome, the learner should be asked whether they would like
+to view possible funding options related to the selected faculty or qualification.
+
+If the learner selects yes, the system should display relevant funding options from the database.
+
+    Funding field                                        Example
+    Funding name                                         Faculty Merit Award
+    Funding type                                         Scholarship, bursary, financial aid, external funding
+    Linked faculty                                       Commerce
+    Linked degree                                        Optional
+    Eligibility description                              Based on academic merit/financial need
+    Required documents                                   ID, results, proof of income
+                                                                                                                 7
+    Closing date                                        Stored in database
+    Contact/URL field                                   Stored as text, not necessarily live internet
+
+
+The system does not need to submit funding applications. It only provides locally stored funding guidance.
+
+6.8 Exporting the Advisory Summary
+The learner should be able to export an advisory summary. This report should be suitable for sharing with a
+parent, teacher, school career advisor or for the learner’s own planning.
+
+The export summary should include:
+
+•     learner profile summary;
+•     selected faculty or degree;
+•     captured subjects and marks;
+•     interest category results;
+•     eligibility outcome;
+•     explanation of gaps;
+•     suggested alternative degrees;
+•     relevant funding options;
+•     date generated;
+•     advisory disclaimer.
+
+The export may be implemented as a printable report, PDF-style report, saved file or on-screen report,
+depending on the implementation approach selected by the student team.
+
+7. System Users
+    User                                                Description
+    Learner                                             The learner uses the system to enter their subjects,
+                                                        marks and interests. The learner can view
+                                                        recommendations, funding information and export
+                                                        their advisory summary.
+    Career Advisor                                      A career advisor may assist learners in using the
+                                                        system, access learner and advisory-session
+                                                        information, view advisory outcomes and exported
+                                                        summaries, and generate advising and exception
+                                                        reports to support discussions with learners and
+                                                        parents.
+    System Administrator                                The system administrator maintains the reference
+                                                        data in the system. This includes faculties, degrees,
+                                                        admission requirements, interest categories,
+                                                        questionnaire questions and funding options. The
+                                                        administrator should be able to add, update or
+                                                        deactivate outdated degree and funding
+                                                        information.
+
+
+
+                                                                                                                8
+8. Data Requirements
+The system must store enough data to support meaningful advising. The database should include data about
+learners, subjects, marks, faculties, qualifications, admission requirements, interests, recommendations,
+funding options and exported reports.
+
+ Entity                                                  Description
+ Learner                                                 Stores learner profile details.
+ GradeLevel                                              Stores Grade 11 and Grade 12 categories.
+ Subject                                                 Stores school subjects.
+ LearnerSubject                                          Stores the learner’s subject choices and marks.
+ Faculty                                                 Stores faculties.
+ DegreeProgramme                                         Stores qualifications offered by each faculty.
+ ProgrammeRequirement                                    Stores subject and mark requirements for each
+                                                         degree.
+ InterestCategory                                        Stores broad interest areas.
+ InterestQuestion                                        Stores questionnaire questions.
+ LearnerInterestResponse                                 Stores learner questionnaire responses.
+ DegreeInterestMapping                                   Links degrees to relevant interest categories.
+ AdvisorySession                                         Stores each advising session completed by a learner.
+ RecommendationResult                                    Stores degree recommendations and scores.
+ FundingOption                                           Stores funding opportunities.
+ FundingFaculty                                          Links funding options to faculties.
+ FundingProgramme                                        Links funding options to specific degrees where
+                                                         relevant.
+ ExportReport                                            Stores details of exported learner summaries.
+ UserAccount                                             Stores login, role and access details for system users
+                                                         requiring authentication, including Administrators
+                                                         and Career Advisors
+The database must be normalised to third normal form. The system should not store repeated groups of
+subjects, marks, funding options or requirements in a single table field.
+
+Additional data requirements:
+
+    •   At least five interest categories must be stored.
+    •   Each degree programme must be mapped to at least one relevant interest category.
+    •   At least one active Administrator account and one active Career Advisor account must exist for testing
+        authentication and role-based access.
+
+9. Recommendation Logic
+The system should contain a recommendation engine. The recommendation engine does not need to use real
+artificial intelligence or machine learning. It should be implemented using business rules and scoring logic,
+comparable to rule-based Expert Systems.
+
+A possible scoring approach is shown below:
+
+ Score Component                                         Description
+ Subject Match Score                                     Checks whether the learner has the required
+                                                         subjects.
+                                                                                                                  9
+    Mark Match Score                                Checks whether the learner’s marks meet the stored
+                                                    minimum values.
+ Interest Match Score                               Compares learner interests with degree interest
+                                                    categories.
+ Faculty Preference Score                           Gives additional weight to degrees in the learner’s
+                                                    preferred faculty.
+ Overall Recommendation Score                       Combines the above scores into an overall advisory
+                                                    result.
+The system should show the recommendation in a way that is understandable to learners. For example:
+
+            You are a possible match for this qualification. You meet the general subject
+            requirements, but your Mathematics mark is below the suggested minimum. You may
+            need to improve this mark or consider one of the alternative programmes listed below.
+
+
+10. Reports
+The system must generate reports that support learner advising, career guidance and system administration.
+Reports may include summary reports, detailed reports, executive reports, operational reports and exception
+reports.
+
+At minimum, each project team must design and implement three meaningful reports. These reports should
+be relevant to the purpose of the system and should use data stored in the local database.
+
+10.1 Report 1: Learner Advisory Summary Report
+This report is generated for an individual learner. It summarises the learner’s profile, subjects, marks, interest
+results, selected qualification, eligibility outcome, recommended alternatives and funding options. This report
+should be exportable so that the learner can share it with a parent, teacher or career advisor.
+
+10.2 Report 2: Degree Interest and Eligibility Report
+This report is generated by an administrator or career advisor. It provides a summary of advising activity across
+learners. The report may include:
+
+•     most selected faculties;
+•     most selected degrees;
+•     number of learners classified as strong matches;
+•     number of learners classified as possible matches;
+•     number of learners not currently eligible;
+•     common subject gaps;
+•     common mark gaps;
+•     most requested funding categories.
+
+This report can help schools or advisors identify where learners need more support.
+
+10.3 Report 3: Learners Not Currently Eligible Exception Report
+This report is generated by a career advisor or system administrator. It lists learners whose advisory outcome
+is Not Currently Eligible or More Information Needed. The report helps identify learners who may need further
+guidance, subject advice or alternative programme recommendations.
+                                                                                                                10
+11. Input and Output Controls
+The system should include validation and controls to reduce errors.
+
+Examples of input controls include:
+
+•   marks must be between 0 and 100;
+•   required fields must not be left blank;
+•   a learner cannot enter the same subject twice in one advisory session;
+•   a degree must belong to a valid faculty;
+•   a funding option must have a valid funding type;
+•   closing dates must be valid dates;
+•   administrator functions must require login.
+
+Examples of output controls include:
+
+•   advisory outcomes must include a disclaimer;
+•   exported reports must show the date generated;
+•   recommendations must show the reason for the outcome;
+•   funding information must show whether it is sample information or requires verification;
+•   inactive degrees or outdated funding options should not appear in learner recommendations.
+
+12. Security and Privacy Considerations
+The system should only collect information needed for advising. Since the system is designed for school
+learners, the project team should consider privacy carefully.
+
+The system should not require unnecessary sensitive personal information. Learner names may be optional if
+the advisory session is only for guidance. Administrators and Career Advisors must authenticate before
+accessing functionality associated with their respective roles. Appropriate role-based access restrictions must
+be implemented.
+
+Administrators should be the only users allowed to maintain degree requirements, funding information and
+interest questionnaire data.
+
+13. Future Requirements
+The System may later be expanded to include additional features, such as:
+
+•   support for multiple universities;
+•   more detailed career pathway mapping;
+•   parent or teacher login;
+•   official application checklist generation;
+•   reminders for application and funding closing dates;
+•   integration with online university information sources;
+•   multilingual support;
+•   improved natural language questioning.
+
+
+                                                                                                              11
+These future requirements are outside the scope of the current student project.For the current project, the
+system must remain standalone, Windows Forms-based and must use only a local database.
+
+14. Project Task
+The analysis phase of the project has been completed. You are now at the design and development phase.
+
+Your task is to design and develop the Future Path Student Advising System according to the requirements
+described in this case study.
+
+Your solution must:
+
+•   be a standalone Windows Forms-based application;
+•   use a local relational database;
+•   follow a three-tier architecture;
+•   include a rule-based recommendation feature using local rules and scoring logic;
+•   allow learners to capture subjects, marks and interests;
+•   check selected degree requirements;
+•   recommend suitable alternatives;
+•   provide relevant funding information;
+•   generate an exportable learner advisory summary;
+•   Include at least three appropriate reports, such as a summary report, detailed report, executive report,
+    operational report or exception report
+•   Include controls and testing.
+
+The system must not connect to external AI tools, online APIs, cloud platforms or web servers.
+
+
+
+
+                                                                                                               12
+PART B
+
+
+Future Path Student Advising System Test Data Specification
+
+1. General
+As each group will design and construct their own domain classes and database, this specification does not
+define the exact structure of all records in the test database. However, each group must ensure that their
+database contains enough test data to allow markers to determine whether the system performs as specified.
+
+Future Path should include enough learner, degree, requirement, interest and funding data to test the main
+system functionality.
+
+2. Learners
+The system must contain at least 10 learner records. The following learner records must be included:
+
+    Learner             Grade     Subjects and Marks                Preferred Pathway    Expected Outcome
+    Gadija Jacobs       12        English 72%; Mathematics          BCom Information     Strong match
+                                  70%; Accounting 74%;              Systems
+                                  Business Studies 79%;
+                                  Economics 70%; Life
+                                  Orientation 80%
+    Aadiel-Raboo        12        English 65%; Mathematical         BSc Computer         Not currently
+    Magwa                         Literacy 78%; Business Studies    Science              eligible
+                                  71%; History 69%; Tourism
+                                  75%; Life Orientation 82%
+    Labeeqah            11        English 80%; Mathematics          BSc Biological       Possible match,
+    Rademeyer                     58%; Physical Sciences 62%;       Sciences             with
+                                  Life Sciences 70%; Geography                           recommendation
+                                  66%; Life Orientation 85%                              to improve
+                                                                                         Mathematics
+    Siyabonga Dickson   12        English 70%; Mathematics          BSc Engineering      Strong match
+                                  75%; Physical Sciences 78%;       (Mechanical
+                                  Engineering Graphics and          Engineering)
+                                  Design 73%; Life Orientation
+                                  80%
+    Derek Vin Diesel    12        English 82%; Mathematical         Bachelor of Health   Not currently
+                                  Literacy 76%; History 79%; Life   Sciences             eligible,
+                                  Sciences 68%; Visual Arts 85%;                         Mathematics and
+                                  Life Orientation 90%                                   Physical Sciences
+                                                                                         required.
+The remaining learner records may be created by the project team.
+
+3. Subjects
+The database must contain at least 16 school subjects, including:
+
+•     English;
+•     Afrikaans;
+                                                                                                             13
+•   Mathematics;
+•   Mathematical Literacy;
+•   Physical Sciences;
+•   Life Sciences;
+•   Accounting;
+•   Business Studies;
+•   Economics;
+•   Geography;
+•   History;
+•   Computer Applications Technology;
+•   Life Orientation;
+•   Tourism;
+•   Engineering Graphics and Design;
+•   Visual Arts.
+
+4. Faculties
+The database must contain at least 5 faculties, for example:
+
+•   Commerce;
+•   Humanities;
+•   Science;
+•   Engineering;
+•   Health Sciences.
+
+5. Degree Programmes
+The database must contain at least 10 degree programmes.
+
+Examples may include:
+
+•   BCom Information Systems;
+•   BCom Accounting;
+•   BCom General;
+•   BSc Computer Science;
+•   BSc Biological Sciences;
+•   BSc Engineering (Mechanical Engineering);
+•   BA Humanities;
+•   BSocSci;
+•   Law-related qualification;
+•   Bachelor of Health Sciences.
+
+The project team may use fictionalised or sample programme names and requirements. The system must not
+claim that sample requirements are official current university requirements.
+
+
+
+                                                                                                     14
+6. Programme Requirements
+Each degree programme must have at least one stored requirement.
+
+Requirements may include:
+
+•    required subject;
+•    minimum mark for required subject;
+•    accepted alternative subject;
+•    minimum overall average;
+•    faculty-specific rule;
+•    advisory note.
+•    At least three programmes must require Mathematics.
+•    At least two programmes must require Physical Sciences.
+•    At least two programmes must accept Mathematical Literacy.
+•    At least one programme must have requirements that Gadija Jacobs meets.
+•    At least one programme must have requirements that Aadiel-Raboo Magwa does not meet.
+•    The BSc Biological Sciences requirements must result in Labeeqah Rademeyer receiving a Possible Match,
+     with her Mathematics mark identified as a gap.
+•    The BSc Engineering (Mechanical Engineering) requirements must result in Siyabonga Dickson receiving a
+     Strong Match.
+     • The Bachelor of Health Sciences requirements must require Mathematics and Physical Sciences, resulting
+     in Derek Vin Diesel being Not Currently Eligible.
+
+7. Interest Questionnaire
+The system must contain at least 8 interest questions. Example questions include:
+
+1.   I enjoy solving problems using numbers or data.
+2.   I enjoy helping people and communities.
+3.   I enjoy working with technology.
+4.   I enjoy science experiments and research.
+5.   I enjoy reading, writing and analysing ideas.
+6.   I enjoy business, entrepreneurship and finance.
+7.   I enjoy designing or building practical solutions.
+8.   I enjoy understanding society, law or politics.
+
+The system must store learner responses and use them to calculate an interest alignment result.
+
+8. Funding Options
+The system must contain at least 8 funding option records.
+
+Each funding option should include:
+
+•    funding name;
+•    funding type;
+•    linked faculty or programme;
+                                                                                                          15
+•   eligibility description;
+•   required documents;
+•   closing date;
+•   contact or application information;
+•   active/inactive status.
+•   At least one funding option must be linked to Commerce.
+•   At least one funding option must be linked to Science.
+•   At least one funding option must be linked to Engineering.
+•   At least one funding option must be linked to Health Sciences.
+•   At least one funding option must be linked to financial need.
+•   At least one funding option must be linked to academic merit.
+
+9. Advisory Sessions
+The system must contain at least 10 advisory session records.
+
+The data should demonstrate the following scenarios:
+
+•   a learner who strongly matches their selected degree;
+•   a learner who does not meet a required subject rule;
+•   a learner whose mark is below the minimum requirement;
+•   a learner whose interest profile aligns with a different faculty;
+•   a learner who requests funding information;
+•   a learner who exports an advisory report.
+•   A learner for whom required information is missing, resulting in a More Information Needed advisory
+    outcome.
+
+10. Test Cases
+Each group must prepare at least 5 test cases to demonstrate that the system meets the user requirements.
+
+The test cases should include:
+
+1. Create a learner profile and capture subjects and marks.
+
+2. Check eligibility for a selected degree.
+
+3. Generate alternative recommendations for a learner who does not meet requirements.
+
+4. View funding options linked to a selected faculty or degree.
+
+5. Export a learner advisory summary report.
+
+The test cases do not need to be submitted with the system specification, but they must be available during
+the demonstration and used to show that the system meets the required functionality.
+
+
+
+
+                                                                                                              16
+

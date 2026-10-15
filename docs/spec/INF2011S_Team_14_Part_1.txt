@@ -1,0 +1,2052 @@
+                    DEPARTMENT OF INFORMATION SYSTEMS
+                  SYSTEMS DESIGN & DEVELOPMENT
+
+
+
+
+   SYSTEMS SPECIFICATION FOR FUTURE PATH STUDENT ADVISING SYSTEM
+
+                             TEAM MEMBERS
+Student Number:       Student Name: Nabeel Braaf
+BRFMOH002
+
+Student Number:       Student Name: Oyama Mila Nongcula
+NNGOYA001
+
+Student Number:       Student Name: Zubair Rayned
+RYNMOG001
+
+Student Number:       Student Name: Kealon Vassen
+VSSKEA002
+
+
+
+
+                                    i
+                                                           TABLE OF CONTENTS
+1.       INTRODUCTION .........................................................................................................................1
+
+     OVERVIEW OF SPECIFICATION.......................................................................................................................... 1
+     CONTEXT & SCOPE OF SYSTEM SPECIFICATION ................................................................................................... 1
+     OVERVIEW OF SPECIFICATION.......................................................................................................................... 2
+     OVERVIEW OF SPECIFICATION.......................................................................................................................... 3
+
+2.       USER INTERFACE & DIALOGUE DESIGN .......................................................................................4
+
+     INTERFACE FLOW DIAGRAMS .......................................................................................................................... 4
+     SCREEN STANDARDS ...................................................................................................................................... 5
+     2.3 DETAILED SCREEN LAYOUT ........................................................................................................................ 9
+
+3.       DESIGN SEQUENCE DIAGRAMS ................................................................................................. 21
+
+     CHECK DEGREE ELIGIBILITY AND GENERATE AN ADVISORY OUTCOME .................................................................. 21
+     GENERATE ALTERNATIVE DEGREE RECOMMENDATIONS ..................................................................................... 23
+
+4.       DESIGN CLASS DIAGRAMS ........................................................................................................ 25
+
+5.       ENTITY RELATIONSHIP DIAGRAM.............................................................................................. 27
+
+6.       REPORT DESIGN ....................................................................................................................... 28
+
+7.       INPUT-OUTPUT STANDARDS & CONTROLS................................................................................ 43
+
+     FORMALISED OUTPUTS: ............................................................................................................................... 43
+     BUILT-IN VALIDATION .................................................................................................................................. 44
+     INPUT INTEGRITY CONTROLS ......................................................................................................................... 44
+     OUTPUT INTEGRITY CONTROLS ...................................................................................................................... 45
+
+8.       SECURITY AND ACCESS DESIGN................................................................................................. 46
+
+     OUTPUT INTEGRITY CONTROLS ...................................................................................................................... 46
+     OUTPUT INTEGRITY CONTROLS ...................................................................................................................... 46
+     HOW THE INTERFACE AND DATA DESIGN SUPPORT THIS ...................................................................................... 48
+
+9.       IMPLEMENTATION PLAN. ......................................................................................................... 49
+
+10.          TEST PLAN ........................................................................................................................... 54
+
+     TEST ENVIRONMENT .................................................................................................................................... 54
+
+                                                                              ii
+  TEST ITEMS ................................................................................................................................................ 54
+  TEST APPROACHES ...................................................................................................................................... 57
+  PROBLEM TRACKING (TEST CASES) ................................................................................................................. 60
+
+11.       RELATIONSHIP BETWEEN DESIGN AND DEVELOPMENT ......................................................... 63
+
+
+
+
+                                                                             iii
+INF2011S
+
+
+
+
+1.       INTRODUCTION
+
+     OVERVIEW OF SPECIFICATION
+     Every year, large numbers of Grade 11 and Grade 12 learners in South Africa must choose a
+     tertiary study path with only fragmented, inconsistent information to guide them, a university
+     website here, a teacher's informal opinion there, outdated pamphlets, or second-hand advice
+     from parents and peers. Because schools often have only one career advisor responsible for
+     large numbers of learners, most learners never get a structured, individualised check of whether
+     their current subjects and marks support the qualifications they are interested in. As
+     documented in the project case study, the result is late discovery of admission mismatches,
+     missed funding opportunities, and study choices that are not well aligned with a learner's actual
+     academic profile or interests.
+
+     Future Path addresses this gap directly. It is a standalone, Windows Forms-based advising
+     application that lets a learner capture their grade, subjects, marks and interests, and then uses
+     locally stored eligibility rules and a weighted scoring model to indicate whether they are a Strong
+     Match, Possible Match, Not Currently Eligible, or require More Information for a selected
+     qualification ,along with a plain-language explanation of the outcome, alternative programme
+     suggestions, relevant funding information, and an exportable advisory summary the learner can
+     share with a parent, teacher or career advisor.
+
+
+     CONTEXT & SCOPE OF SYSTEM SPECIFICATION
+     This design specification builds directly on the objectives and requirements established during
+     the analysis phase: the system must operate entirely offline, using only local business rules and
+     locally stored data, with no external AI services, APIs or cloud platforms involved at any point; it
+     will be built on a three-tier architecture; and its advising outcomes will always be explainable,
+     since Future Path is intended to provide preliminary guidance rather than official admission
+     decisions. These requirements are treated as non-negotiable inputs to every design decision that
+     follows in this document.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                            1
+INF2011S
+
+
+    OVERVIEW OF SPECIFICATION
+
+
+
+
+    Narrative:
+
+    The diagram groups Future Path into its three mandated architectural layers: Presentation,
+    Business Logic and Data with dependencies flowing from the Presentation Layer down through
+    the Business Logic Layer to the Data Layer. This specification covers the full vertical slice of the
+    system end-to-end, because the case study requires every learner-facing feature (profile
+    capture, interest questionnaire, eligibility checking, funding lookup, report export) to be
+    underpinned by rule-based logic and locally stored data at every step, a partial-layer design
+    would not satisfy that requirement. Within the Business Logic Layer, the eligibility and scoring
+    engine is treated as the system's critical-path component: it is the dependency that every other
+    business service and presentation form ultimately relies on to produce a usable outcome, and it
+    is the component most directly tied to the project's core value proposition of explainable, rule-
+    based advising. Design and implementation effort is therefore prioritised on this engine and its
+    supporting data structures (subjects, programme requirements, interest categories) before the
+    surrounding presentation forms and secondary services (funding lookup, report export) are
+    finalised.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                           2
+INF2011S
+
+
+
+
+    OVERVIEW OF SPECIFICATION
+    In-Scope:
+
+        ● A standalone Windows Forms desktop application using a local relational database, built
+        on a three-tier architecture.
+
+        ● Learner profile creation, subject and mark capture, and a short interest questionnaire.
+
+        ● Rule-based eligibility checking and a weighted recommendation engine producing a Strong
+        Match, Possible Match, Not Currently Eligible Match, More Information Needed outcome,
+        with an explanation.
+
+        ● Suggestion of alternative degree programmes when a learner does not meet the
+        requirements for their first-choice qualification.
+
+        ● Display of locally stored funding information linked to a selected faculty or degree.
+
+        ● Export of a learner advisory summary report, plus two further administrative/advisory
+        reports (an aggregate eligibility/interest report and a not-currently-eligible exception
+        report).
+
+        ● Authentication and role-based access control distinguishing Learner, Career Advisor and
+        System Administrator functionality.
+
+
+
+    Out of scope for this project:
+
+        ● Any connection to ChatGPT, Gemini, Copilot, other online AI services, external APIs, cloud
+        platforms or a web server, all advising logic must run locally.
+
+        ● Making or replacing official university admission decisions; Future Path provides
+        preliminary guidance only.
+
+        ● Live or real-time funding and admissions data, funding and requirement information is
+        locally stored sample data, not pulled from the internet.
+
+        ● Submission of funding or university applications on the learner's behalf.
+
+         ● Support for multiple universities, detailed career pathway mapping beyond the interest
+        questionnaire, parent/teacher login, automated application checklists, closing-date
+        reminders, multilingual support, or natural-language interaction, these are noted as possible
+        future extensions but are not part of the current build.
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       3
+INF2011S
+
+
+2.      USER INTERFACE & DIALOGUE DESIGN
+The user interface for the Future Path system must be designed to ensure that Learners, Career
+Advisors, and Administrators can navigate the system logically and interact with its major functions.
+The interface design focuses on form-to-form navigation, specific screens required for profiling,
+subject and mark capturing, interest questionnaire, eligibility checking, recommendation reporting,
+and administrator support functions.
+
+
+     INTERFACE FLOW DIAGRAMS
+
+
+
+
+Narrative:
+Future Path opens on a single Homepage that splits into two navigating systems, the Learner
+Advisory System and System Staff Management System. The Management System is an
+authenticated staff area behind a login that branches by role into Career Advisor and Administrator,
+with Reports Generation being a shared function.
+
+The Learner side is a six step or optional seven step linear capture system with validation loops that
+converge on an Eligibility Results screen. From there, Learner can branch into Alternative Program
+Recommendations and Funding Options that feed into a printable Advisory Summary Report.
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         4
+INF2011S
+
+
+The Advisor side is a lookup and view hub that can search through learner profiles and report data
+and generate necessary reports to improve the system and reference data. The Administrator side
+mirrors this hub pattern for Reference data maintenance that splits into individual maintenance
+screens serving specific data categories needed in the system.
+
+Assumptions:
+
+- Faculty & Department Selection has no dedicated error screen as it will be selection based rather
+than text entry input, so there’s less room for invalid input.
+
+- The shared Login condition covers both Advisor and Administrator as their branching will be done
+internally via the user’s role rather than two separate forms.
+
+- Sessions Dashboard is a hub, not a forced sequence. The Advisor can search once and can jump
+between Learner Profile, Session Info and Reports without researching again.
+
+- Advisory Reports Dashboards shortcuts straight into the Summary Report. The Advisor will be able
+to get a summary report of all learners' Advisory reports or a selected range of students.
+
+- The Administrator’s Maintenance Dashboard groups all categories under one dashboard but keeps
+its own independent screen with executable controls. There are separate categories for easier
+maintainability.
+
+
+    SCREEN STANDARDS
+The standards below are applied to every screen listed in 2.1. They are fixed before development,
+and every rule is expressed in terms of the .NET Framework Windows Forms controls and
+regulations. A screen built to this standard can be designed using Visual Studio without custom
+painting libraries.
+
+2.2.1) Form Layout and Positioning
+
+    •   Fixed size Forms, FormBorderStyle = FixedSingle, MaximizeBox = false, StartPosition =
+        CenterScreen, AutoScaleMode = Dpi.
+        Three sizes only: wide 1200 × 800 px for capture and record screens, standard 1000 × 720 px
+        for outcome, hub and selection screens. All fit a 1400 × 800 display without scrolling.
+    •   Mandatory zones on every screen. Caption bar reading "Future Path <screen name>",
+        navigation rail docked left, title band carrying the screen name, action band docked bottom
+        with navigation button, and an overall status band for the learners progress.
+    •   Conditional zones. A learner context strip where the screen concerns one learner, an amber
+        notice panel where something is still outstanding, and up to four running-figure tiles where
+        derived values help. Each is hidden entirely rather than shown empty.
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       5
+INF2011S
+
+
+    •   Spacing. Controlled groups of functions and input fields will be positioned about 20px apart
+        from one another.
+2.2.2) Navigation Conventions
+
+    •   The navigation rail is a primary way to move between areas and ongoing processes. “Cancel,
+        Back, and Next” buttons will be placed onto the action band at the bottom of the screen for
+        additional and easier navigation.
+    •   Sequence for learners: UI 2–7 run in a fixed order with the rail showing progress.
+    •   Sequence for staff: Staff screens are destinations reached in any order. The five reference-
+        data maintenance screens are TabPages inside UI 13.
+    •   No dead ends. Every screen offers Back, Cancel or a rail destination. Back always preserves
+        captured data for later completion.
+
+
+2.2.3) Button Placement and Naming
+
+ Position                   Label                       Style                     Behaviour
+
+ Furthest Right             Save, Continue, Next,       Navy fill, white text     The form’s
+                            Generate, Print, Check                                AcceptButton, so
+                            Eligibility                                           Enter activates it.
+                                                                                  Disabled while a
+                                                                                  blocking validation
+                                                                                  error stands.
+
+ Second from Right          Back                        White fill, blue border, Returns to previous
+                                                        black text                screen, preserving
+                                                                                  captured data.
+
+ Third from Right           Cancel                      White fill, blue border, The form’s
+                                                        black text                CancelButton which
+                                                                                  abandons the session
+                                                                                  after a confirmation.
+
+ Beside its group           Add Subject, Search,        Amber fill, black text.   Acts on its group,
+                            Clear                                                 performs validation
+                                                                                  checks, and does not
+                                                                                  navigate.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                          6
+INF2011S
+
+
+2.2.4) Fonts and Headings
+
+One typeface throughout, Segoe UI, which ships with Windows, so no font needs installing on a
+laboratory machine and no substitution can break a layout. Consolas is used only for figures,
+because monospaced digits stay aligned in a column. Hierarchy is carried by size and weight, never
+by colour, and Semibold is used in place of Bold.
+
+Screen Title – Segoe UI Semibold large (20pt) acting as screen name in the title band.
+Section Heading – Segoe UI Semibold medium sized (12pt) in section head bars.
+Body – Segoe UI (10pt) for context texts, and grid cells
+Field Label – Segoe UI Semibold (12pt) labels above their control
+Caption – Segoe UI (8pt) for helper texts and status band
+Figures – Consolas (10pt) for marks, scores, dates and identifiers.
+
+2.2.5) Field Labels
+
+        •    Every input control has a visible label, positioned directly above the control and left-
+             aligned.
+        •    Labels are sentence cases with no trailing colon.
+        •    Units and formats live in the label ie) Mark% and never as a grey placeholder inside the
+             text fields.
+
+
+2.2.6) Use of Colours
+
+    •   Navy – Used for structural purposes and the navigation rail, title band, grip column headers
+        and primary buttons.
+    •   Deep Navy – Used to outline the frame to form the outline and status bar.
+    •   Blue – Used to reference the context strip and secondary button borders.
+    •   Blue tint – Used for banding, context strip fills and grid rows.
+    •   Amber – Used to indicated outstanding or incomplete data entry in the notice panel,
+        progress bar and Add button.
+    •   Amber Text – Used to highlight outstanding data.
+    •   Red – Used for invalid input.
+    •   Green – Used to indicate that the requirements have been met and complete. Notice panel
+        changes to notify user can progress.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                        7
+INF2011S
+
+
+2.2.7) Error and Confirmation Messages
+
+ Class                      Presentation and usage
+
+ Field Message              Red text with a warning glyph under the control, which gains a red
+                            border and tint, raised when the control loses focus with an invalid value.
+
+ Validation Summary         Red-bordered box above the controls, one line per offending field, raised
+                            when the primary action is activated while any field is invalid.
+
+ Validation Dialogue        Modal dialog with a single button, raised when the user tries to leave a
+                            capture screen that still holds invalid data.
+
+ Status Message             Status band, persistent, signed-in user and role, record or step position,
+                            and the count of outstanding validation errors.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                          8
+INF2011S
+
+
+    2.3 DETAILED SCREEN LAYOUT
+2.3.1) Staff Login (UI 8)
+
+
+
+
+The Staff Login screen uses multiple text area and labels to make up headings and guidance labels.
+Two text fields are used for user input, where the password text field is masked out for security
+purposes. Two buttons are also fixed in an action panel for navigation. The user enters only their
+Username and Password, which is marked as required with a red asterisk. The user’s profile will be
+fetched from the database, and validation will take place upon login attempt. A blank or
+unrecognised entry highlights the offending label and its text box in red, and the advisory panel
+changes from blue, (guidance) to a red message naming the field and the correction required.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     9
+INF2011S
+
+
+2.3.2) Learner Profile Capture (UI 2)
+
+
+
+
+The Learner Profile screen uses labels, text boxes, combo boxes, a numeric spinner, read-only fields,
+a blue advisory panel and three command buttons. The four required items, Current grade, School
+name, Province and Advising year, carry a red asterisk. School name, and Province fields are
+captured through value-bound controls rather than free text. The year is a numeric control so an
+invalid value cannot be typed at all.
+Email address and Mobile number are optional. The system supplies the four Session details being
+the session number generated at session start, date started stamped from the system date, and the
+captured by and status fields are generated upon creation and progress through the form. Validation
+fires on Save and continue. A missing required value highlights its label and control in red and the
+advisory panel changes from blue guidance to a red message naming the field and the correction.
+Cancel and Back exit without writing anything.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       10
+INF2011S
+
+
+2.3.3) Subjects and Marks Capture (UI 3)
+
+
+
+
+The Subjects and Marks screen use labels, two combo boxes, a numeric control, a data grid, an
+amber advisory panel, a red validation summary and four command buttons. The user enters three
+required items per subject, Subject, Subject level and Mark % which is marked with a red asterisk.
+Subject and Subject level are value-bound combo boxes and Mark % a numeric control constrained
+to 0–100, so an invalid value cannot be typed.
+Add subject commits a row to the grid and the bin icon on a row removes it. There is a minimum
+subject count of 7 but no maximum, so a learner can add extra Advanced Programme subjects. Every
+derived value is supplied by the system. The Achievement level, taken from the entered mark
+against the stored NSC bands, and the captured count and average are both recalculated on each
+add or delete.
+Validation fires on “Add Subject” so a duplicate subject or an out-of-range mark highlights the
+offending label and control in red, and the validation summary lists every entry to correct, while the
+amber panel reports how many subjects remain against the stored minimum. Cancel and Back exit
+without writing anything.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     11
+INF2011S
+
+
+2.3.4) Interest Questionnaire (UI 4)
+
+
+
+
+The Interest Questionnaire screen uses labels, a statement grid carrying eight five-point radio button
+groups, an amber advisory panel, four running-figure tiles and three command buttons. The user
+selects one response per statement, from Strongly disagree to Strongly agree, so nothing is typed,
+and no value on the screen can be invalid.
+The system supplies everything else: the eight statements and their display order are read from
+InterestQuestion and the interest category beneath each from InterestCategory, while the category
+scores shown in the tiles are calculated from the responses given so far. Unanswered statements are
+shaded amber and reported in the advisory panel and Save and continue stays disabled until the
+answered count equals the question count, so amber marks work outstanding rather than an error,
+and red does not appear on this screen at all. Cancel and Back exit without writing anything.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     12
+INF2011S
+
+
+2.3.5) Faculty & Department Selection (UI 5)
+
+
+
+
+The Faculty and Department screen uses labels, a radio pair, a required combo box, a text box shown
+disabled with its reason stated, two data grids, the first carrying an in-grid Select button column, an
+interest alignment strip and three command buttons. The user makes three selections: the search
+mode, the faculty, or one programme via its Select button.
+Everything displayed is system-supplied. The faculty combo is bound to the Faculty table and the
+programme grid. The requirements panel is read from ProgrammeRequirement for the selected
+programme, and the interest alignment percentage and strongest categories are calculated from the
+questionnaire. No value can be invalid, and the screen carries no validation dialog. The Check
+eligibility stays active and repopulates the grids for different selected programs in the department.
+Cancel and Back exit without writing anything.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                      13
+INF2011S
+
+
+2.3.6) Eligibility Results (UI 6)
+
+
+
+
+The Eligibility Results screen uses labels, a learner context strip, an amber outcome band carrying a
+status chip, a data grid, four running-figure tiles and four command buttons. Nothing is entered here
+as it is an outcome screen, and the learner only chooses a forward path or returns to change the
+programme selected.
+Every value shown is produced by the system, the outcome label and its explanation sentence come
+from the set system rules. With no input there is no validation, only reporting. The band always
+states why the outcome was reached rather than the label alone, green marks a requirement met
+and amber a gap, and every state carries its own words so colour is never the only signal. Back,
+Funding options and Alternative programmes leave the outcome unchanged, and Continue to
+summary carries it through to UI 7.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                    14
+INF2011S
+
+
+2.3.7) Alternate Programs Wireframe (UI 6.1a)
+
+
+
+
+The Alternative Programmes screen uses labels, a learner context strip, a blue advisory panel, a
+ranked data grid carrying rank and outcome chips, a reasons panel, a check box and three command
+buttons.
+Nothing is typed, selecting a ranked row rewrites the reasons panel beneath the grid, and the check
+box is unticked by default, so inclusion is based on the user to decides whether these alternatives
+are carried into the advisory summary. Everything in the grid is system-produced and derived with
+internal data. There is no validation, only reporting: every recommendation states its reason rather
+than rank and score alone, green marks a strong match and amber the learner's own possible match.
+Back and Compare with my selection change nothing; Continue to summary carries the session to UI
+7.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                      15
+INF2011S
+
+
+2.3.8) Funding Options (UI 6.2b)
+
+
+
+
+The Funding Options screen uses labels, two combo boxes, a check box, a data grid carrying status
+chips, a three-field read-only detail panel, an amber advisory panel and two command buttons.
+Nothing is typed, the learner sets the Faculty and Funding type filters, may limit the list to options
+still open, and selects a row to load the detail panel.
+Every value is supplied by the system, and both combos are bound to their reference tables. The
+rows are read from the database for the faculty chosen on UI 5. Status is derived by comparing each
+stored closing date with the system date. The count of options shown is derived, and the eligibility,
+required documents and contact fields are shown as read-only. There is no validation. Back returns
+to the advisory outcome. Add to Summary carries the funding through to the advisory summary on
+UI 7.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         16
+INF2011S
+
+
+2.3.9) Advisory Summary (UI 7)
+
+
+
+
+The Advisory Summary screen uses labels, a combo box, two text boxes with a Browse button, a
+read-only field, a document preview pane, a blue advisory panel and three command buttons. The
+user sets only the export format and destination folder, both marked required by a red asterisk.
+Everything else is system-supplied as each line of the preview is assembled from the stored session,
+the file name is proposed from the learner's surname and session number, the generation date and
+time are stamped at export, the page count is derived, and the advisory disclaimer is printed
+automatically. Validation fires on Save and export: an unwritable destination raises a dialog naming
+the folder rather than a technical error, and success is confirmed in the status band, never as a
+modal. Save and export commits the session and Cancel and Back exit without writing.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                    17
+INF2011S
+
+
+2.3.10) Career Advisor Functionality (UI 10.2b)
+
+
+
+
+The tab uses a tab strip, labelled TextBoxes, DateTimePickers and a ComboBox, a read-only
+DataGridView with colour-coded outcome chips, command buttons and a status band. The advisor
+enters only the search criteria, the session number, learner surname, a session date range and an
+advisory outcome, none of which is required, as any may be left blank to widen the search.
+All displayed data is system-retrieved, and the outcome is read back from the stored
+recommendation result rather than recalculated. On Find, an invalid session number or a from-date
+later than the to-date highlights the offending label and control in red, with the status band
+reporting it, turning amber when no sessions match and returning to blue once a valid result set is
+shown. The remaining buttons capture nothing.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                      18
+INF2011S
+
+
+2.3.11) Reference Data Management (UI 13.2)
+
+
+
+
+The tab uses a tab strip, a Faculty ComboBox above a Degree programme ListBox, a read-only
+DataGridView of stored requirements with colour-coded status chips, a maintenance form of
+ComboBoxes, a numeric control, a CheckBox and a multi-line TextBox.
+The administrator selects a faculty and programme to scope the view, then sets Requirement type,
+Subject, Min. mark % and Accepted alternative, each marked mandatory by a red asterisk and
+captured through a value-bound control, so an invalid value cannot be typed. All displayed data is
+retrieved, the programme list filtered by faculty, the grid rows for program requirements, the lists
+bound to their reference tables, and the requirement and active counts. Validation takes place on
+Update requirement or Add requirement which saves mandatory field and highlights a mark outside
+0–100 as the offending label and control in red and reports it in the status band. Green marks an
+active requirement and grey an inactive one. Cancel, Deactivate, Update requirement and Add
+requirement complete the maintenance cycle.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       19
+INF2011S
+
+
+2.3.12) Report Generation Wireframe (UI 11)
+
+
+
+
+The screen uses a RadioButton group of the three reports, labelled DateTimePickers and
+ComboBoxes for the parameters, a CheckBox, a TextBox with a Browse button for the destination, a
+readiness panel and a command band.
+The user selects one report, sets Sessions from and Sessions to, Faculty, Grade and Advisory
+outcome, ticks Include inactive programmes where it applies, and chooses an Output format and
+Save to path. Sessions from, Sessions to, Output format and Save to are marked mandatory by a red
+asterisk. The system retrieves and calculates the rest of the data, the three report definitions are
+read from the report catalogue, the Faculty, Grade and Advisory outcome lists are bound to their
+reference tables, and the last-generated timestamp is generated from the system. Validation fires on
+Generate report, where an omitted mandatory field or a from-date later than the to-date highlights
+the offending label and control in red, parameters that do not apply to the chosen report are
+disabled, and the readiness panel shows green once every requirement is met. Cancel, Preview and
+Browse capture nothing.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       20
+INF2011S
+
+
+
+
+3.      DESIGN SEQUENCE DIAGRAMS
+
+     CHECK DEGREE ELIGIBILITY AND GENERATE AN ADVISORY OUTCOME
+
+
+
+
+Systems Specification for [Future Path Student Advising System]   21
+INF2011S
+
+
+Narrative:
+
+The process starts when the learner selects the Check Eligibility button from the Faculty and
+Department Selection screen, this generates the request for the learner ID and programme ID to be
+sent to the controller. The controller fetches the learner details from the Learner Repository, and the
+degree programme details from the Degree Programme Repository. If the required learner or
+programme information is missing, the controller displays a message learner "More Information
+Needed". Alternatively, if both the details are present, the controller retrieves the subjects captured
+by the learner and their choice of faculty. Then it calculates the scores required to give out a
+recommendation. The degree programme determines the match between the subjects and marks
+and gives out a match result. The interest categories that are associated with the programme are
+used by the learner to find the interest score, while the degree programme checks whether it
+matches the learner's preferred faculty and gives out a faculty bonus. All this data is taken and
+processed by the Recommendation Engine to produce an outcome for the learner. The controller
+then saves a new advisory session and a new recommendation result, before sending the outcome
+back to the screen, which displays it to the learner along with its explanation.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     22
+INF2011S
+
+
+
+
+    GENERATE ALTERNATIVE DEGREE RECOMMENDATIONS
+
+
+
+
+Systems Specification for [Future Path Student Advising System]   23
+INF2011S
+
+
+Narrative:
+
+The sequence diagram begins where the learner chooses to view the alternative programmes in the
+Eligibility Results screen, this triggers a request for the learner ID and excluded programme ID to be
+sent to the controller. The controller then retrieves the learner's information from the Learner
+Repository. If there are missing subjects or interests by the learner, the controller displays a message
+to the learner "More Information Needed". Alternatively, the controller retrieves the learner's
+subjects along with the faculty chosen and retrieves the candidate programmes list from the Degree
+Programme Repository. For each candidate programme, it computes the scores to recommend. The
+degree programme identifies the match between the subject and marks and gives a match result.
+The interest categories of the programmes will be used by the learner to compute interest scores.
+Whereas the degree programme validates whether the programme matches the faculty chosen by
+the learner and gives a faculty bonus. All these pieces of information are then collected and analysed
+by the Recommendation Engine to generate a result for each candidate. After scoring all the
+programmes the Recommendation Engine ranks the candidates and the controller stores the ranked
+list, which is sent to the learner to display the list of the alternative programme.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     24
+INF2011S
+
+
+
+4. DESIGN CLASS DIAGRAMS
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                  25
+INF2011S
+
+
+Narrative:
+
+The boundary classes are the screens the user uses to access the system and form the presentation
+layer. The controller classes form the business logic layer together with the recommendation engine
+class that manages the scoring logic. The entity classes hold the data used by the system whereas
+the data access classes are used to store and retrieve the data from the database. These entities
+consist of the Learner, Degree Programme, Programme Requirement, Advisory Session, and
+Recommendation Result. These classes handle the profile and subjects of the learners, qualifications,
+their requirements and the results of the advisory sessions. The two classes, Match Result and
+Advisory Outcome represent the outcomes for the sequence diagrams. They are both temporary
+values that are used during the process of generating recommendations. The User Account class has
+been left disconnected because the learners go through an entire advisory process without logging
+in.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                    26
+INF2011S
+
+
+5.      ENTITY RELATIONSHIP DIAGRAM
+Narrative:
+
+Each faculty offers one or more-degree programs, and each program stipulates one or more
+requirements, a required subject, a minimum mark, and optionally an accepted alternative. A
+learner undertakes zero or more advisory sessions. Each session records the grade level, preferred
+faculty and selected program, and captures the learner's subject marks and questionnaire responses
+along with their profile. Each session then produces zero or more recommendation results, one for
+the selected program, one per alternative, and may be exported as an advisory summary. Funding
+options reach faculties and programs through two junction tables. Every other relationship is one-to-
+many, and descriptive values are stored once and referenced by key.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     27
+INF2011S
+
+
+6.      REPORT DESIGN
+6.1 Learner Advisory Summary Report
+
+The Learner Advisory Summary is the document a learner using the system walks away with at the
+end of an advisory session once all profile and user data have been captured. They choose to export
+the report on UI7 at the end of their advisory session, which produces a two-page pdf or docx
+report. It is generated by the learner themselves, or a Career Advisor and System Administrator can
+also regenerate the same summary for the specified learner. The report generated is the value itself,
+an advisory report that gives guidance to students looking to pursue further education on their
+selected program choice, alternate options, and funding options for their degree.
+
+6.1.1 Detailed Output Requirements
+
+ Output type & ID:            Report Type: Detailed Report for single instances, one per advisory
+                              session.
+                              Report ID: It is a two-paged A4 portrait document carrying the ID: FP-
+                              LSR.
+                               Report Name: Learner Advisory Summary Report
+
+ Report Objectives:           This report aims to give the learner one sharable record of everything
+                              the session produced, what they captured, their program selection, the
+                              system conclusions and recommendations giving the learner guidance
+                              on steps they can take next.
+
+ Audience:                    The Learners accessing the system are the audience, and the people
+                              they choose to share it to being their parents, advisors, or teachers are
+                              the secondary audience.
+
+ Content:                     The fields that are displayed make up the report which consists of a
+                              masthead, identity line, advisory outcome, subjects and marks, how
+                              those subjects compare with the minimum requirement for each
+                              program, an interest questionnaire outcome, alternate program
+                              choices and funding options linked to that program.
+                               What will be displayed are the following: Report title, learner name,
+                              session number and date, report ID, learner’s grade, school, province,
+                              subjects and corresponding marks and their overall average.
+                              Additionally, the program selection and set minimum requirements will
+                              be displayed with comparisons to their captured marks, a drafted
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       28
+INF2011S
+
+
+                              interest questionnaire outcome with fitted categories in charts,
+                              alternative program options and funding options the learner can apply
+                              for. An overall guidance section will be included
+
+ Layout:                      Three tables and two charts across two pages.
+                               Table 1 and 2 will include 5 columns with supporting data, Table 3 will
+                              have 6 columns and supporting data. Only horizontal rules will apply,
+                              no box or zebra stripping. Text columns will be left-aligned and
+                              numeric columns will be right-aligned in tabular figures.
+                               This report will include a grouped bar chart with two bars per subject
+                              indicating a visible gap between their current marks and what is
+                              required.
+
+ Selection:                   Only one report per advisory session indicated by the SessionID. All
+                              learners using the system will be able to select this report, but
+                              requirement rows are restricted to the qualification the learner
+                              selected. Alternatives are stored on the recommendation table for
+                              qualifications that better suit the learners marks and interest
+                              categories, still restricted to the qualifications offered by the
+                              institutions that are still active.
+                               Funding options only appear if the learner has opted for its inclusion.
+                              Invalid or expired programs and funding options aren’t added to the
+                              report.
+
+ Sequence:                    Subjects are sorted by subject name in ascending order. Requirements
+                              are stored in a requirement order. The mark comparison chart follows
+                              as a visual summary of the above information so they can be read
+                              together. The interest categories questionnaire output is stored in
+                              descending order by score. Alternative programs are displayed next in
+                              descending order by overall fit and the funding options display
+                              thereafter ascending by closing date, so the nearest deadline appears
+                              at the top.
+
+ Grouping and                 There are no set group bands for this report. The report only covers
+ Summarization:               one advisory session, so there is nothing to group by.
+
+
+                              Summarisation is in four categories:
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         29
+INF2011S
+
+
+                               - Overall average of the learners’ captured marks which is compared
+                              against the qualifications minimum overall average.
+                               - Count of requirements met for the qualification.
+                               - Shortfall in percentage points for each unmet requirement.
+                               - Interest percentages per interest category.
+
+
+                              Fixed percentages on the alternatives table are read from the stored
+                              overall score and not recalculated at report time.
+
+ Media to be Used:            Electronic document formats like pdf and docx will be used to export
+                              the report from the system and saved to a user specified folder. The
+                              report will be set to A4 and match the preview, and this report can be
+                              printed out as a physical copy.
+
+ Frequency, Timing, &         The report will be available on demand in real time once per advisory
+ Delivery:                    session. On the moment the learner finishes all selection and data
+                              capturing, the report can be exported. It may be regenerated at a later
+                              stage by a Career Advisor or System Administrator and is never
+                              produced on a schedule, in a batch, or for a session that is incomplete.
+
+ Distribution:                Reports will be rendered by RDLC from a typed dataset. The report
+                              definition holds no queries or business rules so the learner, advisor, or
+                              administrator can save the PDF to their local computer, print it and
+                              distribute it fellow students, teachers, advisors or parents of the
+                              learners. The report is not emailed or transmitted anywhere.
+
+ Privacy, Security, and       Access to the learner’s own summary is bound to the session in
+ Integrity Constraints:       progress, there is no screen where a learner can retrieve another
+                              learner’s report. The staff access is restricted through authentication
+                              and role-based access controls. Their credentials are stored hashed in
+                              the database.
+
+
+                              Every generation writes an Export report row in the database recording
+                              session information about the report generated. This is the report’s
+                              audit trail.
+
+
+                              Integrity is protected by excluding deactivated qualifications and
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                        30
+INF2011S
+
+
+                              funding options, so a learner is never advised towards something the
+                              institution has withdrawn. The report captures its own reference data
+                              and each reprint gives rise to new reference data which differs from
+                              the original.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                      31
+INF2011S
+
+
+6.1.2 Report Layout
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                  32
+INF2011S
+
+
+6.2 Degree Interest & Eligibility Report
+
+The Degree Interest and Eligibility Report is the aggregated counterpart to the Learner Advisory
+Summary Report. This report reads every completed advisory session in a chosen period and reports
+what learners are trying to register for and how many qualify for those programs. It is generated by
+a Career Advisor or System Administrator on demand. It’s valuable as it turns individual advisory
+work into a picture of demand and eligibility across the institution. This reports what qualifications
+attract most students, in which faculties they are in, and their proportions and which subjects are
+responsible for requirements not being met.
+
+6.2.1 Detailed Output Requirements
+
+ Output type & ID:            Report Type: Summary Report aggregating many advisory sessions into
+                              one output generated once per requested period.
+                              Report ID: It is a three-paged A4 landscape document carrying the ID:
+                              FP-DIE
+                               Report Name: Degree Interest and Eligibility Report
+
+ Report Objectives:           This report aims to show the volume and distribution of the advisory
+                              activity over a selected period to report the eligibility rate achieved for
+                              each faculty and each degree program. This report allows users to
+                              identify which degree program attracts the most learner interest and
+                              to expose the specific subjects and marks that most often prevent
+                              learners from enrolling to their desired program.
+
+ Audience:                    The Career Advisors and System Administrators use this report. Career
+                              Advisors use it to see where their guidance is most needed across the
+                              learner population.
+                               System Administrators use it to judge whether the stored program
+                              requirements, interest questions and funding options are producing
+                              sensible outcomes in the report.
+
+ Content:                     Page 1 carries the report masthead, the parameter line showing
+                              exactly which sessions were included, a table of advisory outcomes by
+                              faculty with an eligibility rate per faculty and total rows. A pie chart
+                              summarizes the different outcomes across the whole period as well.
+                               Page 2 carries a table of every active degree program selected in the
+                              period showing the selections and the eligibility outcomes, which is
+                              followed by 5 pie charts showing the outcomes per faculty and
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         33
+INF2011S
+
+
+                              program.
+                               Page 3 carries a bar chart of the required subjects not taken, a table of
+                              subjects taken but scored below the minimum requirements with an
+                              average shortfall, and a table of funding categories. Every page carries
+                              a footer with the report name, generation timestamp and page
+                              number.
+
+ Layout:                      A single navy masthead band at the top of each page holding the
+                              report name, period selected, and generation details. Each page will be
+                              a landscape A4 layout so that all table sections and figures fit on the
+                              page.
+                               Section headings are numbered 1 – 8 continuously across all pages. All
+                              text is left-aligned, and all numbers are right-aligned in their respected
+                              columns.
+                               Charts are placed directly beneath the table they explain and every
+                              chart is followed by a short note stating what is the takeaway from the
+                              diagrams.
+
+ Selection:                   The user supplies a start date and an end date, and may optionally
+                              filter by faculty, by learner grade, and by advisory outcome. Only
+                              advisory sessions that were completed and committed within the set
+                              period are included.
+                               Deactivated degree programs and funding options are excluded by
+                              default. Every parameter uses is printed on page 1 so that the user can
+                              clearly see what was counted and what was not counted.
+
+ Sequence                     The faculty table stored in the database is sorted by the number of
+                              sessions in descending order so the busiest faculty appears first.
+                               The Degree Program table is sorted by the number of selections in
+                              descending order so that the most requested qualification appears
+                              first.
+                               The subject gap bar chart, the mark shortfall table and the funding
+                              category table are each sorted by frequency in descending order,
+                              putting the largest problem or the highest demand at the top of every
+                              list. The five faculty pie charts follow the same order as the faculty
+                              table so that the two can be read against each other.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         34
+INF2011S
+
+
+ Grouping and                 This report groups advisory sessions first by faculty and then by degree
+ Summarization                program. Within each group the four advisory outcomes are counted
+                              and an eligibility rate is calculated as, strong matches + possible
+                              matches, expressed as a percentage of that group’s sessions. Both
+                              tables close with a totals row summarizing the period in one line.
+                               The subject mark and analysis groups items by subject, and the total of
+                              this table will exceed the number of sessions as multiple sessions have
+                              the same subject entries.
+
+ Media to be Used             The report is displayed on screen in the report viewer where the user
+                              can page through it and zoom on specifics. The report can be exported
+                              to document formats like pdf and excel saved to a user specified
+                              folder. The report may be printed as an A4 landscape paper.
+
+ Frequency, Timing, and       The report is generated on demand and is not scheduled or produced
+ Delivery                     automatically. It is typically generated at the end of a term, semester
+                              or academic year. Usually ahead of a university application deadline.
+                              Generation is immediate and the report is produced from data already
+                              stored in the system.
+
+ Distribution                 The report is delivered only to authenticated users of the Future Path
+                              system, being the Career Advisors and System Administrators.
+                              Career Advisors uses the information for targeted group reviews and
+                              learner support.
+                               If exported, it is written to a specific folder within the users computer
+                              in a user specified format in PDF or Excel format. The system does not
+                              email, upload or transmit the report anywhere outside system testing
+                              and internal use to improve the system and its reference data. Any
+                              further distribution is an independent act carried out by the user.
+
+ Privacy, Security, and       Only authenticated Career Advisors and System Administrators may
+ Integrity Constraints        generate this report. Learners have no access to it.
+
+
+                              The report is aggregated and contains no learner names or profile data.
+                              It describes institutional advisory performance and remains restricted
+                              to those two roles. The report is mainly read only and generation
+                              cannot alter stored session information. The report captures its own
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                           35
+INF2011S
+
+
+                              reference data and each reprint gives rise to new reference data
+                              because the period information is different.
+
+
+                              The disclaimer printed on the final page states that these outcomes are
+                              preliminary rule-based guidance and not admission decisions.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                   36
+INF2011S
+
+
+6.2.2 Report Layout
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                  37
+INF2011S
+
+
+
+
+6.3 Learners Not Currently Eligible Report
+
+The Learners Not Currently Eligible Report is an exception report. It only reports on what needs
+attention, specifically the advisory sessions in a period that did not end in a match either because
+the learner did not meet one or more of the requirements for the qualification, they selected or
+because the session was left incomplete. It is generated by the Career Advisor and System
+Administrator typically at the start of a follow-up cycle and it names every affected learner, the
+qualification they were interested in, the reason it could not be recommended and the alternative
+programs if they were suggested by the system. This report tells the advisor who to contact next and
+what issues to address.
+
+6.3.1 Detailed Output Requirements
+
+ Output type & ID:            Report Type: Exception Report listing only the advisory sessions that
+                              fall outside the expected outcome.
+                              Report ID: FP-LER
+                               Report Name: Learners Not Currently Eligible Report
+
+ Report Objectives:           To identify every learner whose advisory session did not result in a
+                              match and to present them as an actionable follow-up list. This report
+                              states the specific reason each learner did not qualify so that the
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       38
+INF2011S
+
+
+                              advisor can act on it. It names the program alternatives for each
+                              affected learner so that the advisor has something constructive to offer
+                              when reaching out.
+
+ Audience:                    The Career Advisors and System Administrators use this report. Career
+                              Advisors use it to do their follow-up work.
+                               System Administrators use it to confirm that the stored requirements
+                              are producing reasonable outcomes and not excluding learners in
+                              error. It is not produced to any learner.
+
+ Content:                     Page 1 carries the report masthead, a fact line summarizing the
+                              sessions in scope, the number and percentage of learners affected. A
+                              bar chart of the reasons recorded across the list and a pie chart of
+                              which faculties carry the follow-ups.
+                              Beneath these are the exceptions grouped by faculty with their session
+                              number, date, learner name, grade, school, qualification selected, the
+                              outcome and recommended alternative.
+                               Page 2 continues listing the remaining faculties and loses with a total
+                              row and disclaimer.
+
+ Layout:                      A single navy masthead band at the top of each page holding the
+                              report name, and generation details. Each page will be a landscape A4
+                              layout so that all table sections and figures fit on the page.
+                               The two charts sit side by side on page 1 above the listings, so the
+                              shape of exception students is outlined. Each faculty is listed along
+                              with each learner with their exceptions alongside.
+                               these group in tables across the whole report and very faculty listed.
+
+ Selection:                   The user supplies a start date and an end date which can be optionally
+                              filtered by faculty and by learner grade. On the sessions whose
+                              advisory outcome is “Not Currently Eligible” or “More Information
+                              Needed” are included in this report.
+                               The parameters used are printed on page 1 alongside the counts so
+                              that the reader can see how many exceptions are drawn from all the
+                              sessions recorded.
+
+ Sequence                     Rows are sorted by faculty first so that an advisor responsible for a
+                              faculty can work with a single block of the report. Within each faculty
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         39
+INF2011S
+
+
+                              they are sorted by outcome, placing those who are “Not Eligible” first.
+                               Within each outcome they are sorted by session date with the newest
+                              first so the most recent session is more visible as the learner could still
+                              be deciding on what to pursue.
+
+ Grouping and                 The listing is grouped by faculty, and each group heading summarises
+ Summarization                that faculty with a count of its exceptions and the split between the
+                              two outcomes.
+                               The listing closes with a report total row summarising all faculties.
+
+ Media to be Used             The report is displayed on screen in the report viewer where the user
+                              can page through it and zoom on specifics. The report can be exported
+                              to document formats like pdf and docx saved to a user specified folder.
+                              The report may be printed as an A4 landscape paper.
+
+ Frequency, Timing, and       The report is generated on demand and is not scheduled or produced
+ Delivery                     automatically. It is typically generated at the end of a term, semester
+                              or academic year. Usually ahead of a university application deadline.
+                              Generation is immediate and the report is produced from data already
+                              stored in the system.
+
+ Distribution                 The report is delivered only to authenticated users of the Future Path
+                              system, being the Career Advisors and System Administrators.
+                              Career Advisors uses the information for targeted group reviews and
+                              follow ups.
+                               If exported, it is written to a specific folder within the users computer
+                              in a user specified format in PDF or Excel format. The system does not
+                              email, upload or transmit the report anywhere outside system testing
+                              and internal use to improve the system and its reference data.
+
+ Privacy, Security, and       Only authenticated Career Advisors and System Administrators may
+ Integrity Constraints        generate this report. Learners have no access to it.
+
+
+                              The restriction is printed in the fact line on page 1 so that anyone
+                              holding a printed copy can see it is not for general circulation. The
+                              report is read only and generating it cannot alter any stored session or
+                              requirement. different.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                           40
+INF2011S
+
+
+                              The report captures its own reference data, and each reprint gives rise
+                              to new reference data which differs from the original, as sessions
+                              completed after the first generation will change the list.
+
+
+                              The disclaimer states plainly that Not Currently Eligible is not an
+                              admission decision, not a refusal and not a statement about any other
+                              qualification, that More Information Needed means only that the
+                              session was incomplete, and that Grade 11 marks are projected and
+                              will change.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                      41
+INF2011S
+
+
+6.3.2 Report Layout
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                  42
+INF2011S
+
+
+7.       INPUT-OUTPUT STANDARDS & CONTROLS
+Future Path's advisory outcomes are only as trustworthy as the data behind them. Because the
+system relies entirely on locally captured learner data and locally stored reference data, with no
+external source to cross-check against. This section identifies the controls that keep that data
+accurate, valid and appropriate at every point it is captured, processed or presented.
+
+
+     FORMALISED OUTPUTS:
+ Data captured                                          Format / entry convention
+
+ Learner grade                                          Selected from a fixed list (Grade 11 / Grade 12),
+                                                        never free text
+
+ School subjects                                        Selected from the stored Subject lookup list,
+                                                        not typed in freely, so a learner cannot enter a
+                                                        subject the school system does not recognise
+
+ Marks                                                  Numeric, whole or one-decimal percentage,
+                                                        entered per subject
+
+ Faculty / degree programme                             Selected from stored Faculty and Degree
+                                                        Programme lookup lists
+
+ Interest questionnaire                                 Fixed set of stored questions, answered on a
+                                                        structured response scale rather than free text,
+                                                        so responses can be scored consistently
+
+ Funding preference                                     Simple yes/no selection to view funding options
+
+ Learner identifying details (name, school,             Optional free-text fields, kept to the minimum
+ province, contact)                                     needed for an advisory session in line with the
+                                                        system's privacy stance
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                           43
+INF2011S
+
+
+    BUILT-IN VALIDATION
+    Validation is applied at two points for every rule below, once in the presentation layer (so the
+    learner or staff member gets immediate feedback) and again in the business logic layer (so a rule
+    can never be bypassed by a malformed or unexpected request from the interface layer):
+
+    •   Marks must fall between 0 and 100.
+
+    •   Required fields (e.g. grade, at least one subject and mark, a selected faculty or degree) may
+        not be left blank before the learner can proceed.
+
+    •   The same subject may not be captured twice within one advisory session, the business logic
+        layer checks existing Learner Subject entries for the current session before allowing a new
+        one to be added.
+
+    •   Dates (such as a funding option's closing date) must be valid calendar dates, entered
+        through a date picker control rather than free text.
+
+    •   A degree programme must be linked to a valid, existing faculty and enforced by the foreign
+        key between Degree Programme and Faculty, and by only offering existing faculties in the
+        degree-maintenance form.
+
+    •   Funding type may only be selected from the predefined set of values (e.g. Scholarship,
+        Bursary, Financial Aid, External Funding), never entered as free text.
+
+
+    INPUT INTEGRITY CONTROLS
+    •   Value Limit Controls: Numeric fields such as marks are constrained to their valid range (0–
+        100), checking the range of inputs for reasonableness.
+
+    •   Data Validation Controls: Dates, numeric fields and contact details are validated against
+        their expected format before being accepted; subjects, faculties, degrees, interest categories
+        and funding types are selected from stored reference data (lookup lists) rather than typed.
+        Together these ensure that specific data values entered are correct and that inconsistent or
+        invalid values cannot enter the database.
+    •   Completeness Controls: The interface will not allow a learner to proceed to the eligibility
+        check, or an administrator to save a new record, while mandatory fields are empty —
+        ensuring all required data has been entered.
+    •   Field Combination Controls: The business logic layer rejects a second entry for a subject
+        already captured in the same advisory session, ensuring data is correct based on the
+        relationship between the learner, subject and advisory session records.
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                       44
+INF2011S
+
+
+    •   Referential integrity: Foreign key relationships (Degree Programme → Faculty, Programme
+        Requirement → Degree Programme, Learner Subject → Subject, Funding Faculty / Funding
+        Programme → Funding Option, and so on) are enforced at the database level, so a record
+        can never reference a faculty, degree or subject that does not exist.
+    •   Confirmation messages: Actions that change stored data meaningfully (submitting an
+        advisory session, exporting a report, or an administrator deactivating a degree or funding
+        option) prompt the user to confirm before the action is finalised.
+
+
+    OUTPUT INTEGRITY CONTROLS
+
+    Output controls ensure that output arrives at the proper destination (for authorised eyes) and is
+    accurate, current and complete:
+
+    •   Accuracy: Every advisory outcome (Strong Match, Possible Match, Not Currently Eligible,
+        More Information Needed) is displayed together with the specific reason for that outcome
+        for example, which subject or mark requirement was not met, rather than the outcome label
+        alone.
+
+    •   Currency: Recommendation and reporting queries exclude degree programmes and funding
+        options that an administrator has marked inactive, so learners are never advised toward
+        outdated options.
+
+    •   Proper destination (authorised eyes): Reports are only accessible to the roles they are
+        intended for, the learner advisory summary is available to the learner who generated it,
+        while the aggregate eligibility report and the exception report are only available to Career
+        Advisors and System Administrators. This is enforced by both the menu options a role can
+        see and a check in the business logic layer before a report is generated.
+
+    •   Completeness and source labelling: A standard advisory disclaimer is shown on-screen and
+        included on every exported report, making clear that Future Path provides preliminary
+        guidance and not an official admission decision. Every exported report (the learner advisory
+        summary and the two advisor/administrator reports) displays the date it was generated.
+        Funding and programme requirement information is clearly marked as locally stored sample
+        data, with a note that details should be verified against the official source before a learner
+        relies on them, consistent with the principle that output labels should correctly identify the
+        source of the data.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                         45
+INF2011S
+
+
+8.       SECURITY AND ACCESS DESIGN
+
+     OUTPUT INTEGRITY CONTROLS
+Future Path recognizes three user roles: Learner, Career Advisor, and System Administrator.
+Consistent with the case study's privacy stance, a Learner can use the core advising functionality
+(profile, subjects, interests, eligibility check, funding view, export) without authenticating, since
+advisory sessions are designed to work with minimal or no identifying information. Career Advisors
+and System Administrators, on the hand must log in with a valid, active User Account record before
+any advisor- or administrator-specific functionality becomes available.
+
+
+     OUTPUT INTEGRITY CONTROLS
+Once a Career Advisor or Administrator logs in, the system reads the Role value on their User
+Account record and uses it to determine what they can do:
+
+     •   Career Advisors can view learner advisory sessions and outcomes and generate the two
+         advisor-facing reports (the Degree Interest and Eligibility Report and the Learners Not
+         Currently Eligible Exception Report). They cannot create, edit or deactivate faculties, degree
+         programmes, programme requirements, interest questionnaire content or funding options.
+
+     •   System Administrators have access to everything a Career Advisor has, plus the reference-
+         data maintenance functionality: adding, updating or deactivating faculties, degree
+         programmes, programme requirements, interest categories/questions and funding options,
+         as well as maintaining user accounts.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                        46
+INF2011S
+
+
+ Capability                      Learner                Career Advisor   System Administrator
+
+ Complete an advisory            Yes                    _                _
+ session (subjects,
+ interests, eligibility check,
+ funding view, export)
+
+ View advisory                   _                      Yes              Yes
+ sessions/outcomes across
+ learners
+
+ Generate Degree Interest        _                      Yes              Yes
+ and Eligibility Report
+
+
+ Generate Learners Not           _                      Yes              Yes
+ Currently Eligible
+ exception report
+
+ Maintain faculties,             _                      No               Yes
+ degrees and programme
+ requirements
+
+ Maintain funding options        _                      No               Yes
+
+
+
+ Maintain interest               _                      No               Yes
+ questionnaire content
+
+
+ Maintain user accounts          _                      No               Yes
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                            47
+INF2011S
+
+
+    HOW THE INTERFACE AND DATA DESIGN SUPPORT THIS
+
+    •   Interface layer: The main menu presented after launch differs by session type: an
+        unauthenticated Learner sees only the advising workflow; a logged-in Career Advisor sees
+        the advising-activity and reporting views; a logged-in Administrator additionally sees the
+        reference-data maintenance forms. Administrator-only forms are never rendered or enabled
+        for an Advisor session.
+
+    •   Business logic layer: Access control is not left to the interface alone. Each method that
+        performs a reference-data change (for example, saving a programme requirement or
+        deactivating a funding option) independently checks that the current session's role is
+        Administrator before executing, so the restriction holds even if a request reaches the
+        business logic layer through an unexpected path.
+    •   Data layer: the User Account entity stores each staff user's credentials, role and active
+        status, and is the single source of truth the login process checks against. Foreign key
+        relationships tie reference-data tables (Programme Requirement, Funding Option, Interest
+        Question, and so on) to the entities an Administrator manages, keeping maintenance actions
+        and the data, they affect consistent with the role model above.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                                                                     48
+INF2011S
+
+
+
+
+9.       IMPLEMENTATION PLAN.
+This plan shows how we will move from the approved design to the completed Future Path system. Our implementation will follow a staged approach, with
+some activities taking place at the same time where possible. This allows different team members to work on separate parts of the system without waiting
+unnecessarily, while still making sure that important dependencies are completed in the correct order. The database structure, domain classes, Learner screens
+and core recommendation logic will be developed early, since these provide the foundation for the rest of the system. The eligibility and recommendation logic
+will be developed and tested using the domain classes and test data while the Data Layer is still being completed, and will then be connected to the stored
+database data during integration. The Data Layer and controller classes will also be finished by this point, ready for the three tiers to be connected. Reports will
+be implemented once the main system is working together, and testing will take place throughout development as well as through full system testing before
+submission.
+
+ Stage              Development           What will be done                              Responsibility Start         End Date     Key Milestone
+                   Activity                                                                              Date
+
+ 1                 Create the             Create the database tables, primary and        Zubair          22 Sep       24 Sep       Database created and ready
+                   database               foreign keys, and relationships shown in our   Rayned          2026         2026         for data
+                                          final ERD.
+
+ 2                 Build the              Create the entity classes shown in our         Nabeel Braaf    22 Sep       24 Sep       Entity/domain classes
+                   entity/domain          Design Class Diagram, including classes for                    2026         2026         complete
+                   classes                learners, programmes, programme
+                                          requirements, advisory sessions,
+                                          recommendation results and user accounts.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                            49
+INF2011S
+
+
+
+ 3                 Build the Learner      Build the Learner screen layouts and             Kealon         22 Sep   29 Sep   Learner screen layouts and
+                   screen layouts and controls for the Learner Profile, Subjects           Vassen         2026     2026     controls complete
+                   controls               and Marks, Interest Questionnaire, Faculty
+                                          and Programme Selection, Eligibility Results,
+                                          Alternative Programmes, Funding Options
+                                          and Advisory Summary from our final UI
+                                          designs.
+
+ 4                 Add sample and         Populate the database with the learner,          Zubair         25 Sep   27 Sep   Test database populated
+                   test data to the       subject, programme, requirement, interest,       Rayned
+                                                                                                          2026     2026
+                   database               funding and advisory-session test data from
+                                                                                           &
+                                          Part B,together with additional realistic test
+                                                                                           Nabeel Braaf
+                                          data.
+
+ 5                 Implement              Implement the rules for checking subjects        Oyama          25 Sep   2 Oct    Eligibility and
+                   eligibility and        and marks, calculating interest alignment,       Nongcula       2026     2026     recommendation logic
+                   recommendation         identifying gaps, producing advisory                                              working
+                   logic                  outcomes and ranking alternative
+                                          programmes.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                            50
+INF2011S
+
+
+
+ 6                 Build the Data         Create the data-access classes used to         Zubair         28 Sep   2 Oct   Data Layer complete and
+                   Layer classes          retrieve, save and update information in the   Rayned         2026     2026    working
+                                          local database.
+                                                                                         &
+
+                                                                                         Nabeel Braaf
+
+ 7                 Build the Career       Build the Staff login, Career Advisor          Kealon         30 Sep   5 Oct   Staff screen layouts and
+                   Advisor and            functions, Administrator screens for           Vassen         2026     2026    controls complete
+                   Administrator          managing faculties, degree programmes,
+                   screen layouts and programme requirements, funding
+                   controls               information, interest questions and user
+                                          accounts, and the report generation screen
+                                          from our final UI designs
+
+ 8                 Build the              Create the controller classes that receive     Oyama          3 Oct    5 Oct   Controller classes complete
+                   controller classes     requests from the screens, manage the          Nongcula       2026     2026
+                                          required processing, control staff access
+                                          and communicate with the Data Layer to
+                                          retrieve or save information.
+
+ 9                 Integrate the          Connect the Presentation Layer, Business       Whole team     6 Oct    9 Oct   Three-tier integration
+                   three tiers            Logic Layer and Data Layer so that the                        2026     2026    complete
+                                          screens, controllers, rules and database
+                                          work together correctly.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                          51
+INF2011S
+
+
+
+ 10                Build and connect      Create and connect the Learner Advisory         Kealon       10 Oct   11 Oct   Three required reports
+                   the reports            Summary Report, Degree Interest and             Vassen       2026     2026     complete and working
+                                          Eligibility Report and Learners Not Currently
+                                                                                          &
+                                          Eligible Exception Report using the
+                                                                                          Zubair
+                                          integrated system data.
+                                                                                          Rayned
+
+ Ongoing           Test during            Test completed components as they are           Whole team   25 Sep   11 Oct   Components tested
+                   development            built, record problems, fix them and retest                  2026     2026     throughout development
+ throughout
+                                          affected functionality.
+ development
+
+ 11                Full system testing    Test the complete system using valid,           Whole team   12 Oct   14 Oct   Full system testing
+                                          invalid, boundary and exception scenarios,                   2026     2026     completed
+                                          including the required Part B scenarios.
+
+ 12                Final fixes and        Fix any remaining problems found during         Whole team   15 Oct   16 Oct   Final system ready for
+                   submission checks      full system testing, retest the affected                     2026     2026     submission
+                                          functionality, and complete the final
+                                          submission checks.
+
+ 13                Final submission       Keep this day available for any unexpected      Whole team   16 Oct   16 Oct   Final system submitted
+                                          problems, complete the final checks and                      2026     2026
+                                          submit the finished system.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                         52
+INF2011S
+
+
+
+ 14                Prepare for the        Rehearse the demonstration and prepare        Whole team   Week of   Week of   Final demonstration ready
+                   final                  the required test cases and sample data for                19 Oct    19 Oct
+                   demonstration          the markers.                                               2026      2026
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                       53
+INF2011S
+
+
+
+
+10.       TEST PLAN
+Testing will check that the Future Path system works as required, saves the correct data and handles
+invalid input correctly. We will test during development and again after the full system has been
+connected
+
+
+      TEST ENVIRONMENT
+      Future Path will be developed and tested using:
+
+      •   Windows laptops/computers
+      •   Microsoft Visual Studio as the development environment
+      •   C#.NET as the programming language/framework
+      •   Windows Forms for the user interface
+      •   SQL Server Express LocalDB as the local relational database used to store the system data
+      •   A three-tier architecture consisting of the Presentation Layer, Business Logic Layer and Data
+          Layer
+      •   A standalone offline desktop application
+
+
+      TEST ITEMS
+The main areas that will be tested are shown below.
+
+ Item to Test                Test Description             Planned Date            Responsibility
+
+ Learner profile creation    Check that learner           During development      Whole team
+                             details can be entered
+                             and saved correctly.
+
+ Subject and mark            Check that subjects          During development      Whole team
+ capture                     and marks can be
+                             entered and saved
+                             correctly.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       54
+INF2011S
+
+
+ Input Validation            Check that invalid or        During development   Whole team
+                             missing input is
+                             handled correctly.
+
+ Interest questionnaire      Check that                   During development   Whole team
+                             questionnaire answers
+                             are processed
+                             correctly.
+
+ Faculty and degree          Check that a learner         During development   Whole team
+ selection                   can select a valid
+                             faculty and degree
+                             programme.
+
+ Degree eligibility          Check that the correct       During development   Whole team
+                             eligibility result is
+                             produced.
+
+ Advisory outcomes           Check that the correct       During development   Whole team
+                             advisory outcome and
+                             reason are shown.
+
+ Alternative                 Check that suitable          During development   Whole team
+ recommendations             alternative degrees are
+                             shown when required.
+
+ Funding information         Check that the correct       During development   Whole team
+                             funding information is
+                             displayed.
+
+ Advisory summary and        Check that the advisory      During development   Whole team
+ export report               summary is generated
+                             and can be exported.
+
+ Career Advisor              Check that Career            During development   Whole team
+ functionality               Advisor functions work
+                             correctly.
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       55
+INF2011S
+
+
+ Administrator               Check that                   During development   Whole team
+ functionality               Administrator
+                             functions work
+                             correctly.
+
+ Staff login and role-       Check login and that         During development   Whole team
+ based access                users can only access
+                             functions allowed for
+                             their role.
+
+ Required reports            Check that all three         During development   Whole team
+                             required reports are
+                             generated correctly.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       56
+INF2011S
+
+
+    TEST APPROACHES
+Testing will be done during development and again after the main parts of the system have been
+connected. Each test will compare the actual result produced by the system with the expected result.
+
+ Types of tests                                           How it will be tested
+
+ Unit testing                                             Test one method, class or small part of the
+                                                          system by itself. Examples include a mark range
+                                                          check, an interest score calculation or a degree
+                                                          requirement check.
+
+ Integration testing                                      Test connected parts of the system together. For
+                                                          example, a Windows Form sends data to the
+                                                          Business Logic Layer, which then uses the Data
+                                                          Layer to save or retrieve data from the database.
+
+ System testing                                           Test the complete Future Path system from start
+                                                          to finish, including learner functions, Career
+                                                          Advisor and Administrator functions, reports and
+                                                          the local database.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       57
+INF2011S
+
+
+The following types of test scenarios will also be used:
+
+ Test scenarios                                         How it will be tested
+
+ Valid tests                                            Use correct data that should be accepted. For
+                                                        example, entering a valid mark such as 75.
+
+
+ Invalid tests                                          Use data that should be rejected. For example,
+                                                        entering letters for a mark or entering the same
+                                                        subject twice.
+
+ Boundary tests                                         Test values at the edge of what is allowed. For
+                                                        example, marks of -1, 0, 100 and 101 can be
+                                                        tested. Marks of 0 and 100 should be accepted,
+                                                        while -1 and 101 should be rejected.
+
+ Exception tests                                        Test unusual or incomplete situations without
+                                                        allowing the system to crash. For example, if
+                                                        information required to complete an eligibility
+                                                        check is missing, the system should give a More
+                                                        Information Needed outcome where
+                                                        appropriate.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       58
+INF2011S
+
+
+The supplied Part B data will be used as an important check for the eligibility and recommendation logic.
+The actual outcome produced by the system will be compared with the expected outcome provided in
+the case study.
+
+ Learner                               Selected programme              Expected outcome
+
+ Gadija Jacobs                         BCom Information Systems        Strong Match
+
+ Aadiel-Raboo Magwa                    BSc Computer Science            Not currently eligible
+
+ Labeeqah Rademeyer                    BSc Biological Sciences         Possible Match – improve
+                                                                       Mathematics
+
+ Siyabonga Dickson                     BSc Engineering (Mechanical     Strong Match
+                                       Engineering)
+
+ Derek Vin Diesel                      Bachelor of Health Sciences     Not currently eligible –
+                                                                       Mathematics and Physical
+                                                                       Sciences required
+
+
+
+
+When a test fails, the problem will be written down, fixed and tested again. Related tests that passed
+before will also be repeated where needed to make sure that a fix has not caused a problem somewhere
+else in the system
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       59
+INF2011S
+
+
+
+
+     PROBLEM TRACKING (TEST CASES)
+The following 5 test cases will be used:
+
+ID     Test scenario           Preconditions         Steps/User Actions          Test data               Expected System Behavior or State    Actual
+                                                                                                                                              Result/
+
+                                                                                                                                              Comments
+
+TC01   Create learner          Future Path is        1. Create a new learner     Gadija Jacobs,          The learner profile, subjects and    To be
+       profile and capture     open and the          profile.                                            marks are accepted and saved         completed
+                                                                                 Grade 12.
+       subjects and marks      learner profile                                                           successfully. All marks are within   during
+                                                     2. Enter the learner's
+                                                                                 English 72%,
+                               screen is                                                                 the allowed 0-100 range.             testing.
+                                                     grade.
+                                                                                 Mathematics 70%,
+                               available
+                                                      3. Capture the learner's   Accounting 74%,
+                                                     subjects and marks.         Business Studies 79%
+
+                                                     4. Save the information.    Economics 70%,
+
+                                                                                 Life Orientation 80%.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                           60
+INF2011S
+
+
+TC02   Check eligibility for   The learner           1. Select the learner. 2.      Gadija Jacobs - BCom     The system displays Strong Match       To be
+       a selected degree       profile, subjects     Select BCom Information        Information Systems      and gives a reason for the advisory    completed
+                               and marks have        Systems.                                                outcome.                               during
+                               already been                                                                                                         testing.
+                                                     3. Run the eligibility check
+                               captured and the
+                               programme
+                               requirements
+                               exist in the
+                               database.
+
+TC03   Generate                The learner’s         1. Select the learner. 2.      Aadiel-Raboo Magwa,      The system displays Not Currently      To be
+       alternative             subjects, marks       Select BSc Computer            Grade 12. English        Eligible, explains which requirement   completed
+       recommendations         and interest          Science. 3. Run the            65%, Mathematical        is not met, and displays suitable      during
+                               information have      eligibility check.             Literacy 78%, Business   alternative programmes based on        testing.
+                               been captured,                                       Studies 71%, History     the learner's subjects, marks and
+                                                     4. View alternative
+                               and alternative                                      69%, Tourism 75%,        interests.
+                                                     recommendations.
+                               degree                                               Life Orientation 82%.
+                               programmes and
+                               requirements
+                               exist in the
+                               database.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                               61
+INF2011S
+
+
+TC04   View funding            Funding               1. Select a learner and      Gadija Jacobs - BCom   The system displays active funding        To be
+       information             information has       programme.                   Information Systems    options linked to Commerce or the         completed
+                               been stored in                                                            selected programme, including the         during
+                                                     2. Choose to view funding
+                               the database and                                                          relevant funding information stored       testing.
+                                                     information.
+                               linked to the                                                             in the database.
+                               relevant faculty
+                               or programme.
+
+TC05   Export learner          The learner has       1. Open the learner's        Labeeqah Rademeyer     The advisory summary is                   To be
+       advisory summary        completed an          advisory summary.            –                      successfully generated and                completed
+                               advisory session                                                          exported. It contains the learner         during
+                                                      2. Select the export        BSc Biological
+                               and an advisory                                                           information, subjects and marks,          testing.
+                                                     option.                      Sciences, expected
+                               outcome has                                                               selected programme, interest
+                                                                                  Possible Match with
+                                                     3. Save/export the report.
+                               been generated.                                                           result, eligibility outcome, identified
+                                                                                  Mathematics
+                                                                                                         gaps, alternatives where relevant,
+                                                                                  identified as a gap.
+                                                                                                         funding information, date
+                                                                                                         generated and advisory disclaimer.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]                                           62
+INF2011S
+
+
+
+
+11.        RELATIONSHIP BETWEEN DESIGN AND DEVELOPMENT
+The Systems Design Specification provides the detailed design that was decided for the system Future
+Path. The development of the system will follow the design choices that were done in the different
+sections of this document. The developed system will correspond with the designs for the interfaces,
+classes, database, sequence diagrams, reports, validation and control, and the access control that was
+specified in this specification.
+
+
+The Interface Design Specifications discussed in Section 2 illustrate the screens that the Learner, Career
+Advisor and Administrator will interact with. This outlines the screens from the Homepage to Learner
+Profile Capture, Subjects and Marks Capture, Interest Questionnaire, Faculty & Department Selection,
+Eligibility Results, Alternative Programmes, Funding Options, Advisory Summary, the staff-facing
+Sessions Dashboard and Reference Data Management screens. This section discusses the links between
+these screens as well as the screen specifications such as the button positioning, colour usage, and error
+messages. The class design is provided in Section 4. The section discusses the boundary classes behind
+each screen, the controller classes responsible for implementing the business logic, and the entity and
+data access classes responsible for storing and accessing the data. This section also describes the
+Recommendation Engine that integrates the scores from the four categories into one result and its two
+result classes of Match Result and Advisory Outcome.
+
+
+The database structure is discussed in Section 5. This discusses the entities for storing the data of the
+Learner, Degree Programme, Programme Requirement, Advisory Session and Recommendation Result,
+as well as the funding and interest entities. The database is normalised in order to avoid any kind of
+repetition and use of foreign keys to maintain relations such as the relation between the Degree
+Programme and the Programme Requirements and the relation between the learner and the subjects
+being captured. The sequence diagrams are discussed in Section 3. The sequence diagrams demonstrate
+the interaction between the classes discussed in Section 4 as they perform the two processes of
+assessing whether the learner qualifies for their chosen programme and generating an advisory
+outcome and generating a ranked list of alternative degree recommendations when the learner does
+not achieve a strong match.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       63
+INF2011S
+
+
+Section 6 provides information about the report design, this includes the three types of reports that will
+be produced by the system: the Learner Advisory Summary Report, Degree Interest and Eligibility Report
+and the Learners Not Currently Eligible Report.
+
+
+Validation and control are defined in Section 7. This includes ensuring that the captured data is validated
+and controlled, such as the use of marks within a particular range, mandatory data fields and non-
+duplicate subjects, and ensuring that the output is also accurate and sensible. Access control design is
+explained in Section 8. It defines the authentication process where the Learner, Career Advisor, and
+Administrator can access the functionality, and it allows the Learner the ability to finish an entire
+advisory session without having to log in while the Career Advisor and Administrator must log in using a
+User Account.
+
+
+
+
+Systems Specification for [Future Path Student Advising System]
+                                                       64
+

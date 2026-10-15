@@ -57,8 +57,62 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationLayer\User.cs" />
-    <Compile Include="DatabaseLayer\AdminDBController.cs" />
+    <Compile Include="ApplicationLayer\AdvisoryOutcome.cs" />
+    <Compile Include="ApplicationLayer\AdvisorySession.cs" />
+    <Compile Include="ApplicationLayer\DailySummary.cs" />
+    <Compile Include="ApplicationLayer\DegreeInterestMapping.cs" />
+    <Compile Include="ApplicationLayer\DegreeProgramme.cs" />
+    <Compile Include="ApplicationLayer\EligibilityController.cs" />
+    <Compile Include="ApplicationLayer\ExportReport.cs" />
+    <Compile Include="ApplicationLayer\Faculty.cs" />
+    <Compile Include="ApplicationLayer\FundingController.cs" />
+    <Compile Include="ApplicationLayer\FundingFaculty.cs" />
+    <Compile Include="ApplicationLayer\FundingOption.cs" />
+    <Compile Include="ApplicationLayer\FundingProgramme.cs" />
+    <Compile Include="ApplicationLayer\GradeLevel.cs" />
+    <Compile Include="ApplicationLayer\InterestCategory.cs" />
+    <Compile Include="ApplicationLayer\InterestController.cs" />
+    <Compile Include="ApplicationLayer\InterestQuestion.cs" />
+    <Compile Include="ApplicationLayer\Learner.cs" />
+    <Compile Include="ApplicationLayer\LearnerController.cs" />
+    <Compile Include="ApplicationLayer\LearnerInterestResponse.cs" />
+    <Compile Include="ApplicationLayer\LearnerSubject.cs" />
+    <Compile Include="ApplicationLayer\LoginController.cs" />
+    <Compile Include="ApplicationLayer\MatchResult.cs" />
+    <Compile Include="ApplicationLayer\ProgrammeAlignment.cs" />
+    <Compile Include="ApplicationLayer\ProgrammeRequirement.cs" />
+    <Compile Include="ApplicationLayer\RecommendationController.cs" />
+    <Compile Include="ApplicationLayer\RecommendationEngine.cs" />
+    <Compile Include="ApplicationLayer\RecommendationResult.cs" />
+    <Compile Include="ApplicationLayer\ReferenceDataController.cs" />
+    <Compile Include="ApplicationLayer\ReportController.cs" />
+    <Compile Include="ApplicationLayer\ReportController.LearnerSummary.cs">
+      <DependentUpon>ReportController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\ReportController.PeriodReports.cs">
+      <DependentUpon>ReportController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\RequirementCheck.cs" />
+    <Compile Include="ApplicationLayer\ReportScope.cs" />
+    <Compile Include="ApplicationLayer\SessionSearchController.cs" />
+    <Compile Include="ApplicationLayer\Subject.cs" />
+    <Compile Include="ApplicationLayer\SystemSettings.cs" />
+    <Compile Include="ApplicationLayer\UserAccount.cs" />
+    <Compile Include="ApplicationLayer\UserAccountController.cs" />
+    <Compile Include="DatabaseLayer\AdvisorySessionRepository.cs" />
+    <Compile Include="DatabaseLayer\DB.cs" />
+    <Compile Include="DatabaseLayer\DegreeProgrammeRepository.cs" />
+    <Compile Include="DatabaseLayer\ExportReportRepository.cs" />
+    <Compile Include="DatabaseLayer\FacultyRepository.cs" />
+    <Compile Include="DatabaseLayer\FundingRepository.cs" />
+    <Compile Include="DatabaseLayer\GradeLevelRepository.cs" />
+    <Compile Include="DatabaseLayer\InterestRepository.cs" />
+    <Compile Include="DatabaseLayer\LearnerRepository.cs" />
+    <Compile Include="DatabaseLayer\ReportRepository.cs" />
+    <Compile Include="DatabaseLayer\SessionSearchRepository.cs" />
+    <Compile Include="DatabaseLayer\SubjectRepository.cs" />
+    <Compile Include="DatabaseLayer\SystemParameterRepository.cs" />
+    <Compile Include="DatabaseLayer\UserAccountRepository.cs" />
     <Compile Include="PresentationLayer\MainForm.Alternatives.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Form</SubType>
@@ -245,5 +299,18 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Database\BuildDatabase.ps1" />
+    <None Include="Database\CreateSchema.sql" />
+    <None Include="Database\GenerateSeedResults.ps1" />
+    <None Include="Database\SeedData.sql" />
+    <Content Include="FuturePath.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FuturePath_log.ldf">
+      <DependentUpon>FuturePath.mdf</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

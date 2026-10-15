@@ -1,0 +1,133 @@
+digraph FuturePathFlow {
+    rankdir=LR;
+    bgcolor="white";
+    fontname="Arial";
+    splines=line;
+    nodesep=0.7;
+    ranksep=0.9;
+    concentrate=false;
+    newrank=true;
+    ordering=out;
+
+    node [shape=box, style=solid, color="#000000", fillcolor="#ffffff", fontname="Arial", fontsize=15, width=1.5, height=0.8, fixedsize=false];
+    edge [fontname="Arial", fontsize=12, color="#000000", arrowsize=0.7, penwidth=1.0];
+
+    Home [label="Future Path\nHomepage\n\nUI 1"];
+
+    /* ============ LEARNER lane ============ */
+    subgraph cluster_learner {
+        label="LEARNER  (no login required)";
+        fontsize=17; fontname="Arial"; labeljust=l; labelloc=t;
+        style=solid; color="#000000"; margin=28;
+
+        Profile     [label="Learner Profile\nCapture\n\nUI 2"];
+        ProfileErr  [label="Invalid Profile\nData\n\nUI 2.1 a"];
+        Marks       [label="Marks & Subjects\nCapture\n\nUI 3"];
+        MarksErr    [label="Invalid / Duplicate\nSubjects Entered\n\nUI 3.1 a"];
+        Interests   [label="Interest\nQuestionnaire\n\nUI 4"];
+        FacDept     [label="Faculty & Department\nSelection\n\nUI 5"];
+        Eligibility [label="Eligibility Results\n\nUI 6"];
+        AltPrograms [label="Alternate Programme\nRecommendations\n\nUI 6.1 a"];
+        FundingOpts [label="Funding Options\n\nUI 6.2 b"];
+        Summary     [label="Advisory Summary\n\nUI 7"];
+
+        Profile -> ProfileErr [dir=both, label="[Invalid data entered]\n'Re-attempt Correction'"];
+        Profile -> Marks [label="'Next' button"];
+        Marks -> MarksErr [dir=both, label="[Invalid / duplicate subject]\n'Re-attempt' button"];
+        Marks -> Interests [label="'Submit' button"];
+        Interests -> FacDept [label="'Submit' button"];
+        FacDept -> Eligibility [label="'Check Eligibility'\nbutton"];
+        Eligibility -> AltPrograms [label="'View Alternative\nOptions' button"];
+        AltPrograms -> Summary [label="'Print' button"];
+        Eligibility -> FundingOpts [dir=both, label="'View Funding\nOptions' button\n'Back' button"];
+        Eligibility -> Summary [label="'Print' button"];
+
+        { rank=same; Profile; ProfileErr; }
+        { rank=same; Marks; MarksErr; }
+        { rank=same; Eligibility; AltPrograms; FundingOpts; }
+    }
+    Home -> Profile [label="'Start Advisory\nSession' button"];
+
+    /* ============ STAFF LOGIN (shared gate) ============ */
+    subgraph cluster_stafflogin {
+        label="STAFF LOGIN";
+        fontsize=17; fontname="Arial"; labeljust=l; labelloc=t;
+        style=solid; color="#000000"; margin=28;
+
+        Login    [label="Staff Login\n\nUI 8"];
+        LoginErr [label="Invalid Login\n\nUI 8.1 a"];
+        Login -> LoginErr [dir=both, label="[Invalid credentials]\n'Retry' button"];
+        { rank=same; Login; LoginErr; }
+    }
+    Home -> Login [label="'Staff Login' icon"];
+
+    /* ============ CAREER ADVISOR lane ============ */
+    subgraph cluster_advisor {
+        label="CAREER ADVISOR  (login required)";
+        fontsize=17; fontname="Arial"; labeljust=l; labelloc=t;
+        style=solid; color="#000000"; margin=28;
+
+        AdvisorDash        [label="Advisor Dashboard\n\nUI 9"];
+        SessionsDash       [label="Sessions Dashboard\n\nUI 10"];
+        LearnerProfileDash [label="Learner Profile\nDashboard\n\nUI 10.1 a"];
+        AdvisorySessionInfo [label="Advisory Session\nInformation\n\nUI 10.2 b"];
+        AdvisoryReportsDash [label="Advisory Reports\nDashboard\n\nUI 10.3 c"];
+
+        AdvisorDash -> SessionsDash [label="'Search Sessions'\nbutton"];
+        SessionsDash -> LearnerProfileDash [label="'View Learners'\nbutton"];
+        SessionsDash -> AdvisorySessionInfo [label="'View Session\nInfo' button"];
+        SessionsDash -> AdvisoryReportsDash [label="'View Reports'\nbutton"];
+
+        { rank=same; LearnerProfileDash; AdvisorySessionInfo; AdvisoryReportsDash; }
+    }
+    Login -> AdvisorDash [label="'Login' button\n[Advisor credentials verified]"];
+
+    /* ============ ADMINISTRATOR lane ============ */
+    subgraph cluster_admin {
+        label="ADMINISTRATOR  (login required)";
+        fontsize=17; fontname="Arial"; labeljust=l; labelloc=t;
+        style=solid; color="#000000"; margin=28;
+
+        AdminDash      [label="Administrator\nDashboard\n\nUI 12"];
+        RefDataDash    [label="Reference Data\nDashboard\n\nUI 13"];
+        UnivInfo       [label="University\nInformation\n\nUI 13.1"];
+        DegreeReq      [label="Degree Requirements\n\nUI 13.2"];
+        FundingInfo    [label="Funding Information\n\nUI 13.3"];
+        InterestCat    [label="Interest Categories\n\nUI 13.4"];
+        QuestionnaireQ [label="Questionnaire\nQuestions\n\nUI 13.5"];
+
+        AdminDash -> RefDataDash [label="'Maintain Reference\nData' button"];
+        RefDataDash -> UnivInfo [label="Tab 1"];
+        RefDataDash -> DegreeReq [label="Tab 2"];
+        RefDataDash -> FundingInfo [label="Tab 3"];
+        RefDataDash -> InterestCat [label="Tab 4"];
+        RefDataDash -> QuestionnaireQ [label="Tab 5"];
+
+        { rank=same; UnivInfo; DegreeReq; FundingInfo; InterestCat; QuestionnaireQ; }
+    }
+    Login -> AdminDash [label="'Login' button\n[Administrator credentials verified]"];
+
+    /* ============ REPORTS lane (shared by Advisor & Administrator) ============ */
+    subgraph cluster_reports {
+        label="REPORTS  (Advisor & Administrator)";
+        fontsize=17; fontname="Arial"; labeljust=l; labelloc=t;
+        style=solid; color="#000000"; margin=28;
+
+        ReportsGen        [label="Reports Selection\n& Generation\n\nUI 11"];
+        SummaryReport     [label="Learners Advisory\nSummary Report\n\nUI 11.1 a"];
+        EligibilityReport [label="Degree Interest &\nEligibility Report\n\nUI 11.2 b"];
+        UneligibleReport  [label="Learners not\nEligible Report\n\nUI 11.3 c"];
+
+        ReportsGen -> SummaryReport [label="'View Summary\nReport' button"];
+        ReportsGen -> EligibilityReport [label="'View Interest\nReport' button"];
+        ReportsGen -> UneligibleReport [label="'View Uneligible\nLearner Report' button"];
+
+        { rank=same; SummaryReport; EligibilityReport; UneligibleReport; }
+    }
+    AdvisorDash -> ReportsGen [label="'Generate Reports'\nbutton"];
+    AdminDash -> ReportsGen [label="'Generate Reports'\nbutton"];
+    AdvisoryReportsDash -> SummaryReport [label="'View Summary\nReport' button"];
+
+    { rank=same; AdvisorDash; AdminDash; }
+    { rank=same; SessionsDash; RefDataDash; ReportsGen; }
+}

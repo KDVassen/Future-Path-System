@@ -1,4 +1,4 @@
-# Future Path — design decisions
+﻿# Future Path — design decisions
 
 _Updated 14 October 2026._
 
@@ -31,6 +31,22 @@ team can defend each choice at the demo. Code comments cite these entries as "de
 | D11 | **Role-based security in the UI and the BLL.** The staff console removes the tabs a role may not reach (`TabPages.Remove`): Career Advisors get the Advisor dashboard, Sessions and Reports; Administrators also get Reference data and the Administrator dashboard. Every BLL method that changes data checks the role again. | Section 8. Administrator-only screens are never shown to a Career Advisor. |
 | D12 | **A missing faculty on UI 5 is shown in red**, like every other required field (`CheckField`). This **deliberately departs from spec 2.3.5**, which says no value on UI 5 can be invalid and shows the message in amber. | One rule for every required field is easier to use and to explain than a special amber case. |
 | D13 | **Future Path is DPI-aware** (`app.manifest`, `dpiAware = true`). | Without it, on a 125% display Windows capped the window at its unscaled height, so the bottom of every tab was hidden. With it, both forms keep their designed size whatever DPI Visual Studio saved them at. Per-monitor awareness was tried and dropped, because the staff grids left stale pixels. |
+
+### Business logic, data layer and database (application layer, October 2026)
+
+How the classes are built is described in `application-layer.md`.
+
+| # | Decision | Why |
+|---|---|---|
+| D14 | **Provisional scoring values** (SystemParameter): WEIGHT_SUBJECT 0.30, WEIGHT_MARK 0.30, WEIGHT_INTEREST 0.30, WEIGHT_FACULTY 0.10, THRESHOLD_STRONG 75, INTEREST_STRONG_MIN 60, MARK_TOLERANCE 2. The outcome is **rules first**: a missing Required subject → Not Currently Eligible; a Required mark more than 2 points short → Not Currently Eligible; within 2 points, or an average below the programme minimum → Possible Match; all met with Overall ≥ 75 and Interest ≥ 60 → Strong Match, otherwise Possible Match. **Oyama and the team must confirm or change these values**; every change re-runs `tests/PartB-Regression.ps1`. | The spec defines the four components and outcomes but no numbers (§4 below). These values reproduce all five Part B outcomes. Labeeqah (2 points short) is Possible, and the designed FP-LER example (46% against 50%) is Not Currently Eligible. |
+| D15 | **Outcome codes** stored in `RecommendationResult.OutcomeCode` are STRONG / POSSIBLE / NCE / MOREINFO. The words shown to people ("Not Currently Eligible", …) come from `AdvisoryOutcome.GetCategory`. | OutcomeCode is VARCHAR(10), so the full words don't fit. One list in the BLL replaces the different spellings the forms were guessing at. |
+| D16 | **Provinces are SystemParameter rows** PROVINCE_1 … PROVINCE_9. | UI 2 and UI 10.1a need a value-bound province list. There is no Province table in the ERD, and the rubric penalises hard-coded lookups. |
+| D17 | **The overall average includes every captured subject**, Life Orientation too. No subject name is hard-coded in the rules. | It's the simplest rule to explain, and it changes no Part B outcome. |
+| D18 | **The Data Layer follows the Waitering System `DB` pattern with five changes**: (1) no database work and no `MessageBox` in constructors or repositories; errors are thrown and the forms show a friendly message; (2) `FillDataSet` takes parameters and clears the table first; (3) replacing a set of child rows (a session's subjects or answers, funding links, re-run results) uses direct commands in one transaction; (4) no delete, only deactivation; (5) `DataMaintenance` / `FinalizeChanges` are private, so a form can't skip the BLL role check. | The Waitering version shows technical text, duplicates rows on refill, and can't run in a transaction. Robustness is 20% of the Part 2 mark. |
+| D19 | **Classes added to the class diagram** (an extension of Section 4, see §3): `LoginController` is the "Authorization & access" package (Authenticate, CheckStaff, CheckAdministrator). `RequirementCheck` is the one place that decides whether a requirement is met; UI 6, FP-LSR, FP-DIE and FP-LER all use it, so no gap rule lives in SQL. `SystemSettings` is the parameter helper. One controller per screen group follows the `XController` / `XRepository` pattern. The empty `User.cs` and `AdminDBController.cs` placeholders are replaced by `UserAccount` and the repositories. | The class diagram covers the two sequence diagrams only. Section 8, the reports and the maintenance screens need these. |
+| D20 | **Checking again replaces the earlier result.** Saving the selected result replaces the session's previous selected row. Generating alternatives replaces the earlier alternatives. Saving subjects or answers again clears the session's results. | `UNIQUE(SessionID, ProgrammeID)` would otherwise make a second "Check eligibility" fail, and a stored result must always match the marks it was made from. |
+| D22 | **The BLL and Data Layer are written at taught-course level** (branch `application-data-simplification`):<br>- 0 means "not given" instead of nullable parameters;<br>- small result classes (`DailySummary`, `ReportScope`, `ProgrammeAlignment`) instead of `out` parameters;<br>- plain `if` / `else` instead of `??` and `? :`;<br>- SQL WHERE clauses built with `if` statements, always parameterised;<br>- no LIKE-wildcard escaping;<br>- one `ReportTally` helper class instead of three;<br>- passwords hashed with a random salt plus SHA-256 (`salt:hash`) instead of PBKDF2.<br>SQL parameters remain the defence against injection, and role checks and salted hashes remain as Section 8 requires. | Every team member must explain their code line by line at the individual walkthrough. The course taught parameterised queries but not key-stretching or wildcard escaping. Behaviour is unchanged: all 1,091 checks still pass. |
+| D21 | **The database ships as `FuturePath/FuturePath.mdf`**, attached through `|DataDirectory|` like the Waitering System's `EmployeeDatabase.mdf`. `Database/CreateSchema.sql`, `SeedData.sql` and `BuildDatabase.ps1` rebuild it. The `.mdf` is built with SQL Server 2025 LocalDB; on an older LocalDB, run `BuildDatabase.ps1`. | It works straight after a clone, and the scripts keep it explainable and rebuildable. |
 
 ## 2. Clashes resolved in favour of the spec
 
@@ -84,9 +100,10 @@ team can defend each choice at the demo. Code comments cite these entries as "de
 
 ## 4. Still open — ask before building
 
-- **Scoring weights and outcome thresholds** (owner: Oyama, Stage 5). The spec defines the four
-  components and the four outcomes but gives no numbers. They go in `SystemParameter`
-  (`WEIGHT_SUBJECT`, `WEIGHT_MARK`, `WEIGHT_INTEREST`, `WEIGHT_FACULTY`, plus threshold keys) and must
-  reproduce the five Part B outcomes. This includes how far below a minimum a mark can be and still
-  be a Possible Match: Labeeqah is 2 points short and must be Possible, while the designed FP-LER
-  shows "Mathematics 46% below 50% minimum" as Not Currently Eligible.
+- **Scoring weights and outcome thresholds: confirm the provisional values in D14** (owner: Oyama,
+  Stage 5). The spec defines the four components and the four outcomes but gives no numbers.
+  Provisional values are now in `SystemParameter` and reproduce the five Part B outcomes (D14).
+  The team should confirm them, or agree on different numbers, before the demo. Any change must
+  still pass `tests/PartB-Regression.ps1`. Example: Labeeqah is 2 points short and must be
+  Possible, while the designed FP-LER shows "Mathematics 46% below 50% minimum" as Not Currently
+  Eligible.
