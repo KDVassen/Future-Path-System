@@ -299,7 +299,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Opens the funding option selected in the grid in the form.</summary>
         private void dgvFunding_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvFunding.SelectedRows.Count == 0)
+            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            if (!dgvFunding.Focused || dgvFunding.SelectedRows.Count == 0)
             {
                 return;
             }

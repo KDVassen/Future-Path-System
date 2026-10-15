@@ -375,7 +375,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Copies the selected row into the form for editing.</summary>
         private void dgvRequirements_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvRequirements.SelectedRows.Count == 0)
+            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            if (!dgvRequirements.Focused || dgvRequirements.SelectedRows.Count == 0)
             {
                 return;
             }

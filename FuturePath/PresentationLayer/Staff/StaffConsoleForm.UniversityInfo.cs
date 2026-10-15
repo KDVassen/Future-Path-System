@@ -421,7 +421,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Copies the selected programme into the form for editing.</summary>
         private void dgvProgrammes_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProgrammes.SelectedRows.Count == 0)
+            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            if (!dgvProgrammes.Focused || dgvProgrammes.SelectedRows.Count == 0)
             {
                 return;
             }
