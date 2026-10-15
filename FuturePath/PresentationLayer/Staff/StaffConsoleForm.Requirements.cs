@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -51,16 +52,25 @@ namespace FuturePath.PresentationLayer
             RequirementsUpdateRequirementCount();
             try
             {
-                // TODO BLL: cboReqFaculty.DataSource = ReferenceDataController.GetFaculties(includeInactive: true);
-                //           cboReqFaculty.DisplayMember = "FacultyName"; cboReqFaculty.ValueMember = "FacultyID";
-                // TODO BLL: cboRequirementType.DataSource = ReferenceDataController.GetRequirementTypes();
-                //           Values of PROGRAMMEREQUIREMENT.RequirementType ("Required" / "Recommended") come from the BLL, never from this form.
-                //           cboRequirementType.DisplayMember = "Description"; cboRequirementType.ValueMember = "RequirementType";
-                // TODO BLL: cboSubject.DataSource = ReferenceDataController.GetSubjects();
-                //           cboSubject.DisplayMember = "SubjectName"; cboSubject.ValueMember = "SubjectID";
-                // TODO BLL: cboAlternative.DataSource = ReferenceDataController.GetAlternativeSubjects();
-                //           The BLL puts a "None" entry first (SubjectID = RequirementsNoAlternativeValue, saved as NULL AlternativeSubjectID).
-                //           cboAlternative.DisplayMember = "SubjectName"; cboAlternative.ValueMember = "SubjectID";
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+
+                // RequirementType values ("Required" / "Recommended") come from the BLL, never from this form.
+                cboRequirementType.DisplayMember = "Description";
+                cboRequirementType.ValueMember = "RequirementType";
+                cboRequirementType.DataSource = referenceDataController.GetRequirementTypes();
+                cboSubject.DisplayMember = "SubjectName";
+                cboSubject.ValueMember = "SubjectID";
+                cboSubject.DataSource = referenceDataController.GetSubjects(false);
+
+                // The BLL puts a "None" entry first (SubjectID 0 = RequirementsNoAlternativeValue, saved as NULL).
+                cboAlternative.DisplayMember = "SubjectName";
+                cboAlternative.ValueMember = "SubjectID";
+                cboAlternative.DataSource = referenceDataController.GetAlternativeSubjects();
+
+                // The scope list is bound last: choosing a faculty lists its programmes straight away.
+                cboReqFaculty.DisplayMember = "FacultyName";
+                cboReqFaculty.ValueMember = "FacultyID";
+                cboReqFaculty.DataSource = referenceDataController.GetFaculties(true, false);
                 cboReqFaculty.SelectedIndex = -1;
                 RequirementsClearForm();
                 ReportStatus("Choose a faculty and a degree programme to see its stored requirements.", false);
@@ -99,11 +109,19 @@ namespace FuturePath.PresentationLayer
             string subject = cboSubject.Text;
             try
             {
-                // TODO BLL: ReferenceDataController.SaveRequirement(UserId, null, (int)lstProgrammes.SelectedValue,
-                //               (string)cboRequirementType.SelectedValue, (int)cboSubject.SelectedValue, RequirementsSelectedAlternativeId(),
-                //               numMinimumMark.Value, chkReqActive.Checked, txtAdvisoryNote.Text.Trim());
-                //           SaveRequirement checks Role = Administrator for UserId before it writes (Section 8), validates again,
-                //           and refuses a second requirement for the same subject (UNIQUE(ProgrammeID, SubjectID)).
+                // RequirementID 0 adds a requirement. An alternative of 0 is "None"; an alternative minimum of 0 means
+                // the main minimum applies (UI 13.2 has no field for it, decisions.md D23). SaveRequirement checks
+                // Role = Administrator before it writes (Section 8), validates again, and refuses a second requirement
+                // for the same subject (UNIQUE(ProgrammeID, SubjectID)).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.SaveRequirement(UserId, 0, (int)lstProgrammes.SelectedValue,
+                    (string)cboRequirementType.SelectedValue, (int)cboSubject.SelectedValue, (int)cboAlternative.SelectedValue,
+                    numMinimumMark.Value, 0m, chkReqActive.Checked, txtAdvisoryNote.Text.Trim());
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -131,19 +149,25 @@ namespace FuturePath.PresentationLayer
 
             try
             {
+                // Each BLL method checks Role = Administrator before it writes (Section 8).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
                 if (requirementsEditingMinimumAverage)
                 {
-                    // TODO BLL: ReferenceDataController.SaveMinimumAverage(UserId, (int)lstProgrammes.SelectedValue, numMinimumMark.Value);
-                    //           The "Minimum average" row maps to DegreeProgramme.MinimumOverallAverage (decisions.md §3), not to
-                    //           a PROGRAMMEREQUIREMENT row. The BLL checks Role = Administrator before it writes.
+                    // The "Minimum average" row is DegreeProgramme.MinimumOverallAverage (decisions.md §3), not a
+                    // ProgrammeRequirement row. 0 clears it.
+                    referenceDataController.SaveMinimumAverage(UserId, (int)lstProgrammes.SelectedValue, numMinimumMark.Value);
                 }
                 else
                 {
-                    // TODO BLL: ReferenceDataController.SaveRequirement(UserId, requirementsSelectedRequirementId, (int)lstProgrammes.SelectedValue,
-                    //               (string)cboRequirementType.SelectedValue, (int)cboSubject.SelectedValue, RequirementsSelectedAlternativeId(),
-                    //               numMinimumMark.Value, chkReqActive.Checked, txtAdvisoryNote.Text.Trim());
-                    //           SaveRequirement checks Role = Administrator for UserId before it writes (Section 8).
+                    referenceDataController.SaveRequirement(UserId, requirementsSelectedRequirementId.Value, (int)lstProgrammes.SelectedValue,
+                        (string)cboRequirementType.SelectedValue, (int)cboSubject.SelectedValue, (int)cboAlternative.SelectedValue,
+                        numMinimumMark.Value, RequirementsStoredAlternativeMinimum(), chkReqActive.Checked, txtAdvisoryNote.Text.Trim());
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -182,8 +206,14 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: ReferenceDataController.DeactivateRequirement(UserId, requirementsSelectedRequirementId.Value);
-                //           Sets PROGRAMMEREQUIREMENT.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Sets ProgrammeRequirement.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.DeactivateRequirement(UserId, requirementsSelectedRequirementId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -216,9 +246,11 @@ namespace FuturePath.PresentationLayer
             {
                 try
                 {
-                    // TODO BLL: lstProgrammes.DataSource = ReferenceDataController.GetProgrammes((int)cboReqFaculty.SelectedValue, includeInactive: true);
-                    //           lstProgrammes.DisplayMember = "ProgrammeName"; lstProgrammes.ValueMember = "ProgrammeID";
-                    //           Each item carries IsActive, which lstProgrammes_Format reads to add "(inactive)".
+                    // DegreeProgramme objects; each carries IsActive, which lstProgrammes_Format reads to add "(inactive)".
+                    ReferenceDataController referenceDataController = new ReferenceDataController();
+                    lstProgrammes.DisplayMember = "ProgrammeName";
+                    lstProgrammes.ValueMember = "ProgrammeID";
+                    lstProgrammes.DataSource = referenceDataController.GetProgrammes((int)cboReqFaculty.SelectedValue, true);
                     lstProgrammes.SelectedIndex = -1;
                 }
                 catch (Exception)
@@ -246,10 +278,11 @@ namespace FuturePath.PresentationLayer
             lblReqGridHeading.Text = "Stored requirements — " + RequirementsProgrammeName();
             try
             {
-                // TODO BLL: dgvRequirements.DataSource = ReferenceDataController.GetRequirements((int)lstProgrammes.SelectedValue, includeInactive: true);
-                //           Columns: RequirementID, RequirementType, SubjectID, SubjectName, MinimumMark, AlternativeSubjectID,
-                //           AlternativeSubjectName, AdvisoryNote, IsActive. The BLL adds one "Minimum average" row
-                //           (RequirementID NULL) read from DegreeProgramme.MinimumOverallAverage (decisions.md §3).
+                // Columns: RequirementID, RequirementType, SubjectID, SubjectName, MinimumMark, AlternativeSubjectID,
+                // AlternativeSubjectName, AlternativeMinimumMark, AdvisoryNote, IsActive. The BLL adds one "Minimum average"
+                // row (RequirementID DBNull) read from DegreeProgramme.MinimumOverallAverage (decisions.md §3).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                dgvRequirements.DataSource = referenceDataController.GetRequirements((int)lstProgrammes.SelectedValue, true);
             }
             catch (Exception)
             {
@@ -260,15 +293,25 @@ namespace FuturePath.PresentationLayer
             RequirementsUpdateRequirementCount();
         }
 
-        /// <summary>The "None" entry becomes a NULL AlternativeSubjectID.</summary>
-        private int? RequirementsSelectedAlternativeId()
+        /// <summary>
+        /// The selected requirement's stored AlternativeMinimumMark, or 0 when it has none. UI 13.2 has no field
+        /// for it, so an update sends the stored value back unchanged (decisions.md D23); otherwise saving the
+        /// form would quietly drop, for example, the 60% that Mathematical Literacy needs.
+        /// </summary>
+        private decimal RequirementsStoredAlternativeMinimum()
         {
-            if (cboAlternative.SelectedValue == null || Equals(cboAlternative.SelectedValue, RequirementsNoAlternativeValue))
+            if (dgvRequirements.SelectedRows.Count == 0)
             {
-                return null;
+                return 0m;
             }
 
-            return Convert.ToInt32(cboAlternative.SelectedValue, CultureInfo.InvariantCulture);
+            DataRowView row = dgvRequirements.SelectedRows[0].DataBoundItem as DataRowView;
+            if (row == null || row["AlternativeMinimumMark"] == DBNull.Value)
+            {
+                return 0m;
+            }
+
+            return (decimal)row["AlternativeMinimumMark"];
         }
 
         #endregion
@@ -501,13 +544,11 @@ namespace FuturePath.PresentationLayer
             return value is bool && (bool)value;
         }
 
-        /// <summary>Reads IsActive from a bound list item (a BLL object or a DataRowView).</summary>
+        /// <summary>True when a programme in the list (a BLL DegreeProgramme object) is inactive.</summary>
         private static bool RequirementsIsInactive(object item)
         {
-            if (item == null) return false;
-            PropertyDescriptor property = TypeDescriptor.GetProperties(item)["IsActive"];
-            object value = property == null ? null : property.GetValue(item);
-            return value is bool && !(bool)value;
+            DegreeProgramme programme = item as DegreeProgramme;
+            return programme != null && !programme.IsActive;
         }
 
         /// <summary>True for null, DBNull and the empty string.</summary>
