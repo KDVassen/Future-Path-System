@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 using FuturePath.ApplicationLayer.Reports;
 using Microsoft.Reporting.WinForms;
 
@@ -196,9 +198,11 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboExportFormat.DataSource = ReportController.GetExportFormats("FP-LSR");
-                //           cboExportFormat.DisplayMember = "FormatName";      // e.g. "PDF document (.pdf)"
-                //           cboExportFormat.ValueMember = "FileExtension";     // e.g. ".pdf"
+                // ExportFormat (".pdf"), FormatName ("PDF document (.pdf)"), FormatCode (PDF) and RenderFormat.
+                ReportController reportController = new ReportController();
+                cboExportFormat.DisplayMember = "FormatName";
+                cboExportFormat.ValueMember = "ExportFormat";
+                cboExportFormat.DataSource = reportController.GetExportFormats(ExportReport.CodeLearnerSummary);
                 cboExportFormat.SelectedIndex = -1;
                 summaryFormatsLoaded = true;
             }
@@ -221,7 +225,8 @@ namespace FuturePath.PresentationLayer
             summaryPageCount = null;
             try
             {
-                // TODO BLL: summaryData = ReportController.GetLearnerSummary(SessionId.Value);   // FpLsrData
+                ReportController reportController = new ReportController();
+                summaryData = reportController.GetLearnerSummary(SessionId.Value);
             }
             catch (Exception)
             {
@@ -230,21 +235,29 @@ namespace FuturePath.PresentationLayer
 
             if (summaryData == null)
             {
-                summaryData = new FpLsrData();   // the empty layout, until the BLL supplies the session
+                summaryData = new FpLsrData();   // the empty layout, so the preview never shows another learner's values
             }
 
-            FpLsrData.ReportHeaderRow header = summaryData.ReportHeader.Count > 0 ? summaryData.ReportHeader[0] : null;
-            summarySurname = header != null && !header.IsLastNameNull() ? header.LastName : null;
-            summarySessionNumber = header != null ? header.SessionNumber : SessionNumber;
+            summarySessionNumber = SessionNumber;
+            if (summaryData.ReportHeader.Count > 0)
+            {
+                FpLsrData.ReportHeaderRow header = summaryData.ReportHeader[0];
+                summarySessionNumber = header.SessionNumber;
+                if (!header.IsLastNameNull())
+                {
+                    summarySurname = header.LastName;
+                }
+            }
 
             SummaryUpdateFileName();
             SummaryBuildPreview();
         }
 
         /// <summary>
-        /// Writes the FP-LSR file, then has the BLL set SessionStatus = 'Completed' and DateCompleted and write
-        /// the ExportReport row (ReportCode FP-LSR, GeneratedByUserID null — a learner's own export). The file is
-        /// rendered from the same report the preview shows, stamped with the export date and time.
+        /// Renders the FP-LSR from the same report the preview shows, stamped with the export date and time.
+        /// The BLL then sets SessionStatus = 'Completed' and DateCompleted and writes the ExportReport row
+        /// (ReportCode FP-LSR, GeneratedByUserID null — a learner's own export), and only then is the file
+        /// written, so a failure never leaves a file for a session that is not completed (application-layer.md §8).
         /// </summary>
         private void SummaryExport(string folder, string fileName)
         {
@@ -253,12 +266,14 @@ namespace FuturePath.PresentationLayer
                 summaryData.ReportHeader[0].DateGenerated = summaryGeneratedOn.Value;   // "stamped at export" (2.3.9)
             }
 
-            string extension = Path.GetExtension(fileName).ToLowerInvariant();
-            byte[] file = rvSummary.LocalReport.Render(extension == ".docx" ? "WORDOPENXML" : "PDF");
-            File.WriteAllBytes(Path.Combine(folder, fileName), file);
+            // The chosen row of GetExportFormats: FormatCode (PDF / DOCX) is stored, RenderFormat drives the ReportViewer.
+            DataRowView format = (DataRowView)cboExportFormat.SelectedItem;
+            byte[] file = rvSummary.LocalReport.Render(Convert.ToString(format["RenderFormat"], CultureInfo.InvariantCulture));
 
-            // TODO BLL: ReportController.CompleteLearnerSession(SessionId.Value, extension.TrimStart('.').ToUpperInvariant(),
-            //               summaryGeneratedOn.Value, null /* GeneratedByUserID */);
+            ReportController reportController = new ReportController();
+            reportController.CompleteLearnerSession(SessionId.Value, Convert.ToString(format["FormatCode"], CultureInfo.InvariantCulture),
+                                                    summaryGeneratedOn.Value);
+            File.WriteAllBytes(Path.Combine(folder, fileName), file);
         }
 
         #endregion
