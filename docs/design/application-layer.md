@@ -21,6 +21,11 @@ Form code-behind  ──►  XController (ApplicationLayer)  ──►  XReposit
 - **Repositories** read and write rows. They contain no business rules. Gap logic, outcomes and
   scores never appear in SQL.
 
+`ReportController` is one class split into three files, like the forms' partial classes:
+- `ReportController.cs`: the catalogue, the export log and the shared helpers;
+- `ReportController.LearnerSummary.cs`: FP-LSR;
+- `ReportController.PeriodReports.cs`: FP-DIE and FP-LER.
+
 ## 2. Coding pattern (from the Waitering System)
 
 | Waitering System | Future Path |
@@ -120,8 +125,12 @@ Overall = `WEIGHT_SUBJECT`·S + `WEIGHT_MARK`·M + `WEIGHT_INTEREST`·I + `WEIGH
 ## 5. Database and seed data
 
 - Schema: `FuturePath/Database/CreateSchema.sql` (19 tables, exactly as `database.md`).
-- Seed: `SeedData.sql`.
-- Build: `powershell -ExecutionPolicy Bypass -File FuturePath\Database\BuildDatabase.ps1`. It creates `FuturePath.mdf` / `FuturePath_log.ldf` in the project folder, which are copied to `bin` (PreserveNewest).
+- Seed: `SeedData.sql` holds only the sessions' *inputs* (subjects, marks, answers, chosen programme).
+- Results: `GenerateSeedResults.ps1` runs the real controllers over every seeded session (CheckEligibility, GenerateAlternatives, and CompleteLearnerSession for sessions 6–12). Every stored RecommendationResult therefore comes from the engine, never from hand arithmetic. It skips sessions that are already Completed, so it is safe to run again.
+- Build: `powershell -ExecutionPolicy Bypass -File FuturePath\Database\BuildDatabase.ps1` (build the project first).
+  - It runs the schema, the seed and then GenerateSeedResults.
+  - It creates `FuturePath.mdf` / `FuturePath_log.ldf` in the project folder, which are copied to `bin` (PreserveNewest).
+  - Re-run it after changing the engine, the scoring parameters or the seed, then run `tests\Seed-Check.ps1` and `tests\PartB-Regression.ps1`.
 - Connection: `Properties.Settings.Default.FuturePathConnectionString` = `AttachDbFilename=|DataDirectory|\FuturePath.mdf` on `(LocalDB)\MSSQLLocalDB`. Tests override it through `DB.ConnectionString`.
 - **The committed `.mdf` is built on SQL Server 2025 LocalDB.** If it won't open on your machine (`sqllocaldb versions` shows an older version), run `BuildDatabase.ps1`.
 - `GradeLevelID` 1 = Grade 11 (Projected), 2 = Grade 12 (Final), matching the `GradeLevel` enum.
@@ -150,14 +159,23 @@ Tests are PowerShell 5.1 scripts in `tests/` that load the built `FuturePath.exe
 - Run each script in its own process:
 
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\Contract-Smoke.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
-powershell -NoProfile -ExecutionPolicy Bypass -File tests\TC01-TC05.ps1
 ```
+
+| Script | Database | Checks |
+|---|---|---|
+| `Contract-Smoke.ps1` | empty schema (`-SchemaOnly`) | entity rules, hashing, login and role checks (31) |
+| `Engine-PartB.ps1` | none | the engine on the five Part B learners in memory, boundaries, ranking (39) |
+| `Learner-Smoke.ps1` | empty schema | UI 2-6.1a flow through the real controllers (157) |
+| `Admin-Smoke.ps1` | empty schema | lookups and every UI 13.x maintenance method, role refusals (172) |
+| `Reports-Smoke.ps1` | empty schema | session search, export log, FP-LSR / FP-DIE / FP-LER datasets (194) |
+| `Seed-Check.ps1` | seeded copy | every seed rule, and each session's stored outcome against its scenario (344) |
+| `PartB-Regression.ps1` | seeded copy | the five Part B outcomes through the real controllers, re-run safety, boundaries (75) |
+| `TC01-TC05.ps1` | seeded copy | the spec Section 10 demonstration cases, security and inactive-data checks (74) |
 
 `PartB-Regression.ps1` must pass after **any** change to the rule engine, the requirements, or the scoring parameters.
 
-## 7. Who owns which file (this round)
+## 7. Who built which file (October 2026 round; now merged)
 
 | Area | Files |
 |---|---|
@@ -198,3 +216,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\TC01-TC05.ps1
   - `GetDailySummary` uses `out` parameters.
 - Call `ReportController.CompleteLearnerSession` **before** writing the FP-LSR file on UI 7, so a failure never leaves a written file for an incomplete session.
 - Map the "All" rows: 0 / "" → null filter.
+- **Known limitation:** `CompleteLearnerSession` makes two writes, the session status and then the ExportReport row, through two repositories with no shared transaction.
+  - If the second write fails, the session is Completed but has no export row.
+  - Both values are validated first, so this needs a database failure between the two statements. On a local single-user LocalDB that is unlikely.
+  - Fix if the team wants it: one repository method that does both in one transaction.

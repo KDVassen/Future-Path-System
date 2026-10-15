@@ -42,7 +42,7 @@ function Get-Rows([string]$sql) {
 }
 
 try {
-    $sessions = Get-Rows 'SELECT SessionID, LearnerID, SelectedProgrammeID, SessionDate FROM AdvisorySession ORDER BY SessionID'
+    $sessions = Get-Rows 'SELECT SessionID, LearnerID, SelectedProgrammeID, SessionDate, SessionStatus FROM AdvisorySession ORDER BY SessionID'
     $eligibility = New-Object FuturePath.ApplicationLayer.EligibilityController
     $recommendation = New-Object FuturePath.ApplicationLayer.RecommendationController
     $reports = New-Object FuturePath.ApplicationLayer.ReportController
@@ -50,6 +50,11 @@ try {
     foreach ($session in $sessions.Rows) {
         $sessionID = [int]$session.SessionID
         $learnerID = [int]$session.LearnerID
+        if ([string]$session.SessionStatus -eq 'Completed') {
+            # Already completed by an earlier run: its results and export row are final.
+            Write-Host ("Session {0}: already Completed, left unchanged" -f $sessionID)
+            continue
+        }
         if ($session.SelectedProgrammeID -is [DBNull]) {
             Write-Host ("Session {0}: no programme selected, skipped" -f $sessionID)
             continue

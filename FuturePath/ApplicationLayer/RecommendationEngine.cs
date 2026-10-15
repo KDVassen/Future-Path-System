@@ -246,9 +246,13 @@ namespace FuturePath.ApplicationLayer
             }
             if (required == 1)
             {
-                return "You meet the 1 required subject and its minimum mark";
+                return "You meet the required subject and its minimum mark";
             }
-            return "You meet all " + required.ToString(CultureInfo.InvariantCulture) + " required subjects and minimum marks";
+            if (required == 2)
+            {
+                return "You meet both required subjects and their minimum marks";
+            }
+            return "You meet all " + required.ToString(CultureInfo.InvariantCulture) + " required subjects and their minimum marks";
         }
 
         /// <summary>Joins names as "A", "A and B" or "A, B and C".</summary>

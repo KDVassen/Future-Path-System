@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Tests the recommendation engine with no database: the five Part B learners (plan-and-tests.md)
     against their programmes built in memory, the 2-point tolerance boundary, weak interest,
@@ -79,7 +79,7 @@ Assert-True ($siyabonga.CalculateInterestScore($engMech.GetInterestCategories())
 
 $outcome = Invoke-Check $gadija $bcomIS
 Assert-Equal 'STRONG' $outcome.Code 'Part B: Gadija Jacobs -> BCom IS is a Strong Match'
-Assert-True ($outcome.Explanation -like 'You meet all 2 required subjects and minimum marks, and your interests align strongly (*%).') ('Strong explanation says why: ' + $outcome.Explanation)
+Assert-True ($outcome.Explanation -like 'You meet both required subjects and their minimum marks, and your interests align strongly (*%).') ('Strong explanation says why: ' + $outcome.Explanation)
 Assert-True ($outcome.OverallScore -ge 75) 'Strong Match has an overall score of at least 75'
 
 $outcome = Invoke-Check $aadiel $bscCS

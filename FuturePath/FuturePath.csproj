@@ -84,6 +84,12 @@
     <Compile Include="ApplicationLayer\RecommendationResult.cs" />
     <Compile Include="ApplicationLayer\ReferenceDataController.cs" />
     <Compile Include="ApplicationLayer\ReportController.cs" />
+    <Compile Include="ApplicationLayer\ReportController.LearnerSummary.cs">
+      <DependentUpon>ReportController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationLayer\ReportController.PeriodReports.cs">
+      <DependentUpon>ReportController.cs</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationLayer\RequirementCheck.cs" />
     <Compile Include="ApplicationLayer\SessionSearchController.cs" />
     <Compile Include="ApplicationLayer\Subject.cs" />
