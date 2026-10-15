@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -46,7 +47,6 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        private const string AdministratorRole = "Administrator";
         private const string ReferenceNote = "Changes apply to new advisory sessions only";
 
         private readonly Form mainForm;
@@ -89,7 +89,7 @@ namespace FuturePath.PresentationLayer
         /// <summary>True when an Administrator is signed in.</summary>
         private bool IsAdministrator
         {
-            get { return Role == AdministratorRole; }
+            get { return Role == UserAccount.RoleAdministratorText; }
         }
 
         /// <summary>
@@ -370,6 +370,31 @@ namespace FuturePath.PresentationLayer
             {
                 e.KeyChar = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
             }
+        }
+
+        /// <summary>
+        /// The ID chosen in a bound list, or 0 when nothing is chosen. 0 means "all" or "none" to every
+        /// BLL method (application-layer.md §3), so a blank filter is passed straight through.
+        /// </summary>
+        private static int SelectedId(ComboBox list)
+        {
+            if (list.SelectedIndex < 0 || !(list.SelectedValue is int))
+            {
+                return 0;
+            }
+
+            return (int)list.SelectedValue;
+        }
+
+        /// <summary>The code chosen in a bound list (e.g. an OutcomeCode), or "" when nothing is chosen ("all").</summary>
+        private static string SelectedCode(ComboBox list)
+        {
+            if (list.SelectedIndex < 0 || list.SelectedValue == null)
+            {
+                return string.Empty;
+            }
+
+            return Convert.ToString(list.SelectedValue, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         /// <summary>Asks for confirmation (spec Section 7). Returns true when the user confirms.</summary>
