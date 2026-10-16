@@ -145,17 +145,14 @@ Overall = `WEIGHT_SUBJECT`·S + `WEIGHT_MARK`·M + `WEIGHT_INTEREST`·I + `WEIGH
 
 ## 5. Database and seed data
 
-- Schema: `FuturePath/Database/CreateSchema.sql` (19 tables, exactly as `database.md`).
-- Seed: `SeedData.sql` holds only the sessions' *inputs* (subjects, marks, answers, chosen programme).
-- Results: `GenerateSeedResults.ps1` runs the real controllers over every seeded session (CheckEligibility, GenerateAlternatives, and CompleteLearnerSession for sessions 6–12). Every stored RecommendationResult therefore comes from the engine, never from hand arithmetic. It skips sessions that are already Completed, so it is safe to run again.
-- Build: `powershell -ExecutionPolicy Bypass -File FuturePath\Database\BuildDatabase.ps1` (build the project first).
-  - It runs the schema, the seed and then GenerateSeedResults.
-  - It creates `FuturePath.mdf` / `FuturePath_log.ldf` in the project folder, which are copied to `bin` (PreserveNewest).
-  - Re-run it after changing the engine, the scoring parameters or the seed, then run `tests\Seed-Check.ps1` and `tests\PartB-Regression.ps1`.
-- Connection: `Properties.Settings.Default.FuturePathConnectionString` = `AttachDbFilename=|DataDirectory|\FuturePath.mdf` on `(LocalDB)\MSSQLLocalDB`. Tests override it through `DB.ConnectionString`.
-- **The committed `.mdf` is built on SQL Server 2025 LocalDB.** If it won't open on your machine (`sqllocaldb versions` shows an older version), run `BuildDatabase.ps1`.
+- The database is `FuturePath/FuturePath.mdf` / `FuturePath_log.ldf` at the project root, made and kept the Waitering System way (decisions.md D25). There are no SQL create or seed scripts. The build copies it to `bin\Debug` (PreserveNewest), and the app works on that copy.
+- Schema: 19 tables, exactly as `database.md`.
+- Seed: the `.mdf` holds every row: the sessions' inputs (subjects, marks, answers, chosen programme) and the results the real engine wrote for them (RecommendationResult, the ExportReport log, Completed for sessions 6–12). CheckEligibility, GenerateAlternatives and CompleteLearnerSession made those results when the database was first built, never hand arithmetic.
+- View or change it in Visual Studio: Server Explorer → `FuturePath.mdf` → Tables → right-click a table → **Show Table Data** (rows) or **Open Table Definition** (columns). Close the app first. Re-run `tests\Seed-Check.ps1` and `tests\PartB-Regression.ps1` after changing the engine, the scoring parameters or the seed rows.
+- Connection: `DB` reads `private string strConn = Settings.Default.FuturePathDatabaseConnectionString;` (as in the Waitering System), which is `AttachDbFilename=|DataDirectory|\FuturePath.mdf` on `(LocalDB)\MSSQLLocalDB`. Tests point that setting at a copy of the database (`tests\TestHelpers.ps1`, `Set-AppConnectionString`).
+- **The committed `.mdf` is built on SQL Server 2025 LocalDB.** If it won't open on your machine (`sqllocaldb versions` shows an older version), install SQL Server 2025 Express LocalDB. The SQL scripts that rebuilt it row for row are in git history (commit 2f950ac, `FuturePath/Database/`).
 - `GradeLevelID` 1 = Grade 11 (Projected), 2 = Grade 12 (Final), matching the `GradeLevel` enum.
-- Seed IDs are fixed with `IDENTITY_INSERT` so tests can refer to them. The Part B list is in `plan-and-tests.md`.
+- Seed IDs are fixed, so tests can refer to them. The Part B list is in `plan-and-tests.md`.
 
 **SystemParameter rows**
 
@@ -200,8 +197,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
 
 | Area | Files |
 |---|---|
-| Shared contract (coordinator; change only by agreement) | `DB.cs`, every entity / result class, `SystemSettings`, `SystemParameterRepository`, `SubjectRepository`, `LoginController`, the read methods of `UserAccountRepository`, `CreateSchema.sql`, `BuildDatabase.ps1`, `FuturePath.csproj`, `App.config`, `Properties/Settings.*`, `tests/TestHelpers.ps1`, `tests/Contract-Smoke.ps1`, this file, `decisions.md` |
-| Seed and tests | `SeedData.sql`, `tests/PartB-Regression.ps1`, `tests/TC01-TC05.ps1`, the Part B section of `plan-and-tests.md` |
+| Shared contract (coordinator; change only by agreement) | `DB.cs`, every entity / result class, `SystemSettings`, `SystemParameterRepository`, `SubjectRepository`, `LoginController`, the read methods of `UserAccountRepository`, `CreateSchema.sql` (now the tables in `FuturePath.mdf`), `FuturePath.csproj`, `App.config`, `Properties/Settings.*`, `tests/TestHelpers.ps1`, `tests/Contract-Smoke.ps1`, this file, `decisions.md` |
+| Seed and tests | `SeedData.sql` (now the rows in `FuturePath.mdf`), `tests/PartB-Regression.ps1`, `tests/TC01-TC05.ps1`, the Part B section of `plan-and-tests.md` |
 | Learner journey | `LearnerRepository`, `AdvisorySessionRepository`, `DegreeProgrammeRepository`, `RecommendationEngine`, `LearnerController`, `EligibilityController`, `RecommendationController`, `tests/Engine-PartB.ps1`, `tests/Learner-Smoke.ps1` |
 | Admin and reference data | `FacultyRepository`, `GradeLevelRepository`, `InterestRepository`, `FundingRepository`, `UserAccountRepository` (maintenance methods), `UserAccountController`, `ReferenceDataController`, `InterestController`, `FundingController`, `tests/Admin-Smoke.ps1` |
 | Reports and search | `ReportRepository`, `ExportReportRepository`, `SessionSearchRepository`, `ReportController`, `SessionSearchController`, `tests/Reports-Smoke.ps1` |

@@ -13,8 +13,6 @@
 
 $ctx = Initialize-FuturePathTest
 try {
-    $seedPath = Join-Path $PSScriptRoot '..\FuturePath\Database\SeedData.sql'
-
     function Get-Count([string]$Sql) {
         return [int](Invoke-TestQuery $ctx $Sql).Rows[0][0]
     }
@@ -30,14 +28,6 @@ try {
             $list.Add((New-Object 'System.Collections.Generic.KeyValuePair[int,decimal]' -ArgumentList (Get-SubjectId $pair[0]), ([decimal]$pair[1])))
         }
         return ,$list
-    }
-
-    function Get-SeedPassword([string]$Username) {
-        # The test passwords live only in the SeedData.sql header comment.
-        $text = [System.IO.File]::ReadAllText($seedPath)
-        $match = [regex]::Match($text, '(?m)^\s+' + [regex]::Escape($Username) + '\s+(\S+)\s*$')
-        if (-not $match.Success) { throw "No test password for $Username in the SeedData.sql header comment." }
-        return $match.Groups[1].Value
     }
 
     # ---------- TC01 ----------

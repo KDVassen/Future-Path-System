@@ -1,6 +1,6 @@
 ﻿<#
 .SYNOPSIS
-    Checks the seed data (FuturePath\Database\SeedData.sql) against the seed rules: row counts, the
+    Checks the seed data in the shipped database (FuturePath\FuturePath.mdf) against the seed rules: row counts, the
     Part B rows, the requirement constraints, interest data, funding coverage, system parameters,
     sessions and staff accounts. It finishes by applying the outcome rules of
     application-layer.md section 4 to every seeded session (with the shared entity methods
@@ -14,7 +14,6 @@
 
 $ctx = Initialize-FuturePathTest
 try {
-    $seedPath = Join-Path $PSScriptRoot '..\FuturePath\Database\SeedData.sql'
     $seedToday = '2026-10-14'   # "today" when the seed was written; fixed so the checks do not age
 
     # ---------- helpers ----------
@@ -34,14 +33,6 @@ try {
         else { Assert-Equal ">= $Minimum" $Actual $Label }
     }
 
-    function Get-SeedPassword([string]$Username) {
-        # The test passwords live only in the SeedData.sql header comment.
-        $text = [System.IO.File]::ReadAllText($seedPath)
-        $match = [regex]::Match($text, '(?m)^\s+' + [regex]::Escape($Username) + '\s+(\S+)\s*$')
-        if (-not $match.Success) { throw "No test password for $Username in the SeedData.sql header comment." }
-        return $match.Groups[1].Value
-    }
-
     function Get-Nullable($Value) { if ($Value -is [DBNull]) { return $null } return $Value }
 
     # ---------- 1. Row counts ----------
@@ -52,7 +43,7 @@ try {
         FundingOption = 10; FundingFaculty = 15; FundingProgramme = 14; Learner = 13; AdvisorySession = 13
         LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 5
     }
-    # RecommendationResult and ExportReport rows are made by Database\GenerateSeedResults.ps1 (checked in section 11).
+    # RecommendationResult and ExportReport rows (written by the real engine) are checked in section 11.
     foreach ($tableName in $expectedCounts.Keys) {
         Assert-Equal $expectedCounts[$tableName] (Get-Scalar "SELECT COUNT(*) FROM $tableName") "$tableName has $($expectedCounts[$tableName]) rows"
     }
@@ -268,7 +259,7 @@ try {
         Assert-Equal $e.Subjects $actualMarks "Session $id subjects and marks are exactly Part B"
         Assert-Equal $activeQuestionCount (Get-Scalar "SELECT COUNT(*) FROM LearnerInterestResponse r JOIN InterestQuestion q ON q.QuestionID = r.QuestionID WHERE r.SessionID = $id AND q.IsActive = 1") "Session $id answers every active question"
     }
-    # Sessions 6-12 were completed and exported by GenerateSeedResults.ps1; 1-5 (Part B) and 13 stay In progress.
+    # Sessions 6-12 were completed by their learner's FP-LSR export; 1-5 (Part B) and 13 stay In progress.
     Assert-Equal '6,7,8,9,10,11,12' (((Invoke-TestQuery $ctx "SELECT SessionID FROM AdvisorySession WHERE SessionStatus = 'Completed' AND DateCompleted IS NOT NULL ORDER BY SessionID").Rows | ForEach-Object { $_.SessionID }) -join ',') 'Sessions 6-12 are Completed with a DateCompleted'
     Assert-Equal 0 (Get-Scalar "SELECT COUNT(*) FROM AdvisorySession WHERE SessionID IN (1, 2, 3, 4, 5, 13) AND (SessionStatus <> 'In progress' OR DateCompleted IS NOT NULL)") 'Part B sessions and session 13 are still In progress'
     Assert-Equal 0 (Get-Scalar 'SELECT COUNT(*) FROM AdvisorySession WHERE SessionID <> LearnerID') 'SessionID = LearnerID for every session'
@@ -422,8 +413,8 @@ try {
         Assert-Equal $case[1] $code "Labeeqah with Mathematics $($case[0]) is $($case[1]) (boundary)"
     }
 
-    # ---------- 11. Stored results (made by the real engine in Database\GenerateSeedResults.ps1) ----------
-    Write-Host "`n--- Stored results from GenerateSeedResults.ps1 ---"
+    # ---------- 11. Stored results (written by the real engine) ----------
+    Write-Host "`n--- Stored results ---"
     foreach ($sessionID in ($scenarios.Keys | Sort-Object)) {
         $selected = Invoke-TestQuery $ctx "SELECT OutcomeCode, OutcomeReason FROM RecommendationResult WHERE SessionID = $sessionID AND IsSelectedProgramme = 1"
         Assert-Equal 1 $selected.Rows.Count "Session $sessionID has exactly one stored selected result"

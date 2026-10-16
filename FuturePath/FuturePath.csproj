@@ -303,10 +303,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Database\BuildDatabase.ps1" />
-    <None Include="Database\CreateSchema.sql" />
-    <None Include="Database\GenerateSeedResults.ps1" />
-    <None Include="Database\SeedData.sql" />
     <Content Include="FuturePath.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

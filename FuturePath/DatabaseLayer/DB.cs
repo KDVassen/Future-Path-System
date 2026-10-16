@@ -28,7 +28,11 @@ namespace FuturePath.DatabaseLayer
             Edit = 1
         }
 
-        private static string connectionString;
+        /// <summary>
+        /// The connection string, from Settings (App.config: AttachDbFilename=|DataDirectory|\FuturePath.mdf
+        /// on (LocalDB)\MSSQLLocalDB), declared as in the Waitering System DB class.
+        /// </summary>
+        private string strConn = Settings.Default.FuturePathDatabaseConnectionString;
         /// <summary>The connection every command uses.</summary>
         protected SqlConnection cnMain;
         /// <summary>The in-memory copy of the tables this repository has filled.</summary>
@@ -37,30 +41,11 @@ namespace FuturePath.DatabaseLayer
         protected SqlDataAdapter daMain;
         #endregion
 
-        #region Properties
-        /// <summary>
-        /// The connection string. It comes from Settings (App.config: AttachDbFilename=
-        /// |DataDirectory|\FuturePath.mdf on (LocalDB)\MSSQLLocalDB). Tests may set it to point at a copy.
-        /// </summary>
-        public static string ConnectionString
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(connectionString))
-                {
-                    connectionString = Settings.Default.FuturePathConnectionString;
-                }
-                return connectionString;
-            }
-            set { connectionString = value; }
-        }
-        #endregion
-
         #region Constructor
         /// <summary>Creates the connection, DataSet and adapter objects. Does not open the connection.</summary>
         public DB()
         {
-            cnMain = new SqlConnection(ConnectionString);
+            cnMain = new SqlConnection(strConn);
             dsMain = new DataSet();
             daMain = new SqlDataAdapter();
         }
