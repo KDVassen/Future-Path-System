@@ -18,7 +18,8 @@
       assembly stays locked until the process ends:
         powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
     - Tests that insert their own fixture rows use Initialize-FuturePathTest -SchemaOnly (an empty
-      database built from CreateSchema.sql); the others get a copy of the seeded FuturePath.mdf.
+      database built from Database\CreateSchema.sql); the others get a copy of the seeded FuturePath.mdf.
+      -FromScripts builds the seeded database from CreateSchema.sql and SeedData.sql instead.
     - Engine-only tests need no database: call Initialize-FuturePathTest -NoDatabase and
       Set-TestSettings with the SystemParameter values to use.
 #>
@@ -32,12 +33,15 @@ $script:TestsPassed  = 0
 $script:TestsFailed  = 0
 $script:Failures     = New-Object System.Collections.Generic.List[string]
 
-function New-SchemaOnlyDatabase {
+function New-ScriptDatabase {
     <#
-    .SYNOPSIS Builds an EMPTY database (CreateSchema.sql only, no seed rows) as FuturePath.mdf in a folder.
+    .SYNOPSIS Builds FuturePath.mdf in a folder from the Database folder scripts: CreateSchema.sql only
+              (an EMPTY database), or with -WithSeedData also SeedData.sql (the shipped data).
     #>
-    param([string]$Folder)
-    $name = 'FuturePathSchema_' + [guid]::NewGuid().ToString('N').Substring(0, 8)
+    param([string]$Folder, [switch]$WithSeedData)
+    $scriptNames = @('CreateSchema.sql')
+    if ($WithSeedData) { $scriptNames += 'SeedData.sql' }
+    $name = 'FuturePathScripts_' + [guid]::NewGuid().ToString('N').Substring(0, 8)
     $mdf = Join-Path $Folder 'FuturePath.mdf'
     $ldf = Join-Path $Folder 'FuturePath_log.ldf'
     $master = New-Object System.Data.SqlClient.SqlConnection('Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=60')
@@ -51,12 +55,16 @@ function New-SchemaOnlyDatabase {
         $database = New-Object System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=$name;Integrated Security=True;Connect Timeout=60")
         $database.Open()
         try {
-            $script = [System.IO.File]::ReadAllText((Join-Path $script:ProjectDir 'Database\CreateSchema.sql'))
-            foreach ($batch in [regex]::Split($script, '^\s*GO\s*$', [System.Text.RegularExpressions.RegexOptions]::Multiline)) {
-                if ($batch.Trim().Length -eq 0) { continue }
-                $command = $database.CreateCommand()
-                $command.CommandText = $batch
-                [void]$command.ExecuteNonQuery()
+            foreach ($scriptName in $scriptNames) {
+                # Batches are separated by lines that contain only GO, as in Visual Studio's query window.
+                $text = [System.IO.File]::ReadAllText((Join-Path $script:ProjectDir "Database\$scriptName"))
+                foreach ($batch in [regex]::Split($text, '^\s*GO\s*$', [System.Text.RegularExpressions.RegexOptions]::Multiline)) {
+                    if ($batch.Trim().Length -eq 0) { continue }
+                    $command = $database.CreateCommand()
+                    $command.CommandText = $batch
+                    $command.CommandTimeout = 120
+                    [void]$command.ExecuteNonQuery()
+                }
             }
         } finally {
             $database.Close()
@@ -74,12 +82,14 @@ function New-SchemaOnlyDatabase {
 function Initialize-FuturePathTest {
     <#
     .SYNOPSIS Loads FuturePath.exe and (unless -NoDatabase) attaches a fresh copy of the database.
-    .PARAMETER MdfPath Database to copy (default: FuturePath\FuturePath.mdf, the seeded database built by Database\BuildDatabase.ps1).
+    .PARAMETER MdfPath Database to copy (default: FuturePath\FuturePath.mdf, the shipped seeded database).
     .PARAMETER SchemaOnly Attach an EMPTY database (schema only) instead, for tests that insert their own fixture rows.
+    .PARAMETER FromScripts Attach a database built from Database\CreateSchema.sql and SeedData.sql instead of a copy.
     #>
     param(
         [switch]$NoDatabase,
         [switch]$SchemaOnly,
+        [switch]$FromScripts,
         [string]$MdfPath = (Join-Path $script:ProjectDir 'FuturePath.mdf')
     )
     if (-not (Test-Path $script:ExePath)) {
@@ -95,7 +105,9 @@ function Initialize-FuturePathTest {
     $temp = Join-Path ([System.IO.Path]::GetTempPath()) ('FuturePathTest_' + [guid]::NewGuid().ToString('N').Substring(0, 8))
     New-Item -ItemType Directory -Path $temp | Out-Null
     if ($SchemaOnly) {
-        New-SchemaOnlyDatabase $temp
+        New-ScriptDatabase $temp
+    } elseif ($FromScripts) {
+        New-ScriptDatabase $temp -WithSeedData
     } else {
         $ldfSource = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($MdfPath), [System.IO.Path]::GetFileNameWithoutExtension($MdfPath) + '_log.ldf')
         Copy-Item $MdfPath (Join-Path $temp 'FuturePath.mdf')
@@ -196,8 +208,8 @@ function New-TypedCollection {
     return ,(New-Object ("System.Collections.ObjectModel.Collection[$TypeName]"))
 }
 
-function Complete-FuturePathTest {
-    <# .SYNOPSIS Detaches and deletes the database copy, prints the summary, and sets the exit code. #>
+function Remove-TestDatabaseCopy {
+    <# .SYNOPSIS Detaches a test database and deletes its temp folder (nothing to do for -NoDatabase). #>
     param($Context)
     if ($Context -ne $null -and $Context.TempFolder) {
         [System.Data.SqlClient.SqlConnection]::ClearAllPools()
@@ -222,6 +234,12 @@ function Complete-FuturePathTest {
         }
         Remove-Item $Context.TempFolder -Recurse -Force -ErrorAction SilentlyContinue
     }
+}
+
+function Complete-FuturePathTest {
+    <# .SYNOPSIS Detaches and deletes the database copy, prints the summary, and sets the exit code. #>
+    param($Context)
+    Remove-TestDatabaseCopy $Context
 
     Write-Host ''
     Write-Host ("{0} passed, {1} failed" -f $script:TestsPassed, $script:TestsFailed) -ForegroundColor $(if ($script:TestsFailed -eq 0) { 'Green' } else { 'Red' })

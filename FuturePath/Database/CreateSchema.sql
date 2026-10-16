@@ -1,7 +1,9 @@
 /* =====================================================================
    Future Path - database schema (SQL Server Express LocalDB)
    Source of truth: docs/design/database.md (19 tables, 3NF).
-   Run by Database/BuildDatabase.ps1 against an empty database.
+   Run it in Visual Studio against an empty database (Server Explorer:
+   right-click the database > New Query, paste this script, Execute),
+   then run SeedData.sql the same way.
 
    Conventions
    - Reference data is never deleted: it is deactivated with IsActive = 0.
@@ -10,6 +12,10 @@
    - OutcomeCode values: STRONG / POSSIBLE / NCE / MOREINFO
      (ApplicationLayer/AdvisoryOutcome.cs).
    ===================================================================== */
+
+/* Stop if the query window is connected to a system database instead of the Future Path one. */
+IF DB_NAME() IN ('master', 'model', 'msdb', 'tempdb')
+    THROW 50000, 'Connect the query window to the Future Path database (not a system database) and run the script again.', 1;
 
 /* ---------- Reference data (maintained by Administrators) ---------- */
 

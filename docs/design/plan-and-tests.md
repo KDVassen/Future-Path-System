@@ -78,8 +78,8 @@ designing/building · society/law/politics.
 
 ## Seed data as built
 
-`FuturePath/Database/SeedData.sql` builds this data. `BuildDatabase.ps1` runs it after
-`CreateSchema.sql`, and `tests/Seed-Check.ps1` checks every rule below. Every ID is fixed with
+`FuturePath/Database/SeedData.sql` builds this data. Run it in Visual Studio after
+`CreateSchema.sql` (`application-layer.md` §5). `tests/Seed-Check.ps1` checks every rule below. Every ID is fixed with
 `IDENTITY_INSERT`, so tests can refer to it.
 
 **The scoring is provisional** (`decisions.md` D14: weights 0.30 / 0.30 / 0.30 / 0.10,

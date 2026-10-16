@@ -1,8 +1,10 @@
 /* =====================================================================
    Future Path - seed data (case study Part B and extra test data).
-   Run by Database/BuildDatabase.ps1 after CreateSchema.sql, on an empty
-   database. Every ID is fixed with IDENTITY_INSERT so the tests can rely
-   on it (docs/design/plan-and-tests.md, "Seed data as built").
+   Run it in Visual Studio after CreateSchema.sql, on the same empty
+   database (Server Explorer: right-click the database > New Query, paste
+   this script, Execute). Together the two scripts give exactly the data in
+   the shipped FuturePath.mdf. Every ID is fixed with IDENTITY_INSERT so the
+   tests can rely on it (docs/design/plan-and-tests.md, "Seed data as built").
 
    - The five Part B learners are LearnerID / SessionID 1-5, exactly as
      the case study gives them. Their outcomes depend on the requirement
@@ -12,9 +14,14 @@
    - Every other person, school and funding option is fictional. The
      funding options are locally stored sample data, not real offers, and
      the requirements are sample rules, not official university rules.
-   - Every session is 'In progress' and there are no RecommendationResult
-     or ExportReport rows: results are generated with the real engine
-     after the merge (see the session section for the plan).
+   - The RecommendationResult and ExportReport rows, and the 'Completed'
+     status of sessions 6-12, were written by the real engine when the
+     database was first built (EligibilityController.CheckEligibility,
+     RecommendationController.GenerateAlternatives and
+     ReportController.CompleteLearnerSession). They are stored here exactly
+     as the engine wrote them, not typed in by hand. Like every stored score
+     they are a historical record (database.md, "Scores are stored on
+     purpose"), so they are not recalculated when a rule or weight changes.
 
    Test passwords (sample accounts only; never use them on a real system):
        admin           FuturePath-Admin1
@@ -355,11 +362,10 @@ GO
 
 /* ---------- Advisory sessions ----------
    SessionID = LearnerID (one session per learner, so CheckEligibility(learnerID, ...) always
-   reaches the session below). Every session is seeded 'In progress' with no results and no
-   exports. Intended outcomes follow application-layer.md section 4 with the provisional
-   parameters (decisions.md D14). Interest scores are for the selected programme.
+   reaches the session below). Intended outcomes follow application-layer.md section 4 with
+   the provisional parameters (decisions.md D14). Interest scores are for the selected programme.
 
-   Session  Learner              Gr  Programme (preferred faculty)        Intended outcome and why                                      Coordinator: complete?  export?
+   Session  Learner              Gr  Programme (preferred faculty)        Intended outcome and why                                      Completed?              Exported?
    -------  -------------------  --  -----------------------------------  ------------------------------------------------------------  ----------------------  -------
     1       Gadija Jacobs        12  1 BCom Information Systems (Comm)    STRONG: requirements met, interest 88                         No (stays In progress)  No
     2       Aadiel-Raboo Magwa   12  3 BSc Computer Science (Sci)         NCE: Mathematics missing (Maths Literacy not accepted)         No (stays In progress)  No
@@ -377,12 +383,11 @@ GO
    12       (no name given)      11  9 Bachelor of Social Science (Hum)   MOREINFO: no subjects and no interest answers                 Yes                     Yes (PDF)
    13       Sipho Mahlangu       11  9 Bachelor of Social Science (Hum)   STRONG: Mathematical Literacy 66 accepted, interest 81        No (stays In progress)  No
 
-   Coordinator, after the merge: for sessions 6-13 run CheckEligibility(learnerID, programme),
-   then RecommendationController.GenerateAlternatives(learnerID, programme) (12 returns none),
-   then for 6-12 ReportController.CompleteLearnerSession(sessionID, format, SessionDate), which
-   marks the session Completed and logs its FP-LSR export (decisions.md D3: a session completes
-   when its summary is exported). Sessions 1-5 stay In progress so PartB-Regression.ps1 can
-   re-run them. */
+   Every session has its eligibility result and ranked alternatives stored below (session 12
+   has no alternatives). Sessions 6-12 were completed by the learner's own FP-LSR export on
+   UI 7, half an hour after the session started: that export sets 'Completed' and
+   DateCompleted and is logged in ExportReport (decisions.md D3: a session completes when its
+   summary is exported). Sessions 1-5 stay In progress so PartB-Regression.ps1 can re-run them. */
 
 SET IDENTITY_INSERT AdvisorySession ON;
 INSERT INTO AdvisorySession (SessionID, LearnerID, GradeLevelID, PreferredFacultyID, SelectedProgrammeID, SessionDate,
@@ -392,13 +397,13 @@ INSERT INTO AdvisorySession (SessionID, LearnerID, GradeLevelID, PreferredFacult
     ( 3,  3, 1, 2,  4, '2026-09-30T09:00:00', 2026, 0, 0, 'In progress', NULL),
     ( 4,  4, 2, 3,  5, '2026-10-01T14:00:00', 2026, 0, 0, 'In progress', NULL),
     ( 5,  5, 2, 4,  7, '2026-10-02T10:30:00', 2026, 0, 0, 'In progress', NULL),
-    ( 6,  6, 2, 1,  2, '2026-01-20T09:15:00', 2026, 1, 0, 'In progress', NULL),
-    ( 7,  7, 1, 3,  6, '2026-02-17T13:40:00', 2026, 0, 0, 'In progress', NULL),
-    ( 8,  8, 2, 4,  8, '2026-03-24T10:05:00', 2026, 0, 0, 'In progress', NULL),
-    ( 9,  9, 2, 1,  1, '2026-05-12T15:20:00', 2026, 0, 1, 'In progress', NULL),
-    (10, 10, 1, 2,  3, '2026-06-23T11:00:00', 2026, 1, 0, 'In progress', NULL),
-    (11, 11, 2, 2,  3, '2026-08-04T09:45:00', 2026, 0, 1, 'In progress', NULL),
-    (12, 12, 1, 5,  9, '2026-09-08T12:00:00', 2026, 0, 0, 'In progress', NULL),
+    ( 6,  6, 2, 1,  2, '2026-01-20T09:15:00', 2026, 1, 0, 'Completed',   '2026-01-20T09:45:00'),
+    ( 7,  7, 1, 3,  6, '2026-02-17T13:40:00', 2026, 0, 0, 'Completed',   '2026-02-17T14:10:00'),
+    ( 8,  8, 2, 4,  8, '2026-03-24T10:05:00', 2026, 0, 0, 'Completed',   '2026-03-24T10:35:00'),
+    ( 9,  9, 2, 1,  1, '2026-05-12T15:20:00', 2026, 0, 1, 'Completed',   '2026-05-12T15:50:00'),
+    (10, 10, 1, 2,  3, '2026-06-23T11:00:00', 2026, 1, 0, 'Completed',   '2026-06-23T11:30:00'),
+    (11, 11, 2, 2,  3, '2026-08-04T09:45:00', 2026, 0, 1, 'Completed',   '2026-08-04T10:15:00'),
+    (12, 12, 1, 5,  9, '2026-09-08T12:00:00', 2026, 0, 0, 'Completed',   '2026-09-08T12:30:00'),
     (13, 13, 1, 5,  9, '2026-10-10T10:00:00', 2026, 0, 0, 'In progress', NULL);
 SET IDENTITY_INSERT AdvisorySession OFF;
 GO
@@ -499,6 +504,155 @@ FROM @Answer a
 SET IDENTITY_INSERT LearnerInterestResponse OFF;
 GO
 
+/* ---------- Recommendation results (written by the real engine; stored exactly as written) ----------
+   One selected row per session (IsSelectedProgramme = 1, no rank), then that session's ranked
+   alternatives (AlternativeRank 1-9, every other active programme). Scores are 0-100 and NULL
+   when nothing could be scored (session 12, More Information Needed). FacultyBonus = 1 when the
+   programme is in the learner's preferred faculty. OutcomeCode: STRONG / POSSIBLE / NCE / MOREINFO.
+
+   Columns: ResultID, SessionID, ProgrammeID, SubjectMatchScore, MarkMatchScore, InterestMatchScore,
+            FacultyBonus, OverallScore, OutcomeCode, OutcomeReason, AlternativeRank, IsSelectedProgramme */
+
+SET IDENTITY_INSERT RecommendationResult ON;
+INSERT INTO RecommendationResult (ResultID, SessionID, ProgrammeID, SubjectMatchScore, MarkMatchScore, InterestMatchScore,
+                                  FacultyBonus, OverallScore, OutcomeCode, OutcomeReason, AlternativeRank, IsSelectedProgramme) VALUES
+    -- Session 1: Gadija Jacobs -> BCom Information Systems
+    (  1,  1,  1, 100.00, 100.00,  88.00, 1,  96.40, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (88%).', NULL, 1),
+    (  2,  1,  2, 100.00, 100.00,  86.84, 1,  96.05, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (86.8%).', 1, 0),
+    (  3,  1,  3, 100.00, 100.00,  75.00, 0,  82.50, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (75%).', 2, 0),
+    (  4,  1, 10, 100.00, 100.00,  39.71, 0,  71.91, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (39.7%) is weaker than a strong match needs (60%).', 3, 0),
+    (  5,  1,  9, 100.00, 100.00,  36.00, 0,  70.80, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (36%) is weaker than a strong match needs (60%).', 4, 0),
+    (  6,  1,  6,  66.67,  66.67,  53.57, 0,  56.07, 'NCE',      'Physical Sciences is required but was not captured.', 5, 0),
+    (  7,  1,  5,  66.67,  66.67,  51.09, 0,  55.33, 'NCE',      'Physical Sciences is required but was not captured.', 6, 0),
+    (  8,  1,  4,  66.67,  66.67,  40.79, 0,  52.24, 'NCE',      'Physical Sciences is required but was not captured.', 7, 0),
+    (  9,  1,  7,  66.67,  66.67,  34.78, 0,  50.44, 'NCE',      'Physical Sciences is required but was not captured.', 8, 0),
+    ( 10,  1,  8,  66.67,  66.67,  32.35, 0,  49.71, 'NCE',      'Life Sciences is required but was not captured.', 9, 0),
+    -- Session 2: Aadiel-Raboo Magwa -> BSc Computer Science
+    ( 11,  2,  3,  50.00,  50.00,  44.57, 1,  53.37, 'NCE',      'Mathematics is required but was not captured.', NULL, 1),
+    ( 12,  2,  9, 100.00, 100.00,  64.00, 0,  79.20, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (64%).', 1, 0),
+    ( 13,  2, 10, 100.00, 100.00,  60.29, 0,  78.09, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (60.3%).', 2, 0),
+    ( 14,  2,  2,  50.00,  50.00,  73.68, 0,  52.10, 'NCE',      'Mathematics is required but was not captured.', 3, 0),
+    ( 15,  2,  1,  50.00,  50.00,  66.00, 0,  49.80, 'NCE',      'Mathematics is required but was not captured.', 4, 0),
+    ( 16,  2,  4,  33.33,  33.33,  32.89, 1,  39.87, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 5, 0),
+    ( 17,  2,  6,  33.33,  33.33,  42.86, 0,  32.86, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 6, 0),
+    ( 18,  2,  8,  33.33,  33.33,  41.91, 0,  32.57, 'NCE',      'Mathematics and Life Sciences are required but were not captured.', 7, 0),
+    ( 19,  2,  7,  33.33,  33.33,  40.76, 0,  32.23, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 8, 0),
+    ( 20,  2,  5,  33.33,  33.33,  29.35, 0,  28.80, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 9, 0),
+    -- Session 3: Labeeqah Rademeyer -> BSc Biological Sciences
+    ( 21,  3,  4, 100.00,  66.67,  81.58, 1,  84.48, 'POSSIBLE', 'Possible match: Mathematics 58% is 2 points below the 60% minimum. This is within 2 points of the minimum.', NULL, 1),
+    ( 22,  3,  8, 100.00, 100.00,  85.29, 0,  85.59, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (85.3%).', 1, 0),
+    ( 23,  3,  9, 100.00, 100.00,  65.00, 0,  79.50, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (65%).', 2, 0),
+    ( 24,  3, 10, 100.00, 100.00,  64.71, 0,  79.41, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (64.7%).', 3, 0),
+    ( 25,  3,  7, 100.00,  66.67,  84.78, 0,  75.44, 'POSSIBLE', 'Possible match: Mathematics 58% is 2 points below the 60% minimum. This is within 2 points of the minimum.', 4, 0),
+    ( 26,  3,  2, 100.00,  50.00,  26.32, 0,  52.90, 'POSSIBLE', 'Possible match: Mathematics 58% is 2 points below the 60% minimum. This is within 2 points of the minimum.', 5, 0),
+    ( 27,  3,  1, 100.00,  50.00,  24.00, 0,  52.20, 'POSSIBLE', 'Possible match: Mathematics 58% is 2 points below the 60% minimum. This is within 2 points of the minimum.', 6, 0),
+    ( 28,  3,  3, 100.00,  50.00,  33.70, 1,  65.11, 'NCE',      'Mathematics 58% is 12 points below the 70% minimum. The largest shortfall (12 points) is more than the 2 points allowed for a possible match.', 7, 0),
+    ( 29,  3,  5, 100.00,  33.33,  52.17, 0,  55.65, 'NCE',      'Mathematics 58% is 12 points below the 70% minimum. Physical Sciences 62% is 8 points below the 70% minimum. The largest shortfall (12 points) is more than the 2 points allowed for a possible match.', 8, 0),
+    ( 30,  3,  6, 100.00,  33.33,  38.10, 0,  51.43, 'NCE',      'Mathematics 58% is 12 points below the 70% minimum. Physical Sciences 62% is 3 points below the 65% minimum. The largest shortfall (12 points) is more than the 2 points allowed for a possible match.', 9, 0),
+    -- Session 4: Siyabonga Dickson -> BSc Engineering (Mechanical Engineering)
+    ( 31,  4,  5, 100.00, 100.00,  85.87, 1,  95.76, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (85.9%).', NULL, 1),
+    ( 32,  4,  6, 100.00, 100.00,  77.38, 1,  93.21, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (77.4%).', 1, 0),
+    ( 33,  4,  3, 100.00, 100.00,  80.43, 0,  84.13, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (80.4%).', 2, 0),
+    ( 34,  4,  4, 100.00, 100.00,  67.11, 0,  80.13, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (67.1%).', 3, 0),
+    ( 35,  4,  1, 100.00, 100.00,  59.00, 0,  77.70, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (59%) is weaker than a strong match needs (60%).', 4, 0),
+    ( 36,  4,  2, 100.00, 100.00,  51.32, 0,  75.40, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (51.3%) is weaker than a strong match needs (60%).', 5, 0),
+    ( 37,  4,  7, 100.00, 100.00,  50.00, 0,  75.00, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (50%) is weaker than a strong match needs (60%).', 6, 0),
+    ( 38,  4,  9, 100.00, 100.00,  29.00, 0,  68.70, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (29%) is weaker than a strong match needs (60%).', 7, 0),
+    ( 39,  4, 10, 100.00, 100.00,  25.00, 0,  67.50, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (25%) is weaker than a strong match needs (60%).', 8, 0),
+    ( 40,  4,  8,  66.67,  66.67,  52.94, 0,  55.88, 'NCE',      'Life Sciences is required but was not captured.', 9, 0),
+    -- Session 5: Derek Vin Diesel -> Bachelor of Health Sciences
+    ( 41,  5,  7,  33.33,  33.33,  80.98, 1,  54.29, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', NULL, 1),
+    ( 42,  5,  9, 100.00, 100.00,  83.00, 0,  84.90, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (83%).', 1, 0),
+    ( 43,  5, 10, 100.00, 100.00,  75.00, 0,  82.50, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (75%).', 2, 0),
+    ( 44,  5,  8,  66.67,  66.67,  84.56, 1,  75.37, 'NCE',      'Mathematics is required but was not captured.', 3, 0),
+    ( 45,  5,  3,  50.00,  50.00,  35.87, 0,  40.76, 'NCE',      'Mathematics is required but was not captured.', 4, 0),
+    ( 46,  5,  1,  50.00,  50.00,  30.00, 0,  39.00, 'NCE',      'Mathematics is required but was not captured.', 5, 0),
+    ( 47,  5,  4,  33.33,  33.33,  60.53, 0,  38.16, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 6, 0),
+    ( 48,  5,  2,  50.00,  50.00,  25.00, 0,  37.50, 'NCE',      'Mathematics is required but was not captured.', 7, 0),
+    ( 49,  5,  6,  33.33,  33.33,  46.43, 0,  33.93, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 8, 0),
+    ( 50,  5,  5,  33.33,  33.33,  45.65, 0,  33.69, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 9, 0),
+    -- Session 6: Nomvula Khumalo -> BCom Accounting
+    ( 51,  6,  2, 100.00, 100.00, 100.00, 1, 100.00, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (100%).', NULL, 1),
+    ( 52,  6,  1, 100.00, 100.00,  85.00, 1,  95.50, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (85%).', 1, 0),
+    ( 53,  6,  3, 100.00, 100.00,  70.11, 0,  81.03, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (70.1%).', 2, 0),
+    ( 54,  6, 10, 100.00, 100.00,  50.00, 0,  75.00, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (50%) is weaker than a strong match needs (60%).', 3, 0),
+    ( 55,  6,  9, 100.00, 100.00,  46.00, 0,  73.80, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (46%) is weaker than a strong match needs (60%).', 4, 0),
+    ( 56,  6,  6,  66.67,  66.67,  60.71, 0,  58.22, 'NCE',      'Physical Sciences is required but was not captured.', 5, 0),
+    ( 57,  6,  5,  66.67,  66.67,  53.26, 0,  55.98, 'NCE',      'Physical Sciences is required but was not captured.', 6, 0),
+    ( 58,  6,  4,  66.67,  66.67,  47.37, 0,  54.21, 'NCE',      'Physical Sciences is required but was not captured.', 7, 0),
+    ( 59,  6,  7,  66.67,  66.67,  34.78, 0,  50.44, 'NCE',      'Physical Sciences is required but was not captured.', 8, 0),
+    ( 60,  6,  8,  66.67,  66.67,  32.35, 0,  49.71, 'NCE',      'Life Sciences is required but was not captured.', 9, 0),
+    -- Session 7: Pieter van Wyk -> BSc Engineering (Civil Engineering)
+    ( 61,  7,  6,  66.67,  66.67,  82.14, 1,  74.64, 'NCE',      'Physical Sciences is required but was not captured.', NULL, 1),
+    ( 62,  7,  3, 100.00, 100.00,  69.57, 0,  80.87, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (69.6%).', 1, 0),
+    ( 63,  7,  2, 100.00, 100.00,  63.16, 0,  78.95, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (63.2%).', 2, 0),
+    ( 64,  7,  1, 100.00, 100.00,  57.00, 0,  77.10, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (57%) is weaker than a strong match needs (60%).', 3, 0),
+    ( 65,  7, 10, 100.00, 100.00,  35.29, 0,  70.59, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (35.3%) is weaker than a strong match needs (60%).', 4, 0),
+    ( 66,  7,  9, 100.00, 100.00,  35.00, 0,  70.50, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (35%) is weaker than a strong match needs (60%).', 5, 0),
+    ( 67,  7,  5,  66.67,  66.67,  76.09, 1,  72.83, 'NCE',      'Physical Sciences is required but was not captured.', 6, 0),
+    ( 68,  7,  4,  66.67,  66.67,  44.74, 0,  53.42, 'NCE',      'Physical Sciences is required but was not captured.', 7, 0),
+    ( 69,  7,  8,  66.67,  66.67,  30.15, 0,  49.05, 'NCE',      'Life Sciences is required but was not captured.', 8, 0),
+    ( 70,  7,  7,  66.67,  66.67,  29.89, 0,  48.97, 'NCE',      'Physical Sciences is required but was not captured.', 9, 0),
+    -- Session 8: Ayesha Patel -> BSc Physiotherapy
+    ( 71,  8,  8, 100.00,  66.67,  94.85, 1,  88.46, 'NCE',      'Mathematics 46% is 4 points below the 50% minimum. The largest shortfall (4 points) is more than the 2 points allowed for a possible match.', NULL, 1),
+    ( 72,  8,  7, 100.00,  33.33,  90.76, 1,  77.23, 'NCE',      'Mathematics 46% is 14 points below the 60% minimum. Physical Sciences 58% is 2 points below the 60% minimum. The largest shortfall (14 points) is more than the 2 points allowed for a possible match.', 1, 0),
+    ( 73,  8,  4, 100.00,  66.67,  80.26, 0,  74.08, 'NCE',      'Mathematics 46% is 14 points below the 60% minimum. The largest shortfall (14 points) is more than the 2 points allowed for a possible match.', 2, 0),
+    ( 74,  8,  9, 100.00,  50.00,  73.00, 0,  66.90, 'NCE',      'Mathematics 46% is 4 points below the 50% minimum. The largest shortfall (4 points) is more than the 2 points allowed for a possible match.', 3, 0),
+    ( 75,  8, 10, 100.00,  50.00,  64.71, 0,  64.41, 'NCE',      'Mathematics 46% is 4 points below the 50% minimum. The largest shortfall (4 points) is more than the 2 points allowed for a possible match.', 4, 0),
+    ( 76,  8,  2, 100.00,  50.00,  38.16, 0,  56.45, 'NCE',      'Mathematics 46% is 14 points below the 60% minimum. The largest shortfall (14 points) is more than the 2 points allowed for a possible match.', 5, 0),
+    ( 77,  8,  3, 100.00,  50.00,  33.70, 0,  55.11, 'NCE',      'Mathematics 46% is 24 points below the 70% minimum. The largest shortfall (24 points) is more than the 2 points allowed for a possible match.', 6, 0),
+    ( 78,  8,  5, 100.00,  33.33,  48.91, 0,  54.67, 'NCE',      'Mathematics 46% is 24 points below the 70% minimum. Physical Sciences 58% is 12 points below the 70% minimum. The largest shortfall (24 points) is more than the 2 points allowed for a possible match.', 7, 0),
+    ( 79,  8,  1, 100.00,  50.00,  32.00, 0,  54.60, 'NCE',      'Mathematics 46% is 14 points below the 60% minimum. The largest shortfall (14 points) is more than the 2 points allowed for a possible match.', 8, 0),
+    ( 80,  8,  6, 100.00,  33.33,  38.10, 0,  51.43, 'NCE',      'Mathematics 46% is 24 points below the 70% minimum. Physical Sciences 58% is 7 points below the 65% minimum. The largest shortfall (24 points) is more than the 2 points allowed for a possible match.', 9, 0),
+    -- Session 9: Lerato Mokoena -> BCom Information Systems
+    ( 81,  9,  1, 100.00, 100.00,  20.00, 1,  76.00, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (20%) is weaker than a strong match needs (60%).', NULL, 1),
+    ( 82,  9,  8, 100.00, 100.00, 100.00, 0,  90.00, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (100%).', 1, 0),
+    ( 83,  9,  7, 100.00, 100.00,  91.30, 0,  87.39, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (91.3%).', 2, 0),
+    ( 84,  9,  4, 100.00, 100.00,  80.26, 0,  84.08, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (80.3%).', 3, 0),
+    ( 85,  9,  9, 100.00, 100.00,  66.00, 0,  79.80, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (66%).', 4, 0),
+    ( 86,  9,  2, 100.00, 100.00,  25.00, 1,  77.50, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (25%) is weaker than a strong match needs (60%).', 5, 0),
+    ( 87,  9, 10, 100.00, 100.00,  50.00, 0,  75.00, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (50%) is weaker than a strong match needs (60%).', 6, 0),
+    ( 88,  9,  5, 100.00,  66.67,  44.57, 0,  63.37, 'POSSIBLE', 'Possible match: Mathematics 68% is 2 points below the 70% minimum. This is within 2 points of the minimum.', 7, 0),
+    ( 89,  9,  6, 100.00,  66.67,  29.76, 0,  58.93, 'POSSIBLE', 'Possible match: Mathematics 68% is 2 points below the 70% minimum. This is within 2 points of the minimum.', 8, 0),
+    ( 90,  9,  3, 100.00,  50.00,  19.57, 0,  50.87, 'POSSIBLE', 'Possible match: Mathematics 68% is 2 points below the 70% minimum. This is within 2 points of the minimum.', 9, 0),
+    -- Session 10: Thabo Ndlovu -> BSc Computer Science
+    ( 91, 10,  3, 100.00, 100.00,  83.15, 1,  94.95, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (83.2%).', NULL, 1),
+    ( 92, 10,  1, 100.00, 100.00,  77.00, 0,  83.10, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (77%).', 1, 0),
+    ( 93, 10,  2, 100.00, 100.00,  63.16, 0,  78.95, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (63.2%).', 2, 0),
+    ( 94, 10,  5, 100.00, 100.00,  63.04, 0,  78.91, 'STRONG',   'You meet all 3 required subjects and their minimum marks, and your interests align strongly (63%).', 3, 0),
+    ( 95, 10,  4, 100.00, 100.00,  51.32, 1,  85.40, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (51.3%) is weaker than a strong match needs (60%).', 4, 0),
+    ( 96, 10,  6, 100.00, 100.00,  59.52, 0,  77.86, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (59.5%) is weaker than a strong match needs (60%).', 5, 0),
+    ( 97, 10,  7, 100.00, 100.00,  34.78, 0,  70.43, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (34.8%) is weaker than a strong match needs (60%).', 6, 0),
+    ( 98, 10, 10, 100.00, 100.00,  25.00, 0,  67.50, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (25%) is weaker than a strong match needs (60%).', 7, 0),
+    ( 99, 10,  9, 100.00, 100.00,  25.00, 0,  67.50, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (25%) is weaker than a strong match needs (60%).', 8, 0),
+    (100, 10,  8,  66.67,  66.67,  35.29, 0,  50.59, 'NCE',      'Life Sciences is required but was not captured.', 9, 0),
+    -- Session 11: Chloe Adams -> BSc Computer Science
+    (101, 11,  3, 100.00, 100.00,  69.57, 1,  90.87, 'POSSIBLE', 'Possible match: Overall average 60.5% is below the 65% minimum average for BSc Computer Science.', NULL, 1),
+    (102, 11,  1, 100.00, 100.00,  67.00, 0,  80.10, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (67%).', 1, 0),
+    (103, 11,  2, 100.00, 100.00,  63.16, 0,  78.95, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (63.2%).', 2, 0),
+    (104, 11,  4, 100.00, 100.00,  44.74, 1,  83.42, 'POSSIBLE', 'You meet the minimum requirements, but your interest alignment (44.7%) is weaker than a strong match needs (60%).', 3, 0),
+    (105, 11,  5, 100.00,  66.67,  54.35, 0,  66.31, 'NCE',      'Physical Sciences 52% is 18 points below the 70% minimum. Overall average 60.5% is below the 65% minimum average for BSc Engineering (Mechanical Engineering). The largest shortfall (18 points) is more than the 2 points allowed for a possible match.', 4, 0),
+    (106, 11,  6, 100.00,  66.67,  53.57, 0,  66.07, 'NCE',      'Physical Sciences 52% is 13 points below the 65% minimum. Overall average 60.5% is below the 65% minimum average for BSc Engineering (Civil Engineering). The largest shortfall (13 points) is more than the 2 points allowed for a possible match.', 5, 0),
+    (107, 11,  7, 100.00,  66.67,  34.24, 0,  60.27, 'NCE',      'Physical Sciences 52% is 8 points below the 60% minimum. Overall average 60.5% is below the 65% minimum average for Bachelor of Health Sciences. The largest shortfall (8 points) is more than the 2 points allowed for a possible match.', 6, 0),
+    (108, 11, 10, 100.00,  50.00,  39.71, 0,  56.91, 'NCE',      'English Home Language 55% is 5 points below the 60% minimum. The largest shortfall (5 points) is more than the 2 points allowed for a possible match.', 7, 0),
+    (109, 11,  9, 100.00,  50.00,  32.00, 0,  54.60, 'NCE',      'English Home Language 55% is 5 points below the 60% minimum. The largest shortfall (5 points) is more than the 2 points allowed for a possible match.', 8, 0),
+    (110, 11,  8,  66.67,  66.67,  30.15, 0,  49.05, 'NCE',      'Life Sciences is required but was not captured.', 9, 0),
+    -- Session 12: (no name given) -> Bachelor of Social Science
+    (111, 12,  9,   NULL,   NULL,   NULL, 0,   NULL, 'MOREINFO', 'Capture at least one subject and mark (step 2) so your eligibility can be checked.', NULL, 1),
+    -- Session 13: Sipho Mahlangu -> Bachelor of Social Science
+    (112, 13,  9, 100.00, 100.00,  81.00, 1,  94.30, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (81%).', NULL, 1),
+    (113, 13, 10, 100.00, 100.00,  85.29, 1,  95.59, 'STRONG',   'You meet both required subjects and their minimum marks, and your interests align strongly (85.3%).', 1, 0),
+    (114, 13,  2,  50.00,  50.00,  36.84, 0,  41.05, 'NCE',      'Mathematics is required but was not captured.', 2, 0),
+    (115, 13,  1,  50.00,  50.00,  33.00, 0,  39.90, 'NCE',      'Mathematics is required but was not captured.', 3, 0),
+    (116, 13,  3,  50.00,  50.00,  25.00, 0,  37.50, 'NCE',      'Mathematics is required but was not captured.', 4, 0),
+    (117, 13,  7,  33.33,  33.33,  50.00, 0,  35.00, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 5, 0),
+    (118, 13,  8,  33.33,  33.33,  47.06, 0,  34.12, 'NCE',      'Mathematics and Life Sciences are required but were not captured.', 6, 0),
+    (119, 13,  6,  33.33,  33.33,  39.29, 0,  31.79, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 7, 0),
+    (120, 13,  4,  33.33,  33.33,  32.89, 0,  29.87, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 8, 0),
+    (121, 13,  5,  33.33,  33.33,  25.00, 0,  27.50, 'NCE',      'Mathematics and Physical Sciences are required but were not captured.', 9, 0);
+SET IDENTITY_INSERT RecommendationResult OFF;
+GO
+
 /* ---------- Staff accounts (passwords are in the header comment; hashes are salted SHA-256) ---------- */
 
 SET IDENTITY_INSERT UserAccount ON;
@@ -509,4 +663,20 @@ INSERT INTO UserAccount (UserID, Username, PasswordHash, FullName, Role, IsActiv
     (4, 'senior.advisor', 'Wg+3JsOdpoxNtn4zGGvVyw==:k6rumnM+zXJ6/LDRVflFHkvqvGUtO3IIlvN6enhceUQ=', 'Zanele Dlamini', 'Career Advisor', 1),
     (5, 'data.admin',     'fVhSUHGUaf26a8fZ4jw8Tg==:RgRsovzW3RZN71WmGpSjZTkFL/Q6DGBtUIkk5iRD6JE=', 'Riaan Peters',   'Administrator',  1);
 SET IDENTITY_INSERT UserAccount OFF;
+GO
+
+/* ---------- Export log (written by ReportController.CompleteLearnerSession) ----------
+   The learner's own FP-LSR export on UI 7 for each completed session (6-12), in the format they
+   chose. GeneratedByUserID and ParametersUsed are NULL for a learner's export (database.md). */
+
+SET IDENTITY_INSERT ExportReport ON;
+INSERT INTO ExportReport (ExportID, ReportCode, SessionID, ParametersUsed, GeneratedByUserID, DateGenerated, ExportFormat) VALUES
+    (1, 'FP-LSR',  6, NULL, NULL, '2026-01-20T09:45:00', 'PDF'),
+    (2, 'FP-LSR',  7, NULL, NULL, '2026-02-17T14:10:00', 'DOCX'),
+    (3, 'FP-LSR',  8, NULL, NULL, '2026-03-24T10:35:00', 'PDF'),
+    (4, 'FP-LSR',  9, NULL, NULL, '2026-05-12T15:50:00', 'PDF'),
+    (5, 'FP-LSR', 10, NULL, NULL, '2026-06-23T11:30:00', 'PDF'),
+    (6, 'FP-LSR', 11, NULL, NULL, '2026-08-04T10:15:00', 'DOCX'),
+    (7, 'FP-LSR', 12, NULL, NULL, '2026-09-08T12:30:00', 'PDF');
+SET IDENTITY_INSERT ExportReport OFF;
 GO
