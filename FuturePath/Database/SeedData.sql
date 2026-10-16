@@ -20,6 +20,8 @@
        admin           FuturePath-Admin1
        advisor         FuturePath-Advisor1
        former.advisor  FuturePath-Former1
+       senior.advisor  FuturePath-Senior1
+       data.admin      FuturePath-DataAdmin1
    The stored values are salted SHA-256 hashes (salt:hash) made with UserAccount.HashPassword.
    ===================================================================== */
 
@@ -497,12 +499,14 @@ FROM @Answer a
 SET IDENTITY_INSERT LearnerInterestResponse OFF;
 GO
 
-/* ---------- Staff accounts (passwords are in the header comment; hashes are PBKDF2) ---------- */
+/* ---------- Staff accounts (passwords are in the header comment; hashes are salted SHA-256) ---------- */
 
 SET IDENTITY_INSERT UserAccount ON;
 INSERT INTO UserAccount (UserID, Username, PasswordHash, FullName, Role, IsActive) VALUES
-    (1, 'admin',          '/QCkBFNWPwPdjsUJ5R+K4w==:I3CKALC3mFpc/TQPVOrpi8q6VvTTRXnwpJz/SR19mOc=', 'Ruth Arendse',  'Administrator',  1),
-    (2, 'advisor',        'INyXI8Q7EIgy5UEskrseUg==:ZnNIAz5avWiLdV42Les8g8dX4E7jb4gAIFmFh/DVZRI=', 'Kagiso Molefe', 'Career Advisor', 1),
-    (3, 'former.advisor', 'm+CgljWcfRwYLdum/W1M4w==:OgYdspxAx1W1hii+LZ4XYxUodu9rDEAeOn0ZO3lKetE=', 'Megan Pillay',  'Career Advisor', 0);
+    (1, 'admin',          '/QCkBFNWPwPdjsUJ5R+K4w==:I3CKALC3mFpc/TQPVOrpi8q6VvTTRXnwpJz/SR19mOc=', 'Ruth Arendse',   'Administrator',  1),
+    (2, 'advisor',        'INyXI8Q7EIgy5UEskrseUg==:ZnNIAz5avWiLdV42Les8g8dX4E7jb4gAIFmFh/DVZRI=', 'Kagiso Molefe',  'Career Advisor', 1),
+    (3, 'former.advisor', 'm+CgljWcfRwYLdum/W1M4w==:OgYdspxAx1W1hii+LZ4XYxUodu9rDEAeOn0ZO3lKetE=', 'Megan Pillay',   'Career Advisor', 0),
+    (4, 'senior.advisor', 'Wg+3JsOdpoxNtn4zGGvVyw==:k6rumnM+zXJ6/LDRVflFHkvqvGUtO3IIlvN6enhceUQ=', 'Zanele Dlamini', 'Career Advisor', 1),
+    (5, 'data.admin',     'fVhSUHGUaf26a8fZ4jw8Tg==:RgRsovzW3RZN71WmGpSjZTkFL/Q6DGBtUIkk5iRD6JE=', 'Riaan Peters',   'Administrator',  1);
 SET IDENTITY_INSERT UserAccount OFF;
 GO

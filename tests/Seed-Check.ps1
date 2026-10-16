@@ -50,7 +50,7 @@ try {
         GradeLevel = 2; SystemParameter = 28; Faculty = 5; Subject = 16; DegreeProgramme = 11
         ProgrammeRequirement = 39; InterestCategory = 9; InterestQuestion = 13; DegreeInterestMapping = 29
         FundingOption = 10; FundingFaculty = 15; FundingProgramme = 14; Learner = 13; AdvisorySession = 13
-        LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 3
+        LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 5
     }
     # RecommendationResult and ExportReport rows are made by Database\GenerateSeedResults.ps1 (checked in section 11).
     foreach ($tableName in $expectedCounts.Keys) {
@@ -291,6 +291,8 @@ try {
     Assert-Equal '1|admin|Administrator|True' ("{0}|{1}|{2}|{3}" -f $users.Rows[0].UserID, $users.Rows[0].Username, $users.Rows[0].Role, [bool]$users.Rows[0].IsActive) 'UserID 1 is the active Administrator admin'
     Assert-Equal '2|advisor|Career Advisor|True' ("{0}|{1}|{2}|{3}" -f $users.Rows[1].UserID, $users.Rows[1].Username, $users.Rows[1].Role, [bool]$users.Rows[1].IsActive) 'UserID 2 is the active Career Advisor advisor'
     Assert-Equal '3|Career Advisor|False' ("{0}|{1}|{2}" -f $users.Rows[2].UserID, $users.Rows[2].Role, [bool]$users.Rows[2].IsActive) 'UserID 3 is an inactive Career Advisor'
+    Assert-Equal '4|senior.advisor|Career Advisor|True' ("{0}|{1}|{2}|{3}" -f $users.Rows[3].UserID, $users.Rows[3].Username, $users.Rows[3].Role, [bool]$users.Rows[3].IsActive) 'UserID 4 is the active Career Advisor senior.advisor'
+    Assert-Equal '5|data.admin|Administrator|True' ("{0}|{1}|{2}|{3}" -f $users.Rows[4].UserID, $users.Rows[4].Username, $users.Rows[4].Role, [bool]$users.Rows[4].IsActive) 'UserID 5 is the active Administrator data.admin'
     $login = New-Object FuturePath.ApplicationLayer.LoginController
     foreach ($row in $users.Rows) {
         $password = Get-SeedPassword ([string]$row.Username)
