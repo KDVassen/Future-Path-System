@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -13,7 +14,7 @@ namespace FuturePath.PresentationLayer
     /// line, and a maintenance form below it (Username*, Full name*, Role*, Active, and a password group).
     /// Password hashes are never loaded into or shown on this screen. A password is required when an
     /// account is added and optional on update (entering one resets it); the BLL stores only a salted
-    /// PBKDF2 hash. Both password boxes are cleared after every save attempt, on Deactivate, Cancel and
+    /// SHA-256 hash (decisions.md D22). Both password boxes are cleared after every save attempt, on Deactivate, Cancel and
     /// selection. An Administrator can never deactivate their own account (compared with the console's
     /// <see cref="UserId"/>). Nothing is ever deleted.
     /// </summary>
@@ -70,11 +71,17 @@ namespace FuturePath.PresentationLayer
                 string username = txtUsername.Text.Trim();
                 try
                 {
-                    AccountsSaveAccount(null, txtNewPassword.Text);
+                    AccountsSaveAccount(0, txtNewPassword.Text);
+                }
+                catch (ArgumentException ex)
+                {
+                    // The BLL's own check failed, e.g. "The username … is already taken."
+                    ReportStatus(ex.Message, true);
+                    return;
                 }
                 catch (Exception)
                 {
-                    ReportStatus("The user account could not be added. The username may already be in use. Please try again.", true);
+                    ReportStatus("The user account could not be added. Please try again.", true);
                     return;
                 }
 
@@ -111,11 +118,17 @@ namespace FuturePath.PresentationLayer
                 bool reset = txtNewPassword.Text.Length > 0;
                 try
                 {
-                    AccountsSaveAccount(accountsSelectedUserId, reset ? txtNewPassword.Text : null);
+                    // A blank password keeps the current one.
+                    AccountsSaveAccount(accountsSelectedUserId.Value, txtNewPassword.Text);
+                }
+                catch (ArgumentException ex)
+                {
+                    ReportStatus(ex.Message, true);
+                    return;
                 }
                 catch (Exception)
                 {
-                    ReportStatus("The user account could not be updated. The username may already be in use. Please try again.", true);
+                    ReportStatus("The user account could not be updated. Please try again.", true);
                     return;
                 }
 
@@ -163,6 +176,11 @@ namespace FuturePath.PresentationLayer
             {
                 AccountsDeactivateAccount(accountsSelectedUserId.Value);
             }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
+            }
             catch (Exception)
             {
                 ReportStatus("The user account could not be deactivated. Please try again.", true);
@@ -190,7 +208,9 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboRole.DataSource = UserAccountController.GetRoles();   // "Administrator", "Career Advisor"
+                // "Administrator", "Career Advisor" (the UserAccount role constants).
+                UserAccountController userAccountController = new UserAccountController();
+                cboRole.DataSource = userAccountController.GetRoles();
                 cboRole.SelectedIndex = -1;
             }
             catch (Exception)
@@ -205,9 +225,10 @@ namespace FuturePath.PresentationLayer
             accountsLoading = true;
             try
             {
-                // TODO BLL: dgvAccounts.DataSource = UserAccountController.GetAccounts(UserId);
-                //           Columns: UserID, Username, FullName, Role, IsActive — the BLL never returns PasswordHash.
-                //           The BLL checks that UserId's Role = Administrator before returning the list.
+                // Columns: UserID, Username, FullName, Role, IsActive — the BLL never returns PasswordHash.
+                // The BLL checks that UserId's Role = Administrator before returning the list.
+                UserAccountController userAccountController = new UserAccountController();
+                dgvAccounts.DataSource = userAccountController.GetAccounts(UserId);
                 dgvAccounts.ClearSelection();
             }
             catch (Exception)
@@ -223,27 +244,27 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Adds (userId null) or updates an account. <paramref name="newPassword"/> is null on an update
-        /// that keeps the current password. The password is passed straight to the BLL and never kept here.
+        /// Adds (userId 0) or updates an account. A blank <paramref name="newPassword"/> on an update keeps the
+        /// current password. The password is passed straight to the BLL and never kept here.
+        /// The BLL checks that UserId's Role = Administrator, re-checks every field and that Username is unique,
+        /// and refuses to deactivate or demote the caller's own account. It stores only a salted hash
+        /// (a random salt plus SHA-256, decisions.md D22), never the plaintext.
         /// </summary>
-        /// <param name="userId">The account being updated, or null to add a new one.</param>
-        /// <param name="newPassword">The new password, or null to keep the current one.</param>
-        private void AccountsSaveAccount(int? userId, string newPassword)
+        /// <param name="userId">The account being updated, or 0 to add a new one.</param>
+        /// <param name="newPassword">The new password, or "" to keep the current one.</param>
+        private void AccountsSaveAccount(int userId, string newPassword)
         {
-            // TODO BLL: UserAccountController.SaveAccount(UserId, userId, txtUsername.Text.Trim(), txtFullName.Text.Trim(),
-            //               (string)cboRole.SelectedValue, chkAccountActive.Checked, newPassword);
-            //           The BLL checks that UserId's Role = Administrator before running; re-checks every field and
-            //           that Username is unique; refuses to deactivate the caller's own account (userId == UserId).
-            //           When newPassword is not null it stores a salted hash only — PBKDF2 via Rfc2898DeriveBytes
-            //           with a random per-user salt into UserAccount.PasswordHash — never the plaintext.
+            UserAccountController userAccountController = new UserAccountController();
+            userAccountController.SaveAccount(UserId, userId, txtUsername.Text.Trim(), txtFullName.Text.Trim(),
+                (string)cboRole.SelectedItem, chkAccountActive.Checked, newPassword);
         }
 
         /// <summary>Sets IsActive = 0 on an account so it can no longer sign in. Nothing is deleted.</summary>
-        /// <param name="userId">The account to deactivate (never the signed-in Administrator's own).</param>
+        /// <param name="userId">The account to deactivate (the BLL refuses the signed-in Administrator's own).</param>
         private void AccountsDeactivateAccount(int userId)
         {
-            // TODO BLL: UserAccountController.DeactivateAccount(UserId, userId);
-            //           The BLL checks that UserId's Role = Administrator before running and refuses userId == UserId.
+            UserAccountController userAccountController = new UserAccountController();
+            userAccountController.DeactivateAccount(UserId, userId);
         }
 
         #endregion

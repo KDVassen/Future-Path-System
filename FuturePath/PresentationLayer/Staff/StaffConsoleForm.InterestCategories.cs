@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -67,7 +68,12 @@ namespace FuturePath.PresentationLayer
             string name = txtCategoryName.Text.Trim();
             try
             {
-                CategoriesSaveCategory(null);
+                CategoriesSaveCategory(0);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -97,7 +103,12 @@ namespace FuturePath.PresentationLayer
             string name = txtCategoryName.Text.Trim();
             try
             {
-                CategoriesSaveCategory(categoriesSelectedId);
+                CategoriesSaveCategory(categoriesSelectedId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -137,6 +148,11 @@ namespace FuturePath.PresentationLayer
             {
                 CategoriesDeactivateCategory(categoriesSelectedId.Value);
             }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
+            }
             catch (Exception)
             {
                 ReportStatus("The category could not be deactivated. Please try again.", true);
@@ -165,8 +181,9 @@ namespace FuturePath.PresentationLayer
             categoriesLoading = true;
             try
             {
-                // TODO BLL: dgvCategories.DataSource = InterestController.GetInterestCategories(includeInactive: true);
-                //           Columns: CategoryID, CategoryName, QuestionCount (active questions), MappedProgrammeCount, IsActive.
+                // Columns: CategoryID, CategoryName, QuestionCount (active questions), MappedProgrammeCount, IsActive.
+                InterestController interestController = new InterestController();
+                dgvCategories.DataSource = interestController.GetInterestCategories(true);
                 dgvCategories.ClearSelection();
             }
             catch (Exception)
@@ -186,8 +203,11 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboWeightProgramme.DataSource = ReferenceDataController.GetDegreeProgrammes(includeInactive: false);
-                //           cboWeightProgramme.DisplayMember = "ProgrammeName"; cboWeightProgramme.ValueMember = "ProgrammeID";
+                // Every active programme (faculty 0 = all).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboWeightProgramme.DisplayMember = "ProgrammeName";
+                cboWeightProgramme.ValueMember = "ProgrammeID";
+                cboWeightProgramme.DataSource = referenceDataController.GetProgrammes(0, false);
                 cboWeightProgramme.SelectedIndex = -1;
             }
             catch (Exception)
@@ -203,8 +223,9 @@ namespace FuturePath.PresentationLayer
             categoriesLoading = true;
             try
             {
-                // TODO BLL: dgvWeights.DataSource = InterestController.GetRelevanceWeights(categoryId);
-                //           Columns: ProgrammeID, ProgrammeName, RelevanceWeight (DegreeInterestMapping, DECIMAL(4,2)).
+                // Columns: ProgrammeID, ProgrammeName, RelevanceWeight (DegreeInterestMapping, DECIMAL(4,2)).
+                InterestController interestController = new InterestController();
+                dgvWeights.DataSource = interestController.GetRelevanceWeights(categoryId);
                 dgvWeights.ClearSelection();
             }
             catch (Exception)
@@ -217,22 +238,23 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Adds (categoryId null) or updates a category. The BLL validates again.</summary>
-        /// <param name="categoryId">The category being updated, or null to add a new one.</param>
-        private void CategoriesSaveCategory(int? categoryId)
+        /// <summary>
+        /// Adds (categoryId 0) or updates a category. The BLL checks that UserId's Role = Administrator,
+        /// re-checks the name (required, max 60) and rejects a CategoryName already in use.
+        /// </summary>
+        /// <param name="categoryId">The category being updated, or 0 to add a new one.</param>
+        private void CategoriesSaveCategory(int categoryId)
         {
-            // TODO BLL: InterestController.SaveInterestCategory(UserId, categoryId, txtCategoryName.Text.Trim(),
-            //               chkCategoryActive.Checked);
-            //           The BLL checks that UserId's Role = Administrator before running, re-checks the name
-            //           (required, max 60) and rejects a CategoryName already in use.
+            InterestController interestController = new InterestController();
+            interestController.SaveInterestCategory(UserId, categoryId, txtCategoryName.Text.Trim(), chkCategoryActive.Checked);
         }
 
-        /// <summary>Sets IsActive = 0 on a category. Nothing is deleted.</summary>
+        /// <summary>Sets IsActive = 0 on a category (Administrator only, checked by the BLL). Nothing is deleted.</summary>
         /// <param name="categoryId">The category to deactivate.</param>
         private void CategoriesDeactivateCategory(int categoryId)
         {
-            // TODO BLL: InterestController.DeactivateInterestCategory(UserId, categoryId);
-            //           The BLL checks that UserId's Role = Administrator before running.
+            InterestController interestController = new InterestController();
+            interestController.DeactivateInterestCategory(UserId, categoryId);
         }
 
         /// <summary>Adds or updates one DegreeInterestMapping row for the selected category.</summary>
@@ -240,9 +262,10 @@ namespace FuturePath.PresentationLayer
         /// <param name="weight">The relevance weight, 0.00–1.00.</param>
         private void CategoriesSaveWeight(int categoryId, decimal weight)
         {
-            // TODO BLL: InterestController.SaveRelevanceWeight(UserId, (int)cboWeightProgramme.SelectedValue, categoryId, weight);
-            //           Inserts or updates DegreeInterestMapping(ProgrammeID, CategoryID, RelevanceWeight).
-            //           The BLL checks that UserId's Role = Administrator before running and re-checks 0.00–1.00.
+            // Inserts or updates DegreeInterestMapping(ProgrammeID, CategoryID, RelevanceWeight).
+            // The BLL checks that UserId's Role = Administrator before running and re-checks 0.00–1.00.
+            InterestController interestController = new InterestController();
+            interestController.SaveRelevanceWeight(UserId, (int)cboWeightProgramme.SelectedValue, categoryId, weight);
         }
 
         #endregion
@@ -377,6 +400,11 @@ namespace FuturePath.PresentationLayer
             try
             {
                 CategoriesSaveWeight(categoriesSelectedId.Value, weight);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -21,9 +22,10 @@ namespace FuturePath.PresentationLayer
     {
         private const string SessionSearchCompletedStatus = "Completed";
 
-        // Set by SessionSearchShowLearnerSessions (UI 10.1a → 10.2b); cleared by Clear or by editing the surname.
-        private int? sessionSearchLearnerFilterId;
-        private string sessionSearchLearnerFilterSurname;
+        // Set by SessionSearchShowLearnerSessions (UI 10.1a → 10.2b); 0 = no learner filter.
+        // Cleared by Clear, or by typing a surname, which starts a search across every learner.
+        private int sessionSearchLearnerFilterId;
+        private string sessionSearchLearnerFilterName;
 
         /// <summary>
         /// Called by <see cref="PageShown"/> each time UI 10.2b appears. The first time, it prepares the
@@ -58,14 +60,13 @@ namespace FuturePath.PresentationLayer
         /// The caller shows this tab first.
         /// </summary>
         /// <param name="learnerId">Learner.LearnerID of the learner chosen on UI 10.1a.</param>
-        /// <param name="learnerName">Display name, e.g. "Rademeyer, L"; the surname is shown in the search field.</param>
+        /// <param name="learnerName">The learner's display name, e.g. "Labeeqah Rademeyer", named in the result count.</param>
         private void SessionSearchShowLearnerSessions(int learnerId, string learnerName)
         {
+            // Filter by the learner's ID only: LearnerName is "First Last", so it cannot be used as a surname.
             SessionSearchClearCriteria();
-            string surname = (learnerName ?? string.Empty).Split(',')[0].Trim();
-            txtSesSurname.Text = surname;
             sessionSearchLearnerFilterId = learnerId;
-            sessionSearchLearnerFilterSurname = surname;
+            sessionSearchLearnerFilterName = learnerName;
             SessionSearchFind();
         }
 
@@ -76,9 +77,11 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboSesOutcome.DataSource = ReferenceDataController.GetOutcomes();
-                //           cboSesOutcome.DisplayMember = "OutcomeName"; cboSesOutcome.ValueMember = "OutcomeCode";
-                //           (the four outcomes of RecommendationResult.OutcomeCode; no table yet — see report)
+                // The four outcomes from AdvisoryOutcome (decisions.md D15): OutcomeCode, OutcomeName.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboSesOutcome.DisplayMember = "OutcomeName";
+                cboSesOutcome.ValueMember = "OutcomeCode";
+                cboSesOutcome.DataSource = referenceDataController.GetOutcomes(false);
                 cboSesOutcome.SelectedIndex = -1;
             }
             catch (Exception)
@@ -91,36 +94,35 @@ namespace FuturePath.PresentationLayer
         /// Asks the BLL for matching sessions. Each row joins AdvisorySession, Learner, DegreeProgramme
         /// and the selected RecommendationResult: SessionID, SessionStatus, SessionNumber (yyyy-NNNN,
         /// built by the BLL), SessionDate, LearnerName, Grade, ProgrammeName, OutcomeCode (stored,
-        /// never recalculated) and IsExported (an ExportReport row exists).
+        /// never recalculated) and IsExported (an ExportReport row exists). A blank field, a null date, an
+        /// outcome of "" and a learner ID of 0 mean "no filter". The BLL checks the role first (Section 8).
         /// </summary>
         private DataTable SessionSearchFindSessions(string sessionNumber, string surname, DateTime? from, DateTime? to,
-            string outcomeCode, int? learnerId)
+            string outcomeCode, int learnerId)
         {
-            // TODO BLL: return SessionSearchController.FindSessions(sessionNumber, surname, from, to, outcomeCode, learnerId, UserId);
-            //           (the BLL checks the role before returning session data — Section 8)
-            return null;
+            SessionSearchController sessionSearchController = new SessionSearchController();
+            return sessionSearchController.FindSessions(UserId, sessionNumber, surname, from, to, outcomeCode, learnerId);
         }
 
         /// <summary>Total number of stored sessions, for the "n of N sessions match" caption.</summary>
         private int SessionSearchCountSessions()
         {
-            // TODO BLL: return SessionSearchController.CountSessions(UserId);
-            return 0;
+            SessionSearchController sessionSearchController = new SessionSearchController();
+            return sessionSearchController.CountSessions(UserId);
         }
 
         /// <summary>
-        /// Regenerates the FP-LSR Learner Advisory Summary for one session. The BLL checks the role,
-        /// refuses an incomplete session and writes an ExportReport row (ReportCode "FP-LSR",
-        /// SessionID set, GeneratedByUserID = UserId).
+        /// Regenerates the FP-LSR Learner Advisory Summary for one session. The BLL checks the role and
+        /// refuses an incomplete session (reports.md FP-LSR "Who generates it"). An export is logged in
+        /// ExportReport by <see cref="SaveReport"/> (ReportCode "FP-LSR", SessionID set, GeneratedByUserID = UserId).
         /// </summary>
         /// <param name="sessionId">AdvisorySession.SessionID of the selected row.</param>
         /// <param name="sessionNumber">The session number yyyy-NNNN, for the subtitle and the file name.</param>
         /// <param name="filePath">Where to save the export, or null to open it in the report viewer (UI 11.1a).</param>
         private void SessionSearchGenerateLearnerSummary(int sessionId, string sessionNumber, string filePath)
         {
-            System.Data.DataSet data = null;
-            // TODO BLL: data = ReportController.GetLearnerSummary(sessionId, UserId);   // FpLsrData
-            //           The BLL checks the role and refuses an incomplete session (reports.md FP-LSR "Who generates it").
+            ReportController reportController = new ReportController();
+            DataSet data = reportController.GetLearnerSummary(UserId, sessionId);
             if (filePath == null)
             {
                 OpenReportViewer(LsrCode, data, "Session " + sessionNumber, sessionId, null, null, null,
@@ -139,33 +141,52 @@ namespace FuturePath.PresentationLayer
         /// <summary>Validates the criteria, runs the search and reports the result in the status bar.</summary>
         private void SessionSearchFind()
         {
-            bool numberValid = SessionSearchCheckSessionNumber();
-            bool datesValid = SessionSearchCheckDateRange();
-            if (!numberValid || !datesValid)
+            if (!SessionSearchCheckSessionNumber())
             {
-                ReportStatus(!numberValid
-                    ? "Session number: use the form yyyy-NNNN, e.g. 2026-0417, or leave it blank."
-                    : "Session from must be on or before Session to.", true);
-                (numberValid ? (Control)dtpSessionFrom : txtSesSessionNumber).Focus();
+                ReportStatus("Session number: use the form yyyy-NNNN, e.g. 2026-0417, or leave it blank.", true);
+                txtSesSessionNumber.Focus();
                 return;
             }
 
-            if (sessionSearchLearnerFilterId.HasValue && txtSesSurname.Text.Trim() != sessionSearchLearnerFilterSurname)
+            if (!SessionSearchCheckDateRange())
             {
-                sessionSearchLearnerFilterId = null;
+                ReportStatus("Session from must be on or before Session to.", true);
+                dtpSessionFrom.Focus();
+                return;
             }
 
-            DateTime? from = dtpSessionFrom.Checked ? (DateTime?)dtpSessionFrom.Value.Date : null;
-            DateTime? to = dtpSessionTo.Checked ? (DateTime?)dtpSessionTo.Value.Date : null;
-            string outcome = cboSesOutcome.SelectedIndex >= 0 ? Convert.ToString(cboSesOutcome.SelectedValue, CultureInfo.InvariantCulture) : null;
+            // A surname typed after opening a learner from UI 10.1a starts a search across every learner.
+            if (txtSesSurname.Text.Trim().Length > 0)
+            {
+                sessionSearchLearnerFilterId = 0;
+            }
+
+            // An unticked date means "no date filter".
+            DateTime? from = null;
+            if (dtpSessionFrom.Checked)
+            {
+                from = dtpSessionFrom.Value.Date;
+            }
+
+            DateTime? to = null;
+            if (dtpSessionTo.Checked)
+            {
+                to = dtpSessionTo.Value.Date;
+            }
 
             DataTable results;
             int total;
             try
             {
-                results = SessionSearchFindSessions(txtSesSessionNumber.Text.Trim(), txtSesSurname.Text.Trim(), from, to, outcome,
-                    sessionSearchLearnerFilterId);
+                results = SessionSearchFindSessions(txtSesSessionNumber.Text.Trim(), txtSesSurname.Text.Trim(), from, to,
+                    SelectedCode(cboSesOutcome), sessionSearchLearnerFilterId);
                 total = SessionSearchCountSessions();
+            }
+            catch (ArgumentException ex)
+            {
+                // The BLL validates the criteria again; its message names the field to fix.
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -174,8 +195,12 @@ namespace FuturePath.PresentationLayer
             }
 
             dgvSessions.DataSource = results;
-            int count = results == null ? 0 : results.Rows.Count;
+            int count = results.Rows.Count;
             lblSesResultsCount.Text = count + " of " + Math.Max(total, count) + " sessions match";
+            if (sessionSearchLearnerFilterId > 0)
+            {
+                lblSesResultsCount.Text = "Sessions of " + sessionSearchLearnerFilterName + ": " + count;
+            }
             if (count == 0)
             {
                 ReportStatus("No sessions match these criteria. Clear a field to widen the search.", true);
@@ -237,8 +262,8 @@ namespace FuturePath.PresentationLayer
             dtpSessionFrom.Checked = false;
             dtpSessionTo.Checked = false;
             cboSesOutcome.SelectedIndex = -1;
-            sessionSearchLearnerFilterId = null;
-            sessionSearchLearnerFilterSurname = null;
+            sessionSearchLearnerFilterId = 0;
+            sessionSearchLearnerFilterName = null;
             SessionSearchCheckSessionNumber();
             SessionSearchCheckDateRange();
             dgvSessions.DataSource = null;
@@ -307,7 +332,7 @@ namespace FuturePath.PresentationLayer
                 using (var save = new SaveFileDialog())
                 {
                     save.Title = "Save advisory summary";
-                    save.Filter = "PDF document (*.pdf)|*.pdf|Word document (*.docx)|*.docx";
+                    save.Filter = ExportFilterOf(LsrCode);
                     save.FileName = "FP-LSR " + sessionNumber;
                     if (save.ShowDialog(this) != DialogResult.OK)
                     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -64,7 +65,12 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                QuestionnaireSaveQuestion(null);
+                QuestionnaireSaveQuestion(0);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -93,7 +99,12 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                QuestionnaireSaveQuestion(questionnaireSelectedId);
+                QuestionnaireSaveQuestion(questionnaireSelectedId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -132,6 +143,11 @@ namespace FuturePath.PresentationLayer
             {
                 QuestionnaireDeactivateQuestion(questionnaireSelectedId.Value);
             }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
+            }
             catch (Exception)
             {
                 ReportStatus("The question could not be deactivated. Please try again.", true);
@@ -159,11 +175,15 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboScopeCategory.DataSource = InterestController.GetInterestCategories(includeInactive: true);
-                //           cboScopeCategory.DisplayMember = "CategoryName"; cboScopeCategory.ValueMember = "CategoryID";
-                // TODO BLL: cboQuestionCategory.DataSource = InterestController.GetInterestCategories(includeInactive: false);
-                //           cboQuestionCategory.DisplayMember = "CategoryName"; cboQuestionCategory.ValueMember = "CategoryID";
-                //           (a separate list for each combo, so they do not share one selection)
+                // A separate table for each combo (GetInterestCategories returns a new one every call),
+                // so they do not share one selection.
+                InterestController interestController = new InterestController();
+                cboScopeCategory.DisplayMember = "CategoryName";
+                cboScopeCategory.ValueMember = "CategoryID";
+                cboScopeCategory.DataSource = interestController.GetInterestCategories(true);
+                cboQuestionCategory.DisplayMember = "CategoryName";
+                cboQuestionCategory.ValueMember = "CategoryID";
+                cboQuestionCategory.DataSource = interestController.GetInterestCategories(false);
                 cboScopeCategory.SelectedIndex = -1;
                 cboQuestionCategory.SelectedIndex = -1;
             }
@@ -179,12 +199,10 @@ namespace FuturePath.PresentationLayer
             questionnaireLoading = true;
             try
             {
-                int? scopeCategoryId = cboScopeCategory.SelectedIndex >= 0 && cboScopeCategory.SelectedValue != null
-                    ? (int?)Convert.ToInt32(cboScopeCategory.SelectedValue, CultureInfo.InvariantCulture)
-                    : null;
-                // TODO BLL: dgvQuestions.DataSource = InterestController.GetQuestions(scopeCategoryId, includeInactive: true);
-                //           Columns: QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive;
-                //           ordered by DisplayOrder. A null scope returns every category.
+                // Columns: QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive, ordered by
+                // DisplayOrder. No scope category (0) lists every category.
+                InterestController interestController = new InterestController();
+                dgvQuestions.DataSource = interestController.GetQuestions(SelectedId(cboScopeCategory), true);
                 dgvQuestions.ClearSelection();
             }
             catch (Exception)
@@ -199,22 +217,24 @@ namespace FuturePath.PresentationLayer
             QuestionnaireUpdateCountLine();
         }
 
-        /// <summary>Adds (questionId null) or updates a question. The BLL validates again.</summary>
-        /// <param name="questionId">The question being updated, or null to add a new one.</param>
-        private void QuestionnaireSaveQuestion(int? questionId)
+        /// <summary>
+        /// Adds (questionId 0) or updates a question. The BLL checks that UserId's Role = Administrator and
+        /// re-checks the statement (required, max 255), the category (an existing, active one) and the order (1–99).
+        /// </summary>
+        /// <param name="questionId">The question being updated, or 0 to add a new one.</param>
+        private void QuestionnaireSaveQuestion(int questionId)
         {
-            // TODO BLL: InterestController.SaveQuestion(UserId, questionId, txtStatement.Text.Trim(),
-            //               (int)cboQuestionCategory.SelectedValue, (int)numDisplayOrder.Value, chkQuestionActive.Checked);
-            //           The BLL checks that UserId's Role = Administrator before running and re-checks the
-            //           statement (required, max 255), the category (an existing, active one) and the order (1–99).
+            InterestController interestController = new InterestController();
+            interestController.SaveQuestion(UserId, questionId, txtStatement.Text.Trim(),
+                (int)cboQuestionCategory.SelectedValue, (int)numDisplayOrder.Value, chkQuestionActive.Checked);
         }
 
-        /// <summary>Sets IsActive = 0 on a question. Nothing is deleted.</summary>
+        /// <summary>Sets IsActive = 0 on a question (Administrator only, checked by the BLL). Nothing is deleted.</summary>
         /// <param name="questionId">The question to deactivate.</param>
         private void QuestionnaireDeactivateQuestion(int questionId)
         {
-            // TODO BLL: InterestController.DeactivateQuestion(UserId, questionId);
-            //           The BLL checks that UserId's Role = Administrator before running.
+            InterestController interestController = new InterestController();
+            interestController.DeactivateQuestion(UserId, questionId);
         }
 
         #endregion

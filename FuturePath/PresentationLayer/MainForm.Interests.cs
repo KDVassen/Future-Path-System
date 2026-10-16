@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -62,55 +61,24 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Reads a named member from a bound list item, whether the source is a DataTable
-        /// (DataRowView) or a list of entity objects.
+        /// Builds one statement row per active question, in the order given (the BLL sorts by
+        /// DisplayOrder). The table comes from InterestController.GetActiveQuestions:
+        /// QuestionID, QuestionText, CategoryID, CategoryName, DisplayOrder.
         /// </summary>
-        private static object InterestsReadMember(object item, string member)
+        /// <param name="questions">The active questions, already ordered.</param>
+        private void InterestsBuildQuestionRows(DataTable questions)
         {
-            var rowView = item as DataRowView;
-            if (rowView != null)
-            {
-                return rowView.Row.Table.Columns.Contains(member) ? rowView[member] : null;
-            }
-
-            var property = TypeDescriptor.GetProperties(item).Find(member, true);
-            return property == null ? null : property.GetValue(item);
-        }
-
-        /// <summary>Reads a member as text; an empty string when it is missing or null.</summary>
-        private static string InterestsReadText(object item, string member)
-        {
-            object value = InterestsReadMember(item, member);
-            return value == null || value == DBNull.Value ? string.Empty : value.ToString();
-        }
-
-        /// <summary>
-        /// Builds one statement row per item of the question list, in the order given (the BLL sorts by
-        /// DisplayOrder). Each item must expose QuestionID, QuestionText and CategoryName; a DataTable,
-        /// DataView or a list of entity objects all work.
-        /// </summary>
-        /// <param name="source">The active questions, already ordered.</param>
-        private void InterestsBuildQuestionRows(object source)
-        {
-            var table = source as DataTable;
-            IEnumerable items = table != null ? table.DefaultView : source as IEnumerable;
-
             pnlStatements.SuspendLayout();
             InterestsClearRows();
-            if (items != null)
+            foreach (DataRow question in questions.Rows)
             {
-                foreach (object item in items)
-                {
-                    var row = new InterestQuestionRow
-                    {
-                        QuestionId = Convert.ToInt32(InterestsReadMember(item, "QuestionID"), CultureInfo.InvariantCulture),
-                        CategoryName = InterestsReadText(item, "CategoryName"),
-                        Index = interestsRows.Count
-                    };
-                    row.Container = InterestsBuildRowPanel(row, InterestsReadText(item, "QuestionText"));
-                    interestsRows.Add(row);
-                    pnlStatements.Controls.Add(row.Container);
-                }
+                InterestQuestionRow row = new InterestQuestionRow();
+                row.QuestionId = Convert.ToInt32(question["QuestionID"], CultureInfo.InvariantCulture);
+                row.CategoryName = Convert.ToString(question["CategoryName"], CultureInfo.CurrentCulture);
+                row.Index = interestsRows.Count;
+                row.Container = InterestsBuildRowPanel(row, Convert.ToString(question["QuestionText"], CultureInfo.CurrentCulture));
+                interestsRows.Add(row);
+                pnlStatements.Controls.Add(row.Container);
             }
 
             // Rows fill the panel when they all fit; otherwise leave room for the vertical scroll bar.
@@ -274,10 +242,8 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: InterestsBuildQuestionRows(InterestController.GetActiveQuestions());
-                //           Active InterestQuestion rows joined to InterestCategory, ordered by DisplayOrder:
-                //           QuestionID, QuestionText, CategoryName.
-                InterestsBuildQuestionRows(null);
+                InterestController interestController = new InterestController();
+                InterestsBuildQuestionRows(interestController.GetActiveQuestions());
                 interestsLoaded = true;
             }
             catch (Exception)
@@ -289,7 +255,16 @@ namespace FuturePath.PresentationLayer
         /// <summary>The responses given so far, QuestionID → ResponseValue (1–5).</summary>
         private Dictionary<int, int> InterestsResponses()
         {
-            return interestsRows.Where(r => r.Response.HasValue).ToDictionary(r => r.QuestionId, r => r.Response.Value);
+            Dictionary<int, int> responses = new Dictionary<int, int>();
+            foreach (InterestQuestionRow row in interestsRows)
+            {
+                if (row.Response.HasValue)
+                {
+                    responses.Add(row.QuestionId, row.Response.Value);
+                }
+            }
+
+            return responses;
         }
 
         /// <summary>
@@ -298,11 +273,12 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void InterestsRefreshCategoryScores()
         {
-            var scores = new List<KeyValuePair<string, double>>();
+            // (category name, score 0–100) pairs, highest first; nothing is saved (Learner.calculateInterestScore).
+            List<KeyValuePair<string, decimal>> scores = new List<KeyValuePair<string, decimal>>();
             try
             {
-                // TODO BLL: scores = InterestController.CalculateCategoryScores(SessionId, InterestsResponses());
-                //           (Learner.calculateInterestScore per InterestCategory; highest first, 0–100.)
+                InterestController interestController = new InterestController();
+                scores = interestController.CalculateCategoryScores(InterestsResponses());
             }
             catch (Exception)
             {
@@ -332,7 +308,8 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void InterestsSave()
         {
-            // TODO BLL: InterestController.SaveResponses(SessionId.Value, InterestsResponses());
+            InterestController interestController = new InterestController();
+            interestController.SaveResponses(SessionId.Value, InterestsResponses());
         }
 
         #endregion
@@ -402,12 +379,19 @@ namespace FuturePath.PresentationLayer
             {
                 InterestsSave();
             }
+            catch (ArgumentException ex)
+            {
+                // The BLL's own check failed: its message says what to do.
+                SetStatus(ex.Message, AmberColour, InkColour);
+                return;
+            }
             catch (Exception)
             {
                 SetStatus("Your answers could not be saved. Please try again.", AmberColour, InkColour);
                 return;
             }
 
+            ForgetResults();
             GoToStep(tabFaculty, 4);
         }
 

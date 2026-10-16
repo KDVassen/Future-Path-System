@@ -1,6 +1,6 @@
 ﻿# Future Path — design decisions
 
-_Updated 14 October 2026._
+_Updated 15 October 2026._
 
 The submitted specification (`docs/spec/INF2011S_Team_14_Part_1.pdf`) is the contract. This file
 records only what the team decided where the spec is silent, unclear or deliberately changed, so the
@@ -47,6 +47,7 @@ How the classes are built is described in `application-layer.md`.
 | D20 | **Checking again replaces the earlier result.** Saving the selected result replaces the session's previous selected row. Generating alternatives replaces the earlier alternatives. Saving subjects or answers again clears the session's results. | `UNIQUE(SessionID, ProgrammeID)` would otherwise make a second "Check eligibility" fail, and a stored result must always match the marks it was made from. |
 | D22 | **The BLL and Data Layer are written at taught-course level** (branch `application-data-simplification`):<br>- 0 means "not given" instead of nullable parameters;<br>- small result classes (`DailySummary`, `ReportScope`, `ProgrammeAlignment`) instead of `out` parameters;<br>- plain `if` / `else` instead of `??` and `? :`;<br>- SQL WHERE clauses built with `if` statements, always parameterised;<br>- no LIKE-wildcard escaping;<br>- one `ReportTally` helper class instead of three;<br>- passwords hashed with a random salt plus SHA-256 (`salt:hash`) instead of PBKDF2.<br>SQL parameters remain the defence against injection, and role checks and salted hashes remain as Section 8 requires. | Every team member must explain their code line by line at the individual walkthrough. The course taught parameterised queries but not key-stretching or wildcard escaping. Behaviour is unchanged: all 1,091 checks still pass. |
 | D21 | **The database ships as `FuturePath/FuturePath.mdf`**, attached through `|DataDirectory|` like the Waitering System's `EmployeeDatabase.mdf`. `Database/CreateSchema.sql`, `SeedData.sql` and `BuildDatabase.ps1` rebuild it. The `.mdf` is built with SQL Server 2025 LocalDB; on an older LocalDB, run `BuildDatabase.ps1`. | It works straight after a clone, and the scripts keep it explainable and rebuildable. |
+| D23 | **The forms call the BLL** (forms round, October 2026). Three gaps were filled while wiring them:<br>- **UI 13.2 has no field for the accepted alternative's minimum mark.** Update requirement sends the stored `AlternativeMinimumMark` back unchanged; Add requirement sends 0, so the main minimum applies. Changing it needs a new field on UI 13.2.<br>- **Saving subjects (UI 3) or answers (UI 4) again after a check locks UI 6–7** and clears them until Check eligibility is pressed again, because the BLL has deleted the session's results (D20).<br>- **Open learner profile (UI 10.1a → 10.2b) filters by learner ID only**, not by surname, because the search grid's `LearnerName` is "First Last". | Seed requirements 32 and 35 accept Mathematical Literacy only at 60%; saving the form for another reason must not quietly lower that. A stale outcome must never be shown or exported (Section 7 output controls). Using the full name as a surname matched no sessions. |
 
 ## 2. Clashes resolved in favour of the spec
 

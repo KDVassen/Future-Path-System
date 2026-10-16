@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -45,13 +45,20 @@ namespace FuturePath.PresentationLayer
             FundingAdminUpdateFundingCount();
             try
             {
-                // TODO BLL: cboFundingType.DataSource = FundingController.GetFundingTypes();
-                //           Read from SystemParameter FUNDING_TYPE_1..4 (Section 7: funding type only from the predefined set).
-                //           cboFundingType.DisplayMember = "ParameterValue"; cboFundingType.ValueMember = "ParameterValue";
-                // TODO BLL: clbFaculties.DataSource = ReferenceDataController.GetFaculties(includeInactive: false);
-                //           clbFaculties.DisplayMember = "FacultyName"; clbFaculties.ValueMember = "FacultyID";
-                // TODO BLL: clbProgrammes.DataSource = ReferenceDataController.GetAllProgrammes(includeInactive: false);
-                //           clbProgrammes.DisplayMember = "ProgrammeName"; clbProgrammes.ValueMember = "ProgrammeID";
+                // SystemParameter FUNDING_TYPE_1..4 (Section 7: funding type only from the predefined set).
+                FundingController fundingController = new FundingController();
+                cboFundingType.DisplayMember = "ParameterValue";
+                cboFundingType.ValueMember = "FundingType";
+                cboFundingType.DataSource = fundingController.GetFundingTypes(false);
+
+                // The active faculties and every active programme (faculty 0 = all) that funding can be linked to.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                clbFaculties.DisplayMember = "FacultyName";
+                clbFaculties.ValueMember = "FacultyID";
+                clbFaculties.DataSource = referenceDataController.GetFaculties(false, false);
+                clbProgrammes.DisplayMember = "ProgrammeName";
+                clbProgrammes.ValueMember = "ProgrammeID";
+                clbProgrammes.DataSource = referenceDataController.GetProgrammes(0, false);
                 cboFundingType.SelectedIndex = -1;
             }
             catch (Exception)
@@ -79,12 +86,18 @@ namespace FuturePath.PresentationLayer
             string name = txtFundingName.Text.Trim();
             try
             {
-                // TODO BLL: FundingController.SaveFunding(UserId, null, name, (string)cboFundingType.SelectedValue,
-                //               txtEligibility.Text.Trim(), txtDocuments.Text.Trim(), FundingAdminClosingDateOrNull(), txtContact.Text.Trim(),
-                //               chkMeritBased.Checked, chkNeedBased.Checked, chkFndActive.Checked,
-                //               FundingAdminCheckedIds(clbFaculties), FundingAdminCheckedIds(clbProgrammes));
-                //           Writes FUNDINGOPTION plus its FUNDINGFACULTY / FUNDINGPROGRAMME links in one transaction.
-                //           The BLL checks Role = Administrator before it writes (Section 8) and validates again.
+                // FundingID 0 adds an option. Writes FundingOption plus its FundingFaculty / FundingProgramme links in one
+                // transaction. The BLL checks Role = Administrator before it writes (Section 8) and validates again.
+                FundingController fundingController = new FundingController();
+                fundingController.SaveFunding(UserId, 0, name, (string)cboFundingType.SelectedValue,
+                    txtEligibility.Text.Trim(), txtDocuments.Text.Trim(), FundingAdminClosingDateOrNull(), txtContact.Text.Trim(),
+                    chkMeritBased.Checked, chkNeedBased.Checked, chkFndActive.Checked,
+                    FundingAdminCheckedIds(clbFaculties), FundingAdminCheckedIds(clbProgrammes));
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -112,11 +125,17 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: FundingController.SaveFunding(UserId, fundingAdminSelectedFundingId, txtFundingName.Text.Trim(),
-                //               (string)cboFundingType.SelectedValue, txtEligibility.Text.Trim(), txtDocuments.Text.Trim(),
-                //               FundingAdminClosingDateOrNull(), txtContact.Text.Trim(), chkMeritBased.Checked, chkNeedBased.Checked,
-                //               chkFndActive.Checked, FundingAdminCheckedIds(clbFaculties), FundingAdminCheckedIds(clbProgrammes));
-                //           Replaces the link rows for this FundingID. The BLL checks Role = Administrator before it writes.
+                // Replaces the link rows for this FundingID. The BLL checks Role = Administrator before it writes.
+                FundingController fundingController = new FundingController();
+                fundingController.SaveFunding(UserId, fundingAdminSelectedFundingId.Value, txtFundingName.Text.Trim(),
+                    (string)cboFundingType.SelectedValue, txtEligibility.Text.Trim(), txtDocuments.Text.Trim(),
+                    FundingAdminClosingDateOrNull(), txtContact.Text.Trim(), chkMeritBased.Checked, chkNeedBased.Checked,
+                    chkFndActive.Checked, FundingAdminCheckedIds(clbFaculties), FundingAdminCheckedIds(clbProgrammes));
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -153,8 +172,14 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: FundingController.DeactivateFunding(UserId, fundingAdminSelectedFundingId.Value);
-                //           Sets FUNDINGOPTION.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Sets FundingOption.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                FundingController fundingController = new FundingController();
+                fundingController.DeactivateFunding(UserId, fundingAdminSelectedFundingId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -185,8 +210,9 @@ namespace FuturePath.PresentationLayer
             FundingAdminClearForm();
             try
             {
-                // TODO BLL: dgvFunding.DataSource = FundingController.GetFundingOptions(includeInactive: true);
-                //           Columns: FundingID, FundingName, FundingType, ClosingDate (null when none), IsActive.
+                // FundingOption objects: FundingID, FundingName, FundingType, ClosingDate (null when none), IsActive.
+                FundingController fundingController = new FundingController();
+                dgvFunding.DataSource = fundingController.GetFundingOptions(true);
             }
             catch (Exception)
             {
@@ -203,13 +229,25 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: var funding = FundingController.GetFunding(fundingId);
-                //           txtFundingName.Text = funding.FundingName; FundingAdminSelectValue(cboFundingType, funding.FundingType);
-                //           txtEligibility.Text = funding.EligibilityDescription; txtDocuments.Text = funding.RequiredDocuments;
-                //           FundingAdminSetClosingDate(funding.ClosingDate); txtContact.Text = funding.ContactInformation;
-                //           chkMeritBased.Checked = funding.IsMeritBased; chkNeedBased.Checked = funding.IsNeedBased;
-                //           chkFndActive.Checked = funding.IsActive;
-                //           FundingAdminCheckIds(clbFaculties, funding.FacultyIds); FundingAdminCheckIds(clbProgrammes, funding.ProgrammeIds);
+                FundingController fundingController = new FundingController();
+                FundingOption funding = fundingController.GetFunding(fundingId);
+                if (funding == null)
+                {
+                    ReportStatus("The selected funding option no longer exists. Refresh the list and try again.", true);
+                    return;
+                }
+
+                txtFundingName.Text = funding.FundingName;
+                FundingAdminSelectValue(cboFundingType, funding.FundingType);
+                txtEligibility.Text = funding.EligibilityDescription;
+                txtDocuments.Text = funding.RequiredDocuments;
+                FundingAdminSetClosingDate(funding.ClosingDate);
+                txtContact.Text = funding.ContactInformation;
+                chkMeritBased.Checked = funding.IsMeritBased;
+                chkNeedBased.Checked = funding.IsNeedBased;
+                chkFndActive.Checked = funding.IsActive;
+                FundingAdminCheckIds(clbFaculties, funding.FacultyIds);
+                FundingAdminCheckIds(clbProgrammes, funding.ProgrammeIds);
                 ReportStatus("Editing the selected funding option. Choose Update funding option to save it, or Cancel.", false);
             }
             catch (Exception)
@@ -232,30 +270,24 @@ namespace FuturePath.PresentationLayer
             dtpClosingDate.Checked = closingDate.HasValue;
         }
 
-        /// <summary>The IDs (ValueMember) of every ticked item in a bound CheckedListBox.</summary>
+        /// <summary>The IDs of every ticked item in the faculty or programme list.</summary>
         private static List<int> FundingAdminCheckedIds(CheckedListBox list)
         {
-            var ids = new List<int>();
+            List<int> ids = new List<int>();
             foreach (object item in list.CheckedItems)
             {
-                object value = FundingAdminReadProperty(item, list.ValueMember);
-                if (value != null && value != DBNull.Value)
-                {
-                    ids.Add(Convert.ToInt32(value, CultureInfo.InvariantCulture));
-                }
+                ids.Add(FundingAdminItemId(item));
             }
 
             return ids;
         }
 
-        /// <summary>Ticks the items whose ID is in <paramref name="ids"/> and unticks the rest.</summary>
+        /// <summary>Ticks the items whose ID is in <paramref name="ids"/> and unticks the rest (null unticks all).</summary>
         private static void FundingAdminCheckIds(CheckedListBox list, ICollection<int> ids)
         {
             for (int i = 0; i < list.Items.Count; i++)
             {
-                object value = FundingAdminReadProperty(list.Items[i], list.ValueMember);
-                bool ticked = ids != null && value != null && value != DBNull.Value
-                              && ids.Contains(Convert.ToInt32(value, CultureInfo.InvariantCulture));
+                bool ticked = ids != null && ids.Contains(FundingAdminItemId(list.Items[i]));
                 list.SetItemChecked(i, ticked);
             }
         }
@@ -267,7 +299,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Opens the funding option selected in the grid in the form.</summary>
         private void dgvFunding_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvFunding.SelectedRows.Count == 0)
+            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            if (!dgvFunding.Focused || dgvFunding.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -396,12 +429,22 @@ namespace FuturePath.PresentationLayer
             return value is bool && (bool)value;
         }
 
-        /// <summary>Reads a property from a bound list item (a BLL object or a DataRowView).</summary>
-        private static object FundingAdminReadProperty(object item, string name)
+        /// <summary>The ID of an item in the faculty list (a BLL Faculty) or the programme list (a DegreeProgramme).</summary>
+        private static int FundingAdminItemId(object item)
         {
-            if (item == null || string.IsNullOrEmpty(name)) return null;
-            PropertyDescriptor property = TypeDescriptor.GetProperties(item)[name];
-            return property == null ? null : property.GetValue(item);
+            Faculty faculty = item as Faculty;
+            if (faculty != null)
+            {
+                return faculty.FacultyID;
+            }
+
+            DegreeProgramme programme = item as DegreeProgramme;
+            if (programme != null)
+            {
+                return programme.ProgrammeID;
+            }
+
+            return 0;
         }
 
         /// <summary>Selects a value in a bound ComboBox, or clears it when there is nothing to match.</summary>

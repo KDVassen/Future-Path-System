@@ -1,7 +1,9 @@
 using System;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -23,9 +25,9 @@ namespace FuturePath.PresentationLayer
             "Step 5 of 6 · Preliminary guidance only. Continue to the summary, or look at alternatives and funding first.";
 
         // The AdvisoryOutcome last displayed, kept so the band can be redrawn whenever UI 6 is shown.
-        private string outcomeCategory;
+        private string outcomeCode;
         private string outcomeExplanation;
-        private double? outcomeScore;
+        private decimal? outcomeScore;
 
         #region Shown, button clicks and reset
 
@@ -71,7 +73,7 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void OutcomeReset()
         {
-            outcomeCategory = null;
+            outcomeCode = null;
             outcomeExplanation = null;
             outcomeScore = null;
             OutcomeRender();
@@ -92,19 +94,19 @@ namespace FuturePath.PresentationLayer
         /// Shows an AdvisoryOutcome: fills the UI 6 outcome band, its status chip and the Overall score
         /// tile, and tells UI 6.1a (Alternative programmes) what the outcome was. Called by Sequence 1
         /// (EligibilityController.CheckEligibility, from UI 5) and by Sequence 2 when alternatives cannot
-        /// be ranked ("More Information Needed", from UI 6.1a). An empty category means the check could
+        /// be ranked ("More Information Needed", from UI 6.1a). An empty code means the check could
         /// not be completed, and the "More information needed" wording is shown.
         /// </summary>
-        /// <param name="category">AdvisoryOutcome.category (RecommendationResult.OutcomeCode).</param>
+        /// <param name="code">AdvisoryOutcome.Code: STRONG, POSSIBLE, NCE or MOREINFO (RecommendationResult.OutcomeCode).</param>
         /// <param name="explanation">AdvisoryOutcome.explanation (RecommendationResult.OutcomeReason).</param>
         /// <param name="overallScore">AdvisoryOutcome.overallScore (0–100), or null when not calculated.</param>
-        public void DisplayOutcome(string category, string explanation, double? overallScore)
+        public void DisplayOutcome(string code, string explanation, decimal? overallScore)
         {
-            outcomeCategory = category;
+            outcomeCode = code;
             outcomeExplanation = explanation;
             outcomeScore = overallScore;
             OutcomeRender();
-            AlternativesShowOutcome(category, explanation);
+            AlternativesShowOutcome(code, explanation);
         }
 
         /// <summary>
@@ -113,31 +115,37 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void OutcomeRender()
         {
-            string programme = string.IsNullOrWhiteSpace(SelectedProgrammeName) ? "the selected programme" : SelectedProgrammeName;
-            string key = string.IsNullOrWhiteSpace(outcomeCategory)
-                ? string.Empty
-                : outcomeCategory.Replace(" ", string.Empty).ToUpperInvariant();
+            string programme = SelectedProgrammeName;
+            if (string.IsNullOrWhiteSpace(programme))
+            {
+                programme = "the selected programme";
+            }
+
+            string code = string.Empty;
+            if (outcomeCode != null)
+            {
+                code = outcomeCode.Trim().ToUpperInvariant();
+            }
+
             string chip, headline, fallback;
             Color back, bar, chipBack, chipFore;
 
-            switch (key)
+            // The stored codes come from AdvisoryOutcome (decisions.md D15), so they are never typed here.
+            switch (code)
             {
-                case "STRONGMATCH":
-                case "STRONG":
+                case AdvisoryOutcome.CodeStrong:
                     chip = "✓ Strong match";
                     headline = "You are a strong match for " + programme;
                     fallback = "You appear to meet the minimum requirements and your interests align strongly with this programme.";
                     back = GreenTint; bar = GreenColour; chipBack = GreenColour; chipFore = Color.White;
                     break;
-                case "POSSIBLEMATCH":
-                case "POSSIBLE":
+                case AdvisoryOutcome.CodePossible:
                     chip = "! Possible match";
                     headline = "You are a possible match for " + programme;
                     fallback = "You meet some of the requirements, but there are one or more gaps or a weaker interest alignment.";
                     back = AmberTint; bar = AmberColour; chipBack = AmberColour; chipFore = InkColour;
                     break;
-                case "NOTCURRENTLYELIGIBLE":
-                case "NOTELIGIBLE":
+                case AdvisoryOutcome.CodeNotEligible:
                     chip = "✗ Not currently eligible";
                     headline = "You are not currently eligible for " + programme;
                     fallback = "You do not currently meet one or more important requirements for this programme.";
@@ -158,19 +166,24 @@ namespace FuturePath.PresentationLayer
             lblOutcomeChip.ForeColor = chipFore;
             lblOutcomeChip.Text = chip;
             lblOutcomeHeadline.Text = headline;
-            lblOutcomeExplanation.Text = string.IsNullOrWhiteSpace(outcomeExplanation) ? fallback : outcomeExplanation.Trim();
-            lblOutcomeChip.AccessibleDescription = headline + ". " + lblOutcomeExplanation.Text;
+            if (string.IsNullOrWhiteSpace(outcomeExplanation))
+            {
+                lblOutcomeExplanation.Text = fallback;
+            }
+            else
+            {
+                lblOutcomeExplanation.Text = outcomeExplanation.Trim();
+            }
 
-            lblOverallTileValue.Text = outcomeScore.HasValue
-                ? outcomeScore.Value.ToString("0", CultureInfo.CurrentCulture)
-                : "—";
+            lblOutcomeChip.AccessibleDescription = headline + ". " + lblOutcomeExplanation.Text;
+            lblOverallTileValue.Text = OutcomeFormatFigure(outcomeScore);
         }
 
         /// <summary>
         /// Shows the three component figures on their running-figure tiles (display only; the
         /// figures and notes come from the stored RecommendationResult row).
         /// </summary>
-        private void OutcomeShowFigures(double? subjectScore, double? markScore, double? interestScore)
+        private void OutcomeShowFigures(decimal? subjectScore, decimal? markScore, decimal? interestScore)
         {
             lblSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
             lblMarkTileValue.Text = OutcomeFormatFigure(markScore);
@@ -178,9 +191,25 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>A whole-number figure for a tile, or a dash when there is none.</summary>
-        private static string OutcomeFormatFigure(double? value)
+        private static string OutcomeFormatFigure(decimal? value)
         {
-            return value.HasValue ? value.Value.ToString("0", CultureInfo.CurrentCulture) : "—";
+            if (!value.HasValue)
+            {
+                return "—";
+            }
+
+            return value.Value.ToString("0", CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>A score column of the stored result row, or null when it is DBNull (not calculated).</summary>
+        private static decimal? OutcomeReadScore(DataRow row, string column)
+        {
+            if (row[column] == DBNull.Value)
+            {
+                return null;
+            }
+
+            return (decimal)row[column];
         }
 
         /// <summary>
@@ -228,12 +257,29 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: dgvChecked.DataSource = EligibilityController.GetCheckedRequirements(SessionId.Value, SelectedProgrammeId.Value);
-                //           (rows: SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet — from MatchResult)
-                // TODO BLL: var result = EligibilityController.GetSelectedResult(SessionId.Value);
-                //           OutcomeShowFigures(result.SubjectMatchScore, result.MarkMatchScore, result.InterestMatchScore);
-                //           lblSubjectTileNote.Text = result.SubjectNote; lblMarkTileNote.Text = result.MarkNote;
-                //           lblInterestTileNote.Text = result.StrongestCategory;
+                // One RequirementCheck per active requirement (SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet).
+                EligibilityController eligibilityController = new EligibilityController();
+                dgvChecked.DataSource = eligibilityController.GetCheckedRequirements(SessionId.Value, SelectedProgrammeId.Value);
+
+                // The stored selected result: one row, or none if no check is on record.
+                DataTable result = eligibilityController.GetSelectedResult(SessionId.Value);
+                if (result.Rows.Count > 0)
+                {
+                    DataRow row = result.Rows[0];
+                    OutcomeShowFigures(OutcomeReadScore(row, "SubjectMatchScore"), OutcomeReadScore(row, "MarkMatchScore"),
+                                       OutcomeReadScore(row, "InterestMatchScore"));
+                    lblSubjectTileNote.Text = Convert.ToString(row["SubjectNote"], CultureInfo.CurrentCulture);
+                    lblMarkTileNote.Text = Convert.ToString(row["MarkNote"], CultureInfo.CurrentCulture);
+                    string strongest = Convert.ToString(row["StrongestCategory"], CultureInfo.CurrentCulture);
+                    if (strongest.Length > 0)
+                    {
+                        lblInterestTileNote.Text = "strongest: " + strongest;
+                    }
+                    else
+                    {
+                        lblInterestTileNote.Text = "from your questionnaire";
+                    }
+                }
             }
             catch (Exception)
             {

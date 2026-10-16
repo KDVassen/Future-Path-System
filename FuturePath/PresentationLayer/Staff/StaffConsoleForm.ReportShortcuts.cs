@@ -2,6 +2,7 @@
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -65,8 +66,7 @@ namespace FuturePath.PresentationLayer
             }
 
             OpenReports(reportCode, dtpRscFrom.Value.Date, dtpRscTo.Value.Date,
-                ReportShortcutsSelectedId(cboRscFaculty), ReportShortcutsSelectedId(cboRscGrade),
-                cboRscOutcome.SelectedIndex >= 0 ? Convert.ToString(cboRscOutcome.SelectedValue, CultureInfo.InvariantCulture) : null);
+                SelectedId(cboRscFaculty), SelectedId(cboRscGrade), SelectedCode(cboRscOutcome));
         }
 
         #endregion
@@ -78,12 +78,17 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboRscFaculty.DataSource = ReferenceDataController.GetFaculties(activeOnly: true);
-                //           cboRscFaculty.DisplayMember = "FacultyName"; cboRscFaculty.ValueMember = "FacultyID";
-                // TODO BLL: cboRscGrade.DataSource = ReferenceDataController.GetGradeLevels();
-                //           cboRscGrade.DisplayMember = "GradeDescription"; cboRscGrade.ValueMember = "GradeLevelID";
-                // TODO BLL: cboRscOutcome.DataSource = ReferenceDataController.GetOutcomes();
-                //           cboRscOutcome.DisplayMember = "OutcomeName"; cboRscOutcome.ValueMember = "OutcomeCode";
+                // A blank list means "all" (SelectedId gives 0, SelectedCode gives "").
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboRscFaculty.DisplayMember = "FacultyName";
+                cboRscFaculty.ValueMember = "FacultyID";
+                cboRscFaculty.DataSource = referenceDataController.GetFaculties(false, false);
+                cboRscGrade.DisplayMember = "GradeDescription";
+                cboRscGrade.ValueMember = "GradeLevelID";
+                cboRscGrade.DataSource = referenceDataController.GetGradeLevels(false);
+                cboRscOutcome.DisplayMember = "OutcomeName";
+                cboRscOutcome.ValueMember = "OutcomeCode";
+                cboRscOutcome.DataSource = referenceDataController.GetOutcomes(false);
                 cboRscFaculty.SelectedIndex = -1;
                 cboRscGrade.SelectedIndex = -1;
                 cboRscOutcome.SelectedIndex = -1;
@@ -98,13 +103,13 @@ namespace FuturePath.PresentationLayer
         /// Asks the BLL for the report catalogue under these criteria: one row per report
         /// (ReportCode, ReportName, Scope, RowsInScope, LastGenerated — the latest
         /// ExportReport.DateGenerated for that ReportCode). Rows come from the BLL, not literals.
+        /// RowsInScope counts completed sessions only, and FP-LER counts only Not Currently Eligible and
+        /// More Information Needed: the BLL applies these rules and checks the role first.
         /// </summary>
-        private DataTable ReportShortcutsGetReportCatalogue(DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcomeCode)
+        private DataTable ReportShortcutsGetReportCatalogue(DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcomeCode)
         {
-            // TODO BLL: return ReportController.GetReportCatalogue(from, to, facultyId, gradeLevelId, outcomeCode, UserId);
-            //           (RowsInScope counts completed sessions only; FP-LER always counts only
-            //            Not Currently Eligible and More Information Needed — the BLL applies these rules)
-            return null;
+            ReportController reportController = new ReportController();
+            return reportController.GetReportCatalogue(UserId, from, to, facultyId, gradeLevelId, outcomeCode);
         }
 
         #endregion
@@ -124,8 +129,12 @@ namespace FuturePath.PresentationLayer
             try
             {
                 reports = ReportShortcutsGetReportCatalogue(dtpRscFrom.Value.Date, dtpRscTo.Value.Date,
-                    ReportShortcutsSelectedId(cboRscFaculty), ReportShortcutsSelectedId(cboRscGrade),
-                    cboRscOutcome.SelectedIndex >= 0 ? Convert.ToString(cboRscOutcome.SelectedValue, CultureInfo.InvariantCulture) : null);
+                    SelectedId(cboRscFaculty), SelectedId(cboRscGrade), SelectedCode(cboRscOutcome));
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -134,7 +143,7 @@ namespace FuturePath.PresentationLayer
             }
 
             dgvReports.DataSource = reports;
-            int count = reports == null ? 0 : reports.Rows.Count;
+            int count = reports.Rows.Count;
             if (count == 0)
             {
                 lblRscResultsCount.Text = "No reports listed";
@@ -160,12 +169,6 @@ namespace FuturePath.PresentationLayer
             lblRscDateRangeError.Text = valid ? string.Empty : "⚠ " + message;
             lblRscDateRangeError.Visible = !valid;
             return valid;
-        }
-
-        /// <summary>The selected list's integer ID, or null when nothing (or no number) is selected.</summary>
-        private static int? ReportShortcutsSelectedId(ComboBox list)
-        {
-            return list.SelectedIndex >= 0 && list.SelectedValue is int ? (int?)(int)list.SelectedValue : null;
         }
 
         /// <summary>Checks the period as soon as either date picker is left.</summary>
