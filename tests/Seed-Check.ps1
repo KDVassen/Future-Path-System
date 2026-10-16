@@ -1,13 +1,11 @@
 ﻿<#
 .SYNOPSIS
-    Checks the seed data (FuturePath\Database\SeedData.sql) against the seed rules: row counts, the
+    Checks the seed data in the shipped database (FuturePath\FuturePath.mdf) against the seed rules: row counts, the
     Part B rows, the requirement constraints, interest data, funding coverage, system parameters,
     sessions and staff accounts. It finishes by applying the outcome rules of
     application-layer.md section 4 to every seeded session (with the shared entity methods
     EvaluateSubjectAndMarkMatch and CalculateInterestScore), so the intended scenario of each
     session is proved by the data. The real engine is tested by PartB-Regression.ps1.
-    Last, it rebuilds the database from Database\CreateSchema.sql and SeedData.sql and checks that
-    every table matches the shipped FuturePath.mdf row for row.
 
     Uses only the shared contract classes, so it runs before the learner-journey code is merged.
     Run: powershell -NoProfile -ExecutionPolicy Bypass -File tests\Seed-Check.ps1
@@ -16,7 +14,6 @@
 
 $ctx = Initialize-FuturePathTest
 try {
-    $seedPath = Join-Path $PSScriptRoot '..\FuturePath\Database\SeedData.sql'
     $seedToday = '2026-10-14'   # "today" when the seed was written; fixed so the checks do not age
 
     # ---------- helpers ----------
@@ -36,14 +33,6 @@ try {
         else { Assert-Equal ">= $Minimum" $Actual $Label }
     }
 
-    function Get-SeedPassword([string]$Username) {
-        # The test passwords live only in the SeedData.sql header comment.
-        $text = [System.IO.File]::ReadAllText($seedPath)
-        $match = [regex]::Match($text, '(?m)^\s+' + [regex]::Escape($Username) + '\s+(\S+)\s*$')
-        if (-not $match.Success) { throw "No test password for $Username in the SeedData.sql header comment." }
-        return $match.Groups[1].Value
-    }
-
     function Get-Nullable($Value) { if ($Value -is [DBNull]) { return $null } return $Value }
 
     # ---------- 1. Row counts ----------
@@ -54,7 +43,7 @@ try {
         FundingOption = 10; FundingFaculty = 15; FundingProgramme = 14; Learner = 13; AdvisorySession = 13
         LearnerSubject = 77; LearnerInterestResponse = 144; UserAccount = 5
     }
-    # RecommendationResult and ExportReport rows (written by the real engine, stored in SeedData.sql) are checked in section 11.
+    # RecommendationResult and ExportReport rows (written by the real engine) are checked in section 11.
     foreach ($tableName in $expectedCounts.Keys) {
         Assert-Equal $expectedCounts[$tableName] (Get-Scalar "SELECT COUNT(*) FROM $tableName") "$tableName has $($expectedCounts[$tableName]) rows"
     }
@@ -424,7 +413,7 @@ try {
         Assert-Equal $case[1] $code "Labeeqah with Mathematics $($case[0]) is $($case[1]) (boundary)"
     }
 
-    # ---------- 11. Stored results (written by the real engine, stored in SeedData.sql) ----------
+    # ---------- 11. Stored results (written by the real engine) ----------
     Write-Host "`n--- Stored results ---"
     foreach ($sessionID in ($scenarios.Keys | Sort-Object)) {
         $selected = Invoke-TestQuery $ctx "SELECT OutcomeCode, OutcomeReason FROM RecommendationResult WHERE SessionID = $sessionID AND IsSelectedProgramme = 1"
@@ -438,48 +427,6 @@ try {
     Assert-Equal 0 (Get-Scalar 'SELECT COUNT(*) FROM RecommendationResult r JOIN DegreeProgramme p ON p.ProgrammeID = r.ProgrammeID WHERE p.IsActive = 0') 'No stored result is for an inactive programme'
     Assert-Equal '6,7,8,9,10,11,12' (((Invoke-TestQuery $ctx "SELECT SessionID FROM ExportReport WHERE ReportCode = 'FP-LSR' AND GeneratedByUserID IS NULL AND ParametersUsed IS NULL ORDER BY SessionID").Rows | ForEach-Object { $_.SessionID }) -join ',') 'Each completed session has its learner FP-LSR export logged'
     Assert-Equal 7 (Get-Scalar 'SELECT COUNT(*) FROM ExportReport') 'Seven exports logged in total'
-
-    # ---------- 12. The Database folder scripts rebuild exactly the shipped database ----------
-    Write-Host "`n--- CreateSchema.sql + SeedData.sql match FuturePath.mdf ---"
-    function Get-RowText($Context, [string]$TableName) {
-        # Every row as one line of text (columns joined with |), sorted, so two copies of a table can be compared.
-        $rows = Invoke-TestQuery $Context "SELECT * FROM [$TableName]"
-        $lines = New-Object System.Collections.Generic.List[string]
-        foreach ($row in $rows.Rows) {
-            $values = foreach ($value in $row.ItemArray) {
-                if ($value -is [DBNull]) { 'NULL' }
-                elseif ($value -is [datetime]) { $value.ToString('o') }
-                else { [System.Convert]::ToString($value, [cultureinfo]::InvariantCulture) }
-            }
-            $lines.Add(($values -join '|'))
-        }
-        $sorted = $lines.ToArray()
-        [Array]::Sort($sorted, [StringComparer]::Ordinal)
-        return ,$sorted
-    }
-
-    $scripted = $null
-    try {
-        $scripted = Initialize-FuturePathTest -FromScripts
-        $tableNames = @((Invoke-TestQuery $ctx 'SELECT name FROM sys.tables ORDER BY name').Rows | ForEach-Object { $_.name })
-        Assert-Equal 19 $tableNames.Count 'FuturePath.mdf has 19 tables'
-        Assert-Equal 19 (Invoke-TestQuery $scripted 'SELECT COUNT(*) AS N FROM sys.tables').Rows[0].N 'The scripts create 19 tables'
-        foreach ($tableName in $tableNames) {
-            $shipped = Get-RowText $ctx $tableName
-            $rebuilt = Get-RowText $scripted $tableName
-            $firstDifference = 'none'
-            if ($shipped.Count -ne $rebuilt.Count) {
-                $firstDifference = '{0} rows in FuturePath.mdf, {1} from the scripts' -f $shipped.Count, $rebuilt.Count
-            } else {
-                for ($i = 0; $i -lt $shipped.Count; $i++) {
-                    if ($shipped[$i] -cne $rebuilt[$i]) { $firstDifference = 'FuturePath.mdf has ' + $shipped[$i]; break }
-                }
-            }
-            Assert-Equal 'none' $firstDifference ('{0}: the scripts rebuild its {1} rows exactly' -f $tableName, $shipped.Count)
-        }
-    } finally {
-        Remove-TestDatabaseCopy $scripted
-    }
 
 } catch {
     # An unexpected error is a failure, never a silent stop; the database copy is always detached.

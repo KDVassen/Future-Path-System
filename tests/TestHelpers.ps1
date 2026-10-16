@@ -18,9 +18,8 @@
     - Run every test script in its own process (powershell.exe -File ...), because a loaded
       assembly stays locked until the process ends:
         powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
-    - Tests that insert their own fixture rows use Initialize-FuturePathTest -SchemaOnly (an empty
-      database built from Database\CreateSchema.sql); the others get a copy of the seeded FuturePath.mdf.
-      -FromScripts builds the seeded database from CreateSchema.sql and SeedData.sql instead.
+    - Tests that insert their own fixture rows use Initialize-FuturePathTest -SchemaOnly (a copy of
+      FuturePath.mdf with every table emptied); the others get a copy of the seeded FuturePath.mdf.
     - Engine-only tests need no database: call Initialize-FuturePathTest -NoDatabase and
       Set-TestSettings with the SystemParameter values to use.
 #>
@@ -34,49 +33,35 @@ $script:TestsPassed  = 0
 $script:TestsFailed  = 0
 $script:Failures     = New-Object System.Collections.Generic.List[string]
 
-function New-ScriptDatabase {
+function Clear-TestDatabase {
     <#
-    .SYNOPSIS Builds FuturePath.mdf in a folder from the Database folder scripts: CreateSchema.sql only
-              (an EMPTY database), or with -WithSeedData also SeedData.sql (the shipped data).
+    .SYNOPSIS Empties every table of a test copy and restarts each IDENTITY at 1, so the fixture tests
+              start from an empty 19-table database. Child tables are emptied before their parents,
+              so no foreign key blocks a delete.
     #>
-    param([string]$Folder, [switch]$WithSeedData)
-    $scriptNames = @('CreateSchema.sql')
-    if ($WithSeedData) { $scriptNames += 'SeedData.sql' }
-    $name = 'FuturePathScripts_' + [guid]::NewGuid().ToString('N').Substring(0, 8)
-    $mdf = Join-Path $Folder 'FuturePath.mdf'
-    $ldf = Join-Path $Folder 'FuturePath_log.ldf'
-    $master = New-Object System.Data.SqlClient.SqlConnection('Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=60')
-    $master.Open()
+    param([string]$ConnectionString)
+    $tables = 'ExportReport', 'RecommendationResult', 'LearnerInterestResponse', 'LearnerSubject', 'AdvisorySession',
+              'Learner', 'FundingProgramme', 'FundingFaculty', 'FundingOption', 'DegreeInterestMapping',
+              'InterestQuestion', 'InterestCategory', 'ProgrammeRequirement', 'DegreeProgramme', 'Subject',
+              'Faculty', 'GradeLevel', 'UserAccount', 'SystemParameter'
+    $connection = New-Object System.Data.SqlClient.SqlConnection($ConnectionString)
+    $connection.Open()
     try {
-        $create = $master.CreateCommand()
-        $create.CommandText = "CREATE DATABASE [$name] ON (NAME = N'FuturePath', FILENAME = N'" + $mdf.Replace("'", "''") +
-                              "') LOG ON (NAME = N'FuturePath_log', FILENAME = N'" + $ldf.Replace("'", "''") + "')"
-        [void]$create.ExecuteNonQuery()
-
-        $database = New-Object System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=$name;Integrated Security=True;Connect Timeout=60")
-        $database.Open()
-        try {
-            foreach ($scriptName in $scriptNames) {
-                # Batches are separated by lines that contain only GO, as in Visual Studio's query window.
-                $text = [System.IO.File]::ReadAllText((Join-Path $script:ProjectDir "Database\$scriptName"))
-                foreach ($batch in [regex]::Split($text, '^\s*GO\s*$', [System.Text.RegularExpressions.RegexOptions]::Multiline)) {
-                    if ($batch.Trim().Length -eq 0) { continue }
-                    $command = $database.CreateCommand()
-                    $command.CommandText = $batch
-                    $command.CommandTimeout = 120
-                    [void]$command.ExecuteNonQuery()
-                }
-            }
-        } finally {
-            $database.Close()
-            [System.Data.SqlClient.SqlConnection]::ClearAllPools()
+        $count = $connection.CreateCommand()
+        $count.CommandText = 'SELECT COUNT(*) FROM sys.tables'
+        if ([int]$count.ExecuteScalar() -ne $tables.Count) {
+            throw 'Clear-TestDatabase: the table list no longer matches FuturePath.mdf.'
         }
-
-        $detach = $master.CreateCommand()
-        $detach.CommandText = "ALTER DATABASE [$name] SET SINGLE_USER WITH ROLLBACK IMMEDIATE; EXEC master.dbo.sp_detach_db @dbname = N'$name'"
-        [void]$detach.ExecuteNonQuery()
+        foreach ($table in $tables) {
+            # RESEED 0 makes the next row 1 again (only for a table whose IDENTITY has been used).
+            $command = $connection.CreateCommand()
+            $command.CommandText = "DELETE FROM [$table]; " +
+                "IF EXISTS (SELECT 1 FROM sys.identity_columns WHERE object_id = OBJECT_ID('$table') AND last_value IS NOT NULL) " +
+                "DBCC CHECKIDENT ('$table', RESEED, 0) WITH NO_INFOMSGS;"
+            [void]$command.ExecuteNonQuery()
+        }
     } finally {
-        $master.Close()
+        $connection.Close()
     }
 }
 
@@ -100,13 +85,11 @@ function Initialize-FuturePathTest {
     <#
     .SYNOPSIS Loads FuturePath.exe and (unless -NoDatabase) attaches a fresh copy of the database.
     .PARAMETER MdfPath Database to copy (default: FuturePath\FuturePath.mdf, the shipped seeded database).
-    .PARAMETER SchemaOnly Attach an EMPTY database (schema only) instead, for tests that insert their own fixture rows.
-    .PARAMETER FromScripts Attach a database built from Database\CreateSchema.sql and SeedData.sql instead of a copy.
+    .PARAMETER SchemaOnly Empty every table of the copy (schema only), for tests that insert their own fixture rows.
     #>
     param(
         [switch]$NoDatabase,
         [switch]$SchemaOnly,
-        [switch]$FromScripts,
         [string]$MdfPath = (Join-Path $script:ProjectDir 'FuturePath.mdf')
     )
     if (-not (Test-Path $script:ExePath)) {
@@ -121,21 +104,18 @@ function Initialize-FuturePathTest {
 
     $temp = Join-Path ([System.IO.Path]::GetTempPath()) ('FuturePathTest_' + [guid]::NewGuid().ToString('N').Substring(0, 8))
     New-Item -ItemType Directory -Path $temp | Out-Null
-    if ($SchemaOnly) {
-        New-ScriptDatabase $temp
-    } elseif ($FromScripts) {
-        New-ScriptDatabase $temp -WithSeedData
-    } else {
-        $ldfSource = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($MdfPath), [System.IO.Path]::GetFileNameWithoutExtension($MdfPath) + '_log.ldf')
-        Copy-Item $MdfPath (Join-Path $temp 'FuturePath.mdf')
-        if (Test-Path $ldfSource) {
-            Copy-Item $ldfSource (Join-Path $temp 'FuturePath_log.ldf')
-        }
+    $ldfSource = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($MdfPath), [System.IO.Path]::GetFileNameWithoutExtension($MdfPath) + '_log.ldf')
+    Copy-Item $MdfPath (Join-Path $temp 'FuturePath.mdf')
+    if (Test-Path $ldfSource) {
+        Copy-Item $ldfSource (Join-Path $temp 'FuturePath_log.ldf')
     }
 
     $context.TempFolder = $temp
     $context.MdfPath = Join-Path $temp 'FuturePath.mdf'
     $context.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=$($context.MdfPath);Integrated Security=True;Connect Timeout=60"
+    if ($SchemaOnly) {
+        Clear-TestDatabase $context.ConnectionString
+    }
     Set-AppConnectionString $context.ConnectionString
     return $context
 }
@@ -165,6 +145,23 @@ function Get-ProvisionalSettings {
         NSC_LEVEL_1 = '0'; NSC_LEVEL_2 = '30'; NSC_LEVEL_3 = '40'; NSC_LEVEL_4 = '50'
         NSC_LEVEL_5 = '60'; NSC_LEVEL_6 = '70'; NSC_LEVEL_7 = '80'
     }
+}
+
+function Get-SeedPassword {
+    <#
+    .SYNOPSIS The test password of a seeded staff account. FuturePath.mdf stores only salted hashes, so the
+              plain sample passwords are kept here (and listed in plan-and-tests.md). Never use them on a real system.
+    #>
+    param([string]$Username)
+    $passwords = @{
+        'admin'          = 'FuturePath-Admin1'
+        'advisor'        = 'FuturePath-Advisor1'
+        'former.advisor' = 'FuturePath-Former1'
+        'senior.advisor' = 'FuturePath-Senior1'
+        'data.admin'     = 'FuturePath-DataAdmin1'
+    }
+    if (-not $passwords.ContainsKey($Username)) { throw "No test password for $Username." }
+    return $passwords[$Username]
 }
 
 function Invoke-TestQuery {
@@ -225,8 +222,8 @@ function New-TypedCollection {
     return ,(New-Object ("System.Collections.ObjectModel.Collection[$TypeName]"))
 }
 
-function Remove-TestDatabaseCopy {
-    <# .SYNOPSIS Detaches a test database and deletes its temp folder (nothing to do for -NoDatabase). #>
+function Complete-FuturePathTest {
+    <# .SYNOPSIS Detaches and deletes the database copy, prints the summary, and sets the exit code. #>
     param($Context)
     if ($Context -ne $null -and $Context.TempFolder) {
         [System.Data.SqlClient.SqlConnection]::ClearAllPools()
@@ -251,12 +248,6 @@ function Remove-TestDatabaseCopy {
         }
         Remove-Item $Context.TempFolder -Recurse -Force -ErrorAction SilentlyContinue
     }
-}
-
-function Complete-FuturePathTest {
-    <# .SYNOPSIS Detaches and deletes the database copy, prints the summary, and sets the exit code. #>
-    param($Context)
-    Remove-TestDatabaseCopy $Context
 
     Write-Host ''
     Write-Host ("{0} passed, {1} failed" -f $script:TestsPassed, $script:TestsFailed) -ForegroundColor $(if ($script:TestsFailed -eq 0) { 'Green' } else { 'Red' })
