@@ -13,7 +13,8 @@
     Rules
     - Build first (MSBuild or Visual Studio); tests load FuturePath\bin\Debug\FuturePath.exe.
     - Tests never touch FuturePath.mdf or bin\Debug\FuturePath.mdf: each run copies the project's
-      FuturePath.mdf / FuturePath_log.ldf to a new temp folder and points DB.ConnectionString at it.
+      FuturePath.mdf / FuturePath_log.ldf to a new temp folder and points the app's connection
+      setting (FuturePathDatabaseConnectionString, read by DB.cs) at the copy.
     - Run every test script in its own process (powershell.exe -File ...), because a loaded
       assembly stays locked until the process ends:
         powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
@@ -79,6 +80,22 @@ function New-ScriptDatabase {
     }
 }
 
+function Set-AppConnectionString {
+    <#
+    .SYNOPSIS Points the app's connection setting (Settings.Default.FuturePathDatabaseConnectionString) at a test database.
+    .DESCRIPTION Settings is internal, so it is reached by reflection. An application-scoped setting can be
+                 changed in memory (it is never saved), and every repository copies it into strConn when it is
+                 created (DB.cs), so set it before creating any controller.
+    #>
+    param([string]$ConnectionString)
+    $settingsType = [System.Reflection.Assembly]::LoadFrom($script:ExePath).GetType('FuturePath.Properties.Settings', $true)
+    $settings = $settingsType.GetProperty('Default').GetValue($null)
+    $settingsType.BaseType.GetProperty('Item').SetValue($settings, $ConnectionString, @('FuturePathDatabaseConnectionString'))
+    if ($settingsType.GetProperty('FuturePathDatabaseConnectionString').GetValue($settings) -ne $ConnectionString) {
+        throw 'Could not point FuturePathDatabaseConnectionString at the test database.'
+    }
+}
+
 function Initialize-FuturePathTest {
     <#
     .SYNOPSIS Loads FuturePath.exe and (unless -NoDatabase) attaches a fresh copy of the database.
@@ -119,7 +136,7 @@ function Initialize-FuturePathTest {
     $context.TempFolder = $temp
     $context.MdfPath = Join-Path $temp 'FuturePath.mdf'
     $context.ConnectionString = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=$($context.MdfPath);Integrated Security=True;Connect Timeout=60"
-    [FuturePath.DatabaseLayer.DB]::ConnectionString = $context.ConnectionString
+    Set-AppConnectionString $context.ConnectionString
     return $context
 }
 
