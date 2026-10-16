@@ -102,7 +102,7 @@ fictional, and the contact details use the reserved `.example` domain and `555` 
 | Faculties | 1 Commerce · 2 Science · 3 Engineering and the Built Environment · 4 Health Sciences · 5 Humanities |
 | Grades | `GradeLevelID` 1 = Grade 11 (Projected), 2 = Grade 12 (Final) |
 | Subjects | 1 English Home Language · 2 Afrikaans First Additional Language · 3 Mathematics · 4 Mathematical Literacy · 5 Life Orientation · 6 Physical Sciences · 7 Life Sciences · 8 Accounting · 9 Business Studies · 10 Economics · 11 Geography · 12 History · 13 Information Technology · 14 Engineering Graphics and Design · 15 Tourism · 16 Visual Arts |
-| Staff | UserID 1 `admin` (Administrator, active) · 2 `advisor` (Career Advisor, active) · 3 `former.advisor` (Career Advisor, **inactive**). The test passwords are only in the header comment of `SeedData.sql`; the tests read them from there. |
+| Staff | UserID 1 `admin` (Administrator, active) · 2 `advisor` (Career Advisor, active) · 3 `former.advisor` (Career Advisor, **inactive**) · 4 `senior.advisor` (Career Advisor, active) · 5 `data.admin` (Administrator, active). The test passwords are only in the header comment of `SeedData.sql`; the tests read them from there. |
 
 Part B's "English" is English Home Language. The case study's subject list names Computer
 Applications Technology; the seed uses Information Technology instead, as the seed brief asked.
