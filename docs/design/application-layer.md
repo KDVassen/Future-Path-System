@@ -206,7 +206,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tests\PartB-Regression.ps1
 | Admin and reference data | `FacultyRepository`, `GradeLevelRepository`, `InterestRepository`, `FundingRepository`, `UserAccountRepository` (maintenance methods), `UserAccountController`, `ReferenceDataController`, `InterestController`, `FundingController`, `tests/Admin-Smoke.ps1` |
 | Reports and search | `ReportRepository`, `ExportReportRepository`, `SessionSearchRepository`, `ReportController`, `SessionSearchController`, `tests/Reports-Smoke.ps1` |
 
-## 8. Notes for the forms round (next)
+## 8. Notes for the forms round (done)
+
+The forms now call these methods; no `// TODO BLL:` placeholder is left (decisions.md D23). The notes
+below stay as the record of how the forms' guessed calls were matched to the real signatures.
+
+**How a form calls the BLL** (the same in every screen file):
+- The controller is a local variable created inside the existing `try`, e.g.
+  `ReferenceDataController referenceDataController = new ReferenceDataController();`.
+- A list sets `DisplayMember` and `ValueMember` **before** `DataSource`, then `SelectedIndex = -1` (or 0 for
+  an "All" row). Binding fires SelectedIndexChanged, and only then is `SelectedValue` already the ID.
+- "Nothing chosen" is passed as 0 or "" (`StaffConsoleForm.SelectedId` / `SelectedCode`).
+- `catch (ArgumentException ex)` shows `ex.Message` (the BLL's own words for a refused value) before the
+  screen's generic `catch (Exception)` message. UI 11 also shows ReportController's `InvalidOperationException`
+  messages ("Session … is still in progress").
+- Bound items are read as the BLL types (`(Faculty)lstFaculties.SelectedItem`, `DataRowView`), not by reflection.
+
 
 - The synthetic **"Minimum average"** row (UI 13.2) and **"Overall average"** row (UI 5) come last. Their values:
   - `RequirementID` DBNull;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -12,7 +13,7 @@ namespace FuturePath.PresentationLayer
     /// entry turns the offending labels and text boxes red, the guidance panel turns from blue to a
     /// red message naming the fix, and the Invalid Login dialog is raised. For an unrecognised entry
     /// the screen never says whether the username or the password was wrong. A recognised account is
-    /// routed by <c>UserAccount.Role</c> to UI 9 (Career Advisor) or UI 12 (Administrator).
+    /// routed by <c>UserAccount.RoleName</c> to UI 9 (Career Advisor) or UI 12 (Administrator).
     /// </summary>
     public partial class StaffLoginForm : Form
     {
@@ -23,9 +24,6 @@ namespace FuturePath.PresentationLayer
         private static readonly Color BlueColour = Color.FromArgb(31, 95, 168);
         private static readonly Color BlueTint = Color.FromArgb(232, 238, 246);
         private static readonly Color DeepNavy = Color.FromArgb(11, 31, 58);
-
-        private const string AdministratorRole = "Administrator";
-        private const string CareerAdvisorRole = "Career Advisor";
 
         private const string GuidanceText =
             "Learners do not log in. Only Career Advisors and System Administrators hold accounts.";
@@ -48,24 +46,15 @@ namespace FuturePath.PresentationLayer
         #region Business Logic Layer hook
 
         /// <summary>
-        /// Asks the BLL to check the credentials. The BLL looks up <c>UserAccount</c> by username,
-        /// verifies the salted password hash (PBKDF2, never plaintext) and checks <c>IsActive</c>.
-        /// It returns nothing about which part failed, so this screen cannot leak it.
+        /// Asks the BLL to check the credentials. LoginController looks up <c>UserAccount</c> by username,
+        /// checks the salted SHA-256 password hash (never plaintext, decisions.md D22) and <c>IsActive</c>.
+        /// It says nothing about which part failed, so this screen cannot leak it.
         /// </summary>
-        /// <returns>True and the account details when the credentials are recognised.</returns>
-        private bool Authenticate(string username, string password, out int userId, out string fullName, out string role)
+        /// <returns>The signed-in account, or null when the credentials are not recognised.</returns>
+        private UserAccount Authenticate(string username, string password)
         {
-            userId = 0;
-            fullName = null;
-            role = null;
-
-            // TODO BLL: var account = LoginController.Authenticate(username, password);
-            //           // returns (UserID, FullName, Role) for an active account whose salted hash matches, otherwise null
-            //           if (account == null) return false;
-            //           userId = account.UserId; fullName = account.FullName; role = account.Role;
-            //           return true;
-            // Until the BLL exists every entry is treated as unrecognised. There is deliberately no bypass.
-            return false;
+            LoginController loginController = new LoginController();
+            return loginController.Authenticate(username, password);
         }
 
         #endregion
@@ -167,13 +156,10 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            int userId;
-            string fullName;
-            string role;
-            bool recognised;
+            UserAccount account;
             try
             {
-                recognised = Authenticate(txtUsername.Text.Trim(), txtPassword.Text, out userId, out fullName, out role);
+                account = Authenticate(txtUsername.Text.Trim(), txtPassword.Text);
             }
             catch (Exception)
             {
@@ -182,7 +168,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            if (!recognised || (role != AdministratorRole && role != CareerAdvisorRole))
+            if (account == null)
             {
                 // Unrecognised: both fields turn red and nothing says which one was wrong.
                 const string message = "Username or password not recognised: check both and try again.";
@@ -197,7 +183,7 @@ namespace FuturePath.PresentationLayer
 
             // One console for both roles: it removes the pages this role may not reach (decisions.md D11)
             // and opens on the role's own dashboard (UI 9 or UI 12).
-            var console = new StaffConsoleForm(homeForm, userId, fullName, role);
+            StaffConsoleForm console = new StaffConsoleForm(homeForm, account.UserID, account.FullName, account.RoleName);
             txtPassword.Clear();
             console.Show();
             navigating = true;

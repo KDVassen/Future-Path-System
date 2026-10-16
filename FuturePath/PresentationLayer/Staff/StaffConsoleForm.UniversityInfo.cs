@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -62,10 +62,17 @@ namespace FuturePath.PresentationLayer
             string name = txtProgrammeName.Text.Trim();
             try
             {
-                // TODO BLL: ReferenceDataController.SaveProgramme(UserId, null, (int)cboProgrammeFaculty.SelectedValue, name,
-                //               UniversityMinimumAverageOrNull(), chkUniActive.Checked);
-                //           Writes DEGREEPROGRAMME. The BLL checks Role = Administrator before it writes (Section 8), validates again,
-                //           and only accepts an existing faculty (referential integrity, Section 7).
+                // ProgrammeID 0 adds a programme. A minimum average of 0 means "no minimum" (stored as NULL).
+                // The BLL checks Role = Administrator before it writes (Section 8), validates again,
+                // and only accepts an existing faculty (referential integrity, Section 7).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.SaveProgramme(UserId, 0, (int)cboProgrammeFaculty.SelectedValue, name,
+                    numMinimumAverage.Value, chkUniActive.Checked);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -93,9 +100,15 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: ReferenceDataController.SaveProgramme(UserId, universitySelectedProgrammeId, (int)cboProgrammeFaculty.SelectedValue,
-                //               txtProgrammeName.Text.Trim(), UniversityMinimumAverageOrNull(), chkUniActive.Checked);
-                //           The BLL checks Role = Administrator before it writes (Section 8).
+                // The BLL checks Role = Administrator before it writes (Section 8).
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.SaveProgramme(UserId, universitySelectedProgrammeId.Value, (int)cboProgrammeFaculty.SelectedValue,
+                    txtProgrammeName.Text.Trim(), numMinimumAverage.Value, chkUniActive.Checked);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -132,8 +145,14 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: ReferenceDataController.DeactivateProgramme(UserId, universitySelectedProgrammeId.Value);
-                //           Sets DEGREEPROGRAMME.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Sets DegreeProgramme.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.DeactivateProgramme(UserId, universitySelectedProgrammeId.Value);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -162,10 +181,14 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: lstFaculties.DataSource = ReferenceDataController.GetFaculties(includeInactive: true);
-                //           lstFaculties.DisplayMember = "FacultyName"; lstFaculties.ValueMember = "FacultyID";
-                // TODO BLL: cboProgrammeFaculty.DataSource = ReferenceDataController.GetFaculties(includeInactive: false);
-                //           cboProgrammeFaculty.DisplayMember = "FacultyName"; cboProgrammeFaculty.ValueMember = "FacultyID";
+                // Two separate lists, so the list box and the combo do not share one selection.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboProgrammeFaculty.DisplayMember = "FacultyName";
+                cboProgrammeFaculty.ValueMember = "FacultyID";
+                cboProgrammeFaculty.DataSource = referenceDataController.GetFaculties(false, false);
+                lstFaculties.DisplayMember = "FacultyName";
+                lstFaculties.ValueMember = "FacultyID";
+                lstFaculties.DataSource = referenceDataController.GetFaculties(true, false);
                 lstFaculties.SelectedIndex = -1;
                 cboProgrammeFaculty.SelectedIndex = -1;
             }
@@ -193,8 +216,9 @@ namespace FuturePath.PresentationLayer
             UniversitySelectValue(cboProgrammeFaculty, lstFaculties.SelectedValue);
             try
             {
-                // TODO BLL: dgvProgrammes.DataSource = ReferenceDataController.GetProgrammes((int)lstFaculties.SelectedValue, includeInactive: true);
-                //           Columns: ProgrammeID, FacultyID, ProgrammeName, MinimumOverallAverage, IsActive.
+                // DegreeProgramme objects: ProgrammeID, FacultyID, ProgrammeName, MinimumOverallAverage, IsActive.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                dgvProgrammes.DataSource = referenceDataController.GetProgrammes((int)lstFaculties.SelectedValue, true);
             }
             catch (Exception)
             {
@@ -203,15 +227,6 @@ namespace FuturePath.PresentationLayer
 
             dgvProgrammes.ClearSelection();
             UniversityUpdateProgrammeCount();
-        }
-
-        /// <summary>
-        /// 0.00 is what the form shows when no minimum average is set, so it is sent as null
-        /// (DegreeProgramme.MinimumOverallAverage is nullable).
-        /// </summary>
-        private decimal? UniversityMinimumAverageOrNull()
-        {
-            return numMinimumAverage.Value == 0m ? (decimal?)null : numMinimumAverage.Value;
         }
 
         #endregion
@@ -230,8 +245,14 @@ namespace FuturePath.PresentationLayer
             string name = txtFacultyName.Text.Trim();
             try
             {
-                // TODO BLL: ReferenceDataController.SaveFaculty(UserId, null, name, true);
-                //           Writes FACULTY. The BLL checks Role = Administrator and refuses a duplicate name.
+                // FacultyID 0 adds a new, active faculty. The BLL checks Role = Administrator and refuses a duplicate name.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.SaveFaculty(UserId, 0, name, true);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -262,8 +283,15 @@ namespace FuturePath.PresentationLayer
             string name = txtFacultyName.Text.Trim();
             try
             {
-                // TODO BLL: ReferenceDataController.SaveFaculty(UserId, (int)lstFaculties.SelectedValue, name, null);
-                //           Renames FACULTY.FacultyName and keeps IsActive. The BLL checks Role = Administrator.
+                // Renames the faculty and keeps its own IsActive. The BLL checks Role = Administrator.
+                Faculty faculty = (Faculty)lstFaculties.SelectedItem;
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.SaveFaculty(UserId, faculty.FacultyID, name, faculty.IsActive);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -300,8 +328,14 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: ReferenceDataController.DeactivateFaculty(UserId, (int)lstFaculties.SelectedValue);
-                //           Sets FACULTY.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Sets Faculty.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                referenceDataController.DeactivateFaculty(UserId, (int)lstFaculties.SelectedValue);
+            }
+            catch (ArgumentException ex)
+            {
+                ReportStatus(ex.Message, true);
+                return;
             }
             catch (Exception)
             {
@@ -334,8 +368,16 @@ namespace FuturePath.PresentationLayer
         /// <summary>A faculty was chosen: copies its name into Faculty details and lists its programmes.</summary>
         private void lstFaculties_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtFacultyName.Text = lstFaculties.SelectedIndex < 0 ? string.Empty
-                : Convert.ToString(UniversityReadProperty(lstFaculties.SelectedItem, "FacultyName"), CultureInfo.CurrentCulture);
+            Faculty faculty = lstFaculties.SelectedItem as Faculty;
+            if (faculty == null)
+            {
+                txtFacultyName.Text = string.Empty;
+            }
+            else
+            {
+                txtFacultyName.Text = faculty.FacultyName;
+            }
+
             CheckField(true, txtFacultyName, lblFacultyName, lblFacultyNameError, null);
             UniversityLoadProgrammes();
         }
@@ -379,7 +421,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Copies the selected programme into the form for editing.</summary>
         private void dgvProgrammes_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProgrammes.SelectedRows.Count == 0)
+            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            if (!dgvProgrammes.Focused || dgvProgrammes.SelectedRows.Count == 0)
             {
                 return;
             }
@@ -507,19 +550,11 @@ namespace FuturePath.PresentationLayer
             return value is bool && (bool)value;
         }
 
-        /// <summary>Reads a property from a bound list item (a BLL object or a DataRowView).</summary>
-        private static object UniversityReadProperty(object item, string name)
-        {
-            if (item == null) return null;
-            PropertyDescriptor property = TypeDescriptor.GetProperties(item)[name];
-            return property == null ? null : property.GetValue(item);
-        }
-
-        /// <summary>True when a bound list item carries IsActive = false.</summary>
+        /// <summary>True when a faculty in the list (a BLL Faculty object) is inactive.</summary>
         private static bool UniversityIsInactive(object item)
         {
-            object value = UniversityReadProperty(item, "IsActive");
-            return value is bool && !(bool)value;
+            Faculty faculty = item as Faculty;
+            return faculty != null && !faculty.IsActive;
         }
 
         /// <summary>True for null, DBNull and the empty string.</summary>

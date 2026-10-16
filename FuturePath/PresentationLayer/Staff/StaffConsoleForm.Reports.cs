@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -87,10 +88,10 @@ namespace FuturePath.PresentationLayer
         /// <param name="reportCode">"FP-LSR", "FP-DIE" or "FP-LER".</param>
         /// <param name="from">First session date in scope.</param>
         /// <param name="to">Last session date in scope.</param>
-        /// <param name="facultyId">Faculty.FacultyID, or null for all faculties.</param>
-        /// <param name="gradeLevelId">GradeLevel.GradeLevelID, or null for all grades.</param>
-        /// <param name="outcome">RecommendationResult.OutcomeCode, or null for all outcomes.</param>
-        private void ReportsApplyFilter(string reportCode, DateTime from, DateTime to, int? facultyId, int? gradeLevelId, string outcome)
+        /// <param name="facultyId">Faculty.FacultyID, or 0 for all faculties.</param>
+        /// <param name="gradeLevelId">GradeLevel.GradeLevelID, or 0 for all grades.</param>
+        /// <param name="outcome">RecommendationResult.OutcomeCode, or "" for all outcomes.</param>
+        private void ReportsApplyFilter(string reportCode, DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcome)
         {
             reportsLoading = true;
             rdoLearnerSummary.Checked = reportCode == ReportsLearnerSummaryCode;
@@ -123,10 +124,13 @@ namespace FuturePath.PresentationLayer
             return value;
         }
 
-        /// <summary>Selects a value in a bound list; an unbound list or a null value selects nothing.</summary>
+        /// <summary>
+        /// Selects a value in a bound list. 0 or "" selects the BLL's "All …" row; a value that is not in
+        /// the list (or an unbound list) selects nothing.
+        /// </summary>
         private static void ReportsSelectValue(ComboBox combo, object value)
         {
-            if (value == null || combo.DataSource == null || string.IsNullOrEmpty(combo.ValueMember))
+            if (combo.DataSource == null)
             {
                 combo.SelectedIndex = -1;
                 return;
@@ -222,17 +226,21 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboRepFaculty.DataSource = ReferenceDataController.GetFaculties(includeAllRow: true);
-                //           cboRepFaculty.DisplayMember = "FacultyName"; cboRepFaculty.ValueMember = "FacultyID";
-                //           // the BLL puts an "All faculties" row (FacultyID null) first
-                // TODO BLL: cboRepGrade.DataSource = ReferenceDataController.GetGradeLevels(includeAllRow: true);
-                //           cboRepGrade.DisplayMember = "GradeDescription"; cboRepGrade.ValueMember = "GradeLevelID";
-                // TODO BLL: cboRepOutcome.DataSource = ReferenceDataController.GetOutcomes(includeAllRow: true);
-                //           cboRepOutcome.DisplayMember = "OutcomeName"; cboRepOutcome.ValueMember = "OutcomeCode";
-                //           // no Outcome table exists: proposed SystemParameter OUTCOME_1..4 (RecommendationResult.OutcomeCode)
-                cboRepFaculty.SelectedIndex = -1;
-                cboRepGrade.SelectedIndex = -1;
-                cboRepOutcome.SelectedIndex = -1;
+                // Each list starts with the BLL's "All …" row (FacultyID 0, GradeLevelID 0, OutcomeCode ""),
+                // which every report method reads as "no filter".
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboRepFaculty.DisplayMember = "FacultyName";
+                cboRepFaculty.ValueMember = "FacultyID";
+                cboRepFaculty.DataSource = referenceDataController.GetFaculties(false, true);
+                cboRepGrade.DisplayMember = "GradeDescription";
+                cboRepGrade.ValueMember = "GradeLevelID";
+                cboRepGrade.DataSource = referenceDataController.GetGradeLevels(true);
+                cboRepOutcome.DisplayMember = "OutcomeName";
+                cboRepOutcome.ValueMember = "OutcomeCode";
+                cboRepOutcome.DataSource = referenceDataController.GetOutcomes(true);
+                cboRepFaculty.SelectedIndex = 0;
+                cboRepGrade.SelectedIndex = 0;
+                cboRepOutcome.SelectedIndex = 0;
             }
             catch (Exception)
             {
@@ -245,8 +253,10 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboOutputFormat.DataSource = ReportController.GetExportFormats(reportCode);
-                //           cboOutputFormat.DisplayMember = "FormatName"; cboOutputFormat.ValueMember = "ExportFormat";
+                ReportController reportController = new ReportController();
+                cboOutputFormat.DisplayMember = "FormatName";
+                cboOutputFormat.ValueMember = "ExportFormat";
+                cboOutputFormat.DataSource = reportController.GetExportFormats(reportCode);
                 cboOutputFormat.SelectedIndex = -1;
             }
             catch (Exception)
@@ -262,19 +272,44 @@ namespace FuturePath.PresentationLayer
         private void ReportsLoadScope()
         {
             string code = ReportsSelectedCode;
-            string scope = code == ReportsLearnerSummaryCode
-                ? "One completed advisory session" + (txtRepSessionNumber.Text.Trim().Length > 0 ? " · " + txtRepSessionNumber.Text.Trim() : string.Empty)
-                : "Sessions " + dtpRepFrom.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) + " to " +
-                  dtpRepTo.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) +
-                  " · " + (cboRepFaculty.SelectedIndex >= 0 ? cboRepFaculty.Text : "all faculties") +
-                  " · " + (cboRepGrade.SelectedIndex >= 0 ? cboRepGrade.Text : "all grades");
+            string scope;
+            if (code == ReportsLearnerSummaryCode)
+            {
+                scope = "One completed advisory session";
+                if (ReportsSessionNumber().Length > 0)
+                {
+                    scope += " · " + ReportsSessionNumber();
+                }
+            }
+            else
+            {
+                scope = "Sessions " + dtpRepFrom.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) + " to " +
+                        dtpRepTo.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
             try
             {
-                // TODO BLL: var s = ReportController.GetScope(code, ReportsSessionNumberOrNull(), dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
-                //               ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
-                //           scope = s.SessionCount + " advisory sessions · " + s.FacultyCount + " faculties · " + s.ProgrammeCount + " programmes";
-                // TODO BLL: DateTime? last = ReportController.GetLastGenerated(code);   // MAX(ExportReport.DateGenerated) for this ReportCode
-                //           scope += last.HasValue ? " · last generated " + last.Value.ToString("d MMMM yyyy 'at' HH:mm") : " · not generated before";
+                ReportController reportController = new ReportController();
+
+                // FP-DIE and FP-LER: the completed sessions, faculties and programmes the request covers.
+                if (code != ReportsLearnerSummaryCode && ReportsPeriodValid)
+                {
+                    ReportScope counts = reportController.GetScope(UserId, code, dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
+                        ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
+                    scope = counts.SessionCount + " advisory sessions · " + counts.FacultyCount + " faculties · " +
+                            counts.ProgrammeCount + " programmes";
+                }
+
+                // MAX(ExportReport.DateGenerated) for this ReportCode.
+                DateTime? last = reportController.GetLastGenerated(code);
+                if (last.HasValue)
+                {
+                    scope += " · last generated " + last.Value.ToString("d MMMM yyyy 'at' HH:mm", CultureInfo.CurrentCulture);
+                }
+                else
+                {
+                    scope += " · not generated before";
+                }
             }
             catch (Exception)
             {
@@ -285,42 +320,88 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// Generates the report. The BLL checks the signed-in user's role from <c>UserAccount</c> (the screen's
-        /// role is never trusted) and builds the typed dataset; this screen renders it to the chosen format and
-        /// folder, records the export (ExportReport) and shows it in the report viewer (UI 11.1a / 11.2b / 11.3c).
+        /// The SessionID of the FP-LSR's session number, or 0 for FP-DIE and FP-LER (they cover a period).
+        /// Throws ArgumentException, whose message the status bar shows, when no session has that number.
         /// </summary>
-        private void ReportsBuildAndSave()
+        private int ReportsFindSessionId()
         {
-            DataSet data = null;
-            int? sessionId = null;
-            // TODO BLL: data = ReportController.Generate(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
-            //               dtpRepFrom.Value.Date, dtpRepTo.Value.Date, ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade),
-            //               ReportsSelectedOutcome(), chkIncludeInactive.Checked);
-            //           Returns FpLsrData / FpDieData / FpLerData: completed sessions only, inactive programmes and
-            //           funding excluded unless the box is ticked (FP-DIE only).
-            // TODO BLL: if (ReportsSelectedCode == ReportsLearnerSummaryCode)
-            //               sessionId = SessionSearchController.FindSessionId(ReportsSessionNumberOrNull());
-            string folder = txtSaveTo.Text.Trim();
-            string extension = (string)cboOutputFormat.SelectedValue;
-            string path = Path.Combine(folder, ReportsFileStem() + extension);
-            SaveReport(ReportsSelectedCode, data, path, sessionId, ReportsParametersUsed());
+            if (ReportsSelectedCode != ReportsLearnerSummaryCode)
+            {
+                return 0;
+            }
 
-            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, sessionId, ReportsParametersUsed(),
+            SessionSearchController sessionSearchController = new SessionSearchController();
+            int sessionId = sessionSearchController.FindSessionId(ReportsSessionNumber());
+            if (sessionId == 0)
+            {
+                throw new ArgumentException("No advisory session has the number " + ReportsSessionNumber() +
+                                            ". Check it on Sessions, then try again.");
+            }
+
+            return sessionId;
+        }
+
+        /// <summary>
+        /// Builds the chosen report's typed dataset through the BLL, which checks the signed-in user's role
+        /// from <c>UserAccount</c> (the screen's role is never trusted): FpLsrData for one completed session,
+        /// FpLerData or FpDieData for the period and filters. Inactive programmes and funding are left out
+        /// (FP-DIE includes inactive programmes only when the box is ticked). Nothing is saved or logged here.
+        /// </summary>
+        /// <param name="sessionId">The FP-LSR's session (from <see cref="ReportsFindSessionId"/>), or 0.</param>
+        private DataSet ReportsBuildData(int sessionId)
+        {
+            ReportController reportController = new ReportController();
+            if (ReportsSelectedCode == ReportsLearnerSummaryCode)
+            {
+                return reportController.GetLearnerSummary(UserId, sessionId);
+            }
+
+            if (ReportsSelectedCode == ReportsNotEligibleCode)
+            {
+                return reportController.BuildNotEligibleReport(UserId, dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
+                    ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade));
+            }
+
+            return reportController.BuildDegreeInterestReport(UserId, dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
+                ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
+        }
+
+        /// <summary>
+        /// Generates the report: builds it, renders it to the chosen format in the chosen folder (created if
+        /// needed), records the export in ExportReport (<see cref="SaveReport"/>) and shows it in the report
+        /// viewer (UI 11.1a / 11.2b / 11.3c).
+        /// </summary>
+        /// <param name="sessionId">The FP-LSR's session, or 0.</param>
+        private void ReportsBuildAndSave(int sessionId)
+        {
+            DataSet data = ReportsBuildData(sessionId);
+            string parameters = ReportsParametersUsed();
+            string folder = txtSaveTo.Text.Trim();
+            string extension = SelectedCode(cboOutputFormat);
+            string path = Path.Combine(folder, ReportsFileStem() + extension);
+            Directory.CreateDirectory(folder);
+            SaveReport(ReportsSelectedCode, data, path, sessionId, parameters);
+
+            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, sessionId, parameters,
                              extension, folder, ReportsFileStem(), tabReports);
             viewerSavedPath = path;
         }
 
         /// <summary>Builds the preview of the chosen report in the report viewer without saving or logging anything.</summary>
-        private void ReportsBuildPreview()
+        /// <param name="sessionId">The FP-LSR's session, or 0.</param>
+        private void ReportsBuildPreview(int sessionId)
         {
-            DataSet data = null;
-            // TODO BLL: data = ReportController.BuildPreview(UserId, ReportsSelectedCode, ReportsSessionNumberOrNull(),
-            //               dtpRepFrom.Value.Date, dtpRepTo.Value.Date, ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade),
-            //               ReportsSelectedOutcome(), chkIncludeInactive.Checked);
-            string extension = cboOutputFormat.SelectedValue as string;
-            string folder = Directory.Exists(txtSaveTo.Text.Trim()) ? txtSaveTo.Text.Trim() : null;
-            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, null, ReportsParametersUsed(),
-                             extension, folder, ReportsFileStem(), tabReports);
+            DataSet data = ReportsBuildData(sessionId);
+
+            // The viewer saves straight to UI 11's format and folder when both are set, otherwise it asks.
+            string folder = string.Empty;
+            if (Directory.Exists(txtSaveTo.Text.Trim()))
+            {
+                folder = txtSaveTo.Text.Trim();
+            }
+
+            OpenReportViewer(ReportsSelectedCode, data, lblReadyScope.Text, sessionId, ReportsParametersUsed(),
+                             SelectedCode(cboOutputFormat), folder, ReportsFileStem(), tabReports);
         }
 
         /// <summary>The proposed file name: FP-LSR_&lt;session&gt;, or the report code and the period.</summary>
@@ -328,7 +409,7 @@ namespace FuturePath.PresentationLayer
         {
             if (ReportsSelectedCode == ReportsLearnerSummaryCode)
             {
-                return ReportsSelectedCode + "_" + (ReportsSessionNumberOrNull() ?? "session");
+                return ReportsSelectedCode + "_" + ReportsSessionNumber();
             }
 
             return ReportsSelectedCode + "_" + dtpRepFrom.Value.ToString("yyyyMMdd", CultureInfo.InvariantCulture) +
@@ -336,46 +417,48 @@ namespace FuturePath.PresentationLayer
         }
 
         /// <summary>
-        /// ExportReport.ParametersUsed for FP-DIE and FP-LER (database.md), e.g.
-        /// "Period 2026-01-01..2026-09-15; Faculty=All; Grade=All; Outcome=All; Inactive=Excluded". Null for FP-LSR,
-        /// which records its SessionID instead.
+        /// ExportReport.ParametersUsed for FP-DIE and FP-LER (database.md), built by the BLL so the log has one
+        /// wording, e.g. "Period 2026-01-01..2026-09-15; Faculty=All; Grade=All; Outcome=All; Inactive=Excluded".
+        /// Null for FP-LSR, which records its SessionID instead.
         /// </summary>
         private string ReportsParametersUsed()
         {
-            if (ReportsSelectedCode == ReportsLearnerSummaryCode)
-            {
-                return null;
-            }
-
-            return "Period " + dtpRepFrom.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + ".." +
-                   dtpRepTo.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) +
-                   "; Faculty=" + (ReportsSelectedId(cboRepFaculty).HasValue ? cboRepFaculty.Text : "All") +
-                   "; Grade=" + (ReportsSelectedId(cboRepGrade).HasValue ? cboRepGrade.Text : "All") +
-                   "; Outcome=" + (cboRepOutcome.Enabled ? (ReportsSelectedOutcome() ?? "All") : "Exceptions") +
-                   "; Inactive=" + (chkIncludeInactive.Enabled && chkIncludeInactive.Checked ? "Included" : "Excluded");
+            ReportController reportController = new ReportController();
+            return reportController.BuildParametersUsed(ReportsSelectedCode, dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
+                ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
         }
 
-        /// <summary>The selected ID of an enabled, bound list, or null for "all".</summary>
-        private static int? ReportsSelectedId(ComboBox combo)
+        /// <summary>The selected ID of an enabled list, or 0 ("all") when the list is not used for this report.</summary>
+        private static int ReportsSelectedId(ComboBox combo)
         {
-            if (!combo.Enabled || combo.SelectedIndex < 0 || !(combo.SelectedValue is int))
+            if (!combo.Enabled)
             {
-                return null;
+                return 0;
             }
 
-            return (int)combo.SelectedValue;
+            return SelectedId(combo);
         }
 
-        /// <summary>The selected outcome code, or null when the filter is off or not used.</summary>
+        /// <summary>The selected outcome code, or "" ("all") when the filter is not used for this report.</summary>
         private string ReportsSelectedOutcome()
         {
-            return cboRepOutcome.Enabled && cboRepOutcome.SelectedIndex >= 0 ? cboRepOutcome.SelectedValue as string : null;
+            if (!cboRepOutcome.Enabled)
+            {
+                return string.Empty;
+            }
+
+            return SelectedCode(cboRepOutcome);
         }
 
-        /// <summary>The session number for FP-LSR, otherwise null.</summary>
-        private string ReportsSessionNumberOrNull()
+        /// <summary>The session number typed for FP-LSR, or "" when the report covers a period.</summary>
+        private string ReportsSessionNumber()
         {
-            return txtRepSessionNumber.Enabled ? txtRepSessionNumber.Text.Trim() : null;
+            if (!txtRepSessionNumber.Enabled)
+            {
+                return string.Empty;
+            }
+
+            return txtRepSessionNumber.Text.Trim();
         }
 
         #endregion
@@ -586,11 +669,23 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                ReportsBuildAndSave();
+                ReportsBuildAndSave(ReportsFindSessionId());
             }
             catch (UnauthorizedAccessException)
             {
                 SetStatus("The report could not be saved to " + txtSaveTo.Text.Trim() + ". Choose another folder.", RedColour, Color.White);
+                return;
+            }
+            catch (ArgumentException ex)
+            {
+                // A value the BLL (or the session-number lookup) refused; the message names it.
+                SetStatus(ex.Message, RedColour, Color.White);
+                return;
+            }
+            catch (InvalidOperationException ex)
+            {
+                // ReportController's own refusal, e.g. "Session 2026-0042 is still in progress …".
+                SetStatus(ex.Message, RedColour, Color.White);
                 return;
             }
             catch (Exception)
@@ -616,8 +711,16 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                ReportsBuildPreview();
+                ReportsBuildPreview(ReportsFindSessionId());
                 SetStatus("Preview of the " + ReportsSelectedName + ": nothing is saved or recorded.", BlueColour, Color.White);
+            }
+            catch (ArgumentException ex)
+            {
+                SetStatus(ex.Message, RedColour, Color.White);
+            }
+            catch (InvalidOperationException ex)
+            {
+                SetStatus(ex.Message, RedColour, Color.White);
             }
             catch (Exception)
             {

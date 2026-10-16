@@ -1,8 +1,10 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 using FuturePath.ApplicationLayer.Reports;
 using Microsoft.Reporting.WinForms;
 
@@ -15,9 +17,9 @@ namespace FuturePath.PresentationLayer
     /// layouts hold no queries and no business rules: this screen only binds each DataTable to the report
     /// data source of the same name, shows it in print layout and renders it to a file.
     /// <para>
-    /// The viewer's own export button is hidden. <b>Save report</b> exports only the formats reports.md allows
-    /// for each report (FP-LSR and FP-LER: PDF or Word; FP-DIE: PDF or Excel), and every saved file is recorded
-    /// in ExportReport through the BLL. Opened from UI 11 (Preview / Generate report) and from UI 10.2b
+    /// The viewer's own export button is hidden. <b>Save report</b> exports only the formats the BLL allows
+    /// for each report (ReportController.GetExportFormats: FP-LSR and FP-LER PDF or Word, FP-DIE PDF or Excel),
+    /// and every saved file is recorded in ExportReport through the BLL. Opened from UI 11 (Preview / Generate report) and from UI 10.2b
     /// (Open advisory summary).
     /// </para>
     /// </summary>
@@ -39,17 +41,17 @@ namespace FuturePath.PresentationLayer
         /// <summary>The typed dataset the report is rendered from.</summary>
         private DataSet viewerData;
 
-        /// <summary>File extension chosen on UI 11 (".pdf", ".docx", ".xlsx"), or null to ask on save.</summary>
+        /// <summary>File extension chosen on UI 11 (".pdf", ".docx", ".xlsx"), or "" to ask on save.</summary>
         private string viewerExtension;
 
-        /// <summary>Folder chosen on UI 11, or null to ask on save.</summary>
+        /// <summary>Folder chosen on UI 11, or "" to ask on save.</summary>
         private string viewerFolder;
 
         /// <summary>Proposed file name without extension.</summary>
         private string viewerFileStem;
 
-        /// <summary>AdvisorySession.SessionID for an FP-LSR, otherwise null (ExportReport.SessionID).</summary>
-        private int? viewerSessionId;
+        /// <summary>AdvisorySession.SessionID for an FP-LSR, otherwise 0 (ExportReport.SessionID).</summary>
+        private int viewerSessionId;
 
         /// <summary>ExportReport.ParametersUsed for FP-DIE / FP-LER, otherwise null.</summary>
         private string viewerParameters;
@@ -63,19 +65,19 @@ namespace FuturePath.PresentationLayer
         /// Shows a report in the viewer (UI 11.1a / 11.2b / 11.3c).
         /// </summary>
         /// <param name="reportCode">FP-LSR, FP-DIE or FP-LER.</param>
-        /// <param name="data">The typed dataset from the BLL; null shows the empty layout.</param>
+        /// <param name="data">The typed dataset from the BLL (FpLsrData, FpDieData or FpLerData).</param>
         /// <param name="scope">What the report covers, for the subtitle.</param>
-        /// <param name="sessionId">The session of an FP-LSR, or null.</param>
+        /// <param name="sessionId">The session of an FP-LSR, or 0.</param>
         /// <param name="parameters">The selection of an FP-DIE / FP-LER (ExportReport.ParametersUsed), or null.</param>
-        /// <param name="extension">The output format chosen on UI 11, or null to ask on save.</param>
-        /// <param name="folder">The folder chosen on UI 11, or null to ask on save.</param>
+        /// <param name="extension">The output format chosen on UI 11, or "" (or null) to ask on save.</param>
+        /// <param name="folder">The folder chosen on UI 11, or "" (or null) to ask on save.</param>
         /// <param name="fileStem">The proposed file name without extension.</param>
         /// <param name="returnPage">The screen Back returns to.</param>
-        private void OpenReportViewer(string reportCode, DataSet data, string scope, int? sessionId, string parameters,
+        private void OpenReportViewer(string reportCode, DataSet data, string scope, int sessionId, string parameters,
                                       string extension, string folder, string fileStem, TabPage returnPage)
         {
             viewerReportCode = reportCode;
-            viewerData = data ?? EmptyReportData(reportCode);
+            viewerData = data;
             viewerScope = scope ?? string.Empty;
             viewerSessionId = sessionId;
             viewerParameters = parameters;
@@ -146,6 +148,12 @@ namespace FuturePath.PresentationLayer
                 SetStatus("The report could not be saved as " + path + ". Close the file if it is open, then try again.", RedColour, Color.White);
                 return;
             }
+            catch (ArgumentException ex)
+            {
+                // The BLL (or SaveReport) refused the export; the message says why, e.g. a file type the report does not allow.
+                SetStatus(ex.Message, RedColour, Color.White);
+                return;
+            }
             catch (Exception)
             {
                 SetStatus("The report could not be saved. Please try again.", RedColour, Color.White);
@@ -179,28 +187,44 @@ namespace FuturePath.PresentationLayer
 
         /// <summary>
         /// Renders a report to a file and records it. Used by the viewer, by UI 11 Generate report and by
-        /// UI 10.2b Export advisory summary.
+        /// UI 10.2b Export advisory summary. The file's extension must be one of the report's formats
+        /// (ReportController.GetExportFormats), which also gives the ReportViewer render format.
         /// </summary>
         /// <param name="reportCode">FP-LSR, FP-DIE or FP-LER.</param>
         /// <param name="data">The typed dataset from the BLL.</param>
         /// <param name="path">The file to write; its extension chooses the format.</param>
-        /// <param name="sessionId">ExportReport.SessionID (FP-LSR), or null.</param>
+        /// <param name="sessionId">ExportReport.SessionID (FP-LSR), or 0.</param>
         /// <param name="parameters">ExportReport.ParametersUsed (FP-DIE / FP-LER), or null.</param>
-        private void SaveReport(string reportCode, DataSet data, string path, int? sessionId, string parameters)
+        private void SaveReport(string reportCode, DataSet data, string path, int sessionId, string parameters)
         {
+            ReportController reportController = new ReportController();
+            string extension = Path.GetExtension(path).ToLowerInvariant();
+            string renderFormat = string.Empty;
+            foreach (DataRow format in reportController.GetExportFormats(reportCode).Rows)
+            {
+                if (Convert.ToString(format["ExportFormat"], CultureInfo.InvariantCulture) == extension)
+                {
+                    renderFormat = Convert.ToString(format["RenderFormat"], CultureInfo.InvariantCulture);
+                }
+            }
+
+            if (renderFormat.Length == 0)
+            {
+                throw new ArgumentException("Save the " + ReportNameOf(reportCode) + " as one of the file types offered for it.");
+            }
+
             byte[] file;
             using (var report = new LocalReport())
             {
-                LoadReport(report, reportCode, data ?? EmptyReportData(reportCode));
-                file = report.Render(RenderFormatOf(Path.GetExtension(path)));
+                LoadReport(report, reportCode, data);
+                file = report.Render(renderFormat);
             }
 
             File.WriteAllBytes(path, file);
 
-            // TODO BLL: ReportController.RecordExport(UserId, reportCode, sessionId, parameters,
-            //               Path.GetExtension(path).TrimStart('.').ToUpperInvariant(), DateTime.Now);
-            //           Writes the ExportReport row (ReportCode, SessionID or ParametersUsed, GeneratedByUserID = UserId,
-            //           DateGenerated, ExportFormat). The BLL checks the role before recording (spec Section 8).
+            // The ExportReport row: ReportCode, SessionID or ParametersUsed, GeneratedByUserID = UserId, DateGenerated
+            // and ExportFormat. The BLL checks the role before recording (spec Section 8).
+            reportController.RecordExport(UserId, reportCode, sessionId, parameters, extension, DateTime.Now);
         }
 
         #endregion
@@ -234,14 +258,6 @@ namespace FuturePath.PresentationLayer
             });
         }
 
-        /// <summary>An empty typed dataset for a report, so the layout still shows before the BLL supplies data.</summary>
-        private static DataSet EmptyReportData(string reportCode)
-        {
-            if (reportCode == LsrCode) return new FpLsrData();
-            if (reportCode == LerCode) return new FpLerData();
-            return new FpDieData();
-        }
-
         private static string ReportFileOf(string reportCode)
         {
             if (reportCode == LsrCode) return "FpLsr";
@@ -265,23 +281,25 @@ namespace FuturePath.PresentationLayer
             return "UI 11.2b";
         }
 
-        /// <summary>The Save dialog filter: the export formats reports.md allows for each report.</summary>
+        /// <summary>
+        /// The Save dialog filter built from the formats the BLL allows for the report
+        /// (ReportController.GetExportFormats), e.g. "PDF document (.pdf)|*.pdf|Word document (.docx)|*.docx".
+        /// </summary>
         private static string ExportFilterOf(string reportCode)
         {
-            return reportCode == DieCode
-                ? "PDF document (*.pdf)|*.pdf|Excel workbook (*.xlsx)|*.xlsx"
-                : "PDF document (*.pdf)|*.pdf|Word document (*.docx)|*.docx";
-        }
-
-        /// <summary>The ReportViewer rendering extension for a file extension.</summary>
-        private static string RenderFormatOf(string extension)
-        {
-            switch ((extension ?? string.Empty).ToLowerInvariant())
+            ReportController reportController = new ReportController();
+            string filter = string.Empty;
+            foreach (DataRow format in reportController.GetExportFormats(reportCode).Rows)
             {
-                case ".docx": return "WORDOPENXML";
-                case ".xlsx": return "EXCELOPENXML";
-                default: return "PDF";
+                if (filter.Length > 0)
+                {
+                    filter += "|";
+                }
+
+                filter += format["FormatName"] + "|*" + format["ExportFormat"];
             }
+
+            return filter;
         }
 
         #endregion

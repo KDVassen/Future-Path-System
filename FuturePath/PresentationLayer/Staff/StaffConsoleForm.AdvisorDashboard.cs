@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -38,14 +39,13 @@ namespace FuturePath.PresentationLayer
             pnlTodayCard.Visible = false;
             try
             {
-                // TODO BLL: var today = SessionSearchController.GetDailySummary(DateTime.Today);
-                //           // counts from AdvisorySession (SessionStatus, SessionDate, DateCompleted) and the selected
-                //           // RecommendationResult (OutcomeCode NCE / MIN) — read back, never recalculated
-                //           if (today == null) return;
-                //           AdvisorDashboardShowFigure(lblCompletedTileValue, today.CompletedCount);
-                //           AdvisorDashboardShowFigure(lblInProgressTileValue, today.InProgressCount);
-                //           AdvisorDashboardShowFigure(lblFollowUpTileValue, today.ExceptionCount);
-                //           pnlTodayCard.Visible = true;
+                // Counts read back from AdvisorySession and the selected RecommendationResult, never recalculated.
+                SessionSearchController sessionSearchController = new SessionSearchController();
+                DailySummary today = sessionSearchController.GetDailySummary(UserId, DateTime.Today);
+                AdvisorDashboardShowFigure(lblCompletedTileValue, today.CompletedCount);
+                AdvisorDashboardShowFigure(lblInProgressTileValue, today.InProgressCount);
+                AdvisorDashboardShowFigure(lblFollowUpTileValue, today.ExceptionCount);
+                pnlTodayCard.Visible = true;
             }
             catch (Exception)
             {

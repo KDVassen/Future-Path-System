@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -92,12 +93,18 @@ namespace FuturePath.PresentationLayer
         {
             try
             {
-                // TODO BLL: cboFundFaculty.DataSource = ReferenceDataController.GetActiveFaculties();
-                //           cboFundFaculty.DisplayMember = "FacultyName"; cboFundFaculty.ValueMember = "FacultyID";
-                // TODO BLL: cboFundingType.DataSource = FundingController.GetFundingTypes();
-                //           SystemParameter rows FUNDING_TYPE_1..4, preceded by the "All funding types" row the BLL supplies.
-                //           cboFundingType.DisplayMember = "ParameterValue"; cboFundingType.ValueMember = "ParameterCode";
-                cboFundingType.SelectedIndex = cboFundingType.Items.Count > 0 ? 0 : -1;
+                ReferenceDataController referenceDataController = new ReferenceDataController();
+                cboFundFaculty.DisplayMember = "FacultyName";
+                cboFundFaculty.ValueMember = "FacultyID";
+                cboFundFaculty.DataSource = referenceDataController.GetActiveFaculties();
+                cboFundFaculty.SelectedIndex = -1;
+
+                // SystemParameter rows FUNDING_TYPE_1..4 after the BLL's "All funding types" row (FundingType "").
+                FundingController fundingController = new FundingController();
+                cboFundingType.DisplayMember = "ParameterValue";
+                cboFundingType.ValueMember = "FundingType";
+                cboFundingType.DataSource = fundingController.GetFundingTypes(true);
+                cboFundingType.SelectedIndex = 0;
                 fundingListsLoaded = true;
             }
             catch (Exception)
@@ -113,14 +120,28 @@ namespace FuturePath.PresentationLayer
             FundingUpdateHeading();
             try
             {
-                // TODO BLL: dgvFunding.DataSource = FundingController.GetActiveFunding(
-                //               cboFundFaculty.SelectedValue as int?, SelectedProgrammeId,
-                //               cboFundingType.SelectedValue as string, chkOpenOnly.Checked);
-                //           Active FundingOption rows linked through FundingFaculty or FundingProgramme, ordered by
-                //           ClosingDate: FundingID, FundingName, FundingType, LinkedTo, ClosingDate,
-                //           EligibilityDescription, RequiredDocuments, ContactInformation.
-                int count = dgvFunding.Rows.Count;
-                lblFundingCount.Text = count == 1 ? "1 funding option shown" : count + " funding options shown";
+                // 0 and "" mean "no filter" to the BLL.
+                int facultyId = 0;
+                if (cboFundFaculty.SelectedIndex >= 0)
+                {
+                    facultyId = (int)cboFundFaculty.SelectedValue;
+                }
+
+                int programmeId = 0;
+                if (SelectedProgrammeId.HasValue)
+                {
+                    programmeId = SelectedProgrammeId.Value;
+                }
+
+                string fundingType = string.Empty;
+                if (cboFundingType.SelectedIndex >= 0)
+                {
+                    fundingType = Convert.ToString(cboFundingType.SelectedValue, CultureInfo.InvariantCulture);
+                }
+
+                // Only active funding linked to the faculty or the programme, nearest closing date first.
+                FundingController fundingController = new FundingController();
+                dgvFunding.DataSource = fundingController.GetActiveFunding(facultyId, programmeId, fundingType, chkOpenOnly.Checked);
             }
             catch (Exception)
             {
@@ -131,7 +152,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Records that the learner wants funding in the summary (FundingInfoRequested = 1).</summary>
         private void FundingRequestInSummary()
         {
-            // TODO BLL: FundingController.RequestFundingInfo(SessionId.Value);   // AdvisorySession.FundingInfoRequested = 1
+            FundingController fundingController = new FundingController();
+            fundingController.RequestFundingInfo(SessionId.Value);
         }
 
         #endregion

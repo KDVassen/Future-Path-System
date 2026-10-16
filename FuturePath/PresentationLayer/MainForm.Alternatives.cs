@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
@@ -124,12 +126,12 @@ namespace FuturePath.PresentationLayer
         /// Needed" (Sequence 2, when the learner has no captured subjects or interests) clears the list
         /// and explains what is missing instead.
         /// </summary>
-        /// <param name="category">Strong Match, Possible Match, Not Currently Eligible or More Information Needed.</param>
+        /// <param name="code">The outcome code: STRONG, POSSIBLE, NCE or MOREINFO.</param>
         /// <param name="explanation">Why the outcome was reached (shown with it, never the label alone).</param>
-        private void AlternativesShowOutcome(string category, string explanation)
+        private void AlternativesShowOutcome(string code, string explanation)
         {
             alternativesRanked = false;   // a new eligibility check makes the earlier ranking stale (Sequence 2 runs again)
-            if (AlternativesOutcomeKind(category) == 'I')
+            if (AlternativesOutcomeKind(code) == 'I')
             {
                 alternativesMoreInfo = true;
                 alternativesMoreInfoText = explanation;
@@ -152,7 +154,7 @@ namespace FuturePath.PresentationLayer
             // The score is shown in the grid row; the notice names the outcome in words.
             alternativesMoreInfo = false;
             alternativesMoreInfoText = null;
-            alternativesSelectedOutcome = AlternativesOutcomeWords(category).ToLower(CultureInfo.CurrentCulture);
+            alternativesSelectedOutcome = AlternativesOutcomeWords(code).ToLower(CultureInfo.CurrentCulture);
             AlternativesShowNotice();
         }
 
@@ -192,6 +194,11 @@ namespace FuturePath.PresentationLayer
         /// </summary>
         private void AlternativesLoad()
         {
+            if (!LearnerId.HasValue || !SelectedProgrammeId.HasValue)
+            {
+                return;
+            }
+
             if (alternativesRanked && alternativesRankedFor == SelectedProgrammeId)
             {
                 return;
@@ -199,15 +206,24 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // TODO BLL: var ranked = RecommendationController.GenerateAlternatives(LearnerId.Value, SelectedProgrammeId.Value);
-                //           (active programmes only; the results are saved with AlternativeRank by AdvisorySessionRepository.saveAll)
-                //           if (ranked.MoreInformationNeeded)
-                //               DisplayOutcome("More Information Needed", ranked.Explanation, null);
-                //           else
-                //               DisplayAlternatives(ranked.Results);   // plus the selected programme's stored row (IsSelectedProgramme = 1)
-                // TODO BLL: alternativesLoadingChoice = true;
-                //           chkIncludeAlternatives.Checked = RecommendationController.GetAlternativesInSummary(SessionId.Value);
-                //           alternativesLoadingChoice = false;
+                // Sequence 2: every other active programme is scored and ranked, and the ranking is saved. The
+                // learner's own selection comes first (no rank), so it can be compared.
+                RecommendationController recommendationController = new RecommendationController();
+                Collection<RecommendationResult> ranked =
+                    recommendationController.GenerateAlternatives(LearnerId.Value, SelectedProgrammeId.Value);
+                if (recommendationController.MissingInformation != null)
+                {
+                    // Only this tab's half of displayOutcome: UI 6 keeps the outcome of the learner's own check.
+                    AlternativesShowOutcome(AdvisoryOutcome.CodeMoreInformation, recommendationController.MissingInformation.Explanation);
+                }
+                else
+                {
+                    DisplayAlternatives(ranked);
+                }
+
+                alternativesLoadingChoice = true;
+                chkIncludeAlternatives.Checked = recommendationController.GetAlternativesInSummary(SessionId.Value);
+                alternativesLoadingChoice = false;
                 alternativesRanked = true;
                 alternativesRankedFor = SelectedProgrammeId;
             }
@@ -221,7 +237,8 @@ namespace FuturePath.PresentationLayer
         /// <summary>Saves the tick box to AdvisorySession.AlternativesInSummary.</summary>
         private void AlternativesSaveChoice()
         {
-            // TODO BLL: RecommendationController.SetAlternativesInSummary(SessionId.Value, chkIncludeAlternatives.Checked);
+            RecommendationController recommendationController = new RecommendationController();
+            recommendationController.SetAlternativesInSummary(SessionId.Value, chkIncludeAlternatives.Checked);
         }
 
         #endregion
@@ -310,13 +327,33 @@ namespace FuturePath.PresentationLayer
                    && Convert.ToInt32(id, CultureInfo.InvariantCulture) == SelectedProgrammeId.Value;
         }
 
-        /// <summary>Classifies a stored OutcomeCode for display: S strong, P possible, N not eligible, I more information.</summary>
+        /// <summary>
+        /// Classifies a stored OutcomeCode (AdvisoryOutcome.Code*) for display: S strong, P possible,
+        /// N not currently eligible, I more information needed (MOREINFO or no outcome yet).
+        /// </summary>
         private static char AlternativesOutcomeKind(string code)
         {
-            string c = (code ?? string.Empty).Trim().ToUpperInvariant();
-            if (c.StartsWith("STRONG") || c == "SM") return 'S';
-            if (c.StartsWith("POSSIBLE") || c == "PM") return 'P';
-            if (c.StartsWith("NOT") || c == "NCE") return 'N';
+            string value = string.Empty;
+            if (code != null)
+            {
+                value = code.Trim().ToUpperInvariant();
+            }
+
+            if (value == AdvisoryOutcome.CodeStrong)
+            {
+                return 'S';
+            }
+
+            if (value == AdvisoryOutcome.CodePossible)
+            {
+                return 'P';
+            }
+
+            if (value == AdvisoryOutcome.CodeNotEligible)
+            {
+                return 'N';
+            }
+
             return 'I';
         }
 
