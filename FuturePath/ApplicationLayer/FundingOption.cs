@@ -1,14 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A bursary, scholarship or other funding option, linked to faculties and/or programmes
-    /// through FundingFaculty and FundingProgramme. Inactive funding never appears to learners
-    /// or in reports. Maps to FundingOption. Funding data is locally stored sample data, to be
-    /// checked against the official source.
-    /// </summary>
+    // Stores information about a bursary, scholarship or other funding option
+    // Funding can be linked to specific faculties and degree programmes
     public class FundingOption
     {
         #region Data Members
@@ -27,89 +24,79 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (FundingOption.FundingID).</summary>
         public int FundingID
         {
             get { return fundingID; }
             set { fundingID = value; }
         }
 
-        /// <summary>The funding option's name.</summary>
         public string FundingName
         {
             get { return fundingName; }
             set { fundingName = value; }
         }
 
-        /// <summary>Scholarship, Bursary, Financial Aid or External Funding (the FUNDING_TYPE_n parameters).</summary>
         public string FundingType
         {
             get { return fundingType; }
             set { fundingType = value; }
         }
 
-        /// <summary>Who may apply.</summary>
         public string EligibilityDescription
         {
             get { return eligibilityDescription; }
             set { eligibilityDescription = value; }
         }
 
-        /// <summary>Documents needed to apply, or "".</summary>
         public string RequiredDocuments
         {
             get { return requiredDocuments; }
             set { requiredDocuments = value; }
         }
 
-        /// <summary>The closing date, or null when applications are always open.</summary>
         public DateTime? ClosingDate
         {
             get { return closingDate; }
             set { closingDate = value; }
         }
 
-        /// <summary>Who to contact, or "" (FundingOption.ContactInformation; class diagram contactInfo).</summary>
         public string ContactInformation
         {
             get { return contactInformation; }
             set { contactInformation = value; }
         }
 
-        /// <summary>True if awarded on academic merit.</summary>
         public bool IsMeritBased
         {
             get { return isMeritBased; }
             set { isMeritBased = value; }
         }
 
-        /// <summary>True if awarded on financial need.</summary>
         public bool IsNeedBased
         {
             get { return isNeedBased; }
             set { isNeedBased = value; }
         }
 
-        /// <summary>Inactive funding is never shown to learners or printed in reports.</summary>
         public bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
         }
 
-        /// <summary>The faculties this funding is offered for.</summary>
+        // Return the faculties linked to this funding option
         public Collection<FundingFaculty> FacultyLinks
         {
             get { return facultyLinks; }
         }
 
-        /// <summary>The programmes this funding is offered for.</summary>
+        // Return the programmes linked to this funding option
         public Collection<FundingProgramme> ProgrammeLinks
         {
             get { return programmeLinks; }
         }
 
-        /// <summary>The linked faculty IDs (for the UI 13.3 tick lists).</summary>
+        // Collect the IDs of all linked faculties
         public Collection<int> FacultyIds
         {
             get
@@ -123,7 +110,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>The linked programme IDs (for the UI 13.3 tick lists).</summary>
+        // Collect the IDs of all linked degree programmes
         public Collection<int> ProgrammeIds
         {
             get
@@ -137,7 +124,8 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>The linked faculty and programme names, e.g. "Commerce, BCom Information Systems".</summary>
+        // Combine the names of linked faculties and programmes
+        // Separate multiple names using commas
         public string LinkedTo
         {
             get
@@ -163,13 +151,13 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>True if applications are open today (no closing date, or a closing date not yet passed).</summary>
+        // Check if applications are still open today
         public bool IsOpen
         {
             get { return IsOpenOn(DateTime.Today); }
         }
 
-        /// <summary>"Open" or "Closed" (the UI 6.2b status chip).</summary>
+        // Return the funding application status
         public string Status
         {
             get
@@ -184,7 +172,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active funding option with no links.</summary>
+        // Create an active funding option with default values
+        // Initialise the faculty and programme collections
         public FundingOption()
         {
             fundingID = 0;
@@ -201,7 +190,8 @@ namespace FuturePath.ApplicationLayer
             programmeLinks = new Collection<FundingProgramme>();
         }
 
-        /// <summary>Creates a funding option with all its stored values (no links yet).</summary>
+        // Create a funding option using its stored details
+        // Faculty and programme links can be loaded separately
         public FundingOption(int pFundingID, string pFundingName, string pFundingType, string pEligibilityDescription,
                              string pRequiredDocuments, DateTime? pClosingDate, string pContactInformation,
                              bool pIsMeritBased, bool pIsNeedBased, bool pIsActive)
@@ -221,16 +211,15 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>True if applications are open on the given day.</summary>
+        // Check whether funding applications are open on a given date
+        // Funding without a closing date is treated as open
         public bool IsOpenOn(DateTime day)
         {
             return !closingDate.HasValue || closingDate.Value.Date >= day.Date;
         }
 
-        /// <summary>
-        /// True if the funding is linked to the faculty or to the programme. 0 means "not given";
-        /// with no faculty and no programme given, every funding option matches.
-        /// </summary>
+        // Check if funding is linked to the selected faculty or programme
+        // Return true when neither a faculty nor a programme is specified
         public bool LinksTo(int facultyID, int programmeID)
         {
             if (facultyID == 0 && programmeID == 0)
@@ -254,7 +243,7 @@ namespace FuturePath.ApplicationLayer
             return false;
         }
 
-        /// <summary>Returns the funding name.</summary>
+        // Return the funding option's name for display
         public override string ToString()
         {
             return fundingName;

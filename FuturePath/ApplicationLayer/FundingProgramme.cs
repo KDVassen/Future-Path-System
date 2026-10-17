@@ -1,9 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Links a funding option to a degree programme it is offered for (FundingProgramme
-    /// junction table). Loaded as a collection on FundingOption.
-    /// </summary>
+    // Links a funding option to a degree programme
+    // Stores the programme details needed when displaying funding information
     public class FundingProgramme
     {
         #region Data Members
@@ -13,21 +12,18 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The funding option (part of the key).</summary>
         public int FundingID
         {
             get { return fundingID; }
             set { fundingID = value; }
         }
 
-        /// <summary>The degree programme (part of the key).</summary>
         public int ProgrammeID
         {
             get { return programmeID; }
             set { programmeID = value; }
         }
 
-        /// <summary>The programme name (for display).</summary>
         public string ProgrammeName
         {
             get { return programmeName; }
@@ -36,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty link.</summary>
+        // Create a new funding and programme link with default values
         public FundingProgramme()
         {
             fundingID = 0;
@@ -44,7 +40,7 @@ namespace FuturePath.ApplicationLayer
             programmeName = "";
         }
 
-        /// <summary>Creates a link between a funding option and a programme.</summary>
+        // Create a link between a funding option and a degree programme
         public FundingProgramme(int pFundingID, int pProgrammeID, string pProgrammeName)
         {
             fundingID = pFundingID;

@@ -1,9 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Links a funding option to a faculty it is offered for (FundingFaculty junction table).
-    /// Loaded as a collection on FundingOption.
-    /// </summary>
+    // Links a funding option to a university faculty
+    // Stores the faculty details needed when displaying funding information
     public class FundingFaculty
     {
         #region Data Members
@@ -13,21 +12,18 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The funding option (part of the key).</summary>
         public int FundingID
         {
             get { return fundingID; }
             set { fundingID = value; }
         }
 
-        /// <summary>The faculty (part of the key).</summary>
         public int FacultyID
         {
             get { return facultyID; }
             set { facultyID = value; }
         }
 
-        /// <summary>The faculty name (for display).</summary>
         public string FacultyName
         {
             get { return facultyName; }
@@ -36,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty link.</summary>
+        // Create a new funding and faculty link with default values
         public FundingFaculty()
         {
             fundingID = 0;
@@ -44,7 +40,7 @@ namespace FuturePath.ApplicationLayer
             facultyName = "";
         }
 
-        /// <summary>Creates a link between a funding option and a faculty.</summary>
+        // Create a link between a funding option and a faculty
         public FundingFaculty(int pFundingID, int pFacultyID, string pFacultyName)
         {
             fundingID = pFundingID;
