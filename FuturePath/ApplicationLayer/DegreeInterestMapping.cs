@@ -1,10 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Links a degree programme to an interest category with a relevance weight (0.00 to 1.00).
-    /// Maps to DegreeInterestMapping, whose key is (ProgrammeID, CategoryID). The class diagram's
-    /// mappingId is that composite key, so no separate ID column is stored.
-    /// </summary>
+    // Links a degree programme to an interest category
+    // Stores how relevant the category is to the programme
     public class DegreeInterestMapping
     {
         #region Data Members
@@ -15,28 +13,25 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The programme (part of the key).</summary>
         public int ProgrammeID
         {
             get { return programmeID; }
             set { programmeID = value; }
         }
 
-        /// <summary>The interest category (part of the key).</summary>
         public int CategoryID
         {
             get { return categoryID; }
             set { categoryID = value; }
         }
 
-        /// <summary>The category name (read from InterestCategory, for display).</summary>
         public string CategoryName
         {
             get { return categoryName; }
             set { categoryName = value; }
         }
 
-        /// <summary>How relevant the category is to the programme, 0.00 to 1.00 (class diagram "weight").</summary>
+        // Weight used when calculating a learner's interest score
         public decimal RelevanceWeight
         {
             get { return relevanceWeight; }
@@ -45,7 +40,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty mapping with weight 1.</summary>
+        // Create a new mapping with default values
+        // Set the relevance weight to 1
         public DegreeInterestMapping()
         {
             programmeID = 0;
@@ -54,7 +50,7 @@ namespace FuturePath.ApplicationLayer
             relevanceWeight = 1;
         }
 
-        /// <summary>Creates a mapping with all its values.</summary>
+        // Create a mapping using its stored values
         public DegreeInterestMapping(int pProgrammeID, int pCategoryID, string pCategoryName, decimal pRelevanceWeight)
         {
             programmeID = pProgrammeID;
@@ -65,7 +61,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Turns the mapping into an InterestCategory that carries this programme's weight.</summary>
+        // Create an InterestCategory using this mapping's category details
+        // Include the relevance weight for programme matching
         public InterestCategory ToInterestCategory()
         {
             InterestCategory category = new InterestCategory(categoryID, categoryName, true);
