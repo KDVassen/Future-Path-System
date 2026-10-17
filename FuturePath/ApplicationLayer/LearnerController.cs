@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -8,23 +9,18 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The learner's steps before the eligibility check: the profile (UI 2), subjects and marks
-    /// (UI 3) and the faculty / programme choice (UI 5), plus the staff learner search (UI 10.1a).
-    /// The session is written as it goes (decisions.md D3). Every input is validated here again,
-    /// even though the form validated it, so bad data cannot reach the database.
-    /// </summary>
+    // Handles learner profiles, subjects, marks and programme selections
+    // Validates learner information before saving it to the database
     public class LearnerController
     {
         #region Data Members
-        // Longest values the Learner table accepts (database.md)
+        // Maximum lengths allowed for learner details
         private const int MaximumNameLength = 50;
         private const int MaximumSchoolLength = 100;
         private const int MaximumEmailLength = 100;
 
-        // name@domain.tld: no spaces, one @, and a dot after the @
+        // Patterns used to validate email addresses and South African mobile numbers
         private const string EmailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-        // A South African mobile number: 0 and nine more digits (spaces and dashes removed first)
         private const string MobilePattern = @"^0\d{9}$";
 
         private LearnerRepository learnerRepository;
@@ -36,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repositories (no database work yet).</summary>
+        // Initialise the repositories and login controller
         public LearnerController()
         {
             learnerRepository = new LearnerRepository();
@@ -49,22 +45,19 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Profile (UI 2)
-        /// <summary>
-        /// Checks the UI 2 profile and returns one message per problem (empty when valid): grade
-        /// 1 or 2; school required (max 100); province one of the PROVINCE_n values; advising year
-        /// within one year of this year; email and mobile (0XX XXX XXXX) format-checked only if given.
-        /// </summary>
+        // Validate the learner's grade, school, province and advising year
+        // Check optional email and mobile details when provided
         public Collection<string> ValidateProfile(int gradeLevelID, string schoolName, string province, short advisingYear, string contactEmail, string contactNumber)
         {
             Collection<string> messages = new Collection<string>();
 
-            // Grade: the GradeLevel enum matches the GradeLevel table (1 = Grade 11, 2 = Grade 12)
+            // Check that the grade is Grade 11 or Grade 12
             if (!Enum.IsDefined(typeof(GradeLevel), gradeLevelID))
             {
                 messages.Add("Choose the learner's current grade (Grade 11 or Grade 12).");
             }
 
-            // School: required free text
+            // Check that a valid school name was entered
             if (string.IsNullOrWhiteSpace(schoolName))
             {
                 messages.Add("Enter the school name.");
@@ -74,20 +67,20 @@ namespace FuturePath.ApplicationLayer
                 messages.Add("Enter a school name of at most " + MaximumSchoolLength + " characters.");
             }
 
-            // Province: one of the PROVINCE_n system parameters
+            // Check that the province exists in the system settings
             if (FindProvince(province) == null)
             {
                 messages.Add("Choose a province from the list.");
             }
 
-            // Advising year: this year, or one year either side
+            // Allow the current advising year or one year before or after
             int thisYear = DateTime.Today.Year;
             if (advisingYear < thisYear - 1 || advisingYear > thisYear + 1)
             {
                 messages.Add("Choose an advising year from " + (thisYear - 1) + " to " + (thisYear + 1) + ".");
             }
 
-            // Optional contact details: format-checked only when given
+            // Validate contact details only when they have been entered
             if (!string.IsNullOrWhiteSpace(contactEmail))
             {
                 string email = contactEmail.Trim();
@@ -106,16 +99,12 @@ namespace FuturePath.ApplicationLayer
             return messages;
         }
 
-        /// <summary>
-        /// Saves the UI 2 profile. The first call (sessionID 0) creates the Learner and an
-        /// In-progress AdvisorySession; later calls update both. Returns the session (SessionID,
-        /// LearnerID, SessionNumber). Throws ArgumentException if the profile is invalid, if the
-        /// session does not exist, or if the session has already been completed.
-        /// </summary>
+        // Save a learner's profile and advisory session
+        // Create new records for the first save or update existing records
         public AdvisorySession SaveProfile(int sessionID, string firstName, string lastName, int gradeLevelID, string schoolName,
                                            string province, short advisingYear, string contactEmail, string contactNumber)
         {
-            // Validate again (the form already did), including the name lengths
+            // Validate the profile and check the name lengths before saving
             Collection<string> messages = ValidateProfile(gradeLevelID, schoolName, province, advisingYear, contactEmail, contactNumber);
             if (!string.IsNullOrWhiteSpace(firstName) && firstName.Trim().Length > MaximumNameLength)
             {
@@ -137,7 +126,7 @@ namespace FuturePath.ApplicationLayer
 
             if (sessionID == 0)
             {
-                // First save: a new learner (class diagram constructor) and a new In-progress session
+                // Create a new learner and advisory session
                 Learner newLearner = new Learner(Clean(firstName), Clean(lastName), grade, schoolName.Trim(), storedProvince, storedEmail, storedNumber);
                 learnerRepository.Save(newLearner);
                 AdvisorySession newSession = new AdvisorySession(newLearner.LearnerID, grade, advisingYear);
@@ -145,7 +134,7 @@ namespace FuturePath.ApplicationLayer
                 return newSession;
             }
 
-            // Later saves: update the learner and the session
+            // Update the learner and session if they have not been completed
             AdvisorySession session = sessionRepository.FindById(sessionID);
             if (session == null)
             {
@@ -176,17 +165,14 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Subjects and marks (UI 3)
-        /// <summary>
-        /// Checks one subject before it is added to the UI 3 grid: a subject chosen and active,
-        /// not already captured (capturedSubjectIDs), and a mark 0-100 with at most one decimal
-        /// (letters fail). Returns one message per problem.
-        /// </summary>
+        // Validate a selected subject and its mark
+        // Prevent duplicate subjects and marks outside the allowed range
         public Collection<string> ValidateSubjectEntry(int subjectID, string markText, IList<int> capturedSubjectIDs)
         {
             Collection<string> messages = new Collection<string>();
             string subjectName = "the subject";
 
-            // Subject: chosen from the list and still offered
+            // Check that the selected subject exists and is active
             Subject subject = null;
             if (subjectID > 0)
             {
@@ -199,14 +185,15 @@ namespace FuturePath.ApplicationLayer
             else
             {
                 subjectName = subject.SubjectName;
-                // Field-combination control: no subject twice in one session
+
+                // Prevent the same subject from being captured twice
                 if (capturedSubjectIDs != null && capturedSubjectIDs.Contains(subjectID))
                 {
                     messages.Add(subject.SubjectName + " has already been captured in this session.");
                 }
             }
 
-            // Mark: 0 to 100 with at most one decimal place (letters and signs give -1)
+            // Check that the mark is between 0 and 100 with one decimal place at most
             if (LearnerSubject.ParseMark(markText) < 0)
             {
                 messages.Add("Enter a mark for " + subjectName + " from 0 to 100, with at most one decimal place.");
@@ -214,11 +201,8 @@ namespace FuturePath.ApplicationLayer
             return messages;
         }
 
-        /// <summary>
-        /// The NSC achievement level for a mark from the NSC_LEVEL_1..7 lower bounds,
-        /// e.g. 72 gives "6  70-79%" (with an en dash) and 85 gives "7  80-100%". Returns "" for
-        /// an invalid mark, or if the NSC_LEVEL parameters are missing or not numbers.
-        /// </summary>
+        // Calculate the NSC achievement level for a subject mark
+        // Use the level boundaries stored in the system settings
         public string GetAchievementLevel(decimal mark)
         {
             if (!LearnerSubject.IsValidMark(mark))
@@ -226,7 +210,7 @@ namespace FuturePath.ApplicationLayer
                 return "";
             }
 
-            // The lower bound of each level, from NSC_LEVEL_1 upwards
+            // Load the lower mark boundary for each achievement level
             Collection<string> values = SystemSettings.GetNumberedValues(SystemSettings.NscLevelPrefix);
             List<decimal> lowerBounds = new List<decimal>();
             foreach (string value in values)
@@ -239,13 +223,14 @@ namespace FuturePath.ApplicationLayer
                 lowerBounds.Add(bound);
             }
 
-            // The highest level whose lower bound the mark reaches
+            // Find the highest achievement level reached by the learner's mark
             for (int i = lowerBounds.Count - 1; i >= 0; i--)
             {
                 if (mark >= lowerBounds[i])
                 {
                     int level = i + 1;
-                    // The band ends just below the next level (the top level ends at 100)
+
+                    // Use the next level's boundary to calculate the upper mark limit
                     decimal upperBound = LearnerSubject.MaximumMark;
                     if (i < lowerBounds.Count - 1)
                     {
@@ -257,11 +242,8 @@ namespace FuturePath.ApplicationLayer
             return "";
         }
 
-        /// <summary>
-        /// Replaces the session's subjects and marks (UI 3 Save and continue). Validates every
-        /// entry again: at least one subject, active subjects, marks 0-100 with one decimal, no
-        /// duplicates. Earlier results for the session are cleared. Throws ArgumentException if invalid.
-        /// </summary>
+        // Validate and save all subjects and marks for an advisory session
+        // Replace previously captured subjects with the updated list
         public void SaveSubjects(int sessionID, IList<KeyValuePair<int, decimal>> subjectMarks)
         {
             if (sessionRepository.FindById(sessionID) == null)
@@ -273,8 +255,7 @@ namespace FuturePath.ApplicationLayer
                 throw new ArgumentException("Capture at least one subject and mark before you continue.");
             }
 
-            // Build the session's subjects through Learner.AddSubject (class diagram addSubject),
-            // which refuses a duplicate subject and a mark outside 0-100 with a friendly message
+            // Use the Learner class to validate subjects, marks and duplicates
             Learner learner = new Learner();
             learner.CurrentSessionID = sessionID;
             foreach (KeyValuePair<int, decimal> entry in subjectMarks)
@@ -291,12 +272,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Faculty and programme (UI 5)
-        /// <summary>
-        /// Stores the preferred faculty and selected programme. The programme must exist, be active
-        /// and belong to an active faculty; the preferred faculty must be an active faculty. The
-        /// preferred faculty may differ from the programme's faculty (that difference is what the
-        /// faculty bonus measures). Throws ArgumentException if not valid.
-        /// </summary>
+        // Save the learner's preferred faculty and selected degree programme
+        // Check that both are valid and active before saving
         public void SaveProgrammeSelection(int sessionID, int preferredFacultyID, int selectedProgrammeID)
         {
             if (sessionRepository.FindById(sessionID) == null)
@@ -304,14 +281,14 @@ namespace FuturePath.ApplicationLayer
                 throw new ArgumentException("We could not find your advisory session. Start again from step 1.");
             }
 
-            // The programme: exists, active, and under an active faculty
+            // Check that the programme and its faculty are active
             DegreeProgramme programme = programmeRepository.FindById(selectedProgrammeID);
             if (programme == null || !programme.IsActive || !IsActiveFaculty(programme.FacultyID))
             {
                 throw new ArgumentException("Choose an active degree programme from the list.");
             }
 
-            // The preferred faculty: exists and active
+            // Check that the preferred faculty exists and is active
             if (!IsActiveFaculty(preferredFacultyID))
             {
                 throw new ArgumentException("Choose a faculty from the list.");
@@ -321,11 +298,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Staff search (UI 10.1a)
-        /// <summary>
-        /// UI 10.1a learner search (Career Advisor or Administrator; throws
-        /// UnauthorizedAccessException otherwise). A grade of 0 means every grade.
-        /// See LearnerRepository.FindLearners for the columns.
-        /// </summary>
+        // Search for learner profiles using the selected filters
+        // Only authorised staff members can perform this search
         public DataTable FindLearners(int actorUserID, string surname, string firstName, int gradeLevelID, string schoolName, string province)
         {
             loginController.CheckStaff(actorUserID);
@@ -334,7 +308,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>The province as stored in the PROVINCE_n parameters (matched without case), or null if it is not one of them.</summary>
+        // Find a valid province from the system settings
+        // Return null if the province is not recognised
         private static string FindProvince(string province)
         {
             if (string.IsNullOrWhiteSpace(province))
@@ -351,20 +326,21 @@ namespace FuturePath.ApplicationLayer
             return null;
         }
 
-        /// <summary>True if the faculty exists and is active.</summary>
+        // Check that a faculty exists and is active
         private bool IsActiveFaculty(int facultyID)
         {
             Faculty faculty = facultyRepository.FindById(facultyID);
             return faculty != null && faculty.IsActive;
         }
 
-        /// <summary>A mobile number without its spaces and dashes.</summary>
+        // Remove spaces and dashes from a mobile number
         private static string DigitsOnly(string number)
         {
             return Clean(number).Replace(" ", "").Replace("-", "");
         }
 
-        /// <summary>A valid mobile number stored as "0XX XXX XXXX", or "" when none was given.</summary>
+        // Format a valid mobile number as 0XX XXX XXXX
+        // Return an empty string if the number is not ten digits long
         private static string FormatMobile(string number)
         {
             string digits = DigitsOnly(number);
@@ -375,7 +351,7 @@ namespace FuturePath.ApplicationLayer
             return digits.Substring(0, 3) + " " + digits.Substring(3, 3) + " " + digits.Substring(6);
         }
 
-        /// <summary>Trimmed text, or "" for null.</summary>
+        // Remove extra spaces or return an empty string if the text is null
         private static string Clean(string text)
         {
             if (text == null)
@@ -385,7 +361,7 @@ namespace FuturePath.ApplicationLayer
             return text.Trim();
         }
 
-        /// <summary>Formats a number without trailing zeros, the same on any regional setting.</summary>
+        // Format a number without unnecessary decimal zeros
         private static string FormatNumber(decimal value)
         {
             return value.ToString("0.#", CultureInfo.InvariantCulture);
