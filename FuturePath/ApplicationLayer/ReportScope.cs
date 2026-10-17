@@ -1,9 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// What a report request covers, for the UI 11 readiness panel: the number of sessions,
-    /// faculties and programmes in scope. Returned by ReportController.GetScope; nothing is stored.
-    /// </summary>
+    // Stores the number of sessions, faculties and programmes covered by a report
+    // Used to show the report scope before generating it
     public class ReportScope
     {
         #region Data Members
@@ -13,21 +12,18 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Completed sessions in the period after the filters.</summary>
         public int SessionCount
         {
             get { return sessionCount; }
             set { sessionCount = value; }
         }
 
-        /// <summary>Different faculties among those sessions.</summary>
         public int FacultyCount
         {
             get { return facultyCount; }
             set { facultyCount = value; }
         }
 
-        /// <summary>Different programmes among those sessions.</summary>
         public int ProgrammeCount
         {
             get { return programmeCount; }
@@ -36,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty scope (all counts 0).</summary>
+        // Create an empty report scope with all counts set to zero
         public ReportScope()
         {
             sessionCount = 0;
@@ -44,7 +40,7 @@ namespace FuturePath.ApplicationLayer
             programmeCount = 0;
         }
 
-        /// <summary>Creates a scope with the three counts.</summary>
+        // Create a report scope using the provided counts
         public ReportScope(int pSessionCount, int pFacultyCount, int pProgrammeCount)
         {
             sessionCount = pSessionCount;
