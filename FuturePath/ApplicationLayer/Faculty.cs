@@ -1,9 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A university faculty (e.g. Commerce) that offers degree programmes.
-    /// Maps to the Faculty table. Faculties are never deleted, only deactivated.
-    /// </summary>
+    // Stores information about a university faculty
+    // Faculties offer degree programmes and can be deactivated
     public class Faculty
     {
         #region Data Members
@@ -13,21 +12,18 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (Faculty.FacultyID).</summary>
         public int FacultyID
         {
             get { return facultyID; }
             set { facultyID = value; }
         }
 
-        /// <summary>The faculty name shown to learners and staff.</summary>
         public string FacultyName
         {
             get { return facultyName; }
             set { facultyName = value; }
         }
 
-        /// <summary>False once an Administrator deactivates the faculty.</summary>
         public bool IsActive
         {
             get { return isActive; }
@@ -36,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active faculty.</summary>
+        // Create a new active faculty with default values
         public Faculty()
         {
             facultyID = 0;
@@ -44,7 +40,7 @@ namespace FuturePath.ApplicationLayer
             isActive = true;
         }
 
-        /// <summary>Creates a faculty with all its values.</summary>
+        // Create a faculty using its stored details
         public Faculty(int pFacultyID, string pFacultyName, bool pIsActive)
         {
             facultyID = pFacultyID;
@@ -54,7 +50,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Returns the faculty name, so a ListBox or ComboBox shows it.</summary>
+        // Return the faculty name for display
         public override string ToString()
         {
             return facultyName;
