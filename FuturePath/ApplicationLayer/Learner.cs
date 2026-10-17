@@ -1,15 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A learner using Future Path. Learners never log in.
-    /// As in the class diagram, the in-memory Learner holds the grade, preferred faculty,
-    /// subjects and interest responses of the learner's current advisory session. The database
-    /// stores those on the session (decisions.md §3 "Learner model");
-    /// LearnerRepository.FindById / FindBySessionId fill them in from the session rows.
-    /// </summary>
+    // Stores the learner's details, subjects and interest responses
+    // Learners can use the system without logging in
     public class Learner
     {
         #region Data Members
@@ -28,77 +24,68 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (Learner.LearnerID).</summary>
         public int LearnerID
         {
             get { return learnerID; }
             set { learnerID = value; }
         }
 
-        /// <summary>Optional first name.</summary>
         public string FirstName
         {
             get { return firstName; }
             set { firstName = value; }
         }
 
-        /// <summary>Optional surname (Learner.LastName).</summary>
         public string LastName
         {
             get { return lastName; }
             set { lastName = value; }
         }
 
-        /// <summary>School name (required, free text).</summary>
         public string SchoolName
         {
             get { return schoolName; }
             set { schoolName = value; }
         }
 
-        /// <summary>Province (required, chosen from the PROVINCE_n system parameters).</summary>
         public string Province
         {
             get { return province; }
             set { province = value; }
         }
 
-        /// <summary>Optional email address, used only for advisor follow-up.</summary>
         public string ContactEmail
         {
             get { return contactEmail; }
             set { contactEmail = value; }
         }
 
-        /// <summary>Optional mobile number (0XX XXX XXXX), used only for advisor follow-up.</summary>
         public string ContactNumber
         {
             get { return contactNumber; }
             set { contactNumber = value; }
         }
 
-        /// <summary>The grade in the current session (class diagram grade: GradeLevel).</summary>
         public GradeLevel Grade
         {
             get { return grade; }
             set { grade = value; }
         }
 
-        /// <summary>The preferred faculty chosen on UI 5 in the current session, or null.</summary>
         public int? PreferredFacultyID
         {
             get { return preferredFacultyID; }
             set { preferredFacultyID = value; }
         }
 
-        /// <summary>The advisory session this learner object was loaded for, or null.</summary>
         public int? CurrentSessionID
         {
             get { return currentSessionID; }
             set { currentSessionID = value; }
         }
 
-        /// <summary>First name and surname, or "Learner" when neither was given.</summary>
+        // Combine the learner's first name and surname
+        // Use "Learner" if neither name was entered
         public string FullName
         {
             get
@@ -121,13 +108,12 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>True once at least one subject has been captured.</summary>
+        // Check whether subjects or interest responses have been captured
         public bool HasSubjects
         {
             get { return subjects.Count > 0; }
         }
 
-        /// <summary>True once at least one interest statement has been answered.</summary>
         public bool HasInterestResponses
         {
             get { return responses.Count > 0; }
@@ -135,7 +121,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty Grade 12 learner with no subjects or responses.</summary>
+        // Create a new learner with default values
+        // Initialise the subject and interest response collections
         public Learner()
         {
             learnerID = 0;
@@ -152,10 +139,7 @@ namespace FuturePath.ApplicationLayer
             responses = new Collection<LearnerInterestResponse>();
         }
 
-        /// <summary>
-        /// Class diagram constructor Learner(name, grade, school, province, contactDetails),
-        /// with the name and contact details split into their stored parts.
-        /// </summary>
+        // Create a learner using the provided personal and school details
         public Learner(string pFirstName, string pLastName, GradeLevel pGrade, string pSchoolName, string pProvince, string pContactEmail, string pContactNumber)
             : this()
         {
@@ -170,11 +154,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram addSubject(subject, mark). Adds a subject mark to the current session.
-        /// Enforces the field-combination control (no subject twice in one session) and the
-        /// 0-100 mark range, and throws ArgumentException with a message the learner can act on.
-        /// </summary>
+        // Add a subject and its mark to the learner's session
+        // Check for duplicate subjects and marks outside the valid range
         public LearnerSubject AddSubject(Subject subject, decimal mark)
         {
             if (subject == null || subject.SubjectID <= 0)
@@ -194,7 +175,7 @@ namespace FuturePath.ApplicationLayer
             return learnerSubject;
         }
 
-        /// <summary>Removes a captured subject. Returns false if it was not captured.</summary>
+        // Remove a subject from the learner's captured subjects
         public bool RemoveSubject(int subjectID)
         {
             LearnerSubject found = FindSubject(subjectID);
@@ -205,13 +186,14 @@ namespace FuturePath.ApplicationLayer
             return subjects.Remove(found);
         }
 
-        /// <summary>True if the subject is already captured in this session.</summary>
+        // Check if a subject has already been added
         public bool HasSubject(int subjectID)
         {
             return FindSubject(subjectID) != null;
         }
 
-        /// <summary>Returns the captured mark for a subject, or null if it was not captured.</summary>
+        // Find a captured subject using its ID
+        // Return null if the subject is not found
         public LearnerSubject FindSubject(int subjectID)
         {
             foreach (LearnerSubject learnerSubject in subjects)
@@ -224,22 +206,20 @@ namespace FuturePath.ApplicationLayer
             return null;
         }
 
-        /// <summary>
-        /// Class diagram getSubjects(). Returns the session's captured subjects. The repository
-        /// also adds stored rows to this collection when it loads the learner.
-        /// </summary>
+        // Return the learner's captured subjects
         public Collection<LearnerSubject> GetSubjects()
         {
             return subjects;
         }
 
-        /// <summary>Returns the session's interest responses.</summary>
+        // Return the learner's interest questionnaire responses
         public Collection<LearnerInterestResponse> GetResponses()
         {
             return responses;
         }
 
-        /// <summary>Records (or replaces) the answer to one interest question.</summary>
+        // Save the response to an interest question
+        // Update the existing response if the question was already answered
         public void SetResponse(int questionID, int categoryID, int responseValue)
         {
             if (!LearnerInterestResponse.IsValidResponse(responseValue))
@@ -258,10 +238,8 @@ namespace FuturePath.ApplicationLayer
             responses.Add(new LearnerInterestResponse(0, SessionIDOrZero(), questionID, categoryID, responseValue));
         }
 
-        /// <summary>
-        /// Class diagram getPreferredFacultyId(). Returns the preferred faculty, or 0 when none
-        /// has been chosen yet (0 never matches a real faculty, so it earns no faculty bonus).
-        /// </summary>
+        // Return the learner's preferred faculty ID
+        // Return 0 if no faculty has been selected
         public int GetPreferredFacultyId()
         {
             if (preferredFacultyID.HasValue)
@@ -271,7 +249,8 @@ namespace FuturePath.ApplicationLayer
             return 0;
         }
 
-        /// <summary>The current session's ID, or 0 when the learner has no session yet.</summary>
+        // Return the current advisory session ID
+        // Return 0 if a session has not been created
         private int SessionIDOrZero()
         {
             if (currentSessionID.HasValue)
@@ -281,11 +260,8 @@ namespace FuturePath.ApplicationLayer
             return 0;
         }
 
-        /// <summary>
-        /// The learner's score for one interest category (0 to 100): the average of
-        /// LearnerInterestResponse.GetScore() over the answered questions in that category.
-        /// Returns null if no question in the category was answered.
-        /// </summary>
+        // Calculate the learner's average score for an interest category
+        // Return null if no questions in that category were answered
         public decimal? CalculateCategoryScore(int categoryID)
         {
             decimal total = 0;
@@ -305,12 +281,9 @@ namespace FuturePath.ApplicationLayer
             return Math.Round(total / answered, 2);
         }
 
-        /// <summary>
-        /// Class diagram calculateInterestScore(categories). The interest score (0 to 100) for a
-        /// programme, from the categories the programme maps to: the relevance-weighted average
-        /// of the learner's category scores, sum(weight x score) / sum(weight). Categories the
-        /// learner did not answer are skipped. Returns 0 if none was answered.
-        /// </summary>
+        // Calculate the weighted interest score for a programme
+        // Use the category scores and their relevance weights
+        // Return 0 if there are no valid scores
         public decimal CalculateInterestScore(Collection<InterestCategory> categories)
         {
             decimal weightedTotal = 0;
@@ -334,7 +307,7 @@ namespace FuturePath.ApplicationLayer
             return Math.Round(weightedTotal / weightTotal, 2);
         }
 
-        /// <summary>Returns the learner's full name.</summary>
+        // Return the learner's full name as a string
         public override string ToString()
         {
             return FullName;
