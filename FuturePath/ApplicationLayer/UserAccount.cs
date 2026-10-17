@@ -1,35 +1,29 @@
-﻿using System;
+﻿
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A staff login: a Career Advisor or an Administrator. Learners never log in, so this class
-    /// has no associations (class diagram). Passwords are never stored: only a salted SHA-256
-    /// hash is kept, in the form "salt:hash" (spec Section 8). Maps to UserAccount.
-    /// </summary>
+    // Stores staff account details and handles password authentication
+    // Supports Career Advisor and Administrator roles
     public class UserAccount
     {
         #region Data Members
-        /// <summary>The two staff roles (spec Section 8).</summary>
+        // Staff roles used to control system access
         public enum RoleType
         {
-            /// <summary>Views sessions and generates reports.</summary>
             CareerAdvisor = 1,
-            /// <summary>Also maintains reference data and user accounts.</summary>
             Administrator = 2
         }
 
-        /// <summary>Stored text for the Administrator role.</summary>
+        // Role names and minimum password length
         public const string RoleAdministratorText = "Administrator";
-        /// <summary>Stored text for the Career Advisor role.</summary>
         public const string RoleCareerAdvisorText = "Career Advisor";
-        /// <summary>The shortest password accepted.</summary>
         public const int MinimumPasswordLength = 8;
 
-        // Bytes of random salt added to each password before hashing
+        // Number of random bytes used when creating a password salt
         private const int SaltSize = 16;
 
         private int userID;
@@ -41,55 +35,50 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (UserAccount.UserID).</summary>
         public int UserID
         {
             get { return userID; }
             set { userID = value; }
         }
 
-        /// <summary>The login name (unique; letters, digits, '.', '_' and '-').</summary>
         public string Username
         {
             get { return username; }
             set { username = value; }
         }
 
-        /// <summary>The salted password hash. Never shown on a screen or returned to a form.</summary>
+        // Store the salted password hash instead of the actual password
         public string PasswordHash
         {
             get { return passwordHash; }
             set { passwordHash = value; }
         }
 
-        /// <summary>The staff member's full name (status bar and dashboards).</summary>
         public string FullName
         {
             get { return fullName; }
             set { fullName = value; }
         }
 
-        /// <summary>Career Advisor or Administrator.</summary>
         public RoleType Role
         {
             get { return role; }
             set { role = value; }
         }
 
-        /// <summary>The role as stored and shown: "Administrator" or "Career Advisor".</summary>
+        // Get the role name used by the system
         public string RoleName
         {
             get { return RoleToText(role); }
         }
 
-        /// <summary>Inactive accounts cannot log in.</summary>
         public bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
         }
 
-        /// <summary>True for an Administrator.</summary>
+        // Check whether the account has Administrator access
         public bool IsAdministrator
         {
             get { return role == RoleType.Administrator; }
@@ -97,7 +86,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active Career Advisor account.</summary>
+        // Create an active Career Advisor account with default values
         public UserAccount()
         {
             userID = 0;
@@ -108,7 +97,7 @@ namespace FuturePath.ApplicationLayer
             isActive = true;
         }
 
-        /// <summary>Creates an account with all its stored values.</summary>
+        // Create a user account using the provided details
         public UserAccount(int pUserID, string pUsername, string pPasswordHash, string pFullName, RoleType pRole, bool pIsActive)
         {
             userID = pUserID;
@@ -121,10 +110,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram authenticate(username, password). True only if the account is active,
-        /// the username matches (not case-sensitive) and the password matches the stored hash.
-        /// </summary>
+        // Check that the account is active and the username matches
+        // Verify the password against the stored hash
         public bool Authenticate(string pUsername, string pPassword)
         {
             if (!isActive || pUsername == null)
@@ -138,16 +125,14 @@ namespace FuturePath.ApplicationLayer
             return VerifyPassword(pPassword, passwordHash);
         }
 
-        /// <summary>Replaces the stored hash with a new salted hash of the password.</summary>
+        // Generate and store a new salted hash for the password
         public void SetPassword(string password)
         {
             passwordHash = HashPassword(password);
         }
 
-        /// <summary>
-        /// Makes a salted hash of a password, stored as "salt:hash" (both in Base64). The salt is
-        /// 16 random bytes, new every time, so two equal passwords get different hashes.
-        /// </summary>
+        // Generate a random salt and use it to hash the password
+        // Store the salt and hash together as Base64 text
         public static string HashPassword(string password)
         {
             if (string.IsNullOrEmpty(password))
@@ -161,10 +146,8 @@ namespace FuturePath.ApplicationLayer
             return salt + ":" + HashWithSalt(password, salt);
         }
 
-        /// <summary>
-        /// True if the password gives the stored hash: the password is hashed again with the
-        /// stored salt and the two hashes are compared. A missing or damaged hash returns false.
-        /// </summary>
+        // Hash the supplied password using the stored salt
+        // Compare it with the saved hash to verify the password
         public static bool VerifyPassword(string password, string storedHash)
         {
             if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(storedHash))
@@ -181,7 +164,7 @@ namespace FuturePath.ApplicationLayer
             return HashWithSalt(password, salt) == hash;
         }
 
-        /// <summary>Turns stored role text into a RoleType. Throws ArgumentException for unknown text.</summary>
+        // Convert stored role text into the matching RoleType
         public static RoleType RoleFromText(string text)
         {
             if (IsSameText(text, RoleAdministratorText))
@@ -195,7 +178,7 @@ namespace FuturePath.ApplicationLayer
             throw new ArgumentException("Choose a role: " + RoleAdministratorText + " or " + RoleCareerAdvisorText + ".");
         }
 
-        /// <summary>Turns a RoleType into its stored text.</summary>
+        // Convert a RoleType into its stored role name
         public static string RoleToText(RoleType value)
         {
             if (value == RoleType.Administrator)
@@ -205,19 +188,20 @@ namespace FuturePath.ApplicationLayer
             return RoleCareerAdvisorText;
         }
 
-        /// <summary>True if the role text is Administrator or Career Advisor.</summary>
+        // Check whether the supplied text is a valid staff role
         public static bool IsValidRoleText(string text)
         {
             return IsSameText(text, RoleAdministratorText) || IsSameText(text, RoleCareerAdvisorText);
         }
 
-        /// <summary>True if a username is 1 to 50 letters, digits, '.', '_' or '-'.</summary>
+        // Check that the username contains only allowed characters
+        // Usernames must be between 1 and 50 characters long
         public static bool IsValidUsername(string text)
         {
-            return !string.IsNullOrWhiteSpace(text) && text.Trim().Length <= 50 && Regex.IsMatch(text.Trim(), @"^[A-Za-z0-9._\-]+$");
+            return !string.IsNullOrWhiteSpace(text) && text.Trim().Length <= 50 && Regex.IsMatch(text.Trim(), @"^[A-Za-z0-9._-]+$");
         }
 
-        /// <summary>The SHA-256 hash (Base64) of the salt followed by the password.</summary>
+        // Generate a SHA-256 hash from the salt and password
         private static string HashWithSalt(string password, string salt)
         {
             SHA256 sha = SHA256.Create();
@@ -225,7 +209,7 @@ namespace FuturePath.ApplicationLayer
             return Convert.ToBase64String(hashBytes);
         }
 
-        /// <summary>True if the text (ignoring spaces at the ends and capitals) equals the expected text.</summary>
+        // Compare two text values without case sensitivity or extra spaces
         private static bool IsSameText(string text, string expected)
         {
             if (text == null)
@@ -235,7 +219,7 @@ namespace FuturePath.ApplicationLayer
             return string.Equals(text.Trim(), expected, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>Returns "Full name (Role)". Never includes the hash.</summary>
+        // Display the staff member's name and role
         public override string ToString()
         {
             return fullName + " (" + RoleName + ")";

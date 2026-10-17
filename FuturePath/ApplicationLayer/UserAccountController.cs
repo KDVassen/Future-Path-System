@@ -1,15 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// UI 13.6 User accounts (decisions.md D5): Administrators create, update and deactivate staff
-    /// accounts. Every public method that reads or changes accounts checks the Administrator role
-    /// first. Passwords are stored only as salted hashes, and the hash is never returned to a form.
-    /// </summary>
+    // Handles staff account management for administrators
+    // Allows accounts to be created, updated and deactivated
     public class UserAccountController
     {
         #region Data Members
@@ -21,7 +19,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The accounts read by the last GetAccounts call (their PasswordHash is blanked).</summary>
+        // Return the accounts loaded for display without their password hashes
         public Collection<UserAccount> AllAccounts
         {
             get { return accounts; }
@@ -29,7 +27,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repository (no database work yet).</summary>
+        // Initialise the user account repository and login controller
         public UserAccountController()
         {
             userAccountRepository = new UserAccountRepository();
@@ -39,7 +37,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Read
-        /// <summary>The roles an account can have: "Administrator", "Career Advisor" (from the UserAccount constants).</summary>
+        // Get the available staff roles
         public Collection<string> GetRoles()
         {
             Collection<string> roles = new Collection<string>();
@@ -48,10 +46,8 @@ namespace FuturePath.ApplicationLayer
             return roles;
         }
 
-        /// <summary>
-        /// UI 13.6 grid (Administrator only): UserID, Username, FullName, Role (text), IsActive,
-        /// ordered by FullName. Never the hash. Throws UnauthorizedAccessException if not an Administrator.
-        /// </summary>
+        // Load staff accounts for administrator maintenance
+        // Remove password hashes from the accounts used for display
         public DataTable GetAccounts(int actorUserID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -66,7 +62,8 @@ namespace FuturePath.ApplicationLayer
             foreach (UserAccount account in accounts)
             {
                 table.Rows.Add(account.UserID, account.Username, account.FullName, account.RoleName, account.IsActive);
-                // The accounts kept for AllAccounts are for display only, so they never carry the hash.
+
+                // Clear the hash so it is not exposed through AllAccounts
                 account.PasswordHash = "";
             }
             return table;
@@ -74,16 +71,13 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Maintenance
-        /// <summary>
-        /// Checks an account before saving and returns one message per problem (empty when valid):
-        /// username required, format (UserAccount.IsValidUsername) and unique; full name required
-        /// (max 100); role valid; a password of at least 8 characters on Add (optional on Update);
-        /// an Administrator cannot deactivate their own account or remove their own Administrator role.
-        /// </summary>
+        // Validate usernames, names, roles and passwords before saving
+        // Prevent administrators from deactivating or demoting themselves
         public Collection<string> ValidateAccount(int actorUserID, int userID, string username, string fullName, string role, bool isActive, string newPassword)
         {
             Collection<string> problems = new Collection<string>();
 
+            // Check the username format and ensure it is unique
             if (!UserAccount.IsValidUsername(username))
             {
                 problems.Add("Enter a username of up to 50 letters, digits, full stops, underscores or hyphens, with no spaces.");
@@ -93,6 +87,7 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("The username " + username.Trim() + " is already taken. Choose a different username.");
             }
 
+            // Check that a valid full name has been entered
             if (string.IsNullOrWhiteSpace(fullName))
             {
                 problems.Add("Enter the staff member's full name.");
@@ -102,14 +97,15 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("Shorten the full name to " + MaximumFullNameLength + " characters or fewer.");
             }
 
+            // Check that the selected role is recognised
             if (!UserAccount.IsValidRoleText(role))
             {
                 problems.Add("Choose a role: " + UserAccount.RoleAdministratorText + " or " + UserAccount.RoleCareerAdvisorText + ".");
             }
 
+            // Require a password for new accounts and validate password changes
             if (userID == 0)
             {
-                // A new account must have a password.
                 if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < UserAccount.MinimumPasswordLength)
                 {
                     problems.Add("Enter a password of at least " + UserAccount.MinimumPasswordLength + " characters.");
@@ -120,7 +116,7 @@ namespace FuturePath.ApplicationLayer
                 problems.Add("Enter a new password of at least " + UserAccount.MinimumPasswordLength + " characters, or leave it blank to keep the current one.");
             }
 
-            // An Administrator may not lock themselves out.
+            // Prevent an administrator from removing their own access
             if (userID == actorUserID)
             {
                 if (!isActive)
@@ -135,11 +131,8 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (userID 0) or updates an account (Administrator only). A non-blank newPassword
-        /// sets a new salted hash; blank keeps the old one on Update. Returns the UserID.
-        /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
-        /// </summary>
+        // Add or update a staff account after checking administrator access
+        // Hash new passwords and keep the existing password when no change is given
         public int SaveAccount(int actorUserID, int userID, string username, string fullName, string role, bool isActive, string newPassword)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -170,7 +163,7 @@ namespace FuturePath.ApplicationLayer
                 account.IsActive = isActive;
                 if (!string.IsNullOrWhiteSpace(newPassword))
                 {
-                    // Password reset: only the new salted hash is stored.
+                    // Generate a new salted hash when the password is changed
                     account.SetPassword(newPassword);
                 }
                 operation = DB.DBOperation.Edit;
@@ -180,7 +173,8 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(account, operation);
         }
 
-        /// <summary>Deactivates an account (Administrator only). Refuses the Administrator's own account.</summary>
+        // Deactivate a staff account without deleting it
+        // Prevent administrators from deactivating their own accounts
         public void DeactivateAccount(int actorUserID, int userID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -199,13 +193,13 @@ namespace FuturePath.ApplicationLayer
             FinalizeChanges(account, DB.DBOperation.Edit);
         }
 
-        /// <summary>Waitering DataMaintenance: makes the change in the repository's DataSet. Private, so the role check cannot be skipped.</summary>
+        // Apply account changes to the repository DataSet
         private void DataMaintenance(UserAccount account, DB.DBOperation operation)
         {
             userAccountRepository.DataSetChange(account, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the change to the database and returns the UserID.</summary>
+        // Save account changes to the database
         private int FinalizeChanges(UserAccount account, DB.DBOperation operation)
         {
             return userAccountRepository.UpdateDataSource(account, operation);
