@@ -1,9 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The three counts on the UI 9 "Today" card, returned by SessionSearchController.GetDailySummary.
-    /// A transient result: nothing is stored.
-    /// </summary>
+    // Stores the daily session counts shown on the staff dashboard
+    // Includes completed, in-progress and exception sessions
     public class DailySummary
     {
         #region Data Members
@@ -13,21 +12,20 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Sessions completed (exported on UI 7) that day.</summary>
         public int CompletedCount
         {
             get { return completedCount; }
             set { completedCount = value; }
         }
 
-        /// <summary>Sessions started that day that are still in progress.</summary>
         public int InProgressCount
         {
             get { return inProgressCount; }
             set { inProgressCount = value; }
         }
 
-        /// <summary>Sessions completed that day with Not Currently Eligible or More Information Needed (follow-up list).</summary>
+        // Count completed sessions that need follow-up
+        // Includes Not Currently Eligible and More Information Needed outcomes
         public int ExceptionCount
         {
             get { return exceptionCount; }
@@ -36,7 +34,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates a summary with all counts 0.</summary>
+        // Create a daily summary with all counts set to zero
         public DailySummary()
         {
             completedCount = 0;
@@ -44,7 +42,7 @@ namespace FuturePath.ApplicationLayer
             exceptionCount = 0;
         }
 
-        /// <summary>Creates a summary with the three counts.</summary>
+        // Create a daily summary using the three session counts
         public DailySummary(int pCompletedCount, int pInProgressCount, int pExceptionCount)
         {
             completedCount = pCompletedCount;

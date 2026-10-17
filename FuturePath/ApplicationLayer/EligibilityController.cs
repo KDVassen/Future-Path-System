@@ -1,18 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Sequence 1, "Check degree eligibility and generate an advisory outcome" (spec Section 3).
-    /// UI 5's Check eligibility button calls CheckEligibility. The controller loads the learner
-    /// and the programme, stops with More Information Needed if anything required is missing,
-    /// otherwise asks the programme for the subject and mark match, the learner for the interest
-    /// score and the programme for the faculty bonus, has the RecommendationEngine produce the
-    /// outcome, and stores it as the session's selected RecommendationResult.
-    /// </summary>
+    // Handles eligibility checks for a learner's selected degree programme
+    // Calculates match scores, generates advisory outcomes and saves the results
     public class EligibilityController
     {
         #region Data Members
@@ -23,7 +18,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller, its repositories and the engine (no database work yet).</summary>
+        // Initialise the repositories and recommendation engine
         public EligibilityController()
         {
             learnerRepository = new LearnerRepository();
@@ -34,20 +29,15 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram checkEligibility(learnerId, programmeId). Checks the learner's current
-        /// session against the programme and stores the result (IsSelectedProgramme = 1, also
-        /// for More Information Needed when the session and programme exist). Always returns an
-        /// outcome with its explanation.
-        /// </summary>
+        // Check the learner's eligibility for a selected programme
+        // Calculate subject, mark and interest scores before saving the outcome
         public AdvisoryOutcome CheckEligibility(int learnerID, int programmeID)
         {
-            // Sequence 1 step 2: findById(learnerId)
+            // Load the learner and programme details
             Learner learner = learnerRepository.FindById(learnerID);
-            // Step 3: findByIdWithRequirements(programmeId)
             DegreeProgramme programme = programmeRepository.FindByIdWithRequirements(programmeID);
 
-            // Step 4 (alt): required learner or programme information missing. Nothing can be stored.
+            // Check that the learner has a session and the programme is active
             if (learner == null || !learner.CurrentSessionID.HasValue)
             {
                 return AdvisoryOutcome.MoreInformationNeeded("We could not find your advisory session. Start again from step 1.");
@@ -57,7 +47,8 @@ namespace FuturePath.ApplicationLayer
                 return AdvisoryOutcome.MoreInformationNeeded("Choose an active degree programme and check again.");
             }
 
-            // Step 4 (alt): no subjects or no interest answers. The selected row is still stored (database.md).
+            // Return More Information Needed if subjects or interest responses are missing
+            // Save the incomplete result so it can still be displayed later
             AdvisoryOutcome outcome;
             if (!learner.HasSubjects)
             {
@@ -72,31 +63,26 @@ namespace FuturePath.ApplicationLayer
                 return outcome;
             }
 
-            // Step 5 (else): getSubjects() and getPreferredFacultyId()
+            // Get the learner's subjects and preferred faculty
             Collection<LearnerSubject> subjects = learner.GetSubjects();
             int facultyID = learner.GetPreferredFacultyId();
-            // Step 6: evaluateSubjectAndMarkMatch(learnerSubjects)
+
+            // Calculate the subject, mark and interest scores
             MatchResult matchResult = programme.EvaluateSubjectAndMarkMatch(subjects);
-            // Step 7: getInterestCategories()
             Collection<InterestCategory> categories = programme.GetInterestCategories();
-            // Step 8: calculateInterestScore(categories)
             decimal interestScore = learner.CalculateInterestScore(categories);
-            // Step 9: matchesPreferredFaculty(facultyId)
+
+            // Check for a preferred faculty match and generate the advisory outcome
             bool facultyBonus = programme.MatchesPreferredFaculty(facultyID);
-            // Step 10: computeOutcome(matchResult, interestScore, facultyBonus)
             outcome = engine.ComputeOutcome(matchResult, interestScore, facultyBonus);
 
-            // Step 11: save(session), then save(result)
+            // Save the selected programme result for the session
             SaveSelectedResult(learner, programme, matchResult, interestScore, facultyBonus, outcome);
-            // Step 12: the view shows the outcome with its explanation
             return outcome;
         }
 
-        /// <summary>
-        /// UI 6 requirement grid: the check of each active requirement of the programme against
-        /// the session's subjects (SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet).
-        /// Empty if the session or the programme does not exist.
-        /// </summary>
+        // Return the results of checking each programme requirement
+        // Return an empty collection if the learner or programme cannot be found
         public Collection<RequirementCheck> GetCheckedRequirements(int sessionID, int programmeID)
         {
             Learner learner = learnerRepository.FindBySessionId(sessionID);
@@ -109,13 +95,8 @@ namespace FuturePath.ApplicationLayer
             return matchResult.Checks;
         }
 
-        /// <summary>
-        /// UI 6 figure tiles for the stored selected result: one row with SubjectMatchScore,
-        /// MarkMatchScore, InterestMatchScore, OverallScore (decimal or DBNull), OutcomeCode,
-        /// OutcomeCategory, OutcomeReason, SubjectNote (e.g. "5 of 5 required subjects captured"),
-        /// MarkNote (e.g. "2 of 3 minimum marks met") and StrongestCategory (the learner's
-        /// highest-scoring category mapped to the programme, or ""). Empty table if none is stored.
-        /// </summary>
+        // Get the saved eligibility scores and outcome for the selected programme
+        // Include notes showing how many subjects and minimum marks were met
         public DataTable GetSelectedResult(int sessionID)
         {
             DataTable table = new DataTable("SelectedResult");
@@ -136,7 +117,7 @@ namespace FuturePath.ApplicationLayer
                 return table;
             }
 
-            // The notes come from checking the session's subjects against the programme again
+            // Recheck the learner's requirements to create the summary notes
             string subjectNote = "";
             string markNote = "";
             string strongestCategory = "";
@@ -174,6 +155,7 @@ namespace FuturePath.ApplicationLayer
                 strongestCategory = FindStrongestCategory(learner, programme);
             }
 
+            // Add the saved scores and calculated notes to the result table
             DataRow row = table.NewRow();
             row["SubjectMatchScore"] = DbValue(result.SubjectMatchScore);
             row["MarkMatchScore"] = DbValue(result.MarkMatchScore);
@@ -191,11 +173,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>
-        /// Sequence 1 step 11. save(session): the session records the selected programme (and the
-        /// preferred faculty, or the programme's faculty if none was chosen) when it is not stored
-        /// yet. save(result): the selected programme's RecommendationResult replaces the old one.
-        /// </summary>
+        // Save the programme selection and its recommendation result
+        // Use the learner's preferred faculty or the programme faculty if none was selected
         private void SaveSelectedResult(Learner learner, DegreeProgramme programme, MatchResult matchResult, decimal? interestScore,
                                         bool facultyBonus, AdvisoryOutcome outcome)
         {
@@ -203,7 +182,7 @@ namespace FuturePath.ApplicationLayer
             AdvisorySession session = sessionRepository.FindById(sessionID);
             if (session.SelectedProgrammeID != programme.ProgrammeID)
             {
-                // The learner's preferred faculty, or the programme's own faculty if none was chosen
+                // Choose the faculty to save with the programme selection
                 int facultyID = programme.FacultyID;
                 if (learner.PreferredFacultyID.HasValue)
                 {
@@ -211,12 +190,14 @@ namespace FuturePath.ApplicationLayer
                 }
                 sessionRepository.SaveProgrammeSelection(sessionID, facultyID, programme.ProgrammeID);
             }
-            // Class diagram recordOutcome(outcome): the session's outcome is the selected result's OutcomeCode
+
+            // Record the outcome and save the selected recommendation
             session.RecordOutcome(outcome.Code);
             sessionRepository.Save(new RecommendationResult(sessionID, programme, matchResult, interestScore, facultyBonus, outcome, true));
         }
 
-        /// <summary>The name of the learner's highest-scoring category among those mapped to the programme, or "" if none was answered.</summary>
+        // Find the learner's highest-scoring interest category linked to the programme
+        // Return an empty string if no category has been answered
         private static string FindStrongestCategory(Learner learner, DegreeProgramme programme)
         {
             string strongest = "";
@@ -233,7 +214,8 @@ namespace FuturePath.ApplicationLayer
             return strongest;
         }
 
-        /// <summary>The value to put in a DataTable cell: null becomes DBNull.</summary>
+        // Convert a nullable decimal into a value that can be stored in a DataTable
+        // Use DBNull when the value is null
         private static object DbValue(decimal? value)
         {
             if (value.HasValue)
