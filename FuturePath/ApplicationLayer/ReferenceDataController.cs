@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Globalization;
@@ -6,13 +7,8 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Reference data: the lists every screen binds to (grades, provinces, outcomes, faculties,
-    /// programmes, subjects, requirements), so no lookup is hard-coded in a form, and the
-    /// Administrator maintenance of faculties, programmes and requirements (UI 13.1, 13.2).
-    /// Every maintenance method checks the Administrator role first. "All" rows (for report
-    /// filters) use 0 or "" as their value; forms treat that as "no filter".
-    /// </summary>
+    // Manages reference data used throughout the system
+    // Allows administrators to maintain faculties, programmes and requirements
     public class ReferenceDataController
     {
         #region Data Members
@@ -30,13 +26,13 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The faculties read by the last GetFaculties call.</summary>
+        // Return the faculties loaded by the controller
         public Collection<Faculty> AllFaculties
         {
             get { return faculties; }
         }
 
-        /// <summary>The programmes read by the last GetProgrammes call.</summary>
+        // Return the programmes loaded by the controller
         public Collection<DegreeProgramme> AllProgrammes
         {
             get { return programmes; }
@@ -44,7 +40,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repositories (no database work yet).</summary>
+        // Initialise the repositories and collections
         public ReferenceDataController()
         {
             facultyRepository = new FacultyRepository();
@@ -58,7 +54,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Lookups
-        /// <summary>GradeLevelID, GradeDescription, MarkBasis; with includeAllRow an "All grades" row (GradeLevelID 0) first.</summary>
+        // Get the available grade levels
+        // Optionally include an All grades choice for filtering
         public DataTable GetGradeLevels(bool includeAllRow)
         {
             DataTable table = gradeLevelRepository.GetGradeLevels();
@@ -73,13 +70,14 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>The provinces from PROVINCE_n parameters: ParameterCode, ParameterValue (display ParameterValue).</summary>
+        // Get the province options from the system settings
         public DataTable GetProvinces()
         {
             return SystemSettings.GetNumberedParameters(SystemSettings.ProvincePrefix);
         }
 
-        /// <summary>OutcomeCode, OutcomeName, OutcomeOrder for the four outcomes; with includeAllRow an "All outcomes" row (OutcomeCode "") first.</summary>
+        // Get the four possible advisory outcomes
+        // Optionally include an All outcomes choice
         public DataTable GetOutcomes(bool includeAllRow)
         {
             DataTable table = new DataTable("Outcomes");
@@ -90,7 +88,8 @@ namespace FuturePath.ApplicationLayer
             {
                 table.Rows.Add("", "All outcomes", 0);
             }
-            // The four outcomes come from AdvisoryOutcome, so codes and wording are never typed twice.
+
+            // Use the outcome types and labels defined in AdvisoryOutcome
             foreach (AdvisoryOutcome.OutcomeType type in AdvisoryOutcome.GetOutcomeTypes())
             {
                 table.Rows.Add(AdvisoryOutcome.GetCode(type), AdvisoryOutcome.GetCategory(type), AdvisoryOutcome.GetDisplayOrder(type));
@@ -98,7 +97,7 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>RequirementType ("Required" / "Recommended") and Description, for the UI 13.2 combo.</summary>
+        // Get the available programme requirement types
         public DataTable GetRequirementTypes()
         {
             DataTable table = new DataTable("RequirementTypes");
@@ -109,7 +108,8 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>A whole-number system parameter (e.g. MIN_SUBJECT_COUNT), or 0 if it is missing or not a number.</summary>
+        // Read a whole-number system parameter
+        // Return zero if the parameter is missing or invalid
         public int GetParameterInt(string code)
         {
             if (string.IsNullOrWhiteSpace(code) || !SystemSettings.Contains(code.Trim()))
@@ -124,7 +124,8 @@ namespace FuturePath.ApplicationLayer
             return value;
         }
 
-        /// <summary>Faculties ordered by name; with includeAllRow an "All faculties" item (FacultyID 0) first.</summary>
+        // Load faculties, including inactive ones when requested
+        // Optionally add an All faculties choice
         public Collection<Faculty> GetFaculties(bool includeInactive, bool includeAllRow)
         {
             faculties = new Collection<Faculty>();
@@ -139,29 +140,28 @@ namespace FuturePath.ApplicationLayer
             return faculties;
         }
 
-        /// <summary>Active faculties (UI 5, UI 6.2b).</summary>
+        // Return only active faculties
         public Collection<Faculty> GetActiveFaculties()
         {
             return GetFaculties(false, false);
         }
 
-        /// <summary>
-        /// Programmes with FacultyName, ordered by name; a facultyID of 0 means every faculty. Without
-        /// includeInactive, inactive programmes and programmes under an inactive faculty are left out.
-        /// </summary>
+        // Load degree programmes for a selected faculty
+        // A faculty ID of zero includes programmes from all faculties
         public Collection<DegreeProgramme> GetProgrammes(int facultyID, bool includeInactive)
         {
             programmes = programmeRepository.GetProgrammes(facultyID, includeInactive);
             return programmes;
         }
 
-        /// <summary>Active programmes of an active faculty (UI 5 browse mode).</summary>
+        // Return active programmes from active faculties
         public Collection<DegreeProgramme> GetActiveProgrammes(int facultyID)
         {
             return GetProgrammes(facultyID, false);
         }
 
-        /// <summary>Active programmes whose name contains the text (UI 5 search mode). Blank text returns none.</summary>
+        // Search active programmes by name
+        // Return an empty collection if no search text is entered
         public Collection<DegreeProgramme> SearchActiveProgrammes(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -175,19 +175,20 @@ namespace FuturePath.ApplicationLayer
             return programmes;
         }
 
-        /// <summary>Subjects ordered by name.</summary>
+        // Get the available school subjects
         public Collection<Subject> GetSubjects(bool includeInactive)
         {
             return subjectRepository.GetSubjects(includeInactive);
         }
 
-        /// <summary>Active subjects (UI 3).</summary>
+        // Return only active school subjects
         public Collection<Subject> GetActiveSubjects()
         {
             return GetSubjects(false);
         }
 
-        /// <summary>Active subjects with a "None" item (SubjectID 0) first, for the UI 13.2 accepted-alternative combo.</summary>
+        // Get active subjects for selecting an alternative requirement
+        // Include None when no alternative subject is required
         public Collection<Subject> GetAlternativeSubjects()
         {
             Collection<Subject> subjects = new Collection<Subject>();
@@ -199,12 +200,8 @@ namespace FuturePath.ApplicationLayer
             return subjects;
         }
 
-        /// <summary>
-        /// UI 13.2 grid: RequirementID (DBNull on the synthetic row), RequirementType, SubjectID,
-        /// SubjectName, MinimumMark, AlternativeSubjectID, AlternativeSubjectName,
-        /// AlternativeMinimumMark, AdvisoryNote, IsActive, plus one "Minimum average" row (last)
-        /// read from DegreeProgramme.MinimumOverallAverage (only if the programme sets one).
-        /// </summary>
+        // Load programme requirements into a table for administrator maintenance
+        // Include the programme's minimum overall average as a separate row
         public DataTable GetRequirements(int programmeID, bool includeInactive)
         {
             DataTable table = new DataTable("Requirements");
@@ -227,7 +224,7 @@ namespace FuturePath.ApplicationLayer
                                requirement.AdvisoryNote, requirement.IsActive);
             }
 
-            // The "Minimum average" row is DegreeProgramme.MinimumOverallAverage (decisions.md §3), not a requirement row.
+            // Add the minimum average if the programme has one
             DegreeProgramme programme = programmeRepository.FindById(programmeID);
             if (programme != null && programme.MinimumOverallAverage.HasValue)
             {
@@ -237,10 +234,8 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>
-        /// UI 5 requirements panel: SubjectName, MinimumMark, RequirementType for the active
-        /// requirements, plus an "Overall average" row (last) if the programme sets a minimum average.
-        /// </summary>
+        // Get active requirements for the learner's selected programme
+        // Include the overall average requirement when applicable
         public DataTable GetActiveRequirements(int programmeID)
         {
             DataTable table = new DataTable("ActiveRequirements");
@@ -263,7 +258,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Faculty maintenance (UI 13.1)
-        /// <summary>Checks a faculty: name required, at most 60 characters, not already used. Returns one message per problem.</summary>
+        // Validate the faculty name and check for duplicates
         public Collection<string> ValidateFaculty(int facultyID, string facultyName)
         {
             Collection<string> problems = new Collection<string>();
@@ -282,11 +277,7 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (facultyID 0) or updates a faculty's name and active flag (Administrator only).
-        /// Returns the FacultyID. Throws ArgumentException if invalid, UnauthorizedAccessException
-        /// if not an Administrator.
-        /// </summary>
+        // Add or update a faculty after checking administrator access
         public int SaveFaculty(int actorUserID, int facultyID, string facultyName, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -315,7 +306,8 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(faculty, operation);
         }
 
-        /// <summary>Deactivates a faculty (Administrator only). Its programmes then drop out of learner lists.</summary>
+        // Deactivate a faculty without deleting it
+        // Its programmes will no longer appear in learner lists
         public void DeactivateFaculty(int actorUserID, int facultyID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -327,10 +319,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Programme maintenance (UI 13.1)
-        /// <summary>
-        /// Checks a programme: existing faculty, name required (max 100) and not already used,
-        /// minimum average 0-100 with at most two decimals (0 = no minimum). Returns one message per problem.
-        /// </summary>
+        // Validate the programme's faculty, name and minimum average
+        // Check for duplicate names and marks outside the valid range
         public Collection<string> ValidateProgramme(int programmeID, int facultyID, string programmeName, decimal minimumOverallAverage)
         {
             Collection<string> problems = new Collection<string>();
@@ -359,10 +349,8 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (programmeID 0) or updates a programme (Administrator only). A minimum average of 0
-        /// means the programme sets none. Returns the ProgrammeID.
-        /// </summary>
+        // Add or update a programme after checking administrator access
+        // A minimum average of zero means no minimum is required
         public int SaveProgramme(int actorUserID, int programmeID, int facultyID, string programmeName, decimal minimumOverallAverage, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -393,7 +381,7 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(programme, operation);
         }
 
-        /// <summary>Deactivates a programme (Administrator only). It then never appears in recommendations or reports.</summary>
+        // Deactivate a programme so it no longer appears in recommendations
         public void DeactivateProgramme(int actorUserID, int programmeID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -405,12 +393,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Requirement maintenance (UI 13.2)
-        /// <summary>
-        /// Checks a requirement: existing programme, valid type, existing subject, one requirement
-        /// per subject per programme, alternative (0 means none) existing and different from the
-        /// subject, marks 0-100 with at most two decimals, note at most 255 characters.
-        /// Returns one message per problem.
-        /// </summary>
+        // Validate the programme requirement and any accepted alternative
+        // Check for duplicate subjects, valid marks and advisory note length
         public Collection<string> ValidateRequirement(int requirementID, int programmeID, string requirementType, int subjectID,
                                                       int alternativeSubjectID, decimal minimumMark, decimal alternativeMinimumMark, string advisoryNote)
         {
@@ -467,12 +451,8 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (requirementID 0) or updates a requirement (Administrator only). 0 means "not set":
-        /// an alternativeSubjectID of 0 is no alternative, a minimum mark of 0 is no minimum, and an
-        /// alternative minimum of 0 means the main minimum applies. Returns the RequirementID.
-        /// Changes apply to new advisory sessions only.
-        /// </summary>
+        // Add or update a subject requirement for a degree programme
+        // Zero values are treated as missing minimums or no alternative
         public int SaveRequirement(int actorUserID, int requirementID, int programmeID, string requirementType, int subjectID,
                                    int alternativeSubjectID, decimal minimumMark, decimal alternativeMinimumMark, bool isActive, string advisoryNote)
         {
@@ -500,7 +480,8 @@ namespace FuturePath.ApplicationLayer
             requirement.RequirementType = requirementType;
             requirement.SubjectID = subjectID;
             requirement.MinimumMark = NoMinimumIfZero(minimumMark);
-            // No alternative (0) is stored as NULL, and then there is no alternative minimum either
+
+            // Store no alternative as null
             requirement.AlternativeSubjectID = null;
             requirement.AlternativeMinimumMark = null;
             if (alternativeSubjectID > 0)
@@ -519,7 +500,7 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(requirement, operation);
         }
 
-        /// <summary>Deactivates a requirement (Administrator only).</summary>
+        // Deactivate a programme requirement without deleting it
         public void DeactivateRequirement(int actorUserID, int requirementID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -529,10 +510,8 @@ namespace FuturePath.ApplicationLayer
             FinalizeChanges(requirement, DB.DBOperation.Edit);
         }
 
-        /// <summary>
-        /// Saves the "Minimum average" row of UI 13.2 into DegreeProgramme.MinimumOverallAverage
-        /// (Administrator only). 0 clears it.
-        /// </summary>
+        // Save the programme's minimum overall average
+        // A value of zero removes the minimum average requirement
         public void SaveMinimumAverage(int actorUserID, int programmeID, decimal minimumOverallAverage)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -548,38 +527,38 @@ namespace FuturePath.ApplicationLayer
         }
         #endregion
 
-        #region Database communication (Waitering DataMaintenance / FinalizeChanges)
-        /// <summary>Waitering DataMaintenance: makes the faculty change in the repository's DataSet. Private, so the role check cannot be skipped.</summary>
+        #region Database communication
+        // Apply faculty changes to the repository DataSet
         private void DataMaintenance(Faculty faculty, DB.DBOperation operation)
         {
             facultyRepository.DataSetChange(faculty, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the faculty change to the database and returns the FacultyID.</summary>
+        // Save faculty changes to the database
         private int FinalizeChanges(Faculty faculty, DB.DBOperation operation)
         {
             return facultyRepository.UpdateDataSource(faculty, operation);
         }
 
-        /// <summary>Waitering DataMaintenance: makes the programme change in the repository's DataSet.</summary>
+        // Apply programme changes to the repository DataSet
         private void DataMaintenance(DegreeProgramme programme, DB.DBOperation operation)
         {
             programmeRepository.DataSetChange(programme, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the programme change to the database and returns the ProgrammeID.</summary>
+        // Save programme changes to the database
         private int FinalizeChanges(DegreeProgramme programme, DB.DBOperation operation)
         {
             return programmeRepository.UpdateDataSource(programme, operation);
         }
 
-        /// <summary>Waitering DataMaintenance: makes the requirement change in the repository's DataSet.</summary>
+        // Apply requirement changes to the repository DataSet
         private void DataMaintenance(ProgrammeRequirement requirement, DB.DBOperation operation)
         {
             programmeRepository.DataSetChange(requirement, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the requirement change to the database and returns the RequirementID.</summary>
+        // Save requirement changes to the database
         private int FinalizeChanges(ProgrammeRequirement requirement, DB.DBOperation operation)
         {
             return programmeRepository.UpdateDataSource(requirement, operation);
@@ -587,7 +566,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>Loads a faculty for an edit, or throws ArgumentException if it no longer exists.</summary>
+        // Find a faculty for editing or throw an error if it no longer exists
         private Faculty FindFaculty(int facultyID)
         {
             Faculty faculty = facultyRepository.FindById(facultyID);
@@ -598,7 +577,7 @@ namespace FuturePath.ApplicationLayer
             return faculty;
         }
 
-        /// <summary>Loads a programme for an edit, or throws ArgumentException if it no longer exists.</summary>
+        // Find a programme for editing or throw an error if it no longer exists
         private DegreeProgramme FindProgramme(int programmeID)
         {
             DegreeProgramme programme = programmeRepository.FindById(programmeID);
@@ -609,7 +588,7 @@ namespace FuturePath.ApplicationLayer
             return programme;
         }
 
-        /// <summary>Loads a requirement for an edit, or throws ArgumentException if it no longer exists.</summary>
+        // Find a requirement for editing or throw an error if it no longer exists
         private ProgrammeRequirement FindRequirement(int requirementID)
         {
             ProgrammeRequirement requirement = programmeRepository.FindRequirementById(requirementID);
@@ -620,13 +599,13 @@ namespace FuturePath.ApplicationLayer
             return requirement;
         }
 
-        /// <summary>True for a percentage from 0 to 100 with at most two decimal places (DECIMAL(5,2)).</summary>
+        // Check that a percentage is between 0 and 100 with two decimal places at most
         private static bool IsValidPercentage(decimal value)
         {
             return value >= 0 && value <= 100 && decimal.Round(value, 2) == value;
         }
 
-        /// <summary>A minimum of 0 means "no minimum", which is stored as NULL.</summary>
+        // Return null when no minimum mark has been set
         private static decimal? NoMinimumIfZero(decimal value)
         {
             if (value == 0)
@@ -636,7 +615,7 @@ namespace FuturePath.ApplicationLayer
             return value;
         }
 
-        /// <summary>The value for a DataTable cell: null becomes DBNull.</summary>
+        // Convert null values to DBNull for DataTable cells
         private static object ValueOrDBNull(object value)
         {
             if (value == null)

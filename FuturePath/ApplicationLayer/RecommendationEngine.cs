@@ -1,37 +1,30 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The recommendation engine: plain C# rules and scoring, no external service (CLAUDE.md).
-    /// The outcome is rule-driven first, then score-driven. A missing Required subject can never
-    /// be a match, whatever the score. Weights and thresholds are SystemParameter rows read
-    /// through SystemSettings (provisional values, decisions.md D14).
-    /// </summary>
+    // Calculates eligibility outcomes and recommendation scores
+    // Uses programme requirements, interest scores and system settings
     public class RecommendationEngine
     {
         #region Data Members
-        // The longest explanation that fits RecommendationResult.OutcomeReason (VARCHAR(500))
+        // Maximum length allowed for an outcome explanation
         private const int MaximumExplanationLength = 500;
         #endregion
 
         #region Constructor
-        /// <summary>Creates the engine.</summary>
+        // Create the recommendation engine
         public RecommendationEngine()
         {
         }
         #endregion
 
         #region Methods
-        /// <summary>
-        /// The weighted overall score, 0-100:
-        /// WEIGHT_SUBJECT x SubjectScore + WEIGHT_MARK x MarkScore + WEIGHT_INTEREST x interestScore
-        /// + WEIGHT_FACULTY x (100 if facultyBonus, else 0), rounded to two decimals and kept
-        /// between 0 and 100. A missing matchResult counts as 0 for the subject and mark parts.
-        /// </summary>
+        // Calculate the weighted overall score using subjects, marks, interests and faculty
+        // Keep the final score between 0 and 100
         public decimal CalculateOverallScore(MatchResult matchResult, decimal interestScore, bool facultyBonus)
         {
             decimal subjectScore = 0;
@@ -47,7 +40,7 @@ namespace FuturePath.ApplicationLayer
                 facultyScore = 100;
             }
 
-            // The four weighted parts (application-layer.md §4)
+            // Combine the four scores using weights from the system settings
             decimal overall = SystemSettings.WeightSubject * subjectScore
                             + SystemSettings.WeightMark * markScore
                             + SystemSettings.WeightInterest * interestScore
@@ -65,20 +58,11 @@ namespace FuturePath.ApplicationLayer
             return overall;
         }
 
-        /// <summary>
-        /// Class diagram computeOutcome(matchResult, interestScore, facultyBonus). Rules in order:
-        /// 1. no subjects captured: More Information Needed;
-        /// 2. a Required subject missing (no accepted alternative): Not Currently Eligible, naming every one;
-        /// 3. a Required mark more than MARK_TOLERANCE below its minimum: Not Currently Eligible;
-        /// 4. a shortfall within the tolerance, or the average below the programme minimum: Possible Match, naming the gaps;
-        /// 5. otherwise Strong Match if the overall score is at least THRESHOLD_STRONG and the
-        ///    interest score at least INTEREST_STRONG_MIN, else Possible Match (weaker interest alignment).
-        /// The explanation always says why (at most 500 characters). OverallScore is set on every
-        /// outcome except More Information Needed (null).
-        /// </summary>
+        // Determine the learner's eligibility outcome using the matching rules
+        // Check missing subjects and mark gaps before using the overall score
         public AdvisoryOutcome ComputeOutcome(MatchResult matchResult, decimal interestScore, bool facultyBonus)
         {
-            // Rule 1: nothing to check without subjects
+            // Return More Information Needed when no subjects have been captured
             if (matchResult == null || matchResult.SubjectsCaptured == 0)
             {
                 return AdvisoryOutcome.MoreInformationNeeded("Capture at least one subject and mark (step 2) so your eligibility can be checked.");
@@ -91,20 +75,20 @@ namespace FuturePath.ApplicationLayer
 
             if (matchResult.HasMissingRequired)
             {
-                // Rule 2: a missing Required subject can never be a match
+                // Missing required subjects make the learner not currently eligible
                 outcome = AdvisoryOutcome.OutcomeType.NotCurrentlyEligible;
                 explanation = DescribeMissingSubjects(matchResult);
             }
             else if (matchResult.LargestShortfall > tolerance)
             {
-                // Rule 3: a mark too far below its minimum
+                // A mark gap above the allowed tolerance makes the learner ineligible
                 outcome = AdvisoryOutcome.OutcomeType.NotCurrentlyEligible;
                 explanation = JoinSentences(matchResult.GapList) + " The largest shortfall (" + FormatNumber(matchResult.LargestShortfall)
                             + " points) is more than the " + FormatNumber(tolerance) + " points allowed for a possible match.";
             }
             else if (matchResult.LargestShortfall > 0 || !matchResult.AverageMet)
             {
-                // Rule 4: a small gap, or the average below the programme minimum
+                // A small mark gap or low average gives a possible match
                 outcome = AdvisoryOutcome.OutcomeType.PossibleMatch;
                 explanation = "Possible match: " + JoinSentences(matchResult.GapList);
                 if (matchResult.LargestShortfall > 0)
@@ -114,27 +98,27 @@ namespace FuturePath.ApplicationLayer
             }
             else if (overallScore >= SystemSettings.ThresholdStrong && interestScore >= SystemSettings.InterestStrongMinimum)
             {
-                // Rule 5: requirements met and a strong score
+                // Give a strong match when requirements and score thresholds are met
                 outcome = AdvisoryOutcome.OutcomeType.StrongMatch;
                 explanation = DescribeRequirementsMet(matchResult) + ", and your interests align strongly ("
                             + FormatNumber(interestScore) + "%).";
             }
             else if (interestScore < SystemSettings.InterestStrongMinimum)
             {
-                // Rule 5: requirements met, but the interests are weaker
+                // Give a possible match if the interest alignment is below the strong threshold
                 outcome = AdvisoryOutcome.OutcomeType.PossibleMatch;
                 explanation = "You meet the minimum requirements, but your interest alignment (" + FormatNumber(interestScore)
                             + "%) is weaker than a strong match needs (" + FormatNumber(SystemSettings.InterestStrongMinimum) + "%).";
             }
             else
             {
-                // Rule 5: requirements met, but the overall score is below the Strong threshold
+                // Give a possible match if the overall score is below the strong threshold
                 outcome = AdvisoryOutcome.OutcomeType.PossibleMatch;
                 explanation = "You meet the minimum requirements, but your overall score (" + FormatNumber(overallScore)
                             + "%) is below the " + FormatNumber(SystemSettings.ThresholdStrong) + "% a strong match needs.";
             }
 
-            // RecommendationResult.OutcomeReason holds at most 500 characters
+            // Shorten explanations that exceed the database character limit
             if (explanation.Length > MaximumExplanationLength)
             {
                 explanation = explanation.Substring(0, MaximumExplanationLength);
@@ -142,12 +126,8 @@ namespace FuturePath.ApplicationLayer
             return new AdvisoryOutcome(outcome, explanation, overallScore);
         }
 
-        /// <summary>
-        /// Class diagram rankAlternatives(candidateOutcomes). Orders the candidates by outcome
-        /// (Strong, Possible, Not Currently Eligible, More Information Needed), then by overall
-        /// score (highest first, no score last), then by programme name, and numbers
-        /// AlternativeRank from 1. Returns a new collection; an empty one when there are no candidates.
-        /// </summary>
+        // Rank alternative programmes by outcome, score and programme name
+        // Assign each programme a rank starting from 1
         public Collection<RecommendationResult> RankAlternatives(Collection<RecommendationResult> candidateOutcomes)
         {
             List<RecommendationResult> sorted = new List<RecommendationResult>();
@@ -173,12 +153,10 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>
-        /// The ranking order used by RankAlternatives. A negative number puts a before b.
-        /// </summary>
+        // Compare programmes by outcome first, then overall score and name
         private static int CompareCandidates(RecommendationResult a, RecommendationResult b)
         {
-            // 1. Outcome: the enum numbers go from weakest (0) to strongest (3), so the higher number comes first
+            // Put stronger outcomes before weaker outcomes
             int outcomeA = (int)AdvisoryOutcome.FromCode(a.OutcomeCode);
             int outcomeB = (int)AdvisoryOutcome.FromCode(b.OutcomeCode);
             if (outcomeA != outcomeB)
@@ -186,7 +164,8 @@ namespace FuturePath.ApplicationLayer
                 return outcomeB.CompareTo(outcomeA);
             }
 
-            // 2. Overall score, highest first; a result without a score goes last
+            // Sort by overall score, with higher scores first
+            // Programmes without scores appear last
             if (a.OverallScore.HasValue && !b.OverallScore.HasValue)
             {
                 return -1;
@@ -200,15 +179,12 @@ namespace FuturePath.ApplicationLayer
                 return b.OverallScore.Value.CompareTo(a.OverallScore.Value);
             }
 
-            // 3. Programme name, A to Z
+            // Sort alphabetically when outcomes and scores are equal
             return string.Compare(a.ProgrammeName, b.ProgrammeName, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>
-        /// Rule 2's explanation: every missing Required subject in one sentence, e.g.
-        /// "Mathematics and Physical Sciences are required but were not captured.", followed by
-        /// any other gaps (marks below a minimum, an average below the programme minimum).
-        /// </summary>
+        // Create an explanation listing all missing required subjects
+        // Include any other mark or average gaps
         private static string DescribeMissingSubjects(MatchResult matchResult)
         {
             string text = JoinNames(matchResult.MissingRequired);
@@ -221,7 +197,7 @@ namespace FuturePath.ApplicationLayer
                 text += " are required but were not captured.";
             }
 
-            // The GapList already has one sentence per missing subject; skip those and keep the rest
+            // Add other gaps without repeating the missing subject messages
             Collection<string> missingSentences = new Collection<string>();
             foreach (RequirementCheck check in matchResult.Checks)
             {
@@ -240,7 +216,8 @@ namespace FuturePath.ApplicationLayer
             return text;
         }
 
-        /// <summary>The start of the Strong Match explanation, e.g. "You meet all 3 required subjects and minimum marks".</summary>
+        // Create the beginning of the Strong Match explanation
+        // Adjust the wording based on the number of required subjects
         private static string DescribeRequirementsMet(MatchResult matchResult)
         {
             int required = matchResult.RequirementsChecked;
@@ -259,7 +236,7 @@ namespace FuturePath.ApplicationLayer
             return "You meet all " + required.ToString(CultureInfo.InvariantCulture) + " required subjects and their minimum marks";
         }
 
-        /// <summary>Joins names as "A", "A and B" or "A, B and C".</summary>
+        // Join names using commas and 'and' before the last name
         private static string JoinNames(Collection<string> names)
         {
             string text = "";
@@ -278,7 +255,7 @@ namespace FuturePath.ApplicationLayer
             return text;
         }
 
-        /// <summary>Joins full sentences with a space between them.</summary>
+        // Combine multiple explanation sentences with spaces
         private static string JoinSentences(Collection<string> sentences)
         {
             string text = "";
@@ -293,7 +270,7 @@ namespace FuturePath.ApplicationLayer
             return text;
         }
 
-        /// <summary>Formats a number without trailing zeros (58, 57.5), the same on any regional setting.</summary>
+        // Format numbers without unnecessary decimal zeros
         private static string FormatNumber(decimal value)
         {
             return value.ToString("0.#", CultureInfo.InvariantCulture);
