@@ -1,20 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿
+using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// One subject requirement of a degree programme, e.g. "Mathematics, Required, minimum 60%,
-    /// no alternative". It can accept one alternative subject (Mathematics / Mathematical
-    /// Literacy), with its own minimum. Maps to ProgrammeRequirement; one requirement per subject
-    /// per programme (UNIQUE(ProgrammeID, SubjectID)).
-    /// </summary>
+    // Stores the subject and mark requirements for a degree programme
+    // Also checks whether a learner meets the requirements or an accepted alternative
     public class ProgrammeRequirement
     {
         #region Data Members
-        /// <summary>A requirement that decides eligibility.</summary>
+        // Types of programme requirements
         public const string TypeRequired = "Required";
-        /// <summary>A requirement that only adds advice; it never decides the outcome.</summary>
         public const string TypeRecommended = "Recommended";
 
         private int requirementID;
@@ -31,84 +27,73 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (ProgrammeRequirement.RequirementID).</summary>
         public int RequirementID
         {
             get { return requirementID; }
             set { requirementID = value; }
         }
 
-        /// <summary>The programme this requirement belongs to.</summary>
         public int ProgrammeID
         {
             get { return programmeID; }
             set { programmeID = value; }
         }
 
-        /// <summary>The subject required (FK to Subject).</summary>
         public int SubjectID
         {
             get { return subjectID; }
             set { subjectID = value; }
         }
 
-        /// <summary>The subject name (read from Subject, for display).</summary>
         public string SubjectName
         {
             get { return subjectName; }
             set { subjectName = value; }
         }
 
-        /// <summary>Required or Recommended.</summary>
         public string RequirementType
         {
             get { return requirementType; }
             set { requirementType = value; }
         }
 
-        /// <summary>The minimum mark (%), or null if only the subject itself is needed.</summary>
         public decimal? MinimumMark
         {
             get { return minimumMark; }
             set { minimumMark = value; }
         }
 
-        /// <summary>The accepted alternative subject, or null if there is none.</summary>
         public int? AlternativeSubjectID
         {
             get { return alternativeSubjectID; }
             set { alternativeSubjectID = value; }
         }
 
-        /// <summary>The alternative subject's name (for display), or "".</summary>
         public string AlternativeSubjectName
         {
             get { return alternativeSubjectName; }
             set { alternativeSubjectName = value; }
         }
 
-        /// <summary>The minimum for the alternative subject; when null, MinimumMark applies.</summary>
         public decimal? AlternativeMinimumMark
         {
             get { return alternativeMinimumMark; }
             set { alternativeMinimumMark = value; }
         }
 
-        /// <summary>The note shown to the learner (UI 6, FP-LSR), or "".</summary>
         public string AdvisoryNote
         {
             get { return advisoryNote; }
             set { advisoryNote = value; }
         }
 
-        /// <summary>Inactive requirements are ignored by the eligibility check.</summary>
         public bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
         }
 
-        /// <summary>True for a Required requirement.</summary>
+        // Check whether this is a required subject
         public bool IsRequired
         {
             get { return requirementType == TypeRequired; }
@@ -116,7 +101,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active Required requirement.</summary>
+        // Create an active requirement with default values
         public ProgrammeRequirement()
         {
             requirementID = 0;
@@ -132,7 +117,7 @@ namespace FuturePath.ApplicationLayer
             isActive = true;
         }
 
-        /// <summary>Creates a requirement with all its stored values.</summary>
+        // Create a requirement using its stored details
         public ProgrammeRequirement(int pRequirementID, int pProgrammeID, int pSubjectID, string pSubjectName, string pRequirementType,
                                     decimal? pMinimumMark, int? pAlternativeSubjectID, string pAlternativeSubjectName,
                                     decimal? pAlternativeMinimumMark, string pAdvisoryNote, bool pIsActive)
@@ -152,19 +137,15 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Class diagram isSatisfiedBy(learnerSubjects): true if this requirement is met.</summary>
+        // Check if the learner meets this programme requirement
         public bool IsSatisfiedBy(Collection<LearnerSubject> learnerSubjects)
         {
             return CheckAgainst(learnerSubjects).IsMet;
         }
 
-        /// <summary>
-        /// Checks this requirement against the learner's subjects:
-        /// 1. the required subject meets the minimum: MET;
-        /// 2. otherwise the accepted alternative meets its minimum: ALT;
-        /// 3. otherwise a captured subject below its minimum: GAP, with the shortfall;
-        /// 4. otherwise: MISSING.
-        /// </summary>
+        // Compare the learner's subjects and marks with the requirements
+        // Check the main subject first, then any accepted alternative
+        // Record whether the requirement is met, missing or below the minimum
         public RequirementCheck CheckAgainst(Collection<LearnerSubject> learnerSubjects)
         {
             LearnerSubject direct = FindSubject(learnerSubjects, subjectID);
@@ -173,7 +154,8 @@ namespace FuturePath.ApplicationLayer
             {
                 alternative = FindSubject(learnerSubjects, alternativeSubjectID.Value);
             }
-            // The alternative's own minimum, or the main minimum when it has none
+            // Use the alternative minimum if one is provided
+            // Otherwise use the main subject's minimum
             decimal? alternativeMinimum = minimumMark;
             if (alternativeMinimumMark.HasValue)
             {
@@ -200,26 +182,28 @@ namespace FuturePath.ApplicationLayer
                                         minimumMark, null, RequirementCheck.ResultMissing, null, advisoryNote);
         }
 
-        /// <summary>True if Required or Recommended.</summary>
+        // Check if the requirement type is valid
         public static bool IsValidType(string type)
         {
             return type == TypeRequired || type == TypeRecommended;
         }
 
-        /// <summary>True if there is no minimum, or the mark reaches it.</summary>
+        // Check if the learner's mark meets the minimum
+        // A subject without a minimum mark is automatically accepted
         private static bool Meets(decimal mark, decimal? minimum)
         {
             return !minimum.HasValue || mark >= minimum.Value;
         }
 
-        /// <summary>Builds a check for a captured subject.</summary>
+        // Create the result for a captured subject
         private RequirementCheck MakeCheck(LearnerSubject taken, decimal? minimum, string resultCode, decimal? shortfall)
         {
             return new RequirementCheck(requirementID, subjectName, taken.SubjectName, alternativeSubjectName, requirementType,
                                         minimum, taken.Mark, resultCode, shortfall, advisoryNote);
         }
 
-        /// <summary>Finds a subject in the learner's captured subjects, or returns null.</summary>
+        // Find the subject in the learner's captured subjects
+        // Return null if it has not been added
         private static LearnerSubject FindSubject(Collection<LearnerSubject> learnerSubjects, int id)
         {
             if (learnerSubjects == null)
@@ -236,7 +220,7 @@ namespace FuturePath.ApplicationLayer
             return null;
         }
 
-        /// <summary>Returns e.g. "Mathematics (Required, 60%)".</summary>
+        // Return a description of the requirement and its minimum mark
         public override string ToString()
         {
             string text = subjectName + " (" + requirementType;
