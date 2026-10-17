@@ -1,41 +1,27 @@
+
 using System;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The result of one eligibility check (class diagram AdvisoryOutcome: category, explanation,
-    /// overallScore). A transient value: it is stored through RecommendationResult
-    /// (OutcomeCode and OutcomeReason). Every outcome carries its reason; the label is never
-    /// shown on its own (spec Section 7, output controls).
-    /// Code is the short value stored in RecommendationResult.OutcomeCode (VARCHAR(10)).
-    /// Category is the wording shown to people.
-    /// </summary>
+    // Stores the result of a learner's programme eligibility check
+    // Includes the outcome category, explanation and overall score
     public class AdvisoryOutcome
     {
         #region Data Members
-        /// <summary>
-        /// The four outcomes (case study §6.5). The numbers order them from weakest to strongest,
-        /// which the engine uses to rank alternatives.
-        /// </summary>
+        // The four possible advisory outcomes
+        // Values are ordered from weakest to strongest for ranking
         public enum OutcomeType
         {
-            /// <summary>The check cannot be completed because required information is missing.</summary>
             MoreInformationNeeded = 0,
-            /// <summary>Does not currently meet one or more important requirements.</summary>
             NotCurrentlyEligible = 1,
-            /// <summary>Meets some requirements but has one or more gaps or weaker alignment.</summary>
             PossibleMatch = 2,
-            /// <summary>Appears to meet the minimum requirements and has strong interest alignment.</summary>
             StrongMatch = 3
         }
 
-        /// <summary>Stored code for Strong Match.</summary>
+        // Codes used when saving advisory outcomes
         public const string CodeStrong = "STRONG";
-        /// <summary>Stored code for Possible Match.</summary>
         public const string CodePossible = "POSSIBLE";
-        /// <summary>Stored code for Not Currently Eligible.</summary>
         public const string CodeNotEligible = "NCE";
-        /// <summary>Stored code for More Information Needed.</summary>
         public const string CodeMoreInformation = "MOREINFO";
 
         private OutcomeType outcome;
@@ -44,40 +30,37 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Which of the four outcomes this is.</summary>
         public OutcomeType Outcome
         {
             get { return outcome; }
             set { outcome = value; }
         }
 
-        /// <summary>The stored code: STRONG, POSSIBLE, NCE or MOREINFO.</summary>
+        // Get the stored code for the selected outcome
         public string Code
         {
             get { return GetCode(outcome); }
         }
 
-        /// <summary>The words shown to people, e.g. "Not Currently Eligible" (class diagram "category").</summary>
+        // Get the outcome category shown to the learner
         public string Category
         {
             get { return GetCategory(outcome); }
         }
 
-        /// <summary>Why this outcome was given, naming the subjects or marks involved.</summary>
         public string Explanation
         {
             get { return explanation; }
             set { explanation = value; }
         }
 
-        /// <summary>The weighted overall score (0 to 100), or null when it could not be calculated.</summary>
         public decimal? OverallScore
         {
             get { return overallScore; }
             set { overallScore = value; }
         }
 
-        /// <summary>The case study definition of this outcome.</summary>
+        // Get the description of the advisory outcome
         public string Definition
         {
             get { return GetDefinition(outcome); }
@@ -85,7 +68,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates a More Information Needed outcome with no explanation yet.</summary>
+        // Create a new outcome with default values
         public AdvisoryOutcome()
         {
             outcome = OutcomeType.MoreInformationNeeded;
@@ -93,7 +76,7 @@ namespace FuturePath.ApplicationLayer
             overallScore = null;
         }
 
-        /// <summary>Creates an outcome with its explanation and overall score.</summary>
+        // Create an outcome using its category, explanation and score
         public AdvisoryOutcome(OutcomeType pOutcome, string pExplanation, decimal? pOverallScore)
         {
             outcome = pOutcome;
@@ -103,13 +86,13 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Creates a More Information Needed outcome that says what is missing.</summary>
+        // Create an outcome when the learner has not provided enough information
         public static AdvisoryOutcome MoreInformationNeeded(string reason)
         {
             return new AdvisoryOutcome(OutcomeType.MoreInformationNeeded, reason, null);
         }
 
-        /// <summary>Returns the stored code for an outcome.</summary>
+        // Return the stored code for an outcome type
         public static string GetCode(OutcomeType type)
         {
             switch (type)
@@ -125,7 +108,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>Returns the display words for an outcome.</summary>
+        // Return the category name displayed to the learner
         public static string GetCategory(OutcomeType type)
         {
             switch (type)
@@ -141,13 +124,13 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>Returns the display words for a stored code, e.g. "NCE" gives "Not Currently Eligible".</summary>
+        // Convert a stored outcome code into its display name
         public static string GetCategory(string code)
         {
             return GetCategory(FromCode(code));
         }
 
-        /// <summary>Returns the case study definition of an outcome (§6.5).</summary>
+        // Return the explanation of what each outcome category means
         public static string GetDefinition(OutcomeType type)
         {
             switch (type)
@@ -163,10 +146,8 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// Turns a stored code back into an outcome. Throws ArgumentException for an unknown code,
-        /// so a bad value is never silently shown as a different outcome.
-        /// </summary>
+        // Convert a stored code back into its outcome type
+        // Throw an error if the code is not recognised
         public static OutcomeType FromCode(string code)
         {
             string value = "";
@@ -189,7 +170,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>True if the code is one of the four stored outcome codes.</summary>
+        // Check whether the code matches one of the four valid outcomes
         public static bool IsValidCode(string code)
         {
             if (code == null)
@@ -200,16 +181,14 @@ namespace FuturePath.ApplicationLayer
             return value == CodeStrong || value == CodePossible || value == CodeNotEligible || value == CodeMoreInformation;
         }
 
-        /// <summary>
-        /// The order outcomes are listed in on screens and reports:
-        /// 1 Strong, 2 Possible, 3 Not Currently Eligible, 4 More Information Needed.
-        /// </summary>
+        // Set the display order for outcomes on screens and reports
+        // Strong Match appears first and More Information Needed appears last
         public static int GetDisplayOrder(OutcomeType type)
         {
             return 4 - (int)type;
         }
 
-        /// <summary>The four outcomes in display order (Strong first).</summary>
+        // Return all four outcome types in display order
         public static OutcomeType[] GetOutcomeTypes()
         {
             return new OutcomeType[]
@@ -221,7 +200,7 @@ namespace FuturePath.ApplicationLayer
             };
         }
 
-        /// <summary>Returns "Category: explanation".</summary>
+        // Return the outcome category followed by its explanation
         public override string ToString()
         {
             return Category + ": " + explanation;
