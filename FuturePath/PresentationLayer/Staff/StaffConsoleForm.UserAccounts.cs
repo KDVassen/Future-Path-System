@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,39 +8,25 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.6 — Reference data, User accounts (Administrators only; decisions.md D5; page
-    /// <c>tabAccounts</c> in the Reference data group). Built to the UI 13.2 maintenance pattern: a
-    /// read-only grid of <c>UserAccount</c> rows (Username · Full name · Role · Status chip) with a count
-    /// line, and a maintenance form below it (Username*, Full name*, Role*, Active, and a password group).
-    /// Password hashes are never loaded into or shown on this screen. A password is required when an
-    /// account is added and optional on update (entering one resets it); the BLL stores only a salted
-    /// SHA-256 hash (decisions.md D22). Both password boxes are cleared after every save attempt, on Deactivate, Cancel and
-    /// selection. An Administrator can never deactivate their own account (compared with the console's
-    /// <see cref="UserId"/>). Nothing is ever deleted.
-    /// </summary>
+    // Handles user account management for Administrators
+    // Passwords are cleared after use and are never displayed in the account list
     public partial class StaffConsoleForm
     {
-        /// <summary>Minimum password length checked in the form (the BLL checks it again).</summary>
+        // Minimum length required for account passwords
         private const int AccountsMinimumPasswordLength = 8;
 
-        /// <summary>UserID of the account being edited; null while adding a new account.</summary>
+        // ID of the selected user, or null for a new account
         private int? accountsSelectedUserId;
 
-        /// <summary>IsActive of the account being edited, so Deactivate can say it is already inactive.</summary>
+        // Active status of the selected account
         private bool accountsSelectedIsActive;
 
-        /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
+        // Prevent selection events while refreshing the grid
         private bool accountsLoading;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.6 appears. The first time, it prepares the grid
-        /// and loads the role list and the accounts. Every time, both password boxes start empty, so a
-        /// password typed before moving to another page never waits on screen.
-        /// </summary>
-        /// <param name="firstTime">True the first time the page is shown in this console.</param>
+        // Initialise the account screen and clear any entered passwords
         private void AccountsShown(bool firstTime)
         {
             if (!firstTime)
@@ -58,7 +45,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add user account: a password is required; the boxes are cleared afterwards whatever happens.</summary>
+        // Validate and add a new user account
         private void btnAccountsAdd_Click(object sender, EventArgs e)
         {
             try
@@ -75,7 +62,7 @@ namespace FuturePath.PresentationLayer
                 }
                 catch (ArgumentException ex)
                 {
-                    // The BLL's own check failed, e.g. "The username … is already taken."
+                    // Display validation errors returned by the controller
                     ReportStatus(ex.Message, true);
                     return;
                 }
@@ -95,10 +82,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Update user account: saves the form over the selected account. Leaving both password boxes blank
-        /// keeps the current password; entering one resets it. The boxes are cleared afterwards whatever happens.
-        /// </summary>
+        // Update the selected account and optionally reset its password
         private void btnAccountsUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -118,7 +102,7 @@ namespace FuturePath.PresentationLayer
                 bool reset = txtNewPassword.Text.Length > 0;
                 try
                 {
-                    // A blank password keeps the current one.
+                    // Leave the password unchanged when the field is empty
                     AccountsSaveAccount(accountsSelectedUserId.Value, txtNewPassword.Text);
                 }
                 catch (ArgumentException ex)
@@ -142,7 +126,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Deactivate: deactivates the selected account after confirmation (never deletes it, never your own).</summary>
+        // Deactivate the selected account after confirmation
         private void btnAccountsDeactivate_Click(object sender, EventArgs e)
         {
             AccountsClearPasswords();
@@ -192,7 +176,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("User account \"" + username + "\" deactivated.", false);
         }
 
-        /// <summary>Cancel: discards the edit, clears the form, both password boxes and the grid selection.</summary>
+        // Cancel editing and clear the account form
         private void btnAccountsCancel_Click(object sender, EventArgs e)
         {
             AccountsClearForm();
@@ -203,12 +187,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the role list supplied by the BLL (never literal Items).</summary>
+        // Load the available user account roles
         private void AccountsLoadRoles()
         {
             try
             {
-                // "Administrator", "Career Advisor" (the UserAccount role constants).
+                // Retrieve Administrator and Career Advisor roles
                 UserAccountController userAccountController = new UserAccountController();
                 cboRole.DataSource = userAccountController.GetRoles();
                 cboRole.SelectedIndex = -1;
@@ -219,14 +203,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Binds the account grid (active and inactive). PasswordHash is never part of the list.</summary>
+        // Load active and inactive accounts without password hashes
         private void AccountsLoadAccounts()
         {
             accountsLoading = true;
             try
             {
-                // Columns: UserID, Username, FullName, Role, IsActive — the BLL never returns PasswordHash.
-                // The BLL checks that UserId's Role = Administrator before returning the list.
+                // Retrieve account details for the grid
                 UserAccountController userAccountController = new UserAccountController();
                 dgvAccounts.DataSource = userAccountController.GetAccounts(UserId);
                 dgvAccounts.ClearSelection();
@@ -243,15 +226,7 @@ namespace FuturePath.PresentationLayer
             AccountsUpdateCountLine();
         }
 
-        /// <summary>
-        /// Adds (userId 0) or updates an account. A blank <paramref name="newPassword"/> on an update keeps the
-        /// current password. The password is passed straight to the BLL and never kept here.
-        /// The BLL checks that UserId's Role = Administrator, re-checks every field and that Username is unique,
-        /// and refuses to deactivate or demote the caller's own account. It stores only a salted hash
-        /// (a random salt plus SHA-256, decisions.md D22), never the plaintext.
-        /// </summary>
-        /// <param name="userId">The account being updated, or 0 to add a new one.</param>
-        /// <param name="newPassword">The new password, or "" to keep the current one.</param>
+        // Add or update an account through the controller
         private void AccountsSaveAccount(int userId, string newPassword)
         {
             UserAccountController userAccountController = new UserAccountController();
@@ -259,8 +234,7 @@ namespace FuturePath.PresentationLayer
                 (string)cboRole.SelectedItem, chkAccountActive.Checked, newPassword);
         }
 
-        /// <summary>Sets IsActive = 0 on an account so it can no longer sign in. Nothing is deleted.</summary>
-        /// <param name="userId">The account to deactivate (the BLL refuses the signed-in Administrator's own).</param>
+        // Deactivate a user account without deleting it
         private void AccountsDeactivateAccount(int userId)
         {
             UserAccountController userAccountController = new UserAccountController();
@@ -271,7 +245,7 @@ namespace FuturePath.PresentationLayer
 
         #region Grid display and selection
 
-        /// <summary>Writes "N accounts · M active" from the bound rows.</summary>
+        // Update the total and active account counts
         private void AccountsUpdateCountLine()
         {
             int total = dgvAccounts.Rows.Count;
@@ -287,7 +261,7 @@ namespace FuturePath.PresentationLayer
             lblAccountCount.Text = total + (total == 1 ? " account" : " accounts") + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        // Format account status as active or inactive
         private void dgvAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == colAccountsStatus.Index)
@@ -296,10 +270,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// After (re)binding, starts with no row selected, so the form stays ready for a new
-        /// account until the administrator picks one, and refreshes the count line.
-        /// </summary>
+        // Clear automatic selection after the account grid is loaded
         private void dgvAccounts_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = accountsLoading;
@@ -310,10 +281,7 @@ namespace FuturePath.PresentationLayer
             AccountsUpdateCountLine();
         }
 
-        /// <summary>
-        /// Copies the account the administrator selects into the form; password boxes always start empty.
-        /// Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
-        /// </summary>
+        // Load the selected account into the form for editing
         private void dgvAccounts_SelectionChanged(object sender, EventArgs e)
         {
             if (accountsLoading || !dgvAccounts.Focused || dgvAccounts.SelectedRows.Count == 0)
@@ -347,10 +315,7 @@ namespace FuturePath.PresentationLayer
 
         #region Maintenance form validation (validated again in the BLL on save)
 
-        /// <summary>
-        /// Validates the whole form; shows field messages and the validation summary.
-        /// </summary>
-        /// <param name="isNew">True on Add: the password is then required.</param>
+        // Validate the account form and show any errors
         private bool AccountsValidateForm(bool isNew)
         {
             var problems = new List<string>();
@@ -361,7 +326,7 @@ namespace FuturePath.PresentationLayer
             if (!AccountsCheckNewPassword(isNew)) { problems.Add("New password"); invalid.Add(txtNewPassword); }
             if (!AccountsCheckConfirmPassword(isNew)) { problems.Add("Confirm password"); invalid.Add(txtConfirmPassword); }
 
-            // An Administrator may not switch off their own account: Active turns red and is listed in the summary.
+            // Prevent administrators from deactivating their own accounts
             bool ownAccountOff = !isNew && accountsSelectedUserId.HasValue && accountsSelectedUserId.Value == UserId && !chkAccountActive.Checked;
             chkAccountActive.ForeColor = ownAccountOff ? RedColour : InkColour;
             if (ownAccountOff) { problems.Add("Active"); invalid.Add(chkAccountActive); }
@@ -376,7 +341,7 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Username: required, at most 50 characters of letters, digits, . _ and -.</summary>
+        // Check that the username has a valid format and length
         private bool AccountsCheckUsername()
         {
             string text = txtUsername.Text.Trim();
@@ -385,7 +350,7 @@ namespace FuturePath.PresentationLayer
                 "Username: letters, digits, . _ - only.");
         }
 
-        /// <summary>Full name: required, at most 100 characters.</summary>
+        // Check that the full name is entered and within 100 characters
         private bool AccountsCheckFullName()
         {
             string text = txtFullName.Text.Trim();
@@ -393,13 +358,13 @@ namespace FuturePath.PresentationLayer
                 "Full name: enter the user's name (max 100 characters).");
         }
 
-        /// <summary>Role: one must be chosen.</summary>
+        // Check that a user role has been selected
         private bool AccountsCheckRole()
         {
             return CheckField(cboRole.SelectedIndex >= 0, cboRole, lblRole, lblRoleError, "Role: choose a role.");
         }
 
-        /// <summary>Required on Add; on Update only checked when something was typed (a reset).</summary>
+        // Check password length when adding or resetting an account
         private bool AccountsCheckNewPassword(bool isNew)
         {
             bool resetting = isNew || txtNewPassword.Text.Length > 0 || txtConfirmPassword.Text.Length > 0;
@@ -408,7 +373,7 @@ namespace FuturePath.PresentationLayer
                 "New password: at least " + AccountsMinimumPasswordLength + " characters.");
         }
 
-        /// <summary>The confirmation must match the new password whenever a password is being set.</summary>
+        // Check that the password confirmation matches
         private bool AccountsCheckConfirmPassword(bool isNew)
         {
             bool resetting = isNew || txtNewPassword.Text.Length > 0 || txtConfirmPassword.Text.Length > 0;
@@ -417,28 +382,28 @@ namespace FuturePath.PresentationLayer
                 "Confirm password: must match the new password.");
         }
 
-        /// <summary>Checks the username as the administrator leaves the box.</summary>
+        // Validate the username when leaving the field
         private void txtUsername_Leave(object sender, EventArgs e) { AccountsCheckUsername(); }
 
-        /// <summary>Checks the full name as the administrator leaves the box.</summary>
+        // Validate the full name when leaving the field
         private void txtFullName_Leave(object sender, EventArgs e) { AccountsCheckFullName(); }
 
-        /// <summary>Checks the role as the administrator leaves the list.</summary>
+        // Validate the role when leaving the dropdown
         private void cboRole_Leave(object sender, EventArgs e) { AccountsCheckRole(); }
 
-        /// <summary>Checks the new password on leaving the box, only when something was typed.</summary>
+        // Validate the new password when leaving the field
         private void txtNewPassword_Leave(object sender, EventArgs e)
         {
             if (txtNewPassword.Text.Length > 0) AccountsCheckNewPassword(!accountsSelectedUserId.HasValue);
         }
 
-        /// <summary>Checks the confirmation on leaving the box, only when something was typed.</summary>
+        // Validate the confirmation when leaving the field
         private void txtConfirmPassword_Leave(object sender, EventArgs e)
         {
             if (txtConfirmPassword.Text.Length > 0) AccountsCheckConfirmPassword(!accountsSelectedUserId.HasValue);
         }
 
-        /// <summary>Clears every field message, the own-account mark and the validation summary.</summary>
+        // Clear validation messages and restore field colours
         private void AccountsClearValidation()
         {
             CheckField(true, txtUsername, lblUsername, lblUsernameError, string.Empty);
@@ -454,14 +419,14 @@ namespace FuturePath.PresentationLayer
 
         #region Helpers
 
-        /// <summary>Empties both password boxes so a password never stays on screen after an attempt.</summary>
+        // Clear both password fields after an account action
         private void AccountsClearPasswords()
         {
             txtNewPassword.Clear();
             txtConfirmPassword.Clear();
         }
 
-        /// <summary>Empties the form and the selection, ready to add a new account.</summary>
+        // Reset the form for a new user account
         private void AccountsClearForm()
         {
             accountsLoading = true;
@@ -478,7 +443,7 @@ namespace FuturePath.PresentationLayer
             AccountsClearValidation();
         }
 
-        /// <summary>True for a bound BIT value of 1.</summary>
+        // Check whether an account's stored active flag is true
         private static bool AccountsIsTrue(object value)
         {
             return value is bool && (bool)value;
