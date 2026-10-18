@@ -1,3 +1,4 @@
+
 using System;
 using System.Data;
 using System.Drawing;
@@ -10,69 +11,46 @@ using Microsoft.Reporting.WinForms;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 11.1a / 11.2b / 11.3c — the report viewer (spec 2.1, Section 6; reports.md "Technology").
-    /// FP-LSR, FP-DIE or FP-LER is shown in the WinForms ReportViewer from the typed dataset the Business
-    /// Logic Layer fills (<see cref="FpLsrData"/>, <see cref="FpDieData"/>, <see cref="FpLerData"/>). The .rdlc
-    /// layouts hold no queries and no business rules: this screen only binds each DataTable to the report
-    /// data source of the same name, shows it in print layout and renders it to a file.
-    /// <para>
-    /// The viewer's own export button is hidden. <b>Save report</b> exports only the formats the BLL allows
-    /// for each report (ReportController.GetExportFormats: FP-LSR and FP-LER PDF or Word, FP-DIE PDF or Excel),
-    /// and every saved file is recorded in ExportReport through the BLL. Opened from UI 11 (Preview / Generate report) and from UI 10.2b
-    /// (Open advisory summary).
-    /// </para>
-    /// </summary>
+    // Handles displaying, saving and exporting reports
     public partial class StaffConsoleForm
     {
         private const string LsrCode = "FP-LSR";
         private const string DieCode = "FP-DIE";
         private const string LerCode = "FP-LER";
 
-        /// <summary>The report on show: FP-LSR, FP-DIE or FP-LER.</summary>
+        // Code of the report currently displayed
         private string viewerReportCode = DieCode;
 
-        /// <summary>What the report covers, for the subtitle (a session, or a period and its filters).</summary>
+        // Description of the report's scope
         private string viewerScope = string.Empty;
 
-        /// <summary>The screen Back returns to (UI 11 or UI 10.2b).</summary>
+        // Page to return to when Back is clicked
         private TabPage viewerReturnPage;
 
-        /// <summary>The typed dataset the report is rendered from.</summary>
+        // Dataset used to display the report
         private DataSet viewerData;
 
-        /// <summary>File extension chosen on UI 11 (".pdf", ".docx", ".xlsx"), or "" to ask on save.</summary>
+        // Selected export file extension
         private string viewerExtension;
 
-        /// <summary>Folder chosen on UI 11, or "" to ask on save.</summary>
+        // Selected export folder
         private string viewerFolder;
 
-        /// <summary>Proposed file name without extension.</summary>
+        // Proposed filename without the extension
         private string viewerFileStem;
 
-        /// <summary>AdvisorySession.SessionID for an FP-LSR, otherwise 0 (ExportReport.SessionID).</summary>
+        // Session ID for learner advisory summaries
         private int viewerSessionId;
 
-        /// <summary>ExportReport.ParametersUsed for FP-DIE / FP-LER, otherwise null.</summary>
+        // Parameters used when generating the report
         private string viewerParameters;
 
-        /// <summary>The full path of the file already saved for this report, or null.</summary>
+        // Full path of the saved report
         private string viewerSavedPath;
 
         #region Opening the viewer
 
-        /// <summary>
-        /// Shows a report in the viewer (UI 11.1a / 11.2b / 11.3c).
-        /// </summary>
-        /// <param name="reportCode">FP-LSR, FP-DIE or FP-LER.</param>
-        /// <param name="data">The typed dataset from the BLL (FpLsrData, FpDieData or FpLerData).</param>
-        /// <param name="scope">What the report covers, for the subtitle.</param>
-        /// <param name="sessionId">The session of an FP-LSR, or 0.</param>
-        /// <param name="parameters">The selection of an FP-DIE / FP-LER (ExportReport.ParametersUsed), or null.</param>
-        /// <param name="extension">The output format chosen on UI 11, or "" (or null) to ask on save.</param>
-        /// <param name="folder">The folder chosen on UI 11, or "" (or null) to ask on save.</param>
-        /// <param name="fileStem">The proposed file name without extension.</param>
-        /// <param name="returnPage">The screen Back returns to.</param>
+        // Open the selected report in the ReportViewer
         private void OpenReportViewer(string reportCode, DataSet data, string scope, int sessionId, string parameters,
                                       string extension, string folder, string fileStem, TabPage returnPage)
         {
@@ -87,7 +65,7 @@ namespace FuturePath.PresentationLayer
             viewerReturnPage = returnPage;
             viewerSavedPath = null;
 
-            // viewerData is set above, so tcConsole_Selecting lets the Report viewer tab open.
+            // Set up the report before opening the viewer
             SelectPage(tabReportViewer);
             LoadReport(rvReport.LocalReport, viewerReportCode, viewerData);
             UseReportPageSettings(rvReport);
@@ -96,7 +74,7 @@ namespace FuturePath.PresentationLayer
             rvReport.RefreshReport();
         }
 
-        /// <summary>Called by <see cref="PageShown"/> each time the viewer appears; the caption names the report on show.</summary>
+        // Update the window title and status when the viewer opens
         private void ReportViewerShown(bool firstTime)
         {
             Text = "Future Path — " + ReportNameOf(viewerReportCode) + " (" + ReportScreenOf(viewerReportCode) + ")";
@@ -110,16 +88,13 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Back returns to the screen that opened the viewer.</summary>
+        // Return to the page that opened the report viewer
         private void btnReportViewerBack_Click(object sender, EventArgs e)
         {
             SelectPage(viewerReturnPage ?? tabReports);
         }
 
-        /// <summary>
-        /// Save report → asks for the file when UI 11 did not set one, confirms, renders the report on show
-        /// to the chosen format and records the export (ExportReport) through the BLL.
-        /// </summary>
+        // Save the displayed report and record the export
         private void btnReportViewerSave_Click(object sender, EventArgs e)
         {
             string path = ReportViewerChoosePath();
@@ -150,7 +125,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL (or SaveReport) refused the export; the message says why, e.g. a file type the report does not allow.
+                // Display the reason when an export is rejected
                 SetStatus(ex.Message, RedColour, Color.White);
                 return;
             }
@@ -168,7 +143,7 @@ namespace FuturePath.PresentationLayer
 
         #region Saving
 
-        /// <summary>The file to save to: UI 11's format and folder when set, otherwise a Save dialog.</summary>
+        // Get the selected save path or open a Save File dialog
         private string ReportViewerChoosePath()
         {
             if (!string.IsNullOrEmpty(viewerExtension) && !string.IsNullOrEmpty(viewerFolder))
@@ -185,16 +160,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Renders a report to a file and records it. Used by the viewer, by UI 11 Generate report and by
-        /// UI 10.2b Export advisory summary. The file's extension must be one of the report's formats
-        /// (ReportController.GetExportFormats), which also gives the ReportViewer render format.
-        /// </summary>
-        /// <param name="reportCode">FP-LSR, FP-DIE or FP-LER.</param>
-        /// <param name="data">The typed dataset from the BLL.</param>
-        /// <param name="path">The file to write; its extension chooses the format.</param>
-        /// <param name="sessionId">ExportReport.SessionID (FP-LSR), or 0.</param>
-        /// <param name="parameters">ExportReport.ParametersUsed (FP-DIE / FP-LER), or null.</param>
+        // Render the report to a file and record the export
         private void SaveReport(string reportCode, DataSet data, string path, int sessionId, string parameters)
         {
             ReportController reportController = new ReportController();
@@ -222,8 +188,7 @@ namespace FuturePath.PresentationLayer
 
             File.WriteAllBytes(path, file);
 
-            // The ExportReport row: ReportCode, SessionID or ParametersUsed, GeneratedByUserID = UserId, DateGenerated
-            // and ExportFormat. The BLL checks the role before recording (spec Section 8).
+            // Record the report export through the controller
             reportController.RecordExport(UserId, reportCode, sessionId, parameters, extension, DateTime.Now);
         }
 
@@ -231,7 +196,7 @@ namespace FuturePath.PresentationLayer
 
         #region Report plumbing (display only — no queries, no rules)
 
-        /// <summary>Points a LocalReport at the embedded .rdlc and binds every DataTable as the data source of the same name.</summary>
+        // Load the report layout and bind its dataset tables
         private static void LoadReport(LocalReport report, string reportCode, DataSet data)
         {
             report.ReportEmbeddedResource = "FuturePath.PresentationLayer.Reports." + ReportFileOf(reportCode) + ".rdlc";
@@ -242,11 +207,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Gives the viewer the report's own page size, orientation and margins. Without this, print layout and the
-        /// toolbar's Print use the default printer's portrait page, so the landscape FP-DIE and FP-LER are cut off on
-        /// the right and split across twice as many pages.
-        /// </summary>
+        // Apply the report's page size, margins and orientation
         private static void UseReportPageSettings(ReportViewer viewer)
         {
             ReportPageSettings page = viewer.LocalReport.GetDefaultPageSettings();
@@ -265,7 +226,7 @@ namespace FuturePath.PresentationLayer
             return "FpDie";
         }
 
-        /// <summary>The report's name, for the window caption and the status messages.</summary>
+        // Get the display name of the selected report
         private static string ReportNameOf(string reportCode)
         {
             if (reportCode == LsrCode) return "Learner Advisory Summary";
@@ -273,7 +234,7 @@ namespace FuturePath.PresentationLayer
             return "Degree Interest and Eligibility Report";
         }
 
-        /// <summary>The report's screen ID in the spec inventory (UI 11.1a / 11.2b / 11.3c).</summary>
+        // Get the screen ID for the selected report
         private static string ReportScreenOf(string reportCode)
         {
             if (reportCode == LsrCode) return "UI 11.1a";
@@ -281,10 +242,7 @@ namespace FuturePath.PresentationLayer
             return "UI 11.2b";
         }
 
-        /// <summary>
-        /// The Save dialog filter built from the formats the BLL allows for the report
-        /// (ReportController.GetExportFormats), e.g. "PDF document (.pdf)|*.pdf|Word document (.docx)|*.docx".
-        /// </summary>
+        // Build the Save dialog filter using supported export formats
         private static string ExportFilterOf(string reportCode)
         {
             ReportController reportController = new ReportController();
