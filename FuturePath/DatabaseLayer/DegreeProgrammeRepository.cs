@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -7,12 +8,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for degree programmes and their requirements (class diagram
-    /// DegreeProgrammeRepository: findByIdWithRequirements, findActiveProgrammes), plus the
-    /// Administrator maintenance of programmes (UI 13.1) and requirements (UI 13.2) in the
-    /// Waitering DataSetChange / UpdateDataSource pattern.
-    /// </summary>
+    // Handles database operations for degree programmes and their requirements
+    // Loads programme details, interest mappings and saves administrator changes
     public class DegreeProgrammeRepository : DB
     {
         #region Data Members
@@ -20,17 +17,17 @@ namespace FuturePath.DatabaseLayer
         private string requirementTable = "ProgrammeRequirement";
         private string mappingTable = "DegreeInterestMapping";
 
-        // Programmes with their faculty name (the join is only for reading; the adapter commands write DegreeProgramme)
+        // Load programmes together with their faculty names
         private string sqlProgrammes = "SELECT p.ProgrammeID, p.FacultyID, f.FacultyName, p.ProgrammeName, p.MinimumOverallAverage, p.IsActive "
                                      + "FROM DegreeProgramme p INNER JOIN Faculty f ON f.FacultyID = p.FacultyID";
 
-        // Requirements with the subject name and the accepted alternative's name (LEFT JOIN: there may be no alternative)
+        // Load requirements with subject names and optional alternative subjects
         private string sqlRequirements = "SELECT r.RequirementID, r.ProgrammeID, r.SubjectID, s.SubjectName, r.RequirementType, r.MinimumMark, "
                                        + "r.AlternativeSubjectID, a.SubjectName AS AlternativeSubjectName, r.AlternativeMinimumMark, r.AdvisoryNote, r.IsActive "
                                        + "FROM ProgrammeRequirement r INNER JOIN Subject s ON s.SubjectID = r.SubjectID "
                                        + "LEFT JOIN Subject a ON a.SubjectID = r.AlternativeSubjectID";
 
-        // A programme's mappings to ACTIVE interest categories, with the category names
+        // Load a programme's interest mappings for active categories
         private string sqlMappings = "SELECT m.ProgrammeID, m.CategoryID, c.CategoryName, m.RelevanceWeight "
                                    + "FROM DegreeInterestMapping m INNER JOIN InterestCategory c ON c.CategoryID = m.CategoryID "
                                    + "WHERE m.ProgrammeID = @ProgrammeID AND c.IsActive = 1 ORDER BY c.CategoryName";
@@ -40,7 +37,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the programme and requirement collections
         public DegreeProgrammeRepository() : base()
         {
             programmes = new Collection<DegreeProgramme>();
@@ -49,12 +46,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read - eligibility engine
-        /// <summary>
-        /// Class diagram findByIdWithRequirements(programmeId). Loads the programme (with
-        /// FacultyName), its ACTIVE requirements (with subject and alternative names, in
-        /// RequirementID order) and its interest mappings to ACTIVE categories (with category
-        /// names and weights). Returns null if it does not exist (active or not).
-        /// </summary>
+        // Find a programme and load its requirements and interest mappings
         public DegreeProgramme FindByIdWithRequirements(int programmeID)
         {
             DegreeProgramme programme = FindById(programmeID);
@@ -66,10 +58,8 @@ namespace FuturePath.DatabaseLayer
             return programme;
         }
 
-        /// <summary>
-        /// Class diagram findActiveProgrammes(excludedProgrammeId). Every active programme under
-        /// an active faculty except the excluded one, each loaded as FindByIdWithRequirements does.
-        /// </summary>
+        // Load active programmes except the selected programme
+        // Include their requirements and interest mappings for recommendations
         public Collection<DegreeProgramme> FindActiveProgrammes(int excludedProgrammeID)
         {
             FillDataSet(sqlProgrammes + " WHERE p.IsActive = 1 AND f.IsActive = 1 AND p.ProgrammeID <> @ExcludedID ORDER BY p.ProgrammeName",
@@ -77,7 +67,7 @@ namespace FuturePath.DatabaseLayer
             Add2Collection();
             Collection<DegreeProgramme> candidates = programmes;
 
-            // Load each candidate's requirements and interest mappings (a handful of programmes, so one query each is fine)
+            // Load the requirements and mappings for each programme
             foreach (DegreeProgramme programme in candidates)
             {
                 LoadRequirementsAndMappings(programme);
@@ -87,7 +77,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read - lists
-        /// <summary>One programme with FacultyName, without requirements, or null.</summary>
+        // Find a programme by ID without loading its requirements
         public DegreeProgramme FindById(int programmeID)
         {
             FillDataSet(sqlProgrammes + " WHERE p.ProgrammeID = @ProgrammeID", programmeTable,
@@ -100,10 +90,8 @@ namespace FuturePath.DatabaseLayer
             return programmes[0];
         }
 
-        /// <summary>
-        /// Programmes with FacultyName, ordered by name. A facultyID of 0 means every faculty.
-        /// Without includeInactive, inactive programmes and programmes under an inactive faculty are left out.
-        /// </summary>
+        // Load programmes for the selected faculty
+        // Optionally include inactive programmes and faculties
         public Collection<DegreeProgramme> GetProgrammes(int facultyID, bool includeInactive)
         {
             string sql = sqlProgrammes + " WHERE 1 = 1";
@@ -122,10 +110,8 @@ namespace FuturePath.DatabaseLayer
             return programmes;
         }
 
-        /// <summary>
-        /// Active programmes under active faculties whose name contains the text (UI 5 search mode).
-        /// Blank text returns an empty collection.
-        /// </summary>
+        // Search active programmes by name
+        // Return an empty collection if the search text is blank
         public Collection<DegreeProgramme> SearchActiveProgrammes(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -138,7 +124,7 @@ namespace FuturePath.DatabaseLayer
             return programmes;
         }
 
-        /// <summary>True if another programme already has this name (not case-sensitive).</summary>
+        // Check whether another programme already has the given name
         public bool ProgrammeNameExists(string programmeName, int excludeProgrammeID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM DegreeProgramme WHERE ProgrammeName = @Name AND ProgrammeID <> @ExcludeID",
@@ -147,7 +133,8 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToInt32(count) > 0;
         }
 
-        /// <summary>A programme's requirements with SubjectName and AlternativeSubjectName, in RequirementID order.</summary>
+        // Load the requirements for a programme
+        // Optionally include requirements that have been deactivated
         public Collection<ProgrammeRequirement> GetRequirements(int programmeID, bool includeInactive)
         {
             string sql = sqlRequirements + " WHERE r.ProgrammeID = @ProgrammeID";
@@ -160,7 +147,7 @@ namespace FuturePath.DatabaseLayer
             return requirements;
         }
 
-        /// <summary>One requirement with its subject names, or null.</summary>
+        // Find a programme requirement by its ID
         public ProgrammeRequirement FindRequirementById(int requirementID)
         {
             FillDataSet(sqlRequirements + " WHERE r.RequirementID = @RequirementID", requirementTable,
@@ -173,7 +160,7 @@ namespace FuturePath.DatabaseLayer
             return requirements[0];
         }
 
-        /// <summary>True if the programme already has a requirement for this subject (UNIQUE(ProgrammeID, SubjectID)).</summary>
+        // Check if the programme already has a requirement for a subject
         public bool RequirementExists(int programmeID, int subjectID, int excludeRequirementID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM ProgrammeRequirement WHERE ProgrammeID = @ProgrammeID AND SubjectID = @SubjectID"
@@ -186,7 +173,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled DegreeProgramme rows into DegreeProgramme objects (Waitering Add2Collection).</summary>
+        // Convert database rows into DegreeProgramme objects
         private void Add2Collection()
         {
             programmes = new Collection<DegreeProgramme>();
@@ -200,7 +187,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Turns the filled ProgrammeRequirement rows into ProgrammeRequirement objects.</summary>
+        // Convert database rows into ProgrammeRequirement objects
         private void AddRequirements2Collection()
         {
             requirements = new Collection<ProgrammeRequirement>();
@@ -215,19 +202,16 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Adds a programme's ACTIVE requirements (RequirementID order) and its mappings to ACTIVE
-        /// interest categories to the programme object. Used by FindByIdWithRequirements and FindActiveProgrammes.
-        /// </summary>
+        // Load active subject requirements and interest mappings for a programme
         private void LoadRequirementsAndMappings(DegreeProgramme programme)
         {
-            // 1. Active requirements, in RequirementID order
+            // Add the programme's active subject requirements
             foreach (ProgrammeRequirement requirement in GetRequirements(programme.ProgrammeID, false))
             {
                 programme.GetRequirements().Add(requirement);
             }
 
-            // 2. Interest mappings to active categories, each with its relevance weight
+            // Add interest categories and their relevance weights
             FillDataSet(sqlMappings, mappingTable, Param("@ProgrammeID", SqlDbType.Int, programme.ProgrammeID));
             foreach (DataRow row in GetTable(mappingTable).Rows)
             {
@@ -236,7 +220,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Copies a programme's values into a DataRow (Waitering FillRow).</summary>
+        // Copy a programme's values into a DataRow
         private void FillRow(DataRow row, DegreeProgramme programme)
         {
             row["FacultyID"] = programme.FacultyID;
@@ -245,7 +229,8 @@ namespace FuturePath.DatabaseLayer
             row["IsActive"] = programme.IsActive;
         }
 
-        /// <summary>Copies a requirement's values into a DataRow (Waitering FillRow). An alternative of 0 is stored as no alternative.</summary>
+        // Copy a requirement's values into a DataRow
+        // Store a missing alternative subject as DBNull
         private void FillRow(DataRow row, ProgrammeRequirement requirement)
         {
             row["ProgrammeID"] = requirement.ProgrammeID;
@@ -267,16 +252,13 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Maintenance - Waitering pattern
-        /// <summary>
-        /// Adds a new programme row to the DataSet, or changes the existing row (Edit).
-        /// Throws ArgumentException if the programme to edit does not exist.
-        /// </summary>
+        // Add a programme row or update an existing row in the DataSet
         public void DataSetChange(DegreeProgramme programme, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty copy of the table gives the columns for the new row
+                // Load the table structure before adding a new programme
                 FillDataSet(sqlProgrammes + " WHERE 1 = 0", programmeTable);
                 row = GetTable(programmeTable).NewRow();
                 FillRow(row, programme);
@@ -295,10 +277,8 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Sends the programme change (made by DataSetChange) to the database. Returns the
-        /// ProgrammeID (the new key for Add, which is also set on the programme).
-        /// </summary>
+        // Save programme changes from the DataSet to the database
+        // Return the programme ID after saving
         public int UpdateDataSource(DegreeProgramme programme, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -313,17 +293,14 @@ namespace FuturePath.DatabaseLayer
 
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row; read it before any other fill
+                // Read the new programme ID from the inserted row
                 DataTable table = GetTable(programmeTable);
                 programme.ProgrammeID = Convert.ToInt32(table.Rows[table.Rows.Count - 1]["ProgrammeID"]);
             }
             return programme.ProgrammeID;
         }
 
-        /// <summary>
-        /// Adds a new requirement row to the DataSet, or changes the existing row (Edit).
-        /// Throws ArgumentException if the requirement to edit does not exist.
-        /// </summary>
+        // Add a requirement row or update an existing row in the DataSet
         public void DataSetChange(ProgrammeRequirement requirement, DB.DBOperation operation)
         {
             DataRow row;
@@ -347,10 +324,8 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Sends the requirement change (made by DataSetChange) to the database. Returns the
-        /// RequirementID (the new key for Add, which is also set on the requirement).
-        /// </summary>
+        // Save requirement changes from the DataSet to the database
+        // Return the requirement ID after saving
         public int UpdateDataSource(ProgrammeRequirement requirement, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -373,7 +348,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters and Create Commands
-        /// <summary>The INSERT for a programme; the new ProgrammeID comes back into the row.</summary>
+        // Create the SQL command for inserting a degree programme
         private void Create_INSERT_Command(DegreeProgramme programme)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO DegreeProgramme (FacultyID, ProgrammeName, MinimumOverallAverage, IsActive) "
@@ -383,7 +358,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(programme);
         }
 
-        /// <summary>One parameter per programme column, each reading its value from the row (Waitering Build_INSERT_Parameters).</summary>
+        // Add the programme parameters to the INSERT command
         private void Build_INSERT_Parameters(DegreeProgramme programme)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@FacultyID", SqlDbType.Int, "FacultyID"));
@@ -392,7 +367,7 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@IsActive", SqlDbType.Bit, "IsActive"));
         }
 
-        /// <summary>The UPDATE for a programme, matched on ProgrammeID.</summary>
+        // Create the SQL command for updating a degree programme
         private void Create_UPDATE_Command(DegreeProgramme programme)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE DegreeProgramme SET FacultyID = @FacultyID, ProgrammeName = @ProgrammeName, "
@@ -401,7 +376,7 @@ namespace FuturePath.DatabaseLayer
             Build_UPDATE_Parameters(programme);
         }
 
-        /// <summary>The UPDATE parameters: every column plus the key.</summary>
+        // Add the programme parameters and ID to the UPDATE command
         private void Build_UPDATE_Parameters(DegreeProgramme programme)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@FacultyID", SqlDbType.Int, "FacultyID"));
@@ -411,7 +386,7 @@ namespace FuturePath.DatabaseLayer
             daMain.UpdateCommand.Parameters.Add(SourceParam("@ProgrammeID", SqlDbType.Int, "ProgrammeID"));
         }
 
-        /// <summary>The INSERT for a requirement; the new RequirementID comes back into the row.</summary>
+        // Create the SQL command for inserting a programme requirement
         private void Create_INSERT_Command(ProgrammeRequirement requirement)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO ProgrammeRequirement (ProgrammeID, SubjectID, RequirementType, MinimumMark, "
@@ -423,7 +398,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(requirement);
         }
 
-        /// <summary>One parameter per requirement column, each reading its value from the row.</summary>
+        // Add the requirement parameters to the INSERT command
         private void Build_INSERT_Parameters(ProgrammeRequirement requirement)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@ProgrammeID", SqlDbType.Int, "ProgrammeID"));
@@ -436,7 +411,7 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@IsActive", SqlDbType.Bit, "IsActive"));
         }
 
-        /// <summary>The UPDATE for a requirement, matched on RequirementID.</summary>
+        // Create the SQL command for updating a programme requirement
         private void Create_UPDATE_Command(ProgrammeRequirement requirement)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE ProgrammeRequirement SET ProgrammeID = @ProgrammeID, SubjectID = @SubjectID, "
@@ -447,7 +422,7 @@ namespace FuturePath.DatabaseLayer
             Build_UPDATE_Parameters(requirement);
         }
 
-        /// <summary>The UPDATE parameters: every column plus the key.</summary>
+        // Add the requirement parameters and ID to the UPDATE command
         private void Build_UPDATE_Parameters(ProgrammeRequirement requirement)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@ProgrammeID", SqlDbType.Int, "ProgrammeID"));

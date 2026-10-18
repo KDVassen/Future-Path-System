@@ -1,48 +1,34 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using FuturePath.Properties;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// The base class of every repository, following the Waitering System DB class. It holds one
-    /// connection (cnMain), one DataSet (dsMain) and one DataAdapter (daMain).
-    /// - Adding or editing one entity: fill a table into the DataSet, change a row
-    ///   (DataSetChange), then send the change with the adapter (UpdateDataSource).
-    /// - Replacing a set of child rows (a session's subjects, a funding option's links): use
-    ///   direct parameterised commands inside one transaction.
-    /// Every query is parameterised. Departures from the Waitering version (decisions.md):
-    /// no MessageBox here (errors are thrown and the forms show a friendly message), no database
-    /// work in the constructor, and FillDataSet clears the table first so rows are never duplicated.
-    /// </summary>
+    // Base class for database repositories
+    // Handles database connections, DataSets, commands and transactions
     public class DB
     {
         #region Data Members
-        /// <summary>The change a repository makes to the DataSet. Reference data is never deleted, only deactivated.</summary>
+        // Types of changes that can be made to database records
         public enum DBOperation
         {
-            /// <summary>Insert a new row.</summary>
             Add = 0,
-            /// <summary>Update an existing row.</summary>
             Edit = 1
         }
 
-        /// <summary>
-        /// The connection string, from Settings (App.config: AttachDbFilename=|DataDirectory|\FuturePath.mdf
-        /// on (LocalDB)\MSSQLLocalDB), declared as in the Waitering System DB class.
-        /// </summary>
+        // Get the database connection string from the project settings
         private string strConn = Settings.Default.FuturePathDatabaseConnectionString;
-        /// <summary>The connection every command uses.</summary>
+
+        // Shared connection, DataSet and adapter used by repositories
         protected SqlConnection cnMain;
-        /// <summary>The in-memory copy of the tables this repository has filled.</summary>
         protected DataSet dsMain;
-        /// <summary>The adapter used to fill tables and send changes back.</summary>
         protected SqlDataAdapter daMain;
         #endregion
 
         #region Constructor
-        /// <summary>Creates the connection, DataSet and adapter objects. Does not open the connection.</summary>
+        // Initialise the connection, DataSet and adapter without opening the database
         public DB()
         {
             cnMain = new SqlConnection(strConn);
@@ -52,10 +38,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Fill the DataSet
-        /// <summary>
-        /// Fills one table of the DataSet fresh from the database with a parameterised query.
-        /// The table is cleared first. Do not call this while a transaction is open.
-        /// </summary>
+        // Load database records into a DataSet table using a parameterised query
+        // Clear existing rows first to prevent duplicates
         protected void FillDataSet(string sqlLocal, string table, params SqlParameter[] parameters)
         {
             daMain = new SqlDataAdapter(sqlLocal, cnMain);
@@ -78,19 +62,20 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Returns a table that FillDataSet has filled.</summary>
+        // Return a previously loaded table from the DataSet
         protected DataTable GetTable(string table)
         {
             return dsMain.Tables[table];
         }
 
-        /// <summary>Returns the whole DataSet (as in the Waitering System).</summary>
+        // Return the repository's DataSet
         public DataSet GetDataSet()
         {
             return dsMain;
         }
 
-        /// <summary>Finds the row with this key in a filled table, or returns null (used for edits).</summary>
+        // Find a record in a loaded table using its key
+        // Return null if the record cannot be found
         protected DataRow FindRow(string table, string keyColumn, int keyValue)
         {
             foreach (DataRow row in dsMain.Tables[table].Rows)
@@ -105,13 +90,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Update the data source
-        /// <summary>
-        /// Sends the DataSet changes for one table to the database through daMain's Insert or
-        /// Update command (the repository builds that command first). If the database rejects
-        /// the change, the change is undone in the DataSet and the error is passed on.
-        /// For an insert, end the INSERT with "; SELECT CAST(SCOPE_IDENTITY() AS INT) AS KeyColumn"
-        /// and set UpdatedRowSource = FirstReturnedRecord; the new key is then in the row.
-        /// </summary>
+        // Save DataSet changes to the database using the adapter
+        // Reject the changes if the database operation fails
         protected void UpdateDataSource(string table)
         {
             try
@@ -132,7 +112,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Direct commands and transactions
-        /// <summary>Runs an INSERT, UPDATE or DELETE and returns the number of rows changed.</summary>
+        // Execute an INSERT, UPDATE or DELETE command
+        // Return the number of affected rows
         protected int ExecuteNonQuery(string sql, params SqlParameter[] parameters)
         {
             using (SqlCommand command = new SqlCommand(sql, cnMain))
@@ -150,7 +131,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Runs a command inside an open transaction (see BeginTransaction).</summary>
+        // Execute a database command within an existing transaction
         protected int ExecuteNonQuery(SqlTransaction transaction, string sql, params SqlParameter[] parameters)
         {
             using (SqlCommand command = new SqlCommand(sql, cnMain, transaction))
@@ -160,7 +141,8 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Runs a query that returns one value (e.g. a COUNT or a new key). DBNull is returned as null.</summary>
+        // Execute a query that returns a single value
+        // Convert a database NULL result to null
         protected object ExecuteScalar(string sql, params SqlParameter[] parameters)
         {
             using (SqlCommand command = new SqlCommand(sql, cnMain))
@@ -183,7 +165,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Runs a one-value query inside an open transaction. DBNull is returned as null.</summary>
+        // Execute a single-value query inside an existing transaction
         protected object ExecuteScalar(SqlTransaction transaction, string sql, params SqlParameter[] parameters)
         {
             using (SqlCommand command = new SqlCommand(sql, cnMain, transaction))
@@ -198,22 +180,14 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Opens the connection and starts a transaction. Use it like this:
-        /// <code>
-        /// SqlTransaction transaction = BeginTransaction();
-        /// try { ExecuteNonQuery(transaction, ...); transaction.Commit(); }
-        /// catch { transaction.Rollback(); throw; }
-        /// finally { CloseConnection(); }
-        /// </code>
-        /// </summary>
+        // Open a connection and begin a database transaction
         protected SqlTransaction BeginTransaction()
         {
             OpenConnection();
             return cnMain.BeginTransaction();
         }
 
-        /// <summary>Closes the connection if it is open.</summary>
+        // Close the database connection if it is open
         protected void CloseConnection()
         {
             if (cnMain.State != ConnectionState.Closed)
@@ -222,7 +196,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Opens the connection if it is closed.</summary>
+        // Open the database connection if it is closed
         private void OpenConnection()
         {
             if (cnMain.State == ConnectionState.Closed)
@@ -231,7 +205,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Adds the parameters to a command.</summary>
+        // Add SQL parameters to a database command
         private static void AddParameters(SqlCommand command, SqlParameter[] parameters)
         {
             if (parameters != null)
@@ -242,7 +216,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Parameter and value helpers
-        /// <summary>Makes a parameter with a value. A null value is sent as SQL NULL.</summary>
+        // Create a SQL parameter and convert null values to DBNull
         protected static SqlParameter Param(string name, SqlDbType type, object value)
         {
             SqlParameter parameter = new SqlParameter(name, type);
@@ -250,13 +224,13 @@ namespace FuturePath.DatabaseLayer
             return parameter;
         }
 
-        /// <summary>Makes an adapter parameter whose value is read from a DataTable column (Waitering Build_INSERT_Parameters).</summary>
+        // Create a SQL parameter linked to a DataTable column
         protected static SqlParameter SourceParam(string name, SqlDbType type, string sourceColumn)
         {
             return new SqlParameter(name, type, 0, sourceColumn);
         }
 
-        /// <summary>The value to put in a DataRow: null becomes DBNull.</summary>
+        // Convert null values to DBNull for database operations
         protected static object DbValue(object value)
         {
             if (value == null)
@@ -266,7 +240,7 @@ namespace FuturePath.DatabaseLayer
             return value;
         }
 
-        /// <summary>Text with the spaces at the ends removed; null becomes "".</summary>
+        // Remove extra spaces or return an empty string for null
         protected static string TextOrEmpty(string value)
         {
             if (value == null)
@@ -276,7 +250,7 @@ namespace FuturePath.DatabaseLayer
             return value.Trim();
         }
 
-        /// <summary>The value to put in a DataRow for optional text: blank becomes DBNull, otherwise trimmed.</summary>
+        // Convert blank text to DBNull or trim the supplied value
         protected static object DbText(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -286,7 +260,8 @@ namespace FuturePath.DatabaseLayer
             return value.Trim();
         }
 
-        /// <summary>Reads text from a row; DBNull becomes "".</summary>
+        // Read text from a database row
+        // Return an empty string for DBNull
         protected static string ReadString(DataRow row, string column)
         {
             if (row[column] is DBNull)
@@ -296,13 +271,13 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToString(row[column]).TrimEnd();
         }
 
-        /// <summary>Reads a whole number that is never NULL (e.g. a key) from a row.</summary>
+        // Read an integer value from a database row
         protected static int ReadInt(DataRow row, string column)
         {
             return Convert.ToInt32(row[column]);
         }
 
-        /// <summary>Reads a whole number from a column that allows NULL; DBNull becomes null.</summary>
+        // Read an optional integer and return null for DBNull
         protected static int? ReadNullableInt(DataRow row, string column)
         {
             if (row[column] is DBNull)
@@ -312,7 +287,7 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToInt32(row[column]);
         }
 
-        /// <summary>Reads a decimal number from a column that allows NULL; DBNull becomes null.</summary>
+        // Read an optional decimal value and return null for DBNull
         protected static decimal? ReadDecimal(DataRow row, string column)
         {
             if (row[column] is DBNull)
@@ -322,7 +297,7 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToDecimal(row[column]);
         }
 
-        /// <summary>Reads a date from a column that allows NULL; DBNull becomes null.</summary>
+        // Read an optional date and return null for DBNull
         protected static DateTime? ReadDate(DataRow row, string column)
         {
             if (row[column] is DBNull)
@@ -332,7 +307,7 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToDateTime(row[column]);
         }
 
-        /// <summary>Reads a BIT from a row; DBNull becomes false.</summary>
+        // Read a boolean value and return false for DBNull
         protected static bool ReadBool(DataRow row, string column)
         {
             if (row[column] is DBNull)
