@@ -1,14 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿
+using System.Collections.ObjectModel;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// How well a learner's subjects and marks match one degree programme (class diagram
-    /// MatchResult: subjectScore, markScore, gapList). A transient value made by
-    /// DegreeProgramme.EvaluateSubjectAndMarkMatch and passed to RecommendationEngine.ComputeOutcome.
-    /// It also keeps each requirement's check, the subjects missing and the overall average,
-    /// because the rule-driven outcome and FP-LSR need them.
-    /// </summary>
+    // Stores the results of comparing a learner's subjects and marks with a degree programme
+    // Keeps track of scores, missing requirements and any mark shortfalls
     public class MatchResult
     {
         #region Data Members
@@ -25,85 +21,80 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>
-        /// % of the programme's active Required requirements whose subject (or accepted
-        /// alternative) was captured. 100 when the programme has no Required requirement.
-        /// </summary>
+        // Percentage of required subjects captured by the learner
+        // Returns 100 when the programme has no required subjects
         public decimal SubjectScore
         {
             get { return subjectScore; }
             set { subjectScore = value; }
         }
 
-        /// <summary>
-        /// % of the Required requirements with a minimum mark that were met.
-        /// 100 when no Required requirement has a minimum mark.
-        /// </summary>
+        // Percentage of required minimum marks that were met
+        // Returns 100 when no minimum marks are required
         public decimal MarkScore
         {
             get { return markScore; }
             set { markScore = value; }
         }
 
-        /// <summary>One sentence per unmet Required requirement (and an average below the minimum).</summary>
+        // Store the requirements that the learner has not met
         public Collection<string> GapList
         {
             get { return gapList; }
         }
 
-        /// <summary>One sentence per unmet Recommended requirement. Advice only; never decides the outcome.</summary>
+        // Store advice for recommended requirements that were not met
         public Collection<string> Notes
         {
             get { return notes; }
         }
 
-        /// <summary>The check of every active requirement, in requirement order.</summary>
+        // Store the results of checking each active programme requirement
         public Collection<RequirementCheck> Checks
         {
             get { return checks; }
         }
 
-        /// <summary>Names of Required subjects missing with no accepted alternative.</summary>
+        // Store the names of required subjects that are missing
         public Collection<string> MissingRequired
         {
             get { return missingRequired; }
         }
 
-        /// <summary>The biggest shortfall (points) on a Required mark, 0 if none.</summary>
+        // Store the largest difference between a required mark and the learner's mark
         public decimal LargestShortfall
         {
             get { return largestShortfall; }
             set { largestShortfall = value; }
         }
 
-        /// <summary>How many subjects the learner captured.</summary>
         public int SubjectsCaptured
         {
             get { return subjectsCaptured; }
             set { subjectsCaptured = value; }
         }
 
-        /// <summary>The learner's average over every captured subject (one decimal), or null if none.</summary>
         public decimal? OverallAverage
         {
             get { return overallAverage; }
             set { overallAverage = value; }
         }
 
-        /// <summary>The programme's minimum overall average, or null if it sets none.</summary>
         public decimal? MinimumOverallAverage
         {
             get { return minimumOverallAverage; }
             set { minimumOverallAverage = value; }
         }
 
-        /// <summary>True if the programme sets no minimum average, or the learner's average reaches it.</summary>
+        // Check if the learner meets the programme's minimum overall average
+        // Return true if the programme does not require a minimum average
         public bool AverageMet
         {
             get { return !minimumOverallAverage.HasValue || (overallAverage.HasValue && overallAverage.Value >= minimumOverallAverage.Value); }
         }
 
-        /// <summary>Points below the minimum average, or null when it was met.</summary>
+        // Calculate how far the learner's average is below the required average
+        // Return null if the minimum average has been met
         public decimal? AverageShortfall
         {
             get
@@ -121,13 +112,13 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>True if any Required subject is missing.</summary>
+        // Check if any required subjects are missing
         public bool HasMissingRequired
         {
             get { return missingRequired.Count > 0; }
         }
 
-        /// <summary>How many Required requirements were checked.</summary>
+        // Count the number of required programme requirements checked
         public int RequirementsChecked
         {
             get
@@ -144,7 +135,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>How many Required requirements were met.</summary>
+        // Count the number of required programme requirements met
         public int RequirementsMet
         {
             get
@@ -163,7 +154,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty match result.</summary>
+        // Create an empty match result and initialise the collections
         public MatchResult()
         {
             subjectScore = 0;

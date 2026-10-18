@@ -1,13 +1,11 @@
+
 using System.Collections.ObjectModel;
 using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Sequence 2, "Generate alternative degree recommendations" (spec Section 3). UI 6's
-    /// Alternative programmes button calls GenerateAlternatives. Every active programme except
-    /// the selected one is scored the same way as Sequence 1, ranked by the engine, and stored.
-    /// </summary>
+    // Generates alternative degree recommendations for learners
+    // Checks programme requirements, calculates scores and ranks the results
     public class RecommendationController
     {
         #region Data Members
@@ -19,10 +17,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Set by GenerateAlternatives when the learner, their session, their subjects or their
-        /// interest answers are missing (sequence diagram "More information needed"), otherwise null.
-        /// </summary>
+        // Store an explanation if there is not enough information for recommendations
         public AdvisoryOutcome MissingInformation
         {
             get { return missingInformation; }
@@ -30,7 +25,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller, its repositories and the engine (no database work yet).</summary>
+        // Initialise the repositories and recommendation engine
         public RecommendationController()
         {
             learnerRepository = new LearnerRepository();
@@ -42,22 +37,17 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram generateAlternatives(learnerId, excludedProgrammeId). Returns the
-        /// session's stored selected result first (AlternativeRank null), then the ranked
-        /// alternatives (rank 1 = best), each with its reason, ProgrammeName and FacultyName. The
-        /// alternatives are saved with AdvisorySessionRepository.SaveAll, replacing earlier ones.
-        /// If information is missing it returns an empty collection and sets MissingInformation.
-        /// </summary>
+        // Generate and rank alternative programmes for the learner
+        // Return the selected programme first, followed by ranked alternatives
         public Collection<RecommendationResult> GenerateAlternatives(int learnerID, int excludedProgrammeID)
         {
             missingInformation = null;
             Collection<RecommendationResult> shown = new Collection<RecommendationResult>();
 
-            // Sequence 2 step 2: findById(learnerId)
+            // Load the learner's details
             Learner learner = learnerRepository.FindById(learnerID);
 
-            // Step 3 (alt): the learner has no session, no captured subjects or no interest answers
+            // Check that the learner has a session, subjects and interest responses
             if (learner == null || !learner.CurrentSessionID.HasValue)
             {
                 missingInformation = AdvisoryOutcome.MoreInformationNeeded("We could not find your advisory session. Start again from step 1.");
@@ -75,16 +65,15 @@ namespace FuturePath.ApplicationLayer
             }
             int sessionID = learner.CurrentSessionID.Value;
 
-            // Step 4 (else): getSubjects(), getPreferredFacultyId(), findActiveProgrammes(excludedProgrammeId)
+            // Get the learner's subjects, preferred faculty and available programmes
             Collection<LearnerSubject> subjects = learner.GetSubjects();
             int facultyID = learner.GetPreferredFacultyId();
             Collection<DegreeProgramme> candidates = programmeRepository.FindActiveProgrammes(excludedProgrammeID);
 
-            // The stored selected row is shown first; its programme is never also an alternative
-            // (UNIQUE(SessionID, ProgrammeID)), even if a different programme was excluded
+            // Load the selected programme so it is not included as an alternative
             RecommendationResult selected = sessionRepository.FindSelectedResult(sessionID);
 
-            // Step 5 (loop): score each candidate exactly as Sequence 1 does
+            // Calculate match scores and outcomes for each alternative programme
             Collection<RecommendationResult> candidateOutcomes = new Collection<RecommendationResult>();
             foreach (DegreeProgramme candidate in candidates)
             {
@@ -100,12 +89,11 @@ namespace FuturePath.ApplicationLayer
                 candidateOutcomes.Add(new RecommendationResult(sessionID, candidate, matchResult, interestScore, facultyBonus, outcome, false));
             }
 
-            // Step 6: rankAlternatives(candidateOutcomes)
+            // Rank the alternatives and save their results
             Collection<RecommendationResult> rankedAlternatives = engine.RankAlternatives(candidateOutcomes);
-            // Step 7: saveAll(rankedAlternatives)
             sessionRepository.SaveAll(rankedAlternatives);
 
-            // Step 8: displayAlternatives - the selected programme's stored row first, then the ranked list
+            // Add the selected programme first, followed by the alternatives
             if (selected != null)
             {
                 shown.Add(selected);
@@ -117,14 +105,14 @@ namespace FuturePath.ApplicationLayer
             return shown;
         }
 
-        /// <summary>The UI 6.1a "include these alternatives in my summary" choice (false if the session does not exist).</summary>
+        // Check if the learner wants alternatives included in their summary
         public bool GetAlternativesInSummary(int sessionID)
         {
             AdvisorySession session = sessionRepository.FindById(sessionID);
             return session != null && session.AlternativesInSummary;
         }
 
-        /// <summary>Stores the UI 6.1a "include these alternatives in my summary" choice.</summary>
+        // Save the learner's choice to include alternatives in the summary
         public void SetAlternativesInSummary(int sessionID, bool include)
         {
             sessionRepository.SetAlternativesInSummary(sessionID, include);

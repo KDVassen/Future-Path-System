@@ -1,10 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The UI 5 interest-alignment strip for one programme: how well the learner's interests match
-    /// it, and the learner's strongest matching categories. Returned by
-    /// InterestController.GetProgrammeAlignment; nothing is stored.
-    /// </summary>
+    // Stores how well a learner's interests match a degree programme
+    // Includes the alignment percentage and strongest interest categories
     public class ProgrammeAlignment
     {
         #region Data Members
@@ -13,14 +11,14 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The learner's interest score for the programme, 0 to 100.</summary>
+        // Store the learner's interest alignment score from 0 to 100
         public decimal AlignmentPercent
         {
             get { return alignmentPercent; }
             set { alignmentPercent = value; }
         }
 
-        /// <summary>Up to three category names, best first, separated by commas (or "").</summary>
+        // Store up to three of the learner's strongest matching categories
         public string StrongestCategories
         {
             get { return strongestCategories; }
@@ -29,14 +27,14 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty alignment (0%, no categories).</summary>
+        // Create a new alignment with default values
         public ProgrammeAlignment()
         {
             alignmentPercent = 0;
             strongestCategories = "";
         }
 
-        /// <summary>Creates an alignment with its values.</summary>
+        // Create an alignment using the calculated score and category names
         public ProgrammeAlignment(decimal pAlignmentPercent, string pStrongestCategories)
         {
             alignmentPercent = pAlignmentPercent;

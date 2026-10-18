@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -6,12 +7,8 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The interest questionnaire: UI 4 (questions, running category scores, saving answers),
-    /// UI 5's interest-alignment strip, and the Administrator maintenance of categories,
-    /// relevance weights (UI 13.4) and questions (UI 13.5). Maintenance methods check the
-    /// Administrator role first.
-    /// </summary>
+    // Handles interest questionnaires and programme interest matching
+    // Also allows administrators to manage categories, questions and weights
     public class InterestController
     {
         #region Data Members
@@ -29,7 +26,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The questions read by the last GetActiveQuestions call.</summary>
+        // Return the questions loaded by the last questionnaire request
         public Collection<InterestQuestion> AllQuestions
         {
             get { return questions; }
@@ -37,7 +34,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repositories (no database work yet).</summary>
+        // Initialise the repositories and questionnaire collection
         public InterestController()
         {
             interestRepository = new InterestRepository();
@@ -49,7 +46,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Learner questionnaire (UI 4, UI 5)
-        /// <summary>UI 4 statements: QuestionID, QuestionText, CategoryID, CategoryName, DisplayOrder (active only, in display order).</summary>
+        // Load active questions in display order for the learner questionnaire
         public DataTable GetActiveQuestions()
         {
             questions = interestRepository.GetQuestions(0, false);
@@ -67,12 +64,8 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>
-        /// The running category scores on UI 4 from the answers so far (question ID to 1-5), as
-        /// (category name, 0-100) pairs, highest first, ties by name. Pure calculation: nothing is
-        /// saved. Answers to unknown or inactive questions are ignored; a value outside 1-5 throws
-        /// ArgumentException.
-        /// </summary>
+        // Calculate category scores from the answers given so far
+        // Ignore unknown questions and sort scores from highest to lowest
         public List<KeyValuePair<string, decimal>> CalculateCategoryScores(IDictionary<int, int> responses)
         {
             List<KeyValuePair<string, decimal>> scores = new List<KeyValuePair<string, decimal>>();
@@ -81,7 +74,7 @@ namespace FuturePath.ApplicationLayer
                 return scores;
             }
 
-            // 1. An in-memory learner holds the answers, so the scoring rule lives in one place (Learner).
+            // Use the learner class to calculate scores from the answers
             Collection<InterestQuestion> activeQuestions = interestRepository.GetQuestions(0, false);
             Learner learner = new Learner();
             foreach (KeyValuePair<int, int> answer in responses)
@@ -93,7 +86,7 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            // 2. One score for every category that has at least one answer.
+            // Calculate a score for each category with at least one answer
             List<int> scoredCategories = new List<int>();
             foreach (InterestQuestion question in activeQuestions)
             {
@@ -109,16 +102,13 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            // 3. Highest first.
+            // Sort the category scores from highest to lowest
             scores.Sort(CompareScores);
             return scores;
         }
 
-        /// <summary>
-        /// Saves the session's answers (question ID to 1-5), replacing earlier ones. There must be
-        /// at least one answer, every value must be 1-5 and every question an active one. Throws
-        /// ArgumentException if not.
-        /// </summary>
+        // Validate and save the learner's questionnaire answers
+        // Replace any previously saved answers for this session
         public void SaveResponses(int sessionID, IDictionary<int, int> responses)
         {
             if (responses == null || responses.Count == 0)
@@ -144,13 +134,8 @@ namespace FuturePath.ApplicationLayer
             learnerRepository.SaveResponses(sessionID, answers);
         }
 
-        /// <summary>
-        /// UI 5 interest-alignment strip: the learner's interest score for the programme
-        /// (Learner.CalculateInterestScore over the programme's categories), and the names of the
-        /// learner's strongest mapped categories (comma-separated, best first, at most three;
-        /// categories with relevance weight 0 do not count). Returns 0% and no categories if the
-        /// session or the programme does not exist.
-        /// </summary>
+        // Calculate interest alignment for the selected programme
+        // Return the three highest-scoring matching categories
         public ProgrammeAlignment GetProgrammeAlignment(int sessionID, int programmeID)
         {
             ProgrammeAlignment alignment = new ProgrammeAlignment();
@@ -164,7 +149,7 @@ namespace FuturePath.ApplicationLayer
             Collection<InterestCategory> categories = programme.GetInterestCategories();
             alignment.AlignmentPercent = learner.CalculateInterestScore(categories);
 
-            // The learner's own score in each mapped category, highest first.
+            // Rank the learner's mapped interest categories by score
             List<KeyValuePair<string, decimal>> ranked = new List<KeyValuePair<string, decimal>>();
             foreach (InterestCategory category in categories)
             {
@@ -191,13 +176,13 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Categories and weights (UI 13.4)
-        /// <summary>CategoryID, CategoryName, QuestionCount, MappedProgrammeCount, IsActive (a new table every call, safe for two combos).</summary>
+        // Load the interest categories for administrator maintenance
         public DataTable GetInterestCategories(bool includeInactive)
         {
             return interestRepository.GetCategoryTable(includeInactive);
         }
 
-        /// <summary>Checks a category: name required, at most 60 characters, not already used.</summary>
+        // Check that the category name is provided, short enough and unique
         public Collection<string> ValidateCategory(int categoryID, string categoryName)
         {
             Collection<string> problems = new Collection<string>();
@@ -216,10 +201,7 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (categoryID 0) or updates a category (Administrator only). Returns the CategoryID.
-        /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
-        /// </summary>
+        // Add or update an interest category after checking administrator access
         public int SaveInterestCategory(int actorUserID, int categoryID, string categoryName, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -248,7 +230,7 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(category, operation);
         }
 
-        /// <summary>Deactivates a category (Administrator only). Its questions are then no longer asked.</summary>
+        // Deactivate a category so its questions are no longer asked
         public void DeactivateInterestCategory(int actorUserID, int categoryID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -258,17 +240,14 @@ namespace FuturePath.ApplicationLayer
             FinalizeChanges(category, DB.DBOperation.Edit);
         }
 
-        /// <summary>The programmes mapped to a category: ProgrammeID, ProgrammeName, RelevanceWeight.</summary>
+        // Load programme relevance weights for the selected category
         public DataTable GetRelevanceWeights(int categoryID)
         {
             return interestRepository.GetRelevanceWeights(categoryID);
         }
 
-        /// <summary>
-        /// Sets a programme's relevance weight for a category, 0.00-1.00 with at most two decimals
-        /// (Administrator only). The category and the programme must exist. Adds the mapping if
-        /// there is none yet, otherwise changes its weight.
-        /// </summary>
+        // Save a programme's relevance weight for a category
+        // Accept values from 0 to 1 with at most two decimal places
         public void SaveRelevanceWeight(int actorUserID, int programmeID, int categoryID, decimal relevanceWeight)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -289,10 +268,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Questions (UI 13.5)
-        /// <summary>
-        /// QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive, ordered by
-        /// DisplayOrder; a categoryID of 0 means all.
-        /// </summary>
+        // Load questions for one category, or all categories when the ID is zero
         public DataTable GetQuestions(int categoryID, bool includeInactive)
         {
             DataTable table = new DataTable("Questions");
@@ -310,7 +286,7 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>Checks a question: text required (max 255), existing active category, display order 1-99.</summary>
+        // Validate the question text, active category and display order
         public Collection<string> ValidateQuestion(string questionText, int categoryID, int displayOrder)
         {
             Collection<string> problems = new Collection<string>();
@@ -336,10 +312,7 @@ namespace FuturePath.ApplicationLayer
             return problems;
         }
 
-        /// <summary>
-        /// Adds (questionID 0) or updates a question (Administrator only). Returns the QuestionID.
-        /// Throws ArgumentException if invalid, UnauthorizedAccessException if not an Administrator.
-        /// </summary>
+        // Add or update a question after checking administrator access
         public int SaveQuestion(int actorUserID, int questionID, string questionText, int categoryID, int displayOrder, bool isActive)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -370,7 +343,7 @@ namespace FuturePath.ApplicationLayer
             return FinalizeChanges(question, operation);
         }
 
-        /// <summary>Deactivates a question (Administrator only).</summary>
+        // Deactivate a question so it no longer appears to learners
         public void DeactivateQuestion(int actorUserID, int questionID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -381,26 +354,26 @@ namespace FuturePath.ApplicationLayer
         }
         #endregion
 
-        #region Database communication (Waitering DataMaintenance / FinalizeChanges)
-        /// <summary>Waitering DataMaintenance: makes the category change in the repository's DataSet. Private, so the role check cannot be skipped.</summary>
+        #region Database communication
+        // Apply a category change to the repository DataSet
         private void DataMaintenance(InterestCategory category, DB.DBOperation operation)
         {
             interestRepository.DataSetChange(category, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the category change to the database and returns the CategoryID.</summary>
+        // Save the category changes to the database
         private int FinalizeChanges(InterestCategory category, DB.DBOperation operation)
         {
             return interestRepository.UpdateDataSource(category, operation);
         }
 
-        /// <summary>Waitering DataMaintenance: makes the question change in the repository's DataSet.</summary>
+        // Apply a question change to the repository DataSet
         private void DataMaintenance(InterestQuestion question, DB.DBOperation operation)
         {
             interestRepository.DataSetChange(question, operation);
         }
 
-        /// <summary>Waitering FinalizeChanges: commits the question change to the database and returns the QuestionID.</summary>
+        // Save the question changes to the database
         private int FinalizeChanges(InterestQuestion question, DB.DBOperation operation)
         {
             return interestRepository.UpdateDataSource(question, operation);
@@ -408,7 +381,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>Loads a category for an edit, or throws ArgumentException if it no longer exists.</summary>
+        // Find a category or report if it no longer exists
         private InterestCategory FindCategory(int categoryID)
         {
             InterestCategory category = interestRepository.FindCategoryById(categoryID);
@@ -419,7 +392,7 @@ namespace FuturePath.ApplicationLayer
             return category;
         }
 
-        /// <summary>Loads a question for an edit, or throws ArgumentException if it no longer exists.</summary>
+        // Find a question or report if it no longer exists
         private InterestQuestion FindQuestion(int questionID)
         {
             InterestQuestion question = interestRepository.FindQuestionById(questionID);
@@ -430,7 +403,7 @@ namespace FuturePath.ApplicationLayer
             return question;
         }
 
-        /// <summary>The question with this ID in a list, or null.</summary>
+        // Search a question collection by ID
         private static InterestQuestion FindQuestion(Collection<InterestQuestion> list, int questionID)
         {
             foreach (InterestQuestion question in list)
@@ -443,7 +416,7 @@ namespace FuturePath.ApplicationLayer
             return null;
         }
 
-        /// <summary>Orders (name, score) pairs by score, highest first, then by name.</summary>
+        // Sort scores highest first, then alphabetically for equal scores
         private static int CompareScores(KeyValuePair<string, decimal> first, KeyValuePair<string, decimal> second)
         {
             int byScore = second.Value.CompareTo(first.Value);

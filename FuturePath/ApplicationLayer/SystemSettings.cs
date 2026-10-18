@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,87 +8,68 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// The settings helper for the SystemParameter table (database.md "SystemParameter keys").
-    /// It is not a domain class. Parameters are read once, the first time one is needed, and
-    /// kept in memory. They hold every value that must not be hard-coded: the scoring weights
-    /// and thresholds, the minimum subject count, the NSC achievement bands, the funding types
-    /// and the provinces. Numbers are stored with a '.' decimal point and read with the
-    /// invariant culture, so they parse the same on any Windows regional setting.
-    /// </summary>
+    // Manages system settings stored in the database
+    // Loads parameters when needed and keeps them in memory for later use
     public static class SystemSettings
     {
         #region Data Members
-        /// <summary>Subjects a learner should capture (UI 3 amber notice; a warning, not a block).</summary>
+        // Codes used to retrieve system settings from the database
         public const string MinSubjectCountCode = "MIN_SUBJECT_COUNT";
-        /// <summary>Weight of the subject score in the overall score (provisional, decisions.md D14).</summary>
         public const string WeightSubjectCode = "WEIGHT_SUBJECT";
-        /// <summary>Weight of the mark score in the overall score (provisional, decisions.md D14).</summary>
         public const string WeightMarkCode = "WEIGHT_MARK";
-        /// <summary>Weight of the interest score in the overall score (provisional, decisions.md D14).</summary>
         public const string WeightInterestCode = "WEIGHT_INTEREST";
-        /// <summary>Weight of the faculty bonus in the overall score (provisional, decisions.md D14).</summary>
         public const string WeightFacultyCode = "WEIGHT_FACULTY";
-        /// <summary>Lowest overall score for a Strong Match (provisional, decisions.md D14).</summary>
         public const string ThresholdStrongCode = "THRESHOLD_STRONG";
-        /// <summary>Lowest interest score for a Strong Match (provisional, decisions.md D14).</summary>
         public const string InterestStrongMinCode = "INTEREST_STRONG_MIN";
-        /// <summary>Largest mark shortfall that is still a Possible Match (provisional, decisions.md D14).</summary>
         public const string MarkToleranceCode = "MARK_TOLERANCE";
-        /// <summary>Prefix of the NSC achievement level lower bounds NSC_LEVEL_1 to NSC_LEVEL_7.</summary>
+
+        // Prefixes used for numbered settings such as levels, funding types and provinces
         public const string NscLevelPrefix = "NSC_LEVEL_";
-        /// <summary>Prefix of the funding types FUNDING_TYPE_1 to FUNDING_TYPE_4.</summary>
         public const string FundingTypePrefix = "FUNDING_TYPE_";
-        /// <summary>Prefix of the provinces PROVINCE_1 to PROVINCE_9.</summary>
         public const string ProvincePrefix = "PROVINCE_";
 
         private static Dictionary<string, string> parameters;
         #endregion
 
         #region Properties
-        /// <summary>WEIGHT_SUBJECT as a number.</summary>
+        // Get the weights used to calculate recommendation scores
         public static decimal WeightSubject
         {
             get { return GetDecimal(WeightSubjectCode); }
         }
 
-        /// <summary>WEIGHT_MARK as a number.</summary>
         public static decimal WeightMark
         {
             get { return GetDecimal(WeightMarkCode); }
         }
 
-        /// <summary>WEIGHT_INTEREST as a number.</summary>
         public static decimal WeightInterest
         {
             get { return GetDecimal(WeightInterestCode); }
         }
 
-        /// <summary>WEIGHT_FACULTY as a number.</summary>
         public static decimal WeightFaculty
         {
             get { return GetDecimal(WeightFacultyCode); }
         }
 
-        /// <summary>THRESHOLD_STRONG as a number.</summary>
+        // Get the thresholds used to determine recommendation outcomes
         public static decimal ThresholdStrong
         {
             get { return GetDecimal(ThresholdStrongCode); }
         }
 
-        /// <summary>INTEREST_STRONG_MIN as a number.</summary>
         public static decimal InterestStrongMinimum
         {
             get { return GetDecimal(InterestStrongMinCode); }
         }
 
-        /// <summary>MARK_TOLERANCE as a number.</summary>
         public static decimal MarkTolerance
         {
             get { return GetDecimal(MarkToleranceCode); }
         }
 
-        /// <summary>MIN_SUBJECT_COUNT as a whole number.</summary>
+        // Get the recommended number of subjects to capture
         public static int MinimumSubjectCount
         {
             get { return GetInt(MinSubjectCountCode); }
@@ -95,10 +77,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Uses the given parameter values instead of reading the database. Used by tests that run
-        /// the engine without a database, and by Reload.
-        /// </summary>
+        // Load parameter values into memory
+        // Also allows tests to supply settings without using the database
         public static void Load(IDictionary<string, string> values)
         {
             parameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -108,24 +88,22 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>Reads the parameters from the database again (after an Administrator changes them).</summary>
+        // Reload the latest parameter values from the database
         public static void Reload()
         {
             SystemParameterRepository repository = new SystemParameterRepository();
             Load(repository.GetParameters());
         }
 
-        /// <summary>True if the parameter exists.</summary>
+        // Check whether a system parameter exists
         public static bool Contains(string code)
         {
             EnsureLoaded();
             return parameters.ContainsKey(code);
         }
 
-        /// <summary>
-        /// Returns a parameter's text. Throws InvalidOperationException naming the missing code,
-        /// so a gap in the SystemParameter table is found rather than replaced by a hidden default.
-        /// </summary>
+        // Get the stored text for a system parameter
+        // Throw an error if the requested parameter does not exist
         public static string GetText(string code)
         {
             EnsureLoaded();
@@ -136,7 +114,7 @@ namespace FuturePath.ApplicationLayer
             return parameters[code];
         }
 
-        /// <summary>Returns a parameter as a whole number.</summary>
+        // Read a system parameter as a whole number
         public static int GetInt(string code)
         {
             int value;
@@ -147,7 +125,8 @@ namespace FuturePath.ApplicationLayer
             return value;
         }
 
-        /// <summary>Returns a parameter as a decimal number (stored with a '.' decimal point).</summary>
+        // Read a system parameter as a decimal number
+        // Use invariant culture so decimal values are read consistently
         public static decimal GetDecimal(string code)
         {
             decimal value;
@@ -158,10 +137,8 @@ namespace FuturePath.ApplicationLayer
             return value;
         }
 
-        /// <summary>
-        /// Returns the values of a numbered group in number order, e.g. FUNDING_TYPE_1,
-        /// FUNDING_TYPE_2 and so on, stopping at the first missing number.
-        /// </summary>
+        // Get the values of numbered system parameters in order
+        // Stop when the next numbered parameter does not exist
         public static Collection<string> GetNumberedValues(string prefix)
         {
             Collection<string> values = new Collection<string>();
@@ -172,17 +149,15 @@ namespace FuturePath.ApplicationLayer
             return values;
         }
 
-        /// <summary>
-        /// Returns a numbered group as a table with ParameterCode and ParameterValue columns,
-        /// ready to bind to a ComboBox (DisplayMember ParameterValue).
-        /// </summary>
+        // Create a table of numbered parameters for dropdown lists
         public static DataTable GetNumberedParameters(string prefix)
         {
             EnsureLoaded();
             DataTable table = new DataTable("Parameters");
             table.Columns.Add("ParameterCode", typeof(string));
             table.Columns.Add("ParameterValue", typeof(string));
-            // FUNDING_TYPE_1, FUNDING_TYPE_2, ... until a number is missing
+
+            // Read each numbered parameter until one is missing
             int number = 1;
             string code = prefix + number.ToString(CultureInfo.InvariantCulture);
             while (parameters.ContainsKey(code))
@@ -194,7 +169,7 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>Reads the parameters from the database the first time they are needed.</summary>
+        // Load parameters from the database if they have not been loaded yet
         private static void EnsureLoaded()
         {
             if (parameters == null)

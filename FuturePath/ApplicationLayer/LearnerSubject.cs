@@ -1,18 +1,15 @@
+
 using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// One subject and mark captured in an advisory session (UI 3). Marks belong to the session,
-    /// not the learner, because a returning learner has new marks (database.md). Maps to the
-    /// LearnerSubject table; UNIQUE(SessionID, SubjectID) stops a subject being captured twice.
-    /// </summary>
+    // Stores a subject and mark captured during a learner's advisory session
+    // Marks belong to the session so returning learners can enter updated marks
     public class LearnerSubject
     {
         #region Data Members
-        /// <summary>The lowest mark allowed.</summary>
+        // Minimum and maximum marks allowed
         public const decimal MinimumMark = 0m;
-        /// <summary>The highest mark allowed.</summary>
         public const decimal MaximumMark = 100m;
 
         private int learnerSubjectID;
@@ -24,42 +21,36 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (LearnerSubject.LearnerSubjectID).</summary>
         public int LearnerSubjectID
         {
             get { return learnerSubjectID; }
             set { learnerSubjectID = value; }
         }
 
-        /// <summary>The advisory session the mark was captured in.</summary>
         public int SessionID
         {
             get { return sessionID; }
             set { sessionID = value; }
         }
 
-        /// <summary>The subject (FK to Subject).</summary>
         public int SubjectID
         {
             get { return subjectID; }
             set { subjectID = value; }
         }
 
-        /// <summary>The subject name (read from Subject, for display and explanations).</summary>
         public string SubjectName
         {
             get { return subjectName; }
             set { subjectName = value; }
         }
 
-        /// <summary>The subject level (read from Subject, for display).</summary>
         public string SubjectLevel
         {
             get { return subjectLevel; }
             set { subjectLevel = value; }
         }
 
-        /// <summary>The percentage mark, 0 to 100 with at most one decimal place.</summary>
         public decimal Mark
         {
             get { return mark; }
@@ -68,7 +59,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty subject mark.</summary>
+        // Create a new subject mark with default values
         public LearnerSubject()
         {
             learnerSubjectID = 0;
@@ -79,7 +70,7 @@ namespace FuturePath.ApplicationLayer
             mark = 0;
         }
 
-        /// <summary>Creates a subject mark with all its values.</summary>
+        // Create a subject mark using its stored details
         public LearnerSubject(int pLearnerSubjectID, int pSessionID, int pSubjectID, string pSubjectName, string pSubjectLevel, decimal pMark)
         {
             learnerSubjectID = pLearnerSubjectID;
@@ -92,26 +83,21 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram validateMarkRange(): true if this mark is from 0 to 100 with at most
-        /// one decimal place. Boundary tests: -1 fails, 0 passes, 100 passes, 101 fails.
-        /// </summary>
+        // Check if the mark is between 0 and 100 with at most one decimal place
         public bool ValidateMarkRange()
         {
             return IsValidMark(mark);
         }
 
-        /// <summary>True if the mark is from 0 to 100 with at most one decimal place.</summary>
+        // Check whether a given mark is within the allowed range
         public static bool IsValidMark(decimal value)
         {
             return value >= MinimumMark && value <= MaximumMark && decimal.Round(value, 1) == value;
         }
 
-        /// <summary>
-        /// Reads a mark typed by the user ("75", "72.5" or "72,5"). Returns -1 for letters,
-        /// signs, more than one decimal place, or a value outside 0 to 100, so bad input never
-        /// throws an exception.
-        /// </summary>
+        // Convert the entered text into a valid decimal mark
+        // Accept both a full stop and a comma as the decimal separator
+        // Return -1 if the mark is invalid
         public static decimal ParseMark(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -131,7 +117,7 @@ namespace FuturePath.ApplicationLayer
             return value;
         }
 
-        /// <summary>Returns "Subject: mark%".</summary>
+        // Return the subject name and mark as a string
         public override string ToString()
         {
             return subjectName + ": " + mark.ToString("0.#", CultureInfo.InvariantCulture) + "%";

@@ -1,14 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A degree programme a learner can check, e.g. "BCom Information Systems". It belongs to
-    /// one faculty, has requirements, and maps to interest categories. Maps to DegreeProgramme.
-    /// The class diagram gives it the matching methods used in both sequence diagrams.
-    /// </summary>
+    // Stores information about a degree programme and its requirements
+    // Also checks subject marks and interest categories for recommendations
     public class DegreeProgramme
     {
         #region Data Members
@@ -23,49 +21,42 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (DegreeProgramme.ProgrammeID).</summary>
         public int ProgrammeID
         {
             get { return programmeID; }
             set { programmeID = value; }
         }
 
-        /// <summary>The faculty that offers the programme.</summary>
         public int FacultyID
         {
             get { return facultyID; }
             set { facultyID = value; }
         }
 
-        /// <summary>The faculty name (read from Faculty, for display).</summary>
         public string FacultyName
         {
             get { return facultyName; }
             set { facultyName = value; }
         }
 
-        /// <summary>The programme name.</summary>
         public string ProgrammeName
         {
             get { return programmeName; }
             set { programmeName = value; }
         }
 
-        /// <summary>The minimum overall average (%), or null if the programme sets none.</summary>
         public decimal? MinimumOverallAverage
         {
             get { return minimumOverallAverage; }
             set { minimumOverallAverage = value; }
         }
 
-        /// <summary>Inactive programmes never appear in recommendations or reports.</summary>
         public bool IsActive
         {
             get { return isActive; }
             set { isActive = value; }
         }
 
-        /// <summary>The programme's interest mappings (loaded with FindByIdWithRequirements).</summary>
         public Collection<DegreeInterestMapping> InterestMappings
         {
             get { return interestMappings; }
@@ -73,7 +64,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active programme.</summary>
+        // Create a new active programme with empty requirements and interest mappings
         public DegreeProgramme()
         {
             programmeID = 0;
@@ -86,7 +77,8 @@ namespace FuturePath.ApplicationLayer
             interestMappings = new Collection<DegreeInterestMapping>();
         }
 
-        /// <summary>Creates a programme with its stored values (no requirements loaded yet).</summary>
+        // Create a programme using its saved details
+        // Requirements and interest mappings can be loaded separately
         public DegreeProgramme(int pProgrammeID, int pFacultyID, string pProgrammeName, decimal? pMinimumOverallAverage, bool pIsActive)
             : this()
         {
@@ -99,15 +91,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Class diagram evaluateSubjectAndMarkMatch(learnerSubjects). Checks every active
-        /// requirement against the learner's subjects and works out:
-        /// - SubjectScore: % of Required subjects captured (or accepted alternatives);
-        /// - MarkScore: % of Required minimum marks met;
-        /// - the gaps, the missing Required subjects and the biggest shortfall;
-        /// - the overall average against the programme's minimum average.
-        /// Recommended requirements only add notes.
-        /// </summary>
+        // Check the learner's subjects and marks against the programme requirements
+        // Calculate the subject and mark scores and record any missing requirements
         public MatchResult EvaluateSubjectAndMarkMatch(Collection<LearnerSubject> learnerSubjects)
         {
             MatchResult result = new MatchResult();
@@ -167,7 +152,7 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            // A programme with no Required subject (or no minimum mark) scores 100 on that part.
+            // Give a score of 100 if there are no required subjects or minimum marks
             result.SubjectScore = 100;
             if (requiredCount > 0)
             {
@@ -179,7 +164,7 @@ namespace FuturePath.ApplicationLayer
                 result.MarkScore = Math.Round(100m * marksMet / markCount, 2);
             }
 
-            // The overall average includes every captured subject (decisions.md).
+            // Calculate the overall average using all captured subjects
             if (learnerSubjects.Count > 0)
             {
                 decimal total = 0;
@@ -203,10 +188,8 @@ namespace FuturePath.ApplicationLayer
             return result;
         }
 
-        /// <summary>
-        /// Class diagram getInterestCategories(). The interest categories this programme maps to,
-        /// each carrying its relevance weight.
-        /// </summary>
+        // Get the interest categories linked to this programme
+        // Each category includes a relevance weight used in scoring
         public Collection<InterestCategory> GetInterestCategories()
         {
             Collection<InterestCategory> categories = new Collection<InterestCategory>();
@@ -217,28 +200,25 @@ namespace FuturePath.ApplicationLayer
             return categories;
         }
 
-        /// <summary>
-        /// Class diagram matchesPreferredFaculty(facultyId). True if the programme belongs to the
-        /// learner's preferred faculty; this is the faculty bonus.
-        /// </summary>
+        // Check if the programme belongs to the learner's preferred faculty
         public bool MatchesPreferredFaculty(int preferredFacultyID)
         {
             return preferredFacultyID > 0 && facultyID == preferredFacultyID;
         }
 
-        /// <summary>Class diagram getRequirements(). The programme's requirements.</summary>
+        // Return the requirements for this programme
         public Collection<ProgrammeRequirement> GetRequirements()
         {
             return requirements;
         }
 
-        /// <summary>Formats a number without trailing zeros.</summary>
+        // Format a number without unnecessary decimal zeros
         private static string FormatNumber(decimal value)
         {
             return value.ToString("0.#", CultureInfo.InvariantCulture);
         }
 
-        /// <summary>Returns the programme name.</summary>
+        // Return the programme name as a string
         public override string ToString()
         {
             return programmeName;

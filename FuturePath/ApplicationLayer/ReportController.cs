@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -8,37 +9,18 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Report generation (spec Section 6): fills the typed datasets FpLsrData, FpDieData and
-    /// FpLerData that the RDLC layouts display, and logs every export in ExportReport. The .rdlc
-    /// files hold no queries and no rules; every count, rate, shortfall and note is worked out
-    /// here. Subject gaps come from DegreeProgramme.EvaluateSubjectAndMarkMatch. Inactive
-    /// programmes and funding are excluded, and every report carries its generation date and the
-    /// disclaimer. FP-DIE and FP-LER (and staff FP-LSR) need a Career Advisor or Administrator.
-    ///
-    /// The reporting period: a session is "in the period" when its SessionDate is from
-    /// fromDate.Date up to, but not including, toDate.Date.AddDays(1). So both dates are whole
-    /// days and a session at 16:30 on the to-date is counted. Only Completed sessions count, each
-    /// joined to its selected RecommendationResult (IsSelectedProgramme = 1), whose stored
-    /// OutcomeCode is read back and never recalculated.
-    ///
-    /// The class is split into three files, like the forms' partial classes: this file holds the
-    /// catalogue, the export log and the shared helpers; ReportController.LearnerSummary.cs builds
-    /// FP-LSR; ReportController.PeriodReports.cs builds FP-DIE and FP-LER.
-    /// </summary>
+    // Stores report information and provides shared reporting methods
+    // Uses the report datasets to create summaries and log exports
     public partial class ReportController
     {
         #region Data Members
-        /// <summary>
-        /// The standard advisory disclaimer (FP-LSR, FP-DIE). The typed datasets have no column for
-        /// it, so each .rdlc prints its own copy of this wording; forms can show this constant.
-        /// </summary>
+        // Disclaimer shown with advisory reports
         public const string AdvisoryDisclaimer =
             "Future Path gives preliminary guidance only. It is not an admission decision. Programme requirements " +
             "and funding details are locally stored sample data; check them against the official university or " +
             "funder source before relying on them.";
 
-        /// <summary>The FP-LER disclaimer: the standard wording plus what the two exception outcomes do and do not mean.</summary>
+        // Additional disclaimer for exception reports
         public const string NotEligibleDisclaimer = AdvisoryDisclaimer +
             " Not Currently Eligible is not a refusal and not a statement about any other qualification." +
             " More Information Needed only means the session was incomplete. Grade 11 marks are projected and will change.";
@@ -66,7 +48,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repositories (no database work yet).</summary>
+        // Initialise the repositories used to generate reports
         public ReportController()
         {
             reportRepository = new ReportRepository();
@@ -81,7 +63,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Report catalogue
-        /// <summary>The report's name, e.g. "FP-LER" gives "Learners Not Currently Eligible".</summary>
+        // Get the name of a report from its code
         public string GetReportName(string reportCode)
         {
             switch (NormaliseCode(reportCode))
@@ -97,12 +79,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// The export formats a report allows (FP-LSR and FP-LER: PDF, Word; FP-DIE: PDF, Excel):
-        /// ExportFormat (file extension ".pdf" / ".docx" / ".xlsx"), FormatName, FormatCode
-        /// (stored value PDF / DOCX / XLSX) and RenderFormat (ReportViewer: PDF / WORDOPENXML / EXCELOPENXML).
-        /// An unknown report code gives an empty table.
-        /// </summary>
+        // Get the available export formats for a report
         public DataTable GetExportFormats(string reportCode)
         {
             DataTable table = new DataTable("ExportFormats");
@@ -118,10 +95,7 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>
-        /// When the report was last generated (from ExportReport), or null. It takes no user ID
-        /// (fixed signature), so it has no role check; it returns only a date, never learner data.
-        /// </summary>
+        // Get the date a report was most recently generated
         public DateTime? GetLastGenerated(string reportCode)
         {
             string code = NormaliseCode(reportCode);
@@ -132,13 +106,8 @@ namespace FuturePath.ApplicationLayer
             return exportRepository.GetLastGenerated(code);
         }
 
-        /// <summary>
-        /// UI 10.3c shortcuts (staff): ReportCode, ReportName, Scope, RowsInScope, LastGenerated for
-        /// the three reports over the period and filters. Completed sessions only; FP-LER counts
-        /// only Not Currently Eligible and More Information Needed.
-        /// LastGenerated is DBNull when the report was never generated. FP-LER ignores the outcome
-        /// filter (it always lists both exception outcomes), and inactive programmes are excluded.
-        /// </summary>
+        // Build the report catalogue with counts and last export dates
+        // Only authorised staff can view the catalogue
         public DataTable GetReportCatalogue(int actorUserID, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID, string outcomeCode)
         {
             loginController.CheckStaff(actorUserID);
@@ -173,11 +142,7 @@ namespace FuturePath.ApplicationLayer
             return catalogue;
         }
 
-        /// <summary>
-        /// UI 11 readiness panel (staff): sessions, faculties and programmes in scope for a report request.
-        /// FP-LER always counts only its two exception outcomes (the outcome filter is ignored) and
-        /// never includes inactive programmes; only FP-DIE honours includeInactive.
-        /// </summary>
+        // Count the sessions, faculties and programmes covered by a report
         public ReportScope GetScope(int actorUserID, string reportCode, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID,
                                     string outcomeCode, bool includeInactive)
         {
@@ -191,11 +156,8 @@ namespace FuturePath.ApplicationLayer
             return CountScope(code, fromDate, toDate, facultyID, gradeLevelID, OptionalOutcome(outcomeCode), includeInactive);
         }
 
-        /// <summary>
-        /// Counts the completed sessions (and their faculties and programmes) a report would cover.
-        /// FP-LER counts only its two exception outcomes and ignores the outcome filter; only
-        /// FP-DIE may include inactive programmes.
-        /// </summary>
+        // Count completed sessions within the selected report filters
+        // Only the degree interest report can include inactive programmes
         private ReportScope CountScope(string reportCode, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID, string outcomeCode,
                                        bool includeInactive)
         {
@@ -215,11 +177,7 @@ namespace FuturePath.ApplicationLayer
             return scope;
         }
 
-        /// <summary>
-        /// Checks a UI 11 request: a known report code, from-date not after to-date, and a format
-        /// the report allows. Returns one message per problem. The format may be given as the
-        /// stored code (PDF) or the file extension (.pdf).
-        /// </summary>
+        // Check the dates, report type and requested export format
         public Collection<string> ValidateReportRequest(string reportCode, DateTime fromDate, DateTime toDate, string exportFormat)
         {
             Collection<string> messages = new Collection<string>();
@@ -246,12 +204,8 @@ namespace FuturePath.ApplicationLayer
             return messages;
         }
 
-        /// <summary>
-        /// The ExportReport.ParametersUsed text for FP-DIE / FP-LER, e.g.
-        /// "Period 2026-01-01..2026-09-15; Faculty=All; Grade=All; Outcome=All; Inactive=Excluded" (max 255).
-        /// Names are printed, not IDs. FP-LER always shows its two outcomes and Inactive=Excluded.
-        /// FP-LSR (and an unknown code) returns null, because an FP-LSR row stores its SessionID instead.
-        /// </summary>
+        // Build the text describing the filters used for a period report
+        // The learner summary stores a session ID instead of parameters
         public string BuildParametersUsed(string reportCode, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID, string outcomeCode, bool includeInactive)
         {
             string code = NormaliseCode(reportCode);
@@ -297,14 +251,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Export log
-        /// <summary>
-        /// Logs a staff export (Career Advisor or Administrator) in ExportReport. For FP-LSR give
-        /// the sessionID and null parameters; for FP-DIE / FP-LER give null sessionID and the
-        /// parameters text. exportFormat is PDF, DOCX or XLSX.
-        /// FP-LSR needs an existing, completed session (sessionID) and stores no parameters; FP-DIE and
-        /// FP-LER store no session (pass 0) and at most 255 characters of parameters. The format must be
-        /// one the report allows (".pdf" is read as PDF).
-        /// </summary>
+        // Log an exported report after checking staff access and format
+        // Learner summaries require an existing completed session
         public void RecordExport(int actorUserID, string reportCode, int sessionID, string parametersUsed, string exportFormat, DateTime generatedAt)
         {
             loginController.CheckStaff(actorUserID);
@@ -352,7 +300,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Catalogue and format helpers
-        /// <summary>What a report covers (UI 10.3c "Scope"), or "" for an unknown code.</summary>
+        // Return a short description of what the report covers
         private static string GetReportScope(string reportCode)
         {
             switch (reportCode)
@@ -368,7 +316,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>The stored formats a report may be exported in (none for an unknown code).</summary>
+        // Return the export formats allowed for the selected report
         private static string[] GetReportFormats(string reportCode)
         {
             switch (reportCode)
@@ -384,7 +332,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>A stored format's file extension, e.g. PDF gives ".pdf".</summary>
+        // Convert the stored format to its file extension
         private static string GetFormatExtension(string formatCode)
         {
             switch (formatCode)
@@ -400,7 +348,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>A stored format's display name, e.g. "PDF document (.pdf)".</summary>
+        // Get the display name for an export format
         private static string GetFormatName(string formatCode)
         {
             switch (formatCode)
@@ -416,7 +364,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>The ReportViewer render format for a stored format, e.g. DOCX gives "WORDOPENXML".</summary>
+        // Get the format required by ReportViewer
         private static string GetRenderFormat(string formatCode)
         {
             switch (formatCode)
@@ -432,10 +380,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// Returns the stored format code (PDF / DOCX / XLSX) if the report allows it, otherwise
-        /// throws ArgumentException naming the formats it does allow.
-        /// </summary>
+        // Check that the selected report supports the requested format
         private string CheckFormat(string reportCode, string exportFormat)
         {
             string[] formats = GetReportFormats(reportCode);
@@ -447,7 +392,7 @@ namespace FuturePath.ApplicationLayer
             return format;
         }
 
-        /// <summary>True if the format is in the list.</summary>
+        // Check whether a format is in the list of allowed formats
         private static bool AllowsFormat(string[] formats, string format)
         {
             foreach (string allowed in formats)
@@ -460,7 +405,7 @@ namespace FuturePath.ApplicationLayer
             return false;
         }
 
-        /// <summary>The formats as words, e.g. "PDF document (.pdf) or Word document (.docx)".</summary>
+        // Combine the available export formats into a readable message
         private static string DescribeFormats(string[] formats)
         {
             string text = "";
@@ -479,13 +424,13 @@ namespace FuturePath.ApplicationLayer
             return text;
         }
 
-        /// <summary>A report code as stored: trimmed and upper case ("fp-die " gives "FP-DIE").</summary>
+        // Clean and capitalise a report code
         private static string NormaliseCode(string reportCode)
         {
             return TextOf(reportCode).ToUpperInvariant();
         }
 
-        /// <summary>A format as stored: ".pdf", "pdf" and "PDF" all give "PDF".</summary>
+        // Convert a file extension or format name to its stored code
         private static string NormaliseFormat(string exportFormat)
         {
             return TextOf(exportFormat).TrimStart('.').ToUpperInvariant();
@@ -493,7 +438,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Period and filter helpers
-        /// <summary>Throws ArgumentException when the from-date is after the to-date (validated again in the BLL).</summary>
+        // Check that the reporting start date is not after the end date
         private static void CheckPeriod(DateTime fromDate, DateTime toDate)
         {
             if (fromDate.Date > toDate.Date)
@@ -502,22 +447,20 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>The first moment of the period: the start of fromDate.</summary>
+        // Get the start of the first day in a reporting period
         private static DateTime PeriodStart(DateTime fromDate)
         {
             return fromDate.Date;
         }
 
-        /// <summary>The end of the period, not included: the start of the day after toDate.</summary>
+        // Get the start of the day after the reporting period ends
         private static DateTime PeriodEnd(DateTime toDate)
         {
             return toDate.Date.AddDays(1);
         }
 
-        /// <summary>
-        /// An optional outcome filter: blank (the "All" row) gives "" (no filter); otherwise one of
-        /// the four stored codes, or ArgumentException.
-        /// </summary>
+        // Validate the optional advisory outcome filter
+        // Return an empty string when all outcomes are included
         private static string OptionalOutcome(string outcomeCode)
         {
             if (string.IsNullOrWhiteSpace(outcomeCode))
@@ -531,10 +474,7 @@ namespace FuturePath.ApplicationLayer
             return outcomeCode.Trim().ToUpperInvariant();
         }
 
-        /// <summary>
-        /// The faculty's name for a parameter line: allText when no faculty was chosen (0), or
-        /// "Unknown faculty" if it does not exist.
-        /// </summary>
+        // Get the selected faculty name for report parameters
         private string FacultyText(int facultyID, string allText)
         {
             if (facultyID <= 0)
@@ -549,10 +489,7 @@ namespace FuturePath.ApplicationLayer
             return name;
         }
 
-        /// <summary>
-        /// The grade's description for a parameter line (e.g. "Grade 12"): allText when no grade was
-        /// chosen (0), or "Unknown grade" if it does not exist.
-        /// </summary>
+        // Get the selected grade description for report parameters
         private string GradeText(int gradeLevelID, string allText)
         {
             if (gradeLevelID <= 0)
@@ -567,7 +504,7 @@ namespace FuturePath.ApplicationLayer
             return TextOf(grades.Rows[0]["GradeDescription"]);
         }
 
-        /// <summary>The FP-LER period line, e.g. "1 January - 15 September 2026" with an en dash (the year once when both dates share it).</summary>
+        // Format the reporting dates as a readable range
         private static string FormatPeriod(DateTime fromDate, DateTime toDate)
         {
             string start = fromDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
@@ -580,7 +517,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Counting and text helpers
-        /// <summary>part as a percentage of whole, one decimal (0 when whole is 0).</summary>
+        // Calculate a percentage, returning zero for an empty total
         private static decimal Percent(int part, int whole)
         {
             if (whole == 0)
@@ -590,7 +527,7 @@ namespace FuturePath.ApplicationLayer
             return Math.Round(100m * part / whole, 1);
         }
 
-        /// <summary>How many rows have this stored OutcomeCode.</summary>
+        // Count sessions with the given advisory outcome
         private static int CountOutcome(DataTable sessions, string outcomeCode)
         {
             int count = 0;
@@ -604,7 +541,7 @@ namespace FuturePath.ApplicationLayer
             return count;
         }
 
-        /// <summary>How many different values an ID column holds (e.g. distinct learners).</summary>
+        // Count distinct IDs in a table column
         private static int CountDistinct(DataTable rows, string column)
         {
             List<int> seen = new List<int>();
@@ -619,11 +556,8 @@ namespace FuturePath.ApplicationLayer
             return seen.Count;
         }
 
-        /// <summary>
-        /// The tally for this group, added (with zero counts) if it is not in the list yet. Groups
-        /// with an ID (faculties, programmes) are matched on the ID; the rest (subjects, reasons)
-        /// pass 0 and are matched on the name.
-        /// </summary>
+        // Find an existing report tally or create a new one
+        // Match by ID when given, otherwise by name
         private static ReportTally FindOrAddTally(List<ReportTally> tallies, int id, string name)
         {
             foreach (ReportTally tally in tallies)
@@ -640,7 +574,7 @@ namespace FuturePath.ApplicationLayer
             return added;
         }
 
-        /// <summary>Adds the text unless the collection already has it.</summary>
+        // Add a value to a collection only once
         private static void AddOnce(Collection<string> items, string text)
         {
             if (!items.Contains(text))
@@ -649,7 +583,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>Sort order: most sessions first, then name A-Z.</summary>
+        // Sort tallies by session count, then by name
         private static int CompareSessionsDescending(ReportTally a, ReportTally b)
         {
             if (a.SessionCount != b.SessionCount)
@@ -659,7 +593,7 @@ namespace FuturePath.ApplicationLayer
             return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>Sort order: highest count first, then name A-Z.</summary>
+        // Sort tallies by count, then by name
         private static int CompareCountsDescending(ReportTally a, ReportTally b)
         {
             if (a.Count != b.Count)
@@ -669,7 +603,7 @@ namespace FuturePath.ApplicationLayer
             return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>Sort order: most sessions offered first, then most added to a summary, then type A-Z.</summary>
+        // Sort funding tallies by count, additions and type name
         private static int CompareFundingDescending(ReportTally a, ReportTally b)
         {
             if (a.Count != b.Count)
@@ -683,7 +617,7 @@ namespace FuturePath.ApplicationLayer
             return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>Sort order: highest interest score first, then category name A-Z.</summary>
+        // Sort interest categories by score and then name
         private static int CompareScoresDescending(KeyValuePair<string, decimal> a, KeyValuePair<string, decimal> b)
         {
             if (a.Value != b.Value)
@@ -693,7 +627,7 @@ namespace FuturePath.ApplicationLayer
             return string.Compare(a.Key, b.Key, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>Outcome words in sentence case for the reports: "Not Currently Eligible" gives "Not currently eligible".</summary>
+        // Convert the outcome wording to sentence case
         private static string SentenceCase(string text)
         {
             if (string.IsNullOrEmpty(text))
@@ -703,7 +637,7 @@ namespace FuturePath.ApplicationLayer
             return text.Substring(0, 1) + text.Substring(1).ToLowerInvariant();
         }
 
-        /// <summary>"First Last" for the FP-LER listing; either part may be blank, both blank gives "Name not given".</summary>
+        // Combine the learner's first name and surname
         private static string LearnerName(object firstName, object lastName)
         {
             string name = (TextOf(firstName) + " " + TextOf(lastName)).Trim();
@@ -714,7 +648,7 @@ namespace FuturePath.ApplicationLayer
             return name;
         }
 
-        /// <summary>The short form of a stored reason for the FP-LER listing: its first sentence.</summary>
+        // Return the first sentence from a longer reason
         private static string FirstSentence(string text)
         {
             int end = text.IndexOf(". ", StringComparison.Ordinal);
@@ -725,7 +659,7 @@ namespace FuturePath.ApplicationLayer
             return text.Substring(0, end + 1);
         }
 
-        /// <summary>Joins sentences with a space, e.g. the gap list for the overall guidance.</summary>
+        // Join explanation sentences with spaces
         private static string JoinSentences(Collection<string> sentences)
         {
             string text = "";
@@ -740,7 +674,7 @@ namespace FuturePath.ApplicationLayer
             return text;
         }
 
-        /// <summary>Text from a DataRow value: DBNull or null gives "", otherwise trimmed.</summary>
+        // Convert a database value to trimmed text
         private static string TextOf(object value)
         {
             if (value == null || value is DBNull)
@@ -750,7 +684,7 @@ namespace FuturePath.ApplicationLayer
             return Convert.ToString(value, CultureInfo.InvariantCulture).Trim();
         }
 
-        /// <summary>A number without trailing zeros: 66.7, 50.</summary>
+        // Format numbers without unnecessary decimal zeros
         private static string FormatNumber(decimal value)
         {
             return value.ToString("0.#", CultureInfo.InvariantCulture);
@@ -758,50 +692,47 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Tally class (the counting helper for FP-DIE and FP-LER)
-        /// <summary>
-        /// A counter for one group in FP-DIE or FP-LER: a faculty, a programme, a subject, a reason
-        /// or a funding type. Each report section uses only the fields it needs.
-        /// </summary>
+        // Stores counts and totals used to build period reports
         private class ReportTally
         {
-            /// <summary>FacultyID or ProgrammeID (0 for subjects, reasons and funding types).</summary>
+            // ID of the faculty or programme being counted
             public int ID;
-            /// <summary>The faculty, programme, subject, reason or funding type.</summary>
+            // Name of the item being counted
             public string Name;
-            /// <summary>The programme's faculty name (programme tallies only).</summary>
+            // Faculty name for programme tallies
             public string FacultyName = "";
-            /// <summary>Sessions with each of the four outcomes (faculty and programme tallies).</summary>
+            // Number of Strong Match sessions
             public int StrongCount;
-            /// <summary>Possible Match sessions.</summary>
+            // Number of Possible Match sessions
             public int PossibleCount;
-            /// <summary>Not Currently Eligible sessions.</summary>
+            // Number of Not Currently Eligible sessions
             public int NotEligibleCount;
-            /// <summary>More Information Needed sessions.</summary>
+            // Number of More Information Needed sessions
             public int MoreInfoCount;
-            /// <summary>A plain count: times a subject gap or reason occurred, or sessions offered a funding type.</summary>
+            // Count of a subject gap, reason or funding type
             public int Count;
-            /// <summary>Funding types: of the sessions offered the type, those that added funding to their summary.</summary>
+            // Number of sessions adding this funding to their summary
             public int AddedCount;
-            /// <summary>Marks below the minimum: the sum of the shortfalls in points.</summary>
+            // Total shortfall across the marks being counted
             public decimal ShortfallTotal;
-            /// <summary>Marks below the minimum: the lowest mark seen.</summary>
+            // Lowest captured mark in the group
             public decimal LowestMark;
-            /// <summary>Funding types: the faculty with the most links to options of the type, or "".</summary>
+            // Faculty with the most links to this funding type
             public string MostLinkedFaculty = "";
 
-            /// <summary>All sessions counted in the four outcomes.</summary>
+            // Total sessions counted across all outcome types
             public int SessionCount
             {
                 get { return StrongCount + PossibleCount + NotEligibleCount + MoreInfoCount; }
             }
 
-            /// <summary>(Strong + Possible) / sessions x 100, one decimal.</summary>
+            // Percentage of sessions with Strong or Possible outcomes
             public decimal EligibilityRate
             {
                 get { return Percent(StrongCount + PossibleCount, SessionCount); }
             }
 
-            /// <summary>Counts one session with this stored outcome code.</summary>
+            // Increase the count for the given advisory outcome
             public void AddOutcome(string outcomeCode)
             {
                 switch (outcomeCode)
@@ -821,7 +752,7 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            /// <summary>The number of sessions with one outcome code.</summary>
+            // Return the count for the given advisory outcome
             public int CountFor(string outcomeCode)
             {
                 switch (outcomeCode)

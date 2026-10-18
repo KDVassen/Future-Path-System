@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -6,11 +7,8 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Funding options: the learner's UI 6.2b view (active funding linked to their faculty or
-    /// programme) and the Administrator maintenance on UI 13.3. Inactive funding never reaches a
-    /// learner. Maintenance methods check the Administrator role first.
-    /// </summary>
+    // Handles funding information for learners and administrators
+    // Allows learners to view funding and administrators to manage funding options
     public class FundingController
     {
         #region Data Members
@@ -26,7 +24,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>The funding options read by the last GetFundingOptions or GetActiveFunding call.</summary>
+        // Return the funding options loaded by the controller
         public Collection<FundingOption> AllFundingOptions
         {
             get { return fundingOptions; }
@@ -34,7 +32,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repositories (no database work yet).</summary>
+        // Initialise the repositories and login controller
         public FundingController()
         {
             fundingRepository = new FundingRepository();
@@ -45,13 +43,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Learner view (UI 6.2b)
-        /// <summary>
-        /// The funding types from FUNDING_TYPE_n with columns ParameterCode, ParameterValue (the
-        /// text to show) and FundingType (the value to filter or store: the type text kept in
-        /// FundingOption.FundingType). With includeAllRow an "All funding types" row comes first,
-        /// with ParameterCode "" and FundingType "" (no filter). Bind DisplayMember = ParameterValue,
-        /// ValueMember = FundingType.
-        /// </summary>
+        // Get the available funding types from the system settings
+        // Optionally add an All funding types choice for filtering
         public DataTable GetFundingTypes(bool includeAllRow)
         {
             DataTable table = SystemSettings.GetNumberedParameters(SystemSettings.FundingTypePrefix);
@@ -71,11 +64,8 @@ namespace FuturePath.ApplicationLayer
             return table;
         }
 
-        /// <summary>
-        /// Active funding linked to the faculty or programme (both 0: all active funding),
-        /// filtered by funding type ("" or null: all) and, with openOnly, to options still open
-        /// today. Ordered by closing date, nearest first (no closing date last).
-        /// </summary>
+        // Get active funding linked to the selected faculty or programme
+        // Filter by funding type and optionally show only open applications
         public Collection<FundingOption> GetActiveFunding(int facultyID, int programmeID, string fundingType, bool openOnly)
         {
             fundingOptions = new Collection<FundingOption>();
@@ -95,7 +85,7 @@ namespace FuturePath.ApplicationLayer
             return fundingOptions;
         }
 
-        /// <summary>UI 6.2b "Add to Summary": sets FundingInfoRequested so funding prints on the FP-LSR.</summary>
+        // Record that the learner wants funding information in their summary
         public void RequestFundingInfo(int sessionID)
         {
             sessionRepository.SetFundingInfoRequested(sessionID, true);
@@ -103,24 +93,22 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Maintenance (UI 13.3)
-        /// <summary>Funding options with their links, for the UI 13.3 grid.</summary>
+        // Load funding options for the administrator's list
+        // Include inactive options when requested
         public Collection<FundingOption> GetFundingOptions(bool includeInactive)
         {
             fundingOptions = fundingRepository.GetFundingOptions(includeInactive);
             return fundingOptions;
         }
 
-        /// <summary>One funding option with FacultyIds and ProgrammeIds, or null.</summary>
+        // Find a funding option using its ID
         public FundingOption GetFunding(int fundingID)
         {
             return fundingRepository.FindById(fundingID);
         }
 
-        /// <summary>
-        /// Checks a funding option: name required (max 100) and not already used, type one of the
-        /// FUNDING_TYPE_n values, eligibility required (max 500), documents max 255, contact max
-        /// 150. Returns one message per problem.
-        /// </summary>
+        // Check the funding name, type and required information
+        // Return a message for each validation problem found
         public Collection<string> ValidateFunding(int fundingID, string fundingName, string fundingType, string eligibilityDescription,
                                                   string requiredDocuments, DateTime? closingDate, string contactInformation)
         {
@@ -160,16 +148,13 @@ namespace FuturePath.ApplicationLayer
             {
                 problems.Add("Shorten the contact information to " + MaximumContactLength + " characters or fewer.");
             }
-            // closingDate comes from a DateTimePicker and is optional, so any date is accepted.
+
+            // The closing date is optional
             return problems;
         }
 
-        /// <summary>
-        /// Adds (fundingID 0) or updates a funding option and its faculty and programme links in
-        /// one transaction (Administrator only). Repeated IDs in the lists are saved once. Returns
-        /// the FundingID. Throws ArgumentException if invalid, UnauthorizedAccessException if not
-        /// an Administrator.
-        /// </summary>
+        // Add or update a funding option and its faculty and programme links
+        // Only administrators can save changes, and invalid details are rejected
         public int SaveFunding(int actorUserID, int fundingID, string fundingName, string fundingType, string eligibilityDescription,
                                string requiredDocuments, DateTime? closingDate, string contactInformation, bool isMeritBased,
                                bool isNeedBased, bool isActive, IList<int> facultyIDs, IList<int> programmeIDs)
@@ -186,7 +171,7 @@ namespace FuturePath.ApplicationLayer
                 throw new ArgumentException("The selected funding option no longer exists. Refresh the list and try again.");
             }
 
-            // The option is built whole: Save replaces every column and every link in one transaction.
+            // Build the funding option before saving it with all its links
             FundingOption option = new FundingOption();
             option.FundingID = fundingID;
             option.FundingName = fundingName.Trim();
@@ -224,7 +209,8 @@ namespace FuturePath.ApplicationLayer
             return fundingRepository.Save(option);
         }
 
-        /// <summary>Deactivates a funding option (Administrator only). It is never deleted.</summary>
+        // Deactivate a funding option without deleting it
+        // Only administrators can perform this action
         public void DeactivateFunding(int actorUserID, int fundingID)
         {
             loginController.CheckAdministrator(actorUserID);
@@ -237,7 +223,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Helpers
-        /// <summary>Text with the spaces at the ends removed; null becomes "".</summary>
+        // Remove extra spaces and return an empty string for null values
         private static string TextOrEmpty(string text)
         {
             if (text == null)
@@ -247,10 +233,8 @@ namespace FuturePath.ApplicationLayer
             return text.Trim();
         }
 
-        /// <summary>
-        /// The funding type as stored in its FUNDING_TYPE_n parameter, or null if the text is not
-        /// one of them (not case-sensitive). Funding types are never typed into the code.
-        /// </summary>
+        // Find a valid funding type from the system settings
+        // Compare without case sensitivity and return null if not found
         private static string FindFundingType(string fundingType)
         {
             if (string.IsNullOrWhiteSpace(fundingType))

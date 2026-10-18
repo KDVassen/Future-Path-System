@@ -1,10 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// One statement on the interest questionnaire (UI 4), e.g. "I enjoy working with numbers
-    /// and data". Each question belongs to one interest category and is answered on a 1-5 scale.
-    /// Maps to InterestQuestion; DisplayOrder fixes the order the statements appear in.
-    /// </summary>
+    // Stores a question used in the learner's interest questionnaire
+    // Each question belongs to an interest category and has a display order
     public class InterestQuestion
     {
         #region Data Members
@@ -17,42 +15,37 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (InterestQuestion.QuestionID).</summary>
         public int QuestionID
         {
             get { return questionID; }
             set { questionID = value; }
         }
 
-        /// <summary>The category this question scores (FK to InterestCategory).</summary>
         public int CategoryID
         {
             get { return categoryID; }
             set { categoryID = value; }
         }
 
-        /// <summary>The category name (read from InterestCategory, for display).</summary>
         public string CategoryName
         {
             get { return categoryName; }
             set { categoryName = value; }
         }
 
-        /// <summary>The statement the learner agrees or disagrees with.</summary>
         public string QuestionText
         {
             get { return questionText; }
             set { questionText = value; }
         }
 
-        /// <summary>Position on UI 4 (1 to 99, lowest first).</summary>
+        // Set the order in which the question appears in the questionnaire
         public int DisplayOrder
         {
             get { return displayOrder; }
             set { displayOrder = value; }
         }
 
-        /// <summary>Inactive questions are not asked.</summary>
         public bool IsActive
         {
             get { return isActive; }
@@ -61,7 +54,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active question.</summary>
+        // Create a new active question with default values
         public InterestQuestion()
         {
             questionID = 0;
@@ -72,7 +65,7 @@ namespace FuturePath.ApplicationLayer
             isActive = true;
         }
 
-        /// <summary>Creates a question with all its stored values.</summary>
+        // Create a question using its stored details
         public InterestQuestion(int pQuestionID, int pCategoryID, string pQuestionText, int pDisplayOrder, bool pIsActive)
         {
             questionID = pQuestionID;
@@ -85,7 +78,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Returns the statement text.</summary>
+        // Return the question text for display
         public override string ToString()
         {
             return questionText;

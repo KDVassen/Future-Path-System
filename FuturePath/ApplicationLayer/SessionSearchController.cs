@@ -1,17 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// Staff session screens: the UI 9 dashboard counts and the UI 10.2b session search. Every
-    /// method checks the Career Advisor or Administrator role first. Outcomes are read back from
-    /// the stored result, never recalculated.
-    /// Dates are whole days: a filter "from 1 June to 3 June" covers SessionDate from 1 June
-    /// 00:00 up to, but not including, 4 June 00:00.
-    /// </summary>
+    // Handles staff dashboard summaries and advisory session searches
+    // Uses saved session information and checks staff access
     public class SessionSearchController
     {
         #region Data Members
@@ -20,7 +16,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the controller and its repository (no database work yet).</summary>
+        // Initialise the session search repository and login controller
         public SessionSearchController()
         {
             searchRepository = new SessionSearchRepository();
@@ -29,10 +25,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>
-        /// UI 9 "Today" card: sessions completed that day, sessions started that day and still in
-        /// progress, and completed that day with outcome Not Currently Eligible or More Information Needed.
-        /// </summary>
+        // Get the daily counts of completed, in-progress and exception sessions
+        // Only authorised staff can view these figures
         public DailySummary GetDailySummary(int actorUserID, DateTime day)
         {
             loginController.CheckStaff(actorUserID);
@@ -45,10 +39,8 @@ namespace FuturePath.ApplicationLayer
             return summary;
         }
 
-        /// <summary>
-        /// Checks the UI 10.2b search fields: a session number, if given, must be yyyy-NNNN; the
-        /// from-date must not be after the to-date. Returns one message per problem.
-        /// </summary>
+        // Validate the session number and selected date range
+        // Return a message for each problem found
         public Collection<string> ValidateSearch(string sessionNumber, DateTime? fromDate, DateTime? toDate)
         {
             Collection<string> messages = new Collection<string>();
@@ -63,29 +55,24 @@ namespace FuturePath.ApplicationLayer
             return messages;
         }
 
-        /// <summary>
-        /// UI 10.2b search. Every filter is optional (blank, null or a learnerID of 0 = no filter). Returns SessionID,
-        /// SessionStatus, SessionNumber, SessionDate, LearnerName, Grade, ProgrammeName, OutcomeCode,
-        /// IsExported (an ExportReport row exists), newest first.
-        /// Throws ArgumentException (with the first validation message) for a badly formed
-        /// session number, reversed dates or an unknown outcome code.
-        /// </summary>
+        // Search advisory sessions using the selected filters
+        // Validate the inputs and return matching sessions
         public DataTable FindSessions(int actorUserID, string sessionNumber, string surname, DateTime? fromDate, DateTime? toDate, string outcomeCode, int learnerID)
         {
             loginController.CheckStaff(actorUserID);
 
-            // Validate again in the BLL (the form validates first).
+            // Check the session number and date range before searching
             Collection<string> messages = ValidateSearch(sessionNumber, fromDate, toDate);
             if (messages.Count > 0)
             {
                 throw new ArgumentException(messages[0]);
             }
 
-            // A session number yyyy-NNNN becomes the SessionID and the year it was started (0 = no filter).
+            // Extract the session ID and year from the session number
             int sessionIDFilter = AdvisorySession.GetSessionID(sessionNumber);
             int yearFilter = AdvisorySession.GetSessionYear(sessionNumber);
 
-            // Whole days: from the start of fromDate up to the start of the day after toDate.
+            // Include complete days when applying the date filters
             DateTime? fromFilter = null;
             DateTime? beforeFilter = null;
             if (fromDate.HasValue)
@@ -97,7 +84,7 @@ namespace FuturePath.ApplicationLayer
                 beforeFilter = toDate.Value.Date.AddDays(1);
             }
 
-            // "All" outcomes is blank; anything else must be one of the four stored codes.
+            // Check the selected outcome or leave the filter blank for all outcomes
             string outcomeFilter = "";
             if (!string.IsNullOrWhiteSpace(outcomeCode))
             {
@@ -114,14 +101,15 @@ namespace FuturePath.ApplicationLayer
             return sessions;
         }
 
-        /// <summary>The total number of advisory sessions (for "n of N sessions match").</summary>
+        // Count all advisory sessions for the staff search screen
         public int CountSessions(int actorUserID)
         {
             loginController.CheckStaff(actorUserID);
             return searchRepository.CountSessions();
         }
 
-        /// <summary>The SessionID for a session number (yyyy-NNNN), or 0 if it is invalid or does not exist.</summary>
+        // Find the session ID using its formatted session number
+        // Return zero if the session is invalid or does not exist
         public int FindSessionId(string sessionNumber)
         {
             int sessionID = AdvisorySession.GetSessionID(sessionNumber);
@@ -135,10 +123,8 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>
-        /// Adds the SessionNumber column (yyyy-NNNN, built from SessionDate and SessionID; it is
-        /// not stored) and fills it for every row. It is placed third, after SessionStatus.
-        /// </summary>
+        // Add a formatted session number to each search result
+        // Place the new column after the session status column
         private static void AddSessionNumbers(DataTable sessions)
         {
             DataColumn column = sessions.Columns.Add("SessionNumber", typeof(string));

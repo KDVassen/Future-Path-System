@@ -1,10 +1,8 @@
+
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// A school subject a learner can capture (e.g. Mathematics). Maps to the Subject table.
-    /// The subject level (Home Language, First Additional Language, Core, Elective) is stored
-    /// with the subject, so UI 3 fills it in read-only (decisions.md D4).
-    /// </summary>
+    // Stores the school subjects available for learners to select
+    // Includes the subject name, level and whether it is active
     public class Subject
     {
         #region Data Members
@@ -15,28 +13,25 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Properties
-        /// <summary>Primary key (Subject.SubjectID).</summary>
         public int SubjectID
         {
             get { return subjectID; }
             set { subjectID = value; }
         }
 
-        /// <summary>The subject name, e.g. "Mathematics".</summary>
         public string SubjectName
         {
             get { return subjectName; }
             set { subjectName = value; }
         }
 
-        /// <summary>Home Language, First Additional Language, Core or Elective.</summary>
+        // Store the subject level, such as Core or Elective
         public string SubjectLevel
         {
             get { return subjectLevel; }
             set { subjectLevel = value; }
         }
 
-        /// <summary>Inactive subjects are not offered on UI 3.</summary>
         public bool IsActive
         {
             get { return isActive; }
@@ -45,7 +40,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Constructors
-        /// <summary>Creates an empty, active subject.</summary>
+        // Create a new active subject with default values
         public Subject()
         {
             subjectID = 0;
@@ -54,7 +49,7 @@ namespace FuturePath.ApplicationLayer
             isActive = true;
         }
 
-        /// <summary>Creates a subject with all its values.</summary>
+        // Create a subject using its stored details
         public Subject(int pSubjectID, string pSubjectName, string pSubjectLevel, bool pIsActive)
         {
             subjectID = pSubjectID;
@@ -65,7 +60,7 @@ namespace FuturePath.ApplicationLayer
         #endregion
 
         #region Methods
-        /// <summary>Returns the subject name, so a ComboBox shows it.</summary>
+        // Return the subject name for display
         public override string ToString()
         {
             return subjectName;
