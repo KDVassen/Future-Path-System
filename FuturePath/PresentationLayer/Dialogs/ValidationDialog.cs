@@ -1,27 +1,21 @@
+
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// The validation dialog (spec 2.2.7), used for UI 2.1a Invalid Profile Data, UI 3.1a
-    /// Invalid / Duplicate Subjects and UI 8.1a Invalid Login. It is raised when the user tries to
-    /// leave a capture screen that still holds invalid data. Its single <b>Re-attempt correction</b>
-    /// button closes the dialog; the calling screen then puts focus back on the first offending
-    /// control, and nothing the user typed is lost.
-    /// </summary>
+    // Displays validation errors when users enter incorrect information
+    // Shows which fields need correcting before continuing
     public partial class ValidationDialog : Form
     {
-        /// <summary>Designer constructor.</summary>
+        // Initialise the validation dialog
         public ValidationDialog()
         {
             InitializeComponent();
         }
 
-        /// <summary>Creates the dialog with a title and one line per entry to correct.</summary>
-        /// <param name="title">E.g. "Invalid profile data".</param>
-        /// <param name="lines">Messages that name the field and the correction.</param>
+        // Display the validation errors with a title and correction messages
         public ValidationDialog(string title, IList<string> lines) : this()
         {
             Text = "Future Path — " + title;
