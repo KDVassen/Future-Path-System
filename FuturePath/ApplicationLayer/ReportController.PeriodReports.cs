@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -8,21 +9,12 @@ using FuturePath.DatabaseLayer;
 
 namespace FuturePath.ApplicationLayer
 {
-    /// <summary>
-    /// ReportController, part 3 of 3: the period reports FP-DIE (Degree Interest and Eligibility,
-    /// spec 6.2) and FP-LER (Learners Not Currently Eligible, spec 6.3). Both cover the completed
-    /// sessions in a period; subject gaps are worked out with RequirementCheck at report time.
-    /// </summary>
+    // Builds the degree interest and learner eligibility reports
     public partial class ReportController
     {
         #region FP-DIE and FP-LER (6.2, 6.3)
-        /// <summary>
-        /// FP-DIE (staff): completed sessions in the period, optional faculty / grade / outcome
-        /// filters, inactive programmes excluded unless includeInactive. No learner names. Logs nothing.
-        /// A session's faculty is the faculty of its selected programme. Subject and mark gaps are
-        /// worked out at report time from each session's subjects and the programme's current
-        /// requirements; sessions with no subjects captured are not counted as gaps.
-        /// </summary>
+
+        // Build the degree interest and eligibility report for a selected period
         public FpDieData BuildDegreeInterestReport(int actorUserID, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID, string outcomeCode, bool includeInactive)
         {
             UserAccount actor = loginController.CheckStaff(actorUserID);
@@ -67,7 +59,7 @@ namespace FuturePath.ApplicationLayer
             }
             header.FundingRequestSessions = CountFundingRequests(sessions);
 
-            // One-line notes under the charts (sections 2, 4 and 5).
+            // Add the notes displayed below the report charts
             if (sessionCount == 0)
             {
                 header.OutcomeChartNote = "No completed sessions match this period and these filters.";
@@ -101,20 +93,13 @@ namespace FuturePath.ApplicationLayer
             return data;
         }
 
-        /// <summary>
-        /// FP-LER (staff): completed sessions in the period whose outcome is Not Currently Eligible
-        /// or More Information Needed, optional faculty / grade filters, with each learner's reason
-        /// and best recommended alternative. Logs nothing.
-        /// Inactive programmes (and programmes under an inactive faculty) are always left out.
-        /// The listing is ordered by faculty name, then Not Currently Eligible before More
-        /// Information Needed, then session date, newest first.
-        /// </summary>
+        // Build the report of learners who need eligibility follow-up
         public FpLerData BuildNotEligibleReport(int actorUserID, DateTime fromDate, DateTime toDate, int facultyID, int gradeLevelID)
         {
             UserAccount actor = loginController.CheckStaff(actorUserID);
             CheckPeriod(fromDate, toDate);
 
-            // Sessions in scope: every completed session in the period after the faculty and grade filters.
+            // Get completed sessions and the ones needing follow-up
             DataTable scope = reportRepository.GetScopeCounts(PeriodStart(fromDate), PeriodEnd(toDate), facultyID, gradeLevelID, "", false, false);
             int sessionsInScope = Convert.ToInt32(scope.Rows[0]["SessionCount"]);
             DataTable exceptions = reportRepository.GetExceptionSessions(PeriodStart(fromDate), PeriodEnd(toDate), facultyID, gradeLevelID);
@@ -127,7 +112,7 @@ namespace FuturePath.ApplicationLayer
             int previousFacultyID = 0;
             foreach (DataRow session in exceptions.Rows)
             {
-                // The rows arrive sorted by faculty, so a new FacultyID starts the next block.
+                // Start a new group whenever the faculty changes
                 int sessionFacultyID = Convert.ToInt32(session["FacultyID"]);
                 if (sessionFacultyID != previousFacultyID)
                 {
@@ -143,7 +128,7 @@ namespace FuturePath.ApplicationLayer
                 }
             }
 
-            // Reasons and faculties, most frequent first.
+            // Sort reasons and faculties by frequency
             reasons.Sort(CompareCountsDescending);
             foreach (ReportTally reason in reasons)
             {
@@ -190,7 +175,7 @@ namespace FuturePath.ApplicationLayer
             return data;
         }
 
-        /// <summary>FP-DIE section 2 and the key figures: always four rows, Strong, Possible, Not currently eligible, More information needed.</summary>
+        // Add the outcome totals and percentages for the FP-DIE report
         private static void AddOutcomeSummaryRows(FpDieData data, DataTable sessions)
         {
             foreach (AdvisoryOutcome.OutcomeType type in AdvisoryOutcome.GetOutcomeTypes())
@@ -202,10 +187,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// FP-DIE section 1 (one row per faculty, busiest first) and section 4 (four slices per
-        /// faculty in the same order, fixed outcome order).
-        /// </summary>
+        // Add faculty totals and outcome breakdowns
         private static void AddFacultyOutcomeRows(FpDieData data, DataTable sessions)
         {
             List<ReportTally> faculties = new List<ReportTally>();
@@ -227,7 +209,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>FP-DIE section 3: one row per selected programme, most selections first.</summary>
+        // Add programme totals, ordered by the number of selections
         private static void AddProgrammeOutcomeRows(FpDieData data, DataTable sessions)
         {
             List<ReportTally> programmes = new List<ReportTally>();
@@ -245,14 +227,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// FP-DIE sections 5 and 6, from each session's Required requirement checks:
-        /// - SubjectGaps: a Required subject MISSING (not taken, no accepted alternative);
-        /// - MarkShortfalls: a Required check that is a GAP (the subject taken is below its minimum),
-        ///   with the number of times, the average shortfall in points and the lowest mark.
-        /// Also writes onto the header the sessions with at least one of each and the average
-        /// shortfall over all GAPs.
-        /// </summary>
+        // Calculate missing subjects and mark shortfalls for completed sessions
         private void AddGapRows(FpDieData data, DataTable sessions, FpDieData.ReportHeaderRow header)
         {
             List<ReportTally> subjectGaps = new List<ReportTally>();
@@ -285,7 +260,7 @@ namespace FuturePath.ApplicationLayer
                     }
                     else if (check.ResultCode == RequirementCheck.ResultGap)
                     {
-                        // A GAP check always has the mark and the shortfall
+                        // Record the mark and shortfall for this requirement
                         decimal shortfall = check.Shortfall.Value;
                         decimal mark = check.Mark.Value;
                         ReportTally tally = FindOrAddTally(markGaps, 0, check.SubjectTakenName);
@@ -338,16 +313,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>
-        /// FP-DIE section 7: one row per funding type (the FUNDING_TYPE_n parameters). Definitions:
-        /// - OfferedCount: sessions in scope whose selected programme, or that programme's faculty,
-        ///   is linked to at least one ACTIVE funding option of the type (what UI 6.2b would list);
-        /// - AddedToSummaryCount: of those sessions, the ones with FundingInfoRequested
-        ///   (Add to Summary was pressed on UI 6.2b);
-        /// - MostLinkedFaculty: the faculty with the most FundingFaculty links among the active
-        ///   options of the type (null when the type has no faculty links).
-        /// Sorted by OfferedCount, then AddedToSummaryCount, highest first.
-        /// </summary>
+        // Summarise funding types offered and added to learner summaries
         private void AddFundingCategoryRows(FpDieData data, DataTable sessions)
         {
             Collection<FundingOption> options = fundingRepository.GetActiveFundingFor(0, 0);
@@ -360,7 +326,7 @@ namespace FuturePath.ApplicationLayer
                 {
                     if (HasFundingOfType(options, fundingType, Convert.ToInt32(session["FacultyID"]), Convert.ToInt32(session["ProgrammeID"])))
                     {
-                        // Count = sessions offered this funding type
+                        // Count sessions offered this type of funding
                         tally.Count++;
                         if (Convert.ToBoolean(session["FundingInfoRequested"]))
                         {
@@ -391,7 +357,7 @@ namespace FuturePath.ApplicationLayer
             }
         }
 
-        /// <summary>One FP-LER listing row from an exception session.</summary>
+        // Add a learner session to the FP-LER exception listing
         private void AddExceptionRow(FpLerData data, DataRow session, int facultySortOrder)
         {
             int sessionID = Convert.ToInt32(session["SessionID"]);
@@ -422,7 +388,7 @@ namespace FuturePath.ApplicationLayer
                 row.ProgrammeName = programmeName;
             }
             row.OutcomeName = SentenceCase(AdvisoryOutcome.GetCategory(outcome));
-            // Each listing row counts towards one of the two exception outcomes
+            // Count the session under its matching exception outcome
             row.NotEligibleCount = 0;
             row.MoreInfoNeededCount = 0;
             if (outcome == AdvisoryOutcome.CodeNotEligible)
@@ -446,15 +412,7 @@ namespace FuturePath.ApplicationLayer
             data.ExceptionListing.AddExceptionListingRow(row);
         }
 
-        /// <summary>
-        /// The FP-LER reason categories for one exception session, each at most once, worked out
-        /// from the session's Required requirement checks at report time:
-        /// - More Information Needed: "Advisory session incomplete";
-        /// - a Required subject not taken: "&lt;Subject&gt; not taken";
-        /// - a Required subject below its minimum: "&lt;Subject taken&gt; mark below the minimum";
-        /// - the overall average below the programme's minimum: "Overall average below the minimum";
-        /// - none of these (the requirements changed after the session): "Other reason (see the listing)".
-        /// </summary>
+        // Group the reasons why a learner needs eligibility follow-up
         private Collection<string> GetReasonCategories(DataRow session, Dictionary<int, DegreeProgramme> programmes)
         {
             Collection<string> reasons = new Collection<string>();
@@ -493,11 +451,7 @@ namespace FuturePath.ApplicationLayer
             return reasons;
         }
 
-        /// <summary>
-        /// Checks one session's subjects against its programme's CURRENT requirements (reports
-        /// work gaps out at report time). Returns null when the learner captured no subjects.
-        /// Each programme is read once and remembered in the dictionary.
-        /// </summary>
+        // Check a session against the programme's current requirements
         private MatchResult EvaluateSession(int sessionID, int programmeID, Dictionary<int, DegreeProgramme> programmes)
         {
             Learner learner = learnerRepository.FindBySessionId(sessionID);
@@ -517,13 +471,10 @@ namespace FuturePath.ApplicationLayer
             return programme.EvaluateSubjectAndMarkMatch(learner.GetSubjects());
         }
 
-        /// <summary>
-        /// The recommended alternative for FP-LER: the best-ranked stored alternative of the session
-        /// whose programme is still active (under an active faculty), or "" if there is none.
-        /// </summary>
+        // Find the highest-ranked active alternative for a session
         private string FindBestAlternative(int sessionID)
         {
-            // FindResults lists the selected programme first, then the alternatives by rank
+            // Results are ordered by selected programme and alternative rank
             foreach (RecommendationResult result in sessionRepository.FindResults(sessionID))
             {
                 if (!result.IsSelectedProgramme && reportRepository.IsProgrammeCurrent(result.ProgrammeID))
@@ -534,7 +485,7 @@ namespace FuturePath.ApplicationLayer
             return "";
         }
 
-        /// <summary>True if an active option of this type is linked to the faculty or the programme.</summary>
+        // Check whether funding of a given type is linked to the faculty or programme
         private static bool HasFundingOfType(Collection<FundingOption> options, string fundingType, int facultyID, int programmeID)
         {
             foreach (FundingOption option in options)
@@ -548,7 +499,7 @@ namespace FuturePath.ApplicationLayer
             return false;
         }
 
-        /// <summary>The faculty with the most links to active options of this type ("" if none); ties go to the first name A-Z.</summary>
+        // Find the faculty with the most links to this funding type
         private static string FindMostLinkedFaculty(Collection<FundingOption> options, string fundingType)
         {
             List<ReportTally> faculties = new List<ReportTally>();
@@ -571,7 +522,7 @@ namespace FuturePath.ApplicationLayer
             return faculties[0].Name;
         }
 
-        /// <summary>The number of sessions with FundingInfoRequested.</summary>
+        // Count sessions where funding information was requested
         private static int CountFundingRequests(DataTable sessions)
         {
             int count = 0;
@@ -585,7 +536,7 @@ namespace FuturePath.ApplicationLayer
             return count;
         }
 
-        /// <summary>All subject-gap occurrences in FP-DIE section 5 (the bars add up to this).</summary>
+        // Count the total missing-subject occurrences in the report
         private static int CountGapOccurrences(FpDieData data)
         {
             int total = 0;
