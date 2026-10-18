@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,32 +7,15 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.1 — Reference data, University info (faculties and degree programmes), built to the UI 13.2
-    /// pattern. Page <c>tabUniversity</c> of the Reference data group; Administrators only.
-    /// <para>
-    /// Left: the Faculty ListBox scopes the view (inactive faculties stay listed, marked "(inactive)"),
-    /// and a small "Faculty details" group below it maintains faculties themselves with its own amber
-    /// group buttons — <b>Add faculty</b>, <b>Rename</b> and <b>Deactivate faculty</b> — which save at once.
-    /// Right: a read-only grid of the selected faculty's programmes (Programme · Min. overall average ·
-    /// Status chip) and the "Add or edit a programme" form, driven by the tab's own buttons
-    /// (<see cref="btnUniversityAdd_Click"/>, <see cref="btnUniversityUpdate_Click"/>,
-    /// <see cref="btnUniversityDeactivate_Click"/>, <see cref="btnUniversityCancel_Click"/>).
-    /// </para>
-    /// Nothing is deleted; the BLL re-validates every save and checks that the user is an Administrator.
-    /// </summary>
+    // Handles faculty and degree programme maintenance for Administrators
     public partial class StaffConsoleForm
     {
-        /// <summary>ProgrammeID of the programme being edited, or null when the form holds a new programme.</summary>
+        // ID of the selected programme, or null for a new programme
         private int? universitySelectedProgrammeId;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.1 is shown. The first time it binds the faculty lists and empties the
-        /// programme form (replaces the old tab's constructor and <c>LoadData</c>).
-        /// </summary>
-        /// <param name="firstTime">True the first time this page is shown in this console.</param>
+        // Initialise the university information screen
         private void UniversityShown(bool firstTime)
         {
             if (!firstTime)
@@ -51,7 +35,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add programme: validates the form and adds a new degree programme.</summary>
+        // Validate and add a new degree programme
         private void btnUniversityAdd_Click(object sender, EventArgs e)
         {
             if (!UniversityValidateForm())
@@ -62,9 +46,8 @@ namespace FuturePath.PresentationLayer
             string name = txtProgrammeName.Text.Trim();
             try
             {
-                // ProgrammeID 0 adds a programme. A minimum average of 0 means "no minimum" (stored as NULL).
-                // The BLL checks Role = Administrator before it writes (Section 8), validates again,
-                // and only accepts an existing faculty (referential integrity, Section 7).
+                // Save the programme through the controller
+                // A minimum average of zero means no minimum is set
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.SaveProgramme(UserId, 0, (int)cboProgrammeFaculty.SelectedValue, name,
                     numMinimumAverage.Value, chkUniActive.Checked);
@@ -84,7 +67,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Programme added: " + name + ".", false);
         }
 
-        /// <summary>Update programme: validates the form and saves it over the programme selected in the grid.</summary>
+        // Validate and update the selected degree programme
         private void btnUniversityUpdate_Click(object sender, EventArgs e)
         {
             if (!universitySelectedProgrammeId.HasValue)
@@ -100,7 +83,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // The BLL checks Role = Administrator before it writes (Section 8).
+                // Save programme changes through the controller
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.SaveProgramme(UserId, universitySelectedProgrammeId.Value, (int)cboProgrammeFaculty.SelectedValue,
                     txtProgrammeName.Text.Trim(), numMinimumAverage.Value, chkUniActive.Checked);
@@ -120,7 +103,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Programme updated.", false);
         }
 
-        /// <summary>Deactivate: deactivates the selected programme after confirmation. Nothing is deleted.</summary>
+        // Deactivate the selected programme after confirmation
         private void btnUniversityDeactivate_Click(object sender, EventArgs e)
         {
             if (!universitySelectedProgrammeId.HasValue || dgvProgrammes.SelectedRows.Count == 0)
@@ -145,7 +128,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Sets DegreeProgramme.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Mark the programme as inactive without deleting it
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.DeactivateProgramme(UserId, universitySelectedProgrammeId.Value);
             }
@@ -164,7 +147,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Cancel: discards the form's changes and clears the grid selection.</summary>
+        // Discard changes and reset the programme form
         private void btnUniversityCancel_Click(object sender, EventArgs e)
         {
             dgvProgrammes.ClearSelection();
@@ -176,12 +159,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the faculty scope list (with inactive faculties) and the form's faculty list (active only).</summary>
+        // Load faculties for the scope list and programme form
         private void UniversityLoadFaculties()
         {
             try
             {
-                // Two separate lists, so the list box and the combo do not share one selection.
+                // Use separate lists for independent selections
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 cboProgrammeFaculty.DisplayMember = "FacultyName";
                 cboProgrammeFaculty.ValueMember = "FacultyID";
@@ -200,7 +183,7 @@ namespace FuturePath.PresentationLayer
             UniversityUpdateFacultyCount();
         }
 
-        /// <summary>Fills the grid with the selected faculty's programmes, active and inactive.</summary>
+        // Load programmes belonging to the selected faculty
         private void UniversityLoadProgrammes()
         {
             dgvProgrammes.DataSource = null;
@@ -216,7 +199,7 @@ namespace FuturePath.PresentationLayer
             UniversitySelectValue(cboProgrammeFaculty, lstFaculties.SelectedValue);
             try
             {
-                // DegreeProgramme objects: ProgrammeID, FacultyID, ProgrammeName, MinimumOverallAverage, IsActive.
+                // Retrieve both active and inactive programmes
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 dgvProgrammes.DataSource = referenceDataController.GetProgrammes((int)lstFaculties.SelectedValue, true);
             }
@@ -233,7 +216,7 @@ namespace FuturePath.PresentationLayer
 
         #region Faculty group (its own amber buttons, saved at once)
 
-        /// <summary>Amber "Add faculty": adds the name typed in Faculty details as a new, active faculty.</summary>
+        // Validate and add a new faculty
         private void btnAddFaculty_Click(object sender, EventArgs e)
         {
             if (!UniversityCheckFacultyName())
@@ -245,7 +228,7 @@ namespace FuturePath.PresentationLayer
             string name = txtFacultyName.Text.Trim();
             try
             {
-                // FacultyID 0 adds a new, active faculty. The BLL checks Role = Administrator and refuses a duplicate name.
+                // Save the new active faculty
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.SaveFaculty(UserId, 0, name, true);
             }
@@ -265,7 +248,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Faculty added: " + name + ".", false);
         }
 
-        /// <summary>Amber "Rename": renames the faculty selected in the list to the name typed in Faculty details.</summary>
+        // Rename the selected faculty
         private void btnRenameFaculty_Click(object sender, EventArgs e)
         {
             if (lstFaculties.SelectedIndex < 0)
@@ -283,7 +266,7 @@ namespace FuturePath.PresentationLayer
             string name = txtFacultyName.Text.Trim();
             try
             {
-                // Renames the faculty and keeps its own IsActive. The BLL checks Role = Administrator.
+                // Keep the faculty's existing active status
                 Faculty faculty = (Faculty)lstFaculties.SelectedItem;
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.SaveFaculty(UserId, faculty.FacultyID, name, faculty.IsActive);
@@ -303,7 +286,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Faculty renamed to " + name + ".", false);
         }
 
-        /// <summary>Amber "Deactivate faculty": deactivates the selected faculty after confirmation. Nothing is deleted.</summary>
+        // Deactivate the selected faculty after confirmation
         private void btnDeactivateFaculty_Click(object sender, EventArgs e)
         {
             if (lstFaculties.SelectedIndex < 0)
@@ -328,7 +311,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Sets Faculty.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Mark the faculty as inactive without deleting it
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.DeactivateFaculty(UserId, (int)lstFaculties.SelectedValue);
             }
@@ -347,17 +330,17 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Checks the Faculty details name field. Returns true when a name was entered.</summary>
+        // Check that the faculty name is provided
         private bool UniversityCheckFacultyName()
         {
             return CheckField(txtFacultyName.Text.Trim().Length > 0, txtFacultyName, lblFacultyName, lblFacultyNameError,
                 "Enter a faculty name.");
         }
 
-        /// <summary>Leaving the faculty name: blank is fine until a faculty button is pressed, so only an earlier message is cleared.</summary>
+        // Clear an earlier validation error when leaving the faculty name
         private void txtFacultyName_Leave(object sender, EventArgs e)
         {
-            // Blank is fine until a faculty button is pressed; only clear an earlier message here.
+            // Only check non-empty names when leaving the field
             if (txtFacultyName.Text.Trim().Length > 0) UniversityCheckFacultyName();
         }
 
@@ -365,7 +348,7 @@ namespace FuturePath.PresentationLayer
 
         #region Scope list and grid
 
-        /// <summary>A faculty was chosen: copies its name into Faculty details and lists its programmes.</summary>
+        // Display the selected faculty and its programmes
         private void lstFaculties_SelectedIndexChanged(object sender, EventArgs e)
         {
             Faculty faculty = lstFaculties.SelectedItem as Faculty;
@@ -382,7 +365,7 @@ namespace FuturePath.PresentationLayer
             UniversityLoadProgrammes();
         }
 
-        /// <summary>Display formatting only: an inactive faculty stays listed with "(inactive)" after its name.</summary>
+        // Mark inactive faculties in the list
         private void lstFaculties_Format(object sender, ListControlConvertEventArgs e)
         {
             if (UniversityIsInactive(e.ListItem))
@@ -391,7 +374,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows "n faculties · m inactive" under the faculty list.</summary>
+        // Update the total and inactive faculty counts
         private void UniversityUpdateFacultyCount()
         {
             int inactive = 0;
@@ -405,7 +388,7 @@ namespace FuturePath.PresentationLayer
                 " inactive. Select one to list its programmes.";
         }
 
-        /// <summary>Shows "n programmes · m active" above the grid.</summary>
+        // Update the total and active programme counts
         private void UniversityUpdateProgrammeCount()
         {
             int active = 0;
@@ -418,10 +401,10 @@ namespace FuturePath.PresentationLayer
             lblUniProgrammeCount.Text = total + (total == 1 ? " programme" : " programmes") + " · " + active + " active";
         }
 
-        /// <summary>Copies the selected programme into the form for editing.</summary>
+        // Load the selected programme into the editing form
         private void dgvProgrammes_SelectionChanged(object sender, EventArgs e)
         {
-            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            // Ignore automatic selections when the grid is not focused
             if (!dgvProgrammes.Focused || dgvProgrammes.SelectedRows.Count == 0)
             {
                 return;
@@ -440,7 +423,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Editing the selected programme. Choose Update programme to save it, or Cancel.", false);
         }
 
-        /// <summary>Display formatting only: status chips and a dash when no minimum average is set.</summary>
+        // Format programme status and minimum average values
         private void dgvProgrammes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == colProgrammesStatus.Index && e.Value is bool)
@@ -466,7 +449,7 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation (validated again in the BLL on save)
 
-        /// <summary>Checks every programme field, shows field messages and the validation summary.</summary>
+        // Validate the programme form and display any errors
         private bool UniversityValidateForm()
         {
             var problems = new List<string>();
@@ -485,24 +468,24 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Checks that the programme's faculty is chosen.</summary>
+        // Check that a faculty is selected for the programme
         private bool UniversityCheckProgrammeFaculty()
         {
             return CheckField(cboProgrammeFaculty.SelectedIndex >= 0, cboProgrammeFaculty, lblProgrammeFaculty,
                 lblProgrammeFacultyError, "Choose the programme's faculty.");
         }
 
-        /// <summary>Checks that a programme name was entered.</summary>
+        // Check that a programme name is entered
         private bool UniversityCheckProgrammeName()
         {
             return CheckField(txtProgrammeName.Text.Trim().Length > 0, txtProgrammeName, lblProgrammeName,
                 lblProgrammeNameError, "Enter the programme name, e.g. BSc Computer Science.");
         }
 
-        /// <summary>Checks that the minimum overall average is a number from 0 to 100.</summary>
+        // Check that the minimum average is between 0 and 100
         private bool UniversityCheckMinimumAverage()
         {
-            // Read the typed text before the NumericUpDown clamps it on losing focus.
+            // Validate the typed value before the control adjusts it
             decimal average;
             bool valid = decimal.TryParse(numMinimumAverage.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out average)
                          && average >= 0m && average <= 100m;
@@ -510,7 +493,7 @@ namespace FuturePath.PresentationLayer
                 "Enter an average from 0 to 100 (two decimals at most).");
         }
 
-        /// <summary>Removes every programme field message and hides the validation summary.</summary>
+        // Clear validation messages and hide the error summary
         private void UniversityClearValidation()
         {
             CheckField(true, cboProgrammeFaculty, lblProgrammeFaculty, lblProgrammeFacultyError, null);
@@ -519,20 +502,20 @@ namespace FuturePath.PresentationLayer
             pnlUniSummary.Visible = false;
         }
 
-        /// <summary>Validates the faculty when the administrator leaves it.</summary>
+        // Validate the selected faculty when leaving the field
         private void cboProgrammeFaculty_Leave(object sender, EventArgs e) { UniversityCheckProgrammeFaculty(); }
 
-        /// <summary>Validates the programme name when the administrator leaves it.</summary>
+        // Validate the programme name when leaving the field
         private void txtProgrammeName_Leave(object sender, EventArgs e) { UniversityCheckProgrammeName(); }
 
-        /// <summary>Validates the minimum average when the administrator leaves it.</summary>
+        // Validate the minimum average when leaving the field
         private void numMinimumAverage_Leave(object sender, EventArgs e) { UniversityCheckMinimumAverage(); }
 
         #endregion
 
         #region Helpers (this screen only)
 
-        /// <summary>Empties the programme form; the faculty defaults to the one selected in the list.</summary>
+        // Reset the programme form for a new entry
         private void UniversityClearForm()
         {
             universitySelectedProgrammeId = null;
@@ -543,27 +526,27 @@ namespace FuturePath.PresentationLayer
             UniversityClearValidation();
         }
 
-        /// <summary>True when the grid row's IsActive cell is true.</summary>
+        // Check whether a programme is active
         private bool UniversityRowIsActive(DataGridViewRow row)
         {
             object value = row.Cells[colProgrammesStatus.Index].Value;
             return value is bool && (bool)value;
         }
 
-        /// <summary>True when a faculty in the list (a BLL Faculty object) is inactive.</summary>
+        // Check whether a faculty is inactive
         private static bool UniversityIsInactive(object item)
         {
             Faculty faculty = item as Faculty;
             return faculty != null && !faculty.IsActive;
         }
 
-        /// <summary>True for null, DBNull and the empty string.</summary>
+        // Check whether a stored value is empty
         private static bool UniversityIsEmpty(object value)
         {
             return value == null || value == DBNull.Value || (value is string && ((string)value).Length == 0);
         }
 
-        /// <summary>Selects a value in a bound ComboBox, or clears it when there is nothing to match.</summary>
+        // Select a dropdown value or clear its selection
         private static void UniversitySelectValue(ComboBox box, object value)
         {
             if (UniversityIsEmpty(value) || box.DataSource == null)

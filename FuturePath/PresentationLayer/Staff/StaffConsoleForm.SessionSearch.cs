@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -8,30 +9,17 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 10.2b — Advisory session tab of the Sessions dashboard (spec 2.3.10, read-only).
-    /// The advisor searches on session number, learner surname, a session date range and an
-    /// advisory outcome; none is required. On <b>Find</b>, a session number not in the form
-    /// yyyy-NNNN, or a from-date later than the to-date, turns its label and control red with a
-    /// field message. The grid lists matching sessions with the outcome read back from the stored
-    /// RecommendationResult (never recalculated). The status bar turns amber when nothing matches
-    /// and blue when results show. <b>Open advisory summary</b> and <b>Export advisory summary</b>
-    /// regenerate the FP-LSR report for the selected session.
-    /// </summary>
+    // Handles advisory session searches and summary reports
     public partial class StaffConsoleForm
     {
         private const string SessionSearchCompletedStatus = "Completed";
 
-        // Set by SessionSearchShowLearnerSessions (UI 10.1a → 10.2b); 0 = no learner filter.
-        // Cleared by Clear, or by typing a surname, which starts a search across every learner.
+        // Learner filter set when opening sessions from a learner profile
+        // A value of 0 means no learner filter is applied
         private int sessionSearchLearnerFilterId;
         private string sessionSearchLearnerFilterName;
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 10.2b appears. The first time, it prepares the
-        /// grid and binds the outcome list, then shows the search guidance.
-        /// </summary>
-        /// <param name="firstTime">True the first time the tab is shown in this console.</param>
+        // Initialise the session search screen and outcome list
         private void SessionSearchShown(bool firstTime)
         {
             if (!firstTime)
@@ -47,7 +35,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Open advisory summary: opens the FP-LSR of the selected session in the report viewer.</summary>
+        // Open the selected session's advisory summary
         private void btnSessionSearchOpen_Click(object sender, EventArgs e)
         {
             SessionSearchOpenSummary(false);
@@ -55,15 +43,10 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        /// <summary>
-        /// Lists the sessions of one learner, used when the advisor opens a learner from UI 10.1a.
-        /// The caller shows this tab first.
-        /// </summary>
-        /// <param name="learnerId">Learner.LearnerID of the learner chosen on UI 10.1a.</param>
-        /// <param name="learnerName">The learner's display name, e.g. "Labeeqah Rademeyer", named in the result count.</param>
+        // Show all advisory sessions belonging to the selected learner
         private void SessionSearchShowLearnerSessions(int learnerId, string learnerName)
         {
-            // Filter by the learner's ID only: LearnerName is "First Last", so it cannot be used as a surname.
+            // Filter using the learner ID rather than their display name
             SessionSearchClearCriteria();
             sessionSearchLearnerFilterId = learnerId;
             sessionSearchLearnerFilterName = learnerName;
@@ -72,12 +55,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the Advisory outcome list to stored data (never literal Items).</summary>
+        // Load the available advisory outcomes
         private void SessionSearchLoadLists()
         {
             try
             {
-                // The four outcomes from AdvisoryOutcome (decisions.md D15): OutcomeCode, OutcomeName.
+                // Retrieve outcome codes and names from reference data
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 cboSesOutcome.DisplayMember = "OutcomeName";
                 cboSesOutcome.ValueMember = "OutcomeCode";
@@ -90,13 +73,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Asks the BLL for matching sessions. Each row joins AdvisorySession, Learner, DegreeProgramme
-        /// and the selected RecommendationResult: SessionID, SessionStatus, SessionNumber (yyyy-NNNN,
-        /// built by the BLL), SessionDate, LearnerName, Grade, ProgrammeName, OutcomeCode (stored,
-        /// never recalculated) and IsExported (an ExportReport row exists). A blank field, a null date, an
-        /// outcome of "" and a learner ID of 0 mean "no filter". The BLL checks the role first (Section 8).
-        /// </summary>
+        // Retrieve advisory sessions matching the search criteria
         private DataTable SessionSearchFindSessions(string sessionNumber, string surname, DateTime? from, DateTime? to,
             string outcomeCode, int learnerId)
         {
@@ -104,21 +81,14 @@ namespace FuturePath.PresentationLayer
             return sessionSearchController.FindSessions(UserId, sessionNumber, surname, from, to, outcomeCode, learnerId);
         }
 
-        /// <summary>Total number of stored sessions, for the "n of N sessions match" caption.</summary>
+        // Get the total number of stored advisory sessions
         private int SessionSearchCountSessions()
         {
             SessionSearchController sessionSearchController = new SessionSearchController();
             return sessionSearchController.CountSessions(UserId);
         }
 
-        /// <summary>
-        /// Regenerates the FP-LSR Learner Advisory Summary for one session. The BLL checks the role and
-        /// refuses an incomplete session (reports.md FP-LSR "Who generates it"). An export is logged in
-        /// ExportReport by <see cref="SaveReport"/> (ReportCode "FP-LSR", SessionID set, GeneratedByUserID = UserId).
-        /// </summary>
-        /// <param name="sessionId">AdvisorySession.SessionID of the selected row.</param>
-        /// <param name="sessionNumber">The session number yyyy-NNNN, for the subtitle and the file name.</param>
-        /// <param name="filePath">Where to save the export, or null to open it in the report viewer (UI 11.1a).</param>
+        // Generate or export the learner advisory summary for a session
         private void SessionSearchGenerateLearnerSummary(int sessionId, string sessionNumber, string filePath)
         {
             ReportController reportController = new ReportController();
@@ -138,7 +108,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search and validation
 
-        /// <summary>Validates the criteria, runs the search and reports the result in the status bar.</summary>
+        // Validate the search criteria and display matching sessions
         private void SessionSearchFind()
         {
             if (!SessionSearchCheckSessionNumber())
@@ -155,13 +125,13 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            // A surname typed after opening a learner from UI 10.1a starts a search across every learner.
+            // Remove the learner filter when searching by surname
             if (txtSesSurname.Text.Trim().Length > 0)
             {
                 sessionSearchLearnerFilterId = 0;
             }
 
-            // An unticked date means "no date filter".
+            // Only apply the start date if its checkbox is selected
             DateTime? from = null;
             if (dtpSessionFrom.Checked)
             {
@@ -184,7 +154,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL validates the criteria again; its message names the field to fix.
+                // Display validation messages returned by the controller
                 ReportStatus(ex.Message, true);
                 return;
             }
@@ -211,7 +181,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Session number is optional; when given it must be yyyy-NNNN.</summary>
+        // Check that the optional session number follows yyyy-NNNN
         private bool SessionSearchCheckSessionNumber()
         {
             string text = txtSesSessionNumber.Text.Trim();
@@ -220,10 +190,7 @@ namespace FuturePath.PresentationLayer
                 "Use the form yyyy-NNNN, e.g. 2026-0417.");
         }
 
-        /// <summary>
-        /// When both dates are ticked, Session from must not be later than Session to. Both labels turn
-        /// red and share one field message (a DateTimePicker ignores BackColor, so only its label shows it).
-        /// </summary>
+        // Check that the selected date range is valid
         private bool SessionSearchCheckDateRange()
         {
             bool valid = !(dtpSessionFrom.Checked && dtpSessionTo.Checked && dtpSessionFrom.Value.Date > dtpSessionTo.Value.Date);
@@ -232,19 +199,19 @@ namespace FuturePath.PresentationLayer
             return CheckField(valid, dtpSessionTo, lblSessionTo, lblSesDateRangeError, message);
         }
 
-        /// <summary>Checks the session number as soon as the field is left.</summary>
+        // Validate the session number when leaving its field
         private void txtSesSessionNumber_Leave(object sender, EventArgs e)
         {
             SessionSearchCheckSessionNumber();
         }
 
-        /// <summary>Find validates the criteria and runs the session search.</summary>
+        // Run the session search
         private void btnSesFind_Click(object sender, EventArgs e)
         {
             SessionSearchFind();
         }
 
-        /// <summary>Clears every criterion, any field message and the result list.</summary>
+        // Clear the session search criteria
         private void btnSesClear_Click(object sender, EventArgs e)
         {
             SessionSearchClearCriteria();
@@ -252,7 +219,7 @@ namespace FuturePath.PresentationLayer
             txtSesSessionNumber.Focus();
         }
 
-        /// <summary>Returns every criterion, the learner filter, the field messages and the grid to their empty state.</summary>
+        // Reset filters, validation messages and search results
         private void SessionSearchClearCriteria()
         {
             txtSesSessionNumber.Clear();
@@ -274,13 +241,13 @@ namespace FuturePath.PresentationLayer
 
         #region Advisory summary (FP-LSR)
 
-        /// <summary>Export advisory summary: confirms, asks where to save, then exports the FP-LSR.</summary>
+        // Export the selected session's advisory summary
         private void btnExportSummary_Click(object sender, EventArgs e)
         {
             SessionSearchOpenSummary(true);
         }
 
-        /// <summary>Double-clicking a session is the same as Open advisory summary.</summary>
+        // Open the advisory summary when a session is double-clicked
         private void dgvSessions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -289,12 +256,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Opens (preview) or exports (PDF or Word, after confirmation) the FP-LSR of the selected
-        /// session. A row must be selected, and the session must be completed: an in-progress session
-        /// is refused with a status message.
-        /// </summary>
-        /// <param name="export">True to export to a file; false to open the preview.</param>
+        // Preview or export the selected completed session's summary
         private void SessionSearchOpenSummary(bool export)
         {
             if (dgvSessions.CurrentRow == null)
@@ -367,7 +329,7 @@ namespace FuturePath.PresentationLayer
 
         #region Grid display (formatting only — the outcome is read back, never recalculated)
 
-        /// <summary>Formats dates as dd/MM/yyyy, Exported as Yes/No and the outcome as marker + words.</summary>
+        // Format session dates, export status and advisory outcomes
         private void dgvSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value == null || e.Value == DBNull.Value)
@@ -392,10 +354,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Paints the outcome as a chip: tinted box, coloured border and marker + words, so the
-        /// outcome is never shown by colour alone and never in red (spec 2.2.6).
-        /// </summary>
+        // Draw a coloured outcome label with text and a border
         private void dgvSessions_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != colSessionsOutcome.Index || e.Value == null || e.Value == DBNull.Value)
@@ -421,7 +380,7 @@ namespace FuturePath.PresentationLayer
             e.Handled = true;
         }
 
-        /// <summary>Display settings for one outcome chip on UI 10.2b.</summary>
+        // Stores the text and colours used for an outcome label
         private struct SessionSearchChip
         {
             public string Text;
@@ -430,11 +389,7 @@ namespace FuturePath.PresentationLayer
             public Color Border;
         }
 
-        /// <summary>
-        /// Maps a stored outcome (code or name) to its marker, words and colours. Display only:
-        /// Strong ✓ green · Possible ! amber · Not currently eligible ✗ dark amber (an unmet requirement is
-        /// amber, never red — decisions.md §2) · More information ? blue. Matches UI 6 and UI 6.1a.
-        /// </summary>
+        // Select the text and colours for a stored advisory outcome
         private static SessionSearchChip SessionSearchOutcomeChip(string outcome)
         {
             string key = (outcome ?? string.Empty).Trim().ToUpperInvariant();
