@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,26 +7,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// The staff console: every screen a Career Advisor or Administrator reaches after UI 8 Staff login —
-    /// UI 9 Advisor dashboard, UI 12 Administrator dashboard, UI 10 Sessions (10.1a / 10.2b / 10.3c),
-    /// UI 13 Reference data (13.1–13.6), UI 11 Reports and the report viewer (UI 11.1a / 11.2b / 11.3c).
-    /// Each screen is a TabPage of <c>tcConsole</c>, whose tab headers are visible; Sessions and Reference
-    /// data hold their screens in the nested <c>tcSessions</c> and <c>tcReference</c> tab controls.
-    /// Each tab has its own row of buttons, with one <c>btnX_Click</c> handler per button in that screen's
-    /// file. The menu bar offers Sign out and Exit, and the status bar shows the latest message with the
-    /// signed-in user on the right. The window is about 990 × 800 (decisions.md D6).
-    /// <para>
-    /// Role-based security (spec Section 8, decisions.md D11): the constructor removes every page the
-    /// signed-in role may not reach, so Administrator-only screens are never rendered for a Career Advisor.
-    /// The Business Logic Layer checks the role again inside every method that changes data.
-    /// </para>
-    /// <para>
-    /// This file holds the shared parts (palette, tab navigation, status bar, menu, sign out, closing).
-    /// Each screen's controls and code live in a partial-class file named after it
-    /// (StaffConsoleForm.Reports.cs, StaffConsoleForm.Requirements.cs, …).
-    /// </para>
-    /// </summary>
+    // Main window for staff dashboards, sessions, reports and reference data
+    // Handles role-based access, navigation and shared UI behaviour
     public partial class StaffConsoleForm : Form
     {
         #region Palette (spec 2.2.6) — runtime colours and fonts; everything else is set in the Designer
@@ -53,11 +36,7 @@ namespace FuturePath.PresentationLayer
         private readonly HashSet<TabPage> shownPages = new HashSet<TabPage>();
         private bool navigating;
 
-        /// <summary>Opens the console for the staff member returned by the login controller.</summary>
-        /// <param name="mainForm">The main window (UI 1), shown again on sign out.</param>
-        /// <param name="userId">UserAccount.UserID.</param>
-        /// <param name="fullName">UserAccount.FullName.</param>
-        /// <param name="role">UserAccount.Role: "Administrator" or "Career Advisor".</param>
+        // Initialise the staff console with the signed-in user's details
         public StaffConsoleForm(Form mainForm, int userId, string fullName, string role)
         {
             InitializeComponent();
@@ -72,30 +51,28 @@ namespace FuturePath.PresentationLayer
             numRelevanceWeight.KeyPress += DecimalBox_KeyPress;
             ApplyRole();
             OpenDashboard();
-            PageShown(CurrentPage);   // no selection event fires before the window exists, so show the first page here
+            PageShown(CurrentPage);   // Show the initial page before tab events begin
         }
 
         #region The signed-in staff member
 
-        /// <summary>UserAccount.UserID — passed to every BLL call so the BLL can check the role itself.</summary>
+        // ID of the signed-in staff member
         private int UserId { get; set; }
 
-        /// <summary>UserAccount.FullName, shown in the status bar.</summary>
+        // Staff member's name displayed in the status bar
         private string FullName { get; set; }
 
-        /// <summary>UserAccount.Role.</summary>
+        // Role of the signed-in staff member
         private string Role { get; set; }
 
-        /// <summary>True when an Administrator is signed in.</summary>
+        // Check whether the signed-in user is an administrator
         private bool IsAdministrator
         {
             get { return Role == UserAccount.RoleAdministratorText; }
         }
 
-        /// <summary>
-        /// Removes the pages this role may not reach (decisions.md D11) and shows who is signed in:
-        /// Career Advisors get UI 9, 10 and 11; Administrators get UI 12, 10, 13 and 11.
-        /// </summary>
+        // Remove pages that the signed-in role is not allowed to access
+        // Display the staff member's name and role
         private void ApplyRole()
         {
             if (IsAdministrator)
@@ -115,7 +92,7 @@ namespace FuturePath.PresentationLayer
 
         #region Tab navigation
 
-        /// <summary>The screen on show (the selected sub-tab when Sessions or Reference data is selected).</summary>
+        // Get the current screen, including nested session and reference tabs
         private TabPage CurrentPage
         {
             get
@@ -127,30 +104,27 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>True for the three Sessions sub-tabs (10.1a, 10.2b, 10.3c).</summary>
+        // Check whether a page belongs to the Sessions section
         private bool IsSessionsPage(TabPage page)
         {
             return page == tabLearnerSearch || page == tabSessionSearch || page == tabReportShortcuts;
         }
 
-        /// <summary>True for the six Reference data sub-tabs (13.1–13.6).</summary>
+        // Check whether a page belongs to the Reference Data section
         private bool IsReferencePage(TabPage page)
         {
             return page == tabUniversity || page == tabRequirements || page == tabFundingAdmin
                    || page == tabCategories || page == tabQuestionnaire || page == tabAccounts;
         }
 
-        /// <summary>Opens the signed-in role's dashboard: UI 12 for Administrators, UI 9 for Career Advisors.</summary>
+        // Open the dashboard for the signed-in user's role
         private void OpenDashboard()
         {
             tcConsole.SelectedTab = IsAdministrator ? tabAdminDashboard : tabAdvisorDashboard;
         }
 
-        /// <summary>
-        /// Selects a screen from code. A Sessions or Reference sub-tab is selected first, then its parent tab
-        /// (selecting tabSessions or tabReference itself keeps the sub-tab used last). A page removed for this
-        /// role (<see cref="ApplyRole"/>) is never selected.
-        /// </summary>
+        // Navigate to a page or a nested Sessions or Reference Data tab
+        // Ignore pages that are unavailable to the signed-in role
         private void SelectPage(TabPage page)
         {
             TabPage parent = IsSessionsPage(page) ? tabSessions : IsReferencePage(page) ? tabReference : page;
@@ -164,14 +138,14 @@ namespace FuturePath.PresentationLayer
             tcConsole.SelectedTab = parent;
         }
 
-        /// <summary>UI 10.3c "Generate report" → UI 11, already filtered (spec 2.1).</summary>
+        // Open the Reports screen with the selected filters applied
         private void OpenReports(string reportCode, DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcome)
         {
             tcConsole.SelectedTab = tabReports;
             ReportsApplyFilter(reportCode, from, to, facultyId, gradeLevelId, outcome);
         }
 
-        /// <summary>The Report viewer tab is refused until a report has been opened from Reports or Sessions.</summary>
+        // Prevent opening the report viewer before a report has been selected
         private void tcConsole_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage == tabReportViewer && viewerData == null)
@@ -181,13 +155,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>A new top-level tab is on show.</summary>
+        // Refresh the screen when the main tab changes
         private void tcConsole_SelectedIndexChanged(object sender, EventArgs e)
         {
             PageShown(CurrentPage);
         }
 
-        /// <summary>A new Sessions sub-tab (10.1a / 10.2b / 10.3c) is on show.</summary>
+        // Refresh the selected Sessions sub-tab when it is visible
         private void tcSessions_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcConsole.SelectedTab == tabSessions)
@@ -196,7 +170,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>A new Reference data sub-tab (13.1–13.6) is on show.</summary>
+        // Refresh the selected Reference Data sub-tab when it is visible
         private void tcReference_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcConsole.SelectedTab == tabReference)
@@ -205,10 +179,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Runs each time a screen comes into view: sets the caption, the status bar and the page's Enter / Esc
-        /// buttons, then lets the screen refresh through its <c>…Shown(firstTime)</c> method.
-        /// </summary>
+        // Update the window title, status bar and buttons for the selected screen
+        // Refresh the screen and track whether it has been opened before
         private void PageShown(TabPage page)
         {
             if (page == null)
@@ -219,7 +191,7 @@ namespace FuturePath.PresentationLayer
             Text = "Future Path — " + page.Text;
             SetStatus(IsReferencePage(page) ? ReferenceNote : "Ready", DeepNavy, Color.White);
 
-            // Enter and Esc run this page's own buttons (the dashboards have none).
+            // Set the Enter and Escape buttons for the current page
             if (page == tabLearnerSearch) SetPageButtons(btnLearnerSearchOpen, null);
             else if (page == tabSessionSearch) SetPageButtons(btnSessionSearchOpen, null);
             else if (page == tabReportShortcuts) SetPageButtons(btnReportShortcutsGenerate, null);
@@ -249,7 +221,7 @@ namespace FuturePath.PresentationLayer
             else if (page == tabAccounts) AccountsShown(firstTime);
         }
 
-        /// <summary>Sets the buttons that Enter (accept) and Esc (cancel) press; null for none.</summary>
+        // Set the buttons triggered by Enter and Escape
         private void SetPageButtons(Button accept, Button cancel)
         {
             AcceptButton = accept;
@@ -260,19 +232,19 @@ namespace FuturePath.PresentationLayer
 
         #region Menu
 
-        /// <summary>Sign out: asks for confirmation, then returns to UI 1.</summary>
+        // Sign out and return to the homepage
         private void mnuSignOut_Click(object sender, EventArgs e)
         {
             SignOut();
         }
 
-        /// <summary>Exit: closes Future Path (the closing confirmation still asks first).</summary>
+        // Close the application from the menu
         private void mnuExit_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        /// <summary>Asks for confirmation, then closes the console and returns to UI 1.</summary>
+        // Confirm sign out before closing the console
         private void SignOut()
         {
             if (!Confirm("Sign out", "Sign out of Future Path and return to the homepage?", "Sign out"))
@@ -289,7 +261,7 @@ namespace FuturePath.PresentationLayer
 
         #region Shared helpers (used by every screen's partial file)
 
-        /// <summary>Shows a message in the status bar (never a modal; spec 2.2.7).</summary>
+        // Display a message in the status bar
         private void SetStatus(string message, Color back, Color fore)
         {
             pnlStatus.BackColor = back;
@@ -298,10 +270,8 @@ namespace FuturePath.PresentationLayer
             lblStatus.Text = message;
         }
 
-        /// <summary>
-        /// A screen's status message: amber with ink text when <paramref name="isWarning"/> (nothing matched,
-        /// something outstanding), blue with white text otherwise. UI 13 screens add the reference-data note.
-        /// </summary>
+        // Show a status message with warning or normal colours
+        // Add the reference-data note when appropriate
         private void ReportStatus(string message, bool isWarning)
         {
             if (IsReferencePage(CurrentPage) && message.IndexOf(ReferenceNote, StringComparison.OrdinalIgnoreCase) < 0)
@@ -312,10 +282,7 @@ namespace FuturePath.PresentationLayer
             SetStatus(message, isWarning ? AmberColour : BlueColour, isWarning ? InkColour : Color.White);
         }
 
-        /// <summary>
-        /// Shows or clears a field message (spec 2.2.7): red text with a warning glyph under the control,
-        /// a red tint on the control and a red label. Returns <paramref name="valid"/>.
-        /// </summary>
+        // Highlight invalid input fields and display their validation messages
         private static bool CheckField(bool valid, Control input, Label fieldLabel, Label messageLabel, string message)
         {
             input.BackColor = valid ? SystemColors.Window : RedTint;
@@ -326,15 +293,7 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>
-        /// Shows a UI 13 form's validation summary — "⚠ n entries to correct: A, B." — with the matching
-        /// status message, then moves focus to the first invalid control.
-        /// </summary>
-        /// <param name="summaryPanel">The form's red summary panel.</param>
-        /// <param name="summaryLabel">The label inside it.</param>
-        /// <param name="fields">The names of the fields to correct, in screen order.</param>
-        /// <param name="firstInvalid">The first control to correct (receives the focus).</param>
-        /// <param name="savedItem">What cannot be saved yet, e.g. "the programme".</param>
+        // Display a summary of validation errors and focus on the first invalid field
         private void ShowFormSummary(Panel summaryPanel, Label summaryLabel, List<string> fields, Control firstInvalid, string savedItem)
         {
             string count = fields.Count + (fields.Count == 1 ? " entry" : " entries");
@@ -347,7 +306,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows an IsActive cell as a status chip (13.1–13.6): "✓ Active" in green or "Inactive" in grey.</summary>
+        // Format active and inactive records as coloured status labels
         private static void FormatStatusChip(DataGridViewCellFormattingEventArgs e, bool active)
         {
             e.Value = active ? "✓ Active" : "Inactive";
@@ -359,11 +318,8 @@ namespace FuturePath.PresentationLayer
             e.FormattingApplied = true;
         }
 
-        /// <summary>
-        /// Lets a decimal box accept either "." or "," as the decimal point. A NumericUpDown only accepts the
-        /// separator of the Windows regional setting (a comma on many South African machines), so "67.5"
-        /// would otherwise be refused; the typed key is swapped for the regional separator before the box sees it.
-        /// </summary>
+        // Accept either a dot or comma as a decimal separator
+        // Use the separator required by the current Windows region
         private void DecimalBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.' || e.KeyChar == ',')
@@ -372,10 +328,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// The ID chosen in a bound list, or 0 when nothing is chosen. 0 means "all" or "none" to every
-        /// BLL method (application-layer.md §3), so a blank filter is passed straight through.
-        /// </summary>
+        // Get the selected ID from a dropdown or return 0 if none is selected
         private static int SelectedId(ComboBox list)
         {
             if (list.SelectedIndex < 0 || !(list.SelectedValue is int))
@@ -386,7 +339,7 @@ namespace FuturePath.PresentationLayer
             return (int)list.SelectedValue;
         }
 
-        /// <summary>The code chosen in a bound list (e.g. an OutcomeCode), or "" when nothing is chosen ("all").</summary>
+        // Get the selected code from a dropdown or return an empty string
         private static string SelectedCode(ComboBox list)
         {
             if (list.SelectedIndex < 0 || list.SelectedValue == null)
@@ -397,7 +350,7 @@ namespace FuturePath.PresentationLayer
             return Convert.ToString(list.SelectedValue, System.Globalization.CultureInfo.InvariantCulture);
         }
 
-        /// <summary>Asks for confirmation (spec Section 7). Returns true when the user confirms.</summary>
+        // Show a confirmation dialog and return whether the user confirmed
         private bool Confirm(string title, string message, string confirmText)
         {
             using (var dialog = new ConfirmationDialog(title, message, confirmText))
@@ -406,7 +359,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Raises the validation dialog, then returns focus to the first offending control.</summary>
+        // Display validation errors and return focus to the invalid control
         private void ShowValidation(string title, IList<string> lines, Control focus)
         {
             using (var dialog = new ValidationDialog(title, lines))
@@ -424,7 +377,7 @@ namespace FuturePath.PresentationLayer
 
         #region Closing
 
-        /// <summary>The caption-bar X and Exit close Future Path, so they ask first (not when signing out).</summary>
+        // Confirm before closing the staff console, except when signing out
         private void StaffConsoleForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing || navigating || mainForm.Visible)
@@ -438,7 +391,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Ends the application when the console was closed with the caption-bar X or Exit.</summary>
+        // Exit the application when the console is closed without signing out
         private void StaffConsoleForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (!navigating && !mainForm.Visible)

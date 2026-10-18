@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,18 +7,11 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 8 — Staff Login, with UI 8.1a Invalid Login (spec 2.3.1). The single gate into the staff
-    /// area: only Career Advisors and System Administrators hold accounts, learners never log in.
-    /// The user enters a Username and a masked Password (both required). A blank or unrecognised
-    /// entry turns the offending labels and text boxes red, the guidance panel turns from blue to a
-    /// red message naming the fix, and the Invalid Login dialog is raised. For an unrecognised entry
-    /// the screen never says whether the username or the password was wrong. A recognised account is
-    /// routed by <c>UserAccount.RoleName</c> to UI 9 (Career Advisor) or UI 12 (Administrator).
-    /// </summary>
+    // Handles staff login for Career Advisors and System Administrators
+    // Validates credentials and opens the dashboard for the signed-in role
     public partial class StaffLoginForm : Form
     {
-        // Colours used at runtime (spec 2.2.6). Everything else is set in the Designer.
+        // Colours used for validation messages and guidance
         private static readonly Color InkColour = Color.FromArgb(27, 31, 36);
         private static readonly Color RedColour = Color.FromArgb(164, 38, 44);
         private static readonly Color RedTint = Color.FromArgb(250, 234, 235);
@@ -33,8 +27,7 @@ namespace FuturePath.PresentationLayer
         private readonly Form homeForm;
         private bool navigating;
 
-        /// <summary>Creates the staff login screen.</summary>
-        /// <param name="homeForm">UI 1, shown again on Cancel.</param>
+        // Initialise the login screen and display the initial guidance
         public StaffLoginForm(Form homeForm)
         {
             InitializeComponent();
@@ -45,12 +38,8 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hook
 
-        /// <summary>
-        /// Asks the BLL to check the credentials. LoginController looks up <c>UserAccount</c> by username,
-        /// checks the salted SHA-256 password hash (never plaintext, decisions.md D22) and <c>IsActive</c>.
-        /// It says nothing about which part failed, so this screen cannot leak it.
-        /// </summary>
-        /// <returns>The signed-in account, or null when the credentials are not recognised.</returns>
+        // Authenticate staff credentials through the login controller
+        // Return the account if valid, otherwise null
         private UserAccount Authenticate(string username, string password)
         {
             LoginController loginController = new LoginController();
@@ -61,24 +50,21 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation
 
-        /// <summary>A blank username is named, because the user can already see it is blank.</summary>
+        // Check whether a username has been entered
         private bool CheckUsername()
         {
             return CheckField(txtUsername.Text.Trim().Length > 0, txtUsername, lblUsername, lblUsernameError,
                 "Username: enter your staff username.");
         }
 
-        /// <summary>A blank password is named, because the user can already see it is blank.</summary>
+        // Check whether a password has been entered
         private bool CheckPassword()
         {
             return CheckField(txtPassword.Text.Length > 0, txtPassword, lblPassword, lblPasswordError,
                 "Password: enter your password.");
         }
 
-        /// <summary>
-        /// Shows or clears a field message (spec 2.2.7): red text with a warning glyph under the
-        /// control, a red tint on the control and a red label.
-        /// </summary>
+        // Highlight invalid fields and display their validation messages
         private static bool CheckField(bool valid, Control input, Label fieldLabel, Label messageLabel, string message)
         {
             input.BackColor = valid ? SystemColors.Window : RedTint;
@@ -89,7 +75,7 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>Clears a red field once the user has typed something into it.</summary>
+        // Clear the username error once a value has been entered
         private void txtUsername_Leave(object sender, EventArgs e)
         {
             if (txtUsername.Text.Trim().Length > 0)
@@ -98,7 +84,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Clears a red field once the user has typed something into it.</summary>
+        // Clear the password error once a value has been entered
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             if (txtPassword.Text.Length > 0)
@@ -138,10 +124,8 @@ namespace FuturePath.PresentationLayer
 
         #region Buttons and navigation
 
-        /// <summary>
-        /// Log in → validate that both fields are filled, authenticate through the BLL, then open
-        /// the dashboard for the account's role. Any failure raises UI 8.1a and clears the password.
-        /// </summary>
+        // Validate login details and authenticate the staff member
+        // Open the correct dashboard or display validation errors
         private void btnLogin_Click(object sender, EventArgs e)
         {
             bool usernameGiven = CheckUsername();
@@ -170,7 +154,7 @@ namespace FuturePath.PresentationLayer
 
             if (account == null)
             {
-                // Unrecognised: both fields turn red and nothing says which one was wrong.
+                // Do not reveal whether the username or password was incorrect
                 const string message = "Username or password not recognised: check both and try again.";
                 CheckField(false, txtUsername, lblUsername, lblUsernameError, message);
                 CheckField(false, txtPassword, lblPassword, lblPasswordError, "Re-enter your password.");
@@ -181,8 +165,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            // One console for both roles: it removes the pages this role may not reach (decisions.md D11)
-            // and opens on the role's own dashboard (UI 9 or UI 12).
+            // Open the staff console with access based on the account's role
             StaffConsoleForm console = new StaffConsoleForm(homeForm, account.UserID, account.FullName, account.RoleName);
             txtPassword.Clear();
             console.Show();
@@ -190,7 +173,7 @@ namespace FuturePath.PresentationLayer
             Close();
         }
 
-        /// <summary>Shows UI 8.1a Invalid Login, clears the password and returns focus.</summary>
+        // Display the invalid login dialog and return focus to the input field
         private void RejectLogin(string panelMessage, IList<string> dialogLines, Control focusTarget)
         {
             txtPassword.Clear();
@@ -204,14 +187,14 @@ namespace FuturePath.PresentationLayer
             focusTarget.Focus();
         }
 
-        /// <summary>Forgot password only explains the process: nothing is reset from this screen.</summary>
+        // Explain that password resets must be handled by an Administrator
         private void lnkForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SetStatus("Passwords are reset by a System Administrator on UI 13.6 User accounts. Ask an Administrator " +
                       "to reset yours.", BlueColour);
         }
 
-        /// <summary>Cancel returns to the homepage without logging in.</summary>
+        // Cancel login and return to the homepage
         private void btnCancel_Click(object sender, EventArgs e)
         {
             txtPassword.Clear();
@@ -224,7 +207,7 @@ namespace FuturePath.PresentationLayer
 
         #region Closing
 
-        /// <summary>The caption-bar X asks first, because it closes Future Path.</summary>
+        // Ask for confirmation before closing the application from the login screen
         private void StaffLoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing || navigating || homeForm.Visible)
@@ -241,7 +224,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Ends the application when this screen was closed with the caption-bar X.</summary>
+        // Exit the application when the login screen is closed directly
         private void StaffLoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (!navigating && !homeForm.Visible)
