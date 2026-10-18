@@ -1,3 +1,4 @@
+
 using System;
 using System.Data;
 using System.Drawing;
@@ -7,34 +8,23 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 6 — Eligibility Results (step 5 of 6; spec 2.3.6). The outcome screen for Sequence 1
-    /// (class diagram: EligibilityCheckView.displayOutcome). Nothing is entered here.
-    /// The outcome band carries a status chip (marker + words) and always states <b>why</b> the
-    /// outcome was reached. Green marks a requirement met, amber a gap or "not currently
-    /// eligible", grey-blue "more information needed" — red is never used for an outcome
-    /// (decisions.md §2). Back, Funding options and Alternative programmes leave the
-    /// stored outcome unchanged, and Continue to summary carries it through to UI 7.
-    /// </summary>
+    // Displays the learner's eligibility results and requirement checks
     public partial class MainForm
     {
-        /// <summary>Grey-blue used for "More information needed" (never red; decisions.md §2).</summary>
+        // Colour used when more information is needed
         private static readonly Color OutcomeGreyBlue = Color.FromArgb(91, 107, 130);
 
         private const string OutcomeReadyStatus =
             "Step 5 of 6 · Preliminary guidance only. Continue to the summary, or look at alternatives and funding first.";
 
-        // The AdvisoryOutcome last displayed, kept so the band can be redrawn whenever UI 6 is shown.
+        // Store the current outcome so it can be shown again
         private string outcomeCode;
         private string outcomeExplanation;
         private decimal? outcomeScore;
 
         #region Shown, button clicks and reset
 
-        /// <summary>
-        /// Called by PageShown each time UI 6 appears: redraws the outcome band for the checked
-        /// programme, shows the ready status and reloads the requirement check.
-        /// </summary>
+        // Refresh the outcome and requirement checks when the page opens
         private void OutcomeShown()
         {
             SetStatus(OutcomeReadyStatus, DeepNavy, Color.White);
@@ -42,35 +32,31 @@ namespace FuturePath.PresentationLayer
             OutcomeLoadCheckedRequirements();
         }
 
-        /// <summary>Continue to summary → UI 7, carrying the outcome through.</summary>
+        // Continue to the advisory summary
         private void btnOutcomeSummary_Click(object sender, EventArgs e)
         {
             OpenSummary(tabOutcome);
         }
 
-        /// <summary>Alternative programmes → UI 6.1a (Sequence 2 runs when the tab is shown).</summary>
+        // Open the alternative programmes screen
         private void btnOutcomeAlternatives_Click(object sender, EventArgs e)
         {
             tcResults.SelectedTab = tabAlternatives;
         }
 
-        /// <summary>Funding options → UI 6.2b, the learner's yes/no choice to view funding (spec Section 7).</summary>
+        // Open the funding options screen
         private void btnOutcomeFunding_Click(object sender, EventArgs e)
         {
             tcResults.SelectedTab = tabFunding;
         }
 
-        /// <summary>Back → UI 5, where another programme can be checked.</summary>
+        // Return to programme selection
         private void btnOutcomeBack_Click(object sender, EventArgs e)
         {
             tcMain.SelectedTab = tabFaculty;
         }
 
-        /// <summary>
-        /// Returns UI 6 to a brand-new state for the next learner (spec 2.1): no stored outcome (the band
-        /// shows "More information needed"), an empty requirement check, and blank figure tiles with
-        /// their original notes.
-        /// </summary>
+        // Clear eligibility results for a new learner session
         private void OutcomeReset()
         {
             outcomeCode = null;
@@ -78,7 +64,7 @@ namespace FuturePath.PresentationLayer
             outcomeScore = null;
             OutcomeRender();
 
-            dgvChecked.AutoGenerateColumns = false;   // bind to the Designer columns only (colCheckedOutcome, colCheckedIsMet, …)
+            dgvChecked.AutoGenerateColumns = false;   // Use the existing Designer columns
             dgvChecked.DataSource = null;
             OutcomeShowFigures(null, null, null);
             lblSubjectTileNote.Text = "required subjects present";
@@ -90,16 +76,7 @@ namespace FuturePath.PresentationLayer
 
         #region Displaying the outcome (class diagram: displayOutcome)
 
-        /// <summary>
-        /// Shows an AdvisoryOutcome: fills the UI 6 outcome band, its status chip and the Overall score
-        /// tile, and tells UI 6.1a (Alternative programmes) what the outcome was. Called by Sequence 1
-        /// (EligibilityController.CheckEligibility, from UI 5) and by Sequence 2 when alternatives cannot
-        /// be ranked ("More Information Needed", from UI 6.1a). An empty code means the check could
-        /// not be completed, and the "More information needed" wording is shown.
-        /// </summary>
-        /// <param name="code">AdvisoryOutcome.Code: STRONG, POSSIBLE, NCE or MOREINFO (RecommendationResult.OutcomeCode).</param>
-        /// <param name="explanation">AdvisoryOutcome.explanation (RecommendationResult.OutcomeReason).</param>
-        /// <param name="overallScore">AdvisoryOutcome.overallScore (0–100), or null when not calculated.</param>
+        // Store and display the eligibility outcome
         public void DisplayOutcome(string code, string explanation, decimal? overallScore)
         {
             outcomeCode = code;
@@ -109,10 +86,7 @@ namespace FuturePath.PresentationLayer
             AlternativesShowOutcome(code, explanation);
         }
 
-        /// <summary>
-        /// Draws the outcome band and the Overall score tile from the stored outcome, naming the
-        /// programme that was checked (SelectedProgrammeName).
-        /// </summary>
+        // Update the outcome banner, explanation and overall score
         private void OutcomeRender()
         {
             string programme = SelectedProgrammeName;
@@ -130,7 +104,7 @@ namespace FuturePath.PresentationLayer
             string chip, headline, fallback;
             Color back, bar, chipBack, chipFore;
 
-            // The stored codes come from AdvisoryOutcome (decisions.md D15), so they are never typed here.
+            // Set the display based on the stored outcome code
             switch (code)
             {
                 case AdvisoryOutcome.CodeStrong:
@@ -179,10 +153,7 @@ namespace FuturePath.PresentationLayer
             lblOverallTileValue.Text = OutcomeFormatFigure(outcomeScore);
         }
 
-        /// <summary>
-        /// Shows the three component figures on their running-figure tiles (display only; the
-        /// figures and notes come from the stored RecommendationResult row).
-        /// </summary>
+        // Display the subject, mark and interest scores
         private void OutcomeShowFigures(decimal? subjectScore, decimal? markScore, decimal? interestScore)
         {
             lblSubjectTileValue.Text = OutcomeFormatFigure(subjectScore);
@@ -190,7 +161,7 @@ namespace FuturePath.PresentationLayer
             lblInterestTileValue.Text = OutcomeFormatFigure(interestScore);
         }
 
-        /// <summary>A whole-number figure for a tile, or a dash when there is none.</summary>
+        // Format a score as a whole number or a dash if missing
         private static string OutcomeFormatFigure(decimal? value)
         {
             if (!value.HasValue)
@@ -201,7 +172,7 @@ namespace FuturePath.PresentationLayer
             return value.Value.ToString("0", CultureInfo.CurrentCulture);
         }
 
-        /// <summary>A score column of the stored result row, or null when it is DBNull (not calculated).</summary>
+        // Read a stored score or return null when unavailable
         private static decimal? OutcomeReadScore(DataRow row, string column)
         {
             if (row[column] == DBNull.Value)
@@ -212,10 +183,7 @@ namespace FuturePath.PresentationLayer
             return (decimal)row[column];
         }
 
-        /// <summary>
-        /// Colours and marks the Outcome column: green with ✓ for a requirement met, amber text
-        /// with ! for a gap. Words are always shown, so colour is never the only signal.
-        /// </summary>
+        // Format requirement results as met or not met
         private void dgvChecked_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != colCheckedOutcome.Index || e.Value == null)
@@ -231,10 +199,7 @@ namespace FuturePath.PresentationLayer
             e.FormattingApplied = true;
         }
 
-        /// <summary>
-        /// Clears the default first-row highlight after binding, so the blue selection never hides
-        /// a coloured cell or suggests a choice the learner did not make.
-        /// </summary>
+        // Clear automatic grid selections after loading data
         private void OutGrid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ((DataGridView)sender).ClearSelection();
@@ -244,10 +209,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>
-        /// Loads the requirement-by-requirement check and the component scores for the selected
-        /// programme from the stored RecommendationResult (written by Sequence 1).
-        /// </summary>
+        // Load saved requirement checks and component scores
         private void OutcomeLoadCheckedRequirements()
         {
             if (!SessionId.HasValue || !SelectedProgrammeId.HasValue)
@@ -257,11 +219,11 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // One RequirementCheck per active requirement (SubjectName, MinimumMark, Mark, RequirementOutcome, IsMet).
+                // Retrieve the requirement checks for the selected programme
                 EligibilityController eligibilityController = new EligibilityController();
                 dgvChecked.DataSource = eligibilityController.GetCheckedRequirements(SessionId.Value, SelectedProgrammeId.Value);
 
-                // The stored selected result: one row, or none if no check is on record.
+                // Read the saved scores and notes for the selected result
                 DataTable result = eligibilityController.GetSelectedResult(SessionId.Value);
                 if (result.Rows.Count > 0)
                 {

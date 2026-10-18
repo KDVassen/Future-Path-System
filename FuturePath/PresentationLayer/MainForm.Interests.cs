@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,63 +10,50 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 4 — Interest Questionnaire (step 3 of 6; spec 2.3.4).
-    /// One five-point RadioButton group per active <c>InterestQuestion</c>, in <c>DisplayOrder</c>, with the
-    /// <c>InterestCategory</c> name under each statement. The rows are built at runtime from the bound
-    /// question list, each in its own panel so its five radio buttons form one group. Nothing is typed,
-    /// so nothing can be invalid: unanswered statements are shaded amber and counted in the amber notice,
-    /// and <b>Save and continue</b> stays disabled until every statement is answered.
-    /// Red never appears on this screen and there is no validation dialog.
-    /// </summary>
+    // Handles the learner interest questionnaire and category scores
     public partial class MainForm
     {
-        // Fonts and sizes of the statement rows built at runtime (spec 2.2.5: body 10 pt, caption 8 pt).
+        // Fonts and sizes used for questionnaire rows
         private static readonly Font InterestsStatementFont = new Font("Segoe UI", 10F);
         private static readonly Font InterestsCategoryFont = new Font("Segoe UI", 8F);
         private const int InterestsRowHeight = 36;   // at 100% scaling
 
-        /// <summary>Captions of the 1–5 scale, used for the radio buttons' accessible names.</summary>
+        // Labels for the five response options
         private static readonly string[] InterestsResponseCaptions = { "Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree" };
 
         private const string InterestsStepStatus = "Step 3 of 6 · Choose one response for every statement.";
 
-        /// <summary>One entry per statement row, in display order.</summary>
+        // Stores the questionnaire rows in display order
         private readonly List<InterestQuestionRow> interestsRows = new List<InterestQuestionRow>();
 
-        /// <summary>True once the questions have been loaded and the rows built for this session.</summary>
+        // Tracks whether questions have been loaded for this session
         private bool interestsLoaded;
 
         #region Statement rows
 
-        /// <summary>The controls and answer of one statement row.</summary>
+        // Stores the controls and response for a questionnaire statement
         private sealed class InterestQuestionRow
         {
-            /// <summary>InterestQuestion.QuestionID.</summary>
+            // ID of the question
             public int QuestionId { get; set; }
 
-            /// <summary>InterestCategory.CategoryName shown under the statement.</summary>
+            // Category shown below the statement
             public string CategoryName { get; set; }
 
-            /// <summary>Position in display order, from 0 (used for banding).</summary>
+            // Position of the statement in the list
             public int Index { get; set; }
 
-            /// <summary>The row container; it groups the five radio buttons.</summary>
+            // Panel containing the statement and radio buttons
             public Panel Container { get; set; }
 
-            /// <summary>The caption under the statement (category, and "Not yet answered").</summary>
+            // Label showing the category and answer status
             public Label CategoryLabel { get; set; }
 
-            /// <summary>The chosen response 1–5, or null while unanswered.</summary>
+            // Selected response from 1 to 5, or null if unanswered
             public int? Response { get; set; }
         }
 
-        /// <summary>
-        /// Builds one statement row per active question, in the order given (the BLL sorts by
-        /// DisplayOrder). The table comes from InterestController.GetActiveQuestions:
-        /// QuestionID, QuestionText, CategoryID, CategoryName, DisplayOrder.
-        /// </summary>
-        /// <param name="questions">The active questions, already ordered.</param>
+        // Build questionnaire rows from the active questions
         private void InterestsBuildQuestionRows(DataTable questions)
         {
             pnlStatements.SuspendLayout();
@@ -81,7 +69,7 @@ namespace FuturePath.PresentationLayer
                 pnlStatements.Controls.Add(row.Container);
             }
 
-            // Rows fill the panel when they all fit; otherwise leave room for the vertical scroll bar.
+            // Adjust row widths depending on available space
             if (interestsRows.Count * LogicalToDeviceUnits(InterestsRowHeight) <= pnlStatements.ClientSize.Height)
             {
                 foreach (InterestQuestionRow row in interestsRows)
@@ -94,10 +82,7 @@ namespace FuturePath.PresentationLayer
             InterestsRefreshProgress();
         }
 
-        /// <summary>
-        /// Removes every statement row and releases its controls, so a new session starts with none of the
-        /// previous learner's answers (rows are rebuilt when the questions are next loaded).
-        /// </summary>
+        // Remove previous questionnaire rows and their controls
         private void InterestsClearRows()
         {
             for (int i = pnlStatements.Controls.Count - 1; i >= 0; i--)
@@ -108,15 +93,11 @@ namespace FuturePath.PresentationLayer
             interestsRows.Clear();
         }
 
-        /// <summary>
-        /// Creates the container for one statement: the statement, its category caption and five
-        /// unlabelled radio buttons aligned under the Strongly disagree … Strongly agree headers.
-        /// </summary>
+        // Create a panel containing a statement and five response buttons
         private Panel InterestsBuildRowPanel(InterestQuestionRow row, string statement)
         {
-            // The radio buttons line up under the Strongly disagree … Strongly agree header labels, so the
-            // columns are read from those Designer labels. The other sizes are pixels at 100% scaling, so
-            // LogicalToDeviceUnits converts them for the screen's scale (e.g. 36 → 45 at 125%).
+            // Use the header labels to align the response buttons
+            // Scale sizes to match the display settings
             int firstResponseColumn = lblHeaderResponse1.Left;
             int responseColumnWidth = lblHeaderResponse1.Width;
             int rowHeight = LogicalToDeviceUnits(InterestsRowHeight);
@@ -176,7 +157,7 @@ namespace FuturePath.PresentationLayer
             return panel;
         }
 
-        /// <summary>Records the chosen response for the row and refreshes the counts, shading and tiles.</summary>
+        // Save the selected response and update questionnaire progress
         private void InterestsResponse_CheckedChanged(object sender, EventArgs e)
         {
             var option = (RadioButton)sender;
@@ -194,11 +175,7 @@ namespace FuturePath.PresentationLayer
 
         #region Showing and resetting
 
-        /// <summary>
-        /// Called by PageShown each time UI 4 is shown: loads the questions the first time in a session, then
-        /// refreshes the shading, tiles and notice, and keeps Save and continue disabled until every
-        /// statement is answered.
-        /// </summary>
+        // Load questions and refresh progress when the page opens
         private void InterestsShown()
         {
             SetStatus(InterestsStepStatus, DeepNavy, Color.White);
@@ -210,11 +187,7 @@ namespace FuturePath.PresentationLayer
             InterestsRefreshProgress();
         }
 
-        /// <summary>
-        /// Returns UI 4 to a brand-new session: every statement row and answer removed (the questions are
-        /// loaded again when the screen is next shown), the category tiles hidden and reset, and the Answered
-        /// tile back to its empty state. No learner may see the previous learner's answers (spec 2.1).
-        /// </summary>
+        // Clear answers and question rows for a new learner
         private void InterestsReset()
         {
             pnlStatements.SuspendLayout();
@@ -237,7 +210,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Loads the active questions (with category names) in DisplayOrder and builds the rows.</summary>
+        // Load active interest questions and build their rows
         private void InterestsLoadQuestions()
         {
             try
@@ -252,7 +225,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>The responses given so far, QuestionID → ResponseValue (1–5).</summary>
+        // Collect the responses answered so far
         private Dictionary<int, int> InterestsResponses()
         {
             Dictionary<int, int> responses = new Dictionary<int, int>();
@@ -267,13 +240,10 @@ namespace FuturePath.PresentationLayer
             return responses;
         }
 
-        /// <summary>
-        /// Asks the BLL for the category scores of the answers so far and shows the three strongest
-        /// in the tiles. Tiles with no score are hidden, never shown empty.
-        /// </summary>
+        // Calculate and display the strongest interest categories
         private void InterestsRefreshCategoryScores()
         {
-            // (category name, score 0–100) pairs, highest first; nothing is saved (Learner.calculateInterestScore).
+            // Category scores are calculated from the current responses
             List<KeyValuePair<string, decimal>> scores = new List<KeyValuePair<string, decimal>>();
             try
             {
@@ -302,10 +272,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Writes one <c>LearnerInterestResponse</c> per statement (ResponseValue 1–5,
-        /// UNIQUE(SessionID, QuestionID)). Only Save and continue writes; Cancel and Back do not.
-        /// </summary>
+        // Save the learner's questionnaire responses
         private void InterestsSave()
         {
             InterestController interestController = new InterestController();
@@ -316,11 +283,7 @@ namespace FuturePath.PresentationLayer
 
         #region Progress and notice
 
-        /// <summary>
-        /// Shades each row (amber while unanswered, banded once answered), updates the Answered tile,
-        /// the "n of N answered" caption and the category tiles. While UI 4 is on screen it also updates
-        /// the notice and enables Save and continue only when every statement is answered.
-        /// </summary>
+        // Update answered counts, row colours and category scores
         private void InterestsRefreshProgress()
         {
             int total = interestsRows.Count;
@@ -367,7 +330,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Save and continue (enabled only when every statement is answered) → UI 5.</summary>
+        // Save all answers and continue to faculty selection
         private void btnInterestsSave_Click(object sender, EventArgs e)
         {
             if (interestsRows.Count == 0 || interestsRows.Any(r => !r.Response.HasValue))
@@ -381,7 +344,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL's own check failed: its message says what to do.
+                // Show any validation errors returned by the controller
                 SetStatus(ex.Message, AmberColour, InkColour);
                 return;
             }
@@ -395,13 +358,13 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabFaculty, 4);
         }
 
-        /// <summary>Back → UI 3. The answers are kept.</summary>
+        // Return to the subjects screen without clearing answers
         private void btnInterestsBack_Click(object sender, EventArgs e)
         {
             tcMain.SelectedTab = tabSubjects;
         }
 
-        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        // Cancel the session and return home
         private void btnInterestsCancel_Click(object sender, EventArgs e)
         {
             GoHome();

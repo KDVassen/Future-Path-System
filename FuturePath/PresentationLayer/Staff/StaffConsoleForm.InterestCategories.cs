@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,37 +8,24 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.4 — Reference data, Interest categories (Administrators only; page <c>tabCategories</c> in the
-    /// Reference data group). Built to the UI 13.2 maintenance pattern: a read-only grid of stored
-    /// <c>InterestCategory</c> rows (Category · Questions · Mapped programmes · Status chip) with a count
-    /// line, and a maintenance form below it (Category name*, Active). The tab's own buttons run
-    /// <see cref="btnCategoriesAdd_Click"/>, <see cref="btnCategoriesUpdate_Click"/>,
-    /// <see cref="btnCategoriesDeactivate_Click"/> and <see cref="btnCategoriesCancel_Click"/>. A second panel
-    /// maintains the programme ↔ category relevance weights (<c>DegreeInterestMapping.RelevanceWeight</c>)
-    /// for the selected category, which the spec needs for the interest match but gives no screen of its
-    /// own. Nothing is ever deleted.
-    /// </summary>
+    // Handles interest category maintenance and programme relevance weights
+    // Allows Administrators to add, update and deactivate categories
     public partial class StaffConsoleForm
     {
         private const string CategoriesScopePrompt = "Select a category in the grid to see and edit its programme weights.";
 
-        /// <summary>CategoryID of the row being edited; null while adding a new category.</summary>
+        // ID of the selected category, or null when adding a new one
         private int? categoriesSelectedId;
 
-        /// <summary>IsActive of the row being edited, so Deactivate can say it is already inactive.</summary>
+        // Active status of the selected category
         private bool categoriesSelectedIsActive;
 
-        /// <summary>True while the grids are being rebound, so selection events are ignored.</summary>
+        // Prevent selection events while refreshing the grids
         private bool categoriesLoading;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.4 appears. The first time, it prepares the grids
-        /// and loads the categories and the programme list; afterwards the page keeps its state.
-        /// </summary>
-        /// <param name="firstTime">True the first time the page is shown in this console.</param>
+        // Initialise the category and programme weight grids
         private void CategoriesShown(bool firstTime)
         {
             if (!firstTime)
@@ -57,7 +45,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add category: adds a new category from the form (validated here and again in the BLL).</summary>
+        // Validate and add a new interest category
         private void btnCategoriesAdd_Click(object sender, EventArgs e)
         {
             if (!CategoriesValidateForm())
@@ -86,7 +74,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" added. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Update category: saves the form over the category selected in the grid.</summary>
+        // Validate and update the selected interest category
         private void btnCategoriesUpdate_Click(object sender, EventArgs e)
         {
             if (!categoriesSelectedId.HasValue)
@@ -121,7 +109,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" updated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Deactivate: deactivates the selected category after confirmation (never deletes it).</summary>
+        // Deactivate a category after confirmation without deleting it
         private void btnCategoriesDeactivate_Click(object sender, EventArgs e)
         {
             if (!categoriesSelectedId.HasValue)
@@ -164,7 +152,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Category \"" + name + "\" deactivated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Cancel: discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
+        // Cancel editing and clear the form without saving
         private void btnCategoriesCancel_Click(object sender, EventArgs e)
         {
             CategoriesClearForm();
@@ -175,13 +163,13 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the category grid (active and inactive rows) and refreshes the count line.</summary>
+        // Load all interest categories and refresh their counts
         private void CategoriesLoadCategories()
         {
             categoriesLoading = true;
             try
             {
-                // Columns: CategoryID, CategoryName, QuestionCount (active questions), MappedProgrammeCount, IsActive.
+                // Retrieve category names, question counts, programme counts and status
                 InterestController interestController = new InterestController();
                 dgvCategories.DataSource = interestController.GetInterestCategories(true);
                 dgvCategories.ClearSelection();
@@ -198,12 +186,12 @@ namespace FuturePath.PresentationLayer
             CategoriesUpdateCountLine();
         }
 
-        /// <summary>Binds the programme list used by the relevance-weight panel (never literal Items).</summary>
+        // Load active degree programmes for relevance weight selection
         private void CategoriesLoadProgrammeList()
         {
             try
             {
-                // Every active programme (faculty 0 = all).
+                // Retrieve programmes from all faculties
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 cboWeightProgramme.DisplayMember = "ProgrammeName";
                 cboWeightProgramme.ValueMember = "ProgrammeID";
@@ -216,14 +204,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Binds the programmes mapped to one category, with their relevance weights.</summary>
-        /// <param name="categoryId">InterestCategory.CategoryID of the selected category.</param>
+        // Load the selected category's programme relevance weights
         private void CategoriesLoadWeights(int categoryId)
         {
             categoriesLoading = true;
             try
             {
-                // Columns: ProgrammeID, ProgrammeName, RelevanceWeight (DegreeInterestMapping, DECIMAL(4,2)).
+                // Retrieve mapped programmes and their stored relevance weights
                 InterestController interestController = new InterestController();
                 dgvWeights.DataSource = interestController.GetRelevanceWeights(categoryId);
                 dgvWeights.ClearSelection();
@@ -238,32 +225,25 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Adds (categoryId 0) or updates a category. The BLL checks that UserId's Role = Administrator,
-        /// re-checks the name (required, max 60) and rejects a CategoryName already in use.
-        /// </summary>
-        /// <param name="categoryId">The category being updated, or 0 to add a new one.</param>
+        // Add or update an interest category through the controller
         private void CategoriesSaveCategory(int categoryId)
         {
             InterestController interestController = new InterestController();
             interestController.SaveInterestCategory(UserId, categoryId, txtCategoryName.Text.Trim(), chkCategoryActive.Checked);
         }
 
-        /// <summary>Sets IsActive = 0 on a category (Administrator only, checked by the BLL). Nothing is deleted.</summary>
-        /// <param name="categoryId">The category to deactivate.</param>
+        // Deactivate the selected category without deleting it
         private void CategoriesDeactivateCategory(int categoryId)
         {
             InterestController interestController = new InterestController();
             interestController.DeactivateInterestCategory(UserId, categoryId);
         }
 
-        /// <summary>Adds or updates one DegreeInterestMapping row for the selected category.</summary>
-        /// <param name="categoryId">The selected category.</param>
-        /// <param name="weight">The relevance weight, 0.00–1.00.</param>
+        // Save a programme's relevance weight for the selected category
         private void CategoriesSaveWeight(int categoryId, decimal weight)
         {
-            // Inserts or updates DegreeInterestMapping(ProgrammeID, CategoryID, RelevanceWeight).
-            // The BLL checks that UserId's Role = Administrator before running and re-checks 0.00–1.00.
+            // Add or update the programme-to-category relevance mapping
+            // The controller checks administrator access and the weight range
             InterestController interestController = new InterestController();
             interestController.SaveRelevanceWeight(UserId, (int)cboWeightProgramme.SelectedValue, categoryId, weight);
         }
@@ -272,7 +252,7 @@ namespace FuturePath.PresentationLayer
 
         #region Grid display and selection
 
-        /// <summary>Writes "N categories · M active" from the bound rows.</summary>
+        // Update the total and active category counts
         private void CategoriesUpdateCountLine()
         {
             int total = dgvCategories.Rows.Count;
@@ -288,7 +268,7 @@ namespace FuturePath.PresentationLayer
             lblCategoryCount.Text = total + (total == 1 ? " category" : " categories") + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        // Format categories as active or inactive
         private void dgvCategories_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == colCategoriesStatus.Index)
@@ -297,10 +277,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// After (re)binding, starts with no row selected, so the form stays ready for a new
-        /// category until the administrator picks one, and refreshes the count line.
-        /// </summary>
+        // Clear automatic category selections after loading the grid
         private void dgvCategories_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = categoriesLoading;
@@ -311,7 +288,7 @@ namespace FuturePath.PresentationLayer
             CategoriesUpdateCountLine();
         }
 
-        /// <summary>After (re)binding the weights, no mapped programme is pre-selected.</summary>
+        // Clear automatic programme selections after loading weights
         private void dgvWeights_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = categoriesLoading;
@@ -321,10 +298,7 @@ namespace FuturePath.PresentationLayer
             categoriesLoading = wasLoading;
         }
 
-        /// <summary>
-        /// Copies the category the administrator selects into the form and shows its programme weights.
-        /// Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
-        /// </summary>
+        // Load the selected category and its programme weights
         private void dgvCategories_SelectionChanged(object sender, EventArgs e)
         {
             if (categoriesLoading || !dgvCategories.Focused || dgvCategories.SelectedRows.Count == 0)
@@ -350,7 +324,7 @@ namespace FuturePath.PresentationLayer
             CategoriesLoadWeights(categoriesSelectedId.Value);
         }
 
-        /// <summary>Choosing a mapped programme puts it and its current weight into the weight fields.</summary>
+        // Display the selected programme and its relevance weight
         private void dgvWeights_SelectionChanged(object sender, EventArgs e)
         {
             if (categoriesLoading || !dgvWeights.Focused || dgvWeights.SelectedRows.Count == 0)
@@ -379,7 +353,7 @@ namespace FuturePath.PresentationLayer
 
         #region Relevance weight panel
 
-        /// <summary>Save weight → validates the programme and weight, then saves the mapping.</summary>
+        // Validate and save the selected programme's relevance weight
         private void btnSaveWeight_Click(object sender, EventArgs e)
         {
             if (!categoriesSelectedId.HasValue)
@@ -418,7 +392,7 @@ namespace FuturePath.PresentationLayer
                 ". Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Checks both weight fields; the first problem is shown in the panel's field message.</summary>
+        // Validate the programme selection and relevance weight
         private bool CategoriesCheckWeightFields()
         {
             decimal weight;
@@ -435,7 +409,7 @@ namespace FuturePath.PresentationLayer
             return programmeValid && weightValid;
         }
 
-        /// <summary>Reads the weight from the raw text, before the NumericUpDown clamps it.</summary>
+        // Read and validate the entered weight before automatic adjustment
         private bool CategoriesTryReadWeight(out decimal weight)
         {
             bool parsed = decimal.TryParse(numRelevanceWeight.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out weight);
@@ -443,13 +417,13 @@ namespace FuturePath.PresentationLayer
                    && decimal.Round(weight, 2) == weight;
         }
 
-        /// <summary>Re-checks the weight fields when the programme list loses focus (only once a category is chosen).</summary>
+        // Validate programme weight fields when leaving the programme dropdown
         private void cboWeightProgramme_Leave(object sender, EventArgs e) { if (categoriesSelectedId.HasValue) CategoriesCheckWeightFields(); }
 
-        /// <summary>Re-checks the weight fields when the weight box loses focus (only once a category is chosen).</summary>
+        // Validate programme weight fields when leaving the weight input
         private void numRelevanceWeight_Leave(object sender, EventArgs e) { if (categoriesSelectedId.HasValue) CategoriesCheckWeightFields(); }
 
-        /// <summary>Turns the weight inputs and Save weight on (a category is selected) or off.</summary>
+        // Enable or disable the relevance weight inputs
         private void CategoriesSetWeightInputsEnabled(bool enabled)
         {
             cboWeightProgramme.Enabled = enabled;
@@ -457,7 +431,7 @@ namespace FuturePath.PresentationLayer
             btnSaveWeight.Enabled = enabled;
         }
 
-        /// <summary>Clears the weight panel's field marks and message.</summary>
+        // Clear validation messages and highlighting from weight fields
         private void CategoriesClearWeightValidation()
         {
             CategoriesMarkField(true, cboWeightProgramme, lblWeightProgramme);
@@ -470,7 +444,7 @@ namespace FuturePath.PresentationLayer
 
         #region Maintenance form validation (validated again in the BLL on save)
 
-        /// <summary>Validates the whole form; shows field messages and the validation summary.</summary>
+        // Validate the category form and display any errors
         private bool CategoriesValidateForm()
         {
             var problems = new List<string>();
@@ -487,7 +461,7 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Category name: required, at most 60 characters.</summary>
+        // Check that the category name is between 1 and 60 characters
         private bool CategoriesCheckName()
         {
             string text = txtCategoryName.Text.Trim();
@@ -495,17 +469,17 @@ namespace FuturePath.PresentationLayer
                 "Category name: enter a name of up to 60 characters.");
         }
 
-        /// <summary>Checks the category name as the administrator leaves the box.</summary>
+        // Validate the category name when leaving its field
         private void txtCategoryName_Leave(object sender, EventArgs e) { CategoriesCheckName(); }
 
-        /// <summary>Red label and red-tint control when invalid; normal colours otherwise (no field message).</summary>
+        // Highlight an invalid field and its label
         private static void CategoriesMarkField(bool valid, Control input, Label fieldLabel)
         {
             input.BackColor = valid ? SystemColors.Window : RedTint;
             fieldLabel.ForeColor = valid ? InkColour : RedColour;
         }
 
-        /// <summary>Clears every field message, the validation summary and the weight panel's marks.</summary>
+        // Clear the category and weight validation messages
         private void CategoriesClearValidation()
         {
             CheckField(true, txtCategoryName, lblCategoryName, lblCategoryNameError, string.Empty);
@@ -517,7 +491,7 @@ namespace FuturePath.PresentationLayer
 
         #region Helpers
 
-        /// <summary>Empties the form, the selection and the weight panel, ready to add a new category.</summary>
+        // Reset the category form and relevance weight panel
         private void CategoriesClearForm()
         {
             categoriesLoading = true;
@@ -536,7 +510,7 @@ namespace FuturePath.PresentationLayer
             CategoriesClearValidation();
         }
 
-        /// <summary>True for a bound BIT value of 1.</summary>
+        // Check whether a stored value is true
         private static bool CategoriesIsTrue(object value)
         {
             return value is bool && (bool)value;

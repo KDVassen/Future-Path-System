@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,34 +11,18 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 11 — Reports selection and generation (Career Advisor and Administrator; spec 2.3.12). The user
-    /// picks one of the three reports (FP-LSR, FP-DIE, FP-LER), sets its parameters, and chooses an output
-    /// format and a folder. Parameters that do not apply to the chosen report are disabled with the reason
-    /// stated beneath them, never hidden. A readiness panel names the report and its scope and turns green
-    /// once every requirement is met. Validation fires on Generate report; the BLL checks the role again
-    /// before generating and logs the export in <c>ExportReport</c> (Section 8).
-    /// <para>
-    /// The tab's own buttons are Generate report (<see cref="btnReportsGenerate_Click"/>) and Preview
-    /// (<see cref="btnReportsPreview_Click"/>); the other tabs are reached through the tab headers.
-    /// </para>
-    /// </summary>
+    // Handles report selection, generation and previews
+    // Supports learner summaries, degree interest and eligibility reports
     public partial class StaffConsoleForm
     {
         private const string ReportsLearnerSummaryCode = "FP-LSR";
         private const string ReportsDegreeInterestCode = "FP-DIE";
         private const string ReportsNotEligibleCode = "FP-LER";
 
-        /// <summary>True while code (not the user) sets the parameters, so change events are ignored.</summary>
+        // Prevent change events while setting report parameters
         private bool reportsLoading = true;
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 11 appears. The first time, sets the default period
-        /// (1 January to today) and folder, binds the lists and applies the rules of the default report
-        /// (FP-DIE). Later visits keep what the user entered (the console keeps the screen alive) and only
-        /// refresh the readiness panel, so its scope and "last generated" line are current.
-        /// </summary>
-        /// <param name="firstTime">True the first time UI 11 is shown in this console.</param>
+        // Initialise report settings or refresh the readiness panel
         private void ReportsShown(bool firstTime)
         {
             if (!firstTime)
@@ -58,7 +43,7 @@ namespace FuturePath.PresentationLayer
 
         #region Report choice
 
-        /// <summary>The report code of the selected radio button.</summary>
+        // Get the code of the selected report
         private string ReportsSelectedCode
         {
             get
@@ -69,7 +54,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>The report name shown in the readiness panel and the confirmation.</summary>
+        // Get the name of the selected report
         private string ReportsSelectedName
         {
             get
@@ -80,17 +65,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Fills this screen with the filters of UI 10.3c, whose Generate report opens UI 11 already filtered
-        /// (<c>OpenReports</c> selects this tab first, so the lists are bound and the IDs can be
-        /// selected straight away).
-        /// </summary>
-        /// <param name="reportCode">"FP-LSR", "FP-DIE" or "FP-LER".</param>
-        /// <param name="from">First session date in scope.</param>
-        /// <param name="to">Last session date in scope.</param>
-        /// <param name="facultyId">Faculty.FacultyID, or 0 for all faculties.</param>
-        /// <param name="gradeLevelId">GradeLevel.GradeLevelID, or 0 for all grades.</param>
-        /// <param name="outcome">RecommendationResult.OutcomeCode, or "" for all outcomes.</param>
+        // Apply report filters passed from the Advisory reports screen
         private void ReportsApplyFilter(string reportCode, DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcome)
         {
             reportsLoading = true;
@@ -116,7 +91,7 @@ namespace FuturePath.PresentationLayer
             SetStatus("Filters copied from Advisory reports (UI 10.3c). Check them, then generate the report.", BlueColour, Color.White);
         }
 
-        /// <summary>Keeps a date inside the range a DateTimePicker accepts.</summary>
+        // Keep a date within the allowed picker range
         private static DateTime ReportsClamp(DateTime value, DateTimePicker picker)
         {
             if (value < picker.MinDate) return picker.MinDate;
@@ -124,10 +99,7 @@ namespace FuturePath.PresentationLayer
             return value;
         }
 
-        /// <summary>
-        /// Selects a value in a bound list. 0 or "" selects the BLL's "All …" row; a value that is not in
-        /// the list (or an unbound list) selects nothing.
-        /// </summary>
+        // Select a value in a bound dropdown
         private static void ReportsSelectValue(ComboBox combo, object value)
         {
             if (combo.DataSource == null)
@@ -139,7 +111,7 @@ namespace FuturePath.PresentationLayer
             combo.SelectedValue = value;
         }
 
-        /// <summary>A different report was chosen: re-apply the parameter rules for it.</summary>
+        // Update parameters when the selected report changes
         private void ReportChoice_CheckedChanged(object sender, EventArgs e)
         {
             var choice = sender as RadioButton;
@@ -151,11 +123,7 @@ namespace FuturePath.PresentationLayer
             ReportsApplyRules();
         }
 
-        /// <summary>
-        /// Enables the parameters the chosen report uses and disables the rest, stating the reason
-        /// under each disabled one (spec 2.3.12: disabled, never hidden). FP-LSR is regenerated per
-        /// session, so it takes a session number instead of the period and filters.
-        /// </summary>
+        // Enable or disable parameters based on the selected report
         private void ReportsApplyRules()
         {
             string code = ReportsSelectedCode;
@@ -190,7 +158,7 @@ namespace FuturePath.PresentationLayer
                 summary ? "Never for learner-facing output"
                         : exceptions ? "FP-LER lists active programmes only" : "Staff-only report; off by default");
 
-            // A disabled field cannot stay red.
+            // Clear validation colours from disabled fields
             ReportsClearError(dtpRepFrom, lblRepFrom, lblFromError);
             lblRepTo.ForeColor = dtpRepTo.Enabled ? InkColour : MutedColour;
             ReportsClearError(txtRepSessionNumber, lblRepSessionNumber, lblRepSessionNumberError);
@@ -199,7 +167,7 @@ namespace FuturePath.PresentationLayer
             ReportsUpdateReadiness();
         }
 
-        /// <summary>Enables or disables one parameter and writes its caption (muted, never red).</summary>
+        // Update a parameter's enabled state and help text
         private static void ReportsSetParameter(Control input, Label fieldLabel, Label noteLabel, bool enabled, string note)
         {
             input.Enabled = enabled;
@@ -221,13 +189,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the Faculty, Grade and Advisory outcome lists to their reference tables.</summary>
+        // Load faculty, grade and outcome filter lists
         private void ReportsLoadLists()
         {
             try
             {
-                // Each list starts with the BLL's "All …" row (FacultyID 0, GradeLevelID 0, OutcomeCode ""),
-                // which every report method reads as "no filter".
+                // Each list includes an option for all records
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 cboRepFaculty.DisplayMember = "FacultyName";
                 cboRepFaculty.ValueMember = "FacultyID";
@@ -248,7 +215,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Binds the output formats allowed for the chosen report (reports.md: LSR PDF/Word, DIE PDF/Excel, LER PDF/Word).</summary>
+        // Load the export formats available for the selected report
         private void ReportsLoadExportFormats(string reportCode)
         {
             try
@@ -265,10 +232,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Refreshes the scope line of the readiness panel: sessions in scope, faculties,
-        /// programmes and the last generated date (from <c>ExportReport</c>).
-        /// </summary>
+        // Update the report scope and last generated date
         private void ReportsLoadScope()
         {
             string code = ReportsSelectedCode;
@@ -291,7 +255,7 @@ namespace FuturePath.PresentationLayer
             {
                 ReportController reportController = new ReportController();
 
-                // FP-DIE and FP-LER: the completed sessions, faculties and programmes the request covers.
+                // Count the sessions, faculties and programmes in scope
                 if (code != ReportsLearnerSummaryCode && ReportsPeriodValid)
                 {
                     ReportScope counts = reportController.GetScope(UserId, code, dtpRepFrom.Value.Date, dtpRepTo.Value.Date,
@@ -300,7 +264,7 @@ namespace FuturePath.PresentationLayer
                             counts.ProgrammeCount + " programmes";
                 }
 
-                // MAX(ExportReport.DateGenerated) for this ReportCode.
+                // Retrieve the most recent export date
                 DateTime? last = reportController.GetLastGenerated(code);
                 if (last.HasValue)
                 {
@@ -319,10 +283,7 @@ namespace FuturePath.PresentationLayer
             lblReadyScope.Text = scope;
         }
 
-        /// <summary>
-        /// The SessionID of the FP-LSR's session number, or 0 for FP-DIE and FP-LER (they cover a period).
-        /// Throws ArgumentException, whose message the status bar shows, when no session has that number.
-        /// </summary>
+        // Find the session ID for a learner advisory summary
         private int ReportsFindSessionId()
         {
             if (ReportsSelectedCode != ReportsLearnerSummaryCode)
@@ -341,13 +302,7 @@ namespace FuturePath.PresentationLayer
             return sessionId;
         }
 
-        /// <summary>
-        /// Builds the chosen report's typed dataset through the BLL, which checks the signed-in user's role
-        /// from <c>UserAccount</c> (the screen's role is never trusted): FpLsrData for one completed session,
-        /// FpLerData or FpDieData for the period and filters. Inactive programmes and funding are left out
-        /// (FP-DIE includes inactive programmes only when the box is ticked). Nothing is saved or logged here.
-        /// </summary>
-        /// <param name="sessionId">The FP-LSR's session (from <see cref="ReportsFindSessionId"/>), or 0.</param>
+        // Build the selected report's dataset using the controller
         private DataSet ReportsBuildData(int sessionId)
         {
             ReportController reportController = new ReportController();
@@ -366,12 +321,7 @@ namespace FuturePath.PresentationLayer
                 ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
         }
 
-        /// <summary>
-        /// Generates the report: builds it, renders it to the chosen format in the chosen folder (created if
-        /// needed), records the export in ExportReport (<see cref="SaveReport"/>) and shows it in the report
-        /// viewer (UI 11.1a / 11.2b / 11.3c).
-        /// </summary>
-        /// <param name="sessionId">The FP-LSR's session, or 0.</param>
+        // Generate, save and open the selected report
         private void ReportsBuildAndSave(int sessionId)
         {
             DataSet data = ReportsBuildData(sessionId);
@@ -387,13 +337,12 @@ namespace FuturePath.PresentationLayer
             viewerSavedPath = path;
         }
 
-        /// <summary>Builds the preview of the chosen report in the report viewer without saving or logging anything.</summary>
-        /// <param name="sessionId">The FP-LSR's session, or 0.</param>
+        // Preview the selected report without saving or logging it
         private void ReportsBuildPreview(int sessionId)
         {
             DataSet data = ReportsBuildData(sessionId);
 
-            // The viewer saves straight to UI 11's format and folder when both are set, otherwise it asks.
+            // Use the chosen folder if it already exists
             string folder = string.Empty;
             if (Directory.Exists(txtSaveTo.Text.Trim()))
             {
@@ -404,7 +353,7 @@ namespace FuturePath.PresentationLayer
                              SelectedCode(cboOutputFormat), folder, ReportsFileStem(), tabReports);
         }
 
-        /// <summary>The proposed file name: FP-LSR_&lt;session&gt;, or the report code and the period.</summary>
+        // Build the report's suggested filename
         private string ReportsFileStem()
         {
             if (ReportsSelectedCode == ReportsLearnerSummaryCode)
@@ -416,11 +365,7 @@ namespace FuturePath.PresentationLayer
                    "-" + dtpRepTo.Value.ToString("yyyyMMdd", CultureInfo.InvariantCulture);
         }
 
-        /// <summary>
-        /// ExportReport.ParametersUsed for FP-DIE and FP-LER (database.md), built by the BLL so the log has one
-        /// wording, e.g. "Period 2026-01-01..2026-09-15; Faculty=All; Grade=All; Outcome=All; Inactive=Excluded".
-        /// Null for FP-LSR, which records its SessionID instead.
-        /// </summary>
+        // Build the report parameters for the export record
         private string ReportsParametersUsed()
         {
             ReportController reportController = new ReportController();
@@ -428,7 +373,7 @@ namespace FuturePath.PresentationLayer
                 ReportsSelectedId(cboRepFaculty), ReportsSelectedId(cboRepGrade), ReportsSelectedOutcome(), chkIncludeInactive.Checked);
         }
 
-        /// <summary>The selected ID of an enabled list, or 0 ("all") when the list is not used for this report.</summary>
+        // Get the selected filter ID or zero when disabled
         private static int ReportsSelectedId(ComboBox combo)
         {
             if (!combo.Enabled)
@@ -439,7 +384,7 @@ namespace FuturePath.PresentationLayer
             return SelectedId(combo);
         }
 
-        /// <summary>The selected outcome code, or "" ("all") when the filter is not used for this report.</summary>
+        // Get the selected outcome or an empty value when disabled
         private string ReportsSelectedOutcome()
         {
             if (!cboRepOutcome.Enabled)
@@ -450,7 +395,7 @@ namespace FuturePath.PresentationLayer
             return SelectedCode(cboRepOutcome);
         }
 
-        /// <summary>The session number typed for FP-LSR, or "" when the report covers a period.</summary>
+        // Get the session number entered for a learner summary
         private string ReportsSessionNumber()
         {
             if (!txtRepSessionNumber.Enabled)
@@ -465,25 +410,25 @@ namespace FuturePath.PresentationLayer
 
         #region Validation (validated again in the BLL)
 
-        /// <summary>True when the period is not used (FP-LSR) or Sessions from is on or before Sessions to.</summary>
+        // Check that the selected date range is valid
         private bool ReportsPeriodValid
         {
             get { return !dtpRepFrom.Enabled || dtpRepFrom.Value.Date <= dtpRepTo.Value.Date; }
         }
 
-        /// <summary>True when the session number is not used, or is in the format yyyy-NNNN.</summary>
+        // Check the learner summary session number format
         private bool ReportsSessionNumberValid
         {
             get { return !txtRepSessionNumber.Enabled || Regex.IsMatch(txtRepSessionNumber.Text.Trim(), @"^\d{4}-\d{4}$"); }
         }
 
-        /// <summary>True when an output format is chosen.</summary>
+        // Check whether an export format has been selected
         private bool ReportsOutputFormatValid
         {
             get { return cboOutputFormat.SelectedIndex >= 0; }
         }
 
-        /// <summary>True when Save to holds a full folder path without invalid characters.</summary>
+        // Check whether the output folder path is valid
         private bool ReportsSaveToValid
         {
             get
@@ -493,10 +438,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Checks the period. One message shows under both pickers and both labels turn red (a
-        /// DateTimePicker cannot be tinted). When the period is not used (FP-LSR) its labels stay muted.
-        /// </summary>
+        // Validate the selected report date range
         private bool ReportsCheckPeriod()
         {
             if (!dtpRepFrom.Enabled)
@@ -514,7 +456,7 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>Checks the FP-LSR session number; when it is not used, its label stays muted.</summary>
+        // Validate the learner summary session number
         private bool ReportsCheckSessionNumber()
         {
             if (!txtRepSessionNumber.Enabled)
@@ -529,21 +471,21 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>Checks that an output format is chosen.</summary>
+        // Validate the selected export format
         private bool ReportsCheckOutputFormat()
         {
             return CheckField(ReportsOutputFormatValid, cboOutputFormat, lblOutputFormat, lblOutputFormatError,
                 "Choose an output format for this report.");
         }
 
-        /// <summary>Checks the Save to folder.</summary>
+        // Validate the selected output folder
         private bool ReportsCheckSaveTo()
         {
             return CheckField(ReportsSaveToValid, txtSaveTo, lblSaveTo, lblSaveToError,
                 "Save to: choose a folder with Browse, or type a full folder path.");
         }
 
-        /// <summary>Clears a field message and gives the label its normal colour (ink, or muted when disabled).</summary>
+        // Clear a field's validation error and restore its colour
         private static void ReportsClearError(Control input, Label fieldLabel, Label messageLabel)
         {
             if (!(input is DateTimePicker))
@@ -555,25 +497,25 @@ namespace FuturePath.PresentationLayer
             messageLabel.Visible = false;
         }
 
-        /// <summary>Session number: checked when the user leaves it with something typed.</summary>
+        // Validate the session number when leaving the field
         private void txtRepSessionNumber_Leave(object sender, EventArgs e)
         {
             if (txtRepSessionNumber.Enabled && txtRepSessionNumber.Text.Trim().Length > 0) ReportsCheckSessionNumber();
         }
 
-        /// <summary>Output format: re-checked on leave once its message is showing.</summary>
+        // Recheck the output format when leaving the dropdown
         private void cboOutputFormat_Leave(object sender, EventArgs e)
         {
             if (lblOutputFormatError.Visible) ReportsCheckOutputFormat();
         }
 
-        /// <summary>Save to: checked on leave.</summary>
+        // Validate the output folder when leaving its field
         private void txtSaveTo_Leave(object sender, EventArgs e)
         {
             ReportsCheckSaveTo();
         }
 
-        /// <summary>Any parameter change re-checks readiness (and clears a period error once fixed).</summary>
+        // Refresh report readiness when a parameter changes
         private void Parameter_Changed(object sender, EventArgs e)
         {
             if (reportsLoading)
@@ -589,10 +531,7 @@ namespace FuturePath.PresentationLayer
             ReportsUpdateReadiness();
         }
 
-        /// <summary>
-        /// Updates the readiness panel: amber with the count of outstanding entries, or green with
-        /// "Ready to generate" once every requirement for the chosen report is met.
-        /// </summary>
+        // Update the readiness panel based on missing or invalid entries
         private void ReportsUpdateReadiness()
         {
             if (reportsLoading)
@@ -617,7 +556,7 @@ namespace FuturePath.PresentationLayer
                                       : "! " + outstanding + (outstanding == 1 ? " entry" : " entries") + " to complete";
         }
 
-        /// <summary>Checks every required field for the chosen report and returns the messages.</summary>
+        // Validate all required report fields
         private List<string> ReportsValidateAll()
         {
             var problems = new List<string>();
@@ -635,7 +574,7 @@ namespace FuturePath.PresentationLayer
             return problems;
         }
 
-        /// <summary>Moves focus to the first field with a message showing.</summary>
+        // Focus the first report field with an error
         private void ReportsFocusFirstError()
         {
             if (lblFromError.Visible) dtpRepFrom.Focus();
@@ -648,10 +587,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>
-        /// Generate report → validate, confirm, generate. The BLL checks the role and logs the export in
-        /// ExportReport.
-        /// </summary>
+        // Validate, confirm and generate the selected report
         private void btnReportsGenerate_Click(object sender, EventArgs e)
         {
             if (ReportsValidateAll().Count > 0)
@@ -678,13 +614,13 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // A value the BLL (or the session-number lookup) refused; the message names it.
+                // Display validation errors returned by the controller
                 SetStatus(ex.Message, RedColour, Color.White);
                 return;
             }
             catch (InvalidOperationException ex)
             {
-                // ReportController's own refusal, e.g. "Session 2026-0042 is still in progress …".
+                // Display errors when the report cannot be generated
                 SetStatus(ex.Message, RedColour, Color.White);
                 return;
             }
@@ -697,7 +633,7 @@ namespace FuturePath.PresentationLayer
             SetStatus(ReportsSelectedName + " generated and saved to " + txtSaveTo.Text.Trim() + ".", GreenColour, Color.White);
         }
 
-        /// <summary>Preview → validate the parameters, then show the report without saving or logging it.</summary>
+        // Preview the selected report without saving it
         private void btnReportsPreview_Click(object sender, EventArgs e)
         {
             bool valid = ReportsCheckPeriod() & ReportsCheckSessionNumber();
@@ -728,7 +664,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Browse → choose the Save to folder (captures nothing else).</summary>
+        // Open a dialog to select the report output folder
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (var folderDialog = new FolderBrowserDialog())

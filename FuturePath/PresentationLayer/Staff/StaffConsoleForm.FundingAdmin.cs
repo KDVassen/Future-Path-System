@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,33 +7,16 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.3 — Reference data, Funding (maintenance), built to the UI 13.2 pattern. Page
-    /// <c>tabFundingAdmin</c> of the Reference data group; Administrators only. (The learner's UI 6.2b
-    /// Funding options screen is a different page, in MainForm.)
-    /// <para>
-    /// Funding options have no parent record to scope by, so the read-only grid of stored funding
-    /// options (Funding name · Type · Closing date · Status chip) takes the scope list's place on the
-    /// left, and the "Add or edit a funding option" form sits on the right: name, type (from
-    /// <c>FUNDING_TYPE_n</c>), eligibility, documents, closing date, contact, merit / need flags, the
-    /// linked faculties and programmes (<c>FUNDINGFACULTY</c> / <c>FUNDINGPROGRAMME</c>) and Active.
-    /// </para>
-    /// The tab's own buttons run <see cref="btnFundingAdminAdd_Click"/>, <see cref="btnFundingAdminUpdate_Click"/>,
-    /// <see cref="btnFundingAdminDeactivate_Click"/> and <see cref="btnFundingAdminCancel_Click"/>. Nothing is
-    /// deleted, and the BLL re-validates every save and checks that the user is an Administrator.
-    /// </summary>
+    // Handles funding option maintenance for Administrators
+    // Allows funding options to be added, updated and deactivated
     public partial class StaffConsoleForm
     {
-        /// <summary>FundingID of the funding option being edited, or null when the form holds a new one.</summary>
+        // ID of the selected funding option, or null for a new option
         private int? fundingAdminSelectedFundingId;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.3 is shown. The first time it binds the funding type, faculty and
-        /// programme lists and the grid (replaces the old tab's constructor and <c>LoadData</c>).
-        /// </summary>
-        /// <param name="firstTime">True the first time this page is shown in this console.</param>
+        // Load funding types, faculties, programmes and stored funding options
         private void FundingAdminShown(bool firstTime)
         {
             if (!firstTime)
@@ -45,13 +29,13 @@ namespace FuturePath.PresentationLayer
             FundingAdminUpdateFundingCount();
             try
             {
-                // SystemParameter FUNDING_TYPE_1..4 (Section 7: funding type only from the predefined set).
+                // Load the predefined funding types
                 FundingController fundingController = new FundingController();
                 cboFundingType.DisplayMember = "ParameterValue";
                 cboFundingType.ValueMember = "FundingType";
                 cboFundingType.DataSource = fundingController.GetFundingTypes(false);
 
-                // The active faculties and every active programme (faculty 0 = all) that funding can be linked to.
+                // Load active faculties and programmes for funding links
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 clbFaculties.DisplayMember = "FacultyName";
                 clbFaculties.ValueMember = "FacultyID";
@@ -75,7 +59,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add funding option: validates the form and adds a new funding option.</summary>
+        // Validate and add a new funding option
         private void btnFundingAdminAdd_Click(object sender, EventArgs e)
         {
             if (!FundingAdminValidateForm())
@@ -86,8 +70,7 @@ namespace FuturePath.PresentationLayer
             string name = txtFundingName.Text.Trim();
             try
             {
-                // FundingID 0 adds an option. Writes FundingOption plus its FundingFaculty / FundingProgramme links in one
-                // transaction. The BLL checks Role = Administrator before it writes (Section 8) and validates again.
+                // Save the new funding option and its faculty and programme links
                 FundingController fundingController = new FundingController();
                 fundingController.SaveFunding(UserId, 0, name, (string)cboFundingType.SelectedValue,
                     txtEligibility.Text.Trim(), txtDocuments.Text.Trim(), FundingAdminClosingDateOrNull(), txtContact.Text.Trim(),
@@ -109,7 +92,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option added: " + name + ".", false);
         }
 
-        /// <summary>Update funding option: validates the form and saves it over the funding option selected in the grid.</summary>
+        // Validate and update the selected funding option
         private void btnFundingAdminUpdate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue)
@@ -125,7 +108,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Replaces the link rows for this FundingID. The BLL checks Role = Administrator before it writes.
+                // Update the funding option and its linked records
                 FundingController fundingController = new FundingController();
                 fundingController.SaveFunding(UserId, fundingAdminSelectedFundingId.Value, txtFundingName.Text.Trim(),
                     (string)cboFundingType.SelectedValue, txtEligibility.Text.Trim(), txtDocuments.Text.Trim(),
@@ -147,7 +130,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Funding option updated.", false);
         }
 
-        /// <summary>Deactivate: deactivates the selected funding option after confirmation. Nothing is deleted.</summary>
+        // Deactivate the selected funding option after confirmation
         private void btnFundingAdminDeactivate_Click(object sender, EventArgs e)
         {
             if (!fundingAdminSelectedFundingId.HasValue || dgvFunding.SelectedRows.Count == 0)
@@ -172,7 +155,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Sets FundingOption.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Mark the funding option as inactive without deleting it
                 FundingController fundingController = new FundingController();
                 fundingController.DeactivateFunding(UserId, fundingAdminSelectedFundingId.Value);
             }
@@ -191,7 +174,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus(name + " deactivated.", false);
         }
 
-        /// <summary>Cancel: discards the form's changes and clears the grid selection.</summary>
+        // Discard changes and clear the current funding selection
         private void btnFundingAdminCancel_Click(object sender, EventArgs e)
         {
             dgvFunding.ClearSelection();
@@ -203,14 +186,14 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Fills the grid with every stored funding option, active and inactive.</summary>
+        // Load all stored funding options into the grid
         private void FundingAdminLoadFunding()
         {
             dgvFunding.DataSource = null;
             FundingAdminClearForm();
             try
             {
-                // FundingOption objects: FundingID, FundingName, FundingType, ClosingDate (null when none), IsActive.
+                // Retrieve both active and inactive funding options
                 FundingController fundingController = new FundingController();
                 dgvFunding.DataSource = fundingController.GetFundingOptions(true);
             }
@@ -223,8 +206,7 @@ namespace FuturePath.PresentationLayer
             FundingAdminUpdateFundingCount();
         }
 
-        /// <summary>Reads the selected option's full record into the form.</summary>
-        /// <param name="fundingId">FundingOption.FundingID of the row selected in the grid.</param>
+        // Load the selected funding option's details into the form
         private void FundingAdminLoadFundingDetail(int fundingId)
         {
             try
@@ -256,21 +238,20 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>An unticked closing date means "no closing date" (ClosingDate is nullable).</summary>
+        // Return the selected closing date or null if none is chosen
         private DateTime? FundingAdminClosingDateOrNull()
         {
             return dtpClosingDate.Checked ? dtpClosingDate.Value.Date : (DateTime?)null;
         }
 
-        /// <summary>Shows a stored closing date, or unticks the picker when there is none.</summary>
-        /// <param name="closingDate">FundingOption.ClosingDate, or null when the option has none.</param>
+        // Display the saved closing date or clear the date selection
         private void FundingAdminSetClosingDate(DateTime? closingDate)
         {
             dtpClosingDate.Value = closingDate.HasValue ? closingDate.Value : DateTime.Today;
             dtpClosingDate.Checked = closingDate.HasValue;
         }
 
-        /// <summary>The IDs of every ticked item in the faculty or programme list.</summary>
+        // Get the IDs of checked faculties or programmes
         private static List<int> FundingAdminCheckedIds(CheckedListBox list)
         {
             List<int> ids = new List<int>();
@@ -282,7 +263,7 @@ namespace FuturePath.PresentationLayer
             return ids;
         }
 
-        /// <summary>Ticks the items whose ID is in <paramref name="ids"/> and unticks the rest (null unticks all).</summary>
+        // Check items whose IDs are included in the supplied list
         private static void FundingAdminCheckIds(CheckedListBox list, ICollection<int> ids)
         {
             for (int i = 0; i < list.Items.Count; i++)
@@ -296,10 +277,10 @@ namespace FuturePath.PresentationLayer
 
         #region Grid
 
-        /// <summary>Opens the funding option selected in the grid in the form.</summary>
+        // Open the selected funding option for editing
         private void dgvFunding_SelectionChanged(object sender, EventArgs e)
         {
-            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            // Ignore automatic selections when the grid is not focused
             if (!dgvFunding.Focused || dgvFunding.SelectedRows.Count == 0)
             {
                 return;
@@ -316,7 +297,7 @@ namespace FuturePath.PresentationLayer
             FundingAdminLoadFundingDetail(fundingAdminSelectedFundingId.Value);
         }
 
-        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        // Format the funding status as active or inactive
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == colFundingStatus.Index && e.Value is bool)
@@ -325,7 +306,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows "n funding options · m active" in the grid card's heading row.</summary>
+        // Update the total and active funding option counts
         private void FundingAdminUpdateFundingCount()
         {
             int active = 0;
@@ -342,7 +323,7 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation (validated again in the BLL on save)
 
-        /// <summary>Checks every required field, shows field messages and the validation summary.</summary>
+        // Validate required funding fields and show any errors
         private bool FundingAdminValidateForm()
         {
             var problems = new List<string>();
@@ -361,28 +342,28 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Checks that a funding name was entered.</summary>
+        // Check that a funding name has been entered
         private bool FundingAdminCheckFundingName()
         {
             return CheckField(txtFundingName.Text.Trim().Length > 0, txtFundingName, lblFundingName, lblFundingNameError,
                 "Enter the funding option's name.");
         }
 
-        /// <summary>Checks that a funding type is chosen.</summary>
+        // Check that a funding type has been selected
         private bool FundingAdminCheckFundingType()
         {
             return CheckField(cboFundingType.SelectedIndex >= 0, cboFundingType, lblFundingType, lblFundingTypeError,
                 "Choose a funding type.");
         }
 
-        /// <summary>Checks that an eligibility description was entered.</summary>
+        // Check that an eligibility description has been entered
         private bool FundingAdminCheckEligibility()
         {
             return CheckField(txtEligibility.Text.Trim().Length > 0, txtEligibility, lblEligibility, lblEligibilityError,
                 "Describe who is eligible (up to 500 characters).");
         }
 
-        /// <summary>Removes every field message and hides the validation summary.</summary>
+        // Clear validation messages and hide the error summary
         private void FundingAdminClearValidation()
         {
             CheckField(true, txtFundingName, lblFundingName, lblFundingNameError, null);
@@ -391,20 +372,20 @@ namespace FuturePath.PresentationLayer
             pnlFndSummary.Visible = false;
         }
 
-        /// <summary>Validates the funding name on leaving it.</summary>
+        // Validate the funding name when leaving the field
         private void txtFundingName_Leave(object sender, EventArgs e) { FundingAdminCheckFundingName(); }
 
-        /// <summary>Validates the funding type on leaving it.</summary>
+        // Validate the funding type when leaving the field
         private void cboFundingType_Leave(object sender, EventArgs e) { FundingAdminCheckFundingType(); }
 
-        /// <summary>Validates the eligibility description on leaving it.</summary>
+        // Validate eligibility when leaving the field
         private void txtEligibility_Leave(object sender, EventArgs e) { FundingAdminCheckEligibility(); }
 
         #endregion
 
         #region Helpers (this screen only)
 
-        /// <summary>Empties the form, ready for a new funding option.</summary>
+        // Clear the form for a new funding option
         private void FundingAdminClearForm()
         {
             fundingAdminSelectedFundingId = null;
@@ -422,14 +403,14 @@ namespace FuturePath.PresentationLayer
             FundingAdminClearValidation();
         }
 
-        /// <summary>True when the grid row's IsActive cell is true.</summary>
+        // Check whether the selected funding row is active
         private bool FundingAdminRowIsActive(DataGridViewRow row)
         {
             object value = row.Cells[colFundingStatus.Index].Value;
             return value is bool && (bool)value;
         }
 
-        /// <summary>The ID of an item in the faculty list (a BLL Faculty) or the programme list (a DegreeProgramme).</summary>
+        // Get the ID of a faculty or degree programme
         private static int FundingAdminItemId(object item)
         {
             Faculty faculty = item as Faculty;
@@ -447,7 +428,7 @@ namespace FuturePath.PresentationLayer
             return 0;
         }
 
-        /// <summary>Selects a value in a bound ComboBox, or clears it when there is nothing to match.</summary>
+        // Select a dropdown value or clear the selection if unavailable
         private static void FundingAdminSelectValue(ComboBox box, object value)
         {
             if (value == null || value == DBNull.Value || box.DataSource == null)

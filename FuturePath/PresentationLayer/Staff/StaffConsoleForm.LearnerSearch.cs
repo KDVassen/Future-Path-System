@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
@@ -6,25 +7,11 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 10.1a — Learner profile tab of the Sessions dashboard (read-only).
-    /// The advisor searches learners on surname, first name, grade, school and province (none is
-    /// required) and sees one row per learner with their session count and last session date.
-    /// Only what an advisor needs to find a learner is shown: contact details are never exposed.
-    /// <b>Open learner profile</b> switches to the Advisory session tab (10.2b) filtered to the
-    /// selected learner's sessions.
-    /// <para>
-    /// This file also holds the console's single <see cref="ProcessDialogKey"/> override, which gives
-    /// Enter inside any of the three Sessions search cards (10.1a, 10.2b, 10.3c) to that tab's Find.
-    /// </para>
-    /// </summary>
+    // Handles learner profile searches and navigation to advisory sessions
+    // Displays learner details without exposing contact information
     public partial class StaffConsoleForm
     {
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 10.1a appears. The first time, it prepares the
-        /// grid and binds the grade and province lists, then shows the search guidance.
-        /// </summary>
-        /// <param name="firstTime">True the first time the tab is shown in this console.</param>
+        // Initialise the learner search screen and load its dropdown lists
         private void LearnerSearchShown(bool firstTime)
         {
             if (!firstTime)
@@ -40,10 +27,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>
-        /// Open learner profile: moves to the Advisory session tab (10.2b) and lists the selected
-        /// learner's sessions there.
-        /// </summary>
+        // Open the selected learner's advisory sessions
         private void btnLearnerSearchOpen_Click(object sender, EventArgs e)
         {
             if (dgvLearners.CurrentRow == null)
@@ -69,7 +53,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the Grade and Province lists to stored data (never literal Items).</summary>
+        // Load the available grades and provinces from stored reference data
         private void LearnerSearchLoadLists()
         {
             try
@@ -79,7 +63,7 @@ namespace FuturePath.PresentationLayer
                 cboLrnGrade.ValueMember = "GradeLevelID";
                 cboLrnGrade.DataSource = referenceDataController.GetGradeLevels(false);
 
-                // The SystemParameter rows PROVINCE_1..9, as on UI 2 (decisions.md D16).
+                // Load provinces from system parameters
                 cboProvince.DisplayMember = "ParameterValue";
                 cboProvince.ValueMember = "ParameterValue";
                 cboProvince.DataSource = referenceDataController.GetProvinces();
@@ -93,11 +77,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Asks the BLL for matching learners (a grade of 0 and a blank field mean "any"). The BLL checks the
-        /// role before returning learner data (Section 8). The result carries only LearnerID, LearnerName,
-        /// GradeDescription, SchoolName, Province, SessionCount and LastSessionDate — no contact details.
-        /// </summary>
+        // Search for matching learners using the selected criteria
+        // Return learner details without contact information
         private DataTable LearnerSearchFindLearners(string surname, string firstName, int gradeLevelId, string school, string province)
         {
             LearnerController learnerController = new LearnerController();
@@ -108,7 +89,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search
 
-        /// <summary>Runs the search and reports the result in the status bar.</summary>
+        // Run the learner search and display the number of matches
         private void LearnerSearchFind()
         {
             DataTable results;
@@ -144,13 +125,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Find runs the learner search.</summary>
+        // Search for learners when Find is clicked
         private void btnLrnFind_Click(object sender, EventArgs e)
         {
             LearnerSearchFind();
         }
 
-        /// <summary>Clears every criterion and the result list.</summary>
+        // Clear the search fields and results
         private void btnLrnClear_Click(object sender, EventArgs e)
         {
             txtLrnSurname.Clear();
@@ -164,7 +145,7 @@ namespace FuturePath.PresentationLayer
             txtLrnSurname.Focus();
         }
 
-        /// <summary>Shows the last session date as dd/MM/yyyy (display formatting only).</summary>
+        // Format the last session date for display
         private void dgvLearners_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == colLearnersLastSession.Index && e.Value is DateTime)
@@ -184,7 +165,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Double-clicking a learner is the same as Open learner profile.</summary>
+        // Open a learner's profile when their row is double-clicked
         private void dgvLearners_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -197,14 +178,8 @@ namespace FuturePath.PresentationLayer
 
         #region Enter in a Sessions search card (UI 10.1a, 10.2b, 10.3c)
 
-        /// <summary>
-        /// Enter inside a Sessions search card runs that tab's Find instead of the primary (Accept)
-        /// button: Learner profile (10.1a), Advisory session (10.2b) or Advisory reports (10.3c). Only
-        /// the card on show can hold the focus, so at most one test is true. Every other key, and
-        /// Enter anywhere else, is handled by the form as usual.
-        /// </summary>
-        /// <param name="keyData">The key pressed, with any modifier keys.</param>
-        /// <returns>True when the key was handled here.</returns>
+        // Run the active Sessions search when Enter is pressed
+        // Use normal keyboard handling outside the search cards
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (keyData == Keys.Return)

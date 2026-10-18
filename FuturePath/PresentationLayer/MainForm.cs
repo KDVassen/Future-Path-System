@@ -1,22 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// The Future Path main window: UI 1 Homepage and the whole self-service learner session (UI 2–7).
-    /// Every screen is a TabPage of the TabControl <c>tcMain</c>, in step order: Home, then steps 1–6.
-    /// Step 5 holds a second TabControl, <c>tcResults</c>, with UI 6, 6.1a and 6.2b. The learner can only
-    /// open a step that has already been reached (spec 2.2.2), and each tab has its own buttons along
-    /// its bottom edge. The window is a fixed size (decisions.md D6).
-    /// <para>
-    /// This file holds what every tab shares: the colour palette, the learner session, moving between
-    /// tabs, the menu, and the status bar. Each screen's own controls and code live in a partial-class
-    /// file named after it (MainForm.Profile.cs, MainForm.Subjects.cs, …).
-    /// </para>
-    /// </summary>
+    // Main window for the homepage and learner advisory session
+    // Handles session state, navigation, menus and shared UI behaviour
     public partial class MainForm : Form
     {
         #region Palette (spec 2.2.6) — runtime colours and fonts; everything else is set in the Designer
@@ -39,49 +30,46 @@ namespace FuturePath.PresentationLayer
 
         #endregion
 
-        /// <summary>The highest step (1–6) the learner has reached; tabs after it stay locked. 0 = no session.</summary>
+        // Highest step reached by the learner; later tabs remain locked
         private int highestStepReached;
 
-        /// <summary>The tab that opened UI 7, so Back on UI 7 returns to it.</summary>
+        // Tab to return to when leaving the summary screen
         private TabPage summaryReturnPage;
 
-        /// <summary>Creates the main window on the homepage (UI 1).</summary>
+        // Initialise the main window and display the homepage
         public MainForm()
         {
             InitializeComponent();
             numMark.KeyPress += DecimalBox_KeyPress;
 
-            // No tab events fire before the window exists, so show the homepage by hand.
+            // Display the homepage when the window first opens
             PageShown(tabHome);
         }
 
         #region The learner session (held once for every step — nothing is copied between screens)
 
-        /// <summary>AdvisorySession.SessionID, returned by the BLL when UI 2 is first saved.</summary>
+        // ID of the current advisory session
         private int? SessionId { get; set; }
 
-        /// <summary>Learner.LearnerID, returned by the BLL when UI 2 is first saved.</summary>
+        // ID of the current learner
         private int? LearnerId { get; set; }
 
-        /// <summary>The display session number yyyy-NNNN, built by the BLL (not stored).</summary>
+        // Formatted session number displayed to the user
         private string SessionNumber { get; set; }
 
-        /// <summary>The preferred faculty chosen on UI 5.</summary>
+        // Faculty selected by the learner
         private int? PreferredFacultyId { get; set; }
 
-        /// <summary>The programme checked on UI 5.</summary>
+        // Programme selected by the learner
         private int? SelectedProgrammeId { get; set; }
 
-        /// <summary>The checked programme's name, for headings on UI 6, 6.1a and 7.</summary>
+        // Name of the selected programme for results and summaries
         private string SelectedProgrammeName { get; set; }
 
-        /// <summary>The learner's name, grade and school for the status bar, set when UI 2 is saved.</summary>
+        // Learner details displayed in the status bar
         private string LearnerContext { get; set; }
 
-        /// <summary>
-        /// Clears every captured value so the next learner starts empty. Called whenever the learner goes
-        /// back to the homepage: nothing in the learner lane may show another learner's data (spec 2.1).
-        /// </summary>
+        // Clear all session details before starting with another learner
         private void ResetLearnerSession()
         {
             SessionId = null;
@@ -104,28 +92,22 @@ namespace FuturePath.PresentationLayer
             SummaryReset();
         }
 
-        /// <summary>UI 1 → Start advisory session: a fresh, empty session on UI 2.</summary>
+        // Start a new advisory session from the homepage
         private void StartLearnerSession()
         {
             ResetLearnerSession();
             GoToStep(tabProfile, 1);
         }
 
-        /// <summary>
-        /// Home, Cancel, or Back from UI 2. Selecting the Home tab asks the learner to confirm first
-        /// (see <see cref="tcMain_Selecting"/>), so every way home goes through the same check.
-        /// </summary>
+        // Return to the homepage
+        // The tab selection handler checks whether confirmation is needed
         private void GoHome()
         {
             tcMain.SelectedTab = tabHome;
         }
 
-        /// <summary>
-        /// Called after the subjects (UI 3) or the questionnaire answers (UI 4) are saved again once the
-        /// eligibility check has run. Saving them deletes the session's results in the BLL (decisions.md D20),
-        /// so the results and the summary lock again until Check eligibility is pressed on UI 5, and nothing
-        /// from the earlier check stays on screen (decisions.md D23).
-        /// </summary>
+        // Clear previous eligibility results when subjects or interests change
+        // Lock the results and summary until eligibility is checked again
         private void ForgetResults()
         {
             if (highestStepReached <= 4)
@@ -140,7 +122,7 @@ namespace FuturePath.PresentationLayer
             SummaryReset();
         }
 
-        /// <summary>UI 6, 6.1a or 6.2b → UI 7. Back on UI 7 returns to the tab that opened it.</summary>
+        // Open the summary and remember which results tab opened it
         private void OpenSummary(TabPage from)
         {
             summaryReturnPage = from;
@@ -151,19 +133,19 @@ namespace FuturePath.PresentationLayer
 
         #region Moving between tabs
 
-        /// <summary>True for every tab that belongs to the learner session (everything but UI 1).</summary>
+        // Check whether a tab belongs to the learner session
         private bool IsLearnerPage(TabPage page)
         {
             return page != null && page != tabHome;
         }
 
-        /// <summary>The tab on screen (the results sub-tab when step 5 is showing).</summary>
+        // Get the currently displayed tab, including results sub-tabs
         private TabPage CurrentPage
         {
             get { return tcMain.SelectedTab == tabResults ? tcResults.SelectedTab : tcMain.SelectedTab; }
         }
 
-        /// <summary>Moves forward to a step: records it as reached (which unlocks its tab), then opens it.</summary>
+        // Unlock and navigate to the requested step
         private void GoToStep(TabPage page, int step)
         {
             if (step > highestStepReached)
@@ -174,7 +156,7 @@ namespace FuturePath.PresentationLayer
             SelectPage(page);
         }
 
-        /// <summary>Opens a tab. A results tab (UI 6, 6.1a, 6.2b) is chosen inside tcResults first, then step 5 is opened.</summary>
+        // Open a main tab or select the correct results sub-tab
         private void SelectPage(TabPage page)
         {
             if (page == tabOutcome || page == tabAlternatives || page == tabFunding)
@@ -188,11 +170,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Runs before a tab opens, whether the learner clicked it or the code selected it.
-        /// The tab's position in tcMain is its step number (Home = 0), so a step not yet reached stays locked.
-        /// Going Home asks first, unless the session is already complete.
-        /// </summary>
+        // Prevent learners from opening steps they have not reached
+        // Confirm before returning home with an unfinished session
         private void tcMain_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage == tabHome)
@@ -220,13 +199,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>A new tab is showing: refresh it.</summary>
+        // Refresh the screen when the selected main tab changes
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             PageShown(CurrentPage);
         }
 
-        /// <summary>A results tab (UI 6 / 6.1a / 6.2b) was chosen: refresh it, if step 5 is the tab on screen.</summary>
+        // Refresh the selected results tab when it is visible
         private void tcResults_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcMain.SelectedTab == tabResults)
@@ -235,10 +214,8 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Sets up the window for the tab on screen: the caption, the status bar, which buttons Enter and
-        /// Esc press, and then lets the screen refresh itself through its <c>…Shown()</c> method.
-        /// </summary>
+        // Update the window, status bar and buttons for the selected page
+        // Call the appropriate screen method to refresh its contents
         private void PageShown(TabPage page)
         {
             Text = "Future Path — " + page.Text;
@@ -306,13 +283,13 @@ namespace FuturePath.PresentationLayer
 
         #region Menu
 
-        /// <summary>Menu → Home: back to UI 1 (the Selecting check asks first during a session).</summary>
+        // Return to the homepage using the menu
         private void mnuHome_Click(object sender, EventArgs e)
         {
             GoHome();
         }
 
-        /// <summary>Menu → Exit: closes Future Path (FormClosing asks first).</summary>
+        // Close the application using the menu
         private void mnuExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -322,7 +299,7 @@ namespace FuturePath.PresentationLayer
 
         #region Shared helpers (used by every screen's partial file)
 
-        /// <summary>Shows a message in the status bar (never a modal; spec 2.2.7).</summary>
+        // Display a message in the status bar
         private void SetStatus(string message, Color back, Color fore)
         {
             pnlStatus.BackColor = back;
@@ -331,7 +308,7 @@ namespace FuturePath.PresentationLayer
             lblStatus.Text = message;
         }
 
-        /// <summary>Fills a tab's notice label: blue guidance, amber outstanding, red invalid, green go-on.</summary>
+        // Display a coloured notice message on a screen
         private static void ShowNotice(Label notice, string message, Color back, Color fore)
         {
             notice.Text = message;
@@ -339,17 +316,14 @@ namespace FuturePath.PresentationLayer
             notice.ForeColor = fore;
         }
 
-        /// <summary>Enables or disables a tab's primary button; disabled shows the rule grey (spec 2.2.3).</summary>
+        // Enable or disable a screen's main action button
         private static void SetPrimaryEnabled(Button button, bool enabled)
         {
             button.Enabled = enabled;
             button.BackColor = enabled ? NavyColour : RuleColour;
         }
 
-        /// <summary>
-        /// Shows or clears a field message (spec 2.2.7): red text with a warning glyph under the control,
-        /// a red tint on the control and a red label. Returns <paramref name="valid"/>.
-        /// </summary>
+        // Show validation feedback and highlight invalid input fields
         private static bool CheckField(bool valid, Control input, Label fieldLabel, Label messageLabel, string message)
         {
             input.BackColor = valid ? SystemColors.Window : RedTint;
@@ -360,11 +334,8 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>
-        /// Lets a decimal box accept either "." or "," as the decimal point. A NumericUpDown only accepts the
-        /// separator of the Windows regional setting (a comma on many South African machines), so "67.5"
-        /// would otherwise be refused; the typed key is swapped for the regional separator before the box sees it.
-        /// </summary>
+        // Accept either a dot or comma as the decimal separator
+        // Convert it to the separator used by the current Windows region
         private void DecimalBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.' || e.KeyChar == ',')
@@ -373,7 +344,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Asks for confirmation (spec Section 7). Returns true when the user confirms.</summary>
+        // Show a confirmation dialog and return whether the user confirmed
         private bool Confirm(string title, string message, string confirmText)
         {
             using (var dialog = new ConfirmationDialog(title, message, confirmText))
@@ -382,7 +353,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Raises the validation dialog (UI 2.1a / 3.1a), then returns focus to the first offending control.</summary>
+        // Show validation errors and return focus to the invalid control
         private void ShowValidation(string title, IList<string> lines, Control focus)
         {
             using (var dialog = new ValidationDialog(title, lines))
@@ -400,7 +371,8 @@ namespace FuturePath.PresentationLayer
 
         #region Closing
 
-        /// <summary>The caption-bar X (or Menu → Exit) closes Future Path, so it asks first.</summary>
+        // Confirm before closing the application
+        // Warn the learner if their session has not been completed
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing)

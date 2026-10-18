@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
@@ -6,22 +7,10 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 10.3c — Advisory reports tab of the Sessions dashboard (read-only).
-    /// The advisor sets a session date range and optional faculty, grade and outcome filters, and
-    /// sees the three reports (FP-LSR, FP-DIE, FP-LER) with their scope, the number of rows those
-    /// criteria put in scope and when each was last generated. Find lists the reports for the criteria
-    /// and Clear resets them, as on 10.1a and 10.2b. <b>Generate report</b> checks the
-    /// date range and opens Report generation (UI 11) already filtered.
-    /// </summary>
+    // Handles report searches and shortcuts from the Sessions dashboard
     public partial class StaffConsoleForm
     {
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 10.3c appears. The first time, it prepares the
-        /// grid, sets the current year to date as the default period, binds the filter lists and lists
-        /// the reports.
-        /// </summary>
-        /// <param name="firstTime">True the first time the tab is shown in this console.</param>
+        // Initialise the report search screen and its filters
         private void ReportShortcutsShown(bool firstTime)
         {
             if (!firstTime)
@@ -39,10 +28,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>
-        /// Generate report: validates the period, then opens UI 11 for the selected report with this
-        /// tab's criteria applied.
-        /// </summary>
+        // Open the selected report with the current search filters
         private void btnReportShortcutsGenerate_Click(object sender, EventArgs e)
         {
             if (!ReportShortcutsCheckDateRange())
@@ -73,12 +59,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the Faculty, Grade and Advisory outcome lists to stored data (never literal Items).</summary>
+        // Load the faculty, grade and outcome filter lists
         private void ReportShortcutsLoadLists()
         {
             try
             {
-                // A blank list means "all" (SelectedId gives 0, SelectedCode gives "").
+                // Leaving a filter blank searches all matching records
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 cboRscFaculty.DisplayMember = "FacultyName";
                 cboRscFaculty.ValueMember = "FacultyID";
@@ -99,13 +85,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Asks the BLL for the report catalogue under these criteria: one row per report
-        /// (ReportCode, ReportName, Scope, RowsInScope, LastGenerated — the latest
-        /// ExportReport.DateGenerated for that ReportCode). Rows come from the BLL, not literals.
-        /// RowsInScope counts completed sessions only, and FP-LER counts only Not Currently Eligible and
-        /// More Information Needed: the BLL applies these rules and checks the role first.
-        /// </summary>
+        // Retrieve available reports and their matching session counts
         private DataTable ReportShortcutsGetReportCatalogue(DateTime from, DateTime to, int facultyId, int gradeLevelId, string outcomeCode)
         {
             ReportController reportController = new ReportController();
@@ -116,7 +96,7 @@ namespace FuturePath.PresentationLayer
 
         #region Search and validation
 
-        /// <summary>Validates the period, then lists the reports with their rows in scope.</summary>
+        // Validate the date range and display matching reports
         private void ReportShortcutsFind()
         {
             if (!ReportShortcutsCheckDateRange())
@@ -157,7 +137,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Sessions from must not be later than Sessions to (field message on both labels).</summary>
+        // Check that the start date is not after the end date
         private bool ReportShortcutsCheckDateRange()
         {
             bool valid = dtpRscFrom.Value.Date <= dtpRscTo.Value.Date;
@@ -171,19 +151,19 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>Checks the period as soon as either date picker is left.</summary>
+        // Validate the date range when leaving a date field
         private void DateRange_Leave(object sender, EventArgs e)
         {
             ReportShortcutsCheckDateRange();
         }
 
-        /// <summary>Find validates the period and lists the reports.</summary>
+        // Run the report search
         private void btnRscFind_Click(object sender, EventArgs e)
         {
             ReportShortcutsFind();
         }
 
-        /// <summary>Clears the criteria (back to the current year to date), any field message and the report list.</summary>
+        // Reset the search criteria and clear the report list
         private void btnRscClear_Click(object sender, EventArgs e)
         {
             dtpRscFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
@@ -198,7 +178,7 @@ namespace FuturePath.PresentationLayer
             dtpRscFrom.Focus();
         }
 
-        /// <summary>Shows Last generated as dd/MM/yyyy HH:mm, or "Never" (display formatting only).</summary>
+        // Format the last generated date or display Never
         private void dgvReports_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex != colReportsLastGenerated.Index)
@@ -219,7 +199,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Double-clicking a report is the same as Generate report.</summary>
+        // Open a report when its row is double-clicked
         private void dgvReports_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

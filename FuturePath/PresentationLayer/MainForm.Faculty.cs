@@ -1,3 +1,4 @@
+
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -6,41 +7,23 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 5 — Faculty &amp; Department Selection (step 4 of 6; spec 2.3.5).
-    /// The learner picks a search mode, a faculty and one programme (with its in-grid
-    /// <b>Select</b> button). The requirements panel shows the stored ProgrammeRequirement rows for
-    /// that programme, and the interest-alignment strip shows how the questionnaire answers from
-    /// UI 4 align with it. Everything shown is system-supplied, so there is no validation dialog:
-    /// a missing faculty or programme gets an amber field message or status instead.
-    /// <b>Check eligibility</b> runs Sequence 1, saves the preferred faculty and selected programme
-    /// on the session, and opens UI 6. It stays active, so the learner can come back and check
-    /// other programmes.
-    /// <para>
-    /// The faculty and programme chosen on this screen only become the session's
-    /// <c>PreferredFacultyId</c> / <c>SelectedProgrammeId</c> once they have been checked, so UI 6,
-    /// 6.1a, 6.2b and 7 always describe the programme whose outcome is on record.
-    /// </para>
-    /// </summary>
+    // Handles faculty and degree programme selection for learners
     public partial class MainForm
     {
         private const string FacultyReadyStatus = "Step 4 of 6 · Choose a faculty, select a programme, then check eligibility.";
 
-        /// <summary>True once the Faculty combo has been bound for this session.</summary>
+        // Tracks whether the faculty list has been loaded
         private bool facultyListsLoaded;
 
-        /// <summary>The programme chosen with its Select button (not yet checked).</summary>
+        // Programme selected but not yet checked for eligibility
         private int? facultyProgrammeId;
 
-        /// <summary>The chosen programme's DegreeProgramme.ProgrammeName (not yet checked).</summary>
+        // Name of the programme selected by the learner
         private string facultyProgrammeName;
 
         #region Shown, button clicks and reset
 
-        /// <summary>
-        /// Called by PageShown each time UI 5 appears: binds the faculty list once per session, restores
-        /// the preferred faculty if the list was reloaded, and shows the ready status.
-        /// </summary>
+        // Load faculties and restore the learner's preferred faculty
         private void FacultyShown()
         {
             if (!facultyListsLoaded)
@@ -57,10 +40,7 @@ namespace FuturePath.PresentationLayer
             SetStatus(FacultyReadyStatus, DeepNavy, Color.White);
         }
 
-        /// <summary>
-        /// Check eligibility → saves the selection, runs Sequence 1 and shows the outcome on UI 6.
-        /// The button stays active, so another programme can be checked after coming Back.
-        /// </summary>
+        // Save the selected programme and check its eligibility
         private void btnFacultyCheck_Click(object sender, EventArgs e)
         {
             if (!FacultyCheckFaculty())
@@ -85,7 +65,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL refused the selection (e.g. the programme was deactivated meanwhile); its message says why.
+                // Display errors returned by the controller
                 SetStatus(ex.Message, AmberColour, InkColour);
                 return;
             }
@@ -101,23 +81,19 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabOutcome, 5);
         }
 
-        /// <summary>Back → UI 4. Nothing is written.</summary>
+        // Return to the interest questionnaire
         private void btnFacultyBack_Click(object sender, EventArgs e)
         {
             tcMain.SelectedTab = tabInterests;
         }
 
-        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        // Cancel and return to the home screen
         private void btnFacultyCancel_Click(object sender, EventArgs e)
         {
             GoHome();
         }
 
-        /// <summary>
-        /// Returns UI 5 to a brand-new state for the next learner (spec 2.1): browse mode, no faculty,
-        /// no search text, no programmes, no selection, no requirements or alignment, no amber message,
-        /// and the faculty list is bound again the next time the screen is shown.
-        /// </summary>
+        // Reset the faculty and programme selection for a new learner
         private void FacultyReset()
         {
             facultyListsLoaded = false;
@@ -130,8 +106,7 @@ namespace FuturePath.PresentationLayer
             txtProgrammeSearch.Enabled = false;
             lblSearchHint.Text = "Disabled while browsing by faculty";
 
-            // Bind only to the Designer columns: auto-generated columns would replace them, and the
-            // column fields used below (colProgrammesSelect, colProgrammesId, …) would no longer be in the grid.
+            // Keep the existing Designer grid columns
             dgvProgrammes.AutoGenerateColumns = false;
             dgvRequirements.AutoGenerateColumns = false;
             dgvProgrammes.DataSource = null;
@@ -145,7 +120,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the Faculty combo to the active faculties (never literal Items).</summary>
+        // Load active faculties into the dropdown
         private void FacultyLoadFaculties()
         {
             try
@@ -163,10 +138,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Fills the programme grid: the active programmes of the chosen faculty while browsing,
-        /// or the active programmes whose name contains the search text while searching.
-        /// </summary>
+        // Load programmes based on the selected browse or search mode
         private void FacultyLoadProgrammes()
         {
             try
@@ -208,10 +180,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Fills the requirements panel from ProgrammeRequirement (and the programme's minimum
-        /// overall average) and the interest-alignment strip for the chosen programme.
-        /// </summary>
+        // Load requirements and interest alignment for the selected programme
         private void FacultyLoadProgrammeDetails()
         {
             lblAlignmentValue.Text = "—";
@@ -226,8 +195,7 @@ namespace FuturePath.PresentationLayer
             lblRequirementsProgramme.Text = facultyProgrammeName;
             try
             {
-                // Active requirements (SubjectName, MinimumMark, RequirementType), then an "Overall average" row
-                // from DegreeProgramme.MinimumOverallAverage when the programme sets one.
+                // Retrieve requirements and the programme's minimum average
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 dgvRequirements.DataSource = referenceDataController.GetActiveRequirements(facultyProgrammeId.Value);
 
@@ -249,25 +217,14 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Saves the preferred faculty and the selected programme on the in-progress session
-        /// (AdvisorySession.PreferredFacultyID and SelectedProgrammeID).
-        /// </summary>
-        /// <param name="facultyId">The faculty chosen in the Faculty combo.</param>
-        /// <param name="programmeId">The programme chosen with its Select button.</param>
+        // Save the learner's preferred faculty and selected programme
         private void FacultySaveSelection(int facultyId, int programmeId)
         {
             LearnerController learnerController = new LearnerController();
             learnerController.SaveProgrammeSelection(SessionId.Value, facultyId, programmeId);
         }
 
-        /// <summary>
-        /// Sequence 1 — Check degree eligibility. The controller loads the learner and the
-        /// programme, runs the RecommendationEngine, stores the RecommendationResult row
-        /// (IsSelectedProgramme = 1) and returns the AdvisoryOutcome, which UI 6 displays with its
-        /// explanation (<see cref="DisplayOutcome"/>, in MainForm.Outcome.cs).
-        /// </summary>
-        /// <param name="programmeId">The programme being checked.</param>
+        // Check eligibility and display the result
         private void FacultyRunEligibilityCheck(int programmeId)
         {
             EligibilityController eligibilityController = new EligibilityController();
@@ -279,7 +236,7 @@ namespace FuturePath.PresentationLayer
 
         #region Selections
 
-        /// <summary>Switches between browsing by faculty and searching by programme name.</summary>
+        // Switch between browsing faculties and searching programmes
         private void rbSearchMode_CheckedChanged(object sender, EventArgs e)
         {
             if (!((RadioButton)sender).Checked)
@@ -300,7 +257,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>A new faculty is checked as the preferred faculty and, while browsing, relists the programmes.</summary>
+        // Reload programmes when a different faculty is selected
         private void cboSelFaculty_SelectionChangeCommitted(object sender, EventArgs e)
         {
             FacultyCheckFaculty();
@@ -311,13 +268,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows the amber message when the learner leaves the Faculty combo without a choice.</summary>
+        // Validate the faculty selection when leaving the field
         private void cboSelFaculty_Leave(object sender, EventArgs e)
         {
             FacultyCheckFaculty();
         }
 
-        /// <summary>Relists the programmes as the search text changes (search mode only).</summary>
+        // Refresh search results as the programme name is typed
         private void txtProgrammeSearch_TextChanged(object sender, EventArgs e)
         {
             if (rdoSearch.Checked)
@@ -327,7 +284,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>The in-grid Select button chooses that programme and loads its requirements.</summary>
+        // Select a programme and load its details
         private void dgvProgrammes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != colProgrammesSelect.Index)
@@ -349,7 +306,7 @@ namespace FuturePath.PresentationLayer
             SetStatus("Selected " + facultyProgrammeName + ". Check eligibility when you are ready.", DeepNavy, Color.White);
         }
 
-        /// <summary>Shows "Selected" on the chosen programme's button and "Select" on every other row.</summary>
+        // Mark the chosen programme in the grid
         private void dgvProgrammes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != colProgrammesSelect.Index)
@@ -365,16 +322,13 @@ namespace FuturePath.PresentationLayer
             e.FormattingApplied = true;
         }
 
-        /// <summary>
-        /// Clears the default first-row highlight after binding (programmes and requirements grids), so
-        /// the blue selection never hides a coloured cell or suggests a choice the learner did not make.
-        /// </summary>
+        // Clear automatic grid selections after loading data
         private void SelGrid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ((DataGridView)sender).ClearSelection();
         }
 
-        /// <summary>Forgets the chosen programme when the list changes.</summary>
+        // Clear the currently selected programme
         private void FacultyClearSelectedProgramme()
         {
             facultyProgrammeId = null;
@@ -382,11 +336,7 @@ namespace FuturePath.PresentationLayer
             FacultyLoadProgrammeDetails();
         }
 
-        /// <summary>
-        /// Faculty is required: a missing faculty shows red, like every other required field
-        /// (decisions.md D12 — a deliberate change from the amber in spec 2.3.5).
-        /// </summary>
-        /// <returns>True when a faculty is chosen.</returns>
+        // Check that a preferred faculty has been selected
         private bool FacultyCheckFaculty()
         {
             return CheckField(cboSelFaculty.SelectedIndex >= 0, cboSelFaculty, lblSelFaculty, lblFacultyError,

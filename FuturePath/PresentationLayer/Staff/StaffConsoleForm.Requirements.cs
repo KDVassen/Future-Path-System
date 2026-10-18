@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,39 +8,22 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.2 — Reference data, Degree requirements (spec 2.3.11). Page <c>tabRequirements</c> of the
-    /// Reference data group; Administrators only.
-    /// The administrator scopes the view with a Faculty ComboBox and a Degree programme ListBox
-    /// (inactive programmes stay listed, marked "(inactive)"), reads the stored requirements in a
-    /// read-only grid with green Active / grey Inactive status chips, and maintains one requirement
-    /// at a time in the "Add or edit a requirement" form, driven by the tab's own buttons
-    /// (<see cref="btnRequirementsAdd_Click"/>, <see cref="btnRequirementsUpdate_Click"/>,
-    /// <see cref="btnRequirementsDeactivate_Click"/>, <see cref="btnRequirementsCancel_Click"/>). Nothing is
-    /// ever deleted, and every save is re-checked by the BLL, which also confirms that the signed-in user
-    /// is an Administrator.
-    /// </summary>
+    // Handles degree programme requirements for Administrators
+    // Allows requirements to be added, updated and deactivated
     public partial class StaffConsoleForm
     {
-        /// <summary>
-        /// SubjectID carried by the BLL's "None" entry in the Accepted alternative list. It is stored
-        /// as a NULL <c>AlternativeSubjectID</c>; the value itself is supplied by the BLL, not by this form.
-        /// </summary>
+        // Value used when no alternative subject is selected
         private const int RequirementsNoAlternativeValue = 0;
 
-        /// <summary>RequirementID of the row being edited; null for a new requirement or the Minimum average row.</summary>
+        // ID of the selected requirement, or null for a new requirement
         private int? requirementsSelectedRequirementId;
 
-        /// <summary>True while the programme's "Minimum average" row (DegreeProgramme.MinimumOverallAverage) is being edited.</summary>
+        // Tracks whether the programme's minimum average is being edited
         private bool requirementsEditingMinimumAverage;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.2 is shown. The first time it binds the faculty scope list and the form's
-        /// lists and empties the form (replaces the old tab's constructor and <c>LoadData</c>).
-        /// </summary>
-        /// <param name="firstTime">True the first time this page is shown in this console.</param>
+        // Initialise the requirements screen and load reference data
         private void RequirementsShown(bool firstTime)
         {
             if (!firstTime)
@@ -54,7 +38,7 @@ namespace FuturePath.PresentationLayer
             {
                 ReferenceDataController referenceDataController = new ReferenceDataController();
 
-                // RequirementType values ("Required" / "Recommended") come from the BLL, never from this form.
+                // Load the available requirement types and subjects
                 cboRequirementType.DisplayMember = "Description";
                 cboRequirementType.ValueMember = "RequirementType";
                 cboRequirementType.DataSource = referenceDataController.GetRequirementTypes();
@@ -62,12 +46,12 @@ namespace FuturePath.PresentationLayer
                 cboSubject.ValueMember = "SubjectID";
                 cboSubject.DataSource = referenceDataController.GetSubjects(false);
 
-                // The BLL puts a "None" entry first (SubjectID 0 = RequirementsNoAlternativeValue, saved as NULL).
+                // Load alternative subjects, including None
                 cboAlternative.DisplayMember = "SubjectName";
                 cboAlternative.ValueMember = "SubjectID";
                 cboAlternative.DataSource = referenceDataController.GetAlternativeSubjects();
 
-                // The scope list is bound last: choosing a faculty lists its programmes straight away.
+                // Load faculties for selecting a programme
                 cboReqFaculty.DisplayMember = "FacultyName";
                 cboReqFaculty.ValueMember = "FacultyID";
                 cboReqFaculty.DataSource = referenceDataController.GetFaculties(true, false);
@@ -85,7 +69,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add requirement: validates the form and adds it as a new requirement of the selected programme.</summary>
+        // Validate and add a new programme requirement
         private void btnRequirementsAdd_Click(object sender, EventArgs e)
         {
             if (lstProgrammes.SelectedIndex < 0)
@@ -94,7 +78,7 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            // A new row is always a subject requirement; the minimum average is edited from its own row.
+            // Enable subject fields when adding a requirement
             if (requirementsEditingMinimumAverage)
             {
                 requirementsEditingMinimumAverage = false;
@@ -109,10 +93,8 @@ namespace FuturePath.PresentationLayer
             string subject = cboSubject.Text;
             try
             {
-                // RequirementID 0 adds a requirement. An alternative of 0 is "None"; an alternative minimum of 0 means
-                // the main minimum applies (UI 13.2 has no field for it, decisions.md D23). SaveRequirement checks
-                // Role = Administrator before it writes (Section 8), validates again, and refuses a second requirement
-                // for the same subject (UNIQUE(ProgrammeID, SubjectID)).
+                // Save the new requirement through the controller
+                // Zero represents no separate alternative minimum mark
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.SaveRequirement(UserId, 0, (int)lstProgrammes.SelectedValue,
                     (string)cboRequirementType.SelectedValue, (int)cboSubject.SelectedValue, (int)cboAlternative.SelectedValue,
@@ -133,7 +115,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement added for " + subject + ".", false);
         }
 
-        /// <summary>Update requirement: validates the form and saves it over the requirement selected in the grid.</summary>
+        // Validate and update the selected requirement
         private void btnRequirementsUpdate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0)
@@ -149,12 +131,11 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Each BLL method checks Role = Administrator before it writes (Section 8).
+                // Save changes through the controller
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 if (requirementsEditingMinimumAverage)
                 {
-                    // The "Minimum average" row is DegreeProgramme.MinimumOverallAverage (decisions.md §3), not a
-                    // ProgrammeRequirement row. 0 clears it.
+                    // Update the programme's minimum overall average
                     referenceDataController.SaveMinimumAverage(UserId, (int)lstProgrammes.SelectedValue, numMinimumMark.Value);
                 }
                 else
@@ -179,7 +160,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement updated.", false);
         }
 
-        /// <summary>Deactivate: deactivates the selected requirement after confirmation. Nothing is deleted.</summary>
+        // Deactivate the selected requirement after confirmation
         private void btnRequirementsDeactivate_Click(object sender, EventArgs e)
         {
             if (dgvRequirements.SelectedRows.Count == 0 || !requirementsSelectedRequirementId.HasValue)
@@ -206,7 +187,7 @@ namespace FuturePath.PresentationLayer
 
             try
             {
-                // Sets ProgrammeRequirement.IsActive = 0. The BLL checks Role = Administrator before it writes.
+                // Mark the requirement as inactive without deleting it
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 referenceDataController.DeactivateRequirement(UserId, requirementsSelectedRequirementId.Value);
             }
@@ -225,7 +206,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Requirement for " + subject + " deactivated.", false);
         }
 
-        /// <summary>Cancel: discards the form's changes and clears the grid selection, ready for a new requirement.</summary>
+        // Discard changes and reset the requirement form
         private void btnRequirementsCancel_Click(object sender, EventArgs e)
         {
             dgvRequirements.ClearSelection();
@@ -237,7 +218,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Lists the selected faculty's programmes, active and inactive.</summary>
+        // Load all programmes for the selected faculty
         private void RequirementsLoadProgrammes()
         {
             lstProgrammes.DataSource = null;
@@ -246,7 +227,7 @@ namespace FuturePath.PresentationLayer
             {
                 try
                 {
-                    // DegreeProgramme objects; each carries IsActive, which lstProgrammes_Format reads to add "(inactive)".
+                    // Include active and inactive degree programmes
                     ReferenceDataController referenceDataController = new ReferenceDataController();
                     lstProgrammes.DisplayMember = "ProgrammeName";
                     lstProgrammes.ValueMember = "ProgrammeID";
@@ -263,7 +244,7 @@ namespace FuturePath.PresentationLayer
             RequirementsLoadRequirements();
         }
 
-        /// <summary>Fills the grid with the selected programme's stored requirements.</summary>
+        // Load the selected programme's stored requirements
         private void RequirementsLoadRequirements()
         {
             dgvRequirements.DataSource = null;
@@ -278,9 +259,7 @@ namespace FuturePath.PresentationLayer
             lblReqGridHeading.Text = "Stored requirements — " + RequirementsProgrammeName();
             try
             {
-                // Columns: RequirementID, RequirementType, SubjectID, SubjectName, MinimumMark, AlternativeSubjectID,
-                // AlternativeSubjectName, AlternativeMinimumMark, AdvisoryNote, IsActive. The BLL adds one "Minimum average"
-                // row (RequirementID DBNull) read from DegreeProgramme.MinimumOverallAverage (decisions.md §3).
+                // Load subject requirements and the programme's minimum average
                 ReferenceDataController referenceDataController = new ReferenceDataController();
                 dgvRequirements.DataSource = referenceDataController.GetRequirements((int)lstProgrammes.SelectedValue, true);
             }
@@ -293,11 +272,7 @@ namespace FuturePath.PresentationLayer
             RequirementsUpdateRequirementCount();
         }
 
-        /// <summary>
-        /// The selected requirement's stored AlternativeMinimumMark, or 0 when it has none. UI 13.2 has no field
-        /// for it, so an update sends the stored value back unchanged (decisions.md D23); otherwise saving the
-        /// form would quietly drop, for example, the 60% that Mathematical Literacy needs.
-        /// </summary>
+        // Preserve the stored alternative minimum mark when updating
         private decimal RequirementsStoredAlternativeMinimum()
         {
             if (dgvRequirements.SelectedRows.Count == 0)
@@ -318,19 +293,19 @@ namespace FuturePath.PresentationLayer
 
         #region Scope list and grid
 
-        /// <summary>A faculty was chosen: lists its programmes.</summary>
+        // Load programmes when a faculty is selected
         private void cboReqFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
             RequirementsLoadProgrammes();
         }
 
-        /// <summary>A programme was chosen: lists its stored requirements.</summary>
+        // Load requirements when a programme is selected
         private void lstProgrammes_SelectedIndexChanged(object sender, EventArgs e)
         {
             RequirementsLoadRequirements();
         }
 
-        /// <summary>Display formatting only: an inactive programme stays listed with "(inactive)" after its name.</summary>
+        // Mark inactive programmes in the list
         private void lstProgrammes_Format(object sender, ListControlConvertEventArgs e)
         {
             if (RequirementsIsInactive(e.ListItem))
@@ -339,7 +314,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows "n programmes in this faculty · m inactive" under the list.</summary>
+        // Update the total and inactive programme counts
         private void RequirementsUpdateProgrammeCount()
         {
             if (cboReqFaculty.SelectedIndex < 0)
@@ -359,7 +334,7 @@ namespace FuturePath.PresentationLayer
                 " inactive. Inactive programmes stay visible here and nowhere in the learner lane.";
         }
 
-        /// <summary>Shows "n requirements · m active" above the grid.</summary>
+        // Update the total and active requirement counts
         private void RequirementsUpdateRequirementCount()
         {
             int active = 0;
@@ -372,10 +347,10 @@ namespace FuturePath.PresentationLayer
             lblRequirementCount.Text = total + (total == 1 ? " requirement" : " requirements") + " · " + active + " active";
         }
 
-        /// <summary>Copies the selected row into the form for editing.</summary>
+        // Load the selected requirement into the editing form
         private void dgvRequirements_SelectionChanged(object sender, EventArgs e)
         {
-            // Only a selection made in the focused grid counts, not the automatic first-row selection on binding.
+            // Ignore automatic grid selection when the grid is not focused
             if (!dgvRequirements.Focused || dgvRequirements.SelectedRows.Count == 0)
             {
                 return;
@@ -403,7 +378,7 @@ namespace FuturePath.PresentationLayer
                 : "Editing the selected requirement. Choose Update requirement to save it, or Cancel.", false);
         }
 
-        /// <summary>Display formatting only: status chips and dashes for empty cells.</summary>
+        // Format requirement status, marks and empty values
         private void dgvRequirements_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.ColumnIndex == colRequirementsStatus.Index && e.Value is bool)
@@ -427,7 +402,7 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation (validated again in the BLL on save)
 
-        /// <summary>Checks every field, shows field messages and the validation summary. True when all are valid.</summary>
+        // Validate the requirement form and display any errors
         private bool RequirementsValidateForm()
         {
             var problems = new List<string>();
@@ -451,37 +426,37 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Checks that a requirement type is chosen.</summary>
+        // Check that a requirement type is selected
         private bool RequirementsCheckRequirementType()
         {
             return CheckField(cboRequirementType.SelectedIndex >= 0, cboRequirementType, lblRequirementType,
                 lblRequirementTypeError, "Choose a requirement type.");
         }
 
-        /// <summary>Checks that a subject is chosen.</summary>
+        // Check that a subject is selected
         private bool RequirementsCheckSubject()
         {
             return CheckField(cboSubject.SelectedIndex >= 0, cboSubject, lblSubject, lblSubjectError, "Choose a subject.");
         }
 
-        /// <summary>Checks that an accepted alternative (or None) is chosen.</summary>
+        // Check that an alternative subject or None is selected
         private bool RequirementsCheckAlternative()
         {
             return CheckField(cboAlternative.SelectedIndex >= 0, cboAlternative, lblAlternative, lblAlternativeError,
                 "Choose an alternative, or None.");
         }
 
-        /// <summary>Checks that the minimum mark is a number from 0 to 100.</summary>
+        // Check that the minimum mark is between 0 and 100
         private bool RequirementsCheckMinimumMark()
         {
-            // Read the typed text before the NumericUpDown clamps it on losing focus.
+            // Validate the typed value before the control adjusts it
             decimal mark;
             bool valid = decimal.TryParse(numMinimumMark.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out mark)
                          && mark >= 0m && mark <= 100m;
             return CheckField(valid, numMinimumMark, lblMinimumMark, lblMinimumMarkError, "Enter a mark from 0 to 100.");
         }
 
-        /// <summary>Removes every field message and hides the validation summary.</summary>
+        // Clear validation messages and hide the error summary
         private void RequirementsClearValidation()
         {
             CheckField(true, cboRequirementType, lblRequirementType, lblRequirementTypeError, null);
@@ -491,23 +466,23 @@ namespace FuturePath.PresentationLayer
             pnlReqSummary.Visible = false;
         }
 
-        /// <summary>Validates the requirement type on leaving it (not while the Minimum average row is edited).</summary>
+        // Validate requirement type when leaving the field
         private void cboRequirementType_Leave(object sender, EventArgs e) { if (!requirementsEditingMinimumAverage) RequirementsCheckRequirementType(); }
 
-        /// <summary>Validates the subject on leaving it (not while the Minimum average row is edited).</summary>
+        // Validate subject when leaving the field
         private void cboSubject_Leave(object sender, EventArgs e) { if (!requirementsEditingMinimumAverage) RequirementsCheckSubject(); }
 
-        /// <summary>Validates the accepted alternative on leaving it (not while the Minimum average row is edited).</summary>
+        // Validate alternative subject when leaving the field
         private void cboAlternative_Leave(object sender, EventArgs e) { if (!requirementsEditingMinimumAverage) RequirementsCheckAlternative(); }
 
-        /// <summary>Validates the minimum mark on leaving it.</summary>
+        // Validate the minimum mark when leaving the field
         private void numMinimumMark_Leave(object sender, EventArgs e) { RequirementsCheckMinimumMark(); }
 
         #endregion
 
         #region Helpers (this screen only)
 
-        /// <summary>Empties the form, ready for a new requirement.</summary>
+        // Reset the form for a new requirement
         private void RequirementsClearForm()
         {
             requirementsSelectedRequirementId = null;
@@ -522,7 +497,7 @@ namespace FuturePath.PresentationLayer
             RequirementsClearValidation();
         }
 
-        /// <summary>The minimum-average row only has a mark, so the subject fields are locked while it is edited.</summary>
+        // Enable or disable subject fields when editing minimum averages
         private void RequirementsSetSubjectFieldsEnabled(bool enabled)
         {
             cboRequirementType.Enabled = enabled;
@@ -532,39 +507,39 @@ namespace FuturePath.PresentationLayer
             txtAdvisoryNote.Enabled = enabled;
         }
 
-        /// <summary>The selected programme's display name, or an empty string when none is selected.</summary>
+        // Get the name of the selected degree programme
         private string RequirementsProgrammeName()
         {
             return lstProgrammes.SelectedIndex < 0 ? string.Empty : lstProgrammes.GetItemText(lstProgrammes.SelectedItem);
         }
 
-        /// <summary>True when the grid row's IsActive cell is true.</summary>
+        // Check whether a requirement is active
         private bool RequirementsRowIsActive(DataGridViewRow row)
         {
             object value = row.Cells[colRequirementsStatus.Index].Value;
             return value is bool && (bool)value;
         }
 
-        /// <summary>True when a programme in the list (a BLL DegreeProgramme object) is inactive.</summary>
+        // Check whether a degree programme is inactive
         private static bool RequirementsIsInactive(object item)
         {
             DegreeProgramme programme = item as DegreeProgramme;
             return programme != null && !programme.IsActive;
         }
 
-        /// <summary>True for null, DBNull and the empty string.</summary>
+        // Check whether a stored value is empty
         private static bool RequirementsIsEmpty(object value)
         {
             return value == null || value == DBNull.Value || (value is string && ((string)value).Length == 0);
         }
 
-        /// <summary>Converts a cell value to an int, or null when the cell is empty.</summary>
+        // Convert a value to an integer or null
         private static int? RequirementsToNullableInt(object value)
         {
             return RequirementsIsEmpty(value) ? (int?)null : Convert.ToInt32(value, CultureInfo.InvariantCulture);
         }
 
-        /// <summary>Selects a value in a bound ComboBox, or clears it when there is nothing to match.</summary>
+        // Select a dropdown value or clear the selection
         private static void RequirementsSelectValue(ComboBox box, object value)
         {
             if (RequirementsIsEmpty(value) || box.DataSource == null)

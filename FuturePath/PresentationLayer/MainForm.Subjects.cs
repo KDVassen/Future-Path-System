@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,57 +10,42 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 3 — Subjects and Marks Capture (step 2 of 6; spec 2.3.3). The graded rich dialog.
-    /// The learner picks a Subject (bound to active <c>Subject</c> rows), sees its Subject level
-    /// (read-only, from <c>Subject.SubjectLevel</c>, decisions.md D4) and enters a Mark % from 0 to 100
-    /// with at most one decimal. <b>Add subject</b> validates the entry: a duplicate subject or a bad
-    /// mark turns the label and control red and the validation summary lists every entry to fix.
-    /// Captured rows are kept in a presentation list, so going Back and returning never loses them.
-    /// The amber notice counts the subjects still needed against <c>MIN_SUBJECT_COUNT</c> — a warning,
-    /// never a block (decisions.md §3). Leaving with invalid data raises UI 3.1a.
-    /// </summary>
+    // Handles subject and mark entry for learner advisory sessions
     public partial class MainForm
     {
         private const string SubjectsStepStatus = "Step 2 of 6 · Add every subject on your latest report, then save and continue.";
         private const string SubjectsNoDataText = "—";
 
-        /// <summary>The rows captured in this session, shown in the grid. Kept when the learner goes Back and returns.</summary>
+        // Stores subjects captured during the current session
         private readonly BindingList<CapturedSubjectRow> subjectsRows = new BindingList<CapturedSubjectRow>();
 
-        /// <summary>True once the subject list and the minimum subject count have been loaded for this session.</summary>
+        // Tracks whether the subject list has been loaded
         private bool subjectsLoaded;
 
-        /// <summary>The stored minimum subject count (SystemParameter MIN_SUBJECT_COUNT); 0 until it is loaded.</summary>
+        // Minimum number of subjects set in the system
         private int subjectsMinimumCount;
 
-        /// <summary>
-        /// The mark exactly as typed. The NumericUpDown clamps and rounds its text when it loses focus,
-        /// so the raw text is remembered while the learner types and validated instead.
-        /// </summary>
+        // Keeps the mark as typed before the control adjusts its value
         private string subjectsRawMarkText = string.Empty;
 
         #region Presentation row
 
-        /// <summary>
-        /// One captured subject as the grid shows it. Presentation only: the BLL keeps the
-        /// <c>LearnerSubject</c> rows; this list lets Back and return keep what was entered.
-        /// </summary>
+        // Stores the subject details displayed in the grid
         private sealed class CapturedSubjectRow
         {
-            /// <summary>Subject.SubjectID of the captured subject.</summary>
+            // ID of the captured subject
             public int SubjectId { get; set; }
 
-            /// <summary>Subject.SubjectName, shown in the Subject column.</summary>
+            // Name of the subject
             public string SubjectName { get; set; }
 
-            /// <summary>Subject.SubjectLevel, shown in the Level column.</summary>
+            // Level of the subject
             public string SubjectLevel { get; set; }
 
-            /// <summary>LearnerSubject.Mark, DECIMAL(5,1), shown in Consolas right-aligned.</summary>
+            // Mark entered by the learner
             public decimal Mark { get; set; }
 
-            /// <summary>NSC achievement level worked out by the BLL from NSC_LEVEL_1..7.</summary>
+            // Achievement level calculated from the mark
             public string AchievementLevel { get; set; }
         }
 
@@ -67,11 +53,7 @@ namespace FuturePath.PresentationLayer
 
         #region Showing and resetting
 
-        /// <summary>
-        /// Called by PageShown each time UI 3 is shown: binds the grid to the captured rows once, loads the
-        /// subject list and minimum count the first time in a session, and refreshes the totals, the notice
-        /// and whether Save and continue is available.
-        /// </summary>
+        // Load captured subjects and update the totals
         private void SubjectsShown()
         {
             SetStatus(SubjectsStepStatus, DeepNavy, Color.White);
@@ -89,11 +71,7 @@ namespace FuturePath.PresentationLayer
             SubjectsRefreshTotals();
         }
 
-        /// <summary>
-        /// Returns UI 3 to a brand-new session: no captured rows, an empty Add-a-subject group, no red
-        /// field states or summary, the list and minimum count to be reloaded, and Enter back on Save and
-        /// continue. No learner may see the previous learner's subjects (spec 2.1).
-        /// </summary>
+        // Clear captured subjects for a new learner session
         private void SubjectsReset()
         {
             subjectsRows.Clear();
@@ -113,10 +91,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>
-        /// Binds the subject list to active <c>Subject</c> rows and reads the stored minimum subject
-        /// count (MIN_SUBJECT_COUNT; 0 if it is missing). Nothing is hard-coded.
-        /// </summary>
+        // Load active subjects and the minimum subject count
         private void SubjectsLoadReferenceData()
         {
             try
@@ -136,22 +111,14 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// The NSC achievement level for a mark, worked out by the BLL from the NSC_LEVEL_1..7
-        /// parameters, e.g. 72 gives "6  70–79%". The subject itself is only kept in the grid
-        /// until <b>Save and continue</b>, so adding or removing a row writes nothing.
-        /// </summary>
+        // Get the NSC achievement level for a mark
         private string SubjectsGetAchievementLevel(decimal mark)
         {
             LearnerController learnerController = new LearnerController();
             return learnerController.GetAchievementLevel(mark);
         }
 
-        /// <summary>
-        /// Writes the captured subjects as <c>LearnerSubject</c> rows for the session, replacing any saved
-        /// before. Only <b>Save and continue</b> writes; Cancel and Back leave without writing anything (2.3.3).
-        /// The BLL validates every subject and mark again.
-        /// </summary>
+        // Save the captured subjects through the controller
         private void SubjectsSave()
         {
             List<KeyValuePair<int, decimal>> subjectMarks = new List<KeyValuePair<int, decimal>>();
@@ -168,7 +135,7 @@ namespace FuturePath.PresentationLayer
 
         #region Reading the selected subject
 
-        /// <summary>The Subject chosen in the list (bound to the BLL's Subject objects), or null when none is chosen.</summary>
+        // Return the selected subject or null if none is chosen
         private Subject SubjectsSelectedSubject()
         {
             if (cboSubject.SelectedIndex < 0)
@@ -179,7 +146,7 @@ namespace FuturePath.PresentationLayer
             return cboSubject.SelectedItem as Subject;
         }
 
-        /// <summary>True when the subject is already in the captured grid.</summary>
+        // Check whether a subject has already been captured
         private bool SubjectsIsCaptured(int subjectId)
         {
             foreach (CapturedSubjectRow row in subjectsRows)
@@ -193,7 +160,7 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Fills the read-only Subject level box from the selected subject's SubjectLevel.</summary>
+        // Display the level of the selected subject
         private void cboSubject_SelectedIndexChanged(object sender, EventArgs e)
         {
             Subject subject = SubjectsSelectedSubject();
@@ -211,10 +178,7 @@ namespace FuturePath.PresentationLayer
 
         #region Validation (validated again in the BLL)
 
-        /// <summary>
-        /// Checks the subject: one must be chosen, and it must not already be captured in this session.
-        /// </summary>
-        /// <returns>The message to show, or null when the subject is valid.</returns>
+        // Check for a missing or duplicate subject
         private string SubjectsSubjectProblem()
         {
             Subject subject = SubjectsSelectedSubject();
@@ -231,11 +195,7 @@ namespace FuturePath.PresentationLayer
             return null;
         }
 
-        /// <summary>
-        /// Checks the mark as typed (not the clamped value): numbers only, 0 to 100, at most one decimal.
-        /// </summary>
-        /// <param name="mark">The parsed mark when valid.</param>
-        /// <returns>The message to show, or null when the mark is valid.</returns>
+        // Validate the original mark entered by the learner
         private string SubjectsMarkProblem(out decimal mark)
         {
             mark = 0;
@@ -245,7 +205,7 @@ namespace FuturePath.PresentationLayer
                 return "Mark: enter the mark % from your latest report.";
             }
 
-            // Accept either decimal separator, whatever the regional setting.
+            // Accept decimal points and commas
             string normalised = text.Replace(',', '.');
             if (!decimal.TryParse(normalised, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
                     CultureInfo.InvariantCulture, out mark))
@@ -267,11 +227,7 @@ namespace FuturePath.PresentationLayer
             return null;
         }
 
-        /// <summary>
-        /// Validates the Add-a-subject group, marks every offending label and control red, and shows
-        /// the validation summary listing every entry to fix.
-        /// </summary>
-        /// <returns>The problems found, each with the control to refocus.</returns>
+        // Validate both subject and mark fields
         private List<KeyValuePair<Control, string>> SubjectsValidateEntry()
         {
             var problems = new List<KeyValuePair<Control, string>>();
@@ -285,16 +241,11 @@ namespace FuturePath.PresentationLayer
             if (markMessage != null) problems.Add(new KeyValuePair<Control, string>(numMark, markMessage));
 
             SubjectsShowSummary(problems.Select(p => p.Value).ToList());
-            // The rejected text is deliberately NOT written back into the box: a NumericUpDown clamps any text
-            // assigned to it at once (150 -> 100), and a second Enter would then quietly add the clamped value.
-            // The remembered raw text keeps the error standing until the learner edits the mark again.
+            // Keep invalid raw text so it cannot be silently changed into an accepted mark
             return problems;
         }
 
-        /// <summary>
-        /// Shows the red validation summary under the group, or hides it when there is nothing to fix.
-        /// The captured-subjects card moves down to make room.
-        /// </summary>
+        // Display validation errors and adjust the subject list layout
         private void SubjectsShowSummary(IList<string> lines)
         {
             bool show = lines.Count > 0;
@@ -304,15 +255,14 @@ namespace FuturePath.PresentationLayer
                                   Environment.NewLine + "• " + string.Join(Environment.NewLine + "• ", lines);
             }
 
-            // The card keeps its bottom edge; its top starts where the summary does, or below it with the same gap
-            // as between the Add card and the summary. Read from the Designer controls, so it is right at any DPI.
+            // Adjust the captured subjects card to make room for errors
             pnlSummary.Visible = show;
             int bottom = pnlCapturedCard.Bottom;
             int top = show ? pnlSummary.Bottom + (pnlSummary.Top - pnlAddCard.Bottom) : pnlSummary.Top;
             pnlCapturedCard.SetBounds(pnlCapturedCard.Left, top, pnlCapturedCard.Width, bottom - top);
         }
 
-        /// <summary>Clears every field message and hides the summary.</summary>
+        // Clear field errors and the validation summary
         private void SubjectsClearEntryErrors()
         {
             CheckField(true, cboSubject, lblSubject, lblSubjectError, null);
@@ -320,7 +270,7 @@ namespace FuturePath.PresentationLayer
             SubjectsShowSummary(new List<string>());
         }
 
-        /// <summary>Re-checks the subject on leaving it, once the learner has started an entry.</summary>
+        // Validate the subject when leaving the dropdown
         private void cboSubject_Leave(object sender, EventArgs e)
         {
             if (cboSubject.SelectedIndex >= 0 || pnlSummary.Visible)
@@ -329,7 +279,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Re-checks the mark on leaving it, reading the text as typed.</summary>
+        // Validate the mark when leaving the field
         private void numMark_Leave(object sender, EventArgs e)
         {
             if (cboSubject.SelectedIndex >= 0 || pnlSummary.Visible)
@@ -338,7 +288,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Remembers the mark text while the learner types, before the control can clamp it.</summary>
+        // Remember the mark as the learner types
         private void numMark_TextChanged(object sender, EventArgs e)
         {
             if (numMark.ContainsFocus)
@@ -351,7 +301,7 @@ namespace FuturePath.PresentationLayer
 
         #region Add and remove
 
-        /// <summary>Add subject: validates, then commits the row to the grid and recalculates the totals.</summary>
+        // Validate and add the selected subject to the grid
         private void btnAddSubject_Click(object sender, EventArgs e)
         {
             subjectsRawMarkText = numMark.ContainsFocus ? numMark.Text : subjectsRawMarkText;
@@ -391,7 +341,7 @@ namespace FuturePath.PresentationLayer
             captured.AchievementLevel = achievement;
             subjectsRows.Add(captured);
 
-            // Ready for the next subject.
+            // Reset the fields for another subject
             cboSubject.SelectedIndex = -1;
             txtSubjectLevel.Text = string.Empty;
             numMark.Value = numMark.Minimum;
@@ -402,7 +352,7 @@ namespace FuturePath.PresentationLayer
             cboSubject.Focus();
         }
 
-        /// <summary>The Remove button in a row removes that subject and recalculates the totals.</summary>
+        // Remove a subject from the captured list
         private void dgvSubjects_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.RowIndex >= subjectsRows.Count || e.ColumnIndex != colSubjectsRemove.Index)
@@ -410,12 +360,12 @@ namespace FuturePath.PresentationLayer
                 return;
             }
 
-            // Nothing is written until Save and continue, so the row only leaves the grid.
+            // The subject is only saved when continuing
             CapturedSubjectRow row = subjectsRows[e.RowIndex];
             subjectsRows.RemoveAt(e.RowIndex);
             if (pnlSummary.Visible)
             {
-                // A duplicate may no longer be a duplicate.
+                // Recheck duplicate errors after removing a subject
                 SubjectsValidateEntry();
             }
 
@@ -423,16 +373,13 @@ namespace FuturePath.PresentationLayer
             SetStatus(row.SubjectName + " removed. " + SubjectsStepStatus, DeepNavy, Color.White);
         }
 
-        /// <summary>The grid is for reading: no row starts highlighted after the list changes.</summary>
+        // Clear the grid selection after loading data
         private void dgvSubjects_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dgvSubjects.ClearSelection();
         }
 
-        /// <summary>
-        /// Recalculates the captured count and average (display only) and the "n of min captured" caption.
-        /// It also refreshes the notice and whether Save and continue is available (at least one subject).
-        /// </summary>
+        // Update the subject count, average and save button
         private void SubjectsRefreshTotals()
         {
             int count = subjectsRows.Count;
@@ -458,10 +405,7 @@ namespace FuturePath.PresentationLayer
 
         #region Notice and Enter key
 
-        /// <summary>
-        /// Amber when fewer than MIN_SUBJECT_COUNT subjects are captured (a warning, never a block),
-        /// green when enough are captured, blue guidance while the stored minimum is not known.
-        /// </summary>
+        // Display guidance based on the number of subjects captured
         private void SubjectsUpdateNotice()
         {
             int count = subjectsRows.Count;
@@ -486,13 +430,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>While focus is in the Add-a-subject group, Enter adds the subject.</summary>
+        // Use Enter to add a subject while the entry group is focused
         private void pnlAddCard_Enter(object sender, EventArgs e)
         {
             AcceptButton = btnAddSubject;
         }
 
-        /// <summary>Outside the group, Enter means Save and continue again.</summary>
+        // Restore Enter to Save and continue outside the entry group
         private void pnlAddCard_Leave(object sender, EventArgs e)
         {
             AcceptButton = btnSubjectsSave;
@@ -502,10 +446,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>
-        /// Save and continue → UI 4. Invalid data in the Add-a-subject group raises UI 3.1a
-        /// (Invalid or duplicate subjects) and refocuses the offending control.
-        /// </summary>
+        // Validate and save subjects before continuing
         private void btnSubjectsSave_Click(object sender, EventArgs e)
         {
             subjectsRawMarkText = numMark.ContainsFocus ? numMark.Text : subjectsRawMarkText;
@@ -520,7 +461,7 @@ namespace FuturePath.PresentationLayer
                     return;
                 }
 
-                // A valid entry that was never added: ask rather than drop it silently.
+                // Confirm before leaving a valid but unadded subject behind
                 if (!Confirm("Subject not added",
                     cboSubject.Text + " has not been added to your captured subjects. Continue without it?", "Continue without it"))
                 {
@@ -542,7 +483,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL's own check failed: its message names the subject or mark to fix.
+                // Display errors returned by the controller
                 SetStatus(ex.Message, RedColour, Color.White);
                 return;
             }
@@ -556,13 +497,13 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabInterests, 3);
         }
 
-        /// <summary>Back → UI 2. The captured subjects are kept.</summary>
+        // Return to the learner profile without removing captured subjects
         private void btnSubjectsBack_Click(object sender, EventArgs e)
         {
             tcMain.SelectedTab = tabProfile;
         }
 
-        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        // Cancel the session and return home
         private void btnSubjectsCancel_Click(object sender, EventArgs e)
         {
             GoHome();
