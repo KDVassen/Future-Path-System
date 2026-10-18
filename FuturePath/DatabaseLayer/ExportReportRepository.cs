@@ -1,3 +1,4 @@
+
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -5,12 +6,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for the ExportReport log. Insert is the one place an ExportReport row is
-    /// written, both for a learner's own FP-LSR (UI 7) and for staff exports (decisions.md D2).
-    /// Insert follows the Waitering pattern: fill an empty copy of the table, add a row, then
-    /// send it with the adapter's INSERT command.
-    /// </summary>
+    // Handles database operations for report export records
+    // Saves export details and retrieves the last generated date
     public class ExportReportRepository : DB
     {
         #region Data Members
@@ -19,32 +16,34 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the export report repository
         public ExportReportRepository() : base()
         {
         }
         #endregion
 
         #region Methods
-        /// <summary>Writes one ExportReport row and returns its ExportID (also stored in report.ExportID).</summary>
+        // Save a new report export record to the database
+        // Return the generated export ID
         public int Insert(ExportReport report)
         {
-            // 1. Fill an empty copy of the table so the DataSet knows its columns.
+            // Load the table structure without retrieving existing records
             FillDataSet(sqlLocal + " WHERE 1 = 0", table);
 
-            // 2. Add the new row to the DataSet (Waitering DataSetChange).
+            // Add the report details to a new DataSet row
             DataRow row = GetTable(table).NewRow();
             FillRow(row, report);
             GetTable(table).Rows.Add(row);
 
-            // 3. Send the row to the database. The INSERT returns the new key into the row.
+            // Insert the new record and retrieve its generated ID
             Create_INSERT_Command();
             UpdateDataSource(table);
             report.ExportID = Convert.ToInt32(row["ExportID"]);
             return report.ExportID;
         }
 
-        /// <summary>When the report was last generated, or null if never.</summary>
+        // Get the date a report was last generated
+        // Return null if the report has never been generated
         public DateTime? GetLastGenerated(string reportCode)
         {
             object value = ExecuteScalar("SELECT MAX(DateGenerated) FROM ExportReport WHERE ReportCode = @ReportCode",
@@ -58,7 +57,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Copies the log entry into a DataRow (Waitering FillRow). Nulls become DBNull.</summary>
+        // Copy report export details into a DataRow
+        // Convert missing values to database NULL values
         private void FillRow(DataRow row, ExportReport report)
         {
             row["ReportCode"] = report.ReportCode;
@@ -71,7 +71,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters and Create Commands
-        /// <summary>One adapter parameter per column; each reads its value from the new row (Waitering Build_INSERT_Parameters).</summary>
+        // Add the required parameters to the INSERT command
         private void Build_INSERT_Parameters()
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@ReportCode", SqlDbType.VarChar, "ReportCode"));
@@ -82,10 +82,8 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@ExportFormat", SqlDbType.VarChar, "ExportFormat"));
         }
 
-        /// <summary>
-        /// The adapter's INSERT command (Waitering Create_INSERT_Command). It ends by selecting the
-        /// new ExportID, which the adapter copies back into the row (FirstReturnedRecord).
-        /// </summary>
+        // Create the SQL command for inserting a report export record
+        // Return the new ExportID to the DataSet after insertion
         private void Create_INSERT_Command()
         {
             daMain.InsertCommand = new SqlCommand(

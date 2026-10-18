@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,10 +7,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for staff accounts (UI 8 login, UI 13.6 maintenance), in the Waitering
-    /// DataSetChange / UpdateDataSource pattern. UserAccount is the single source of truth for login.
-    /// </summary>
+    // Handles database operations for staff user accounts
+    // Loads account details and saves new or updated accounts
     public class UserAccountRepository : DB
     {
         #region Data Members
@@ -19,7 +18,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the user account collection
         public UserAccountRepository() : base()
         {
             accounts = new Collection<UserAccount>();
@@ -27,7 +26,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read
-        /// <summary>The account with this username (not case-sensitive), or null.</summary>
+        // Find a staff account using its username
         public UserAccount FindByUsername(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
@@ -43,7 +42,7 @@ namespace FuturePath.DatabaseLayer
             return accounts[0];
         }
 
-        /// <summary>One account, or null.</summary>
+        // Find a user account by ID or return null if it does not exist
         public UserAccount FindById(int userID)
         {
             FillDataSet(sqlLocal + " WHERE UserID = @UserID", table, Param("@UserID", SqlDbType.Int, userID));
@@ -55,7 +54,7 @@ namespace FuturePath.DatabaseLayer
             return accounts[0];
         }
 
-        /// <summary>Every account, ordered by FullName.</summary>
+        // Load all user accounts ordered by full name
         public Collection<UserAccount> GetAccounts()
         {
             FillDataSet(sqlLocal + " ORDER BY FullName", table);
@@ -63,7 +62,7 @@ namespace FuturePath.DatabaseLayer
             return accounts;
         }
 
-        /// <summary>True if another account already has this username.</summary>
+        // Check whether another account already has the same username
         public bool UsernameExists(string username, int excludeUserID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM UserAccount WHERE Username = @Username AND UserID <> @ExcludeID",
@@ -74,7 +73,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled UserAccount rows into UserAccount objects (Waitering Add2Collection).</summary>
+        // Convert database rows into UserAccount objects
         private void Add2Collection()
         {
             accounts = new Collection<UserAccount>();
@@ -88,13 +87,13 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Maintenance - Waitering pattern
-        /// <summary>Adds a new account row to the DataSet, or changes the existing row (Edit).</summary>
+        // Add a new account or update an existing one in the DataSet
         public void DataSetChange(UserAccount account, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty fill gives the table its columns; the new row is added to it.
+                // Load the table structure before adding a new account
                 FillDataSet(sqlLocal + " WHERE 1 = 0", table);
                 row = GetTable(table).NewRow();
                 FillRow(row, account);
@@ -112,7 +111,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Sends the account change to the database. Returns the UserID (the new key for Add).</summary>
+        // Save account changes to the database and return the account ID
         public int UpdateDataSource(UserAccount account, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -126,17 +125,15 @@ namespace FuturePath.DatabaseLayer
             UpdateDataSource(table);
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row (FirstReturnedRecord).
+                // Read the new account ID from the inserted row
                 DataTable accountTable = GetTable(table);
                 account.UserID = ReadInt(accountTable.Rows[accountTable.Rows.Count - 1], "UserID");
             }
             return account.UserID;
         }
 
-        /// <summary>
-        /// Copies the account's values into a row (Waitering FillRow). The key is never changed
-        /// here. Only the salted hash is stored, never a password.
-        /// </summary>
+        // Copy account details into a DataRow
+        // Store only the password hash, never the actual password
         private void FillRow(DataRow row, UserAccount account)
         {
             row["Username"] = account.Username.Trim();
@@ -148,7 +145,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters, Create Commands
-        /// <summary>The INSERT parameters, each read from a column of the new row (Waitering Build_INSERT_Parameters).</summary>
+        // Add the required parameters to the INSERT command
         private void Build_INSERT_Parameters(UserAccount account)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@Username", SqlDbType.VarChar, "Username"));
@@ -158,7 +155,7 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@IsActive", SqlDbType.Bit, "IsActive"));
         }
 
-        /// <summary>The INSERT command. It returns the new UserID into the row.</summary>
+        // Create the SQL command for inserting a new account
         private void Create_INSERT_Command(UserAccount account)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO UserAccount (Username, PasswordHash, FullName, Role, IsActive) " +
@@ -168,7 +165,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(account);
         }
 
-        /// <summary>The UPDATE parameters, each read from a column of the changed row.</summary>
+        // Add the required parameters to the UPDATE command
         private void Build_UPDATE_Parameters(UserAccount account)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@Username", SqlDbType.VarChar, "Username"));
@@ -179,7 +176,7 @@ namespace FuturePath.DatabaseLayer
             daMain.UpdateCommand.Parameters.Add(SourceParam("@UserID", SqlDbType.Int, "UserID"));
         }
 
-        /// <summary>The UPDATE command for one account.</summary>
+        // Create the SQL command for updating an existing account
         private void Create_UPDATE_Command(UserAccount account)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE UserAccount SET Username = @Username, PasswordHash = @PasswordHash, FullName = @FullName, " +

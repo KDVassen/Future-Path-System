@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -7,11 +8,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for interest categories, questions and programme relevance weights
-    /// (UI 4 questionnaire, UI 13.4 categories and weights, UI 13.5 questionnaire), in the
-    /// Waitering DataSetChange / UpdateDataSource pattern.
-    /// </summary>
+    // Handles interest categories, questionnaire questions and programme relevance weights
+    // Loads and saves the information used for interest-based recommendations
     public class InterestRepository : DB
     {
         #region Data Members
@@ -27,7 +25,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the interest category and question collections
         public InterestRepository() : base()
         {
             categories = new Collection<InterestCategory>();
@@ -36,7 +34,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Categories
-        /// <summary>Categories ordered by name; inactive ones only when includeInactive is true.</summary>
+        // Load interest categories ordered by name
+        // Include inactive categories when requested
         public Collection<InterestCategory> GetCategories(bool includeInactive)
         {
             string sql = sqlCategories;
@@ -49,10 +48,7 @@ namespace FuturePath.DatabaseLayer
             return categories;
         }
 
-        /// <summary>
-        /// UI 13.4 grid: CategoryID, CategoryName, QuestionCount (the category's active questions),
-        /// MappedProgrammeCount (its DegreeInterestMapping rows), IsActive. A new table every call.
-        /// </summary>
+        // Load category details with their question and programme mapping counts
         public DataTable GetCategoryTable(bool includeInactive)
         {
             string sql = "SELECT c.CategoryID, c.CategoryName, " +
@@ -68,7 +64,7 @@ namespace FuturePath.DatabaseLayer
             return GetTable(categoryListTable).Copy();
         }
 
-        /// <summary>One category, or null.</summary>
+        // Find an interest category by its ID
         public InterestCategory FindCategoryById(int categoryID)
         {
             FillDataSet(sqlCategories + " WHERE CategoryID = @CategoryID", categoryTable, Param("@CategoryID", SqlDbType.Int, categoryID));
@@ -80,7 +76,7 @@ namespace FuturePath.DatabaseLayer
             return categories[0];
         }
 
-        /// <summary>True if another category already has this name.</summary>
+        // Check whether another interest category has the same name
         public bool CategoryNameExists(string categoryName, int excludeCategoryID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM InterestCategory WHERE CategoryName = @CategoryName AND CategoryID <> @ExcludeID",
@@ -89,13 +85,13 @@ namespace FuturePath.DatabaseLayer
             return Convert.ToInt32(count) > 0;
         }
 
-        /// <summary>Adds a new category row to the DataSet, or changes the existing row (Edit).</summary>
+        // Add a new interest category or update an existing one in the DataSet
         public void DataSetChange(InterestCategory category, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty fill gives the table its columns; the new row is added to it.
+                // Load the table structure before adding a new category
                 FillDataSet(sqlCategories + " WHERE 1 = 0", categoryTable);
                 row = GetTable(categoryTable).NewRow();
                 FillRow(row, category);
@@ -113,7 +109,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Sends the category change to the database. Returns the CategoryID (the new key for Add).</summary>
+        // Save category changes to the database and return the category ID
         public int UpdateDataSource(InterestCategory category, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -127,7 +123,7 @@ namespace FuturePath.DatabaseLayer
             UpdateDataSource(categoryTable);
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row (FirstReturnedRecord).
+                // Retrieve the new category ID after insertion
                 DataTable rows = GetTable(categoryTable);
                 category.CategoryID = ReadInt(rows.Rows[rows.Rows.Count - 1], "CategoryID");
             }
@@ -136,11 +132,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Questions
-        /// <summary>
-        /// Questions with CategoryName, ordered by DisplayOrder then QuestionID. A categoryID of 0
-        /// means every category. Without includeInactive, inactive questions and questions in
-        /// inactive categories are left out.
-        /// </summary>
+        // Load questions ordered by display order and question ID
+        // Optionally filter by category and include inactive questions
         public Collection<InterestQuestion> GetQuestions(int categoryID, bool includeInactive)
         {
             string sql = sqlQuestions + " WHERE 1 = 1";
@@ -159,7 +152,7 @@ namespace FuturePath.DatabaseLayer
             return questions;
         }
 
-        /// <summary>One question with CategoryName, or null.</summary>
+        // Find an interest question by its ID
         public InterestQuestion FindQuestionById(int questionID)
         {
             FillDataSet(sqlQuestions + " WHERE q.QuestionID = @QuestionID", questionTable, Param("@QuestionID", SqlDbType.Int, questionID));
@@ -171,13 +164,13 @@ namespace FuturePath.DatabaseLayer
             return questions[0];
         }
 
-        /// <summary>Adds a new question row to the DataSet, or changes the existing row (Edit).</summary>
+        // Add a new question or update an existing one in the DataSet
         public void DataSetChange(InterestQuestion question, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty fill gives the table its columns; the new row is added to it.
+                // Load the table structure before adding a new question
                 FillDataSet(sqlQuestions + " WHERE 1 = 0", questionTable);
                 row = GetTable(questionTable).NewRow();
                 FillRow(row, question);
@@ -195,7 +188,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Sends the question change to the database. Returns the QuestionID (the new key for Add).</summary>
+        // Save question changes to the database and return the question ID
         public int UpdateDataSource(InterestQuestion question, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -209,7 +202,7 @@ namespace FuturePath.DatabaseLayer
             UpdateDataSource(questionTable);
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row (FirstReturnedRecord).
+                // Retrieve the new question ID after insertion
                 DataTable rows = GetTable(questionTable);
                 question.QuestionID = ReadInt(rows.Rows[rows.Rows.Count - 1], "QuestionID");
             }
@@ -218,10 +211,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Relevance weights
-        /// <summary>
-        /// UI 13.4 weights grid for a category: ProgrammeID, ProgrammeName, RelevanceWeight,
-        /// ordered by programme name. A new table every call.
-        /// </summary>
+        // Load programme relevance weights for the selected interest category
         public DataTable GetRelevanceWeights(int categoryID)
         {
             FillDataSet("SELECT m.ProgrammeID, p.ProgrammeName, m.RelevanceWeight FROM DegreeInterestMapping m " +
@@ -231,10 +221,10 @@ namespace FuturePath.DatabaseLayer
             return GetTable(weightTable).Copy();
         }
 
-        /// <summary>Inserts or updates the DegreeInterestMapping row for (programme, category).</summary>
+        // Update a programme's relevance weight or insert a new mapping
         public void SaveRelevanceWeight(int programmeID, int categoryID, decimal relevanceWeight)
         {
-            // Update the mapping if it exists; if no row was updated, insert it.
+            // Insert a mapping only if an existing row was not updated
             ExecuteNonQuery("UPDATE DegreeInterestMapping SET RelevanceWeight = @Weight WHERE ProgrammeID = @ProgrammeID AND CategoryID = @CategoryID; " +
                             "IF @@ROWCOUNT = 0 " +
                             "INSERT INTO DegreeInterestMapping (ProgrammeID, CategoryID, RelevanceWeight) VALUES (@ProgrammeID, @CategoryID, @Weight)",
@@ -245,7 +235,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled InterestCategory rows into InterestCategory objects (Waitering Add2Collection).</summary>
+        // Convert database rows into InterestCategory objects
         private void AddCategories2Collection()
         {
             categories = new Collection<InterestCategory>();
@@ -255,7 +245,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Turns the filled InterestQuestion rows into InterestQuestion objects (Waitering Add2Collection).</summary>
+        // Convert database rows into InterestQuestion objects
         private void AddQuestions2Collection()
         {
             questions = new Collection<InterestQuestion>();
@@ -269,14 +259,14 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Copies the category's values into a row (Waitering FillRow). The key is never changed here.</summary>
+        // Copy an interest category's values into a DataRow
         private void FillRow(DataRow row, InterestCategory category)
         {
             row["CategoryName"] = category.CategoryName.Trim();
             row["IsActive"] = category.IsActive;
         }
 
-        /// <summary>Copies the question's values into a row (Waitering FillRow). The key is never changed here.</summary>
+        // Copy an interest question's values into a DataRow
         private void FillRow(DataRow row, InterestQuestion question)
         {
             row["CategoryID"] = question.CategoryID;
@@ -287,14 +277,14 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters, Create Commands
-        /// <summary>The category INSERT parameters, each read from a column of the new row.</summary>
+        // Add the category parameters to the INSERT command
         private void Build_INSERT_Parameters(InterestCategory category)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@CategoryName", SqlDbType.VarChar, "CategoryName"));
             daMain.InsertCommand.Parameters.Add(SourceParam("@IsActive", SqlDbType.Bit, "IsActive"));
         }
 
-        /// <summary>The category INSERT command. It returns the new CategoryID into the row.</summary>
+        // Create the SQL command for inserting a new interest category
         private void Create_INSERT_Command(InterestCategory category)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO InterestCategory (CategoryName, IsActive) VALUES (@CategoryName, @IsActive); " +
@@ -303,7 +293,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(category);
         }
 
-        /// <summary>The category UPDATE parameters, each read from a column of the changed row.</summary>
+        // Add the category parameters and ID to the UPDATE command
         private void Build_UPDATE_Parameters(InterestCategory category)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@CategoryName", SqlDbType.VarChar, "CategoryName"));
@@ -311,14 +301,14 @@ namespace FuturePath.DatabaseLayer
             daMain.UpdateCommand.Parameters.Add(SourceParam("@CategoryID", SqlDbType.Int, "CategoryID"));
         }
 
-        /// <summary>The category UPDATE command.</summary>
+        // Create the SQL command for updating an interest category
         private void Create_UPDATE_Command(InterestCategory category)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE InterestCategory SET CategoryName = @CategoryName, IsActive = @IsActive WHERE CategoryID = @CategoryID", cnMain);
             Build_UPDATE_Parameters(category);
         }
 
-        /// <summary>The question INSERT parameters, each read from a column of the new row.</summary>
+        // Add the question parameters to the INSERT command
         private void Build_INSERT_Parameters(InterestQuestion question)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@CategoryID", SqlDbType.Int, "CategoryID"));
@@ -327,7 +317,7 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@IsActive", SqlDbType.Bit, "IsActive"));
         }
 
-        /// <summary>The question INSERT command. It returns the new QuestionID into the row.</summary>
+        // Create the SQL command for inserting a new interest question
         private void Create_INSERT_Command(InterestQuestion question)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO InterestQuestion (CategoryID, QuestionText, DisplayOrder, IsActive) " +
@@ -337,7 +327,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(question);
         }
 
-        /// <summary>The question UPDATE parameters, each read from a column of the changed row.</summary>
+        // Add the question parameters and ID to the UPDATE command
         private void Build_UPDATE_Parameters(InterestQuestion question)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@CategoryID", SqlDbType.Int, "CategoryID"));
@@ -347,7 +337,7 @@ namespace FuturePath.DatabaseLayer
             daMain.UpdateCommand.Parameters.Add(SourceParam("@QuestionID", SqlDbType.Int, "QuestionID"));
         }
 
-        /// <summary>The question UPDATE command.</summary>
+        // Create the SQL command for updating an interest question
         private void Create_UPDATE_Command(InterestQuestion question)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE InterestQuestion SET CategoryID = @CategoryID, QuestionText = @QuestionText, " +

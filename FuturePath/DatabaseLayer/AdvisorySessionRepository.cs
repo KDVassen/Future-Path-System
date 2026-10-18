@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -6,11 +7,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for advisory sessions and their recommendation results (class diagram
-    /// AdvisorySessionRepository: save(session), save(result), saveAll(results)).
-    /// Re-running a check is safe: UNIQUE(SessionID, ProgrammeID) is respected by replacing rows.
-    /// </summary>
+    // Handles database operations for advisory sessions and recommendation results
+    // Loads, saves and updates sessions and their programme recommendations
     public class AdvisorySessionRepository : DB
     {
         #region Data Members
@@ -20,7 +18,7 @@ namespace FuturePath.DatabaseLayer
         private string sqlLocal = "SELECT SessionID, LearnerID, GradeLevelID, PreferredFacultyID, SelectedProgrammeID, SessionDate, AdvisingYear, "
                                 + "FundingInfoRequested, AlternativesInSummary, SessionStatus, DateCompleted FROM AdvisorySession";
 
-        // Results with the programme and faculty names, for display
+        // Load recommendation results with their programme and faculty names
         private string sqlResults = "SELECT r.ResultID, r.SessionID, r.ProgrammeID, p.ProgrammeName, f.FacultyName, r.SubjectMatchScore, "
                                   + "r.MarkMatchScore, r.InterestMatchScore, r.FacultyBonus, r.OverallScore, r.OutcomeCode, r.OutcomeReason, "
                                   + "r.AlternativeRank, r.IsSelectedProgramme "
@@ -38,7 +36,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the session and recommendation result collections
         public AdvisorySessionRepository() : base()
         {
             sessions = new Collection<AdvisorySession>();
@@ -47,10 +45,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read
-        /// <summary>
-        /// Loads one session, with Outcome set to the selected programme's OutcomeCode ("" if none).
-        /// Results are not loaded. Returns null if it does not exist.
-        /// </summary>
+        // Find an advisory session using its ID
+        // Load the outcome from its selected programme result
         public AdvisorySession FindById(int sessionID)
         {
             FillDataSet(sqlLocal + " WHERE SessionID = @SessionID", table, Param("@SessionID", SqlDbType.Int, sessionID));
@@ -61,7 +57,7 @@ namespace FuturePath.DatabaseLayer
             }
             AdvisorySession session = sessions[0];
 
-            // The session's outcome is the OutcomeCode of its selected programme's result row
+            // Get the saved outcome of the selected programme
             object outcomeCode = ExecuteScalar("SELECT OutcomeCode FROM RecommendationResult WHERE SessionID = @SessionID AND IsSelectedProgramme = 1",
                                                Param("@SessionID", SqlDbType.Int, sessionID));
             if (outcomeCode == null)
@@ -75,7 +71,7 @@ namespace FuturePath.DatabaseLayer
             return session;
         }
 
-        /// <summary>The selected programme's result (IsSelectedProgramme = 1) with ProgrammeName and FacultyName, or null.</summary>
+        // Find the selected programme's recommendation result for a session
         public RecommendationResult FindSelectedResult(int sessionID)
         {
             FillDataSet(sqlResults + " WHERE r.SessionID = @SessionID AND r.IsSelectedProgramme = 1", resultTable,
@@ -88,7 +84,8 @@ namespace FuturePath.DatabaseLayer
             return results[0];
         }
 
-        /// <summary>All results of a session with ProgrammeName and FacultyName: the selected one first, then alternatives by rank.</summary>
+        // Load all recommendation results for a session
+        // Show the selected programme first, followed by ranked alternatives
         public Collection<RecommendationResult> FindResults(int sessionID)
         {
             FillDataSet(sqlResults + " WHERE r.SessionID = @SessionID ORDER BY r.IsSelectedProgramme DESC, r.AlternativeRank, p.ProgrammeName",
@@ -99,7 +96,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled AdvisorySession rows into AdvisorySession objects (Waitering Add2Collection).</summary>
+        // Convert database rows into AdvisorySession objects
         private void Add2Collection()
         {
             sessions = new Collection<AdvisorySession>();
@@ -121,7 +118,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Turns the filled RecommendationResult rows into RecommendationResult objects.</summary>
+        // Convert database rows into RecommendationResult objects
         private void AddResults2Collection()
         {
             results = new Collection<RecommendationResult>();
@@ -146,7 +143,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Copies a session's values into a DataRow (Waitering FillRow).</summary>
+        // Copy an advisory session's values into a DataRow
         private void FillRow(DataRow row, AdvisorySession session)
         {
             row["LearnerID"] = session.LearnerID;
@@ -161,10 +158,8 @@ namespace FuturePath.DatabaseLayer
             row["DateCompleted"] = DbValue(session.DateCompleted);
         }
 
-        /// <summary>
-        /// Inserts one result row inside the open transaction and sets its new ResultID.
-        /// Used by Save(result) and SaveAll.
-        /// </summary>
+        // Insert a recommendation result using the current transaction
+        // Store the generated result ID after insertion
         private void InsertResult(SqlTransaction transaction, RecommendationResult result)
         {
             object newID = ExecuteScalar(transaction, sqlInsertResult,
@@ -184,11 +179,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Write
-        /// <summary>
-        /// Class diagram save(session). Inserts the session (sets SessionID) when SessionID is 0,
-        /// otherwise updates every column. Returns the same session. Throws ArgumentException if
-        /// the session to update does not exist.
-        /// </summary>
+        // Add a new advisory session or update an existing one
+        // Save the generated session ID when a new record is inserted
         public AdvisorySession Save(AdvisorySession session)
         {
             DB.DBOperation operation = DB.DBOperation.Edit;
@@ -201,25 +193,23 @@ namespace FuturePath.DatabaseLayer
             return session;
         }
 
-        /// <summary>
-        /// Class diagram save(result): stores the selected programme's result. In one transaction
-        /// it deletes the session's previous selected row and any row for the same programme,
-        /// then inserts this row with IsSelectedProgramme = 1 (sets ResultID). Returns the result.
-        /// </summary>
+        // Save the selected programme's recommendation result
+        // Replace previous selected results within a single transaction
         public RecommendationResult Save(RecommendationResult result)
         {
-            // The selected programme's row is never ranked
+            // Selected programmes do not have an alternative rank
             result.IsSelectedProgramme = true;
             result.AlternativeRank = null;
 
             SqlTransaction transaction = BeginTransaction();
             try
             {
-                // 1. Remove the old selected row, and an alternative row for the same programme (UNIQUE(SessionID, ProgrammeID))
+                // Remove the previous selected result and any duplicate programme result
                 ExecuteNonQuery(transaction, "DELETE FROM RecommendationResult WHERE SessionID = @SessionID AND (IsSelectedProgramme = 1 OR ProgrammeID = @ProgrammeID)",
                                 Param("@SessionID", SqlDbType.Int, result.SessionID),
                                 Param("@ProgrammeID", SqlDbType.Int, result.ProgrammeID));
-                // 2. Insert the new selected row
+
+                // Insert the new selected programme result
                 InsertResult(transaction, result);
                 transaction.Commit();
             }
@@ -235,12 +225,8 @@ namespace FuturePath.DatabaseLayer
             return result;
         }
 
-        /// <summary>
-        /// Class diagram saveAll(results): stores the ranked alternatives. In one transaction it
-        /// deletes the session's previous alternative rows (IsSelectedProgramme = 0) and inserts
-        /// these (sets each ResultID). All results must belong to one session (ArgumentException
-        /// if not). An empty collection changes nothing. Returns true.
-        /// </summary>
+        // Save all ranked alternative recommendations for a session
+        // Replace previous alternatives while keeping the selected programme
         public bool SaveAll(Collection<RecommendationResult> results)
         {
             if (results == null || results.Count == 0)
@@ -259,10 +245,11 @@ namespace FuturePath.DatabaseLayer
             SqlTransaction transaction = BeginTransaction();
             try
             {
-                // 1. Remove the session's previous alternatives (the selected row stays)
+                // Remove previous alternatives without deleting the selected result
                 ExecuteNonQuery(transaction, "DELETE FROM RecommendationResult WHERE SessionID = @SessionID AND IsSelectedProgramme = 0",
                                 Param("@SessionID", SqlDbType.Int, sessionID));
-                // 2. Insert the new ranked alternatives
+
+                // Insert the updated ranked alternative results
                 foreach (RecommendationResult result in results)
                 {
                     result.IsSelectedProgramme = false;
@@ -282,7 +269,7 @@ namespace FuturePath.DatabaseLayer
             return true;
         }
 
-        /// <summary>Stores the preferred faculty and selected programme chosen on UI 5.</summary>
+        // Save the learner's preferred faculty and selected degree programme
         public void SaveProgrammeSelection(int sessionID, int preferredFacultyID, int selectedProgrammeID)
         {
             ExecuteNonQuery("UPDATE AdvisorySession SET PreferredFacultyID = @PreferredFacultyID, SelectedProgrammeID = @SelectedProgrammeID WHERE SessionID = @SessionID",
@@ -291,7 +278,7 @@ namespace FuturePath.DatabaseLayer
                             Param("@SessionID", SqlDbType.Int, sessionID));
         }
 
-        /// <summary>Stores the UI 6.1a "include these alternatives in my summary" choice.</summary>
+        // Save whether alternative programmes should appear in the learner's summary
         public void SetAlternativesInSummary(int sessionID, bool include)
         {
             ExecuteNonQuery("UPDATE AdvisorySession SET AlternativesInSummary = @Include WHERE SessionID = @SessionID",
@@ -299,7 +286,7 @@ namespace FuturePath.DatabaseLayer
                             Param("@SessionID", SqlDbType.Int, sessionID));
         }
 
-        /// <summary>Stores the UI 6.2b "Add to Summary" choice (FundingInfoRequested).</summary>
+        // Save whether funding information should appear in the learner's summary
         public void SetFundingInfoRequested(int sessionID, bool requested)
         {
             ExecuteNonQuery("UPDATE AdvisorySession SET FundingInfoRequested = @Requested WHERE SessionID = @SessionID",
@@ -307,7 +294,7 @@ namespace FuturePath.DatabaseLayer
                             Param("@SessionID", SqlDbType.Int, sessionID));
         }
 
-        /// <summary>Sets SessionStatus = 'Completed' and DateCompleted (UI 7 Save and export).</summary>
+        // Mark an advisory session as completed and save its completion date
         public void MarkCompleted(int sessionID, DateTime dateCompleted)
         {
             ExecuteNonQuery("UPDATE AdvisorySession SET SessionStatus = @Status, DateCompleted = @DateCompleted WHERE SessionID = @SessionID",
@@ -318,13 +305,13 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Database Operations - Waitering pattern
-        /// <summary>Adds a new session row to the DataSet, or changes the existing row (Edit).</summary>
+        // Add a new session row or update an existing row in the DataSet
         private void DataSetChange(AdvisorySession session, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty copy of the table gives the columns for the new row
+                // Load the table structure before adding a new row
                 FillDataSet(sqlLocal + " WHERE 1 = 0", table);
                 row = GetTable(table).NewRow();
                 FillRow(row, session);
@@ -342,7 +329,8 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Sends the session change to the database; for Add, sets the new SessionID.</summary>
+        // Send session changes from the DataSet to the database
+        // Retrieve the new session ID after an insert
         private void UpdateDataSource(AdvisorySession session, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -357,7 +345,7 @@ namespace FuturePath.DatabaseLayer
 
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row; read it before any other fill
+                // Read the newly generated session ID from the inserted row
                 DataTable sessionTable = GetTable(table);
                 session.SessionID = Convert.ToInt32(sessionTable.Rows[sessionTable.Rows.Count - 1]["SessionID"]);
             }
@@ -365,7 +353,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters and Create Commands
-        /// <summary>The INSERT for a session; the new SessionID comes back into the row.</summary>
+        // Create the SQL command for inserting a new advisory session
         private void Create_INSERT_Command(AdvisorySession session)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO AdvisorySession (LearnerID, GradeLevelID, PreferredFacultyID, SelectedProgrammeID, "
@@ -377,13 +365,13 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(session);
         }
 
-        /// <summary>One parameter per session column, each reading its value from the row (Waitering Build_INSERT_Parameters).</summary>
+        // Add the required parameters to the INSERT command
         private void Build_INSERT_Parameters(AdvisorySession session)
         {
             AddSessionParameters(daMain.InsertCommand);
         }
 
-        /// <summary>The UPDATE for a session: every column, matched on SessionID.</summary>
+        // Create the SQL command for updating an existing advisory session
         private void Create_UPDATE_Command(AdvisorySession session)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE AdvisorySession SET LearnerID = @LearnerID, GradeLevelID = @GradeLevelID, "
@@ -394,14 +382,14 @@ namespace FuturePath.DatabaseLayer
             Build_UPDATE_Parameters(session);
         }
 
-        /// <summary>The UPDATE parameters: every column plus the key.</summary>
+        // Add the required parameters to the UPDATE command
         private void Build_UPDATE_Parameters(AdvisorySession session)
         {
             AddSessionParameters(daMain.UpdateCommand);
             daMain.UpdateCommand.Parameters.Add(SourceParam("@SessionID", SqlDbType.Int, "SessionID"));
         }
 
-        /// <summary>The column parameters shared by the INSERT and the UPDATE.</summary>
+        // Add the shared session parameters for INSERT and UPDATE commands
         private static void AddSessionParameters(SqlCommand command)
         {
             command.Parameters.Add(SourceParam("@LearnerID", SqlDbType.Int, "LearnerID"));
