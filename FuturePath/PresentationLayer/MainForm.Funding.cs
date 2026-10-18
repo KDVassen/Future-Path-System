@@ -1,3 +1,4 @@
+
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -6,30 +7,20 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 6.2b — Funding Options (step 5 of 6; spec 2.3.8).
-    /// Nothing is typed. The learner sets the Faculty and Funding type filters (both bound to stored
-    /// reference data), may limit the list to options that are still open, and selects a row to fill
-    /// the read-only detail card. Only <b>active</b> funding linked to the faculty or programme is
-    /// listed. Funding is labelled as sample information to verify with the funder. There is no
-    /// validation. <b>Add to Summary</b> sets <c>FundingInfoRequested = 1</c> and opens UI 7.
-    /// </summary>
+    // Handles funding options and their details for learners
     public partial class MainForm
     {
         private const string FundingReadyStatus = "Step 5 of 6 · Select a funding option to see its details.";
 
-        /// <summary>The UI 5 faculty the Faculty filter was last defaulted to.</summary>
+        // Faculty previously used to filter funding options
         private int? fundingDefaultedFacultyId;
 
-        /// <summary>True once both filters have been bound for this session.</summary>
+        // Tracks whether the funding filters have been loaded
         private bool fundingListsLoaded;
 
         #region Shown, button clicks and reset
 
-        /// <summary>
-        /// Called by PageShown each time UI 6.2b appears: shows the ready status, binds the filters once
-        /// per session and lists the funding for the UI 5 faculty.
-        /// </summary>
+        // Initialise the funding screen and load available options
         private void FundingShown()
         {
             SetStatus(FundingReadyStatus, DeepNavy, Color.White);
@@ -41,7 +32,7 @@ namespace FuturePath.PresentationLayer
             FundingApplyDefaultFaculty();
         }
 
-        /// <summary>Add to Summary → sets FundingInfoRequested = 1, then opens UI 7 (Back there returns here).</summary>
+        // Add funding information to the advisory summary
         private void btnFundingAdd_Click(object sender, EventArgs e)
         {
             try
@@ -57,20 +48,16 @@ namespace FuturePath.PresentationLayer
             OpenSummary(tabFunding);
         }
 
-        /// <summary>Back → UI 6 (Eligibility results).</summary>
+        // Return to the eligibility results screen
         private void btnFundingBack_Click(object sender, EventArgs e)
         {
             tcResults.SelectedTab = tabOutcome;
         }
 
-        /// <summary>
-        /// Returns UI 6.2b to a brand-new state for the next learner (spec 2.1): no faculty or funding
-        /// type chosen, "still open" unticked, an empty list and count, the default heading, an empty
-        /// detail card, and the filters are bound again the next time the screen is shown.
-        /// </summary>
+        // Reset funding filters and details for a new learner
         private void FundingReset()
         {
-            fundingListsLoaded = false;          // first, so unticking below does not list funding
+            fundingListsLoaded = false;          // Prevent loading funding while resetting filters
             fundingDefaultedFacultyId = null;
 
             cboFundFaculty.SelectedIndex = -1;
@@ -88,7 +75,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds both filters to stored reference data (never literal Items).</summary>
+        // Load faculty and funding type filters
         private void FundingLoadLists()
         {
             try
@@ -99,7 +86,7 @@ namespace FuturePath.PresentationLayer
                 cboFundFaculty.DataSource = referenceDataController.GetActiveFaculties();
                 cboFundFaculty.SelectedIndex = -1;
 
-                // SystemParameter rows FUNDING_TYPE_1..4 after the BLL's "All funding types" row (FundingType "").
+                // Load funding types with an option to show all
                 FundingController fundingController = new FundingController();
                 cboFundingType.DisplayMember = "ParameterValue";
                 cboFundingType.ValueMember = "FundingType";
@@ -113,14 +100,14 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Lists the active funding for the chosen faculty (and the selected programme) using the filters.</summary>
+        // Load active funding matching the selected filters
         private void FundingLoad()
         {
             FundingClearDetail();
             FundingUpdateHeading();
             try
             {
-                // 0 and "" mean "no filter" to the BLL.
+                // Zero and an empty string represent no filter
                 int facultyId = 0;
                 if (cboFundFaculty.SelectedIndex >= 0)
                 {
@@ -139,7 +126,7 @@ namespace FuturePath.PresentationLayer
                     fundingType = Convert.ToString(cboFundingType.SelectedValue, CultureInfo.InvariantCulture);
                 }
 
-                // Only active funding linked to the faculty or the programme, nearest closing date first.
+                // Show active funding for the faculty or programme
                 FundingController fundingController = new FundingController();
                 dgvFunding.DataSource = fundingController.GetActiveFunding(facultyId, programmeId, fundingType, chkOpenOnly.Checked);
             }
@@ -149,7 +136,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Records that the learner wants funding in the summary (FundingInfoRequested = 1).</summary>
+        // Record that funding details should appear in the summary
         private void FundingRequestInSummary()
         {
             FundingController fundingController = new FundingController();
@@ -160,7 +147,7 @@ namespace FuturePath.PresentationLayer
 
         #region Filters
 
-        /// <summary>Defaults the Faculty filter to the UI 5 faculty whenever that choice has changed.</summary>
+        // Default the funding faculty to the learner's selected faculty
         private void FundingApplyDefaultFaculty()
         {
             if (fundingDefaultedFacultyId == PreferredFacultyId && dgvFunding.DataSource != null)
@@ -177,16 +164,13 @@ namespace FuturePath.PresentationLayer
             FundingLoad();
         }
 
-        /// <summary>A different faculty relists the funding.</summary>
+        // Reload funding when the faculty changes
         private void cboFundFaculty_SelectionChangeCommitted(object sender, EventArgs e) { FundingLoad(); }
 
-        /// <summary>A different funding type relists the funding.</summary>
+        // Reload funding when the funding type changes
         private void cboFundingType_SelectionChangeCommitted(object sender, EventArgs e) { FundingLoad(); }
 
-        /// <summary>
-        /// "Show only options that are still open" relists the funding — once the filters are loaded, so
-        /// unticking the box in <see cref="FundingReset"/> does not list anything.
-        /// </summary>
+        // Reload funding when the open-only filter changes
         private void chkOpenOnly_CheckedChanged(object sender, EventArgs e)
         {
             if (fundingListsLoaded)
@@ -195,7 +179,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>"Funding linked to the Faculty of Science" — follows the Faculty filter.</summary>
+        // Update the funding heading to match the selected faculty
         private void FundingUpdateHeading()
         {
             string faculty = cboFundFaculty.SelectedIndex >= 0 ? cboFundFaculty.Text : string.Empty;
@@ -217,7 +201,7 @@ namespace FuturePath.PresentationLayer
 
         #region Grid and detail card (display only)
 
-        /// <summary>Selecting a row fills the read-only detail card.</summary>
+        // Show the details of the selected funding option
         private void dgvFunding_SelectionChanged(object sender, EventArgs e)
         {
             DataGridViewRow row = dgvFunding.CurrentRow;
@@ -233,7 +217,7 @@ namespace FuturePath.PresentationLayer
             txtContact.Text = FundingCellText(row, colFundingContact);
         }
 
-        /// <summary>Shows the first option's details as soon as the list is filled.</summary>
+        // Show the first funding option after loading the grid
         private void dgvFunding_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             int count = dgvFunding.Rows.Count;
@@ -248,10 +232,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Status chip derived from the stored ClosingDate against today's date (display only):
-        /// "✓ Open" on green, or "– Closed" in grey. No closing date counts as open.
-        /// </summary>
+        // Format funding options as open or closed
         private void dgvFunding_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != colFundingStatus.Index)
@@ -269,7 +250,7 @@ namespace FuturePath.PresentationLayer
             e.FormattingApplied = true;
         }
 
-        /// <summary>A cell's text for the detail card, or a dash when it is empty.</summary>
+        // Get a funding detail value or a dash if empty
         private static string FundingCellText(DataGridViewRow row, DataGridViewColumn column)
         {
             object value = row.Cells[column.Index].Value;
@@ -277,7 +258,7 @@ namespace FuturePath.PresentationLayer
             return text.Length == 0 ? "—" : text;
         }
 
-        /// <summary>Empties the detail card and restores its prompt.</summary>
+        // Clear the funding detail fields
         private void FundingClearDetail()
         {
             lblDetailHeading.Text = "Select a funding option to see its details";
