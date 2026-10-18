@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,53 +12,41 @@ using Microsoft.Reporting.WinForms;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 7 — Advisory Summary and export (step 6 of 6; spec 2.3.9, report FP-LSR).
-    /// The learner sets only the export format and the destination folder (both required). The file
-    /// name, generation date and the preview are system-supplied: the preview is the FP-LSR report itself
-    /// (FpLsr.rdlc in the ReportViewer), rendered from the stored session, so the learner sees exactly what is
-    /// exported; alternatives appear only if ticked on UI 6.1a and funding only if added on UI 6.2b. <b>Save and export</b> validates, asks for confirmation, writes the file,
-    /// completes the session and logs the export. An unusable folder raises a dialog that names the
-    /// folder; success is shown in the status bar, never in a modal, and the primary button becomes
-    /// <b>Finish</b>. Back returns to the tab that opened UI 7; Back and Cancel write nothing.
-    /// </summary>
+    // Handles the advisory summary preview, export and session completion
     public partial class MainForm
     {
         private const string SummaryReadyStatus = "Step 6 of 6 · Choose an export format and a folder, then save and export.";
         private const string SummaryGuidanceText =
             "Saving the advisory summary completes this session: your profile, subjects, marks, questionnaire " +
             "responses and advisory outcome are kept on record as a completed session.";
-        /// <summary>True once the export formats have been bound for this session.</summary>
+
+        // Tracks whether export formats have been loaded
         private bool summaryFormatsLoaded;
 
-        /// <summary>True once the summary has been saved; the primary button then becomes Finish.</summary>
+        // Tracks whether the summary has been exported
         private bool summaryExported;
 
-        /// <summary>The success message shown in the status bar after the export.</summary>
+        // Success message shown after exporting
         private string summaryExportedMessage;
 
         private DateTime? summaryGeneratedOn;
 
-        /// <summary>The stored session as the FP-LSR typed dataset (filled by the BLL): the preview and the export are rendered from it.</summary>
+        // Report data used for both the preview and export
         private FpLsrData summaryData;
 
-        // From the report header, for the proposed file name Surname_SessionNumber.
+        // Details used to generate the file name
         private string summarySurname;
         private string summarySessionNumber;
 
-        /// <summary>Pages of the rendered summary, shown beside the export format.</summary>
+        // Number of pages in the rendered report
         private int? summaryPageCount;
 
-        /// <summary>True once the preview's RenderingComplete handler is attached.</summary>
+        // Tracks whether the preview event handler is attached
         private bool summaryViewerReady;
 
         #region Shown, button clicks and reset
 
-        /// <summary>
-        /// Called by PageShown each time UI 7 appears: binds the export formats once per session, shows
-        /// the guidance notice and rebuilds the preview from the stored session. After the export it only
-        /// restores the completed (Finish) state.
-        /// </summary>
+        // Load the summary preview or restore the completed state
         private void SummaryShown()
         {
             SummaryShowGuidance();
@@ -77,15 +66,12 @@ namespace FuturePath.PresentationLayer
             SummaryLoad();
         }
 
-        /// <summary>
-        /// Save and export → validate both required fields, check the folder, confirm, export, then
-        /// report success in the status bar. After success the button reads Finish and returns home.
-        /// </summary>
+        // Validate and export the advisory summary
         private void btnSummaryExport_Click(object sender, EventArgs e)
         {
             if (summaryExported)
             {
-                GoHome();   // the session is complete, so the Home tab does not ask
+                GoHome();   // Return home after the session is completed
                 return;
             }
 
@@ -144,11 +130,7 @@ namespace FuturePath.PresentationLayer
             SummaryShowExported(folder);
         }
 
-        /// <summary>
-        /// Returns UI 7 to a brand-new state for the next learner (spec 2.1): no export format, folder,
-        /// file name, generation date, preview or field messages; the fields are editable again; the
-        /// exported (Finish) state is cleared; and the formats are bound again the next time it is shown.
-        /// </summary>
+        // Reset the summary screen for a new learner
         private void SummaryReset()
         {
             summaryFormatsLoaded = false;
@@ -177,13 +159,13 @@ namespace FuturePath.PresentationLayer
             btnSummaryCancel.Visible = true;
         }
 
-        /// <summary>Back → the tab that opened UI 7 (UI 6, 6.1a or 6.2b). Nothing is written.</summary>
+        // Return to the page that opened the summary
         private void btnSummaryBack_Click(object sender, EventArgs e)
         {
             SelectPage(summaryReturnPage ?? tabOutcome);
         }
 
-        /// <summary>Cancel leaves the session (the Home tab asks first). Nothing is written.</summary>
+        // Cancel the session and return home
         private void btnSummaryCancel_Click(object sender, EventArgs e)
         {
             GoHome();
@@ -193,12 +175,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the export formats offered for FP-LSR (PDF / Word) — never literal Items.</summary>
+        // Load the available PDF and Word export formats
         private void SummaryLoadExportFormats()
         {
             try
             {
-                // ExportFormat (".pdf"), FormatName ("PDF document (.pdf)"), FormatCode (PDF) and RenderFormat.
+                // Retrieve export formats from the report controller
                 ReportController reportController = new ReportController();
                 cboExportFormat.DisplayMember = "FormatName";
                 cboExportFormat.ValueMember = "ExportFormat";
@@ -212,14 +194,10 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Reads the stored session as the FP-LSR typed dataset that the preview and the file name are built
-        /// from. The outcome is read back, never recalculated; the alternatives and funding flags come from the
-        /// session row (AlternativesInSummary, FundingInfoRequested).
-        /// </summary>
+        // Load the stored session data for the report preview
         private void SummaryLoad()
         {
-            // Cleared first, so a failed read never shows the previous values.
+            // Clear previous data before loading the current session
             summaryData = null;
             summarySurname = summarySessionNumber = null;
             summaryPageCount = null;
@@ -235,7 +213,7 @@ namespace FuturePath.PresentationLayer
 
             if (summaryData == null)
             {
-                summaryData = new FpLsrData();   // the empty layout, so the preview never shows another learner's values
+                summaryData = new FpLsrData();   // Use an empty report instead of showing previous data
             }
 
             summarySessionNumber = SessionNumber;
@@ -253,20 +231,15 @@ namespace FuturePath.PresentationLayer
             SummaryBuildPreview();
         }
 
-        /// <summary>
-        /// Renders the FP-LSR from the same report the preview shows, stamped with the export date and time.
-        /// The BLL then sets SessionStatus = 'Completed' and DateCompleted and writes the ExportReport row
-        /// (ReportCode FP-LSR, GeneratedByUserID null — a learner's own export), and only then is the file
-        /// written, so a failure never leaves a file for a session that is not completed (application-layer.md §8).
-        /// </summary>
+        // Render the report, complete the session and write the exported file
         private void SummaryExport(string folder, string fileName)
         {
             if (summaryData.ReportHeader.Count > 0)
             {
-                summaryData.ReportHeader[0].DateGenerated = summaryGeneratedOn.Value;   // "stamped at export" (2.3.9)
+                summaryData.ReportHeader[0].DateGenerated = summaryGeneratedOn.Value;   // Set the report's export date
             }
 
-            // The chosen row of GetExportFormats: FormatCode (PDF / DOCX) is stored, RenderFormat drives the ReportViewer.
+            // Use the selected format to render the report
             DataRowView format = (DataRowView)cboExportFormat.SelectedItem;
             byte[] file = rvSummary.LocalReport.Render(Convert.ToString(format["RenderFormat"], CultureInfo.InvariantCulture));
 
@@ -280,7 +253,7 @@ namespace FuturePath.PresentationLayer
 
         #region File name and preview (assembled from the stored session)
 
-        /// <summary>Proposes the file name &lt;Surname&gt;_&lt;SessionNumber&gt; with the chosen format's extension.</summary>
+        // Generate the summary file name using the surname and session number
         private void SummaryUpdateFileName()
         {
             string name = string.IsNullOrEmpty(summarySurname) ? "Learner" : summarySurname.Trim().Replace(' ', '-');
@@ -294,11 +267,7 @@ namespace FuturePath.PresentationLayer
                 : format;
         }
 
-        /// <summary>
-        /// Shows the FP-LSR in the preview pane, in print layout so the learner sees the exported pages. There are
-        /// no section tick boxes: alternatives print only if ticked on UI 6.1a, funding only if added on UI 6.2b,
-        /// and everything else always — the report reads those flags from the stored session.
-        /// </summary>
+        // Build the report preview from the stored session data
         private void SummaryBuildPreview()
         {
             if (!summaryViewerReady)
@@ -315,7 +284,7 @@ namespace FuturePath.PresentationLayer
                 report.DataSources.Add(new ReportDataSource(table.TableName, table));
             }
 
-            ReportPageSettings page = report.GetDefaultPageSettings();   // the report's own A4 portrait page, not the printer's
+            ReportPageSettings page = report.GetDefaultPageSettings();   // Use the report's page settings
             rvSummary.SetPageSettings(new System.Drawing.Printing.PageSettings
             {
                 PaperSize = page.PaperSize,
@@ -327,7 +296,7 @@ namespace FuturePath.PresentationLayer
             rvSummary.RefreshReport();
         }
 
-        /// <summary>Once the preview has rendered, shows its page count beside the export format.</summary>
+        // Update the page count once the preview has rendered
         private void SummaryPreview_RenderingComplete(object sender, RenderingCompleteEventArgs e)
         {
             try
@@ -346,24 +315,21 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation (validated again in the BLL on export)
 
-        /// <summary>Export format is required.</summary>
+        // Check that an export format is selected
         private bool SummaryCheckFormat()
         {
             return CheckField(cboExportFormat.SelectedIndex >= 0, cboExportFormat, lblExportFormat, lblExportFormatError,
                 "Export format: choose PDF or Word.");
         }
 
-        /// <summary>Save to (the destination folder) is required.</summary>
+        // Check that a destination folder is entered
         private bool SummaryCheckFolder()
         {
             return CheckField(txtSaveTo.Text.Trim().Length > 0, txtSaveTo, lblSaveTo, lblSaveToError,
                 "Save to: choose the folder to save your summary in.");
         }
 
-        /// <summary>
-        /// True when the folder exists and a file can be written there. Checked here so the learner
-        /// gets a plain message naming the folder instead of a technical error.
-        /// </summary>
+        // Check whether the selected folder can be written to
         private static bool SummaryFolderIsWritable(string folder)
         {
             try
@@ -384,7 +350,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Raises the dialog that names an unusable folder in plain words.</summary>
+        // Show a validation error when the folder cannot be used
         private void SummaryShowFolderProblem(string folder)
         {
             CheckField(false, txtSaveTo, lblSaveTo, lblSaveToError, "Save to: this folder cannot be used. Choose another folder.");
@@ -396,13 +362,13 @@ namespace FuturePath.PresentationLayer
             }, txtSaveTo);
         }
 
-        /// <summary>Checks the format when the learner leaves the combo.</summary>
+        // Validate the export format when leaving the field
         private void cboExportFormat_Leave(object sender, EventArgs e) { SummaryCheckFormat(); }
 
-        /// <summary>Checks the folder when the learner leaves the box.</summary>
+        // Validate the folder when leaving the field
         private void txtSaveTo_Leave(object sender, EventArgs e) { SummaryCheckFolder(); }
 
-        /// <summary>A new format changes the proposed file extension and the preview line.</summary>
+        // Update the file name when the export format changes
         private void cboExportFormat_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SummaryCheckFormat();
@@ -413,7 +379,7 @@ namespace FuturePath.PresentationLayer
 
         #region Browse, guidance and the completed state
 
-        /// <summary>Browse (amber group button) picks the destination folder.</summary>
+        // Open a dialog to choose the destination folder
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (var dialog = new FolderBrowserDialog())
@@ -433,13 +399,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Shows the blue guidance notice: saving completes the session.</summary>
+        // Display guidance about saving the advisory summary
         private void SummaryShowGuidance()
         {
             ShowNotice(lblSummaryNotice, SummaryGuidanceText, BlueTint, InkColour);
         }
 
-        /// <summary>Success is shown in the status bar (never a modal) and the screen switches to Finish.</summary>
+        // Show export success and switch to the Finish state
         private void SummaryShowExported(string folder)
         {
             summaryExported = true;
@@ -452,10 +418,7 @@ namespace FuturePath.PresentationLayer
             SummaryApplyFinishState();
         }
 
-        /// <summary>
-        /// The completed state of UI 7: only the primary button, reading Finish (it returns to the
-        /// homepage), a green notice, and the success message in the status bar.
-        /// </summary>
+        // Update the screen after a successful export
         private void SummaryApplyFinishState()
         {
             btnSummaryExport.Text = "Finish";

@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,13 +10,7 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 2 — Learner Profile Capture (step 1 of 6; spec 2.3.2).
-    /// Names and contact details are optional. Grade, school, province and advising year are
-    /// required. Session details are system-supplied and read-only. On <b>Save and continue</b>,
-    /// a missing or invalid value turns its label and control red, the notice turns red and
-    /// names the field, and UI 2.1a (Invalid Profile Data) is raised.
-    /// </summary>
+    // Handles learner profile capture and validation
     public partial class MainForm
     {
         private const string ProfileGuidanceText =
@@ -24,21 +19,15 @@ namespace FuturePath.PresentationLayer
 
         private const string ProfileStepStatus = "Step 1 of 6 · Complete the required fields marked *.";
 
-        /// <summary>True once the grade and province lists have been bound for this session.</summary>
+        // Tracks whether the grade and province lists have been loaded
         private bool profileListsLoaded;
 
-        /// <summary>
-        /// The red notice text left standing by the last failed <b>Save and continue</b>, or null when the blue
-        /// guidance shows. Kept so the red notice is still there if the learner moves away and comes back.
-        /// </summary>
+        // Keeps the last validation error visible when returning to the page
         private string profileNoticeError;
 
         #region Showing and resetting
 
-        /// <summary>
-        /// Called by PageShown each time UI 2 is shown: binds the lists the first time, shows the system-supplied
-        /// session details, and shows the blue guidance notice unless a red error notice is standing.
-        /// </summary>
+        // Load profile details and display guidance or validation errors
         private void ProfileShown()
         {
             SetStatus(ProfileStepStatus, DeepNavy, Color.White);
@@ -58,12 +47,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Returns UI 2 to a brand-new session: every field empty, advising year back to this year, the
-        /// system-supplied session details for a new session, no red field states, the lists to be bound again
-        /// and the blue guidance notice the next time UI 2 is shown. No learner may see the previous learner's
-        /// details (spec 2.1).
-        /// </summary>
+        // Clear the profile fields for a new learner session
         private void ProfileReset()
         {
             txtFirstName.Text = string.Empty;
@@ -96,11 +80,7 @@ namespace FuturePath.PresentationLayer
             profileListsLoaded = false;
         }
 
-        /// <summary>
-        /// Fills the read-only, system-supplied session details: the session number once the BLL has assigned
-        /// one ("Assigned on save" until then), the date the session started (today, set when it starts),
-        /// "Self-service" as the capturer and "In progress" as the status (decisions.md D3).
-        /// </summary>
+        // Show the current advisory session details
         private void ProfileShowSessionDetails()
         {
             txtSessionNumber.Text = string.IsNullOrEmpty(SessionNumber) ? "Assigned on save" : SessionNumber;
@@ -117,7 +97,7 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the grade and province lists to stored data (never literal Items).</summary>
+        // Load the available grades and provinces
         private void ProfileLoadLists()
         {
             try
@@ -127,7 +107,7 @@ namespace FuturePath.PresentationLayer
                 cboGrade.ValueMember = "GradeLevelID";
                 cboGrade.DataSource = referenceDataController.GetGradeLevels(false);
 
-                // Province is value-bound (2.3.2) to the SystemParameter rows PROVINCE_1..9 (decisions.md D16).
+                // Load province options from reference data
                 cboProvince.DisplayMember = "ParameterValue";
                 cboProvince.ValueMember = "ParameterValue";
                 cboProvince.DataSource = referenceDataController.GetProvinces();
@@ -142,11 +122,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// Saves the learner and opens (or updates) the "In progress" advisory session
-        /// (decisions.md D3). The BLL validates again and returns the session with its IDs and number.
-        /// The first save sends session ID 0, which tells the BLL to create the learner and the session.
-        /// </summary>
+        // Save the learner profile and advisory session
         private void ProfileSave()
         {
             int sessionId = 0;
@@ -166,10 +142,7 @@ namespace FuturePath.PresentationLayer
             txtSessionNumber.Text = SessionNumber;
         }
 
-        /// <summary>
-        /// The learner line shown in the status bar from UI 3 onward: name (or "Learner (name not given)") · grade ·
-        /// school · province, and the session number once the BLL has assigned one.
-        /// </summary>
+        // Build the learner details shown in the status bar
         private string ProfileContextLine()
         {
             string name = (txtFirstName.Text.Trim() + " " + txtSurname.Text.Trim()).Trim();
@@ -187,10 +160,7 @@ namespace FuturePath.PresentationLayer
 
         #region Field validation (validated again in the BLL on save)
 
-        /// <summary>
-        /// Current grade is required: one of the bound grade levels must be chosen. The grade hint shares the
-        /// space under the grade box with the field message, so it is hidden while the message shows.
-        /// </summary>
+        // Check that a grade is selected
         private bool ProfileCheckGrade()
         {
             bool valid = CheckField(cboGrade.SelectedIndex >= 0, cboGrade, lblGrade, lblGradeError,
@@ -199,24 +169,21 @@ namespace FuturePath.PresentationLayer
             return valid;
         }
 
-        /// <summary>School name is required.</summary>
+        // Check that a school name is entered
         private bool ProfileCheckSchool()
         {
             return CheckField(txtSchool.Text.Trim().Length > 0, txtSchool, lblSchool, lblSchoolError,
                 "School name: enter the name of your school.");
         }
 
-        /// <summary>Province is required: one of the bound provinces must be chosen.</summary>
+        // Check that a province is selected
         private bool ProfileCheckProvince()
         {
             return CheckField(cboProvince.SelectedIndex >= 0, cboProvince, lblProvince, lblProvinceError,
                 "Province: choose the province of your school.");
         }
 
-        /// <summary>
-        /// Advising year is required and must lie in the allowed range. Reads the typed text, because the
-        /// NumericUpDown clamps it on losing focus.
-        /// </summary>
+        // Check that the advising year is within the allowed range
         private bool ProfileCheckAdvisingYear()
         {
             int year;
@@ -226,7 +193,7 @@ namespace FuturePath.PresentationLayer
                 "Advising year: enter a year from " + numAdvisingYear.Minimum + " to " + numAdvisingYear.Maximum + ".");
         }
 
-        /// <summary>Email address is optional; when given it must look like name@example.co.za.</summary>
+        // Check the optional email address format
         private bool ProfileCheckEmail()
         {
             string text = txtEmail.Text.Trim();
@@ -235,7 +202,7 @@ namespace FuturePath.PresentationLayer
                 "Email address: enter an address such as name@example.co.za, or leave it blank.");
         }
 
-        /// <summary>Mobile number is optional; when given it must be ten digits starting with 0 (spaces and dashes allowed).</summary>
+        // Check the optional mobile number format
         private bool ProfileCheckMobile()
         {
             string digits = Regex.Replace(txtMobile.Text, @"[\s\-]", string.Empty);
@@ -244,35 +211,35 @@ namespace FuturePath.PresentationLayer
                 "Mobile number: use the format 0XX XXX XXXX, or leave it blank.");
         }
 
-        /// <summary>Re-checks the grade when the learner leaves it.</summary>
+        // Validate the grade when leaving the field
         private void cboGrade_Leave(object sender, EventArgs e) { ProfileCheckGrade(); }
 
-        /// <summary>Re-checks the school name when the learner leaves it.</summary>
+        // Validate the school name when leaving the field
         private void txtSchool_Leave(object sender, EventArgs e) { ProfileCheckSchool(); }
 
-        /// <summary>Re-checks the province when the learner leaves it.</summary>
+        // Validate the province when leaving the field
         private void cboProvince_Leave(object sender, EventArgs e) { ProfileCheckProvince(); }
 
-        /// <summary>Re-checks the advising year (as typed) when the learner leaves it.</summary>
+        // Validate the advising year when leaving the field
         private void numAdvisingYear_Leave(object sender, EventArgs e) { ProfileCheckAdvisingYear(); }
 
-        /// <summary>Re-checks the email address when the learner leaves it.</summary>
+        // Validate the email address when leaving the field
         private void txtEmail_Leave(object sender, EventArgs e) { ProfileCheckEmail(); }
 
-        /// <summary>Re-checks the mobile number when the learner leaves it.</summary>
+        // Validate the mobile number when leaving the field
         private void txtMobile_Leave(object sender, EventArgs e) { ProfileCheckMobile(); }
 
         #endregion
 
         #region Notice
 
-        /// <summary>Shows the blue guidance notice (what is required and what is optional).</summary>
+        // Display the default profile guidance
         private void ProfileShowGuidance()
         {
             ShowNotice(lblProfileNotice, ProfileGuidanceText, BlueTint, InkColour);
         }
 
-        /// <summary>Shows the red notice naming the first field to correct.</summary>
+        // Display the profile validation error
         private void ProfileShowNoticeError(string message)
         {
             ShowNotice(lblProfileNotice, message, RedTint, RedColour);
@@ -282,10 +249,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>
-        /// Save and continue → validate, save, then UI 3; or UI 2.1a (Invalid profile data) if anything is
-        /// invalid, with the focus returned to the first field to correct.
-        /// </summary>
+        // Validate and save the profile before continuing
         private void btnProfileSave_Click(object sender, EventArgs e)
         {
             var problems = new List<KeyValuePair<Control, string>>();
@@ -311,7 +275,7 @@ namespace FuturePath.PresentationLayer
             }
             catch (ArgumentException ex)
             {
-                // The BLL's own check failed: its message names the field and the fix.
+                // Display validation errors returned by the controller
                 ProfileShowNoticeError(ex.Message);
                 SetStatus(ex.Message, RedColour, Color.White);
                 return;
@@ -328,13 +292,13 @@ namespace FuturePath.PresentationLayer
             GoToStep(tabSubjects, 2);
         }
 
-        /// <summary>Back on the first step leaves the session (the Home tab asks first).</summary>
+        // Return to the home screen
         private void btnProfileBack_Click(object sender, EventArgs e)
         {
             GoHome();
         }
 
-        /// <summary>Cancel leaves the session (the Home tab asks first).</summary>
+        // Cancel the session and return home
         private void btnProfileCancel_Click(object sender, EventArgs e)
         {
             GoHome();
