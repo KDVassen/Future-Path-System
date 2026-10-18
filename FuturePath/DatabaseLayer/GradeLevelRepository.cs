@@ -1,8 +1,9 @@
+
 using System.Data;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>Data access for the GradeLevel lookup table (IDs match the GradeLevel enum).</summary>
+    // Handles database access for grade levels
     public class GradeLevelRepository : DB
     {
         #region Data Members
@@ -11,17 +12,14 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the grade level repository
         public GradeLevelRepository() : base()
         {
         }
         #endregion
 
         #region Read
-        /// <summary>
-        /// Columns GradeLevelID, GradeDescription, MarkBasis, ordered by GradeLevelID. A new table
-        /// is returned every call, so the caller may add rows to it and bind it to several combos.
-        /// </summary>
+        // Load grade levels ordered by ID and return a copy of the table
         public DataTable GetGradeLevels()
         {
             FillDataSet(sqlLocal + " ORDER BY GradeLevelID", table);

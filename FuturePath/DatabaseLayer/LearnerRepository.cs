@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -7,13 +8,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for learners (class diagram LearnerRepository: findById, save).
-    /// The in-memory Learner carries its current session's grade, preferred faculty, subjects and
-    /// interest responses, so this repository reads Learner together with the AdvisorySession,
-    /// LearnerSubject and LearnerInterestResponse rows (classes-and-sequences.md "Mapping the
-    /// classes to storage").
-    /// </summary>
+    // Handles database operations for learners and their advisory sessions
+    // Loads learner details, subjects and interest responses, and saves changes
     public class LearnerRepository : DB
     {
         #region Data Members
@@ -25,18 +21,17 @@ namespace FuturePath.DatabaseLayer
 
         private string sqlLocal = "SELECT LearnerID, FirstName, LastName, SchoolName, Province, ContactEmail, ContactNumber FROM Learner";
 
-        // The session's subjects with the subject name and level
+        // Load a session's subjects with their names and levels
         private string sqlSubjects = "SELECT ls.LearnerSubjectID, ls.SessionID, ls.SubjectID, s.SubjectName, s.SubjectLevel, ls.Mark "
                                    + "FROM LearnerSubject ls INNER JOIN Subject s ON s.SubjectID = ls.SubjectID "
                                    + "WHERE ls.SessionID = @SessionID ORDER BY s.SubjectName";
 
-        // The session's answers with each question's category
+        // Load a session's interest responses with their categories
         private string sqlResponses = "SELECT r.ResponseID, r.SessionID, r.QuestionID, q.CategoryID, r.ResponseValue "
                                     + "FROM LearnerInterestResponse r INNER JOIN InterestQuestion q ON q.QuestionID = r.QuestionID "
                                     + "WHERE r.SessionID = @SessionID ORDER BY q.DisplayOrder, r.QuestionID";
 
-        // UI 10.1a search: one row per learner (GROUP BY), counting their sessions. The learner's
-        // grade is the highest grade they had a session in (learners only move from Grade 11 to 12).
+        // Search learners and show their session count, latest session and highest grade
         private string sqlSearch = "SELECT l.LearnerID, LTRIM(RTRIM(ISNULL(l.FirstName, '') + ' ' + ISNULL(l.LastName, ''))) AS LearnerName, "
                                  + "l.SchoolName, l.Province, COUNT(s.SessionID) AS SessionCount, "
                                  + "MAX(s.SessionDate) AS LastSessionDate, MAX(s.GradeLevelID) AS GradeLevelID "
@@ -44,33 +39,30 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the learner repository
         public LearnerRepository() : base()
         {
         }
         #endregion
 
         #region Read
-        /// <summary>
-        /// Class diagram findById(learnerId). Loads the learner with their latest advisory session
-        /// (the In-progress one if there is one, otherwise the most recent): grade, preferred
-        /// faculty, CurrentSessionID, subjects (with names and levels) and responses (with
-        /// CategoryID). A learner with no session has CurrentSessionID null. Returns null if the
-        /// learner does not exist.
-        /// </summary>
+        // Find a learner and load their latest in-progress or completed session
+        // Include their grade, preferred faculty, subjects and interest responses
         public Learner FindById(int learnerID)
         {
-            // 1. The learner's newest In-progress session
+            // Look for the learner's latest in-progress session
             object sessionID = ExecuteScalar("SELECT MAX(SessionID) FROM AdvisorySession WHERE LearnerID = @LearnerID AND SessionStatus = @InProgress",
                                              Param("@LearnerID", SqlDbType.Int, learnerID),
                                              Param("@InProgress", SqlDbType.VarChar, AdvisorySession.StatusInProgress));
-            // 2. If there is none, the learner's newest session of any status
+
+            // Use the most recent session if none are in progress
             if (sessionID == null)
             {
                 sessionID = ExecuteScalar("SELECT MAX(SessionID) FROM AdvisorySession WHERE LearnerID = @LearnerID",
                                           Param("@LearnerID", SqlDbType.Int, learnerID));
             }
-            // 3. A learner with no session at all is loaded without one (0 = no session)
+
+            // Load only the learner profile if no sessions exist
             if (sessionID == null)
             {
                 return LoadLearner(learnerID, 0);
@@ -78,11 +70,8 @@ namespace FuturePath.DatabaseLayer
             return LoadLearner(learnerID, Convert.ToInt32(sessionID));
         }
 
-        /// <summary>
-        /// Loads the learner of one session, with that session's grade, preferred faculty,
-        /// subjects and responses (CurrentSessionID = sessionID). Returns null if the session
-        /// does not exist.
-        /// </summary>
+        // Find a learner using an advisory session ID
+        // Load the details associated with that specific session
         public Learner FindBySessionId(int sessionID)
         {
             object learnerID = ExecuteScalar("SELECT LearnerID FROM AdvisorySession WHERE SessionID = @SessionID",
@@ -94,15 +83,11 @@ namespace FuturePath.DatabaseLayer
             return LoadLearner(Convert.ToInt32(learnerID), sessionID);
         }
 
-        /// <summary>
-        /// UI 10.1a learner search. A blank text or a grade of 0 means "no filter". Names match from
-        /// the start, the school anywhere in its name, the province exactly. Returns columns
-        /// LearnerID, LearnerName, GradeDescription, SchoolName, Province, SessionCount,
-        /// LastSessionDate (DateTime or DBNull), as a new table every call. Never returns contact details.
-        /// </summary>
+        // Search learners using optional name, grade, school and province filters
+        // Return a table of matching learners and their session details
         public DataTable FindLearners(string surname, string firstName, int gradeLevelID, string schoolName, string province)
         {
-            // Only the filters that were filled in are added to the WHERE clause (each as a parameter)
+            // Add search conditions for the filters provided
             string sql = sqlSearch + " WHERE 1 = 1";
             List<SqlParameter> parameters = new List<SqlParameter>();
             if (!string.IsNullOrWhiteSpace(surname))
@@ -132,7 +117,7 @@ namespace FuturePath.DatabaseLayer
                 parameters.Add(Param("@GradeLevelID", SqlDbType.Int, gradeLevelID));
             }
 
-            // The grade description comes from the GradeLevel table
+            // Include the grade description in the search results
             sql = "SELECT x.LearnerID, x.LearnerName, g.GradeDescription, x.SchoolName, x.Province, x.SessionCount, x.LastSessionDate "
                 + "FROM (" + sql + ") x LEFT JOIN GradeLevel g ON g.GradeLevelID = x.GradeLevelID "
                 + "ORDER BY x.LearnerName, x.LearnerID";
@@ -142,14 +127,11 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>
-        /// The shared loader of FindById and FindBySessionId: the Learner row, then (when there is a
-        /// session) the session's grade and preferred faculty, its subjects and its responses.
-        /// Returns null if the learner does not exist.
-        /// </summary>
+        // Load a learner profile and the details of the selected session
+        // Return null if the learner does not exist
         private Learner LoadLearner(int learnerID, int sessionID)
         {
-            // 1. The Learner row
+            // Load the learner's personal details
             FillDataSet(sqlLocal + " WHERE LearnerID = @LearnerID", table, Param("@LearnerID", SqlDbType.Int, learnerID));
             if (GetTable(table).Rows.Count == 0)
             {
@@ -161,7 +143,7 @@ namespace FuturePath.DatabaseLayer
                 return learner;
             }
 
-            // 2. The session's grade and preferred faculty
+            // Load the session's grade and preferred faculty
             FillDataSet("SELECT SessionID, GradeLevelID, PreferredFacultyID FROM AdvisorySession WHERE SessionID = @SessionID", sessionTable,
                         Param("@SessionID", SqlDbType.Int, sessionID));
             if (GetTable(sessionTable).Rows.Count == 0)
@@ -173,7 +155,7 @@ namespace FuturePath.DatabaseLayer
             learner.Grade = (GradeLevel)ReadInt(sessionRow, "GradeLevelID");
             learner.PreferredFacultyID = ReadNullableInt(sessionRow, "PreferredFacultyID");
 
-            // 3. The session's subjects (added straight to the learner's collection)
+            // Load the learner's subjects and marks for this session
             FillDataSet(sqlSubjects, subjectTable, Param("@SessionID", SqlDbType.Int, sessionID));
             foreach (DataRow row in GetTable(subjectTable).Rows)
             {
@@ -182,7 +164,7 @@ namespace FuturePath.DatabaseLayer
                                                              ReadString(row, "SubjectLevel"), ReadDecimal(row, "Mark").Value));
             }
 
-            // 4. The session's interest responses, each with its question's category
+            // Load the session's interest questionnaire responses
             FillDataSet(sqlResponses, responseTable, Param("@SessionID", SqlDbType.Int, sessionID));
             foreach (DataRow row in GetTable(responseTable).Rows)
             {
@@ -193,7 +175,7 @@ namespace FuturePath.DatabaseLayer
             return learner;
         }
 
-        /// <summary>Turns a filled Learner row into a Learner object (Waitering Add2Collection, for one row).</summary>
+        // Convert a database row into a Learner object
         private Learner Add2Collection(DataRow row)
         {
             Learner learner = new Learner();
@@ -207,7 +189,8 @@ namespace FuturePath.DatabaseLayer
             return learner;
         }
 
-        /// <summary>Copies a learner's values into a DataRow (Waitering FillRow). Blank optional values are stored as NULL.</summary>
+        // Copy a learner's details into a DataRow
+        // Store optional blank values as database NULL values
         private void FillRow(DataRow row, Learner learner)
         {
             row["FirstName"] = DbText(learner.FirstName);
@@ -220,12 +203,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Write
-        /// <summary>
-        /// Class diagram save(learner). Inserts the Learner row (and sets learner.LearnerID) when
-        /// LearnerID is 0, otherwise updates it. Only the Learner table is written; sessions,
-        /// subjects and responses have their own methods. Throws ArgumentException if the learner
-        /// to update does not exist.
-        /// </summary>
+        // Insert a new learner or update an existing learner profile
         public void Save(Learner learner)
         {
             DB.DBOperation operation = DB.DBOperation.Edit;
@@ -237,21 +215,20 @@ namespace FuturePath.DatabaseLayer
             UpdateDataSource(learner, operation);
         }
 
-        /// <summary>
-        /// Replaces the session's LearnerSubject rows with these subjects, in one transaction.
-        /// Also deletes the session's RecommendationResult rows, because they no longer match the
-        /// marks. Sets each subject's SessionID and new LearnerSubjectID.
-        /// </summary>
+        // Replace a session's saved subjects and marks
+        // Remove old recommendation results because the marks may have changed
         public void SaveSubjects(int sessionID, Collection<LearnerSubject> subjects)
         {
             SqlTransaction transaction = BeginTransaction();
             try
             {
-                // 1. The stored results were worked out from the old marks
+                // Remove recommendations calculated using previous marks
                 ExecuteNonQuery(transaction, "DELETE FROM RecommendationResult WHERE SessionID = @SessionID", Param("@SessionID", SqlDbType.Int, sessionID));
-                // 2. Remove the old marks
+
+                // Remove the previously saved subjects
                 ExecuteNonQuery(transaction, "DELETE FROM LearnerSubject WHERE SessionID = @SessionID", Param("@SessionID", SqlDbType.Int, sessionID));
-                // 3. Insert the new marks
+
+                // Insert the updated subjects and marks
                 foreach (LearnerSubject subject in subjects)
                 {
                     object newID = ExecuteScalar(transaction, "INSERT INTO LearnerSubject (SessionID, SubjectID, Mark) VALUES (@SessionID, @SubjectID, @Mark); "
@@ -275,21 +252,20 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Replaces the session's LearnerInterestResponse rows with these responses, in one
-        /// transaction. Also deletes the session's RecommendationResult rows (stale interest
-        /// scores). Sets each response's SessionID and new ResponseID.
-        /// </summary>
+        // Replace a session's interest questionnaire responses
+        // Remove old recommendation results because interest scores may have changed
         public void SaveResponses(int sessionID, Collection<LearnerInterestResponse> responses)
         {
             SqlTransaction transaction = BeginTransaction();
             try
             {
-                // 1. The stored results were worked out from the old answers
+                // Remove recommendations calculated using previous responses
                 ExecuteNonQuery(transaction, "DELETE FROM RecommendationResult WHERE SessionID = @SessionID", Param("@SessionID", SqlDbType.Int, sessionID));
-                // 2. Remove the old answers
+
+                // Remove the previously saved questionnaire responses
                 ExecuteNonQuery(transaction, "DELETE FROM LearnerInterestResponse WHERE SessionID = @SessionID", Param("@SessionID", SqlDbType.Int, sessionID));
-                // 3. Insert the new answers
+
+                // Insert the updated responses
                 foreach (LearnerInterestResponse response in responses)
                 {
                     object newID = ExecuteScalar(transaction, "INSERT INTO LearnerInterestResponse (SessionID, QuestionID, ResponseValue) "
@@ -315,13 +291,13 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Database Operations - Waitering pattern
-        /// <summary>Adds a new learner row to the DataSet, or changes the existing row (Edit).</summary>
+        // Add a new learner row or update an existing row in the DataSet
         private void DataSetChange(Learner learner, DB.DBOperation operation)
         {
             DataRow row;
             if (operation == DB.DBOperation.Add)
             {
-                // An empty copy of the table gives the columns for the new row
+                // Load the table structure before adding a new learner
                 FillDataSet(sqlLocal + " WHERE 1 = 0", table);
                 row = GetTable(table).NewRow();
                 FillRow(row, learner);
@@ -339,7 +315,8 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>Sends the learner change to the database; for Add, sets the new LearnerID.</summary>
+        // Save learner changes from the DataSet to the database
+        // Retrieve the new learner ID after insertion
         private void UpdateDataSource(Learner learner, DB.DBOperation operation)
         {
             if (operation == DB.DBOperation.Add)
@@ -354,7 +331,7 @@ namespace FuturePath.DatabaseLayer
 
             if (operation == DB.DBOperation.Add)
             {
-                // The INSERT returned the new key into the row; read it before any other fill
+                // Read the new learner ID from the inserted row
                 DataTable learnerTable = GetTable(table);
                 learner.LearnerID = Convert.ToInt32(learnerTable.Rows[learnerTable.Rows.Count - 1]["LearnerID"]);
             }
@@ -362,7 +339,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Build Parameters and Create Commands
-        /// <summary>The INSERT for a learner; the new LearnerID comes back into the row.</summary>
+        // Create the SQL command for inserting a new learner
         private void Create_INSERT_Command(Learner learner)
         {
             daMain.InsertCommand = new SqlCommand("INSERT INTO Learner (FirstName, LastName, SchoolName, Province, ContactEmail, ContactNumber) "
@@ -372,7 +349,7 @@ namespace FuturePath.DatabaseLayer
             Build_INSERT_Parameters(learner);
         }
 
-        /// <summary>One parameter per learner column, each reading its value from the row (Waitering Build_INSERT_Parameters).</summary>
+        // Add the learner parameters to the INSERT command
         private void Build_INSERT_Parameters(Learner learner)
         {
             daMain.InsertCommand.Parameters.Add(SourceParam("@FirstName", SqlDbType.VarChar, "FirstName"));
@@ -383,7 +360,7 @@ namespace FuturePath.DatabaseLayer
             daMain.InsertCommand.Parameters.Add(SourceParam("@ContactNumber", SqlDbType.VarChar, "ContactNumber"));
         }
 
-        /// <summary>The UPDATE for a learner, matched on LearnerID.</summary>
+        // Create the SQL command for updating an existing learner
         private void Create_UPDATE_Command(Learner learner)
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE Learner SET FirstName = @FirstName, LastName = @LastName, SchoolName = @SchoolName, "
@@ -392,7 +369,7 @@ namespace FuturePath.DatabaseLayer
             Build_UPDATE_Parameters(learner);
         }
 
-        /// <summary>The UPDATE parameters: every column plus the key.</summary>
+        // Add the learner parameters and ID to the UPDATE command
         private void Build_UPDATE_Parameters(Learner learner)
         {
             daMain.UpdateCommand.Parameters.Add(SourceParam("@FirstName", SqlDbType.VarChar, "FirstName"));
