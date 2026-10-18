@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -7,11 +8,8 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>
-    /// Data access for funding options and their faculty / programme links (UI 6.2b, UI 13.3,
-    /// FP-LSR Table 3). An option and its links are saved together in one transaction (a set of
-    /// link rows is replaced with direct commands, application-layer.md §2 "Replace a set").
-    /// </summary>
+    // Handles database operations for funding options
+    // Manages funding details and their faculty and programme links
     public class FundingRepository : DB
     {
         #region Data Members
@@ -24,7 +22,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the funding options collection
         public FundingRepository() : base()
         {
             fundingOptions = new Collection<FundingOption>();
@@ -32,7 +30,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read
-        /// <summary>Funding options with their links (and link names), ordered by FundingName; inactive ones only when includeInactive is true.</summary>
+        // Load funding options with their faculty and programme links
+        // Include inactive options when requested
         public Collection<FundingOption> GetFundingOptions(bool includeInactive)
         {
             string sql = sqlLocal;
@@ -46,7 +45,7 @@ namespace FuturePath.DatabaseLayer
             return fundingOptions;
         }
 
-        /// <summary>One funding option with its links, or null.</summary>
+        // Find a funding option by ID and load its links
         public FundingOption FindById(int fundingID)
         {
             FillDataSet(sqlLocal + " WHERE FundingID = @FundingID", table, Param("@FundingID", SqlDbType.Int, fundingID));
@@ -59,21 +58,18 @@ namespace FuturePath.DatabaseLayer
             return fundingOptions[0];
         }
 
-        /// <summary>
-        /// Active funding linked to the faculty OR the programme, with links, ordered by ClosingDate
-        /// (nearest first, no closing date last). 0 means "not given"; with both 0, every active
-        /// funding option. Links to inactive faculties or programmes are not loaded, so they do not count.
-        /// </summary>
+        // Get active funding linked to the selected faculty or programme
+        // Order by closing date and exclude links to inactive records
         public Collection<FundingOption> GetActiveFundingFor(int facultyID, int programmeID)
         {
-            // 1. Every active option, nearest closing date first (no closing date sorts as the last date)
+            // Load active options with the nearest closing dates first
             FillDataSet(sqlLocal + " WHERE IsActive = 1 ORDER BY ISNULL(ClosingDate, '9999-12-31'), FundingName", table);
             Add2Collection();
 
-            // 2. Their links to active faculties and active programmes
+            // Load links to active faculties and programmes
             LoadLinks(0, true);
 
-            // 3. Keep only the options linked to the faculty or to the programme
+            // Keep funding linked to the requested faculty or programme
             Collection<FundingOption> linked = new Collection<FundingOption>();
             foreach (FundingOption option in fundingOptions)
             {
@@ -86,7 +82,7 @@ namespace FuturePath.DatabaseLayer
             return fundingOptions;
         }
 
-        /// <summary>True if another funding option already has this name.</summary>
+        // Check whether another funding option has the same name
         public bool FundingNameExists(string fundingName, int excludeFundingID)
         {
             object count = ExecuteScalar("SELECT COUNT(*) FROM FundingOption WHERE FundingName = @FundingName AND FundingID <> @ExcludeID",
@@ -97,18 +93,15 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Write
-        /// <summary>
-        /// Inserts (FundingID 0) or updates the option and replaces its FundingFaculty and
-        /// FundingProgramme rows with option.FacultyLinks / ProgrammeLinks, in one transaction.
-        /// Sets option.FundingID and returns it.
-        /// </summary>
+        // Add or update a funding option and replace its links
+        // Save everything in one transaction to keep the records consistent
         public int Save(FundingOption option)
         {
             int fundingID = option.FundingID;
             SqlTransaction transaction = BeginTransaction();
             try
             {
-                // 1. The option itself: insert (and read the new key) or update.
+                // Insert a new funding option or update an existing one
                 if (fundingID == 0)
                 {
                     object newID = ExecuteScalar(transaction,
@@ -128,11 +121,11 @@ namespace FuturePath.DatabaseLayer
                         OptionParameters(option, fundingID));
                 }
 
-                // 2. Remove the old links.
+                // Remove previous faculty and programme links
                 ExecuteNonQuery(transaction, "DELETE FROM FundingFaculty WHERE FundingID = @FundingID", Param("@FundingID", SqlDbType.Int, fundingID));
                 ExecuteNonQuery(transaction, "DELETE FROM FundingProgramme WHERE FundingID = @FundingID", Param("@FundingID", SqlDbType.Int, fundingID));
 
-                // 3. Insert the new links (a new parameter object for every command).
+                // Insert the updated faculty links
                 foreach (FundingFaculty link in option.FacultyLinks)
                 {
                     ExecuteNonQuery(transaction, "INSERT INTO FundingFaculty (FundingID, FacultyID) VALUES (@FundingID, @FacultyID)",
@@ -156,7 +149,7 @@ namespace FuturePath.DatabaseLayer
                 CloseConnection();
             }
 
-            // Only now that the save is committed does the option (and its links) get the key.
+            // Update the funding IDs after the transaction has succeeded
             option.FundingID = fundingID;
             foreach (FundingFaculty link in option.FacultyLinks)
             {
@@ -169,7 +162,7 @@ namespace FuturePath.DatabaseLayer
             return fundingID;
         }
 
-        /// <summary>Sets IsActive (deactivation; funding is never deleted).</summary>
+        // Activate or deactivate a funding option without deleting it
         public void SetActive(int fundingID, bool isActive)
         {
             ExecuteNonQuery("UPDATE FundingOption SET IsActive = @IsActive WHERE FundingID = @FundingID",
@@ -178,7 +171,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled FundingOption rows into FundingOption objects (Waitering Add2Collection), without links.</summary>
+        // Convert database rows into FundingOption objects
         private void Add2Collection()
         {
             fundingOptions = new Collection<FundingOption>();
@@ -191,15 +184,11 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>
-        /// Reads the faculty and programme links (with their names) and attaches each one to its
-        /// option in fundingOptions. A fundingID of 0 reads the links of every option. With
-        /// activeOnly, links to inactive faculties, inactive programmes and programmes under an
-        /// inactive faculty are left out.
-        /// </summary>
+        // Load the faculty and programme links for funding options
+        // Optionally exclude links to inactive faculties and programmes
         private void LoadLinks(int fundingID, bool activeOnly)
         {
-            // The faculty links
+            // Load faculty links and their names
             string sql = "SELECT ff.FundingID, ff.FacultyID, f.FacultyName FROM FundingFaculty ff " +
                          "INNER JOIN Faculty f ON f.FacultyID = ff.FacultyID WHERE 1 = 1";
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -222,7 +211,7 @@ namespace FuturePath.DatabaseLayer
                 }
             }
 
-            // The programme links (a new parameter list: one parameter object cannot be used by two commands)
+            // Load programme links using a new list of SQL parameters
             sql = "SELECT fp.FundingID, fp.ProgrammeID, p.ProgrammeName FROM FundingProgramme fp " +
                   "INNER JOIN DegreeProgramme p ON p.ProgrammeID = fp.ProgrammeID " +
                   "INNER JOIN Faculty pf ON pf.FacultyID = p.FacultyID WHERE 1 = 1";
@@ -247,7 +236,7 @@ namespace FuturePath.DatabaseLayer
             }
         }
 
-        /// <summary>The option with this ID in fundingOptions, or null (a link to an option that was not read is skipped).</summary>
+        // Find a funding option in the loaded collection by its ID
         private FundingOption FindOption(int fundingID)
         {
             foreach (FundingOption option in fundingOptions)
@@ -260,10 +249,8 @@ namespace FuturePath.DatabaseLayer
             return null;
         }
 
-        /// <summary>
-        /// The parameters of the FundingOption INSERT / UPDATE, made new for every command.
-        /// Blank optional text is stored as NULL.
-        /// </summary>
+        // Create SQL parameters for inserting or updating a funding option
+        // Store optional blank text as database NULL values
         private static SqlParameter[] OptionParameters(FundingOption option, int fundingID)
         {
             return new SqlParameter[]
