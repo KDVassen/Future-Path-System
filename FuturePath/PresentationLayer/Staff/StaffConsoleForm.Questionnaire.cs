@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,37 +7,24 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 13.5 — Reference data, Questionnaire questions (Administrators only; page <c>tabQuestionnaire</c>
-    /// in the Reference data group). Built to the UI 13.2 maintenance pattern: a Category scope on the
-    /// left (with "Show all categories"), a read-only grid of stored <c>InterestQuestion</c> rows
-    /// (Order · Statement · Category · Status chip) with a count line, and a maintenance form below it
-    /// (Statement* with an "n / 255" counter, Category*, Display order*, Active). Learners answer every
-    /// active question on UI 4 on a 1–5 scale. The tab's own buttons run
-    /// <see cref="btnQuestionnaireAdd_Click"/>, <see cref="btnQuestionnaireUpdate_Click"/>,
-    /// <see cref="btnQuestionnaireDeactivate_Click"/> and <see cref="btnQuestionnaireCancel_Click"/>.
-    /// Nothing is ever deleted.
-    /// </summary>
+    // Handles questionnaire maintenance for Administrators
+    // Allows questions to be added, updated and deactivated
     public partial class StaffConsoleForm
     {
         private const int QuestionnaireStatementMaxLength = 255;
 
-        /// <summary>QuestionID of the row being edited; null while adding a new question.</summary>
+        // ID of the selected question, or null when adding a new one
         private int? questionnaireSelectedId;
 
-        /// <summary>IsActive of the row being edited, so Deactivate can say it is already inactive.</summary>
+        // Active status of the selected question
         private bool questionnaireSelectedIsActive;
 
-        /// <summary>True while the grid is being rebound, so selection events are ignored.</summary>
+        // Prevent selection events while refreshing the grid
         private bool questionnaireLoading;
 
         #region Page shown
 
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 13.5 appears. The first time, it prepares the grid
-        /// and loads the category lists and the questions; afterwards the page keeps its state.
-        /// </summary>
-        /// <param name="firstTime">True the first time the page is shown in this console.</param>
+        // Initialise the question grid and load category lists
         private void QuestionnaireShown(bool firstTime)
         {
             if (!firstTime)
@@ -55,7 +43,7 @@ namespace FuturePath.PresentationLayer
 
         #region Button click events
 
-        /// <summary>Add question: adds a new question from the form (validated here and again in the BLL).</summary>
+        // Validate and add a new questionnaire question
         private void btnQuestionnaireAdd_Click(object sender, EventArgs e)
         {
             if (!QuestionnaireValidateForm())
@@ -83,7 +71,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question added. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Update question: saves the form over the question selected in the grid.</summary>
+        // Validate and update the selected question
         private void btnQuestionnaireUpdate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
@@ -117,7 +105,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question updated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Deactivate: deactivates the selected question after confirmation (never deletes it).</summary>
+        // Deactivate the selected question after confirmation
         private void btnQuestionnaireDeactivate_Click(object sender, EventArgs e)
         {
             if (!questionnaireSelectedId.HasValue)
@@ -159,7 +147,7 @@ namespace FuturePath.PresentationLayer
             ReportStatus("Question deactivated. Changes apply to new advisory sessions only.", false);
         }
 
-        /// <summary>Cancel: discards the edit, clears the form and the grid selection. Nothing is saved.</summary>
+        // Discard changes and clear the question form
         private void btnQuestionnaireCancel_Click(object sender, EventArgs e)
         {
             QuestionnaireClearForm();
@@ -170,13 +158,12 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hooks
 
-        /// <summary>Binds the scope and form category lists (each to its own list; never literal Items).</summary>
+        // Load category lists for filtering and editing questions
         private void QuestionnaireLoadCategoryLists()
         {
             try
             {
-                // A separate table for each combo (GetInterestCategories returns a new one every call),
-                // so they do not share one selection.
+                // Use separate lists so the dropdowns have independent selections
                 InterestController interestController = new InterestController();
                 cboScopeCategory.DisplayMember = "CategoryName";
                 cboScopeCategory.ValueMember = "CategoryID";
@@ -193,14 +180,13 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Binds the question grid for the scope category (or every category), in display order.</summary>
+        // Load questionnaire questions for the selected category
         private void QuestionnaireLoadQuestions()
         {
             questionnaireLoading = true;
             try
             {
-                // Columns: QuestionID, CategoryID, DisplayOrder, QuestionText, CategoryName, IsActive, ordered by
-                // DisplayOrder. No scope category (0) lists every category.
+                // Retrieve questions in display order, optionally filtered by category
                 InterestController interestController = new InterestController();
                 dgvQuestions.DataSource = interestController.GetQuestions(SelectedId(cboScopeCategory), true);
                 dgvQuestions.ClearSelection();
@@ -217,11 +203,7 @@ namespace FuturePath.PresentationLayer
             QuestionnaireUpdateCountLine();
         }
 
-        /// <summary>
-        /// Adds (questionId 0) or updates a question. The BLL checks that UserId's Role = Administrator and
-        /// re-checks the statement (required, max 255), the category (an existing, active one) and the order (1–99).
-        /// </summary>
-        /// <param name="questionId">The question being updated, or 0 to add a new one.</param>
+        // Add or update a question using the controller
         private void QuestionnaireSaveQuestion(int questionId)
         {
             InterestController interestController = new InterestController();
@@ -229,8 +211,7 @@ namespace FuturePath.PresentationLayer
                 (int)cboQuestionCategory.SelectedValue, (int)numDisplayOrder.Value, chkQuestionActive.Checked);
         }
 
-        /// <summary>Sets IsActive = 0 on a question (Administrator only, checked by the BLL). Nothing is deleted.</summary>
-        /// <param name="questionId">The question to deactivate.</param>
+        // Deactivate a question without deleting it
         private void QuestionnaireDeactivateQuestion(int questionId)
         {
             InterestController interestController = new InterestController();
@@ -241,14 +222,14 @@ namespace FuturePath.PresentationLayer
 
         #region Scope, grid display and selection
 
-        /// <summary>Choosing a scope category lists only its questions.</summary>
+        // Filter questions by the selected category
         private void cboScopeCategory_SelectionChangeCommitted(object sender, EventArgs e)
         {
             QuestionnaireLoadQuestions();
             QuestionnaireClearForm();
         }
 
-        /// <summary>"Show all categories" clears the scope and lists every question.</summary>
+        // Remove the category filter and show all questions
         private void lnkShowAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             cboScopeCategory.SelectedIndex = -1;
@@ -256,7 +237,7 @@ namespace FuturePath.PresentationLayer
             QuestionnaireClearForm();
         }
 
-        /// <summary>Writes "N questions · M active" (and the scope) from the bound rows.</summary>
+        // Update the total and active question counts
         private void QuestionnaireUpdateCountLine()
         {
             int total = dgvQuestions.Rows.Count;
@@ -273,7 +254,7 @@ namespace FuturePath.PresentationLayer
             lblQuestionCount.Text = total + (total == 1 ? " question" : " questions") + scope + " · " + active + " active";
         }
 
-        /// <summary>Shows IsActive as a status chip (display formatting only).</summary>
+        // Format questions as active or inactive
         private void dgvQuestions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == colQuestionsStatus.Index)
@@ -282,10 +263,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>
-        /// After (re)binding, starts with no row selected, so the form stays ready for a new
-        /// question until the administrator picks one, and refreshes the count line.
-        /// </summary>
+        // Clear automatic row selection after loading the question grid
         private void dgvQuestions_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             bool wasLoading = questionnaireLoading;
@@ -296,10 +274,7 @@ namespace FuturePath.PresentationLayer
             QuestionnaireUpdateCountLine();
         }
 
-        /// <summary>
-        /// Copies the question the administrator selects into the form. Only a selection made in the
-        /// focused grid counts, not the automatic first-row selection on binding.
-        /// </summary>
+        // Load the selected question's details into the form
         private void dgvQuestions_SelectionChanged(object sender, EventArgs e)
         {
             if (questionnaireLoading || !dgvQuestions.Focused || dgvQuestions.SelectedRows.Count == 0)
@@ -339,7 +314,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Keeps the "n / 255" counter beside the statement up to date.</summary>
+        // Update the character counter as the statement changes
         private void txtStatement_TextChanged(object sender, EventArgs e)
         {
             lblStatementLength.Text = txtStatement.TextLength + " / " + QuestionnaireStatementMaxLength;
@@ -349,7 +324,7 @@ namespace FuturePath.PresentationLayer
 
         #region Maintenance form validation (validated again in the BLL on save)
 
-        /// <summary>Validates the whole form; shows field messages and the validation summary.</summary>
+        // Validate the question form and show any errors
         private bool QuestionnaireValidateForm()
         {
             var problems = new List<string>();
@@ -368,7 +343,7 @@ namespace FuturePath.PresentationLayer
             return false;
         }
 
-        /// <summary>Statement: required, at most 255 characters.</summary>
+        // Check that the statement is provided and within 255 characters
         private bool QuestionnaireCheckStatement()
         {
             string text = txtStatement.Text.Trim();
@@ -376,17 +351,17 @@ namespace FuturePath.PresentationLayer
                 "Statement: enter the statement learners rate, up to 255 characters.");
         }
 
-        /// <summary>Category: one must be chosen.</summary>
+        // Check that a category has been selected
         private bool QuestionnaireCheckCategory()
         {
             return CheckField(cboQuestionCategory.SelectedIndex >= 0, cboQuestionCategory, lblQuestionCategory, lblQuestionCategoryError,
                 "Category: choose the category it scores.");
         }
 
-        /// <summary>Display order: a whole number from 1 to 99, read from the typed text.</summary>
+        // Check that display order is a whole number from 1 to 99
         private bool QuestionnaireCheckDisplayOrder()
         {
-            // Read the typed text before the NumericUpDown clamps it on losing focus.
+            // Validate the typed value before the control adjusts it
             int order;
             bool valid = int.TryParse(numDisplayOrder.Text.Trim(), NumberStyles.Integer, CultureInfo.CurrentCulture, out order)
                          && order >= numDisplayOrder.Minimum && order <= numDisplayOrder.Maximum;
@@ -394,16 +369,16 @@ namespace FuturePath.PresentationLayer
                 "Display order: enter a whole number from 1 to 99.");
         }
 
-        /// <summary>Checks the statement as the administrator leaves the box.</summary>
+        // Validate the statement when leaving its field
         private void txtStatement_Leave(object sender, EventArgs e) { QuestionnaireCheckStatement(); }
 
-        /// <summary>Checks the category as the administrator leaves the list.</summary>
+        // Validate the category when leaving its dropdown
         private void cboQuestionCategory_Leave(object sender, EventArgs e) { QuestionnaireCheckCategory(); }
 
-        /// <summary>Checks the display order as the administrator leaves the box.</summary>
+        // Validate display order when leaving its field
         private void numDisplayOrder_Leave(object sender, EventArgs e) { QuestionnaireCheckDisplayOrder(); }
 
-        /// <summary>Clears every field message and the validation summary.</summary>
+        // Clear validation messages and hide the error summary
         private void QuestionnaireClearValidation()
         {
             CheckField(true, txtStatement, lblStatement, lblStatementError, string.Empty);
@@ -416,7 +391,7 @@ namespace FuturePath.PresentationLayer
 
         #region Helpers
 
-        /// <summary>Empties the form and the selection, ready to add a new question.</summary>
+        // Reset the form for a new questionnaire question
         private void QuestionnaireClearForm()
         {
             questionnaireLoading = true;
@@ -432,7 +407,7 @@ namespace FuturePath.PresentationLayer
             QuestionnaireClearValidation();
         }
 
-        /// <summary>True for a bound BIT value of 1.</summary>
+        // Check whether a stored value is true
         private static bool QuestionnaireIsTrue(object value)
         {
             return value is bool && (bool)value;
