@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿
+using System.Collections.ObjectModel;
 using System.Data;
 using FuturePath.ApplicationLayer;
 
 namespace FuturePath.DatabaseLayer
 {
-    /// <summary>Data access for school subjects (read-only: the specification has no subject maintenance screen).</summary>
+    // Handles read-only database operations for school subjects
     public class SubjectRepository : DB
     {
         #region Data Members
@@ -14,7 +15,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Constructor
-        /// <summary>Creates the repository (no database work until a method is called).</summary>
+        // Initialise the subject collection
         public SubjectRepository() : base()
         {
             subjects = new Collection<Subject>();
@@ -22,7 +23,8 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Read
-        /// <summary>Subjects ordered by name; inactive ones only when includeInactive is true.</summary>
+        // Load subjects ordered by name
+        // Include inactive subjects when requested
         public Collection<Subject> GetSubjects(bool includeInactive)
         {
             string sql = sqlLocal;
@@ -35,7 +37,7 @@ namespace FuturePath.DatabaseLayer
             return subjects;
         }
 
-        /// <summary>One subject, or null.</summary>
+        // Find a subject by its ID or return null if it does not exist
         public Subject FindById(int subjectID)
         {
             FillDataSet(sqlLocal + " WHERE SubjectID = @SubjectID", table, Param("@SubjectID", SqlDbType.Int, subjectID));
@@ -49,7 +51,7 @@ namespace FuturePath.DatabaseLayer
         #endregion
 
         #region Utility Methods
-        /// <summary>Turns the filled Subject rows into Subject objects (Waitering Add2Collection).</summary>
+        // Convert database rows into Subject objects
         private void Add2Collection()
         {
             subjects = new Collection<Subject>();
