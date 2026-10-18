@@ -1,3 +1,4 @@
+
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -6,19 +7,10 @@ using FuturePath.ApplicationLayer;
 
 namespace FuturePath.PresentationLayer
 {
-    /// <summary>
-    /// UI 9 — Advisor dashboard (Career Advisor). The Career Advisor's hub, built to the hub pattern
-    /// (screens-detail.md): a welcome line, one card per task with a button to UI 10 (Sessions) and UI 11
-    /// (Reports), and a read-only "Today" summary whose figures come from the BLL. The summary stays hidden
-    /// until figures arrive, so it is never shown empty.
-    /// </summary>
+    // Handles the Career Advisor dashboard and daily session summary
     public partial class StaffConsoleForm
     {
-        /// <summary>
-        /// Called by <see cref="PageShown"/> each time UI 9 appears. The welcome line is written once; the
-        /// "Today" figures are refreshed on every visit, because they change during the day.
-        /// </summary>
-        /// <param name="firstTime">True the first time UI 9 is shown in this console.</param>
+        // Display the welcome message and refresh today's statistics
         private void AdvisorDashboardShown(bool firstTime)
         {
             if (firstTime)
@@ -31,15 +23,13 @@ namespace FuturePath.PresentationLayer
 
         #region Business Logic Layer hook
 
-        /// <summary>
-        /// Fills the read-only "Today" figures. The card stays hidden unless the BLL returns them.
-        /// </summary>
+        // Load today's session statistics from the Business Logic Layer
         private void AdvisorDashboardLoadToday()
         {
             pnlTodayCard.Visible = false;
             try
             {
-                // Counts read back from AdvisorySession and the selected RecommendationResult, never recalculated.
+                // Retrieve saved session counts
                 SessionSearchController sessionSearchController = new SessionSearchController();
                 DailySummary today = sessionSearchController.GetDailySummary(UserId, DateTime.Today);
                 AdvisorDashboardShowFigure(lblCompletedTileValue, today.CompletedCount);
@@ -53,9 +43,7 @@ namespace FuturePath.PresentationLayer
             }
         }
 
-        /// <summary>Writes one whole-number figure into its tile.</summary>
-        /// <param name="valueLabel">The tile's value label (lblCompletedTileValue, lblInProgressTileValue or lblFollowUpTileValue).</param>
-        /// <param name="value">The count returned by the BLL.</param>
+        // Display a session count in its dashboard tile
         private static void AdvisorDashboardShowFigure(Label valueLabel, int value)
         {
             valueLabel.Text = value.ToString("N0", CultureInfo.CurrentCulture);
@@ -65,13 +53,13 @@ namespace FuturePath.PresentationLayer
 
         #region Hub buttons
 
-        /// <summary>Search advisory sessions → UI 10 Sessions (opens on the Sessions tab used last).</summary>
+        // Open the Sessions section
         private void btnAdvSearchSessions_Click(object sender, EventArgs e)
         {
             SelectPage(tabSessions);
         }
 
-        /// <summary>Generate reports → UI 11 Reports.</summary>
+        // Open the Reports section
         private void btnAdvGenerateReports_Click(object sender, EventArgs e)
         {
             SelectPage(tabReports);
